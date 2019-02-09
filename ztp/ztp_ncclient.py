@@ -6,15 +6,25 @@ sys.path.append("/pkg/bin")
 from ztp_helper import ZtpHelpers
 warnings.simplefilter("ignore", DeprecationWarning)
 from ncclient import manager
-import logging
+import logging, json, subprocess
 from lxml import etree
-import json
+
+from ctypes import cdll
+
+libc = cdll.LoadLibrary('libc.so.6')
+_setns = libc.setns
+CLONE_NEWNET = 0x40000000
+
 
 rootLogger = logging.getLogger('ncclient.transport.session')
 rootLogger.setLevel(logging.DEBUG)
 handler = logging.StreamHandler()
 rootLogger.addHandler(handler)
 
+WEB_SERVER_URL = "http://100.96.0.20/"
+PIP_RPM_URL = WEB_SERVER_URL + "packages/python-pip-7.1.0-r0.0.core2_64.rpm"
+SYSLOG_SERVER = "100.96.0.20"
+SYSLOG_PORT = "514"
 
 def install_and_import(package):
     import importlib
@@ -31,6 +41,23 @@ def install_and_import(package):
 
 class ZtpFunctions(ZtpHelpers):
     def ncclient_connect(self, host, duration=120):
+        """User defined method in Child Class
+           Method to connect to the netconf agent in IOS-XR
+           using ncclient and return the ncclient manager handle.
+           Since the netconf agent takes time to initialize,
+           this method retries on failure for max specified duration
+           until the connection succeeds.
+           :param host: The local loopback ip to connect to (setup
+                        using netconf_init()
+           :type cmd: str 
+           :param duration: maximum amount of time till which the method
+                            retries to achieve a successful connection
+           :type duration: str
+
+           :return: Returns ncclient.manager() object on success
+                    and None on failure
+           :rtype: object 
+        """
         connected = False
         t_start = time.time()
         t_end = t_start + duration 
@@ -58,16 +85,86 @@ class ZtpFunctions(ZtpHelpers):
         else:
             return None 
 
+
+    def run_bash(self, cmd=None, vrf="global-vrf", pid=1):
+        """User defined method in Child Class
+           Wrapper method for basic subprocess.Popen to execute 
+           bash commands on IOS-XR in specified vrf (or global-vrf 
+           by default).
+           :param cmd: bash command to be executed in XR linux shell. 
+           :type cmd: str 
+           
+           :return: Return a dictionary with status and output
+                    { 'status': '0 or non-zero', 
+                      'output': 'output from bash cmd' }
+           :rtype: dict
+        """
+
+        with open(self.get_netns_path(nsname=vrf,nspid=pid)) as fd:
+            self.setns(fd, CLONE_NEWNET)
+
+            if self.debug:
+                self.logger.debug("bash cmd being run: "+cmd)
+            if cmd is not None:
+                process = subprocess.Popen(cmd, 
+                                           stdout=subprocess.PIPE,
+                                           stderr=subprocess.PIPE,
+                                           shell=True)
+                out, err = process.communicate()
+                if self.debug:
+                    self.logger.debug("output: "+out)
+                    self.logger.debug("error: "+err)
+            else:
+                self.syslogger.info("No bash command provided")
+                return {"status" : 1, "output" : "",
+                        "error" : "No bash command provided"}
+
+            status = process.returncode
+
+            return {"status" : status, "output" : out, "error" : err}
+
+
 if __name__ == '__main__':
 
     # ZtpFunctions is a child class that inherits capabilities from
     # the ZtpHelpers library native to the OS.
-    # A couple of methods(see above) are added to ZtpFunctions on top of the base functionality.
-    ztp_script = ZtpFunctions(syslog_server="100.96.0.20",syslog_port=514)
+    # A couple of methods(see above) are added to ZtpFunctions on top 
+    #of the basse functionality.
+    ztp_script = ZtpFunctions(syslog_server=SYSLOG_SERVER,
+                              syslog_port=SYSLOG_PORT,
+                              syslog_file="/root/ztp_python.log")
 
+
+    # Let's set up some packages we'll use later in the script
+    # Before we fetch the python packages, install pip and 
+    # upgrade it.
+   
+    cmd = "wget " + PIP_RPM_URL + " -O /tmp/pip.rpm"
+ 
+    if not ztp_script.run_bash(cmd)["status"] == "success":
+        ztp_script.syslogger.info("Successfully downloaded python-pip rpm")
+        cmd = "yum install -y /tmp/pip.rpm"
+        if not ztp_script.run_bash(cmd)["status"] == "success":
+            ztp_script.syslogger.info("Successfully installed python-pip rpm")
+            cmd = "pip install --upgrade pip"
+            if not ztp_script.run_bash(cmd)["status"] == "success":
+                ztp_script.syslogger.info("Successfully upgraded pip")
+            else:
+                ztp_script.syslogger.info("Failed to upgrade pip")
+                sys.exit(1)
+        else:
+            ztp_script.syslogger.info("Failed to install pip")
+            sys.exit(1)
+    else:
+        ztp_script.syslogger.info("Failed to download python-pip rpm")
+        sys.exit(1) 
+  
+
+
+    
     # Install packages through pip. Requires internet access
     # through the gateway in your ZTP LAN
-    for package in ['xmltodict']: 
+    for package in ['xmltodict']:
         install_and_import(package)
 
     # Choose any ip you need for the host value
