@@ -129,7 +129,14 @@ if __name__ == '__main__':
     # ZtpFunctions is a child class that inherits capabilities from
     # the ZtpHelpers library native to the OS.
     # A couple of methods(see above) are added to ZtpFunctions on top 
-    #of the basse functionality.
+    # of the base functionality.
+    # The ZtpHelpers class and consequently the ZtpFunctions class
+    # accepts syslog parameters for the __init__() method. 
+    #
+    # Using the class method ztp_script.syslogger.info(<string>)
+    # will automatically send a formatted syslog to the specified
+    # syslog server and file (all optional)
+
     ztp_script = ZtpFunctions(syslog_server=SYSLOG_SERVER,
                               syslog_port=SYSLOG_PORT,
                               syslog_file="/root/ztp_python.log")
@@ -140,12 +147,13 @@ if __name__ == '__main__':
     # upgrade it.
    
     cmd = "wget " + PIP_RPM_URL + " -O /tmp/pip.rpm"
- 
     if not ztp_script.run_bash(cmd)["status"] == "success":
         ztp_script.syslogger.info("Successfully downloaded python-pip rpm")
+ 
         cmd = "yum install -y /tmp/pip.rpm"
         if not ztp_script.run_bash(cmd)["status"] == "success":
             ztp_script.syslogger.info("Successfully installed python-pip rpm")
+
             cmd = "pip install --upgrade pip"
             if not ztp_script.run_bash(cmd)["status"] == "success":
                 ztp_script.syslogger.info("Successfully upgraded pip")
@@ -168,19 +176,17 @@ if __name__ == '__main__':
         install_and_import(package)
 
     # Choose any ip you need for the host value
-    # This will be set up as a local loopback that ncclient onbox will connect to
-    # through the ncclient_init() method. It will be cleaned up as part of ncclient_cleanup() method
-
+    # This will be set up as a local loopback(/32) that the onbox ncclient will connect to through
+    # the ncclient_init() method. It will be cleaned up as part of ncclient_cleanup() method
     host = "172.16.20.1"
-
 
     # Initialize the basic configuration for ncclient to work
     # Sets up local loopback as host to connect to and enable netconf on port 830.
     # Also imports the local key (/root/.ssh/id_rsa.pub) for password free operation
-
     result = ztp_script.ncclient_init(host_ip=host)
     if result["status"] == "error":
         ztp_script.syslogger.info("Failed to initialize configuration for ncclient, aborting....")
+
         # sys.exit() used judiciously is quite important. ZTP will retry if your script returns a
         # non zero exit code. In production, this ensures the box continuously looks to download and
         # execute a working script by retrying on failure.
