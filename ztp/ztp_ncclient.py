@@ -150,7 +150,7 @@ if __name__ == '__main__':
     if not ztp_script.run_bash(cmd)["status"] == "success":
         ztp_script.syslogger.info("Successfully downloaded python-pip rpm")
  
-        cmd = "yum install -y /tmp/pip.rpm"
+        cmd = "rpm -ivh /tmp/pip.rpm"
         if not ztp_script.run_bash(cmd)["status"] == "success":
             ztp_script.syslogger.info("Successfully installed python-pip rpm")
 
