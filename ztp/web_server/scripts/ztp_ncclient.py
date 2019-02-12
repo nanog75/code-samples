@@ -147,15 +147,15 @@ if __name__ == '__main__':
     # upgrade it.
    
     cmd = "wget " + PIP_RPM_URL + " -O /tmp/pip.rpm"
-    if not ztp_script.run_bash(cmd)["status"] == "success":
+    if not ztp_script.run_bash(cmd)["status"]:
         ztp_script.syslogger.info("Successfully downloaded python-pip rpm")
  
         cmd = "rpm -ivh /tmp/pip.rpm"
-        if not ztp_script.run_bash(cmd)["status"] == "success":
+        if not ztp_script.run_bash(cmd)["status"]:
             ztp_script.syslogger.info("Successfully installed python-pip rpm")
 
             cmd = "pip install --upgrade pip"
-            if not ztp_script.run_bash(cmd)["status"] == "success":
+            if not ztp_script.run_bash(cmd)["status"]:
                 ztp_script.syslogger.info("Successfully upgraded pip")
             else:
                 ztp_script.syslogger.info("Failed to upgrade pip")
