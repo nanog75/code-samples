@@ -15,7 +15,6 @@ libc = cdll.LoadLibrary('libc.so.6')
 _setns = libc.setns
 CLONE_NEWNET = 0x40000000
 
-
 rootLogger = logging.getLogger('ncclient.transport.session')
 rootLogger.setLevel(logging.DEBUG)
 handler = logging.StreamHandler()
@@ -25,17 +24,18 @@ WEB_SERVER_URL = "http://100.96.0.20/"
 PIP_RPM_URL = WEB_SERVER_URL + "packages/python-pip-7.1.0-r0.0.core2_64.rpm"
 SYSLOG_SERVER = "100.96.0.20"
 SYSLOG_PORT = "514"
+HTTPS_PROXY=""
 
 def install_and_import(package):
     import importlib
     try:
         importlib.import_module(package)
     except ImportError:
-      try:
-        from pip import main as pipmain
-      except:
-        from pip._internal import main as pipmain
-      pipmain(['install', package])
+        try:
+          from pip import main as pipmain
+        except:
+          from pip._internal import main as pipmain
+        pipmain(['install', '--proxy='+HTTPS_PROXY, package])
     finally:
         globals()[package] = importlib.import_module(package)
 
@@ -143,6 +143,7 @@ if __name__ == '__main__':
 
 
     # Let's set up some packages we'll use later in the script
+
     # Before we fetch the python packages, install pip and 
     # upgrade it.
    
@@ -150,11 +151,11 @@ if __name__ == '__main__':
     if not ztp_script.run_bash(cmd)["status"]:
         ztp_script.syslogger.info("Successfully downloaded python-pip rpm")
  
-        cmd = "rpm -ivh /tmp/pip.rpm"
+        cmd = "rpm -ivh --force /tmp/pip.rpm"
         if not ztp_script.run_bash(cmd)["status"]:
             ztp_script.syslogger.info("Successfully installed python-pip rpm")
 
-            cmd = "pip install --upgrade pip"
+            cmd = "pip --proxy="+HTTPS_PROXY+" install --upgrade pip"
             if not ztp_script.run_bash(cmd)["status"]:
                 ztp_script.syslogger.info("Successfully upgraded pip")
             else:
@@ -170,14 +171,20 @@ if __name__ == '__main__':
 
 
     
-    # Install packages through pip. Requires internet access
+    # Install packages through pip and import them. Requires internet access
     # through the gateway in your ZTP LAN
     for package in ['xmltodict']:
-        install_and_import(package)
+        try:
+          install_and_import(package)
+          ztp_script.syslogger.info("Successfully installed and imported "+package)
+        except:
+          ztp_script.syslogger.info("Failed to install/import "+package)
+          sys.exit(1)
 
     # Choose any ip you need for the host value
-    # This will be set up as a local loopback(/32) that the onbox ncclient will connect to through
-    # the ncclient_init() method. It will be cleaned up as part of ncclient_cleanup() method
+    # This will be set up as a local loopback(/32) that the onbox ncclient will connect 
+    # to through the ncclient_init() method. 
+    # It will be cleaned up as part of ncclient_cleanup() method
     host = "172.16.20.1"
 
     # Initialize the basic configuration for ncclient to work
@@ -195,7 +202,7 @@ if __name__ == '__main__':
 
     # Connects to IOS-XR netconf agent and returns a manager handle for ncclient
     # This is a method of the child class defined above that retries the connection
-    # during initial boot as needed.
+    # during initial boot for a specified maximum duration (default = 120seconds)
     nc_mgr = ztp_script.ncclient_connect(host=host)
    
     if nc_mgr is None:
