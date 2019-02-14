@@ -22,9 +22,24 @@ rootLogger.addHandler(handler)
 
 WEB_SERVER_URL = "http://100.96.0.20/"
 PIP_RPM_URL = WEB_SERVER_URL + "packages/python-pip-7.1.0-r0.0.core2_64.rpm"
+SERVER_XML_URL = WEB_SERVER_URL+"xml/"
 SYSLOG_SERVER = "100.96.0.20"
 SYSLOG_PORT = "514"
-HTTPS_PROXY=""
+HTTPS_PROXY = ""
+
+# List of XML files to be downloaded and applied as configuration 
+# through ncclient onbox. 
+# Hint: Add to this list on the server and download and use with ncclient
+# appropriately for each router to achieve your final configuration 
+XML_FILE_LIST =  ['lldp_config_oc.xml', 
+                  'interface_config_oc.xml']
+
+# Use this Serial Number map to figure out the router specific URL
+# to use for downloads based on the local router's Serial Number
+SERIAL_NO_MAP = {'FGE00050000': 'rtr1',
+                 'FGE00080000': 'rtr2',
+                 'FGE000b0000': 'rtr3',
+                 'FGE00170000': 'rtr4'}
 
 def install_and_import(package):
     import importlib
@@ -124,6 +139,32 @@ class ZtpFunctions(ZtpHelpers):
             return {"status" : status, "output" : out, "error" : err}
 
 
+    def get_serial_number(self):
+        """User defined method in Child Class
+           Method to fetch the serial number of the router
+           that this script is running on. Can be useful in
+           invoking router/device specific URLs to take specific
+           action based on the router.
+           :return: Returns Serial number of the device (also used
+                    by ZTP DHCP requests) on success
+                    Returns empty string on failure
+           :rtype: str 
+        """
+        cmd = "dmidecode -s system-serial-number | grep -v -e \"^#\""        
+        response = self.run_bash(cmd)
+        if not response["status"]:
+            self.syslogger.info("Successfully fetched Serial Number:")
+            if self.debug:
+                self.logger.debug(response["output"])
+            return response["output"]
+        else:
+            self.syslogger.info("Failed to fetch Serial Number:")
+            if self.debug:
+                self.logger.debug(response["output"])
+                self.logger.debug(response["error"])
+            return ""
+
+
 if __name__ == '__main__':
 
     # ZtpFunctions is a child class that inherits capabilities from
@@ -181,6 +222,7 @@ if __name__ == '__main__':
           ztp_script.syslogger.info("Failed to install/import "+package)
           sys.exit(1)
 
+
     # Choose any ip you need for the host value
     # This will be set up as a local loopback(/32) that the onbox ncclient will connect 
     # to through the ncclient_init() method. 
@@ -214,6 +256,7 @@ if __name__ == '__main__':
         print(response)
         response_dict=xmltodict.parse(str(response))
         print json.dumps(response_dict, indent=4)
+
         nc_mgr.close_session()
 
 

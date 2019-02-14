@@ -105,13 +105,13 @@ if __name__ == "__main__":
 
     bash_util = BashUtilities(syslog_file="/root/ztp_python.log")
 
-    print "\n####### Restart the docker daemon to make sure changes take effect######\n"
+    print("\n####### Restart the docker daemon to make sure changes take effect######\n")
     result = bash_util.admincmd(cmd = "run ssh 10.0.2.16 service docker restart", root_lr_user="ztp-user")    
 
     if result["status"] == "success":
-        print "\n###### Successfully restarted the docker daemon, response: ######\n"
+        print("\n###### Successfully restarted the docker daemon, response: ######\n")
         pprint(result["output"])
-        print "\n###### return value in json: ######\n"
+        print("\n###### return value in json: ######\n")
         print json.dumps(result["output"],sort_keys=True, indent=4)
     else:
         print("Failed to run admincmd, aborting ...")
@@ -122,8 +122,13 @@ if __name__ == "__main__":
     print("Sleeping for about 30 seconds, waiting for the docker daemon to be up")
     time.sleep(30)
    
-    print "\n#######Pulling the docker image for Open/R ######\n" 
+    print("\n#######Pulling the docker image for Open/R ######\n")
     result = bash_util.run_bash(cmd = "export DOCKER_HOST=unix:///misc/app_host/docker.sock && ip netns exec global-vrf docker pull  akshshar/openr-xr")
-    
-    result
 
+    if result["status"]:
+        print("Failed to pull docker image")
+        sys.exit(1)
+    else:
+        print("Successfully downloaded the docker image")
+        print(result["output"])
+        sys.exit(0)
