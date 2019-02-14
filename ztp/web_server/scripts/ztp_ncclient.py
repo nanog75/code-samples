@@ -156,7 +156,7 @@ class ZtpFunctions(ZtpHelpers):
             self.syslogger.info("Successfully fetched Serial Number:")
             if self.debug:
                 self.logger.debug(response["output"])
-            return response["output"]
+            return response["output"].strip()
         else:
             self.syslogger.info("Failed to fetch Serial Number:")
             if self.debug:
