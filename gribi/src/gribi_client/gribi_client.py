@@ -6,6 +6,7 @@ import pprint
 
 import sys
 sys.path.append("../")
+sys.path.append("../..")
 from gribi_api import GrpcClient
 from genpy import gribi_pb2
 from util import util
