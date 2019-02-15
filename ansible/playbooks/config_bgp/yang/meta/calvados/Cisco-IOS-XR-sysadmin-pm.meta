@@ -1,0 +1,472 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-sysadmin-pm ns="http://www.cisco.com/ns/yang/Cisco-IOS-XR-sysadmin-pm" revision="2017-04-12">
+  <files>
+    <file revision="2017-04-12" submodule="false">Cisco-IOS-XR-sysadmin-pm.yang</file>
+  </files>
+  <prefix>pmh</prefix>
+  <import prefix="tailf">tailf-common</import>
+  <import prefix="xs">tailf-xsd-types</import>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="show_trace">Cisco-IOS-XR-sysadmin-show-trace</import>
+  <typedef name="startupMode">
+    <type node="enumeration">
+      <enum>ON-BOOTUP</enum>
+      <enum>ON-SELECTION</enum>
+      <enum>ON-DEMAND</enum>
+    </type>
+  </typedef>
+  <typedef name="processState">
+    <type node="enumeration">
+      <enum>IDLE</enum>
+      <enum>RUNNING</enum>
+      <enum>STOPPING</enum>
+      <enum>STOPPED</enum>
+      <enum>DESELECTING</enum>
+      <enum>DESELECTED</enum>
+    </type>
+  </typedef>
+  <typedef name="serviceScope">
+    <type node="enumeration">
+      <enum>SYSTEM</enum>
+      <enum>RACK</enum>
+    </type>
+  </typedef>
+  <typedef name="serviceState">
+    <type node="enumeration">
+      <enum>SS_IDLE</enum>
+      <enum>SS_RUNNING</enum>
+      <enum>SS_ACK_PENDING</enum>
+    </type>
+  </typedef>
+  <typedef name="serviceRole">
+    <type node="enumeration">
+      <enum>NONE</enum>
+      <enum>ACTIVE</enum>
+      <enum>STANDBY</enum>
+    </type>
+  </typedef>
+  <typedef name="proc-name-type">
+    <type>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="user-name-type">
+    <type>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="task-name-type">
+    <type>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="folder-name-type">
+    <type>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="source-name-type">
+    <type>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="dest-name-type">
+    <type>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="file-name-type">
+    <type>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="folder-file-name-type">
+    <type>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="instance-id-type">
+    <type>
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="service-name-type">
+    <type>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="proc-id-type">
+    <type>
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="node-name-type">
+    <type>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <processes config="true" is-key="false" node="container" presence="false">
+    <all-locations config="true" key="location" node="list">
+      <xr-path/>
+      <location config="true" is-key="true" node="leaf">
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </location>
+      <ip-addr config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>inet:ip-address</type-name>
+        </type>
+      </ip-addr>
+      <pcbs config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </pcbs>
+      <name config="true" key="proc-name instance-id" node="list">
+        <xr-path/>
+        <proc-name config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>proc-name-type</type-name>
+          </type>
+        </proc-name>
+        <instance-id config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>instance-id-type</type-name>
+          </type>
+        </instance-id>
+        <path config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </path>
+        <startup-file config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </startup-file>
+        <startup-mode config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>startupMode</type-name>
+          </type>
+        </startup-mode>
+        <heart-beat-timeout config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </heart-beat-timeout>
+        <last-heart-beat-time config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>xs:double</type-name>
+          </type>
+        </last-heart-beat-time>
+        <max-restarts config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </max-restarts>
+        <respawn-reset-timer config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </respawn-reset-timer>
+        <mandatory config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </mandatory>
+        <maint-mode config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </maint-mode>
+        <args config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </args>
+        <proc-state config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>processState</type-name>
+          </type>
+        </proc-state>
+        <pid config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>int32</type-name>
+          </type>
+        </pid>
+        <proc-aborted config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </proc-aborted>
+        <exit-status config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </exit-status>
+        <respawns config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>int32</type-name>
+          </type>
+        </respawns>
+        <start-time config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </start-time>
+        <ready-time config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>xs:double</type-name>
+          </type>
+        </ready-time>
+        <last-exit-time config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </last-exit-time>
+        <services config="true" key="service-name" node="list">
+          <xr-path/>
+          <service-name config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </service-name>
+          <scope config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>serviceScope</type-name>
+            </type>
+          </scope>
+          <redundancy config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </redundancy>
+          <ha-ready config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </ha-ready>
+          <service-state config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>serviceState</type-name>
+            </type>
+          </service-state>
+          <ha-role config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>serviceRole</type-name>
+            </type>
+          </ha-role>
+          <new-ha-role config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>serviceRole</type-name>
+            </type>
+          </new-ha-role>
+          <selected config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </selected>
+          <ip1 config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </ip1>
+          <ip2 config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </ip2>
+          <svc-start-time config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </svc-start-time>
+          <svc-ready-time config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>xs:double</type-name>
+            </type>
+          </svc-ready-time>
+          <svc-haready-time config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>xs:double</type-name>
+            </type>
+          </svc-haready-time>
+        </services>
+        <proc-action config="false" is-key="false" node="action" prefix="tailf-common">
+          <do-what config="true" is-key="false" node="leaf">
+            <type node="enumeration">
+              <enum>crash</enum>
+              <enum>restart</enum>
+              <enum>disable-heartbeat</enum>
+              <enum>enable-heartbeat</enum>
+              <enum>start</enum>
+              <enum>shutdown</enum>
+              <enum>mandatory-toggle</enum>
+            </type>
+            <mandatory>true</mandatory>
+          </do-what>
+          <user-name config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </user-name>
+          <user-ip config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </user-ip>
+          <do-what config="true" is-key="false" node="leaf">
+            <type node="enumeration">
+              <enum>crash</enum>
+              <enum>restart</enum>
+              <enum>disable-heartbeat</enum>
+              <enum>enable-heartbeat</enum>
+              <enum>start</enum>
+              <enum>shutdown</enum>
+              <enum>mandatory-toggle</enum>
+            </type>
+            <mandatory>true</mandatory>
+          </do-what>
+          <user-name config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </user-name>
+          <user-ip config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </user-ip>
+          <proc-action-status config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </proc-action-status>
+          <proc-action-status config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </proc-action-status>
+          <do-what config="true" is-key="false" node="leaf">
+            <type node="enumeration">
+              <enum>crash</enum>
+              <enum>restart</enum>
+              <enum>disable-heartbeat</enum>
+              <enum>enable-heartbeat</enum>
+              <enum>start</enum>
+              <enum>shutdown</enum>
+              <enum>mandatory-toggle</enum>
+            </type>
+            <mandatory>true</mandatory>
+          </do-what>
+          <user-name config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </user-name>
+          <user-ip config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </user-ip>
+          <proc-action-status config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </proc-action-status>
+        </proc-action>
+      </name>
+    </all-locations>
+  </processes>
+  <process-manager config="true" is-key="false" node="container" presence="false">
+    <all-locations-info config="true" key="location-info" node="list">
+      <xr-path/>
+      <location-info config="true" is-key="true" node="leaf">
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </location-info>
+      <ip-addr-info config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>inet:ip-address</type-name>
+        </type>
+      </ip-addr-info>
+      <pm-start-time config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </pm-start-time>
+      <mand-proc-down config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </mand-proc-down>
+      <vmm-capi-up config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </vmm-capi-up>
+      <wdmon-capi-up config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </wdmon-capi-up>
+      <wdmon-capi-timestamp config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </wdmon-capi-timestamp>
+      <wdmon-num-capi-connects config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </wdmon-num-capi-connects>
+    </all-locations-info>
+  </process-manager>
+  <pm config="true" is-key="false" node="container" presence="false">
+    <pm config="true" is-key="false" node="container" presence="false">
+      <trace config="true" key="buffer" node="list">
+        <xr-path/>
+        <buffer config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </buffer>
+        <location config="true" key="location_name" node="list">
+          <xr-path/>
+          <location_name config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </location_name>
+          <all-options config="true" key="option" node="list">
+            <xr-path/>
+            <option config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </option>
+            <trace-blocks config="true" node="list">
+              <xr-path/>
+              <data config="true" is-key="false" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </data>
+            </trace-blocks>
+          </all-options>
+        </location>
+      </trace>
+    </pm>
+  </pm>
+</Cisco-IOS-XR-sysadmin-pm>

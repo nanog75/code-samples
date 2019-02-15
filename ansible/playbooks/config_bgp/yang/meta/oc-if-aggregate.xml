@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<openconfig-if-aggregate ns="http://openconfig.net/yang/interfaces/aggregate" oc-ver="1.0.2" revision="2016-05-26">
+  <files>
+    <file revision="2016-05-26" submodule="false">openconfig-if-aggregate.yang</file>
+  </files>
+  <prefix>oc-lag</prefix>
+  <organization>OpenConfig working group</organization>
+  <import prefix="oc-if">openconfig-interfaces</import>
+  <import prefix="oc-eth">openconfig-if-ethernet</import>
+  <import prefix="ift">iana-if-type</import>
+  <import prefix="oc-ext">openconfig-extensions</import>
+  <typedef name="aggregation-type">
+    <type node="enumeration">
+      <enum>LACP</enum>
+      <enum>STATIC</enum>
+    </type>
+  </typedef>
+  <augment path="/oc-if:interfaces/oc-if:interface">
+    <when>oc-if:type = 'ift:ieee8023adLag'</when>
+    <aggregation config="true" is-key="false" node="container" presence="false">
+      <config config="true" is-key="false" node="container" presence="false">
+        <lag-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>aggregation-type</type-name>
+          </type>
+        </lag-type>
+        <min-links config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint16</type-name>
+          </type>
+        </min-links>
+      </config>
+      <state config="true" is-key="false" node="container" presence="false">
+        <lag-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>aggregation-type</type-name>
+          </type>
+        </lag-type>
+        <min-links config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint16</type-name>
+          </type>
+        </min-links>
+        <lag-speed config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </lag-speed>
+        <member config="true" is-key="false" is-yang-key="false" node="leaf-list">
+          <when>oc-lag:lag-type = 'STATIC'</when>
+          <type>
+            <type-name>oc-if:base-interface-ref</type-name>
+          </type>
+        </member>
+      </state>
+    </aggregation>
+  </augment>
+  <augment path="/oc-if:interfaces/oc-if:interface/oc-eth:ethernet/oc-eth:config">
+    <when>oc-if:type = 'ift:ethernetCsmacd'</when>
+    <aggregate-id config="true" is-key="false" is-yang-key="false" node="leaf">
+      <type>
+        <type-name>leafref</type-name>
+      </type>
+    </aggregate-id>
+  </augment>
+  <augment path="/oc-if:interfaces/oc-if:interface/oc-eth:ethernet/oc-eth:state">
+    <when>oc-if:type = 'ift:ethernetCsmacd'</when>
+    <aggregate-id config="true" is-key="false" is-yang-key="false" node="leaf">
+      <type>
+        <type-name>leafref</type-name>
+      </type>
+    </aggregate-id>
+  </augment>
+</openconfig-if-aggregate>

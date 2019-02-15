@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<SNMP-COMMUNITY-MIB ns="http://tail-f.com/ns/mibs/SNMP-COMMUNITY-MIB/200308060000Z" revision="2003-08-06">
+  <files>
+    <file revision="2003-08-06" submodule="false">SNMP-COMMUNITY-MIB.yang</file>
+  </files>
+  <prefix>SNMP_COMMUNITY_MIB</prefix>
+  <import prefix="tailf">tailf-common</import>
+  <import prefix="SNMPv2_TC">SNMPv2-TC</import>
+  <import prefix="SNMP_TARGET_MIB">SNMP-TARGET-MIB</import>
+  <import prefix="SNMP_FRAMEWORK_MIB">SNMP-FRAMEWORK-MIB</import>
+  <typedef name="snmpCommunityIndexType">
+    <type length="1 .. 32">
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="snmpCommunityNameType">
+    <type>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="snmpCommunitySecurityNameType">
+    <type length="1 .. 32">
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="snmpCommunityContextNameType">
+    <type length="min .. 32">
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="snmpTargetAddrNameType">
+    <type length="1 .. 32">
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="snmpTargetAddrTMaskType">
+    <type>
+      <pattern>(((([0-9A-Fa-f]{2}):){0,254}([0-9A-Fa-f]{2}))){0,1}</pattern>
+      <type-name>tailf:hex-list</type-name>
+    </type>
+  </typedef>
+  <typedef name="snmpTargetAddrMMSType">
+    <type range="0 .. 2147483647">
+      <type-name>int32</type-name>
+    </type>
+  </typedef>
+  <SNMP-COMMUNITY-MIB config="true" is-key="false" node="container" presence="false">
+    <snmpCommunityTable config="true" is-key="false" node="container" presence="false">
+      <snmpCommunityEntry config="true" key="snmpCommunityIndex" node="list">
+        <xr-path/>
+        <snmpCommunityIndex config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>snmpCommunityIndexType</type-name>
+          </type>
+        </snmpCommunityIndex>
+        <snmpCommunityName config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>snmpCommunityNameType</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </snmpCommunityName>
+        <snmpCommunitySecurityName config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>snmpCommunitySecurityNameType</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </snmpCommunitySecurityName>
+        <snmpCommunityContextEngineID config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SNMP_FRAMEWORK_MIB:SnmpEngineID</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </snmpCommunityContextEngineID>
+        <snmpCommunityContextName config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>snmpCommunityContextNameType</type-name>
+          </type>
+          <default/>
+        </snmpCommunityContextName>
+        <snmpCommunityTransportTag config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SNMP_TARGET_MIB:SnmpTagValue</type-name>
+          </type>
+          <default/>
+        </snmpCommunityTransportTag>
+        <snmpCommunityStorageType config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SNMPv2_TC:StorageType</type-name>
+          </type>
+          <default>permanent</default>
+        </snmpCommunityStorageType>
+      </snmpCommunityEntry>
+    </snmpCommunityTable>
+  </SNMP-COMMUNITY-MIB>
+</SNMP-COMMUNITY-MIB>

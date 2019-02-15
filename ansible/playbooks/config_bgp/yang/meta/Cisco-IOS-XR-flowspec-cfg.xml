@@ -1,0 +1,268 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-flowspec-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-flowspec-cfg" revision="2015-11-09">
+  <files>
+    <file revision="2015-11-09" submodule="false">Cisco-IOS-XR-flowspec-cfg.yang</file>
+  </files>
+  <prefix>flowspec-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-ifmgr-cfg</import>
+  <typedef name="Fs-vrf-af">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">ipv4</enum>
+      <enum value="2">ipv6</enum>
+    </type>
+  </typedef>
+  <typedef name="Fs-af-p">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="2">pbr</enum>
+    </type>
+  </typedef>
+  <typedef name="Fs-addf">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">ipv4</enum>
+      <enum value="2">ipv6</enum>
+    </type>
+  </typedef>
+  <typedef name="Fs-vrf-af-p">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="2">pbr</enum>
+    </type>
+  </typedef>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <ipv4-flow-spec config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv4-flowspec/</xr-path>
+      <xr-xml-map>cfg_fs:IPV4FlowSpec</xr-xml-map>
+      <xr-task>network</xr-task>
+      <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv4-flowspec/enabled</xr-path>
+        <xr-xml-map>cfg_fs:Enabled</xr-xml-map>
+        <xr-task>network</xr-task>
+        <xr-sch-type>FalseOnly</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </enabled>
+    </ipv4-flow-spec>
+  </augment>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <ipv6-flow-spec config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6-flowspec/</xr-path>
+      <xr-xml-map>cfg_fs:IPV6FlowSpec</xr-xml-map>
+      <xr-task>network</xr-task>
+      <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6-flowspec/enabled</xr-path>
+        <xr-xml-map>cfg_fs:Enabled</xr-xml-map>
+        <xr-task>network</xr-task>
+        <xr-sch-type>FalseOnly</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </enabled>
+    </ipv6-flow-spec>
+  </augment>
+  <flow-spec config="true" is-key="false" node="container" presence="false">
+    <xr-presence-submode/>
+    <xr-path>/cfg/gl/flowspec/aya</xr-path>
+    <xr-xml-map>cfg_fs:FlowSpec</xr-xml-map>
+    <xr-task>network</xr-task>
+    <xr-scope>exported</xr-scope>
+    <afs config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/flowspec/ord_c/afi/</xr-path>
+      <xr-xml-map>cfg_fs:AFTable</xr-xml-map>
+      <xr-task>network</xr-task>
+      <af config="true" key="af-name" node="list">
+        <xr-path>/cfg/gl/flowspec/ord_c/afi/&lt;cfg_fs_AF_arg2&gt;/</xr-path>
+        <xr-xml-map>cfg_fs:AF</xr-xml-map>
+        <xr-task>network</xr-task>
+        <xr-scope>exported</xr-scope>
+        <service-policies config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/flowspec/ord_c/afi/&lt;cfg_fs_AF_arg2&gt;/service-policy/</xr-path>
+          <xr-xml-map>cfg_fs:ServicePolicyTable</xr-xml-map>
+          <xr-task>network</xr-task>
+          <service-policy config="true" key="policy-type policy-name" node="list">
+            <xr-path>/cfg/gl/flowspec/ord_c/afi/&lt;cfg_fs_AF_arg2&gt;/service-policy/&lt;cfg_fs_ServicePolicy_arg3&gt;,&lt;cfg_fs_ServicePolicy_arg4&gt;</xr-path>
+            <xr-task>network</xr-task>
+            <policy-type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/flowspec/ord_c/afi/&lt;cfg_fs_AF_arg2&gt;/service-policy/&lt;cfg_fs_ServicePolicy_arg3&gt;,&lt;cfg_fs_ServicePolicy_arg4&gt;</xr-path>
+              <xr-task>network</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <xr-sch-arg-name>&lt;cfg_fs_ServicePolicy_arg3&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>Fs-af-p</type-name>
+              </type>
+            </policy-type>
+            <policy-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/flowspec/ord_c/afi/&lt;cfg_fs_AF_arg2&gt;/service-policy/&lt;cfg_fs_ServicePolicy_arg3&gt;,&lt;cfg_fs_ServicePolicy_arg4&gt;</xr-path>
+              <xr-task>network</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;cfg_fs_ServicePolicy_arg4&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </policy-name>
+            <local config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/flowspec/ord_c/afi/&lt;cfg_fs_AF_arg2&gt;/service-policy/&lt;cfg_fs_ServicePolicy_arg3&gt;,&lt;cfg_fs_ServicePolicy_arg4&gt;</xr-path>
+              <xr-task>network</xr-task>
+              <xr-sch-type>Boolean</xr-sch-type>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </local>
+          </service-policy>
+        </service-policies>
+        <interface-all config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/flowspec/ord_c/afi/&lt;cfg_fs_AF_arg2&gt;/interface_all</xr-path>
+          <xr-xml-map>cfg_fs:InterfaceAll</xr-xml-map>
+          <xr-task>network</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </interface-all>
+        <af-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/flowspec/ord_c/afi/&lt;cfg_fs_AF_arg2&gt;/</xr-path>
+          <xr-xml-map>cfg_fs:AFName</xr-xml-map>
+          <xr-task>network</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <xr-sch-arg-name>&lt;cfg_fs_AF_arg2&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>Fs-addf</type-name>
+          </type>
+        </af-name>
+      </af>
+    </afs>
+    <vrfs config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/flowspec/ord_d/vrf/</xr-path>
+      <xr-xml-map>cfg_fs:VRFTable</xr-xml-map>
+      <xr-task>network</xr-task>
+      <vrf config="true" key="vrf-name" node="list">
+        <xr-path>/cfg/gl/flowspec/ord_d/vrf/&lt;cfg_fs_VRF_arg1&gt;/</xr-path>
+        <xr-xml-map>cfg_fs:VRF</xr-xml-map>
+        <xr-task>network</xr-task>
+        <xr-scope>exported</xr-scope>
+        <afs config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/flowspec/ord_d/vrf/&lt;cfg_fs_VRF_arg1&gt;/afi/</xr-path>
+          <xr-xml-map>cfg_fs_vrf:AFTable</xr-xml-map>
+          <xr-task>network</xr-task>
+          <af config="true" key="af-name" node="list">
+            <xr-path>/cfg/gl/flowspec/ord_d/vrf/&lt;cfg_fs_VRF_arg1&gt;/afi/&lt;cfg_fs_vrf_AF_arg2&gt;/</xr-path>
+            <xr-xml-map>cfg_fs_vrf:AF</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-scope>exported</xr-scope>
+            <service-policies config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/flowspec/ord_d/vrf/&lt;cfg_fs_VRF_arg1&gt;/afi/&lt;cfg_fs_vrf_AF_arg2&gt;/service-policy/</xr-path>
+              <xr-xml-map>cfg_fs_vrf:ServicePolicyTable</xr-xml-map>
+              <xr-task>network</xr-task>
+              <service-policy config="true" key="policy-type policy-name" node="list">
+                <xr-path>/cfg/gl/flowspec/ord_d/vrf/&lt;cfg_fs_VRF_arg1&gt;/afi/&lt;cfg_fs_vrf_AF_arg2&gt;/service-policy/&lt;cfg_fs_ServicePolicy_arg3&gt;,&lt;cfg_fs_ServicePolicy_arg4&gt;</xr-path>
+                <xr-task>network</xr-task>
+                <policy-type config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/flowspec/ord_d/vrf/&lt;cfg_fs_VRF_arg1&gt;/afi/&lt;cfg_fs_vrf_AF_arg2&gt;/service-policy/&lt;cfg_fs_ServicePolicy_arg3&gt;,&lt;cfg_fs_ServicePolicy_arg4&gt;</xr-path>
+                  <xr-task>network</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <xr-sch-arg-name>&lt;cfg_fs_ServicePolicy_arg3&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>Fs-af-p</type-name>
+                  </type>
+                </policy-type>
+                <policy-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/cfg/gl/flowspec/ord_d/vrf/&lt;cfg_fs_VRF_arg1&gt;/afi/&lt;cfg_fs_vrf_AF_arg2&gt;/service-policy/&lt;cfg_fs_ServicePolicy_arg3&gt;,&lt;cfg_fs_ServicePolicy_arg4&gt;</xr-path>
+                  <xr-task>network</xr-task>
+                  <xr-sch-type>String</xr-sch-type>
+                  <xr-sch-arg-name>&lt;cfg_fs_ServicePolicy_arg4&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>xr:Cisco-ios-xr-string</type-name>
+                  </type>
+                </policy-name>
+                <local config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/flowspec/ord_d/vrf/&lt;cfg_fs_VRF_arg1&gt;/afi/&lt;cfg_fs_vrf_AF_arg2&gt;/service-policy/&lt;cfg_fs_ServicePolicy_arg3&gt;,&lt;cfg_fs_ServicePolicy_arg4&gt;</xr-path>
+                  <xr-task>network</xr-task>
+                  <xr-sch-type>Boolean</xr-sch-type>
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <mandatory>true</mandatory>
+                </local>
+              </service-policy>
+            </service-policies>
+            <interface-all config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/flowspec/ord_d/vrf/&lt;cfg_fs_VRF_arg1&gt;/afi/&lt;cfg_fs_vrf_AF_arg2&gt;/interface_all</xr-path>
+              <xr-xml-map>cfg_fs_vrf:InterfaceAll</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </interface-all>
+            <af-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/flowspec/ord_d/vrf/&lt;cfg_fs_VRF_arg1&gt;/afi/&lt;cfg_fs_vrf_AF_arg2&gt;/</xr-path>
+              <xr-xml-map>cfg_fs_vrf:AFName</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <xr-sch-arg-name>&lt;cfg_fs_vrf_AF_arg2&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>Fs-vrf-af</type-name>
+              </type>
+            </af-name>
+          </af>
+        </afs>
+        <vrf-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/flowspec/ord_d/vrf/&lt;cfg_fs_VRF_arg1&gt;/</xr-path>
+          <xr-xml-map>cfg_fs:VRFName</xr-xml-map>
+          <xr-task>network</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;cfg_fs_VRF_arg1&gt;</xr-sch-arg-name>
+          <type length="1..32">
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </vrf-name>
+      </vrf>
+    </vrfs>
+    <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/flowspec/ord_a/enter</xr-path>
+      <xr-xml-map>cfg_fs:Enable</xr-xml-map>
+      <xr-task>network</xr-task>
+      <xr-sch-type>Configured</xr-sch-type>
+      <type>
+        <type-name>empty</type-name>
+      </type>
+    </enable>
+    <interface-all config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/flowspec/ord_b/interface_all</xr-path>
+      <xr-xml-map>cfg_fs:InterfaceAll</xr-xml-map>
+      <xr-task>network</xr-task>
+      <xr-sch-type>Configured</xr-sch-type>
+      <type>
+        <type-name>empty</type-name>
+      </type>
+    </interface-all>
+  </flow-spec>
+</Cisco-IOS-XR-flowspec-cfg>

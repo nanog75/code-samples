@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<SNMPv2-MIB ns="http://tail-f.com/ns/mibs/SNMPv2-MIB/200210160000Z" revision="2002-10-16">
+  <files>
+    <file revision="2002-10-16" submodule="false">SNMPv2-MIB.yang</file>
+  </files>
+  <prefix>SNMPv2_MIB</prefix>
+  <import prefix="yang">ietf-yang-types</import>
+  <import prefix="tailf">tailf-common</import>
+  <import prefix="SNMPv2_TC">SNMPv2-TC</import>
+  <typedef name="sysDescrType">
+    <type length="min .. 255">
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="sysContactType">
+    <type length="min .. 255">
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="sysNameType">
+    <type length="min .. 255">
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="sysLocationType">
+    <type length="min .. 255">
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="sysServicesType">
+    <type range="0 .. 127">
+      <type-name>int32</type-name>
+    </type>
+  </typedef>
+  <typedef name="snmpEnableAuthenTrapsType">
+    <type node="enumeration">
+      <enum value="1">enabled</enum>
+      <enum value="2">disabled</enum>
+    </type>
+  </typedef>
+  <typedef name="sysORIndexType">
+    <type range="1 .. 2147483647">
+      <type-name>int32</type-name>
+    </type>
+  </typedef>
+  <SNMPv2-MIB config="true" is-key="false" node="container" presence="false">
+    <system config="true" is-key="false" node="container" presence="false">
+      <sysDescr config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>sysDescrType</type-name>
+        </type>
+      </sysDescr>
+      <sysObjectID config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>yang:object-identifier</type-name>
+        </type>
+      </sysObjectID>
+      <sysUpTime config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>yang:timeticks</type-name>
+        </type>
+      </sysUpTime>
+      <sysContact config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>sysContactType</type-name>
+        </type>
+        <default/>
+      </sysContact>
+      <sysName config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>sysNameType</type-name>
+        </type>
+        <default/>
+      </sysName>
+      <sysLocation config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>sysLocationType</type-name>
+        </type>
+        <default/>
+      </sysLocation>
+      <sysServices config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>sysServicesType</type-name>
+        </type>
+      </sysServices>
+      <sysORLastChange config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>yang:timestamp</type-name>
+        </type>
+      </sysORLastChange>
+    </system>
+    <snmp config="true" is-key="false" node="container" presence="false">
+      <snmpInPkts config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>yang:counter32</type-name>
+        </type>
+      </snmpInPkts>
+      <snmpInBadVersions config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>yang:counter32</type-name>
+        </type>
+      </snmpInBadVersions>
+      <snmpInBadCommunityNames config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>yang:counter32</type-name>
+        </type>
+      </snmpInBadCommunityNames>
+      <snmpInBadCommunityUses config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>yang:counter32</type-name>
+        </type>
+      </snmpInBadCommunityUses>
+      <snmpInASNParseErrs config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>yang:counter32</type-name>
+        </type>
+      </snmpInASNParseErrs>
+      <snmpEnableAuthenTraps config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>snmpEnableAuthenTrapsType</type-name>
+        </type>
+        <default>disabled</default>
+      </snmpEnableAuthenTraps>
+      <snmpSilentDrops config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>yang:counter32</type-name>
+        </type>
+      </snmpSilentDrops>
+      <snmpProxyDrops config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>yang:counter32</type-name>
+        </type>
+      </snmpProxyDrops>
+    </snmp>
+    <snmpSet config="true" is-key="false" node="container" presence="false">
+      <snmpSetSerialNo config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>SNMPv2_TC:TestAndIncr</type-name>
+        </type>
+      </snmpSetSerialNo>
+    </snmpSet>
+    <sysORTable config="true" is-key="false" node="container" presence="false">
+      <sysOREntry config="true" key="sysORIndex" node="list">
+        <xr-path/>
+        <sysORIndex config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>sysORIndexType</type-name>
+          </type>
+        </sysORIndex>
+        <sysORID config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>yang:object-identifier</type-name>
+          </type>
+        </sysORID>
+        <sysORDescr config="true" is-key="false" node="leaf">
+          <type length="0 .. 255">
+            <type-name>string</type-name>
+          </type>
+        </sysORDescr>
+        <sysORUpTime config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>yang:timestamp</type-name>
+          </type>
+        </sysORUpTime>
+      </sysOREntry>
+    </sysORTable>
+  </SNMPv2-MIB>
+</SNMPv2-MIB>

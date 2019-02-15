@@ -1,0 +1,586 @@
+<?xml version="1.0"?>
+<openconfig-bgp-policy ns="http://openconfig.net/yang/bgp-policy" oc-ver="3.0.1" revision="2017-02-02">
+  <files>
+    <file revision="2017-02-02" submodule="false">openconfig-bgp-policy.yang</file>
+  </files>
+  <prefix>oc-bgp-pol</prefix>
+  <organization>OpenConfig working group</organization>
+  <import prefix="oc-inet">openconfig-inet-types</import>
+  <import prefix="oc-rpol">openconfig-routing-policy</import>
+  <import prefix="oc-pol-types">openconfig-policy-types</import>
+  <import prefix="oc-bgp-types">openconfig-bgp-types</import>
+  <import prefix="oc-ext">openconfig-extensions</import>
+  <typedef name="bgp-set-community-option-type">
+    <type node="enumeration">
+      <enum>ADD</enum>
+      <enum>REMOVE</enum>
+      <enum>REPLACE</enum>
+    </type>
+  </typedef>
+  <typedef name="bgp-next-hop-type">
+    <type node="union">
+      <type>
+        <type-name>oc-inet:ip-address</type-name>
+      </type>
+      <type node="enumeration">
+        <enum>SELF</enum>
+      </type>
+    </type>
+  </typedef>
+  <typedef name="bgp-set-med-type">
+    <type node="union">
+      <type>
+        <type-name>uint32</type-name>
+      </type>
+      <type>
+        <pattern>^[+-][0-9]+</pattern>
+        <type-name>string</type-name>
+      </type>
+      <type node="enumeration">
+        <enum>IGP</enum>
+      </type>
+    </type>
+  </typedef>
+  <augment path="/oc-rpol:routing-policy/oc-rpol:defined-sets">
+    <bgp-defined-sets config="true" is-key="false" node="container" presence="false">
+      <community-sets config="true" is-key="false" node="container" presence="false">
+        <community-set config="true" key="community-set-name" node="list">
+          <community-set-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </community-set-name>
+          <config config="true" is-key="false" node="container" presence="false">
+            <community-set-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </community-set-name>
+            <community-member config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <type node="union">
+                <type>
+                  <type-name>oc-bgp-types:bgp-std-community-type</type-name>
+                </type>
+                <type>
+                  <type-name>oc-bgp-types:bgp-community-regexp-type</type-name>
+                </type>
+                <type>
+                  <type-name>oc-bgp-types:bgp-well-known-community-type</type-name>
+                </type>
+              </type>
+            </community-member>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <community-set-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </community-set-name>
+            <community-member config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <type node="union">
+                <type>
+                  <type-name>oc-bgp-types:bgp-std-community-type</type-name>
+                </type>
+                <type>
+                  <type-name>oc-bgp-types:bgp-community-regexp-type</type-name>
+                </type>
+                <type>
+                  <type-name>oc-bgp-types:bgp-well-known-community-type</type-name>
+                </type>
+              </type>
+            </community-member>
+          </state>
+        </community-set>
+      </community-sets>
+      <ext-community-sets config="true" is-key="false" node="container" presence="false">
+        <ext-community-set config="true" key="ext-community-set-name" node="list">
+          <ext-community-set-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </ext-community-set-name>
+          <config config="true" is-key="false" node="container" presence="false">
+            <ext-community-set-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </ext-community-set-name>
+            <ext-community-member config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <type node="union">
+                <type>
+                  <type-name>oc-bgp-types:bgp-ext-community-type</type-name>
+                </type>
+                <type>
+                  <type-name>oc-bgp-types:bgp-community-regexp-type</type-name>
+                </type>
+              </type>
+            </ext-community-member>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <ext-community-set-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </ext-community-set-name>
+            <ext-community-member config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <type node="union">
+                <type>
+                  <type-name>oc-bgp-types:bgp-ext-community-type</type-name>
+                </type>
+                <type>
+                  <type-name>oc-bgp-types:bgp-community-regexp-type</type-name>
+                </type>
+              </type>
+            </ext-community-member>
+          </state>
+        </ext-community-set>
+      </ext-community-sets>
+      <as-path-sets config="true" is-key="false" node="container" presence="false">
+        <as-path-set config="true" key="as-path-set-name" node="list">
+          <as-path-set-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </as-path-set-name>
+          <config config="true" is-key="false" node="container" presence="false">
+            <as-path-set-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </as-path-set-name>
+            <as-path-set-member config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </as-path-set-member>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <as-path-set-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </as-path-set-name>
+            <as-path-set-member config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </as-path-set-member>
+          </state>
+        </as-path-set>
+      </as-path-sets>
+    </bgp-defined-sets>
+  </augment>
+  <augment path="/oc-rpol:routing-policy/oc-rpol:policy-definitions/oc-rpol:policy-definition/oc-rpol:statements/oc-rpol:statement/oc-rpol:conditions">
+    <bgp-conditions config="true" is-key="false" node="container" presence="false">
+      <config config="true" is-key="false" node="container" presence="false">
+        <med-eq config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </med-eq>
+        <origin-eq config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>oc-bgp-types:bgp-origin-attr-type</type-name>
+          </type>
+        </origin-eq>
+        <next-hop-in config="true" is-key="false" is-yang-key="false" node="leaf-list">
+          <type>
+            <type-name>oc-inet:ip-address</type-name>
+          </type>
+        </next-hop-in>
+        <afi-safi-in config="true" is-key="false" is-yang-key="false" node="leaf-list">
+          <type node="identityref">
+            <base>oc-bgp-types:AFI_SAFI_TYPE</base>
+          </type>
+        </afi-safi-in>
+        <local-pref-eq config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </local-pref-eq>
+        <route-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="enumeration">
+            <enum>INTERNAL</enum>
+            <enum>EXTERNAL</enum>
+          </type>
+        </route-type>
+      </config>
+      <state config="true" is-key="false" node="container" presence="false">
+        <med-eq config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </med-eq>
+        <origin-eq config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>oc-bgp-types:bgp-origin-attr-type</type-name>
+          </type>
+        </origin-eq>
+        <next-hop-in config="true" is-key="false" is-yang-key="false" node="leaf-list">
+          <type>
+            <type-name>oc-inet:ip-address</type-name>
+          </type>
+        </next-hop-in>
+        <afi-safi-in config="true" is-key="false" is-yang-key="false" node="leaf-list">
+          <type node="identityref">
+            <base>oc-bgp-types:AFI_SAFI_TYPE</base>
+          </type>
+        </afi-safi-in>
+        <local-pref-eq config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </local-pref-eq>
+        <route-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="enumeration">
+            <enum>INTERNAL</enum>
+            <enum>EXTERNAL</enum>
+          </type>
+        </route-type>
+      </state>
+      <community-count config="true" is-key="false" node="container" presence="false">
+        <config config="true" is-key="false" node="container" presence="false">
+          <operator config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type node="identityref">
+              <base>ATTRIBUTE_COMPARISON</base>
+            </type>
+          </operator>
+          <value config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </value>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <operator config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type node="identityref">
+              <base>ATTRIBUTE_COMPARISON</base>
+            </type>
+          </operator>
+          <value config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </value>
+        </state>
+      </community-count>
+      <as-path-length config="true" is-key="false" node="container" presence="false">
+        <config config="true" is-key="false" node="container" presence="false">
+          <operator config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type node="identityref">
+              <base>ATTRIBUTE_COMPARISON</base>
+            </type>
+          </operator>
+          <value config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </value>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <operator config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type node="identityref">
+              <base>ATTRIBUTE_COMPARISON</base>
+            </type>
+          </operator>
+          <value config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </value>
+        </state>
+      </as-path-length>
+      <match-community-set config="true" is-key="false" node="container" presence="false">
+        <config config="true" is-key="false" node="container" presence="false">
+          <community-set config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </community-set>
+          <match-set-options config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-pol-types:match-set-options-type</type-name>
+            </type>
+          </match-set-options>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <community-set config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </community-set>
+          <match-set-options config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-pol-types:match-set-options-type</type-name>
+            </type>
+          </match-set-options>
+        </state>
+      </match-community-set>
+      <match-ext-community-set config="true" is-key="false" node="container" presence="false">
+        <config config="true" is-key="false" node="container" presence="false">
+          <ext-community-set config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </ext-community-set>
+          <match-set-options config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-pol-types:match-set-options-type</type-name>
+            </type>
+          </match-set-options>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <ext-community-set config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </ext-community-set>
+          <match-set-options config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-pol-types:match-set-options-type</type-name>
+            </type>
+          </match-set-options>
+        </state>
+      </match-ext-community-set>
+      <match-as-path-set config="true" is-key="false" node="container" presence="false">
+        <config config="true" is-key="false" node="container" presence="false">
+          <as-path-set config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </as-path-set>
+          <match-set-options config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-pol-types:match-set-options-type</type-name>
+            </type>
+          </match-set-options>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <as-path-set config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </as-path-set>
+          <match-set-options config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-pol-types:match-set-options-type</type-name>
+            </type>
+          </match-set-options>
+        </state>
+      </match-as-path-set>
+    </bgp-conditions>
+  </augment>
+  <augment path="/oc-rpol:routing-policy/oc-rpol:policy-definitions/oc-rpol:policy-definition/oc-rpol:statements/oc-rpol:statement/oc-rpol:actions">
+    <bgp-actions config="true" is-key="false" node="container" presence="false">
+      <config config="true" is-key="false" node="container" presence="false">
+        <set-route-origin config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>oc-bgp-types:bgp-origin-attr-type</type-name>
+          </type>
+        </set-route-origin>
+        <set-local-pref config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </set-local-pref>
+        <set-next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>bgp-next-hop-type</type-name>
+          </type>
+        </set-next-hop>
+        <set-med config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>bgp-set-med-type</type-name>
+          </type>
+        </set-med>
+      </config>
+      <state config="true" is-key="false" node="container" presence="false">
+        <set-route-origin config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>oc-bgp-types:bgp-origin-attr-type</type-name>
+          </type>
+        </set-route-origin>
+        <set-local-pref config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </set-local-pref>
+        <set-next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>bgp-next-hop-type</type-name>
+          </type>
+        </set-next-hop>
+        <set-med config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>bgp-set-med-type</type-name>
+          </type>
+        </set-med>
+      </state>
+      <set-as-path-prepend config="true" is-key="false" node="container" presence="false">
+        <config config="true" is-key="false" node="container" presence="false">
+          <repeat-n config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..max">
+              <type-name>uint8</type-name>
+            </type>
+          </repeat-n>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <repeat-n config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..max">
+              <type-name>uint8</type-name>
+            </type>
+          </repeat-n>
+        </state>
+      </set-as-path-prepend>
+      <set-community config="true" is-key="false" node="container" presence="false">
+        <config config="true" is-key="false" node="container" presence="false">
+          <method config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type node="enumeration">
+              <enum>INLINE</enum>
+              <enum>REFERENCE</enum>
+            </type>
+          </method>
+          <options config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>bgp-set-community-option-type</type-name>
+            </type>
+          </options>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <method config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type node="enumeration">
+              <enum>INLINE</enum>
+              <enum>REFERENCE</enum>
+            </type>
+          </method>
+          <options config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>bgp-set-community-option-type</type-name>
+            </type>
+          </options>
+        </state>
+        <inline config="true" is-key="false" node="container" presence="false">
+          <when>../config/method=INLINE</when>
+          <config config="true" is-key="false" node="container" presence="false">
+            <communities config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <type node="union">
+                <type>
+                  <type-name>oc-bgp-types:bgp-std-community-type</type-name>
+                </type>
+                <type>
+                  <type-name>oc-bgp-types:bgp-well-known-community-type</type-name>
+                </type>
+              </type>
+            </communities>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <communities config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <type node="union">
+                <type>
+                  <type-name>oc-bgp-types:bgp-std-community-type</type-name>
+                </type>
+                <type>
+                  <type-name>oc-bgp-types:bgp-well-known-community-type</type-name>
+                </type>
+              </type>
+            </communities>
+          </state>
+        </inline>
+        <reference config="true" is-key="false" node="container" presence="false">
+          <when>../config/method=REFERENCE</when>
+          <config config="true" is-key="false" node="container" presence="false">
+            <community-set-ref config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </community-set-ref>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <community-set-ref config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </community-set-ref>
+          </state>
+        </reference>
+      </set-community>
+      <set-ext-community config="true" is-key="false" node="container" presence="false">
+        <config config="true" is-key="false" node="container" presence="false">
+          <method config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type node="enumeration">
+              <enum>INLINE</enum>
+              <enum>REFERENCE</enum>
+            </type>
+          </method>
+          <options config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>bgp-set-community-option-type</type-name>
+            </type>
+          </options>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <method config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type node="enumeration">
+              <enum>INLINE</enum>
+              <enum>REFERENCE</enum>
+            </type>
+          </method>
+          <options config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>bgp-set-community-option-type</type-name>
+            </type>
+          </options>
+        </state>
+        <inline config="true" is-key="false" node="container" presence="false">
+          <when>../config/method=INLINE</when>
+          <config config="true" is-key="false" node="container" presence="false">
+            <communities config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <type node="union">
+                <type>
+                  <type-name>oc-bgp-types:bgp-ext-community-type</type-name>
+                </type>
+                <type>
+                  <type-name>oc-bgp-types:bgp-well-known-community-type</type-name>
+                </type>
+              </type>
+            </communities>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <communities config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <type node="union">
+                <type>
+                  <type-name>oc-bgp-types:bgp-ext-community-type</type-name>
+                </type>
+                <type>
+                  <type-name>oc-bgp-types:bgp-well-known-community-type</type-name>
+                </type>
+              </type>
+            </communities>
+          </state>
+        </inline>
+        <reference config="true" is-key="false" node="container" presence="false">
+          <when>../config/method=REFERENCE</when>
+          <config config="true" is-key="false" node="container" presence="false">
+            <ext-community-set-ref config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </ext-community-set-ref>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <ext-community-set-ref config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </ext-community-set-ref>
+          </state>
+        </reference>
+      </set-ext-community>
+    </bgp-actions>
+  </augment>
+</openconfig-bgp-policy>

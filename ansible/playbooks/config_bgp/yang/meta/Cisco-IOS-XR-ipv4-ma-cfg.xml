@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ipv4-ma-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-ma-cfg" revision="2015-07-30">
+  <files>
+    <file revision="2015-07-30" submodule="false">Cisco-IOS-XR-ipv4-ma-cfg.yang</file>
+  </files>
+  <prefix>ipv4-ma-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="Ipv4-qppb">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">ip-prec</enum>
+      <enum value="2">qos-grp</enum>
+      <enum value="3">both</enum>
+    </type>
+  </typedef>
+  <ipv4-network-global config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/ipv4-io/</xr-path>
+    <xr-xml-map>ipv4_cfg:IPV4NetworkGlobal</xr-xml-map>
+    <xr-task>network</xr-task>
+    <unnumbered config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ipv4-io/unnumbered/</xr-path>
+      <xr-xml-map>ipv4_cfg:Unnumbered</xr-xml-map>
+      <xr-task>network</xr-task>
+      <mpls config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/ipv4-io/unnumbered/mpls/</xr-path>
+        <xr-xml-map>ipv4_cfg:MPLS</xr-xml-map>
+        <xr-task>network</xr-task>
+        <te config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/ipv4-io/unnumbered/mpls/traffic-eng/</xr-path>
+          <xr-xml-map>ipv4_cfg:TE</xr-xml-map>
+          <xr-task>network</xr-task>
+          <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/ipv4-io/unnumbered/mpls/traffic-eng/vrf/default/if</xr-path>
+            <xr-xml-map>ipv4_cfg:Interface</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </interface>
+        </te>
+      </mpls>
+    </unnumbered>
+    <qppb config="true" is-key="false" node="container" presence="false">
+      <xr-is-packed/>
+      <xr-path>/cfg/gl/ipv4-io/qppb/input`</xr-path>
+      <xr-xml-map>ipv4_cfg:QPPB</xr-xml-map>
+      <xr-task>network</xr-task>
+      <xr-pack-format>%d%d</xr-pack-format>
+      <source config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/gl/ipv4-io/qppb/input`0</xr-path>
+        <xr-xml-map>ipv4_cfg:Source</xr-xml-map>
+        <xr-task>network</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Ipv4-qppb</type-name>
+        </type>
+      </source>
+      <destination config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/gl/ipv4-io/qppb/input`1</xr-path>
+        <xr-xml-map>ipv4_cfg:Destination</xr-xml-map>
+        <xr-task>network</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Ipv4-qppb</type-name>
+        </type>
+      </destination>
+    </qppb>
+    <source-route config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/ipv4-io/source-route</xr-path>
+      <xr-xml-map>ipv4_cfg:SourceRoute</xr-xml-map>
+      <xr-task>network</xr-task>
+      <xr-sch-type>Boolean</xr-sch-type>
+      <type>
+        <type-name>boolean</type-name>
+      </type>
+      <default>true</default>
+    </source-route>
+    <reassemble-max-packets config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/ipv4-io/max-paks</xr-path>
+      <xr-xml-map>ipv4_cfg:ReassembleMaxPackets</xr-xml-map>
+      <xr-task>network</xr-task>
+      <xr-sch-type>Range</xr-sch-type>
+      <type range="1..50">
+        <type-name>uint32</type-name>
+      </type>
+    </reassemble-max-packets>
+    <reassemble-time-out config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/ipv4-io/reassemble-timeout</xr-path>
+      <xr-xml-map>ipv4_cfg:ReassembleTimeOut</xr-xml-map>
+      <xr-task>network</xr-task>
+      <xr-sch-type>Range</xr-sch-type>
+      <type range="1..120">
+        <type-name>uint32</type-name>
+      </type>
+    </reassemble-time-out>
+  </ipv4-network-global>
+  <subscriber-pta config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/iedge/pta/</xr-path>
+    <xr-xml-map>ipv4_sub_tcp_mss_cfg:SubscriberPTA</xr-xml-map>
+    <xr-task>network</xr-task>
+    <tcp-mss-adjust config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/iedge/pta/tcp/mss-adjust</xr-path>
+      <xr-xml-map>ipv4_sub_tcp_mss_cfg:TCP_MSSAdjust</xr-xml-map>
+      <xr-task>network</xr-task>
+      <xr-sch-type>Range</xr-sch-type>
+      <type range="1280..1536">
+        <type-name>uint32</type-name>
+      </type>
+    </tcp-mss-adjust>
+  </subscriber-pta>
+</Cisco-IOS-XR-ipv4-ma-cfg>

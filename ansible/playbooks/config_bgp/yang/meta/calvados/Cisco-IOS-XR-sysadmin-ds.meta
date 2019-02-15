@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-sysadmin-ds ns="http://www.cisco.com/ns/yang/Cisco-IOS-XR-sysadmin-ds" revision="2018-05-21">
+  <files>
+    <file revision="2018-05-21" submodule="false">Cisco-IOS-XR-sysadmin-ds.yang</file>
+  </files>
+  <prefix>ds</prefix>
+  <import prefix="tailf">tailf-common</import>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="show_trace">Cisco-IOS-XR-sysadmin-show-trace</import>
+  <typedef name="service-scope">
+    <type node="enumeration">
+      <enum>None</enum>
+      <enum>Rack</enum>
+      <enum>System</enum>
+      <enum>Node</enum>
+    </type>
+  </typedef>
+  <typedef name="process-role">
+    <type node="enumeration">
+      <enum>NoRole</enum>
+      <enum>Active</enum>
+      <enum>Standby</enum>
+      <enum>None</enum>
+      <enum value="254">Unknown</enum>
+    </type>
+  </typedef>
+  <typedef name="process-issu-role">
+    <type node="enumeration">
+      <enum value="1">Primary</enum>
+      <enum value="2">Secondary</enum>
+      <enum value="3">Tertiary</enum>
+      <enum value="254">Unknown</enum>
+    </type>
+  </typedef>
+  <services config="true" is-key="false" node="container" presence="false">
+    <all-locations config="true" key="location" node="list">
+      <xr-path/>
+      <location config="true" is-key="true" node="leaf">
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </location>
+      <services config="true" key="name" node="list">
+        <xr-path/>
+        <name config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </name>
+        <endpoint config="true" node="list">
+          <xr-path/>
+          <scope config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>service-scope</type-name>
+            </type>
+          </scope>
+          <ip config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </ip>
+          <port config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>inet:port-number</type-name>
+            </type>
+          </port>
+          <role config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>process-role</type-name>
+            </type>
+          </role>
+          <issu_role config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>process-issu-role</type-name>
+            </type>
+          </issu_role>
+          <node config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </node>
+        </endpoint>
+        <registrations config="true" node="list">
+          <xr-path/>
+          <client config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </client>
+          <pid config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </pid>
+        </registrations>
+      </services>
+    </all-locations>
+  </services>
+  <services-stats config="true" is-key="false" node="container" presence="false">
+    <ds config="true" is-key="false" node="container" presence="false">
+      <trace config="true" key="buffer" node="list">
+        <xr-path/>
+        <buffer config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </buffer>
+        <location config="true" key="location_name" node="list">
+          <xr-path/>
+          <location_name config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </location_name>
+          <all-options config="true" key="option" node="list">
+            <xr-path/>
+            <option config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </option>
+            <trace-blocks config="true" node="list">
+              <xr-path/>
+              <data config="true" is-key="false" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </data>
+            </trace-blocks>
+          </all-options>
+        </location>
+      </trace>
+    </ds>
+    <all-locations config="true" key="location" node="list">
+      <xr-path/>
+      <location config="true" is-key="true" node="leaf">
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </location>
+      <stats config="true" key="name" node="list">
+        <xr-path/>
+        <name config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </name>
+        <published config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </published>
+        <deleted config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </deleted>
+        <modified config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </modified>
+        <registered config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </registered>
+        <unregistered config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </unregistered>
+        <notifications config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </notifications>
+        <remote_sent config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </remote_sent>
+        <remote_recv config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </remote_recv>
+      </stats>
+    </all-locations>
+  </services-stats>
+</Cisco-IOS-XR-sysadmin-ds>

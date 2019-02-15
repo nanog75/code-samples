@@ -1,0 +1,253 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-lpts-punt-flowtrap-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-lpts-punt-flowtrap-cfg" revision="2017-09-07">
+  <files>
+    <file revision="2017-09-07" submodule="false">Cisco-IOS-XR-lpts-punt-flowtrap-cfg.yang</file>
+  </files>
+  <prefix>lpts-punt-flowtrap-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-lpts-lib-cfg</import>
+  <typedef name="Lpts-punt-flowtrap-proto-id">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">arp</enum>
+      <enum value="2">icmp</enum>
+      <enum value="3">dhcp</enum>
+      <enum value="4">pppoe</enum>
+      <enum value="5">ppp</enum>
+      <enum value="6">igmp</enum>
+      <enum value="7">ipv4</enum>
+      <enum value="8">l2tp</enum>
+      <enum value="9">unclassified</enum>
+      <enum value="10">ospf</enum>
+      <enum value="11">bgp</enum>
+      <enum value="12">default</enum>
+    </type>
+  </typedef>
+  <augment path="/a1:lpts">
+    <punt config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/lpts/punt/</xr-path>
+      <xr-xml-map>lpts_punt_flowtrap_cfg:Punt</xr-xml-map>
+      <xr-task>config-services</xr-task>
+      <flowtrap config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/lpts/punt/flowtrap/</xr-path>
+        <xr-xml-map>lpts_punt_flowtrap_cfg:Flowtrap</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <penalty-rates config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/lpts/punt/flowtrap/rate/</xr-path>
+          <xr-xml-map>lpts_punt_flowtrap_cfg:PenaltyRateTable</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <penalty-rate config="true" key="protocol-name" node="list">
+            <xr-path>/cfg/gl/lpts/punt/flowtrap/rate/&lt;lpts_punt_flowtrap_cfg_PenaltyRate_arg2&gt;</xr-path>
+            <xr-xml-map>lpts_punt_flowtrap_cfg:PenaltyRate</xr-xml-map>
+            <xr-task>config-services</xr-task>
+            <protocol-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/lpts/punt/flowtrap/rate/&lt;lpts_punt_flowtrap_cfg_PenaltyRate_arg2&gt;</xr-path>
+              <xr-xml-map>lpts_punt_flowtrap_cfg:ProtocolName</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <xr-sch-arg-name>&lt;lpts_punt_flowtrap_cfg_PenaltyRate_arg2&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>Lpts-punt-flowtrap-proto-id</type-name>
+              </type>
+            </protocol-name>
+            <rate config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/lpts/punt/flowtrap/rate/&lt;lpts_punt_flowtrap_cfg_PenaltyRate_arg2&gt;</xr-path>
+              <xr-xml-map>lpts_punt_flowtrap_cfg:Rate</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="2..100">
+                <type-name>uint32</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </rate>
+          </penalty-rate>
+        </penalty-rates>
+        <penalty-timeouts config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/lpts/punt/flowtrap/timeout/</xr-path>
+          <xr-xml-map>lpts_punt_flowtrap_cfg:PenaltyTimeoutTable</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <penalty-timeout config="true" key="protocol-name" node="list">
+            <xr-path>/cfg/gl/lpts/punt/flowtrap/timeout/&lt;lpts_punt_flowtrap_cfg_PenaltyTimeout_arg2&gt;</xr-path>
+            <xr-xml-map>lpts_punt_flowtrap_cfg:PenaltyTimeout</xr-xml-map>
+            <xr-task>config-services</xr-task>
+            <protocol-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/lpts/punt/flowtrap/timeout/&lt;lpts_punt_flowtrap_cfg_PenaltyTimeout_arg2&gt;</xr-path>
+              <xr-xml-map>lpts_punt_flowtrap_cfg:ProtocolName</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <xr-sch-arg-name>&lt;lpts_punt_flowtrap_cfg_PenaltyTimeout_arg2&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>Lpts-punt-flowtrap-proto-id</type-name>
+              </type>
+            </protocol-name>
+            <timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/lpts/punt/flowtrap/timeout/&lt;lpts_punt_flowtrap_cfg_PenaltyTimeout_arg2&gt;</xr-path>
+              <xr-xml-map>lpts_punt_flowtrap_cfg:Timeout</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="1..1000">
+                <type-name>uint32</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </timeout>
+          </penalty-timeout>
+        </penalty-timeouts>
+        <exclude config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/lpts/punt/flowtrap/exclude/</xr-path>
+          <xr-xml-map>lpts_punt_flowtrap_cfg:Exclude</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <interface-names config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/lpts/punt/flowtrap/exclude/if/</xr-path>
+            <xr-xml-map>lpts_punt_flowtrap_cfg:InterfaceTable</xr-xml-map>
+            <xr-task>config-services</xr-task>
+            <interface-name config="true" key="ifname" node="list">
+              <xr-path>/cfg/gl/lpts/punt/flowtrap/exclude/if/&lt;lpts_punt_flowtrap_cfg_InterfaceName_arg2&gt;</xr-path>
+              <xr-xml-map>lpts_punt_flowtrap_cfg:InterfaceName</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <ifname config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/lpts/punt/flowtrap/exclude/if/&lt;lpts_punt_flowtrap_cfg_InterfaceName_arg2&gt;</xr-path>
+                <xr-xml-map>lpts_punt_flowtrap_cfg:ifname</xr-xml-map>
+                <xr-task>config-services</xr-task>
+                <xr-sch-type>InterfaceName</xr-sch-type>
+                <xr-sch-arg-name>&lt;lpts_punt_flowtrap_cfg_InterfaceName_arg2&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>xr:Interface-name</type-name>
+                </type>
+              </ifname>
+              <id1 config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/lpts/punt/flowtrap/exclude/if/&lt;lpts_punt_flowtrap_cfg_InterfaceName_arg2&gt;</xr-path>
+                <xr-xml-map>lpts_punt_flowtrap_cfg:ID1</xr-xml-map>
+                <xr-task>config-services</xr-task>
+                <xr-sch-type>Boolean</xr-sch-type>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </id1>
+            </interface-name>
+          </interface-names>
+        </exclude>
+        <max-flow-gap config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/lpts/punt/flowtrap/max_flow_gap</xr-path>
+          <xr-xml-map>lpts_punt_flowtrap_cfg:MaxFlowGap</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..60000">
+            <type-name>uint32</type-name>
+          </type>
+        </max-flow-gap>
+        <et-size config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/lpts/punt/flowtrap/et_size</xr-path>
+          <xr-xml-map>lpts_punt_flowtrap_cfg:EtSize</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..128">
+            <type-name>uint32</type-name>
+          </type>
+        </et-size>
+        <eviction-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/lpts/punt/flowtrap/et_eviction_threshold</xr-path>
+          <xr-xml-map>lpts_punt_flowtrap_cfg:EvictionThreshold</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..65535">
+            <type-name>uint32</type-name>
+          </type>
+        </eviction-threshold>
+        <report-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/lpts/punt/flowtrap/et_report_threshold</xr-path>
+          <xr-xml-map>lpts_punt_flowtrap_cfg:ReportThreshold</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>xr:Cisco-ios-xr-port-number</type-name>
+          </type>
+        </report-threshold>
+        <non-subscriber-interfaces config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/lpts/punt/flowtrap/nonsubscribers</xr-path>
+          <xr-xml-map>lpts_punt_flowtrap_cfg:NonSubscriberInterfaces</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>Integer</xr-sch-type>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </non-subscriber-interfaces>
+        <sample-prob config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/lpts/punt/flowtrap/et_sample_prob</xr-path>
+          <xr-xml-map>lpts_punt_flowtrap_cfg:SampleProb</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <type length="1..32">
+            <type-name>string</type-name>
+          </type>
+        </sample-prob>
+        <eviction-search-limit config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/lpts/punt/flowtrap/et_eviction_search_limit</xr-path>
+          <xr-xml-map>lpts_punt_flowtrap_cfg:EvictionSearchLimit</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..128">
+            <type-name>uint32</type-name>
+          </type>
+        </eviction-search-limit>
+        <routing-protocols-enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/lpts/punt/flowtrap/routing_protocols_enable</xr-path>
+          <xr-xml-map>lpts_punt_flowtrap_cfg:RoutingProtocolsEnable</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>Boolean</xr-sch-type>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </routing-protocols-enable>
+        <subscriber-interfaces config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/lpts/punt/flowtrap/subscribers</xr-path>
+          <xr-xml-map>lpts_punt_flowtrap_cfg:SubscriberInterfaces</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>Boolean</xr-sch-type>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </subscriber-interfaces>
+        <interface-based-flow config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/lpts/punt/flowtrap/interface_based_flow</xr-path>
+          <xr-xml-map>lpts_punt_flowtrap_cfg:InterfaceBasedFlow</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>Boolean</xr-sch-type>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </interface-based-flow>
+        <dampening config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/lpts/punt/flowtrap/dampening</xr-path>
+          <xr-xml-map>lpts_punt_flowtrap_cfg:Dampening</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="5000..60000">
+            <type-name>uint32</type-name>
+          </type>
+        </dampening>
+      </flowtrap>
+    </punt>
+  </augment>
+</Cisco-IOS-XR-lpts-punt-flowtrap-cfg>

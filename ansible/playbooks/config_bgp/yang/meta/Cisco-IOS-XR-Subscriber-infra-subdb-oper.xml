@@ -1,0 +1,526 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-Subscriber-infra-subdb-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-Subscriber-infra-subdb-oper" revision="2015-11-09">
+  <files>
+    <file revision="2015-11-09" submodule="false">Cisco-IOS-XR-Subscriber-infra-subdb-oper.yang</file>
+    <file revision="2015-11-09" submodule="true">Cisco-IOS-XR-Subscriber-infra-subdb-oper-sub1.yang</file>
+    <file revision="2015-11-09" submodule="true">Cisco-IOS-XR-Subscriber-infra-subdb-oper-sub2.yang</file>
+  </files>
+  <prefix>subscriber-infra-subdb-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="yang">ietf-yang-types</import>
+  <typedef name="Session-state">
+    <type node="enumeration">
+      <enum value="1">init</enum>
+      <enum value="2">destroy</enum>
+      <enum value="3">config-generate</enum>
+      <enum value="4">feature-registration-wait</enum>
+      <enum value="5">config-apply</enum>
+      <enum value="6">config-done</enum>
+      <enum value="7">config-removed</enum>
+      <enum value="8">config-error</enum>
+      <enum value="9">error</enum>
+      <enum value="11">sync</enum>
+    </type>
+  </typedef>
+  <typedef name="Subdb-object-type-data">
+    <type node="enumeration">
+      <enum value="1">user-profile</enum>
+      <enum value="2">service-profile</enum>
+      <enum value="3">subscriber-service</enum>
+      <enum value="4">ppp</enum>
+      <enum value="5">ip-subscriber</enum>
+    </type>
+  </typedef>
+  <subscriber-database config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/subdb/</xr-path>
+    <xr-xml-map>subscriber_subdb_oper:SubscriberDatabase</xr-xml-map>
+    <xr-task>config-services</xr-task>
+    <xr-scope>exported</xr-scope>
+    <nodes config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/subdb/node/</xr-path>
+      <xr-xml-map>subscriber_subdb_oper:NodeTable</xr-xml-map>
+      <xr-task>config-services</xr-task>
+      <node config="false" key="node-name" node="list">
+        <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/</xr-path>
+        <xr-xml-map>subscriber_subdb_oper:Node</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <xr-scope>exported</xr-scope>
+        <association config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/association/</xr-path>
+          <xr-xml-map>subdb_association_oper:Association</xr-xml-map>
+          <xr-task>network</xr-task>
+          <labels config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/association/assoc/</xr-path>
+            <xr-xml-map>subdb_association_oper:LabelTable</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-filterlist>SubscriberDatabaseLabelDetailFilter</xr-filterlist>
+            <xr-filterlist>SubscriberDatabaseInterfaceFilter</xr-filterlist>
+            <xr-filterlist>SubscriberDatabaseInterfaceBriefFilter</xr-filterlist>
+            <xr-filterlist>SubscriberDatabaseTemplateTypeFilter</xr-filterlist>
+            <xr-filterlist>SubscriberDatabaseTemplateTypeBriefFilter</xr-filterlist>
+            <label config="false" key="subscriber-label" node="list">
+              <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/association/assoc/&lt;subdb_association_oper_Label_session-id&gt;</xr-path>
+              <xr-xml-map>subdb_association_oper:Label</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-grp-name>subdb_assoc_session</xr-bag-grp-name>
+              <xr-bag>subdb.bag</xr-bag>
+              <subscriber-label config="false" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-pathformat>hex_nozerox</xr-pathformat>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/association/assoc/&lt;subdb_association_oper_Label_session-id&gt;</xr-path>
+                <xr-xml-map>subdb_association_oper:SubscriberLabel</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-sch-type>HexInteger</xr-sch-type>
+                <xr-sch-arg-name>&lt;subdb_association_oper_Label_session-id&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>xr:Hex-integer</type-name>
+                </type>
+              </subscriber-label>
+              <template config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/association/assoc/&lt;subdb_association_oper_Label_session-id&gt;~subdb_assoc_session.Template</xr-path>
+                <xr-task>network</xr-task>
+                <xr-bag-version>1 0</xr-bag-version>
+                <associated-template config="false" node="list">
+                  <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/association/assoc/&lt;subdb_association_oper_Label_session-id&gt;~subdb_assoc_session.Template.AssociatedTemplates[&lt;bag_arg21&gt;]</xr-path>
+                  <xr-task>network</xr-task>
+                  <xr-bag-version>1 0</xr-bag-version>
+                  <xr-internal-key>&lt;bag_arg21&gt;</xr-internal-key>
+                  <template-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/association/assoc/&lt;subdb_association_oper_Label_session-id&gt;~subdb_assoc_session.Template.AssociatedTemplates[&lt;bag_arg21&gt;].TemplateType</xr-path>
+                    <xr-xml-map>subdb:TemplateType</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <type>
+                      <type-name>Subdb-object-type-data</type-name>
+                    </type>
+                  </template-type>
+                  <template-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/association/assoc/&lt;subdb_association_oper_Label_session-id&gt;~subdb_assoc_session.Template.AssociatedTemplates[&lt;bag_arg21&gt;].TemplateName</xr-path>
+                    <xr-xml-map>subdb:TemplateName</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <type length="0..65">
+                      <type-name>string</type-name>
+                    </type>
+                  </template-name>
+                  <varlist config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/association/assoc/&lt;subdb_association_oper_Label_session-id&gt;~subdb_assoc_session.Template.AssociatedTemplates[&lt;bag_arg21&gt;].Varlist</xr-path>
+                    <xr-xml-map>subdb:Varlist</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <type length="0..1000">
+                      <type-name>string</type-name>
+                    </type>
+                  </varlist>
+                </associated-template>
+              </template>
+              <interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/association/assoc/&lt;subdb_association_oper_Label_session-id&gt;~subdb_assoc_session.InterfaceName</xr-path>
+                <xr-xml-map>subdb:InterfaceName</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>xr:Interface-name</type-name>
+                </type>
+              </interface-name>
+              <associations config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/association/assoc/&lt;subdb_association_oper_Label_session-id&gt;~subdb_assoc_session.Associations</xr-path>
+                <xr-xml-map>subdb:Associations</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </associations>
+              <varlist-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/association/assoc/&lt;subdb_association_oper_Label_session-id&gt;~subdb_assoc_session.VarlistId</xr-path>
+                <xr-xml-map>subdb:VarlistId</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </varlist-id>
+            </label>
+          </labels>
+        </association>
+        <summary config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/show/summary</xr-path>
+          <xr-xml-map>subdb_association_oper:Summary</xr-xml-map>
+          <xr-task>network</xr-task>
+          <xr-bag-grp-name>subdb_summary_counts_bag</xr-bag-grp-name>
+          <xr-bag>subdb_show_edm.bag</xr-bag>
+          <assoc-db-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/show/summary~subdb_summary_counts_bag.AssocDbEntries</xr-path>
+            <xr-xml-map>subdb_show_edm:AssocDbEntries</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </assoc-db-entries>
+          <assoc-db-associations config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/show/summary~subdb_summary_counts_bag.AssocDbAssociations</xr-path>
+            <xr-xml-map>subdb_show_edm:AssocDbAssociations</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </assoc-db-associations>
+          <derived-db-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/show/summary~subdb_summary_counts_bag.DerivedDbEntries</xr-path>
+            <xr-xml-map>subdb_show_edm:DerivedDbEntries</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </derived-db-entries>
+          <config-db-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/show/summary~subdb_summary_counts_bag.ConfigDbEntries</xr-path>
+            <xr-xml-map>subdb_show_edm:ConfigDbEntries</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </config-db-entries>
+          <interface-db-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/show/summary~subdb_summary_counts_bag.InterfaceDbEntries</xr-path>
+            <xr-xml-map>subdb_show_edm:InterfaceDbEntries</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </interface-db-entries>
+          <num-ipsub-dhcp config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/show/summary~subdb_summary_counts_bag.NumIpsubDhcp</xr-path>
+            <xr-xml-map>subdb_show_edm:NumIpsubDhcp</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </num-ipsub-dhcp>
+          <num-ipsub-inband config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/show/summary~subdb_summary_counts_bag.NumIpsubInband</xr-path>
+            <xr-xml-map>subdb_show_edm:NumIpsubInband</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </num-ipsub-inband>
+          <num-pppoe config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/show/summary~subdb_summary_counts_bag.NumPppoe</xr-path>
+            <xr-xml-map>subdb_show_edm:NumPppoe</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </num-pppoe>
+          <subdb-obj-counts-by-type config="false" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/show/summary~subdb_summary_counts_bag.SubdbObjCountsByType[&lt;bag_arg15&gt;]</xr-path>
+            <xr-xml-map>subdb_show_edm:SubdbObjCountsByType</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg15&gt;</xr-internal-key>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+            <max-elements>16</max-elements>
+          </subdb-obj-counts-by-type>
+          <num-subscribers-in-state config="false" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/show/summary~subdb_summary_counts_bag.NumSubscribersInState[&lt;bag_arg16&gt;]</xr-path>
+            <xr-xml-map>subdb_show_edm:NumSubscribersInState</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg16&gt;</xr-internal-key>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+            <max-elements>32</max-elements>
+          </num-subscribers-in-state>
+          <num-transitions-through-state config="false" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/show/summary~subdb_summary_counts_bag.NumTransitionsThroughState[&lt;bag_arg17&gt;]</xr-path>
+            <xr-xml-map>subdb_show_edm:NumTransitionsThroughState</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg17&gt;</xr-internal-key>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+            <max-elements>32</max-elements>
+          </num-transitions-through-state>
+        </summary>
+        <session config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/</xr-path>
+          <xr-xml-map>subdb_session_oper:Session</xr-xml-map>
+          <xr-task>network</xr-task>
+          <xr-scope>exported</xr-scope>
+          <labels config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/sub-label/</xr-path>
+            <xr-xml-map>subdb_session_oper:LabelTable</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-filterlist>SubscriberDatabaseSessionStateFilter</xr-filterlist>
+            <label config="false" key="subscriber-label" node="list">
+              <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/sub-label/&lt;subdb_session_oper_Label_session-id&gt;</xr-path>
+              <xr-xml-map>subdb_session_oper:Label</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-grp-name>subdb_subscriber_obj</xr-bag-grp-name>
+              <xr-bag>subdb.bag</xr-bag>
+              <subscriber-label config="false" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-pathformat>hex_nozerox</xr-pathformat>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/sub-label/&lt;subdb_session_oper_Label_session-id&gt;</xr-path>
+                <xr-xml-map>subdb_session_oper:SubscriberLabel</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-sch-type>HexInteger</xr-sch-type>
+                <xr-sch-arg-name>&lt;subdb_session_oper_Label_session-id&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>xr:Hex-integer</type-name>
+                </type>
+              </subscriber-label>
+              <session-state config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/sub-label/&lt;subdb_session_oper_Label_session-id&gt;~subdb_subscriber_obj.SessionState</xr-path>
+                <xr-xml-map>subdb:SessionState</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>Session-state</type-name>
+                </type>
+              </session-state>
+              <activate-request-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/sub-label/&lt;subdb_session_oper_Label_session-id&gt;~subdb_subscriber_obj.ActivateRequestID</xr-path>
+                <xr-xml-map>subdb:ActivateRequestID</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </activate-request-id>
+              <transaction-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/sub-label/&lt;subdb_session_oper_Label_session-id&gt;~subdb_subscriber_obj.TransactionID</xr-path>
+                <xr-xml-map>subdb:TransactionID</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>int32</type-name>
+                </type>
+              </transaction-id>
+              <produce-done-request-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/sub-label/&lt;subdb_session_oper_Label_session-id&gt;~subdb_subscriber_obj.ProduceDoneRequestID</xr-path>
+                <xr-xml-map>subdb:ProduceDoneRequestID</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </produce-done-request-id>
+              <destroy-req-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/sub-label/&lt;subdb_session_oper_Label_session-id&gt;~subdb_subscriber_obj.destroy_req_received</xr-path>
+                <xr-xml-map>subdb:destroy_req_received</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </destroy-req-received>
+              <destroy-request-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/sub-label/&lt;subdb_session_oper_Label_session-id&gt;~subdb_subscriber_obj.DestroyRequestID</xr-path>
+                <xr-xml-map>subdb:DestroyRequestID</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </destroy-request-id>
+              <is-config-changed config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/sub-label/&lt;subdb_session_oper_Label_session-id&gt;~subdb_subscriber_obj.IsConfigChanged</xr-path>
+                <xr-xml-map>subdb:IsConfigChanged</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-config-changed>
+              <is-creator-gone config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/sub-label/&lt;subdb_session_oper_Label_session-id&gt;~subdb_subscriber_obj.IsCreatorGone</xr-path>
+                <xr-xml-map>subdb:IsCreatorGone</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-creator-gone>
+              <is-delete-notify-done config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/sub-label/&lt;subdb_session_oper_Label_session-id&gt;~subdb_subscriber_obj.IsDeleteNotifyDone</xr-path>
+                <xr-xml-map>subdb:IsDeleteNotifyDone</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-delete-notify-done>
+              <add-modify-done config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/sub-label/&lt;subdb_session_oper_Label_session-id&gt;~subdb_subscriber_obj.AddModifyDone</xr-path>
+                <xr-xml-map>subdb:AddModifyDone</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </add-modify-done>
+              <is-rollback-needed config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/sub-label/&lt;subdb_session_oper_Label_session-id&gt;~subdb_subscriber_obj.IsRollbackNeeded</xr-path>
+                <xr-xml-map>subdb:IsRollbackNeeded</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-rollback-needed>
+              <is-rollback-in-progress config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/sub-label/&lt;subdb_session_oper_Label_session-id&gt;~subdb_subscriber_obj.IsRollbackInProgress</xr-path>
+                <xr-xml-map>subdb:IsRollbackInProgress</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-rollback-in-progress>
+              <is-server-restart-apply config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/sub-label/&lt;subdb_session_oper_Label_session-id&gt;~subdb_subscriber_obj.IsServerRestartApply</xr-path>
+                <xr-xml-map>subdb:IsServerRestartApply</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-server-restart-apply>
+              <is-rollback-performed config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/sub-label/&lt;subdb_session_oper_Label_session-id&gt;~subdb_subscriber_obj.IsRollbackPerformed</xr-path>
+                <xr-xml-map>subdb:IsRollbackPerformed</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-rollback-performed>
+              <repl-pending config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/sub-label/&lt;subdb_session_oper_Label_session-id&gt;~subdb_subscriber_obj.repl_pending</xr-path>
+                <xr-xml-map>subdb:repl_pending</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </repl-pending>
+              <activate-timer-running config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/sub-label/&lt;subdb_session_oper_Label_session-id&gt;~subdb_subscriber_obj.activate_timer_running</xr-path>
+                <xr-xml-map>subdb:activate_timer_running</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </activate-timer-running>
+              <apply-timer-running config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/sub-label/&lt;subdb_session_oper_Label_session-id&gt;~subdb_subscriber_obj.apply_timer_running</xr-path>
+                <xr-xml-map>subdb:apply_timer_running</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </apply-timer-running>
+              <event-queue-size config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/sub-label/&lt;subdb_session_oper_Label_session-id&gt;~subdb_subscriber_obj.event_queue_size</xr-path>
+                <xr-xml-map>subdb:event_queue_size</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </event-queue-size>
+              <restarts config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/sub-label/&lt;subdb_session_oper_Label_session-id&gt;~subdb_subscriber_obj.Restarts</xr-path>
+                <xr-xml-map>subdb:Restarts</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>hex_binary_type</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>yang:hex-string</type-name>
+                </type>
+              </restarts>
+              <template-interface-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/session/sub-label/&lt;subdb_session_oper_Label_session-id&gt;~subdb_subscriber_obj.TemplateInterfaceID</xr-path>
+                <xr-xml-map>subdb:TemplateInterfaceID</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </template-interface-id>
+            </label>
+          </labels>
+        </session>
+        <node-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-pathformat>hex_nozerox</xr-pathformat>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/subdb/node/&lt;subscriber_subdb_oper_Node_nodeid&gt;/</xr-path>
+          <xr-xml-map>subscriber_subdb_oper:NodeName</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>NodeID</xr-sch-type>
+          <xr-sch-arg-name>&lt;subscriber_subdb_oper_Node_nodeid&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Node-id</type-name>
+          </type>
+        </node-name>
+      </node>
+    </nodes>
+  </subscriber-database>
+</Cisco-IOS-XR-Subscriber-infra-subdb-oper>

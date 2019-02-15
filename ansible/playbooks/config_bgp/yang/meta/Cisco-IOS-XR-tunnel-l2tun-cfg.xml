@@ -1,0 +1,346 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-tunnel-l2tun-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-tunnel-l2tun-cfg" revision="2017-09-07">
+  <files>
+    <file revision="2017-09-07" submodule="false">Cisco-IOS-XR-tunnel-l2tun-cfg.yang</file>
+  </files>
+  <prefix>tunnel-l2tun-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="L2tp-no-user">
+    <xr-sch-type>RangeEnum</xr-sch-type>
+    <type range="0..4294967295">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="L2tp-hash-method">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">md5</enum>
+      <enum value="2">sha1</enum>
+      <enum value="3">none</enum>
+    </type>
+  </typedef>
+  <typedef name="L2tp-digest-hash-method">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">md5</enum>
+      <enum value="2">sha1</enum>
+    </type>
+  </typedef>
+  <l2tp config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/l2tpv3/</xr-path>
+    <xr-xml-map>l2tp_cfg:L2TP</xr-xml-map>
+    <xr-task>tunnel</xr-task>
+    <classes config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/l2tpv3/class/</xr-path>
+      <xr-xml-map>l2tp_cfg:ClassTable</xr-xml-map>
+      <xr-task>tunnel</xr-task>
+      <class config="true" key="class-name" node="list">
+        <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/</xr-path>
+        <xr-xml-map>l2tp_cfg:Class</xr-xml-map>
+        <xr-task>tunnel</xr-task>
+        <xr-scope>exported</xr-scope>
+        <security config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_n/</xr-path>
+          <xr-xml-map>l2tp_security_cfg:Security</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <ip config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_n/check/</xr-path>
+            <xr-xml-map>l2tp_security_cfg:IP</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <address-check config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_n/check/peeraddr</xr-path>
+              <xr-xml-map>l2tp_security_cfg:AddressCheck</xr-xml-map>
+              <xr-task>tunnel</xr-task>
+              <xr-sch-type>TrueOnly</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </address-check>
+          </ip>
+        </security>
+        <retransmit config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_d/retransmit/</xr-path>
+          <xr-xml-map>l2tp_cfg:Retransmit</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <initial config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_d/retransmit/initial/</xr-path>
+            <xr-xml-map>l2tp_cfg:Initial</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <retry config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_d/retransmit/initial/retries</xr-path>
+              <xr-xml-map>l2tp_cfg:Retry</xr-xml-map>
+              <xr-task>tunnel</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="1..1000">
+                <type-name>uint32</type-name>
+              </type>
+            </retry>
+            <timeout config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_d/retransmit/initial/timeout/</xr-path>
+              <xr-xml-map>l2tp_cfg:Timeout</xr-xml-map>
+              <xr-task>tunnel</xr-task>
+              <minimum config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_d/retransmit/initial/timeout/min</xr-path>
+                <xr-xml-map>l2tp_cfg:Minimum</xr-xml-map>
+                <xr-task>tunnel</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="1..8">
+                  <type-name>uint32</type-name>
+                </type>
+              </minimum>
+              <maximum config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_d/retransmit/initial/timeout/max</xr-path>
+                <xr-xml-map>l2tp_cfg:Maximum</xr-xml-map>
+                <xr-task>tunnel</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="1..8">
+                  <type-name>uint32</type-name>
+                </type>
+              </maximum>
+            </timeout>
+          </initial>
+          <retry config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_d/retransmit/retries</xr-path>
+            <xr-xml-map>l2tp_cfg:Retry</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="5..1000">
+              <type-name>uint32</type-name>
+            </type>
+          </retry>
+          <timeout config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_d/retransmit/timeout/</xr-path>
+            <xr-xml-map>l2tp_cfg:Timeout</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <minimum config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_d/retransmit/timeout/min</xr-path>
+              <xr-xml-map>l2tp_cfg:Minimum</xr-xml-map>
+              <xr-task>tunnel</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="1..8">
+                <type-name>uint32</type-name>
+              </type>
+            </minimum>
+            <maximum config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_d/retransmit/timeout/max</xr-path>
+              <xr-xml-map>l2tp_cfg:Maximum</xr-xml-map>
+              <xr-task>tunnel</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="1..8">
+                <type-name>uint32</type-name>
+              </type>
+            </maximum>
+          </timeout>
+        </retransmit>
+        <tunnel config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_m/</xr-path>
+          <xr-xml-map>l2tp_cfg:Tunnel</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <accounting config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_m/tunacct</xr-path>
+            <xr-xml-map>l2tp_cfg:Accounting</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </accounting>
+        </tunnel>
+        <digest config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_j/digest/</xr-path>
+          <xr-xml-map>l2tp_cfg:Digest</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <secrets config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_j/digest/secret/</xr-path>
+            <xr-xml-map>l2tp_cfg:SecretTable</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <secret config="true" key="secret-name" node="list">
+              <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_j/digest/secret/&lt;l2tp_cfg_Secret_password&gt;</xr-path>
+              <xr-xml-map>l2tp_cfg:Secret</xr-xml-map>
+              <xr-task>tunnel</xr-task>
+              <secret-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_j/digest/secret/&lt;l2tp_cfg_Secret_password&gt;</xr-path>
+                <xr-xml-map>l2tp_cfg:SecretName</xr-xml-map>
+                <xr-task>tunnel</xr-task>
+                <xr-sch-type>EncryptedString</xr-sch-type>
+                <xr-sch-arg-name>&lt;l2tp_cfg_Secret_password&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>xr:Cisco-ios-xr-string</type-name>
+                </type>
+              </secret-name>
+              <hash config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_j/digest/secret/&lt;l2tp_cfg_Secret_password&gt;</xr-path>
+                <xr-xml-map>l2tp_cfg:Hash</xr-xml-map>
+                <xr-task>tunnel</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <type>
+                  <type-name>L2tp-hash-method</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </hash>
+            </secret>
+          </secrets>
+          <hash config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_j/digest/hash</xr-path>
+            <xr-xml-map>l2tp_cfg:Hash</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>L2tp-digest-hash-method</type-name>
+            </type>
+          </hash>
+          <check-disable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_j/digest/check</xr-path>
+            <xr-xml-map>l2tp_cfg:CheckDisable</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </check-disable>
+        </digest>
+        <ip config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_l/</xr-path>
+          <xr-xml-map>l2tp_cfg:IP</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <tos config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_l/ip-tos</xr-path>
+            <xr-xml-map>l2tp_cfg:TOS</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..255">
+              <type-name>uint32</type-name>
+            </type>
+          </tos>
+        </ip>
+        <host-name config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_f/hostname</xr-path>
+          <xr-xml-map>l2tp_cfg:Hostname</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </host-name>
+        <hidden config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_g/hidden</xr-path>
+          <xr-xml-map>l2tp_cfg:Hidden</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </hidden>
+        <hello-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_i/hello-interval</xr-path>
+          <xr-xml-map>l2tp_cfg:HelloInterval</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-sch-type>ZeroRange</xr-sch-type>
+          <type range="0..1000">
+            <type-name>uint32</type-name>
+          </type>
+        </hello-interval>
+        <timeout-setup config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_e/timeout-setup</xr-path>
+          <xr-xml-map>l2tp_cfg:TimeoutSetup</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="60..6000">
+            <type-name>uint32</type-name>
+          </type>
+        </timeout-setup>
+        <receive-window config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_c/receive-window</xr-path>
+          <xr-xml-map>l2tp_cfg:ReceiveWindow</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..16384">
+            <type-name>uint32</type-name>
+          </type>
+        </receive-window>
+        <congestion-control config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_o/congctrl</xr-path>
+          <xr-xml-map>l2tp_cfg:CongestionControl</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </congestion-control>
+        <timeout-no-user config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_e/timeout-nouser</xr-path>
+          <xr-xml-map>l2tp_cfg:TimeoutNoUser</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>L2tp-no-user</type-name>
+          </type>
+        </timeout-no-user>
+        <authentication config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_b/authentication</xr-path>
+          <xr-xml-map>l2tp_cfg:Authentication</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-sch-type>Integer</xr-sch-type>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </authentication>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_a/l2tp-class</xr-path>
+          <xr-xml-map>l2tp_cfg:Enable</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </enable>
+        <password config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/ord_h/password</xr-path>
+          <xr-xml-map>l2tp_cfg:Password</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-sch-type>ProprietaryPassword</xr-sch-type>
+          <type>
+            <type-name>xr:Proprietary-password</type-name>
+          </type>
+        </password>
+        <class-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/l2tpv3/class/&lt;l2tp_cfg_Class_name&gt;/</xr-path>
+          <xr-xml-map>l2tp_cfg:ClassName</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;l2tp_cfg_Class_name&gt;</xr-sch-arg-name>
+          <type length="1..31">
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </class-name>
+      </class>
+    </classes>
+  </l2tp>
+</Cisco-IOS-XR-tunnel-l2tun-cfg>

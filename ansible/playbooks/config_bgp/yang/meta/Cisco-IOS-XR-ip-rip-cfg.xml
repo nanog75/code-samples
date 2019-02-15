@@ -1,0 +1,1883 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ip-rip-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ip-rip-cfg" revision="2015-11-09">
+  <files>
+    <file revision="2015-11-09" submodule="false">Cisco-IOS-XR-ip-rip-cfg.yang</file>
+  </files>
+  <prefix>ip-rip-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="Rip-ext-community">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">as</enum>
+      <enum value="1">ipv4-address</enum>
+      <enum value="2">four-byte-as</enum>
+    </type>
+  </typedef>
+  <typedef name="Default-redist-route">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">all</enum>
+    </type>
+  </typedef>
+  <typedef name="Default-information-option">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">always</enum>
+      <enum value="1">policy</enum>
+    </type>
+  </typedef>
+  <typedef name="Isis-redist-route">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">level1</enum>
+      <enum value="2">level2</enum>
+      <enum value="3">level1-and2</enum>
+    </type>
+  </typedef>
+  <typedef name="Bgp-redist-route">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">all</enum>
+      <enum value="512">internal</enum>
+      <enum value="1024">external</enum>
+      <enum value="2048">local</enum>
+    </type>
+  </typedef>
+  <typedef name="Rip-auth-mode">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="2">text</enum>
+      <enum value="3">md5</enum>
+    </type>
+  </typedef>
+  <rip config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/rip/</xr-path>
+    <xr-xml-map>ip_rip_cfg:RIP</xr-xml-map>
+    <xr-task>rip</xr-task>
+    <default-vrf config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/rip/ord_A/default/</xr-path>
+      <xr-xml-map>ip_rip_cfg:DefaultVRF</xr-xml-map>
+      <xr-task>rip</xr-task>
+      <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/rip/ord_A/default/ord_d/config</xr-path>
+        <xr-xml-map>ip_rip_cfg:Enable</xr-xml-map>
+        <xr-task>rip</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </enable>
+      <broadcast-for-v2 config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/rip/ord_A/default/ord_t/broadcastforv2</xr-path>
+        <xr-xml-map>ip_rip_cfg:BroadcastForV2</xr-xml-map>
+        <xr-task>rip</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </broadcast-for-v2>
+      <distance config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/rip/ord_A/default/ord_t/distance</xr-path>
+        <xr-xml-map>ip_rip_cfg:Distance</xr-xml-map>
+        <xr-task>rip</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..255">
+          <type-name>uint32</type-name>
+        </type>
+        <default>120</default>
+      </distance>
+      <default-information config="true" is-key="false" node="container" presence="true">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-is-packed/>
+        <xr-path>/cfg/gl/rip/ord_A/default/ord_t/defaultinformation`</xr-path>
+        <xr-xml-map>ip_rip_cfg:DefaultInformation</xr-xml-map>
+        <xr-task>rip</xr-task>
+        <xr-pack-format>%s%d</xr-pack-format>
+        <route-policy-name config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%s%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/rip/ord_A/default/ord_t/defaultinformation`0</xr-path>
+          <xr-xml-map>ip_rip_cfg:RoutePolicyName</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </route-policy-name>
+        <option config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%s%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/rip/ord_A/default/ord_t/defaultinformation`1</xr-path>
+          <xr-xml-map>ip_rip_cfg:Option</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Default-information-option</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </option>
+      </default-information>
+      <default-metric config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/rip/ord_A/default/ord_t/defaultmetric</xr-path>
+        <xr-xml-map>ip_rip_cfg:DefaultMetric</xr-xml-map>
+        <xr-task>rip</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..16">
+          <type-name>uint32</type-name>
+        </type>
+      </default-metric>
+      <output-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/rip/ord_A/default/ord_t/outputdelay</xr-path>
+        <xr-xml-map>ip_rip_cfg:OutputDelay</xr-xml-map>
+        <xr-task>rip</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="8..50">
+          <type-name>uint32</type-name>
+        </type>
+      </output-delay>
+      <auto-summary config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/rip/ord_A/default/ord_t/autosummary</xr-path>
+        <xr-xml-map>ip_rip_cfg:AutoSummary</xr-xml-map>
+        <xr-task>rip</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </auto-summary>
+      <redistribution config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/</xr-path>
+        <xr-xml-map>ip_rip_cfg:Redistribution</xr-xml-map>
+        <xr-task>rip</xr-task>
+        <connected config="true" is-key="false" node="container" presence="true">
+          <xr-presence-packed/>
+          <xr-is-packed/>
+          <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/connected/0x0`</xr-path>
+          <xr-xml-map>ip_rip_cfg:Connected</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <xr-pack-format>%s%d</xr-pack-format>
+          <route-policy-name config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/connected/0x0`0</xr-path>
+            <xr-xml-map>ip_rip_cfg:RoutePolicyName</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </route-policy-name>
+          <route-type config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/connected/0x0`1</xr-path>
+            <xr-xml-map>ip_rip_cfg:RouteType</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Default-redist-route</type-name>
+            </type>
+          </route-type>
+        </connected>
+        <bgps config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/bgp/</xr-path>
+          <xr-xml-map>ip_rip_cfg:BGPTable</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <bgp config="true" key="asnxx asnyy" node="list">
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/bgp/&lt;ip_rip_cfg_BGP_asn_xx&gt;,&lt;ip_rip_cfg_BGP_asn_yy&gt;</xr-path>
+            <xr-xml-map>ip_rip_cfg:BGP</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-pack-format>%s%d</xr-pack-format>
+            <asnxx config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/bgp/&lt;ip_rip_cfg_BGP_asn_xx&gt;,&lt;ip_rip_cfg_BGP_asn_yy&gt;</xr-path>
+              <xr-xml-map>ip_rip_cfg:ASNXX</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-sch-arg-name>&lt;ip_rip_cfg_BGP_asn_xx&gt;</xr-sch-arg-name>
+              <type range="0..65535">
+                <type-name>uint32</type-name>
+              </type>
+            </asnxx>
+            <asnyy config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/bgp/&lt;ip_rip_cfg_BGP_asn_xx&gt;,&lt;ip_rip_cfg_BGP_asn_yy&gt;</xr-path>
+              <xr-xml-map>ip_rip_cfg:ASNYY</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-sch-arg-name>&lt;ip_rip_cfg_BGP_asn_yy&gt;</xr-sch-arg-name>
+              <type range="0..4294967295">
+                <type-name>uint32</type-name>
+              </type>
+            </asnyy>
+            <policy config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/bgp/&lt;ip_rip_cfg_BGP_asn_xx&gt;,&lt;ip_rip_cfg_BGP_asn_yy&gt;`0</xr-path>
+              <xr-xml-map>ip_rip_cfg:Policy</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </policy>
+            <type config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/bgp/&lt;ip_rip_cfg_BGP_asn_xx&gt;,&lt;ip_rip_cfg_BGP_asn_yy&gt;`1</xr-path>
+              <xr-xml-map>ip_rip_cfg:Type</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Bgp-redist-route</type-name>
+              </type>
+            </type>
+          </bgp>
+        </bgps>
+        <isises config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/isis/</xr-path>
+          <xr-xml-map>ip_rip_cfg:ISISTable</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <isis config="true" key="isis-name" node="list">
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/isis/&lt;ip_rip_cfg_ISIS_instance&gt;</xr-path>
+            <xr-xml-map>ip_rip_cfg:ISIS</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-pack-format>%s%d</xr-pack-format>
+            <isis-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/isis/&lt;ip_rip_cfg_ISIS_instance&gt;</xr-path>
+              <xr-xml-map>ip_rip_cfg:ISISName</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;ip_rip_cfg_ISIS_instance&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </isis-name>
+            <route-policy-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/isis/&lt;ip_rip_cfg_ISIS_instance&gt;`0</xr-path>
+              <xr-xml-map>ip_rip_cfg:RoutePolicyName</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </route-policy-name>
+            <route-type config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/isis/&lt;ip_rip_cfg_ISIS_instance&gt;`1</xr-path>
+              <xr-xml-map>ip_rip_cfg:RouteType</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Isis-redist-route</type-name>
+              </type>
+            </route-type>
+          </isis>
+        </isises>
+        <eigrp-s config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/eigrp/</xr-path>
+          <xr-xml-map>ip_rip_cfg:EIGRPTable</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <eigrp config="true" key="as" node="list">
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/eigrp/&lt;ip_rip_cfg_EIGRP_asnum&gt;</xr-path>
+            <xr-xml-map>ip_rip_cfg:EIGRP</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-pack-format>%s%d</xr-pack-format>
+            <as config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/eigrp/&lt;ip_rip_cfg_EIGRP_asnum&gt;</xr-path>
+              <xr-xml-map>ip_rip_cfg:AS</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-sch-arg-name>&lt;ip_rip_cfg_EIGRP_asnum&gt;</xr-sch-arg-name>
+              <type range="1..65535">
+                <type-name>uint32</type-name>
+              </type>
+            </as>
+            <route-policy-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/eigrp/&lt;ip_rip_cfg_EIGRP_asnum&gt;`0</xr-path>
+              <xr-xml-map>ip_rip_cfg:RoutePolicyName</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </route-policy-name>
+            <route-type config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/eigrp/&lt;ip_rip_cfg_EIGRP_asnum&gt;`1</xr-path>
+              <xr-xml-map>ip_rip_cfg:RouteType</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Default-redist-route</type-name>
+              </type>
+            </route-type>
+          </eigrp>
+        </eigrp-s>
+        <static config="true" is-key="false" node="container" presence="true">
+          <xr-presence-packed/>
+          <xr-is-packed/>
+          <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/static/0x0`</xr-path>
+          <xr-xml-map>ip_rip_cfg:Static</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <xr-pack-format>%s%d</xr-pack-format>
+          <route-policy-name config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/static/0x0`0</xr-path>
+            <xr-xml-map>ip_rip_cfg:RoutePolicyName</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </route-policy-name>
+          <route-type config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/static/0x0`1</xr-path>
+            <xr-xml-map>ip_rip_cfg:RouteType</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Default-redist-route</type-name>
+            </type>
+          </route-type>
+        </static>
+        <ospfs config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/ospf/</xr-path>
+          <xr-xml-map>ip_rip_cfg:OSPFTable</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <ospf config="true" key="ospf-name" node="list">
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/ospf/&lt;ip_rip_cfg_OSPF_instance&gt;</xr-path>
+            <xr-xml-map>ip_rip_cfg:OSPF</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-pack-format>%s%d%d%d%d%d</xr-pack-format>
+            <ospf-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%s%d%d%d%d%d</xr-pack-format>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/ospf/&lt;ip_rip_cfg_OSPF_instance&gt;</xr-path>
+              <xr-xml-map>ip_rip_cfg:OSPFName</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;ip_rip_cfg_OSPF_instance&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </ospf-name>
+            <route-policy-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%s%d%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/ospf/&lt;ip_rip_cfg_OSPF_instance&gt;`0</xr-path>
+              <xr-xml-map>ip_rip_cfg:RoutePolicyName</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </route-policy-name>
+            <internal config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%s%d%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/ospf/&lt;ip_rip_cfg_OSPF_instance&gt;`1</xr-path>
+              <xr-xml-map>ip_rip_cfg:Internal</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Boolean</xr-sch-type>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </internal>
+            <external config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%s%d%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/ospf/&lt;ip_rip_cfg_OSPF_instance&gt;`2</xr-path>
+              <xr-xml-map>ip_rip_cfg:External</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Boolean</xr-sch-type>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </external>
+            <external-type config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%s%d%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/ospf/&lt;ip_rip_cfg_OSPF_instance&gt;`3</xr-path>
+              <xr-xml-map>ip_rip_cfg:ExternalType</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="0..2">
+                <type-name>uint32</type-name>
+              </type>
+            </external-type>
+            <nssa-external config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%s%d%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/ospf/&lt;ip_rip_cfg_OSPF_instance&gt;`4</xr-path>
+              <xr-xml-map>ip_rip_cfg:NSSAExternal</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Boolean</xr-sch-type>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </nssa-external>
+            <nssa-external-type config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%s%d%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/redist/ospf/&lt;ip_rip_cfg_OSPF_instance&gt;`5</xr-path>
+              <xr-xml-map>ip_rip_cfg:NSSAExternalType</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="0..2">
+                <type-name>uint32</type-name>
+              </type>
+            </nssa-external-type>
+          </ospf>
+        </ospfs>
+      </redistribution>
+      <ip-distances config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/rip/ord_A/default/ord_t/distanceip/</xr-path>
+        <xr-xml-map>ip_rip_cfg:IPDistanceTable</xr-xml-map>
+        <xr-task>rip</xr-task>
+        <ip-distance config="true" key="address netmask" node="list">
+          <xr-path>/cfg/gl/rip/ord_A/default/ord_t/distanceip/&lt;ip_rip_cfg_IPDistance_ipaddr&gt;/&lt;ip_rip_cfg_IPDistance_netmask&gt;</xr-path>
+          <xr-xml-map>ip_rip_cfg:IPDistance</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <address config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-pathformat>hex_padded_nozerox</xr-pathformat>
+            <xr-primitive-type>inaddr</xr-primitive-type>
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/distanceip/&lt;ip_rip_cfg_IPDistance_ipaddr&gt;/&lt;ip_rip_cfg_IPDistance_netmask&gt;</xr-path>
+            <xr-xml-map>ip_rip_cfg:Address</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-sch-type>IPV4Address</xr-sch-type>
+            <xr-sch-arg-name>&lt;ip_rip_cfg_IPDistance_ipaddr&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>inet:ipv4-address-no-zone</type-name>
+            </type>
+          </address>
+          <netmask config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-pathformat>hex_padded_nozerox</xr-pathformat>
+            <xr-primitive-type>inaddr</xr-primitive-type>
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/distanceip/&lt;ip_rip_cfg_IPDistance_ipaddr&gt;/&lt;ip_rip_cfg_IPDistance_netmask&gt;</xr-path>
+            <xr-xml-map>ip_rip_cfg:Netmask</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-sch-type>IPV4Address</xr-sch-type>
+            <xr-sch-arg-name>&lt;ip_rip_cfg_IPDistance_netmask&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>inet:ipv4-address-no-zone</type-name>
+            </type>
+          </netmask>
+          <distance config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/distanceip/&lt;ip_rip_cfg_IPDistance_ipaddr&gt;/&lt;ip_rip_cfg_IPDistance_netmask&gt;</xr-path>
+            <xr-xml-map>ip_rip_cfg:Distance</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..255">
+              <type-name>uint32</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </distance>
+        </ip-distance>
+      </ip-distances>
+      <policy-out config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/gl/rip/ord_A/default/ord_t/policy-out</xr-path>
+        <xr-xml-map>ip_rip_cfg:PolicyOut</xr-xml-map>
+        <xr-task>rip</xr-task>
+        <xr-sch-type>String</xr-sch-type>
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </policy-out>
+      <interfaces config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/</xr-path>
+        <xr-xml-map>ip_rip_cfg:InterfaceTable</xr-xml-map>
+        <xr-task>rip</xr-task>
+        <interface config="true" key="interface-name" node="list">
+          <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/</xr-path>
+          <xr-xml-map>ip_rip_cfg:Interface</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <authentication config="true" is-key="false" node="container" presence="true">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_p/authentication`</xr-path>
+            <xr-xml-map>ip_rip_cfg:Authentication</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-pack-format>%s%d</xr-pack-format>
+            <keychain config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_p/authentication`0</xr-path>
+              <xr-xml-map>ip_rip_cfg:Keychain</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </keychain>
+            <mode config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_p/authentication`1</xr-path>
+              <xr-xml-map>ip_rip_cfg:Mode</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Rip-auth-mode</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </mode>
+          </authentication>
+          <site-of-origin config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/siteoforigin`</xr-path>
+            <xr-xml-map>ip_rip_cfg:SiteOfOrigin</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-pack-format>%d%d%d%d%N%d</xr-pack-format>
+            <type config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d%N%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/siteoforigin`0</xr-path>
+              <xr-xml-map>ip_rip_cfg:Type</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Rip-ext-community</type-name>
+              </type>
+            </type>
+            <as-xx config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d%N%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/siteoforigin`1</xr-path>
+              <xr-xml-map>ip_rip_cfg:AS_XX</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <when>../type != 'as' and ../type != 'ipv4-address'</when>
+              <type range="0..65535">
+                <type-name>uint32</type-name>
+              </type>
+            </as-xx>
+            <as-yy config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d%N%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/siteoforigin`2</xr-path>
+              <xr-xml-map>ip_rip_cfg:AS_YY</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <when>../type != 'ipv4-address'</when>
+              <type range="0..4294967295">
+                <type-name>uint32</type-name>
+              </type>
+            </as-yy>
+            <as-index config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d%N%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/siteoforigin`3</xr-path>
+              <xr-xml-map>ip_rip_cfg:ASIndex</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <when>../type != 'ipv4-address'</when>
+              <type range="0..4294967295">
+                <type-name>uint32</type-name>
+              </type>
+            </as-index>
+            <address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d%N%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/siteoforigin`4</xr-path>
+              <xr-xml-map>ip_rip_cfg:Address</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>IPV4Address</xr-sch-type>
+              <when>../type = 'ipv4-address'</when>
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </address>
+            <address-index config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d%N%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/siteoforigin`5</xr-path>
+              <xr-xml-map>ip_rip_cfg:AddressIndex</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <when>../type = 'ipv4-address'</when>
+              <type range="0..65535">
+                <type-name>uint32</type-name>
+              </type>
+            </address-index>
+          </site-of-origin>
+          <receive-version config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/version/receive`</xr-path>
+            <xr-xml-map>ip_rip_cfg:ReceiveVersion</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <version1 config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/version/receive`0</xr-path>
+              <xr-xml-map>ip_rip_cfg:Version1</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Boolean</xr-sch-type>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </version1>
+            <version2 config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/version/receive`1</xr-path>
+              <xr-xml-map>ip_rip_cfg:Version2</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Boolean</xr-sch-type>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>true</default>
+            </version2>
+          </receive-version>
+          <send-version config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/version/send`</xr-path>
+            <xr-xml-map>ip_rip_cfg:SendVersion</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <version1 config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/version/send`0</xr-path>
+              <xr-xml-map>ip_rip_cfg:Version1</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Boolean</xr-sch-type>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </version1>
+            <version2 config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/version/send`1</xr-path>
+              <xr-xml-map>ip_rip_cfg:Version2</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Boolean</xr-sch-type>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>true</default>
+            </version2>
+          </send-version>
+          <broadcast-for-v2 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/broadcastforv2</xr-path>
+            <xr-xml-map>ip_rip_cfg:BroadcastForV2</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </broadcast-for-v2>
+          <poison-reverse config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/poisonreverse</xr-path>
+            <xr-xml-map>ip_rip_cfg:PoisonReverse</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </poison-reverse>
+          <passive config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/passive</xr-path>
+            <xr-xml-map>ip_rip_cfg:Passive</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </passive>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_d/enabled</xr-path>
+            <xr-xml-map>ip_rip_cfg:Enable</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </enable>
+          <policy-out config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/policy-out</xr-path>
+            <xr-xml-map>ip_rip_cfg:PolicyOut</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </policy-out>
+          <accept-metric-zero config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/acceptmetric0</xr-path>
+            <xr-xml-map>ip_rip_cfg:AcceptMetricZero</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </accept-metric-zero>
+          <policy-in config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/policy-in</xr-path>
+            <xr-xml-map>ip_rip_cfg:PolicyIn</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </policy-in>
+          <split-horizon-disable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/splithorizon_disable</xr-path>
+            <xr-xml-map>ip_rip_cfg:SplitHorizonDisable</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </split-horizon-disable>
+          <interface-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/</xr-path>
+            <xr-xml-map>ip_rip_cfg:InterfaceName</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-sch-type>InterfaceName</xr-sch-type>
+            <xr-sch-arg-name>&lt;ip_rip_cfg_Interface_intf&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+          </interface-name>
+        </interface>
+      </interfaces>
+      <neighbors config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/rip/ord_A/default/ord_t/neighbor/</xr-path>
+        <xr-xml-map>ip_rip_cfg:NeighborTable</xr-xml-map>
+        <xr-task>rip</xr-task>
+        <neighbor config="true" key="neighbor-address" node="list">
+          <xr-path>/cfg/gl/rip/ord_A/default/ord_t/neighbor/&lt;ip_rip_cfg_Neighbor_ipaddr&gt;</xr-path>
+          <xr-xml-map>ip_rip_cfg:Neighbor</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <neighbor-address config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-pathformat>hex_padded_nozerox</xr-pathformat>
+            <xr-create-item-relative-path/>
+            <xr-primitive-type>inaddr</xr-primitive-type>
+            <xr-path>/cfg/gl/rip/ord_A/default/ord_t/neighbor/&lt;ip_rip_cfg_Neighbor_ipaddr&gt;</xr-path>
+            <xr-xml-map>ip_rip_cfg:NeighborAddress</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-sch-type>IPV4Address</xr-sch-type>
+            <xr-sch-arg-name>&lt;ip_rip_cfg_Neighbor_ipaddr&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>inet:ipv4-address-no-zone</type-name>
+            </type>
+          </neighbor-address>
+        </neighbor>
+      </neighbors>
+      <validate-source-disable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/rip/ord_A/default/ord_t/validatesource_disable</xr-path>
+        <xr-xml-map>ip_rip_cfg:ValidateSourceDisable</xr-xml-map>
+        <xr-task>rip</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </validate-source-disable>
+      <maximum-paths config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/rip/ord_A/default/ord_t/maximumpaths</xr-path>
+        <xr-xml-map>ip_rip_cfg:MaximumPaths</xr-xml-map>
+        <xr-task>rip</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..128">
+          <type-name>uint32</type-name>
+        </type>
+        <default>4</default>
+      </maximum-paths>
+      <nsf config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/rip/ord_A/default/ord_t/nsf</xr-path>
+        <xr-xml-map>ip_rip_cfg:NSF</xr-xml-map>
+        <xr-task>rip</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </nsf>
+      <policy-in config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/gl/rip/ord_A/default/ord_t/policy-in</xr-path>
+        <xr-xml-map>ip_rip_cfg:PolicyIn</xr-xml-map>
+        <xr-task>rip</xr-task>
+        <xr-sch-type>String</xr-sch-type>
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </policy-in>
+      <timers config="true" is-key="false" node="container" presence="true">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-is-packed/>
+        <xr-path>/cfg/gl/rip/ord_A/default/ord_t/timers`</xr-path>
+        <xr-xml-map>ip_rip_cfg:Timers</xr-xml-map>
+        <xr-task>rip</xr-task>
+        <xr-pack-format>%d%d%d%d</xr-pack-format>
+        <update-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/rip/ord_A/default/ord_t/timers`0</xr-path>
+          <xr-xml-map>ip_rip_cfg:UpdateTimer</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="5..50000">
+            <type-name>uint32</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </update-timer>
+        <invalid-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/rip/ord_A/default/ord_t/timers`1</xr-path>
+          <xr-xml-map>ip_rip_cfg:InvalidTimer</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="15..200000">
+            <type-name>uint32</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </invalid-timer>
+        <holddown-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/rip/ord_A/default/ord_t/timers`2</xr-path>
+          <xr-xml-map>ip_rip_cfg:HolddownTimer</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="15..200000">
+            <type-name>uint32</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </holddown-timer>
+        <flush-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/rip/ord_A/default/ord_t/timers`3</xr-path>
+          <xr-xml-map>ip_rip_cfg:FlushTimer</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="16..250000">
+            <type-name>uint32</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </flush-timer>
+      </timers>
+    </default-vrf>
+    <vrfs config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/rip/ord_B/</xr-path>
+      <xr-xml-map>ip_rip_cfg:VRFTable</xr-xml-map>
+      <xr-task>rip</xr-task>
+      <vrf config="true" key="vrf-name" node="list">
+        <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/</xr-path>
+        <xr-xml-map>ip_rip_cfg:VRF</xr-xml-map>
+        <xr-task>rip</xr-task>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_d/vrf_config</xr-path>
+          <xr-xml-map>ip_rip_cfg:Enable</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </enable>
+        <vrf-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/</xr-path>
+          <xr-xml-map>ip_rip_cfg:VRFName</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <xr-sch-type>VRF_Name</xr-sch-type>
+          <xr-sch-arg-name>&lt;ip_rip_cfg_VRF_vrfname&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </vrf-name>
+        <broadcast-for-v2 config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/broadcastforv2</xr-path>
+          <xr-xml-map>ip_rip_cfg:BroadcastForV2</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </broadcast-for-v2>
+        <distance config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/distance</xr-path>
+          <xr-xml-map>ip_rip_cfg:Distance</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="0..255">
+            <type-name>uint32</type-name>
+          </type>
+          <default>120</default>
+        </distance>
+        <default-information config="true" is-key="false" node="container" presence="true">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-is-packed/>
+          <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/defaultinformation`</xr-path>
+          <xr-xml-map>ip_rip_cfg:DefaultInformation</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <xr-pack-format>%s%d</xr-pack-format>
+          <route-policy-name config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/defaultinformation`0</xr-path>
+            <xr-xml-map>ip_rip_cfg:RoutePolicyName</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </route-policy-name>
+          <option config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/defaultinformation`1</xr-path>
+            <xr-xml-map>ip_rip_cfg:Option</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Default-information-option</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </option>
+        </default-information>
+        <default-metric config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/defaultmetric</xr-path>
+          <xr-xml-map>ip_rip_cfg:DefaultMetric</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="0..16">
+            <type-name>uint32</type-name>
+          </type>
+        </default-metric>
+        <output-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/outputdelay</xr-path>
+          <xr-xml-map>ip_rip_cfg:OutputDelay</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="8..50">
+            <type-name>uint32</type-name>
+          </type>
+        </output-delay>
+        <auto-summary config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/autosummary</xr-path>
+          <xr-xml-map>ip_rip_cfg:AutoSummary</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </auto-summary>
+        <redistribution config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/</xr-path>
+          <xr-xml-map>ip_rip_cfg:Redistribution</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <connected config="true" is-key="false" node="container" presence="true">
+            <xr-presence-packed/>
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/connected/0x0`</xr-path>
+            <xr-xml-map>ip_rip_cfg:Connected</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-pack-format>%s%d</xr-pack-format>
+            <route-policy-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/connected/0x0`0</xr-path>
+              <xr-xml-map>ip_rip_cfg:RoutePolicyName</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </route-policy-name>
+            <route-type config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/connected/0x0`1</xr-path>
+              <xr-xml-map>ip_rip_cfg:RouteType</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Default-redist-route</type-name>
+              </type>
+            </route-type>
+          </connected>
+          <bgps config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/bgp/</xr-path>
+            <xr-xml-map>ip_rip_cfg:BGPTable</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <bgp config="true" key="asnxx asnyy" node="list">
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/bgp/&lt;ip_rip_cfg_BGP_asn_xx&gt;,&lt;ip_rip_cfg_BGP_asn_yy&gt;</xr-path>
+              <xr-xml-map>ip_rip_cfg:BGP</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <asnxx config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%s%d</xr-pack-format>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/bgp/&lt;ip_rip_cfg_BGP_asn_xx&gt;,&lt;ip_rip_cfg_BGP_asn_yy&gt;</xr-path>
+                <xr-xml-map>ip_rip_cfg:ASNXX</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-sch-arg-name>&lt;ip_rip_cfg_BGP_asn_xx&gt;</xr-sch-arg-name>
+                <type range="0..65535">
+                  <type-name>uint32</type-name>
+                </type>
+              </asnxx>
+              <asnyy config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%s%d</xr-pack-format>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/bgp/&lt;ip_rip_cfg_BGP_asn_xx&gt;,&lt;ip_rip_cfg_BGP_asn_yy&gt;</xr-path>
+                <xr-xml-map>ip_rip_cfg:ASNYY</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-sch-arg-name>&lt;ip_rip_cfg_BGP_asn_yy&gt;</xr-sch-arg-name>
+                <type range="0..4294967295">
+                  <type-name>uint32</type-name>
+                </type>
+              </asnyy>
+              <policy config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/bgp/&lt;ip_rip_cfg_BGP_asn_xx&gt;,&lt;ip_rip_cfg_BGP_asn_yy&gt;`0</xr-path>
+                <xr-xml-map>ip_rip_cfg:Policy</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </policy>
+              <type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/bgp/&lt;ip_rip_cfg_BGP_asn_xx&gt;,&lt;ip_rip_cfg_BGP_asn_yy&gt;`1</xr-path>
+                <xr-xml-map>ip_rip_cfg:Type</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <type>
+                  <type-name>Bgp-redist-route</type-name>
+                </type>
+              </type>
+            </bgp>
+          </bgps>
+          <isises config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/isis/</xr-path>
+            <xr-xml-map>ip_rip_cfg:ISISTable</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <isis config="true" key="isis-name" node="list">
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/isis/&lt;ip_rip_cfg_ISIS_instance&gt;</xr-path>
+              <xr-xml-map>ip_rip_cfg:ISIS</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <isis-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%s%d</xr-pack-format>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/isis/&lt;ip_rip_cfg_ISIS_instance&gt;</xr-path>
+                <xr-xml-map>ip_rip_cfg:ISISName</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <xr-sch-arg-name>&lt;ip_rip_cfg_ISIS_instance&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>xr:Cisco-ios-xr-string</type-name>
+                </type>
+              </isis-name>
+              <route-policy-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/isis/&lt;ip_rip_cfg_ISIS_instance&gt;`0</xr-path>
+                <xr-xml-map>ip_rip_cfg:RoutePolicyName</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </route-policy-name>
+              <route-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/isis/&lt;ip_rip_cfg_ISIS_instance&gt;`1</xr-path>
+                <xr-xml-map>ip_rip_cfg:RouteType</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <type>
+                  <type-name>Isis-redist-route</type-name>
+                </type>
+              </route-type>
+            </isis>
+          </isises>
+          <eigrp-s config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/eigrp/</xr-path>
+            <xr-xml-map>ip_rip_cfg:EIGRPTable</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <eigrp config="true" key="as" node="list">
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/eigrp/&lt;ip_rip_cfg_EIGRP_asnum&gt;</xr-path>
+              <xr-xml-map>ip_rip_cfg:EIGRP</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <as config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%s%d</xr-pack-format>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/eigrp/&lt;ip_rip_cfg_EIGRP_asnum&gt;</xr-path>
+                <xr-xml-map>ip_rip_cfg:AS</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-sch-arg-name>&lt;ip_rip_cfg_EIGRP_asnum&gt;</xr-sch-arg-name>
+                <type range="1..65535">
+                  <type-name>uint32</type-name>
+                </type>
+              </as>
+              <route-policy-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/eigrp/&lt;ip_rip_cfg_EIGRP_asnum&gt;`0</xr-path>
+                <xr-xml-map>ip_rip_cfg:RoutePolicyName</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </route-policy-name>
+              <route-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/eigrp/&lt;ip_rip_cfg_EIGRP_asnum&gt;`1</xr-path>
+                <xr-xml-map>ip_rip_cfg:RouteType</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <type>
+                  <type-name>Default-redist-route</type-name>
+                </type>
+              </route-type>
+            </eigrp>
+          </eigrp-s>
+          <static config="true" is-key="false" node="container" presence="true">
+            <xr-presence-packed/>
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/static/0x0`</xr-path>
+            <xr-xml-map>ip_rip_cfg:Static</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-pack-format>%s%d</xr-pack-format>
+            <route-policy-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/static/0x0`0</xr-path>
+              <xr-xml-map>ip_rip_cfg:RoutePolicyName</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </route-policy-name>
+            <route-type config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/static/0x0`1</xr-path>
+              <xr-xml-map>ip_rip_cfg:RouteType</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Default-redist-route</type-name>
+              </type>
+            </route-type>
+          </static>
+          <ospfs config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/ospf/</xr-path>
+            <xr-xml-map>ip_rip_cfg:OSPFTable</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <ospf config="true" key="ospf-name" node="list">
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/ospf/&lt;ip_rip_cfg_OSPF_instance&gt;</xr-path>
+              <xr-xml-map>ip_rip_cfg:OSPF</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-pack-format>%s%d%d%d%d%d</xr-pack-format>
+              <ospf-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%s%d%d%d%d%d</xr-pack-format>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/ospf/&lt;ip_rip_cfg_OSPF_instance&gt;</xr-path>
+                <xr-xml-map>ip_rip_cfg:OSPFName</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <xr-sch-arg-name>&lt;ip_rip_cfg_OSPF_instance&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>xr:Cisco-ios-xr-string</type-name>
+                </type>
+              </ospf-name>
+              <route-policy-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/ospf/&lt;ip_rip_cfg_OSPF_instance&gt;`0</xr-path>
+                <xr-xml-map>ip_rip_cfg:RoutePolicyName</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </route-policy-name>
+              <internal config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/ospf/&lt;ip_rip_cfg_OSPF_instance&gt;`1</xr-path>
+                <xr-xml-map>ip_rip_cfg:Internal</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>Boolean</xr-sch-type>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </internal>
+              <external config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/ospf/&lt;ip_rip_cfg_OSPF_instance&gt;`2</xr-path>
+                <xr-xml-map>ip_rip_cfg:External</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>Boolean</xr-sch-type>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </external>
+              <external-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/ospf/&lt;ip_rip_cfg_OSPF_instance&gt;`3</xr-path>
+                <xr-xml-map>ip_rip_cfg:ExternalType</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="0..2">
+                  <type-name>uint32</type-name>
+                </type>
+              </external-type>
+              <nssa-external config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/ospf/&lt;ip_rip_cfg_OSPF_instance&gt;`4</xr-path>
+                <xr-xml-map>ip_rip_cfg:NSSAExternal</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>Boolean</xr-sch-type>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </nssa-external>
+              <nssa-external-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/redist/ospf/&lt;ip_rip_cfg_OSPF_instance&gt;`5</xr-path>
+                <xr-xml-map>ip_rip_cfg:NSSAExternalType</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="0..2">
+                  <type-name>uint32</type-name>
+                </type>
+              </nssa-external-type>
+            </ospf>
+          </ospfs>
+        </redistribution>
+        <ip-distances config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/distanceip/</xr-path>
+          <xr-xml-map>ip_rip_cfg:IPDistanceTable</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <ip-distance config="true" key="address netmask" node="list">
+            <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/distanceip/&lt;ip_rip_cfg_IPDistance_ipaddr&gt;/&lt;ip_rip_cfg_IPDistance_netmask&gt;</xr-path>
+            <xr-xml-map>ip_rip_cfg:IPDistance</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <address config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-pathformat>hex_padded_nozerox</xr-pathformat>
+              <xr-primitive-type>inaddr</xr-primitive-type>
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/distanceip/&lt;ip_rip_cfg_IPDistance_ipaddr&gt;/&lt;ip_rip_cfg_IPDistance_netmask&gt;</xr-path>
+              <xr-xml-map>ip_rip_cfg:Address</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>IPV4Address</xr-sch-type>
+              <xr-sch-arg-name>&lt;ip_rip_cfg_IPDistance_ipaddr&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </address>
+            <netmask config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-pathformat>hex_padded_nozerox</xr-pathformat>
+              <xr-primitive-type>inaddr</xr-primitive-type>
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/distanceip/&lt;ip_rip_cfg_IPDistance_ipaddr&gt;/&lt;ip_rip_cfg_IPDistance_netmask&gt;</xr-path>
+              <xr-xml-map>ip_rip_cfg:Netmask</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>IPV4Address</xr-sch-type>
+              <xr-sch-arg-name>&lt;ip_rip_cfg_IPDistance_netmask&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </netmask>
+            <distance config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/distanceip/&lt;ip_rip_cfg_IPDistance_ipaddr&gt;/&lt;ip_rip_cfg_IPDistance_netmask&gt;</xr-path>
+              <xr-xml-map>ip_rip_cfg:Distance</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="0..255">
+                <type-name>uint32</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </distance>
+          </ip-distance>
+        </ip-distances>
+        <policy-out config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/policy-out</xr-path>
+          <xr-xml-map>ip_rip_cfg:PolicyOut</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </policy-out>
+        <interfaces config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/</xr-path>
+          <xr-xml-map>ip_rip_cfg:InterfaceTable</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <interface config="true" key="interface-name" node="list">
+            <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/</xr-path>
+            <xr-xml-map>ip_rip_cfg:Interface</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <authentication config="true" is-key="false" node="container" presence="true">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-is-packed/>
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_p/authentication`</xr-path>
+              <xr-xml-map>ip_rip_cfg:Authentication</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <keychain config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%s%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_p/authentication`0</xr-path>
+                <xr-xml-map>ip_rip_cfg:Keychain</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </keychain>
+              <mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%s%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_p/authentication`1</xr-path>
+                <xr-xml-map>ip_rip_cfg:Mode</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <type>
+                  <type-name>Rip-auth-mode</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </mode>
+            </authentication>
+            <site-of-origin config="true" is-key="false" node="container" presence="false">
+              <xr-is-packed/>
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/siteoforigin`</xr-path>
+              <xr-xml-map>ip_rip_cfg:SiteOfOrigin</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-pack-format>%d%d%d%d%N%d</xr-pack-format>
+              <type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%N%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/siteoforigin`0</xr-path>
+                <xr-xml-map>ip_rip_cfg:Type</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <type>
+                  <type-name>Rip-ext-community</type-name>
+                </type>
+              </type>
+              <as-xx config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%N%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/siteoforigin`1</xr-path>
+                <xr-xml-map>ip_rip_cfg:AS_XX</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <when>../type != 'as' and ../type != 'ipv4-address'</when>
+                <type range="0..65535">
+                  <type-name>uint32</type-name>
+                </type>
+              </as-xx>
+              <as-yy config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%N%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/siteoforigin`2</xr-path>
+                <xr-xml-map>ip_rip_cfg:AS_YY</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <when>../type != 'ipv4-address'</when>
+                <type range="0..4294967295">
+                  <type-name>uint32</type-name>
+                </type>
+              </as-yy>
+              <as-index config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%N%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/siteoforigin`3</xr-path>
+                <xr-xml-map>ip_rip_cfg:ASIndex</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <when>../type != 'ipv4-address'</when>
+                <type range="0..4294967295">
+                  <type-name>uint32</type-name>
+                </type>
+              </as-index>
+              <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%N%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/siteoforigin`4</xr-path>
+                <xr-xml-map>ip_rip_cfg:Address</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>IPV4Address</xr-sch-type>
+                <when>../type = 'ipv4-address'</when>
+                <type>
+                  <type-name>inet:ipv4-address-no-zone</type-name>
+                </type>
+              </address>
+              <address-index config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%N%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/siteoforigin`5</xr-path>
+                <xr-xml-map>ip_rip_cfg:AddressIndex</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <when>../type = 'ipv4-address'</when>
+                <type range="0..65535">
+                  <type-name>uint32</type-name>
+                </type>
+              </address-index>
+            </site-of-origin>
+            <receive-version config="true" is-key="false" node="container" presence="false">
+              <xr-is-packed/>
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/version/receive`</xr-path>
+              <xr-xml-map>ip_rip_cfg:ReceiveVersion</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <version1 config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/version/receive`0</xr-path>
+                <xr-xml-map>ip_rip_cfg:Version1</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>Boolean</xr-sch-type>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </version1>
+              <version2 config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/version/receive`1</xr-path>
+                <xr-xml-map>ip_rip_cfg:Version2</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>Boolean</xr-sch-type>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>true</default>
+              </version2>
+            </receive-version>
+            <send-version config="true" is-key="false" node="container" presence="false">
+              <xr-is-packed/>
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/version/send`</xr-path>
+              <xr-xml-map>ip_rip_cfg:SendVersion</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <version1 config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/version/send`0</xr-path>
+                <xr-xml-map>ip_rip_cfg:Version1</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>Boolean</xr-sch-type>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </version1>
+              <version2 config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/version/send`1</xr-path>
+                <xr-xml-map>ip_rip_cfg:Version2</xr-xml-map>
+                <xr-task>rip</xr-task>
+                <xr-sch-type>Boolean</xr-sch-type>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>true</default>
+              </version2>
+            </send-version>
+            <broadcast-for-v2 config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/broadcastforv2</xr-path>
+              <xr-xml-map>ip_rip_cfg:BroadcastForV2</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </broadcast-for-v2>
+            <poison-reverse config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/poisonreverse</xr-path>
+              <xr-xml-map>ip_rip_cfg:PoisonReverse</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </poison-reverse>
+            <passive config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/passive</xr-path>
+              <xr-xml-map>ip_rip_cfg:Passive</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </passive>
+            <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_d/enabled</xr-path>
+              <xr-xml-map>ip_rip_cfg:Enable</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </enable>
+            <policy-out config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/policy-out</xr-path>
+              <xr-xml-map>ip_rip_cfg:PolicyOut</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </policy-out>
+            <accept-metric-zero config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/acceptmetric0</xr-path>
+              <xr-xml-map>ip_rip_cfg:AcceptMetricZero</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </accept-metric-zero>
+            <policy-in config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/policy-in</xr-path>
+              <xr-xml-map>ip_rip_cfg:PolicyIn</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </policy-in>
+            <split-horizon-disable config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/ord_t/splithorizon_disable</xr-path>
+              <xr-xml-map>ip_rip_cfg:SplitHorizonDisable</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </split-horizon-disable>
+            <interface-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/if/&lt;ip_rip_cfg_Interface_intf&gt;/</xr-path>
+              <xr-xml-map>ip_rip_cfg:InterfaceName</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>InterfaceName</xr-sch-type>
+              <xr-sch-arg-name>&lt;ip_rip_cfg_Interface_intf&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-name>
+          </interface>
+        </interfaces>
+        <neighbors config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/neighbor/</xr-path>
+          <xr-xml-map>ip_rip_cfg:NeighborTable</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <neighbor config="true" key="neighbor-address" node="list">
+            <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/neighbor/&lt;ip_rip_cfg_Neighbor_ipaddr&gt;</xr-path>
+            <xr-xml-map>ip_rip_cfg:Neighbor</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <neighbor-address config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-pathformat>hex_padded_nozerox</xr-pathformat>
+              <xr-create-item-relative-path/>
+              <xr-primitive-type>inaddr</xr-primitive-type>
+              <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/neighbor/&lt;ip_rip_cfg_Neighbor_ipaddr&gt;</xr-path>
+              <xr-xml-map>ip_rip_cfg:NeighborAddress</xr-xml-map>
+              <xr-task>rip</xr-task>
+              <xr-sch-type>IPV4Address</xr-sch-type>
+              <xr-sch-arg-name>&lt;ip_rip_cfg_Neighbor_ipaddr&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </neighbor-address>
+          </neighbor>
+        </neighbors>
+        <validate-source-disable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/validatesource_disable</xr-path>
+          <xr-xml-map>ip_rip_cfg:ValidateSourceDisable</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </validate-source-disable>
+        <maximum-paths config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/maximumpaths</xr-path>
+          <xr-xml-map>ip_rip_cfg:MaximumPaths</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..128">
+            <type-name>uint32</type-name>
+          </type>
+          <default>4</default>
+        </maximum-paths>
+        <nsf config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/nsf</xr-path>
+          <xr-xml-map>ip_rip_cfg:NSF</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </nsf>
+        <policy-in config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/policy-in</xr-path>
+          <xr-xml-map>ip_rip_cfg:PolicyIn</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </policy-in>
+        <timers config="true" is-key="false" node="container" presence="true">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-is-packed/>
+          <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/timers`</xr-path>
+          <xr-xml-map>ip_rip_cfg:Timers</xr-xml-map>
+          <xr-task>rip</xr-task>
+          <xr-pack-format>%d%d%d%d</xr-pack-format>
+          <update-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/timers`0</xr-path>
+            <xr-xml-map>ip_rip_cfg:UpdateTimer</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="5..50000">
+              <type-name>uint32</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </update-timer>
+          <invalid-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/timers`1</xr-path>
+            <xr-xml-map>ip_rip_cfg:InvalidTimer</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="15..200000">
+              <type-name>uint32</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </invalid-timer>
+          <holddown-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/timers`2</xr-path>
+            <xr-xml-map>ip_rip_cfg:HolddownTimer</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="15..200000">
+              <type-name>uint32</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </holddown-timer>
+          <flush-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/rip/ord_B/&lt;ip_rip_cfg_VRF_vrfname&gt;/ord_t/timers`3</xr-path>
+            <xr-xml-map>ip_rip_cfg:FlushTimer</xr-xml-map>
+            <xr-task>rip</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="16..250000">
+              <type-name>uint32</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </flush-timer>
+        </timers>
+      </vrf>
+    </vrfs>
+  </rip>
+</Cisco-IOS-XR-ip-rip-cfg>

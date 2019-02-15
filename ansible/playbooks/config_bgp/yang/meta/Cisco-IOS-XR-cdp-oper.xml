@@ -1,0 +1,982 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-cdp-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-cdp-oper" revision="2015-07-30">
+  <files>
+    <file revision="2015-07-30" submodule="false">Cisco-IOS-XR-cdp-oper.yang</file>
+    <file revision="2015-07-30" submodule="true">Cisco-IOS-XR-cdp-oper-sub1.yang</file>
+  </files>
+  <prefix>cdp-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="yang">ietf-yang-types</import>
+  <typedef name="Im-state">
+    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+    <type>
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Cdp-duplex">
+    <type node="enumeration">
+      <enum value="0">cdp-dplx-none</enum>
+      <enum value="1">cdp-dplx-half</enum>
+      <enum value="2">cdp-dplx-full</enum>
+    </type>
+  </typedef>
+  <typedef name="In6-addr">
+    <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+    <type>
+      <type-name>inet:ipv6-address</type-name>
+    </type>
+  </typedef>
+  <typedef name="Cdp-l3-addr-protocol">
+    <type node="enumeration">
+      <enum>ipv4</enum>
+      <enum>ipv6</enum>
+    </type>
+  </typedef>
+  <cdp config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/cdp/</xr-path>
+    <xr-xml-map>cdp_oper:CDP</xr-xml-map>
+    <xr-task>cdp</xr-task>
+    <nodes config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/cdp/node/</xr-path>
+      <xr-xml-map>cdp_oper:NodeTable</xr-xml-map>
+      <xr-task>cdp</xr-task>
+      <node config="false" key="node-name" node="list">
+        <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/</xr-path>
+        <xr-xml-map>cdp_oper:Node</xr-xml-map>
+        <xr-task>cdp</xr-task>
+        <neighbors config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/</xr-path>
+          <xr-xml-map>cdp_oper:Neighbors</xr-xml-map>
+          <xr-task>cdp</xr-task>
+          <details config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/</xr-path>
+            <xr-xml-map>cdp_oper:DetailTable</xr-xml-map>
+            <xr-task>cdp</xr-task>
+            <detail config="false" node="list">
+              <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;</xr-path>
+              <xr-xml-map>cdp_oper:Detail</xr-xml-map>
+              <xr-task>cdp</xr-task>
+              <xr-bag-grp-name>cdp_neighbor</xr-bag-grp-name>
+              <xr-bag>cdp.bag</xr-bag>
+              <interface-name config="false" is-key="true" is-yang-key="false" node="leaf">
+                <xr-pathformat>hex_nozerox</xr-pathformat>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;</xr-path>
+                <xr-xml-map>cdp_oper:InterfaceName</xr-xml-map>
+                <xr-task>cdp</xr-task>
+                <xr-sch-type>InterfaceHandle</xr-sch-type>
+                <xr-sch-arg-name>&lt;cdp_oper_Detail_ifhandle&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>xr:Interface-name</type-name>
+                </type>
+              </interface-name>
+              <device-id config="false" is-key="true" is-yang-key="false" node="leaf">
+                <xr-pathformat>hex_nozerox</xr-pathformat>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;</xr-path>
+                <xr-xml-map>cdp_oper:DeviceID</xr-xml-map>
+                <xr-task>cdp</xr-task>
+                <xr-sch-type>EncodedString</xr-sch-type>
+                <xr-sch-arg-name>&lt;cdp_oper_Detail_device-id&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </device-id>
+              <cdp-neighbor config="false" node="list">
+                <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;]</xr-path>
+                <xr-task>cdp</xr-task>
+                <xr-bag>cdp.bag</xr-bag>
+                <xr-bag-dll>libcdp_bag_desc.dll</xr-bag-dll>
+                <xr-bag-list-next>next</xr-bag-list-next>
+                <xr-bag-version>3 0</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+                <detail config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <network-addresses config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.NetworkAddresses</xr-path>
+                    <xr-task>cdp</xr-task>
+                    <xr-bag-version>3 0</xr-bag-version>
+                    <cdp-addr-entry config="false" node="list">
+                      <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.NetworkAddresses[&lt;bag_arg1&gt;]</xr-path>
+                      <xr-task>cdp</xr-task>
+                      <xr-struct>cdp.bag</xr-struct>
+                      <xr-bag-dll>libcdp_bag_desc.dll</xr-bag-dll>
+                      <xr-bag-list-next>next</xr-bag-list-next>
+                      <xr-bag-version>3 0</xr-bag-version>
+                      <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+                      <address config="false" is-key="false" node="container" presence="false">
+                        <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.NetworkAddresses[&lt;bag_arg1&gt;].Address</xr-path>
+                        <xr-task>cdp</xr-task>
+                        <xr-bag-version>3 0</xr-bag-version>
+                        <address-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.NetworkAddresses[&lt;bag_arg1&gt;].Address.AddressType</xr-path>
+                          <xr-xml-map>cdp:AddressType</xr-xml-map>
+                          <xr-task>cdp</xr-task>
+                          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                          <xr-bag-version>3 0</xr-bag-version>
+                          <type>
+                            <type-name>Cdp-l3-addr-protocol</type-name>
+                          </type>
+                        </address-type>
+                        <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.NetworkAddresses[&lt;bag_arg1&gt;].Address.IPv4Address</xr-path>
+                          <xr-xml-map>cdp:IPv4Address</xr-xml-map>
+                          <xr-task>cdp</xr-task>
+                          <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                          <xr-bag-version>3 0</xr-bag-version>
+                          <when>../address-type = 'ipv4'</when>
+                          <type>
+                            <type-name>inet:ipv4-address</type-name>
+                          </type>
+                        </ipv4-address>
+                        <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.NetworkAddresses[&lt;bag_arg1&gt;].Address.IPv6Address</xr-path>
+                          <xr-xml-map>cdp:IPv6Address</xr-xml-map>
+                          <xr-task>cdp</xr-task>
+                          <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                          <xr-bag-version>3 0</xr-bag-version>
+                          <when>../address-type = 'ipv6'</when>
+                          <type>
+                            <type-name>In6-addr</type-name>
+                          </type>
+                        </ipv6-address>
+                      </address>
+                    </cdp-addr-entry>
+                  </network-addresses>
+                  <protocol-hello-list config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.ProtocolHelloList</xr-path>
+                    <xr-task>cdp</xr-task>
+                    <xr-bag-version>3 0</xr-bag-version>
+                    <cdp-prot-hello-entry config="false" node="list">
+                      <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.ProtocolHelloList[&lt;bag_arg2&gt;]</xr-path>
+                      <xr-task>cdp</xr-task>
+                      <xr-struct>cdp.bag</xr-struct>
+                      <xr-bag-dll>libcdp_bag_desc.dll</xr-bag-dll>
+                      <xr-bag-list-next>next</xr-bag-list-next>
+                      <xr-bag-version>3 0</xr-bag-version>
+                      <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+                      <hello-message config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.ProtocolHelloList[&lt;bag_arg2&gt;].HelloMessage</xr-path>
+                        <xr-task>cdp</xr-task>
+                        <xr-bag-primitive-type>opaque</xr-bag-primitive-type>
+                        <xr-bag-version>3 0</xr-bag-version>
+                        <type>
+                          <type-name>yang:hex-string</type-name>
+                        </type>
+                      </hello-message>
+                    </cdp-prot-hello-entry>
+                  </protocol-hello-list>
+                  <version config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.Version</xr-path>
+                    <xr-xml-map>cdp:Version</xr-xml-map>
+                    <xr-task>cdp</xr-task>
+                    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                    <xr-bag-version>3 0</xr-bag-version>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </version>
+                  <vtp-domain config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.VTPDomain</xr-path>
+                    <xr-xml-map>cdp:VTPDomain</xr-xml-map>
+                    <xr-task>cdp</xr-task>
+                    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                    <xr-bag-version>3 0</xr-bag-version>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </vtp-domain>
+                  <native-vlan config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.NativeVLAN</xr-path>
+                    <xr-xml-map>cdp:NativeVLAN</xr-xml-map>
+                    <xr-task>cdp</xr-task>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>3 0</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </native-vlan>
+                  <duplex config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.Duplex</xr-path>
+                    <xr-xml-map>cdp:Duplex</xr-xml-map>
+                    <xr-task>cdp</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>3 0</xr-bag-version>
+                    <type>
+                      <type-name>Cdp-duplex</type-name>
+                    </type>
+                  </duplex>
+                  <system-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.SystemName</xr-path>
+                    <xr-xml-map>cdp:SystemName</xr-xml-map>
+                    <xr-task>cdp</xr-task>
+                    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                    <xr-bag-version>3 0</xr-bag-version>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </system-name>
+                </detail>
+                <receiving-interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].ReceivingInterfaceName</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <type>
+                    <type-name>xr:Interface-name</type-name>
+                  </type>
+                </receiving-interface-name>
+                <device-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].DeviceID</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </device-id>
+                <port-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].PortID</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </port-id>
+                <header-version config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].HeaderVersion</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </header-version>
+                <hold-time config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].HoldTime</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <type>
+                    <type-name>uint16</type-name>
+                  </type>
+                </hold-time>
+                <capabilities config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Capabilities</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </capabilities>
+                <platform config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/de/&lt;cdp_oper_Detail_ifhandle&gt;,&lt;cdp_oper_Detail_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Platform</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </platform>
+              </cdp-neighbor>
+            </detail>
+          </details>
+          <devices config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/</xr-path>
+            <xr-xml-map>cdp_oper:DeviceTable</xr-xml-map>
+            <xr-task>cdp</xr-task>
+            <device config="false" key="device-id" node="list">
+              <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;</xr-path>
+              <xr-xml-map>cdp_oper:Device</xr-xml-map>
+              <xr-task>cdp</xr-task>
+              <xr-bag-grp-name>cdp_neighbor</xr-bag-grp-name>
+              <xr-bag>cdp.bag</xr-bag>
+              <device-id config="false" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-pathformat>hex_nozerox</xr-pathformat>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;</xr-path>
+                <xr-xml-map>cdp_oper:DeviceID</xr-xml-map>
+                <xr-task>cdp</xr-task>
+                <xr-sch-type>EncodedString</xr-sch-type>
+                <xr-sch-arg-name>&lt;cdp_oper_Device_device-id&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </device-id>
+              <cdp-neighbor config="false" node="list">
+                <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;]</xr-path>
+                <xr-task>cdp</xr-task>
+                <xr-bag>cdp.bag</xr-bag>
+                <xr-bag-dll>libcdp_bag_desc.dll</xr-bag-dll>
+                <xr-bag-list-next>next</xr-bag-list-next>
+                <xr-bag-version>3 0</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+                <detail config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <network-addresses config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.NetworkAddresses</xr-path>
+                    <xr-task>cdp</xr-task>
+                    <xr-bag-version>3 0</xr-bag-version>
+                    <cdp-addr-entry config="false" node="list">
+                      <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.NetworkAddresses[&lt;bag_arg1&gt;]</xr-path>
+                      <xr-task>cdp</xr-task>
+                      <xr-struct>cdp.bag</xr-struct>
+                      <xr-bag-dll>libcdp_bag_desc.dll</xr-bag-dll>
+                      <xr-bag-list-next>next</xr-bag-list-next>
+                      <xr-bag-version>3 0</xr-bag-version>
+                      <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+                      <address config="false" is-key="false" node="container" presence="false">
+                        <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.NetworkAddresses[&lt;bag_arg1&gt;].Address</xr-path>
+                        <xr-task>cdp</xr-task>
+                        <xr-bag-version>3 0</xr-bag-version>
+                        <address-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.NetworkAddresses[&lt;bag_arg1&gt;].Address.AddressType</xr-path>
+                          <xr-xml-map>cdp:AddressType</xr-xml-map>
+                          <xr-task>cdp</xr-task>
+                          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                          <xr-bag-version>3 0</xr-bag-version>
+                          <type>
+                            <type-name>Cdp-l3-addr-protocol</type-name>
+                          </type>
+                        </address-type>
+                        <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.NetworkAddresses[&lt;bag_arg1&gt;].Address.IPv4Address</xr-path>
+                          <xr-xml-map>cdp:IPv4Address</xr-xml-map>
+                          <xr-task>cdp</xr-task>
+                          <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                          <xr-bag-version>3 0</xr-bag-version>
+                          <when>../address-type = 'ipv4'</when>
+                          <type>
+                            <type-name>inet:ipv4-address</type-name>
+                          </type>
+                        </ipv4-address>
+                        <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.NetworkAddresses[&lt;bag_arg1&gt;].Address.IPv6Address</xr-path>
+                          <xr-xml-map>cdp:IPv6Address</xr-xml-map>
+                          <xr-task>cdp</xr-task>
+                          <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                          <xr-bag-version>3 0</xr-bag-version>
+                          <when>../address-type = 'ipv6'</when>
+                          <type>
+                            <type-name>In6-addr</type-name>
+                          </type>
+                        </ipv6-address>
+                      </address>
+                    </cdp-addr-entry>
+                  </network-addresses>
+                  <protocol-hello-list config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.ProtocolHelloList</xr-path>
+                    <xr-task>cdp</xr-task>
+                    <xr-bag-version>3 0</xr-bag-version>
+                    <cdp-prot-hello-entry config="false" node="list">
+                      <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.ProtocolHelloList[&lt;bag_arg2&gt;]</xr-path>
+                      <xr-task>cdp</xr-task>
+                      <xr-struct>cdp.bag</xr-struct>
+                      <xr-bag-dll>libcdp_bag_desc.dll</xr-bag-dll>
+                      <xr-bag-list-next>next</xr-bag-list-next>
+                      <xr-bag-version>3 0</xr-bag-version>
+                      <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+                      <hello-message config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.ProtocolHelloList[&lt;bag_arg2&gt;].HelloMessage</xr-path>
+                        <xr-task>cdp</xr-task>
+                        <xr-bag-primitive-type>opaque</xr-bag-primitive-type>
+                        <xr-bag-version>3 0</xr-bag-version>
+                        <type>
+                          <type-name>yang:hex-string</type-name>
+                        </type>
+                      </hello-message>
+                    </cdp-prot-hello-entry>
+                  </protocol-hello-list>
+                  <version config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.Version</xr-path>
+                    <xr-xml-map>cdp:Version</xr-xml-map>
+                    <xr-task>cdp</xr-task>
+                    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                    <xr-bag-version>3 0</xr-bag-version>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </version>
+                  <vtp-domain config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.VTPDomain</xr-path>
+                    <xr-xml-map>cdp:VTPDomain</xr-xml-map>
+                    <xr-task>cdp</xr-task>
+                    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                    <xr-bag-version>3 0</xr-bag-version>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </vtp-domain>
+                  <native-vlan config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.NativeVLAN</xr-path>
+                    <xr-xml-map>cdp:NativeVLAN</xr-xml-map>
+                    <xr-task>cdp</xr-task>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>3 0</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </native-vlan>
+                  <duplex config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.Duplex</xr-path>
+                    <xr-xml-map>cdp:Duplex</xr-xml-map>
+                    <xr-task>cdp</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>3 0</xr-bag-version>
+                    <type>
+                      <type-name>Cdp-duplex</type-name>
+                    </type>
+                  </duplex>
+                  <system-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.SystemName</xr-path>
+                    <xr-xml-map>cdp:SystemName</xr-xml-map>
+                    <xr-task>cdp</xr-task>
+                    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                    <xr-bag-version>3 0</xr-bag-version>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </system-name>
+                </detail>
+                <receiving-interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].ReceivingInterfaceName</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <type>
+                    <type-name>xr:Interface-name</type-name>
+                  </type>
+                </receiving-interface-name>
+                <device-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].DeviceID</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </device-id>
+                <port-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].PortID</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </port-id>
+                <header-version config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].HeaderVersion</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </header-version>
+                <hold-time config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].HoldTime</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <type>
+                    <type-name>uint16</type-name>
+                  </type>
+                </hold-time>
+                <capabilities config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Capabilities</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </capabilities>
+                <platform config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/dev/&lt;cdp_oper_Device_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Platform</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </platform>
+              </cdp-neighbor>
+            </device>
+          </devices>
+          <summaries config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/</xr-path>
+            <xr-xml-map>cdp_oper:SummaryTable</xr-xml-map>
+            <xr-task>cdp</xr-task>
+            <summary config="false" node="list">
+              <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;</xr-path>
+              <xr-xml-map>cdp_oper:Summary</xr-xml-map>
+              <xr-task>cdp</xr-task>
+              <xr-bag-grp-name>cdp_neighbor</xr-bag-grp-name>
+              <xr-bag>cdp.bag</xr-bag>
+              <interface-name config="false" is-key="true" is-yang-key="false" node="leaf">
+                <xr-pathformat>hex_nozerox</xr-pathformat>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;</xr-path>
+                <xr-xml-map>cdp_oper:InterfaceName</xr-xml-map>
+                <xr-task>cdp</xr-task>
+                <xr-sch-type>InterfaceHandle</xr-sch-type>
+                <xr-sch-arg-name>&lt;cdp_oper_Summary_ifhandle&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>xr:Interface-name</type-name>
+                </type>
+              </interface-name>
+              <device-id config="false" is-key="true" is-yang-key="false" node="leaf">
+                <xr-pathformat>hex_nozerox</xr-pathformat>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;</xr-path>
+                <xr-xml-map>cdp_oper:DeviceID</xr-xml-map>
+                <xr-task>cdp</xr-task>
+                <xr-sch-type>EncodedString</xr-sch-type>
+                <xr-sch-arg-name>&lt;cdp_oper_Summary_device-id&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </device-id>
+              <cdp-neighbor config="false" node="list">
+                <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;]</xr-path>
+                <xr-task>cdp</xr-task>
+                <xr-bag>cdp.bag</xr-bag>
+                <xr-bag-dll>libcdp_bag_desc.dll</xr-bag-dll>
+                <xr-bag-list-next>next</xr-bag-list-next>
+                <xr-bag-version>3 0</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+                <detail config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <network-addresses config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.NetworkAddresses</xr-path>
+                    <xr-task>cdp</xr-task>
+                    <xr-bag-version>3 0</xr-bag-version>
+                    <cdp-addr-entry config="false" node="list">
+                      <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.NetworkAddresses[&lt;bag_arg1&gt;]</xr-path>
+                      <xr-task>cdp</xr-task>
+                      <xr-struct>cdp.bag</xr-struct>
+                      <xr-bag-dll>libcdp_bag_desc.dll</xr-bag-dll>
+                      <xr-bag-list-next>next</xr-bag-list-next>
+                      <xr-bag-version>3 0</xr-bag-version>
+                      <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+                      <address config="false" is-key="false" node="container" presence="false">
+                        <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.NetworkAddresses[&lt;bag_arg1&gt;].Address</xr-path>
+                        <xr-task>cdp</xr-task>
+                        <xr-bag-version>3 0</xr-bag-version>
+                        <address-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.NetworkAddresses[&lt;bag_arg1&gt;].Address.AddressType</xr-path>
+                          <xr-xml-map>cdp:AddressType</xr-xml-map>
+                          <xr-task>cdp</xr-task>
+                          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                          <xr-bag-version>3 0</xr-bag-version>
+                          <type>
+                            <type-name>Cdp-l3-addr-protocol</type-name>
+                          </type>
+                        </address-type>
+                        <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.NetworkAddresses[&lt;bag_arg1&gt;].Address.IPv4Address</xr-path>
+                          <xr-xml-map>cdp:IPv4Address</xr-xml-map>
+                          <xr-task>cdp</xr-task>
+                          <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                          <xr-bag-version>3 0</xr-bag-version>
+                          <when>../address-type = 'ipv4'</when>
+                          <type>
+                            <type-name>inet:ipv4-address</type-name>
+                          </type>
+                        </ipv4-address>
+                        <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.NetworkAddresses[&lt;bag_arg1&gt;].Address.IPv6Address</xr-path>
+                          <xr-xml-map>cdp:IPv6Address</xr-xml-map>
+                          <xr-task>cdp</xr-task>
+                          <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                          <xr-bag-version>3 0</xr-bag-version>
+                          <when>../address-type = 'ipv6'</when>
+                          <type>
+                            <type-name>In6-addr</type-name>
+                          </type>
+                        </ipv6-address>
+                      </address>
+                    </cdp-addr-entry>
+                  </network-addresses>
+                  <protocol-hello-list config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.ProtocolHelloList</xr-path>
+                    <xr-task>cdp</xr-task>
+                    <xr-bag-version>3 0</xr-bag-version>
+                    <cdp-prot-hello-entry config="false" node="list">
+                      <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.ProtocolHelloList[&lt;bag_arg2&gt;]</xr-path>
+                      <xr-task>cdp</xr-task>
+                      <xr-struct>cdp.bag</xr-struct>
+                      <xr-bag-dll>libcdp_bag_desc.dll</xr-bag-dll>
+                      <xr-bag-list-next>next</xr-bag-list-next>
+                      <xr-bag-version>3 0</xr-bag-version>
+                      <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+                      <hello-message config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.ProtocolHelloList[&lt;bag_arg2&gt;].HelloMessage</xr-path>
+                        <xr-task>cdp</xr-task>
+                        <xr-bag-primitive-type>opaque</xr-bag-primitive-type>
+                        <xr-bag-version>3 0</xr-bag-version>
+                        <type>
+                          <type-name>yang:hex-string</type-name>
+                        </type>
+                      </hello-message>
+                    </cdp-prot-hello-entry>
+                  </protocol-hello-list>
+                  <version config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.Version</xr-path>
+                    <xr-xml-map>cdp:Version</xr-xml-map>
+                    <xr-task>cdp</xr-task>
+                    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                    <xr-bag-version>3 0</xr-bag-version>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </version>
+                  <vtp-domain config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.VTPDomain</xr-path>
+                    <xr-xml-map>cdp:VTPDomain</xr-xml-map>
+                    <xr-task>cdp</xr-task>
+                    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                    <xr-bag-version>3 0</xr-bag-version>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </vtp-domain>
+                  <native-vlan config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.NativeVLAN</xr-path>
+                    <xr-xml-map>cdp:NativeVLAN</xr-xml-map>
+                    <xr-task>cdp</xr-task>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>3 0</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </native-vlan>
+                  <duplex config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.Duplex</xr-path>
+                    <xr-xml-map>cdp:Duplex</xr-xml-map>
+                    <xr-task>cdp</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>3 0</xr-bag-version>
+                    <type>
+                      <type-name>Cdp-duplex</type-name>
+                    </type>
+                  </duplex>
+                  <system-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Detail.SystemName</xr-path>
+                    <xr-xml-map>cdp:SystemName</xr-xml-map>
+                    <xr-task>cdp</xr-task>
+                    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                    <xr-bag-version>3 0</xr-bag-version>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </system-name>
+                </detail>
+                <receiving-interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].ReceivingInterfaceName</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <type>
+                    <type-name>xr:Interface-name</type-name>
+                  </type>
+                </receiving-interface-name>
+                <device-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].DeviceID</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </device-id>
+                <port-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].PortID</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </port-id>
+                <header-version config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].HeaderVersion</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </header-version>
+                <hold-time config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].HoldTime</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <type>
+                    <type-name>uint16</type-name>
+                  </type>
+                </hold-time>
+                <capabilities config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Capabilities</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </capabilities>
+                <platform config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/ne/br/&lt;cdp_oper_Summary_ifhandle&gt;,&lt;cdp_oper_Summary_device-id&gt;~cdp_neighbor[&lt;bag_arg3&gt;].Platform</xr-path>
+                  <xr-task>cdp</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>3 0</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </platform>
+              </cdp-neighbor>
+            </summary>
+          </summaries>
+        </neighbors>
+        <statistics config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/stats</xr-path>
+          <xr-xml-map>cdp_oper:Statistics</xr-xml-map>
+          <xr-task>cdp</xr-task>
+          <xr-bag-grp-name>cdp_stats</xr-bag-grp-name>
+          <xr-bag>cdp.bag</xr-bag>
+          <received-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/stats~cdp_stats.ReceivedPackets</xr-path>
+            <xr-xml-map>cdp:ReceivedPackets</xr-xml-map>
+            <xr-task>cdp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </received-packets>
+          <received-packets-v1 config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/stats~cdp_stats.ReceivedPacketsV1</xr-path>
+            <xr-xml-map>cdp:ReceivedPacketsV1</xr-xml-map>
+            <xr-task>cdp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </received-packets-v1>
+          <received-packets-v2 config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/stats~cdp_stats.ReceivedPacketsV2</xr-path>
+            <xr-xml-map>cdp:ReceivedPacketsV2</xr-xml-map>
+            <xr-task>cdp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </received-packets-v2>
+          <transmitted-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/stats~cdp_stats.TransmittedPackets</xr-path>
+            <xr-xml-map>cdp:TransmittedPackets</xr-xml-map>
+            <xr-task>cdp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </transmitted-packets>
+          <transmitted-packets-v1 config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/stats~cdp_stats.TransmittedPacketsV1</xr-path>
+            <xr-xml-map>cdp:TransmittedPacketsV1</xr-xml-map>
+            <xr-task>cdp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </transmitted-packets-v1>
+          <transmitted-packets-v2 config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/stats~cdp_stats.TransmittedPacketsV2</xr-path>
+            <xr-xml-map>cdp:TransmittedPacketsV2</xr-xml-map>
+            <xr-task>cdp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </transmitted-packets-v2>
+          <header-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/stats~cdp_stats.HeaderErrors</xr-path>
+            <xr-xml-map>cdp:HeaderErrors</xr-xml-map>
+            <xr-task>cdp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </header-errors>
+          <checksum-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/stats~cdp_stats.ChecksumErrors</xr-path>
+            <xr-xml-map>cdp:ChecksumErrors</xr-xml-map>
+            <xr-task>cdp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </checksum-errors>
+          <encapsulation-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/stats~cdp_stats.EncapsulationErrors</xr-path>
+            <xr-xml-map>cdp:EncapsulationErrors</xr-xml-map>
+            <xr-task>cdp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </encapsulation-errors>
+          <bad-packet-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/stats~cdp_stats.BadPacketErrors</xr-path>
+            <xr-xml-map>cdp:BadPacketErrors</xr-xml-map>
+            <xr-task>cdp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </bad-packet-errors>
+          <out-of-memory-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/stats~cdp_stats.OutOfMemoryErrors</xr-path>
+            <xr-xml-map>cdp:OutOfMemoryErrors</xr-xml-map>
+            <xr-task>cdp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </out-of-memory-errors>
+          <truncated-packet-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/stats~cdp_stats.TruncatedPacketErrors</xr-path>
+            <xr-xml-map>cdp:TruncatedPacketErrors</xr-xml-map>
+            <xr-task>cdp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </truncated-packet-errors>
+          <header-version-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/stats~cdp_stats.HeaderVersionErrors</xr-path>
+            <xr-xml-map>cdp:HeaderVersionErrors</xr-xml-map>
+            <xr-task>cdp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </header-version-errors>
+          <open-file-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/stats~cdp_stats.OpenFileErrors</xr-path>
+            <xr-xml-map>cdp:OpenFileErrors</xr-xml-map>
+            <xr-task>cdp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </open-file-errors>
+        </statistics>
+        <interfaces config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/intf/</xr-path>
+          <xr-xml-map>cdp_oper:InterfaceTable</xr-xml-map>
+          <xr-task>cdp</xr-task>
+          <interface config="false" key="interface-name" node="list">
+            <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/intf/&lt;cdp_oper_Interface_ifhandle&gt;</xr-path>
+            <xr-xml-map>cdp_oper:Interface</xr-xml-map>
+            <xr-task>cdp</xr-task>
+            <xr-bag-grp-name>cdp_interface</xr-bag-grp-name>
+            <xr-bag>cdp.bag</xr-bag>
+            <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-pathformat>hex_nozerox</xr-pathformat>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/intf/&lt;cdp_oper_Interface_ifhandle&gt;</xr-path>
+              <xr-xml-map>cdp_oper:InterfaceName</xr-xml-map>
+              <xr-task>cdp</xr-task>
+              <xr-sch-type>InterfaceHandle</xr-sch-type>
+              <xr-sch-arg-name>&lt;cdp_oper_Interface_ifhandle&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-name>
+            <interface-handle config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/intf/&lt;cdp_oper_Interface_ifhandle&gt;~cdp_interface.InterfaceHandle</xr-path>
+              <xr-xml-map>cdp:InterfaceHandle</xr-xml-map>
+              <xr-task>cdp</xr-task>
+              <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+              <xr-bag-version>3 0</xr-bag-version>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-handle>
+            <basecaps-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/intf/&lt;cdp_oper_Interface_ifhandle&gt;~cdp_interface.BasecapsState</xr-path>
+              <xr-xml-map>cdp:BasecapsState</xr-xml-map>
+              <xr-task>cdp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 0</xr-bag-version>
+              <type>
+                <type-name>Im-state</type-name>
+              </type>
+            </basecaps-state>
+            <cdp-protocol-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/intf/&lt;cdp_oper_Interface_ifhandle&gt;~cdp_interface.CDPProtocolState</xr-path>
+              <xr-xml-map>cdp:CDPProtocolState</xr-xml-map>
+              <xr-task>cdp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 0</xr-bag-version>
+              <type>
+                <type-name>Im-state</type-name>
+              </type>
+            </cdp-protocol-state>
+            <interface-encaps config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/intf/&lt;cdp_oper_Interface_ifhandle&gt;~cdp_interface.InterfaceEncaps</xr-path>
+              <xr-xml-map>cdp:InterfaceEncaps</xr-xml-map>
+              <xr-task>cdp</xr-task>
+              <xr-bag-primitive-type>im_caps_type</xr-bag-primitive-type>
+              <xr-bag-version>3 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </interface-encaps>
+          </interface>
+        </interfaces>
+        <node-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-pathformat>hex_nozerox</xr-pathformat>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/cdp/node/&lt;cdp_oper_Node_node-id&gt;/</xr-path>
+          <xr-xml-map>cdp_oper:NodeName</xr-xml-map>
+          <xr-task>cdp</xr-task>
+          <xr-sch-type>NodeID</xr-sch-type>
+          <xr-sch-arg-name>&lt;cdp_oper_Node_node-id&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Node-id</type-name>
+          </type>
+        </node-name>
+      </node>
+    </nodes>
+  </cdp>
+</Cisco-IOS-XR-cdp-oper>

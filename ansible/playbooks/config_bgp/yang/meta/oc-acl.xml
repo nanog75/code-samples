@@ -1,0 +1,628 @@
+<?xml version="1.0"?>
+<openconfig-acl ns="http://openconfig.net/yang/acl" oc-ver="1.0.0" revision="2017-05-26">
+  <files>
+    <file revision="2017-05-26" submodule="false">openconfig-acl.yang</file>
+  </files>
+  <prefix>oc-acl</prefix>
+  <organization>OpenConfig working group</organization>
+  <import prefix="oc-match">openconfig-packet-match</import>
+  <import prefix="oc-if">openconfig-interfaces</import>
+  <import prefix="oc-yang">openconfig-yang-types</import>
+  <import prefix="oc-ext">openconfig-extensions</import>
+  <identity name="ACL_TYPE"/>
+  <identity name="ACL_IPV4">
+    <base>ACL_TYPE</base>
+  </identity>
+  <identity name="ACL_IPV6">
+    <base>ACL_TYPE</base>
+  </identity>
+  <identity name="ACL_L2">
+    <base>ACL_TYPE</base>
+  </identity>
+  <identity name="ACL_MIXED">
+    <base>ACL_TYPE</base>
+  </identity>
+  <identity name="FORWARDING_ACTION"/>
+  <identity name="ACCEPT">
+    <base>FORWARDING_ACTION</base>
+  </identity>
+  <identity name="DROP">
+    <base>FORWARDING_ACTION</base>
+  </identity>
+  <identity name="REJECT">
+    <base>FORWARDING_ACTION</base>
+  </identity>
+  <identity name="LOG_ACTION"/>
+  <identity name="LOG_SYSLOG">
+    <base>LOG_ACTION</base>
+  </identity>
+  <identity name="LOG_NONE">
+    <base>LOG_ACTION</base>
+  </identity>
+  <identity name="ACL_COUNTER_CAPABILITY"/>
+  <identity name="INTERFACE_ONLY">
+    <base>ACL_COUNTER_CAPABILITY</base>
+  </identity>
+  <identity name="AGGREGATE_ONLY">
+    <base>ACL_COUNTER_CAPABILITY</base>
+  </identity>
+  <identity name="INTERFACE_AGGREGATE">
+    <base>ACL_COUNTER_CAPABILITY</base>
+  </identity>
+  <acl config="true" is-key="false" node="container" presence="false">
+    <config config="true" is-key="false" node="container" presence="false"/>
+    <state config="true" is-key="false" node="container" presence="false">
+      <counter-capability config="true" is-key="false" is-yang-key="false" node="leaf">
+        <type node="identityref">
+          <base>ACL_COUNTER_CAPABILITY</base>
+        </type>
+      </counter-capability>
+    </state>
+    <acl-sets config="true" is-key="false" node="container" presence="false">
+      <acl-set config="true" key="name type" node="list">
+        <name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <type>
+            <type-name>leafref</type-name>
+          </type>
+        </name>
+        <type config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <type>
+            <type-name>leafref</type-name>
+          </type>
+        </type>
+        <config config="true" is-key="false" node="container" presence="false">
+          <name config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </name>
+          <type config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type node="identityref">
+              <base>ACL_TYPE</base>
+            </type>
+          </type>
+          <description config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </description>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <name config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </name>
+          <type config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type node="identityref">
+              <base>ACL_TYPE</base>
+            </type>
+          </type>
+          <description config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </description>
+        </state>
+        <acl-entries config="true" is-key="false" node="container" presence="false">
+          <acl-entry config="true" key="sequence-id" node="list">
+            <sequence-id config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </sequence-id>
+            <config config="true" is-key="false" node="container" presence="false">
+              <sequence-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </sequence-id>
+              <description config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </description>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <sequence-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </sequence-id>
+              <description config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </description>
+              <matched-packets config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>oc-yang:counter64</type-name>
+                </type>
+              </matched-packets>
+              <matched-octets config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>oc-yang:counter64</type-name>
+                </type>
+              </matched-octets>
+            </state>
+            <when>../../config/type='ACL_L2'</when>
+            <when>../../config/type='ACL_IPV4'</when>
+            <when>../../config/type='ACL_IPV6'</when>
+            <when>../../config/type='ACL_IPV6' or ../../config/type='ACL_IPV4'</when>
+            <l2 config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <source-mac config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-yang:mac-address</type-name>
+                  </type>
+                </source-mac>
+                <source-mac-mask config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-yang:mac-address</type-name>
+                  </type>
+                </source-mac-mask>
+                <destination-mac config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-yang:mac-address</type-name>
+                  </type>
+                </destination-mac>
+                <destination-mac-mask config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-yang:mac-address</type-name>
+                  </type>
+                </destination-mac-mask>
+                <ethertype config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-pkt-match-types:ethertype-type</type-name>
+                  </type>
+                </ethertype>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <source-mac config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-yang:mac-address</type-name>
+                  </type>
+                </source-mac>
+                <source-mac-mask config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-yang:mac-address</type-name>
+                  </type>
+                </source-mac-mask>
+                <destination-mac config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-yang:mac-address</type-name>
+                  </type>
+                </destination-mac>
+                <destination-mac-mask config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-yang:mac-address</type-name>
+                  </type>
+                </destination-mac-mask>
+                <ethertype config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-pkt-match-types:ethertype-type</type-name>
+                  </type>
+                </ethertype>
+              </state>
+            </l2>
+            <ipv4 config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <source-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-inet:ipv4-prefix</type-name>
+                  </type>
+                </source-address>
+                <destination-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-inet:ipv4-prefix</type-name>
+                  </type>
+                </destination-address>
+                <dscp config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-inet:dscp</type-name>
+                  </type>
+                </dscp>
+                <protocol config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-pkt-match-types:ip-protocol-type</type-name>
+                  </type>
+                </protocol>
+                <hop-limit config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="0..255">
+                    <type-name>uint8</type-name>
+                  </type>
+                </hop-limit>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <source-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-inet:ipv4-prefix</type-name>
+                  </type>
+                </source-address>
+                <destination-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-inet:ipv4-prefix</type-name>
+                  </type>
+                </destination-address>
+                <dscp config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-inet:dscp</type-name>
+                  </type>
+                </dscp>
+                <protocol config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-pkt-match-types:ip-protocol-type</type-name>
+                  </type>
+                </protocol>
+                <hop-limit config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="0..255">
+                    <type-name>uint8</type-name>
+                  </type>
+                </hop-limit>
+              </state>
+            </ipv4>
+            <ipv6 config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <source-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-inet:ipv6-prefix</type-name>
+                  </type>
+                </source-address>
+                <source-flow-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-inet:ipv6-flow-label</type-name>
+                  </type>
+                </source-flow-label>
+                <destination-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-inet:ipv6-prefix</type-name>
+                  </type>
+                </destination-address>
+                <destination-flow-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-inet:ipv6-flow-label</type-name>
+                  </type>
+                </destination-flow-label>
+                <dscp config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-inet:dscp</type-name>
+                  </type>
+                </dscp>
+                <protocol config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-pkt-match-types:ip-protocol-type</type-name>
+                  </type>
+                </protocol>
+                <hop-limit config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="0..255">
+                    <type-name>uint8</type-name>
+                  </type>
+                </hop-limit>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <source-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-inet:ipv6-prefix</type-name>
+                  </type>
+                </source-address>
+                <source-flow-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-inet:ipv6-flow-label</type-name>
+                  </type>
+                </source-flow-label>
+                <destination-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-inet:ipv6-prefix</type-name>
+                  </type>
+                </destination-address>
+                <destination-flow-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-inet:ipv6-flow-label</type-name>
+                  </type>
+                </destination-flow-label>
+                <dscp config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-inet:dscp</type-name>
+                  </type>
+                </dscp>
+                <protocol config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-pkt-match-types:ip-protocol-type</type-name>
+                  </type>
+                </protocol>
+                <hop-limit config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="0..255">
+                    <type-name>uint8</type-name>
+                  </type>
+                </hop-limit>
+              </state>
+            </ipv6>
+            <transport config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <source-port config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-pkt-match-types:port-num-range</type-name>
+                  </type>
+                </source-port>
+                <destination-port config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-pkt-match-types:port-num-range</type-name>
+                  </type>
+                </destination-port>
+                <tcp-flags config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                  <type node="identityref">
+                    <base>oc-pkt-match-types:TCP_FLAGS</base>
+                  </type>
+                </tcp-flags>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <source-port config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-pkt-match-types:port-num-range</type-name>
+                  </type>
+                </source-port>
+                <destination-port config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-pkt-match-types:port-num-range</type-name>
+                  </type>
+                </destination-port>
+                <tcp-flags config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                  <type node="identityref">
+                    <base>oc-pkt-match-types:TCP_FLAGS</base>
+                  </type>
+                </tcp-flags>
+              </state>
+            </transport>
+            <input-interface config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false"/>
+              <state config="true" is-key="false" node="container" presence="false"/>
+              <interface-ref config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>leafref</type-name>
+                    </type>
+                  </interface>
+                  <subinterface config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>leafref</type-name>
+                    </type>
+                  </subinterface>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>leafref</type-name>
+                    </type>
+                  </interface>
+                  <subinterface config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>leafref</type-name>
+                    </type>
+                  </subinterface>
+                </state>
+              </interface-ref>
+            </input-interface>
+            <actions config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <forwarding-action config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type node="identityref">
+                    <base>FORWARDING_ACTION</base>
+                  </type>
+                  <mandatory>true</mandatory>
+                </forwarding-action>
+                <log-action config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type node="identityref">
+                    <base>LOG_ACTION</base>
+                  </type>
+                  <default>LOG_NONE</default>
+                </log-action>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <forwarding-action config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type node="identityref">
+                    <base>FORWARDING_ACTION</base>
+                  </type>
+                  <mandatory>true</mandatory>
+                </forwarding-action>
+                <log-action config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type node="identityref">
+                    <base>LOG_ACTION</base>
+                  </type>
+                  <default>LOG_NONE</default>
+                </log-action>
+              </state>
+            </actions>
+          </acl-entry>
+        </acl-entries>
+      </acl-set>
+    </acl-sets>
+    <interfaces config="true" is-key="false" node="container" presence="false">
+      <interface config="true" key="id" node="list">
+        <id config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <type>
+            <type-name>leafref</type-name>
+          </type>
+        </id>
+        <config config="true" is-key="false" node="container" presence="false">
+          <id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-if:interface-id</type-name>
+            </type>
+          </id>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-if:interface-id</type-name>
+            </type>
+          </id>
+        </state>
+        <interface-ref config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </interface>
+            <subinterface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </subinterface>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </interface>
+            <subinterface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </subinterface>
+          </state>
+        </interface-ref>
+        <ingress-acl-sets config="true" is-key="false" node="container" presence="false">
+          <ingress-acl-set config="true" key="set-name type" node="list">
+            <set-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </set-name>
+            <type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </type>
+            <config config="true" is-key="false" node="container" presence="false">
+              <set-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>leafref</type-name>
+                </type>
+              </set-name>
+              <type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>leafref</type-name>
+                </type>
+              </type>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <set-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>leafref</type-name>
+                </type>
+              </set-name>
+              <type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>leafref</type-name>
+                </type>
+              </type>
+            </state>
+            <acl-entries config="true" is-key="false" node="container" presence="false">
+              <acl-entry config="true" key="sequence-id" node="list">
+                <sequence-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </sequence-id>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <sequence-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>leafref</type-name>
+                    </type>
+                  </sequence-id>
+                  <matched-packets config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-yang:counter64</type-name>
+                    </type>
+                  </matched-packets>
+                  <matched-octets config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-yang:counter64</type-name>
+                    </type>
+                  </matched-octets>
+                </state>
+              </acl-entry>
+            </acl-entries>
+          </ingress-acl-set>
+        </ingress-acl-sets>
+        <egress-acl-sets config="true" is-key="false" node="container" presence="false">
+          <egress-acl-set config="true" key="set-name type" node="list">
+            <set-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </set-name>
+            <type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </type>
+            <config config="true" is-key="false" node="container" presence="false">
+              <set-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>leafref</type-name>
+                </type>
+              </set-name>
+              <type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>leafref</type-name>
+                </type>
+              </type>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <set-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>leafref</type-name>
+                </type>
+              </set-name>
+              <type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>leafref</type-name>
+                </type>
+              </type>
+            </state>
+            <acl-entries config="true" is-key="false" node="container" presence="false">
+              <acl-entry config="true" key="sequence-id" node="list">
+                <sequence-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </sequence-id>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <sequence-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>leafref</type-name>
+                    </type>
+                  </sequence-id>
+                  <matched-packets config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-yang:counter64</type-name>
+                    </type>
+                  </matched-packets>
+                  <matched-octets config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-yang:counter64</type-name>
+                    </type>
+                  </matched-octets>
+                </state>
+              </acl-entry>
+            </acl-entries>
+          </egress-acl-set>
+        </egress-acl-sets>
+      </interface>
+    </interfaces>
+  </acl>
+</openconfig-acl>

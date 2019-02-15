@@ -1,0 +1,318 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-tunnel-nve-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-tunnel-nve-cfg" revision="2016-08-30">
+  <files>
+    <file revision="2016-08-30" submodule="false">Cisco-IOS-XR-tunnel-nve-cfg.yang</file>
+  </files>
+  <prefix>tunnel-nve-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-ifmgr-cfg</import>
+  <typedef name="Host-reach-protocol">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">bgp</enum>
+    </type>
+  </typedef>
+  <typedef name="Vni-range">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="1..16777215">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Vxlan-udp-port-enum">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="4789">ietf-udp-port</enum>
+      <enum value="48879">ivx-lan-udp-port</enum>
+    </type>
+  </typedef>
+  <typedef name="Overlay-encap-enum">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">vx-lan-encapsulation</enum>
+      <enum value="1">soft-gre-encapsulation</enum>
+    </type>
+  </typedef>
+  <typedef name="Unknown-unicast-flooding-enum">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">suppress-uuf</enum>
+    </type>
+  </typedef>
+  <typedef name="Load-balance-enum">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">per-evi</enum>
+    </type>
+  </typedef>
+  <typedef name="Ir-protocol-enum">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">bgp</enum>
+    </type>
+  </typedef>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <nve config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/</xr-path>
+      <xr-xml-map>nve_cfg:NVE</xr-xml-map>
+      <xr-task>interface</xr-task>
+      <anycast config="true" is-key="false" node="container" presence="false">
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/anycast`</xr-path>
+        <xr-xml-map>nve_cfg:Anycast</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-pack-format>%s%N</xr-pack-format>
+        <source-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%s%N</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/anycast`0</xr-path>
+          <xr-xml-map>nve_cfg:SourceInterface</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </source-interface>
+        <sync-group config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%s%N</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/anycast`1</xr-path>
+          <xr-xml-map>nve_cfg:SyncGroup</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-sch-type>IPV4Address</xr-sch-type>
+          <type>
+            <type-name>inet:ipv4-address-no-zone</type-name>
+          </type>
+        </sync-group>
+      </anycast>
+      <redundancy config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/red/</xr-path>
+        <xr-xml-map>nve_cfg:Redundancy</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <backbone-vx-lan config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/red/bb-vxlan/</xr-path>
+          <xr-xml-map>nve_cfg:BackboneVxLAN</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/red/bb-vxlan/a</xr-path>
+            <xr-xml-map>nve_cfg:Enable</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </enable>
+          <backbone-vx-laniccp config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/red/bb-vxlan/iccp-grp</xr-path>
+            <xr-xml-map>nve_cfg:BackboneVxLANICCP</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-sch-type>Integer</xr-sch-type>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </backbone-vx-laniccp>
+        </backbone-vx-lan>
+        <backbone-mpls config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/red/bb-mpls/</xr-path>
+          <xr-xml-map>nve_cfg:BackboneMPLS</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <backbone-mplsiccp config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/red/bb-mpls/iccp-grp</xr-path>
+            <xr-xml-map>nve_cfg:BackboneMPLSICCP</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-sch-type>Integer</xr-sch-type>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </backbone-mplsiccp>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/red/bb-mpls/a</xr-path>
+            <xr-xml-map>nve_cfg:Enable</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </enable>
+        </backbone-mpls>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/red/a</xr-path>
+          <xr-xml-map>nve_cfg:Enable</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </enable>
+      </redundancy>
+      <member-vnis config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/vni/</xr-path>
+        <xr-xml-map>nve_cfg:MemberVNI_Table</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <member-vni config="true" key="vni-start vni-end" node="list">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/vni/&lt;nve_cfg_MemberVNI_vnistart&gt;,&lt;nve_cfg_MemberVNI_vniend&gt;/</xr-path>
+          <xr-xml-map>nve_cfg:MemberVNI</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <multicast config="true" is-key="false" node="container" presence="true">
+            <xr-presence-packed/>
+            <xr-is-packed/>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/vni/&lt;nve_cfg_MemberVNI_vnistart&gt;,&lt;nve_cfg_MemberVNI_vniend&gt;/mcast`</xr-path>
+            <xr-xml-map>nve_cfg:Multicast</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-pack-format>%N%N</xr-pack-format>
+            <multicast-group-min config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%N%N</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/vni/&lt;nve_cfg_MemberVNI_vnistart&gt;,&lt;nve_cfg_MemberVNI_vniend&gt;/mcast`0</xr-path>
+              <xr-xml-map>nve_cfg:MulticastGroupMin</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-sch-type>IPV4Address</xr-sch-type>
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </multicast-group-min>
+            <multicast-group-max config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%N%N</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/vni/&lt;nve_cfg_MemberVNI_vnistart&gt;,&lt;nve_cfg_MemberVNI_vniend&gt;/mcast`1</xr-path>
+              <xr-xml-map>nve_cfg:MulticastGroupMax</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-sch-type>IPV4Address</xr-sch-type>
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </multicast-group-max>
+          </multicast>
+          <host-reachability config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/vni/&lt;nve_cfg_MemberVNI_vnistart&gt;,&lt;nve_cfg_MemberVNI_vniend&gt;/host-reach</xr-path>
+            <xr-xml-map>nve_cfg:HostReachability</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Host-reach-protocol</type-name>
+            </type>
+          </host-reachability>
+          <vrf config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/vni/&lt;nve_cfg_MemberVNI_vnistart&gt;,&lt;nve_cfg_MemberVNI_vniend&gt;/vrf</xr-path>
+            <xr-xml-map>nve_cfg:VRF</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </vrf>
+          <unknown-unicast-flooding config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/vni/&lt;nve_cfg_MemberVNI_vnistart&gt;,&lt;nve_cfg_MemberVNI_vniend&gt;/uuf-supr</xr-path>
+            <xr-xml-map>nve_cfg:UnknownUnicastFlooding</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Unknown-unicast-flooding-enum</type-name>
+            </type>
+          </unknown-unicast-flooding>
+          <load-balance-per-evi config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/vni/&lt;nve_cfg_MemberVNI_vnistart&gt;,&lt;nve_cfg_MemberVNI_vniend&gt;/lb-per-evi</xr-path>
+            <xr-xml-map>nve_cfg:LoadBalancePerEvi</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Load-balance-enum</type-name>
+            </type>
+          </load-balance-per-evi>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/vni/&lt;nve_cfg_MemberVNI_vnistart&gt;,&lt;nve_cfg_MemberVNI_vniend&gt;/a</xr-path>
+            <xr-xml-map>nve_cfg:Enable</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </enable>
+          <vni-start config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/vni/&lt;nve_cfg_MemberVNI_vnistart&gt;,&lt;nve_cfg_MemberVNI_vniend&gt;/</xr-path>
+            <xr-xml-map>nve_cfg:VNI_Start</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <xr-sch-arg-name>&lt;nve_cfg_MemberVNI_vnistart&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>Vni-range</type-name>
+            </type>
+          </vni-start>
+          <vni-end config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/vni/&lt;nve_cfg_MemberVNI_vnistart&gt;,&lt;nve_cfg_MemberVNI_vniend&gt;/</xr-path>
+            <xr-xml-map>nve_cfg:VNI_End</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <xr-sch-arg-name>&lt;nve_cfg_MemberVNI_vniend&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>Vni-range</type-name>
+            </type>
+          </vni-end>
+        </member-vni>
+      </member-vnis>
+      <vx-lan-udp-port config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/udp</xr-path>
+        <xr-xml-map>nve_cfg:VxLANUdpPort</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Vxlan-udp-port-enum</type-name>
+        </type>
+        <default>ietf-udp-port</default>
+      </vx-lan-udp-port>
+      <overlay-encapsulation config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/encap</xr-path>
+        <xr-xml-map>nve_cfg:OverlayEncapsulation</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Overlay-encap-enum</type-name>
+        </type>
+        <default>vx-lan-encapsulation</default>
+      </overlay-encapsulation>
+      <source-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/source</xr-path>
+        <xr-xml-map>nve_cfg:SourceInterface</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-sch-type>String</xr-sch-type>
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </source-interface>
+      <ingress-replication-protocol config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/nve/ir-protocol</xr-path>
+        <xr-xml-map>nve_cfg:IngressReplicationProtocol</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Ir-protocol-enum</type-name>
+        </type>
+      </ingress-replication-protocol>
+    </nve>
+  </augment>
+</Cisco-IOS-XR-tunnel-nve-cfg>

@@ -1,0 +1,1768 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-sysadmin-alarm-mgr ns="http://www.cisco.com/ns/yang/Cisco-IOS-XR-sysadmin-alarm-mgr" revision="2017-04-12">
+  <files>
+    <file revision="2017-04-12" submodule="false">Cisco-IOS-XR-sysadmin-alarm-mgr.yang</file>
+  </files>
+  <prefix>alarms</prefix>
+  <import prefix="tailf">tailf-common</import>
+  <import prefix="yang">ietf-yang-types</import>
+  <import prefix="calvados">Cisco-IOS-XR-sysadmin-types</import>
+  <import prefix="show_trace">Cisco-IOS-XR-sysadmin-show-trace</import>
+  <typedef name="severity_td">
+    <type node="enumeration">
+      <enum value="0">unknown</enum>
+      <enum value="1">not_reported</enum>
+      <enum value="2">not_alarmed</enum>
+      <enum value="3">minor</enum>
+      <enum value="4">major</enum>
+      <enum value="5">critical</enum>
+    </type>
+  </typedef>
+  <typedef name="status_td">
+    <type node="enumeration">
+      <enum value="0">unknown</enum>
+      <enum value="1">set</enum>
+      <enum value="2">clear</enum>
+      <enum value="3">suppress</enum>
+    </type>
+  </typedef>
+  <typedef name="group_td">
+    <type node="enumeration">
+      <enum value="0">unknown</enum>
+      <enum value="1">environ</enum>
+      <enum value="2">ethernet</enum>
+      <enum value="3">fabric</enum>
+      <enum value="4">power</enum>
+      <enum value="5">software</enum>
+      <enum value="7">slice</enum>
+      <enum value="8">cpu</enum>
+      <enum value="9">controller</enum>
+      <enum value="10">sonet</enum>
+      <enum value="11">otn</enum>
+      <enum value="12">sdh_controller</enum>
+      <enum value="13">asic</enum>
+      <enum value="14">fpd_infra</enum>
+      <enum value="15">shelf</enum>
+      <enum value="16">mpa</enum>
+      <enum value="17">ots</enum>
+      <enum value="18">timing</enum>
+      <enum value="19">last</enum>
+    </type>
+  </typedef>
+  <typedef name="agent_state_td">
+    <type node="enumeration">
+      <enum value="0">start</enum>
+      <enum value="1">init</enum>
+      <enum value="2">connecting</enum>
+      <enum value="3">connected</enum>
+      <enum value="4">registered</enum>
+      <enum value="5">disconnected</enum>
+    </type>
+  </typedef>
+  <typedef name="agent_type_td">
+    <type node="enumeration">
+      <enum value="0">unknown</enum>
+      <enum value="1">producer</enum>
+      <enum value="2">consumer</enum>
+      <enum value="3">subscriber</enum>
+    </type>
+  </typedef>
+  <typedef name="timestamp_td">
+    <type>
+      <type-name>yang:date-and-time</type-name>
+    </type>
+  </typedef>
+  <alarm_mgr config="true" is-key="false" node="container" presence="false">
+    <brief config="true" is-key="false" node="container" presence="false">
+      <card config="true" is-key="false" node="container" presence="false">
+        <location config="true" key="locations" node="list">
+          <xr-path/>
+          <locations config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>calvados:location-id</type-name>
+            </type>
+          </locations>
+          <active config="true" key="aid eid" node="list">
+            <xr-path/>
+            <max-elements>1024</max-elements>
+            <aid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </aid>
+            <tag config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </tag>
+            <module config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </module>
+            <gen_location config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </gen_location>
+            <eid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </eid>
+            <severity config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>severity_td</type-name>
+              </type>
+            </severity>
+            <group config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>group_td</type-name>
+              </type>
+            </group>
+            <description config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </description>
+            <set_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </set_time>
+          </active>
+          <history config="true" key="aid eid" node="list">
+            <xr-path/>
+            <max-elements>1024</max-elements>
+            <aid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </aid>
+            <tag config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </tag>
+            <module config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </module>
+            <gen_location config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </gen_location>
+            <eid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </eid>
+            <severity config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>severity_td</type-name>
+              </type>
+            </severity>
+            <group config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>group_td</type-name>
+              </type>
+            </group>
+            <description config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </description>
+            <set_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </set_time>
+            <clear_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </clear_time>
+          </history>
+          <suppressed config="true" key="aid eid" node="list">
+            <xr-path/>
+            <max-elements>1024</max-elements>
+            <aid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </aid>
+            <tag config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </tag>
+            <module config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </module>
+            <gen_location config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </gen_location>
+            <eid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </eid>
+            <severity config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>severity_td</type-name>
+              </type>
+            </severity>
+            <group config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>group_td</type-name>
+              </type>
+            </group>
+            <description config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </description>
+            <set_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </set_time>
+            <suppressed_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </suppressed_time>
+          </suppressed>
+        </location>
+      </card>
+      <rack config="true" is-key="false" node="container" presence="false">
+        <rack_locations config="true" key="rackid" node="list">
+          <xr-path/>
+          <rackid config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </rackid>
+          <active config="true" key="aid eid" node="list">
+            <xr-path/>
+            <max-elements>1024</max-elements>
+            <aid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </aid>
+            <tag config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </tag>
+            <module config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </module>
+            <gen_location config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </gen_location>
+            <eid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </eid>
+            <severity config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>severity_td</type-name>
+              </type>
+            </severity>
+            <group config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>group_td</type-name>
+              </type>
+            </group>
+            <description config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </description>
+            <set_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </set_time>
+          </active>
+          <history config="true" key="aid eid" node="list">
+            <xr-path/>
+            <max-elements>1024</max-elements>
+            <aid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </aid>
+            <tag config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </tag>
+            <module config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </module>
+            <gen_location config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </gen_location>
+            <eid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </eid>
+            <severity config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>severity_td</type-name>
+              </type>
+            </severity>
+            <group config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>group_td</type-name>
+              </type>
+            </group>
+            <description config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </description>
+            <set_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </set_time>
+            <clear_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </clear_time>
+          </history>
+          <suppressed config="true" key="aid eid" node="list">
+            <xr-path/>
+            <max-elements>1024</max-elements>
+            <aid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </aid>
+            <tag config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </tag>
+            <module config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </module>
+            <gen_location config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </gen_location>
+            <eid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </eid>
+            <severity config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>severity_td</type-name>
+              </type>
+            </severity>
+            <group config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>group_td</type-name>
+              </type>
+            </group>
+            <description config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </description>
+            <set_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </set_time>
+            <suppressed_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </suppressed_time>
+          </suppressed>
+        </rack_locations>
+      </rack>
+      <system config="true" is-key="false" node="container" presence="false">
+        <active config="true" key="aid eid" node="list">
+          <xr-path/>
+          <max-elements>1024</max-elements>
+          <aid config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </aid>
+          <tag config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </tag>
+          <module config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </module>
+          <gen_location config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </gen_location>
+          <eid config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </eid>
+          <severity config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>severity_td</type-name>
+            </type>
+          </severity>
+          <group config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>group_td</type-name>
+            </type>
+          </group>
+          <description config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </description>
+          <set_time config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </set_time>
+        </active>
+        <history config="true" key="aid eid" node="list">
+          <xr-path/>
+          <max-elements>1024</max-elements>
+          <aid config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </aid>
+          <tag config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </tag>
+          <module config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </module>
+          <gen_location config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </gen_location>
+          <eid config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </eid>
+          <severity config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>severity_td</type-name>
+            </type>
+          </severity>
+          <group config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>group_td</type-name>
+            </type>
+          </group>
+          <description config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </description>
+          <set_time config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </set_time>
+          <clear_time config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </clear_time>
+        </history>
+        <suppressed config="true" key="aid eid" node="list">
+          <xr-path/>
+          <max-elements>1024</max-elements>
+          <aid config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </aid>
+          <tag config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </tag>
+          <module config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </module>
+          <gen_location config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </gen_location>
+          <eid config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </eid>
+          <severity config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>severity_td</type-name>
+            </type>
+          </severity>
+          <group config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>group_td</type-name>
+            </type>
+          </group>
+          <description config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </description>
+          <set_time config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </set_time>
+          <suppressed_time config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </suppressed_time>
+        </suppressed>
+      </system>
+    </brief>
+    <detail config="true" is-key="false" node="container" presence="false">
+      <card config="true" is-key="false" node="container" presence="false">
+        <location config="true" key="locations" node="list">
+          <xr-path/>
+          <locations config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>calvados:location-id</type-name>
+            </type>
+          </locations>
+          <active config="true" key="aid eid" node="list">
+            <xr-path/>
+            <max-elements>1024</max-elements>
+            <aid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </aid>
+            <tag config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </tag>
+            <module config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </module>
+            <gen_location config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </gen_location>
+            <eid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </eid>
+            <severity config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>severity_td</type-name>
+              </type>
+            </severity>
+            <group config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>group_td</type-name>
+              </type>
+            </group>
+            <description config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </description>
+            <set_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </set_time>
+            <state config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>status_td</type-name>
+              </type>
+            </state>
+            <reporting_agent_id config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </reporting_agent_id>
+            <resynced config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </resynced>
+            <detail_desc config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </detail_desc>
+            <clear_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </clear_time>
+          </active>
+          <history config="true" key="aid eid" node="list">
+            <xr-path/>
+            <max-elements>1024</max-elements>
+            <aid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </aid>
+            <tag config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </tag>
+            <module config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </module>
+            <gen_location config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </gen_location>
+            <eid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </eid>
+            <severity config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>severity_td</type-name>
+              </type>
+            </severity>
+            <group config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>group_td</type-name>
+              </type>
+            </group>
+            <description config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </description>
+            <set_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </set_time>
+            <state config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>status_td</type-name>
+              </type>
+            </state>
+            <reporting_agent_id config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </reporting_agent_id>
+            <resynced config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </resynced>
+            <detail_desc config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </detail_desc>
+            <clear_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </clear_time>
+          </history>
+          <stats config="true" key="attime" node="list">
+            <xr-path/>
+            <max-elements>1024</max-elements>
+            <attime config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </attime>
+            <reported config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </reported>
+            <dropped config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </dropped>
+            <bi_set config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </bi_set>
+            <bi_clear config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </bi_clear>
+            <suppressed config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </suppressed>
+            <drop_inv_aid config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </drop_inv_aid>
+            <drop_no_mem config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </drop_no_mem>
+            <drop_db_error config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </drop_db_error>
+            <drop_clear_no_set config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </drop_clear_no_set>
+            <drop_dup config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </drop_dup>
+            <cache_hit config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </cache_hit>
+            <cache_miss config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </cache_miss>
+          </stats>
+          <clients config="true" key="agent_handle" node="list">
+            <xr-path/>
+            <max-elements>1024</max-elements>
+            <agent_name config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </agent_name>
+            <agent_id config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </agent_id>
+            <agent_location config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </agent_location>
+            <agent_handle config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </agent_handle>
+            <agent_state config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>agent_state_td</type-name>
+              </type>
+            </agent_state>
+            <agent_type config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>agent_type_td</type-name>
+              </type>
+            </agent_type>
+            <agent_filter_disp config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </agent_filter_disp>
+            <agent_subs_id config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </agent_subs_id>
+            <agent_filter_state config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>status_td</type-name>
+              </type>
+            </agent_filter_state>
+            <agent_filter_severity config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>severity_td</type-name>
+              </type>
+            </agent_filter_severity>
+            <agent_filter_group config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>group_td</type-name>
+              </type>
+            </agent_filter_group>
+            <agent_sdr_id config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </agent_sdr_id>
+            <agent_connect_count config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </agent_connect_count>
+            <agent_connect_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </agent_connect_time>
+            <agent_get_count config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </agent_get_count>
+            <agent_subscribe_count config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </agent_subscribe_count>
+            <agent_report_count config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </agent_report_count>
+          </clients>
+          <suppressed config="true" key="aid eid" node="list">
+            <xr-path/>
+            <max-elements>1024</max-elements>
+            <aid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </aid>
+            <tag config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </tag>
+            <module config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </module>
+            <gen_location config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </gen_location>
+            <eid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </eid>
+            <severity config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>severity_td</type-name>
+              </type>
+            </severity>
+            <group config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>group_td</type-name>
+              </type>
+            </group>
+            <description config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </description>
+            <set_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </set_time>
+            <state config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>status_td</type-name>
+              </type>
+            </state>
+            <reporting_agent_id config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </reporting_agent_id>
+            <resynced config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </resynced>
+            <detail_desc config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </detail_desc>
+            <suppressed_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </suppressed_time>
+          </suppressed>
+        </location>
+      </card>
+      <rack config="true" is-key="false" node="container" presence="false">
+        <rack_locations config="true" key="rackid" node="list">
+          <xr-path/>
+          <rackid config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </rackid>
+          <active config="true" key="aid eid" node="list">
+            <xr-path/>
+            <max-elements>1024</max-elements>
+            <aid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </aid>
+            <tag config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </tag>
+            <module config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </module>
+            <gen_location config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </gen_location>
+            <eid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </eid>
+            <severity config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>severity_td</type-name>
+              </type>
+            </severity>
+            <group config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>group_td</type-name>
+              </type>
+            </group>
+            <description config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </description>
+            <set_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </set_time>
+            <state config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>status_td</type-name>
+              </type>
+            </state>
+            <reporting_agent_id config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </reporting_agent_id>
+            <resynced config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </resynced>
+            <detail_desc config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </detail_desc>
+            <clear_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </clear_time>
+          </active>
+          <history config="true" key="aid eid" node="list">
+            <xr-path/>
+            <max-elements>1024</max-elements>
+            <aid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </aid>
+            <tag config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </tag>
+            <module config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </module>
+            <gen_location config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </gen_location>
+            <eid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </eid>
+            <severity config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>severity_td</type-name>
+              </type>
+            </severity>
+            <group config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>group_td</type-name>
+              </type>
+            </group>
+            <description config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </description>
+            <set_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </set_time>
+            <state config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>status_td</type-name>
+              </type>
+            </state>
+            <reporting_agent_id config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </reporting_agent_id>
+            <resynced config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </resynced>
+            <detail_desc config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </detail_desc>
+            <clear_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </clear_time>
+          </history>
+          <stats config="true" key="attime" node="list">
+            <xr-path/>
+            <max-elements>1024</max-elements>
+            <attime config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </attime>
+            <reported config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </reported>
+            <dropped config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </dropped>
+            <bi_set config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </bi_set>
+            <bi_clear config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </bi_clear>
+            <suppressed config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </suppressed>
+            <drop_inv_aid config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </drop_inv_aid>
+            <drop_no_mem config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </drop_no_mem>
+            <drop_db_error config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </drop_db_error>
+            <drop_clear_no_set config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </drop_clear_no_set>
+            <drop_dup config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </drop_dup>
+            <cache_hit config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </cache_hit>
+            <cache_miss config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </cache_miss>
+          </stats>
+          <clients config="true" key="agent_handle" node="list">
+            <xr-path/>
+            <max-elements>1024</max-elements>
+            <agent_name config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </agent_name>
+            <agent_id config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </agent_id>
+            <agent_location config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </agent_location>
+            <agent_handle config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </agent_handle>
+            <agent_state config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>agent_state_td</type-name>
+              </type>
+            </agent_state>
+            <agent_type config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>agent_type_td</type-name>
+              </type>
+            </agent_type>
+            <agent_filter_disp config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </agent_filter_disp>
+            <agent_subs_id config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </agent_subs_id>
+            <agent_filter_state config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>status_td</type-name>
+              </type>
+            </agent_filter_state>
+            <agent_filter_severity config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>severity_td</type-name>
+              </type>
+            </agent_filter_severity>
+            <agent_filter_group config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>group_td</type-name>
+              </type>
+            </agent_filter_group>
+            <agent_sdr_id config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </agent_sdr_id>
+            <agent_connect_count config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </agent_connect_count>
+            <agent_connect_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </agent_connect_time>
+            <agent_get_count config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </agent_get_count>
+            <agent_subscribe_count config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </agent_subscribe_count>
+            <agent_report_count config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </agent_report_count>
+          </clients>
+          <suppressed config="true" key="aid eid" node="list">
+            <xr-path/>
+            <max-elements>1024</max-elements>
+            <aid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </aid>
+            <tag config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </tag>
+            <module config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </module>
+            <gen_location config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </gen_location>
+            <eid config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </eid>
+            <severity config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>severity_td</type-name>
+              </type>
+            </severity>
+            <group config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>group_td</type-name>
+              </type>
+            </group>
+            <description config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </description>
+            <set_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </set_time>
+            <state config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>status_td</type-name>
+              </type>
+            </state>
+            <reporting_agent_id config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </reporting_agent_id>
+            <resynced config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </resynced>
+            <detail_desc config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </detail_desc>
+            <suppressed_time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </suppressed_time>
+          </suppressed>
+        </rack_locations>
+      </rack>
+      <system config="true" is-key="false" node="container" presence="false">
+        <active config="true" key="aid eid" node="list">
+          <xr-path/>
+          <max-elements>1024</max-elements>
+          <aid config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </aid>
+          <tag config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </tag>
+          <module config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </module>
+          <gen_location config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </gen_location>
+          <eid config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </eid>
+          <severity config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>severity_td</type-name>
+            </type>
+          </severity>
+          <group config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>group_td</type-name>
+            </type>
+          </group>
+          <description config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </description>
+          <set_time config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </set_time>
+          <state config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>status_td</type-name>
+            </type>
+          </state>
+          <reporting_agent_id config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </reporting_agent_id>
+          <resynced config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </resynced>
+          <detail_desc config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </detail_desc>
+          <clear_time config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </clear_time>
+        </active>
+        <history config="true" key="aid eid" node="list">
+          <xr-path/>
+          <max-elements>1024</max-elements>
+          <aid config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </aid>
+          <tag config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </tag>
+          <module config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </module>
+          <gen_location config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </gen_location>
+          <eid config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </eid>
+          <severity config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>severity_td</type-name>
+            </type>
+          </severity>
+          <group config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>group_td</type-name>
+            </type>
+          </group>
+          <description config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </description>
+          <set_time config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </set_time>
+          <state config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>status_td</type-name>
+            </type>
+          </state>
+          <reporting_agent_id config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </reporting_agent_id>
+          <resynced config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </resynced>
+          <detail_desc config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </detail_desc>
+          <clear_time config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </clear_time>
+        </history>
+        <stats config="true" key="attime" node="list">
+          <xr-path/>
+          <max-elements>1024</max-elements>
+          <attime config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </attime>
+          <reported config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </reported>
+          <dropped config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </dropped>
+          <bi_set config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </bi_set>
+          <bi_clear config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </bi_clear>
+          <suppressed config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </suppressed>
+          <drop_inv_aid config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </drop_inv_aid>
+          <drop_no_mem config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </drop_no_mem>
+          <drop_db_error config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </drop_db_error>
+          <drop_clear_no_set config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </drop_clear_no_set>
+          <drop_dup config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </drop_dup>
+          <cache_hit config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </cache_hit>
+          <cache_miss config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </cache_miss>
+        </stats>
+        <clients config="true" key="agent_handle" node="list">
+          <xr-path/>
+          <max-elements>1024</max-elements>
+          <agent_name config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </agent_name>
+          <agent_id config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </agent_id>
+          <agent_location config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </agent_location>
+          <agent_handle config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </agent_handle>
+          <agent_state config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>agent_state_td</type-name>
+            </type>
+          </agent_state>
+          <agent_type config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>agent_type_td</type-name>
+            </type>
+          </agent_type>
+          <agent_filter_disp config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </agent_filter_disp>
+          <agent_subs_id config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </agent_subs_id>
+          <agent_filter_state config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>status_td</type-name>
+            </type>
+          </agent_filter_state>
+          <agent_filter_severity config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>severity_td</type-name>
+            </type>
+          </agent_filter_severity>
+          <agent_filter_group config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>group_td</type-name>
+            </type>
+          </agent_filter_group>
+          <agent_sdr_id config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </agent_sdr_id>
+          <agent_connect_count config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </agent_connect_count>
+          <agent_connect_time config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </agent_connect_time>
+          <agent_get_count config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </agent_get_count>
+          <agent_subscribe_count config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </agent_subscribe_count>
+          <agent_report_count config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </agent_report_count>
+        </clients>
+        <suppressed config="true" key="aid eid" node="list">
+          <xr-path/>
+          <max-elements>1024</max-elements>
+          <aid config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </aid>
+          <tag config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </tag>
+          <module config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </module>
+          <gen_location config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </gen_location>
+          <eid config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </eid>
+          <severity config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>severity_td</type-name>
+            </type>
+          </severity>
+          <group config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>group_td</type-name>
+            </type>
+          </group>
+          <description config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </description>
+          <set_time config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </set_time>
+          <state config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>status_td</type-name>
+            </type>
+          </state>
+          <reporting_agent_id config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </reporting_agent_id>
+          <resynced config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </resynced>
+          <detail_desc config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </detail_desc>
+          <suppressed_time config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </suppressed_time>
+        </suppressed>
+      </system>
+    </detail>
+    <trace config="true" key="buffer" node="list">
+      <xr-path/>
+      <buffer config="true" is-key="true" node="leaf">
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </buffer>
+      <location config="true" key="location_name" node="list">
+        <xr-path/>
+        <location_name config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </location_name>
+        <all-options config="true" key="option" node="list">
+          <xr-path/>
+          <option config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </option>
+          <trace-blocks config="true" node="list">
+            <xr-path/>
+            <data config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </data>
+          </trace-blocks>
+        </all-options>
+      </location>
+    </trace>
+  </alarm_mgr>
+</Cisco-IOS-XR-sysadmin-alarm-mgr>

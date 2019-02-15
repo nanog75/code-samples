@@ -1,0 +1,884 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-bundlemgr-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-bundlemgr-cfg" revision="2017-05-01">
+  <files>
+    <file revision="2017-05-01" submodule="false">Cisco-IOS-XR-bundlemgr-cfg.yang</file>
+  </files>
+  <prefix>bundlemgr-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="yang">ietf-yang-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-ifmgr-cfg</import>
+  <import prefix="a2">Cisco-IOS-XR-rgmgr-cfg</import>
+  <typedef name="Bfd-mode">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">no-cfg</enum>
+      <enum value="1">cisco</enum>
+      <enum value="2">ietf</enum>
+    </type>
+  </typedef>
+  <typedef name="Churn-logging">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">actor</enum>
+      <enum value="2">partner</enum>
+      <enum value="3">both</enum>
+    </type>
+  </typedef>
+  <typedef name="Bundle-mode">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">on</enum>
+      <enum value="1">active</enum>
+      <enum value="2">passive</enum>
+    </type>
+  </typedef>
+  <typedef name="Bundle-minimum-bandwidth-range">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">kbps</enum>
+      <enum value="2">mbps</enum>
+      <enum value="3">gbps</enum>
+    </type>
+  </typedef>
+  <typedef name="Period-short-enum">
+    <xr-sch-type>RangeEnum</xr-sch-type>
+    <type node="union">
+      <type node="enumeration">
+        <enum value="1">true</enum>
+      </type>
+      <type range="1..1000">
+        <type-name>uint32</type-name>
+      </type>
+    </type>
+  </typedef>
+  <typedef name="Bundle-cisco-ext-types">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">lon-signaling-off</enum>
+      <enum value="1">lon-signaling-on</enum>
+    </type>
+  </typedef>
+  <typedef name="Bundle-cisco-ext">
+    <xr-sch-type>Configured</xr-sch-type>
+    <type>
+      <type-name>empty</type-name>
+    </type>
+  </typedef>
+  <typedef name="Bundle-maximum-active-links-mode">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">default</enum>
+      <enum value="1">hot-standby</enum>
+    </type>
+  </typedef>
+  <typedef name="Mlacp-switchover">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">brute-force</enum>
+      <enum value="2">revertive</enum>
+    </type>
+  </typedef>
+  <typedef name="Bundle-load-balance">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">default</enum>
+      <enum value="1">efp-auto</enum>
+      <enum value="2">efp-value</enum>
+      <enum value="3">source-ip</enum>
+      <enum value="4">destination-ip</enum>
+    </type>
+  </typedef>
+  <typedef name="Bundle-port-activity">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">on</enum>
+      <enum value="2">active</enum>
+      <enum value="3">passive</enum>
+      <enum value="4">inherit</enum>
+    </type>
+  </typedef>
+  <typedef name="Mlacp-maximize-parameter">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">links</enum>
+      <enum value="2">bandwidth</enum>
+    </type>
+  </typedef>
+  <typedef name="Bundle-period">
+    <xr-sch-type>RangeEnum</xr-sch-type>
+    <type node="union">
+      <type node="enumeration">
+        <enum value="1">true</enum>
+      </type>
+      <type range="1..1000">
+        <type-name>uint32</type-name>
+      </type>
+    </type>
+  </typedef>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <bfd config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bfd/</xr-path>
+      <xr-xml-map>bundlemgr_bfd_cfg:BFD</xr-xml-map>
+      <xr-task>bundle</xr-task>
+      <address-family config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bfd/address-family/</xr-path>
+        <xr-xml-map>bundlemgr_bfd_cfg:AddressFamily</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <ipv6 config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bfd/address-family/ipv6/</xr-path>
+          <xr-xml-map>bundlemgr_bfd_cfg:IPv6</xr-xml-map>
+          <xr-task>bundle</xr-task>
+          <ipv6-timers config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bfd/address-family/ipv6/timers/</xr-path>
+            <xr-xml-map>bundlemgr_bfd_cfg:IPv6Timers</xr-xml-map>
+            <xr-task>bundle</xr-task>
+            <ipv6-nbor-unconfig-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bfd/address-family/ipv6/timers/nbr-unconfig</xr-path>
+              <xr-xml-map>bundlemgr_bfd_cfg:IPv6NborUnconfigTimer</xr-xml-map>
+              <xr-task>bundle</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="60..3600">
+                <type-name>uint32</type-name>
+              </type>
+            </ipv6-nbor-unconfig-timer>
+            <ipv6-start-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bfd/address-family/ipv6/timers/start</xr-path>
+              <xr-xml-map>bundlemgr_bfd_cfg:IPv6StartTimer</xr-xml-map>
+              <xr-task>bundle</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="60..3600">
+                <type-name>uint32</type-name>
+              </type>
+            </ipv6-start-timer>
+          </ipv6-timers>
+          <ipv6-destination-address config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bfd/address-family/ipv6/destination</xr-path>
+            <xr-xml-map>bundlemgr_bfd_cfg:IPv6DestinationAddress</xr-xml-map>
+            <xr-task>bundle</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </ipv6-destination-address>
+          <ipv6-detection-multiplier config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bfd/address-family/ipv6/multiplier</xr-path>
+            <xr-xml-map>bundlemgr_bfd_cfg:IPv6DetectionMultiplier</xr-xml-map>
+            <xr-task>bundle</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="2..50">
+              <type-name>uint32</type-name>
+            </type>
+          </ipv6-detection-multiplier>
+          <ipv6-fast-detect config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bfd/address-family/ipv6/fast-detect</xr-path>
+            <xr-xml-map>bundlemgr_bfd_cfg:IPv6FastDetect</xr-xml-map>
+            <xr-task>bundle</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </ipv6-fast-detect>
+          <ipv6-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bfd/address-family/ipv6/min-interval</xr-path>
+            <xr-xml-map>bundlemgr_bfd_cfg:IPv6Interval</xr-xml-map>
+            <xr-task>bundle</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="3..30000">
+              <type-name>uint32</type-name>
+            </type>
+          </ipv6-interval>
+        </ipv6>
+        <ipv4 config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bfd/address-family/ipv4/</xr-path>
+          <xr-xml-map>bundlemgr_bfd_cfg:IPv4</xr-xml-map>
+          <xr-task>bundle</xr-task>
+          <echo config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bfd/address-family/ipv4/echo/</xr-path>
+            <xr-xml-map>bundlemgr_bfd_cfg:Echo</xr-xml-map>
+            <xr-task>bundle</xr-task>
+            <min-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bfd/address-family/ipv4/echo/min-interval</xr-path>
+              <xr-xml-map>bundlemgr_bfd_cfg:MinInterval</xr-xml-map>
+              <xr-task>bundle</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="15..2000">
+                <type-name>uint32</type-name>
+              </type>
+            </min-interval>
+          </echo>
+          <timers config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bfd/address-family/ipv4/timers/</xr-path>
+            <xr-xml-map>bundlemgr_bfd_cfg:Timers</xr-xml-map>
+            <xr-task>bundle</xr-task>
+            <nbor-unconfig-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bfd/address-family/ipv4/timers/nbr-unconfig</xr-path>
+              <xr-xml-map>bundlemgr_bfd_cfg:NborUnconfigTimer</xr-xml-map>
+              <xr-task>bundle</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="60..3600">
+                <type-name>uint32</type-name>
+              </type>
+            </nbor-unconfig-timer>
+            <start-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bfd/address-family/ipv4/timers/start</xr-path>
+              <xr-xml-map>bundlemgr_bfd_cfg:StartTimer</xr-xml-map>
+              <xr-task>bundle</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="60..3600">
+                <type-name>uint32</type-name>
+              </type>
+            </start-timer>
+          </timers>
+          <interval config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bfd/address-family/ipv4/min-interval</xr-path>
+            <xr-xml-map>bundlemgr_bfd_cfg:Interval</xr-xml-map>
+            <xr-task>bundle</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="3..30000">
+              <type-name>uint32</type-name>
+            </type>
+          </interval>
+          <detection-multiplier config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bfd/address-family/ipv4/multiplier</xr-path>
+            <xr-xml-map>bundlemgr_bfd_cfg:DetectionMultiplier</xr-xml-map>
+            <xr-task>bundle</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="2..50">
+              <type-name>uint32</type-name>
+            </type>
+          </detection-multiplier>
+          <destination-address config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>inaddr</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bfd/address-family/ipv4/destination</xr-path>
+            <xr-xml-map>bundlemgr_bfd_cfg:DestinationAddress</xr-xml-map>
+            <xr-task>bundle</xr-task>
+            <xr-sch-type>IPV4Address</xr-sch-type>
+            <type>
+              <type-name>inet:ipv4-address-no-zone</type-name>
+            </type>
+          </destination-address>
+          <fast-detect config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bfd/address-family/ipv4/fast-detect</xr-path>
+            <xr-xml-map>bundlemgr_bfd_cfg:FastDetect</xr-xml-map>
+            <xr-task>bundle</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </fast-detect>
+        </ipv4>
+      </address-family>
+      <mode config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bfd/mode</xr-path>
+        <xr-xml-map>bundlemgr_bfd_cfg:Mode</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Bfd-mode</type-name>
+        </type>
+        <default>no-cfg</default>
+      </mode>
+    </bfd>
+  </augment>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <bundle config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bundle/</xr-path>
+      <xr-xml-map>bundlemgr_interface_cfg:Bundle</xr-xml-map>
+      <xr-task>bundle</xr-task>
+      <bundle-load-balancing config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bundle/load-balancing/</xr-path>
+        <xr-xml-map>bundlemgr_interface_cfg:BundleLoadBalancing</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-scope>exported</xr-scope>
+        <hash-function config="true" is-key="false" node="container" presence="true">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-is-packed/>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bundle/load-balancing/hash`</xr-path>
+          <xr-xml-map>bundlemgr_interface_cfg:HashFunction</xr-xml-map>
+          <xr-task>bundle</xr-task>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <hash-type config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bundle/load-balancing/hash`0</xr-path>
+            <xr-xml-map>bundlemgr_interface_cfg:HashType</xr-xml-map>
+            <xr-task>bundle</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Bundle-load-balance</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </hash-type>
+          <hash-value config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bundle/load-balancing/hash`1</xr-path>
+            <xr-xml-map>bundlemgr_interface_cfg:HashValue</xr-xml-map>
+            <xr-task>bundle</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1..64">
+              <type-name>uint32</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </hash-value>
+        </hash-function>
+        <localize-links config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bundle/load-balancing/locality-threshold</xr-path>
+          <xr-xml-map>bundlemgr_interface_lb_locality_cfg:LocalizeLinks</xr-xml-map>
+          <xr-task>bundle</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..64">
+            <type-name>uint32</type-name>
+          </type>
+        </localize-links>
+      </bundle-load-balancing>
+      <minimum-active config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bundle/minimum_active/</xr-path>
+        <xr-xml-map>bundlemgr_interface_cfg:MinimumActive</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <bandwidth config="true" is-key="false" node="container" presence="true">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-is-packed/>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bundle/minimum_active/bandwidth`</xr-path>
+          <xr-xml-map>bundlemgr_interface_cfg:Bandwidth</xr-xml-map>
+          <xr-task>bundle</xr-task>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <min-bandwidth-range config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bundle/minimum_active/bandwidth`0</xr-path>
+            <xr-xml-map>bundlemgr_interface_cfg:MinBandwidthRange</xr-xml-map>
+            <xr-task>bundle</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Bundle-minimum-bandwidth-range</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </min-bandwidth-range>
+          <bandwidth config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bundle/minimum_active/bandwidth`1</xr-path>
+            <xr-xml-map>bundlemgr_interface_cfg:Bandwidth</xr-xml-map>
+            <xr-task>bundle</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1..4294967295">
+              <type-name>uint32</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </bandwidth>
+        </bandwidth>
+        <links config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bundle/minimum_active/links</xr-path>
+          <xr-xml-map>bundlemgr_interface_cfg:Links</xr-xml-map>
+          <xr-task>bundle</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..64">
+            <type-name>uint32</type-name>
+          </type>
+          <default>1</default>
+        </links>
+      </minimum-active>
+      <maximum-active config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bundle/maximum_active/</xr-path>
+        <xr-xml-map>bundlemgr_interface_cfg:MaximumActive</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <links config="true" is-key="false" node="container" presence="true">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-is-packed/>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bundle/maximum_active/links`</xr-path>
+          <xr-xml-map>bundlemgr_interface_cfg:Links</xr-xml-map>
+          <xr-task>bundle</xr-task>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <links config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bundle/maximum_active/links`0</xr-path>
+            <xr-xml-map>bundlemgr_interface_cfg:Links</xr-xml-map>
+            <xr-task>bundle</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1..64">
+              <type-name>uint32</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </links>
+          <max-active-links-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bundle/maximum_active/links`1</xr-path>
+            <xr-xml-map>bundlemgr_interface_cfg:MaxActiveLinksMode</xr-xml-map>
+            <xr-task>bundle</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Bundle-maximum-active-links-mode</type-name>
+            </type>
+          </max-active-links-mode>
+        </links>
+      </maximum-active>
+      <lacp-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bundle/lacp_delay</xr-path>
+        <xr-xml-map>bundlemgr_interface_cfg:LacpDelay</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1000..15000">
+          <type-name>uint32</type-name>
+        </type>
+      </lacp-delay>
+      <lacp-fallback config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bundle/lacp-fallback</xr-path>
+        <xr-xml-map>bundlemgr_interface_cfg:LacpFallback</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..120">
+          <type-name>uint32</type-name>
+        </type>
+        <default>5</default>
+      </lacp-fallback>
+      <shutdown config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bundle/shutdown</xr-path>
+        <xr-xml-map>bundlemgr_interface_cfg:Shutdown</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </shutdown>
+      <wait-while config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bundle/wait_while</xr-path>
+        <xr-xml-map>bundlemgr_interface_cfg:WaitWhile</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..2000">
+          <type-name>uint32</type-name>
+        </type>
+        <default>2000</default>
+      </wait-while>
+    </bundle>
+  </augment>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <lacp config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/lacp/</xr-path>
+      <xr-xml-map>bundlemgr_distrib_lacp_cfg:LACP</xr-xml-map>
+      <xr-task>bundle</xr-task>
+      <xr-scope>exported</xr-scope>
+      <cisco-extensions config="true" is-key="false" node="container" presence="true">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/lacp/cisco_extensions`</xr-path>
+        <xr-xml-map>bundlemgr_distrib_bdl_lacp_cfg:CiscoExtensions</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <cisco-ext config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/lacp/cisco_extensions`0</xr-path>
+          <xr-xml-map>bundlemgr_distrib_bdl_lacp_cfg:CiscoExt</xr-xml-map>
+          <xr-task>bundle</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>Bundle-cisco-ext</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </cisco-ext>
+        <cisco-ext-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/lacp/cisco_extensions`1</xr-path>
+          <xr-xml-map>bundlemgr_distrib_bdl_lacp_cfg:CiscoExtType</xr-xml-map>
+          <xr-task>bundle</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Bundle-cisco-ext-types</type-name>
+          </type>
+        </cisco-ext-type>
+      </cisco-extensions>
+      <timeout config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/lacp/timeout/</xr-path>
+        <xr-xml-map>bundlemgr_distrib_bdl_lacp_cfg:Timeout</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <rx-default config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/lacp/timeout/rx_default</xr-path>
+          <xr-xml-map>bundlemgr_distrib_bdl_lacp_cfg:RxDefault</xr-xml-map>
+          <xr-task>bundle</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="0..3000">
+            <type-name>uint32</type-name>
+          </type>
+        </rx-default>
+        <actor-churn config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/lacp/timeout/actor_churn</xr-path>
+          <xr-xml-map>bundlemgr_distrib_bdl_lacp_cfg:ActorChurn</xr-xml-map>
+          <xr-task>bundle</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="0..120">
+            <type-name>uint32</type-name>
+          </type>
+        </actor-churn>
+        <partner-churn config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/lacp/timeout/partner_churn</xr-path>
+          <xr-xml-map>bundlemgr_distrib_bdl_lacp_cfg:PartnerChurn</xr-xml-map>
+          <xr-task>bundle</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="0..120">
+            <type-name>uint32</type-name>
+          </type>
+        </partner-churn>
+      </timeout>
+      <system-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/lacp/sys_pri</xr-path>
+        <xr-xml-map>bundlemgr_distrib_bdl_lacp_cfg:SystemPriority</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..65535">
+          <type-name>uint32</type-name>
+        </type>
+      </system-priority>
+      <period config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/lacp/peirod</xr-path>
+        <xr-xml-map>bundlemgr_distrib_bdl_lacp_cfg:Period</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-sch-type>RangeEnum</xr-sch-type>
+        <type>
+          <type-name>Bundle-period</type-name>
+        </type>
+      </period>
+      <collector-max-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/lacp/coll-max-delay</xr-path>
+        <xr-xml-map>bundlemgr_distrib_bdl_lacp_cfg:CollectorMaxDelay</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..65535">
+          <type-name>uint32</type-name>
+        </type>
+      </collector-max-delay>
+      <lacp-nonrevertive config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/lacp/lacp_nonrev</xr-path>
+        <xr-xml-map>bundlemgr_distrib_bdl_lacp_cfg:LACP-nonrevertive</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </lacp-nonrevertive>
+      <mode config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/lacp/mode</xr-path>
+        <xr-xml-map>bundlemgr_distrib_bdl_lacp_cfg:Mode</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Bundle-mode</type-name>
+        </type>
+      </mode>
+      <fast-switchover config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/lacp/nullop/fast-switchover</xr-path>
+        <xr-xml-map>bundlemgr_distrib_bdl_lacp_cfg:Fast-switchover</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </fast-switchover>
+      <suppress-flaps config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/lacp/switchover/suppress_flaps</xr-path>
+        <xr-xml-map>bundlemgr_distrib_bdl_lacp_cfg:SuppressFlaps</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="100..65535">
+          <type-name>uint32</type-name>
+        </type>
+      </suppress-flaps>
+      <system-mac config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-elem-size>3</xr-pack-elem-size>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/lacp/sys_mac`0</xr-path>
+        <xr-xml-map>bundlemgr_distrib_bdl_lacp_cfg:SystemMAC</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-pack-format>%d%d%d</xr-pack-format>
+        <xr-sch-type>MACAddress</xr-sch-type>
+        <type>
+          <type-name>yang:mac-address</type-name>
+        </type>
+      </system-mac>
+      <period-short config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/lacp/period</xr-path>
+        <xr-xml-map>bundlemgr_mbr_interface_cfg:PeriodShort</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-sch-type>RangeEnum</xr-sch-type>
+        <type>
+          <type-name>Period-short-enum</type-name>
+        </type>
+      </period-short>
+      <churn-logging config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/lacp/churn/logging</xr-path>
+        <xr-xml-map>bundlemgr_distrib_bdl_lacp_cfg:ChurnLogging</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Churn-logging</type-name>
+        </type>
+      </churn-logging>
+    </lacp>
+  </augment>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <bundle-member config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bm/</xr-path>
+      <xr-xml-map>bundlemgr_mbr_interface_cfg:BundleMember</xr-xml-map>
+      <xr-task>bundle</xr-task>
+      <id config="true" is-key="false" node="container" presence="false">
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bm/bundle_id`</xr-path>
+        <xr-xml-map>bundlemgr_mbr_interface_cfg:ID</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <bundle-id config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bm/bundle_id`0</xr-path>
+          <xr-xml-map>bundlemgr_mbr_interface_cfg:BundleID</xr-xml-map>
+          <xr-task>bundle</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..65535">
+            <type-name>uint32</type-name>
+          </type>
+        </bundle-id>
+        <port-activity config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bm/bundle_id`1</xr-path>
+          <xr-xml-map>bundlemgr_mbr_interface_cfg:PortActivity</xr-xml-map>
+          <xr-task>bundle</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Bundle-port-activity</type-name>
+          </type>
+        </port-activity>
+      </id>
+      <port-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/bm/port_priority</xr-path>
+        <xr-xml-map>bundlemgr_mbr_interface_cfg:PortPriority</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type>
+          <type-name>xr:Cisco-ios-xr-port-number</type-name>
+        </type>
+        <default>32768</default>
+      </port-priority>
+    </bundle-member>
+  </augment>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <mlacp config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/mlacp/</xr-path>
+      <xr-xml-map>bundlemgr_distrib_bdl_mlacp_cfg:mLACP</xr-xml-map>
+      <xr-task>bundle</xr-task>
+      <maximize config="true" is-key="false" node="container" presence="true">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/mlacp/switchover/maximize`</xr-path>
+        <xr-xml-map>bundlemgr_distrib_bdl_mlacp_cfg:Maximize</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-pack-format>%d%d%d</xr-pack-format>
+        <maximize-by config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/mlacp/switchover/maximize`0</xr-path>
+          <xr-xml-map>bundlemgr_distrib_bdl_mlacp_cfg:MaximizeBy</xr-xml-map>
+          <xr-task>bundle</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Mlacp-maximize-parameter</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </maximize-by>
+        <link-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/mlacp/switchover/maximize`1</xr-path>
+          <xr-xml-map>bundlemgr_distrib_bdl_mlacp_cfg:LinkThreshold</xr-xml-map>
+          <xr-task>bundle</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="0..64">
+            <type-name>uint32</type-name>
+          </type>
+        </link-threshold>
+        <bandwidth-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/mlacp/switchover/maximize`2</xr-path>
+          <xr-xml-map>bundlemgr_distrib_bdl_mlacp_cfg:BandwidthThreshold</xr-xml-map>
+          <xr-task>bundle</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="0..4294967295">
+            <type-name>uint32</type-name>
+          </type>
+        </bandwidth-threshold>
+      </maximize>
+      <port-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/mlacp/port_priority</xr-path>
+        <xr-xml-map>bundlemgr_distrib_bdl_mlacp_cfg:PortPriority</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type>
+          <type-name>xr:Cisco-ios-xr-port-number</type-name>
+        </type>
+        <default>32768</default>
+      </port-priority>
+      <recovery-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/mlacp/switchover/delay</xr-path>
+        <xr-xml-map>bundlemgr_distrib_bdl_mlacp_cfg:RecoveryDelay</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..65535">
+          <type-name>uint32</type-name>
+        </type>
+        <default>300</default>
+      </recovery-delay>
+      <switchover-type config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/mlacp/switchover/type</xr-path>
+        <xr-xml-map>bundlemgr_distrib_bdl_mlacp_cfg:SwitchoverType</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Mlacp-switchover</type-name>
+        </type>
+      </switchover-type>
+      <iccp-group config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/mlacp/rg</xr-path>
+        <xr-xml-map>bundlemgr_distrib_bdl_mlacp_cfg:ICCPGroup</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..4294967295">
+          <type-name>uint32</type-name>
+        </type>
+      </iccp-group>
+    </mlacp>
+  </augment>
+  <augment path="/a2:redundancy-group-manager/a2:iccp/a2:iccp-groups/a2:iccp-group">
+    <mlacp config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/rgmgr/iccp/group/&lt;infra_rgmgr_iccp_cfg_ICCPGroup_arg1&gt;/mlacp/</xr-path>
+      <xr-xml-map>bundlemgr_distrib_rg_cfg:mLACP</xr-xml-map>
+      <xr-task>bundle</xr-task>
+      <connect-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/rgmgr/iccp/group/&lt;infra_rgmgr_iccp_cfg_ICCPGroup_arg1&gt;/mlacp/connect-timeout</xr-path>
+        <xr-xml-map>bundlemgr_distrib_rg_cfg:ConnectTimeout</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..65534">
+          <type-name>uint32</type-name>
+        </type>
+      </connect-timeout>
+      <system-mac config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-elem-size>3</xr-pack-elem-size>
+        <xr-path>/cfg/gl/rgmgr/iccp/group/&lt;infra_rgmgr_iccp_cfg_ICCPGroup_arg1&gt;/mlacp/sys_mac`0</xr-path>
+        <xr-xml-map>bundlemgr_distrib_rg_cfg:SystemMAC</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-pack-format>%d%d%d</xr-pack-format>
+        <xr-sch-type>MACAddress</xr-sch-type>
+        <type>
+          <type-name>yang:mac-address</type-name>
+        </type>
+      </system-mac>
+      <node config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/rgmgr/iccp/group/&lt;infra_rgmgr_iccp_cfg_ICCPGroup_arg1&gt;/mlacp/nodeid</xr-path>
+        <xr-xml-map>bundlemgr_distrib_rg_cfg:Node</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..7">
+          <type-name>uint32</type-name>
+        </type>
+      </node>
+      <system-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/rgmgr/iccp/group/&lt;infra_rgmgr_iccp_cfg_ICCPGroup_arg1&gt;/mlacp/sys_pri</xr-path>
+        <xr-xml-map>bundlemgr_distrib_rg_cfg:SystemPriority</xr-xml-map>
+        <xr-task>bundle</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..65535">
+          <type-name>uint32</type-name>
+        </type>
+      </system-priority>
+    </mlacp>
+  </augment>
+  <lacp config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/lacp/</xr-path>
+    <xr-xml-map>bundlemgr_cfg:LACP</xr-xml-map>
+    <xr-task>bundle</xr-task>
+    <system-mac config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-is-packed/>
+      <xr-pack-elem-size>3</xr-pack-elem-size>
+      <xr-path>/cfg/gl/lacp/sys_mac`0</xr-path>
+      <xr-xml-map>bundlemgr_cfg:SystemMAC</xr-xml-map>
+      <xr-task>bundle</xr-task>
+      <xr-pack-format>%d%d%d</xr-pack-format>
+      <xr-sch-type>MACAddress</xr-sch-type>
+      <type>
+        <type-name>yang:mac-address</type-name>
+      </type>
+    </system-mac>
+    <system-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/lacp/sys_pri</xr-path>
+      <xr-xml-map>bundlemgr_cfg:SystemPriority</xr-xml-map>
+      <xr-task>bundle</xr-task>
+      <xr-sch-type>Range</xr-sch-type>
+      <type range="1..65535">
+        <type-name>uint32</type-name>
+      </type>
+      <default>32768</default>
+    </system-priority>
+  </lacp>
+</Cisco-IOS-XR-bundlemgr-cfg>

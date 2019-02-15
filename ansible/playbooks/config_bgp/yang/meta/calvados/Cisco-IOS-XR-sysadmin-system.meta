@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-sysadmin-system ns="http://www.cisco.com/ns/yang/Cisco-IOS-XR-sysadmin-system" revision="2017-10-31">
+  <files>
+    <file revision="2017-10-31" submodule="false">Cisco-IOS-XR-sysadmin-system.yang</file>
+  </files>
+  <prefix>calvados_system</prefix>
+  <import prefix="tailf">tailf-common</import>
+  <import prefix="inet">ietf-inet-types</import>
+  <typedef name="file-name-type">
+    <type>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="screen-length">
+    <type range="0 .. 32000">
+      <type-name>uint64</type-name>
+    </type>
+  </typedef>
+  <typedef name="screen-width">
+    <type range="0 .. 512">
+      <type-name>uint64</type-name>
+    </type>
+  </typedef>
+  <typedef name="ipv4-subnet-mask-ip">
+    <type>
+      <type-name>inet:ip-address</type-name>
+    </type>
+  </typedef>
+  <typedef name="ipv6-prefix">
+    <type range="0..128">
+      <type-name>uint8</type-name>
+    </type>
+  </typedef>
+  <typedef name="calvados-ipv4-with-optional-subnet-bits">
+    <type>
+      <pattern>(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(/(([0-9])|([1-2][0-9])|(3[0-2])))?</pattern>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="calvados-ipv6-with-optional-prefix">
+    <type>
+      <pattern>((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(/(([0-9])|([0-9]{2})|(1[0-1][0-9])|(12[0-8])))?</pattern>
+      <pattern>(([^:]+:){6}(([^:]+:[^:]+)|(.*\..*)))|((([^:]+:)*[^:]+)?::(([^:]+:)*[^:]+)?)(/.+)?</pattern>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <mgmt config="true" is-key="false" node="container" presence="false">
+    <ipv4 config="true" is-key="false" node="container" presence="false">
+      <address config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>calvados-ipv4-with-optional-subnet-bits</type-name>
+        </type>
+        <must>true() = contains(../subnet-mask-ip, '.') or true() = contains(../address, '/')</must>
+      </address>
+      <subnet-mask-ip config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>ipv4-subnet-mask-ip</type-name>
+        </type>
+        <must>false() = contains(../address, '/')</must>
+      </subnet-mask-ip>
+    </ipv4>
+    <ipv6 config="true" is-key="false" node="container" presence="false">
+      <address config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>calvados-ipv6-with-optional-prefix</type-name>
+        </type>
+        <must>true() = (../prefix) or true() = contains(../address, '/')</must>
+      </address>
+      <prefix config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>ipv6-prefix</type-name>
+        </type>
+        <must>false() = contains(../address, '/')</must>
+      </prefix>
+    </ipv6>
+  </mgmt>
+</Cisco-IOS-XR-sysadmin-system>

@@ -1,0 +1,259 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-lib-mpp-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-lib-mpp-oper" revision="2017-05-01">
+  <files>
+    <file revision="2017-05-01" submodule="false">Cisco-IOS-XR-lib-mpp-oper.yang</file>
+    <file revision="2017-05-01" submodule="true">Cisco-IOS-XR-lib-mpp-oper-sub1.yang</file>
+  </files>
+  <prefix>lib-mpp-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="inet">ietf-inet-types</import>
+  <identity name="Mpp-af-id-base"/>
+  <identity name="ipv4">
+    <base>Mpp-af-id-base</base>
+    <xr-identity-str-value>ipv4</xr-identity-str-value>
+    <xr-identity-int-value>2</xr-identity-int-value>
+  </identity>
+  <identity name="ipv6">
+    <base>Mpp-af-id-base</base>
+    <xr-identity-str-value>ipv6</xr-identity-str-value>
+    <xr-identity-int-value>10</xr-identity-int-value>
+  </identity>
+  <typedef name="Mpp-in6-addr">
+    <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+    <type>
+      <type-name>inet:ipv6-address</type-name>
+    </type>
+  </typedef>
+  <typedef name="Mpp-in-addr">
+    <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+    <type>
+      <type-name>inet:ipv4-address</type-name>
+    </type>
+  </typedef>
+  <typedef name="Mpp-af-id">
+    <type node="identityref">
+      <base>Mpp-af-id-base</base>
+    </type>
+  </typedef>
+  <typedef name="Mpp-allow">
+    <type node="enumeration">
+      <enum>ssh</enum>
+      <enum>telnet</enum>
+      <enum>snmp</enum>
+      <enum>tftp</enum>
+      <enum>http</enum>
+      <enum>xr-xml</enum>
+      <enum>netconf</enum>
+      <enum>all</enum>
+    </type>
+  </typedef>
+  <management-plane-protection config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/mgmtplane/gl/</xr-path>
+    <xr-xml-map>mpp_oper:ManagementPlaneProtection</xr-xml-map>
+    <xr-task>system</xr-task>
+    <outband config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/mgmtplane/gl/outofband/</xr-path>
+      <xr-xml-map>mpp_oper:Outband</xr-xml-map>
+      <xr-task>system</xr-task>
+      <vrf config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/mgmtplane/gl/outofband/vrf</xr-path>
+        <xr-xml-map>mpp_oper:VRF</xr-xml-map>
+        <xr-task>system</xr-task>
+        <xr-bag-grp-name>vrf_info</xr-bag-grp-name>
+        <xr-bag>mpp.bag</xr-bag>
+        <vrf-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/mgmtplane/gl/outofband/vrf~vrf_info.VRFName</xr-path>
+          <xr-xml-map>mpp:VRFName</xr-xml-map>
+          <xr-task>system</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 0</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </vrf-name>
+      </vrf>
+      <interfaces config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/mgmtplane/gl/outofband/interfaces/</xr-path>
+        <xr-xml-map>mpp_oper:InterfaceTable</xr-xml-map>
+        <xr-task>system</xr-task>
+        <interface config="false" key="interface-name" node="list">
+          <xr-path>/oper/mgmtplane/gl/outofband/interfaces/&lt;mpp_oper_Interface_ifname&gt;</xr-path>
+          <xr-xml-map>mpp_oper:Interface</xr-xml-map>
+          <xr-task>system</xr-task>
+          <xr-bag-grp-name>mpp_proto</xr-bag-grp-name>
+          <xr-bag>mpp.bag</xr-bag>
+          <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/mgmtplane/gl/outofband/interfaces/&lt;mpp_oper_Interface_ifname&gt;</xr-path>
+            <xr-xml-map>mpp_oper:InterfaceName</xr-xml-map>
+            <xr-task>system</xr-task>
+            <xr-sch-type>EncodedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;mpp_oper_Interface_ifname&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </interface-name>
+          <protocol config="false" node="list">
+            <xr-path>/oper/mgmtplane/gl/outofband/interfaces/&lt;mpp_oper_Interface_ifname&gt;~mpp_proto.Protocols[&lt;bag_arg2&gt;]</xr-path>
+            <xr-task>system</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+            <allow config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mgmtplane/gl/outofband/interfaces/&lt;mpp_oper_Interface_ifname&gt;~mpp_proto.Protocols[&lt;bag_arg2&gt;].Allow</xr-path>
+              <xr-xml-map>mpp:Allow</xr-xml-map>
+              <xr-task>system</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>Mpp-allow</type-name>
+              </type>
+            </allow>
+            <is-all-peers-allowed config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mgmtplane/gl/outofband/interfaces/&lt;mpp_oper_Interface_ifname&gt;~mpp_proto.Protocols[&lt;bag_arg2&gt;].IsAllPeersAllowed</xr-path>
+              <xr-xml-map>mpp:IsAllPeersAllowed</xr-xml-map>
+              <xr-task>system</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </is-all-peers-allowed>
+            <peer-address config="false" node="list">
+              <xr-path>/oper/mgmtplane/gl/outofband/interfaces/&lt;mpp_oper_Interface_ifname&gt;~mpp_proto.Protocols[&lt;bag_arg2&gt;].PeerAddress[&lt;bag_arg1&gt;]</xr-path>
+              <xr-task>system</xr-task>
+              <xr-bag-version>1 0</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+              <af-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mgmtplane/gl/outofband/interfaces/&lt;mpp_oper_Interface_ifname&gt;~mpp_proto.Protocols[&lt;bag_arg2&gt;].PeerAddress[&lt;bag_arg1&gt;].AFName</xr-path>
+                <xr-xml-map>mpp:AFName</xr-xml-map>
+                <xr-task>system</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>Mpp-af-id</type-name>
+                </type>
+              </af-name>
+              <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mgmtplane/gl/outofband/interfaces/&lt;mpp_oper_Interface_ifname&gt;~mpp_proto.Protocols[&lt;bag_arg2&gt;].PeerAddress[&lt;bag_arg1&gt;].IPv4Address</xr-path>
+                <xr-xml-map>mpp:IPv4Address</xr-xml-map>
+                <xr-task>system</xr-task>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <when>../af-name = 'ipv4'</when>
+                <type>
+                  <type-name>Mpp-in-addr</type-name>
+                </type>
+              </ipv4-address>
+              <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mgmtplane/gl/outofband/interfaces/&lt;mpp_oper_Interface_ifname&gt;~mpp_proto.Protocols[&lt;bag_arg2&gt;].PeerAddress[&lt;bag_arg1&gt;].IPv6Address</xr-path>
+                <xr-xml-map>mpp:IPv6Address</xr-xml-map>
+                <xr-task>system</xr-task>
+                <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <when>../af-name = 'ipv6'</when>
+                <type>
+                  <type-name>Mpp-in6-addr</type-name>
+                </type>
+              </ipv6-address>
+            </peer-address>
+          </protocol>
+        </interface>
+      </interfaces>
+    </outband>
+    <inband config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/mgmtplane/gl/inband/</xr-path>
+      <xr-xml-map>mpp_oper:Inband</xr-xml-map>
+      <xr-task>system</xr-task>
+      <interfaces config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/mgmtplane/gl/inband/interfaces/</xr-path>
+        <xr-xml-map>mpp_oper:InterfaceTable</xr-xml-map>
+        <xr-task>system</xr-task>
+        <interface config="false" key="interface-name" node="list">
+          <xr-path>/oper/mgmtplane/gl/inband/interfaces/&lt;mpp_oper_Interface_ifname&gt;</xr-path>
+          <xr-xml-map>mpp_oper:Interface</xr-xml-map>
+          <xr-task>system</xr-task>
+          <xr-bag-grp-name>mpp_proto</xr-bag-grp-name>
+          <xr-bag>mpp.bag</xr-bag>
+          <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/mgmtplane/gl/inband/interfaces/&lt;mpp_oper_Interface_ifname&gt;</xr-path>
+            <xr-xml-map>mpp_oper:InterfaceName</xr-xml-map>
+            <xr-task>system</xr-task>
+            <xr-sch-type>EncodedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;mpp_oper_Interface_ifname&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </interface-name>
+          <protocol config="false" node="list">
+            <xr-path>/oper/mgmtplane/gl/inband/interfaces/&lt;mpp_oper_Interface_ifname&gt;~mpp_proto.Protocols[&lt;bag_arg2&gt;]</xr-path>
+            <xr-task>system</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+            <allow config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mgmtplane/gl/inband/interfaces/&lt;mpp_oper_Interface_ifname&gt;~mpp_proto.Protocols[&lt;bag_arg2&gt;].Allow</xr-path>
+              <xr-xml-map>mpp:Allow</xr-xml-map>
+              <xr-task>system</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>Mpp-allow</type-name>
+              </type>
+            </allow>
+            <is-all-peers-allowed config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mgmtplane/gl/inband/interfaces/&lt;mpp_oper_Interface_ifname&gt;~mpp_proto.Protocols[&lt;bag_arg2&gt;].IsAllPeersAllowed</xr-path>
+              <xr-xml-map>mpp:IsAllPeersAllowed</xr-xml-map>
+              <xr-task>system</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </is-all-peers-allowed>
+            <peer-address config="false" node="list">
+              <xr-path>/oper/mgmtplane/gl/inband/interfaces/&lt;mpp_oper_Interface_ifname&gt;~mpp_proto.Protocols[&lt;bag_arg2&gt;].PeerAddress[&lt;bag_arg1&gt;]</xr-path>
+              <xr-task>system</xr-task>
+              <xr-bag-version>1 0</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+              <af-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mgmtplane/gl/inband/interfaces/&lt;mpp_oper_Interface_ifname&gt;~mpp_proto.Protocols[&lt;bag_arg2&gt;].PeerAddress[&lt;bag_arg1&gt;].AFName</xr-path>
+                <xr-xml-map>mpp:AFName</xr-xml-map>
+                <xr-task>system</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>Mpp-af-id</type-name>
+                </type>
+              </af-name>
+              <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mgmtplane/gl/inband/interfaces/&lt;mpp_oper_Interface_ifname&gt;~mpp_proto.Protocols[&lt;bag_arg2&gt;].PeerAddress[&lt;bag_arg1&gt;].IPv4Address</xr-path>
+                <xr-xml-map>mpp:IPv4Address</xr-xml-map>
+                <xr-task>system</xr-task>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <when>../af-name = 'ipv4'</when>
+                <type>
+                  <type-name>Mpp-in-addr</type-name>
+                </type>
+              </ipv4-address>
+              <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mgmtplane/gl/inband/interfaces/&lt;mpp_oper_Interface_ifname&gt;~mpp_proto.Protocols[&lt;bag_arg2&gt;].PeerAddress[&lt;bag_arg1&gt;].IPv6Address</xr-path>
+                <xr-xml-map>mpp:IPv6Address</xr-xml-map>
+                <xr-task>system</xr-task>
+                <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <when>../af-name = 'ipv6'</when>
+                <type>
+                  <type-name>Mpp-in6-addr</type-name>
+                </type>
+              </ipv6-address>
+            </peer-address>
+          </protocol>
+        </interface>
+      </interfaces>
+    </inband>
+  </management-plane-protection>
+</Cisco-IOS-XR-lib-mpp-oper>

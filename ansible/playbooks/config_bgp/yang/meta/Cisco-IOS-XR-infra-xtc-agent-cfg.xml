@@ -1,0 +1,1515 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-infra-xtc-agent-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-infra-xtc-agent-cfg" revision="2018-11-28">
+  <files>
+    <file revision="2018-11-28" submodule="false">Cisco-IOS-XR-infra-xtc-agent-cfg.yang</file>
+  </files>
+  <prefix>infra-xtc-agent-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-segment-routing-ms-cfg</import>
+  <typedef name="Xtc-metric-value">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">relative</enum>
+      <enum value="2">absolute</enum>
+    </type>
+  </typedef>
+  <typedef name="Xtc-affinity-rule">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">affinity-include-all</enum>
+      <enum value="1">affinity-exclude-any</enum>
+      <enum value="2">affinity-include-any</enum>
+    </type>
+  </typedef>
+  <typedef name="Xtc-binding-sidexplicit-rule">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">fallback-dynamic</enum>
+      <enum value="2">enforce-srlb</enum>
+    </type>
+  </typedef>
+  <typedef name="Xtc-binding-sid-dynamic-rule">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">disable</enum>
+    </type>
+  </typedef>
+  <typedef name="Xtc-path-hop">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">mpls</enum>
+      <enum value="2">srv6</enum>
+    </type>
+  </typedef>
+  <typedef name="Xtc-steering-application">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">bgp</enum>
+      <enum value="2">isis</enum>
+      <enum value="3">ospf</enum>
+    </type>
+  </typedef>
+  <typedef name="Xtc-path">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">explicit</enum>
+      <enum value="2">dynamic</enum>
+    </type>
+  </typedef>
+  <typedef name="Xtc-metric">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">igp</enum>
+      <enum value="2">te</enum>
+      <enum value="3">hopcount</enum>
+      <enum value="12">latency</enum>
+    </type>
+  </typedef>
+  <typedef name="Xtc-address-family">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">af-type-ipv4</enum>
+      <enum value="2">xtc-af-type-ipv6</enum>
+    </type>
+  </typedef>
+  <typedef name="Xtc-segment">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">ipv4-address</enum>
+      <enum value="3">mpls-label</enum>
+    </type>
+  </typedef>
+  <typedef name="Xtc-binding-sid">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">mpls-label-specified</enum>
+      <enum value="2">mpls-label-any</enum>
+    </type>
+  </typedef>
+  <typedef name="Xtc-disjointness">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">link</enum>
+      <enum value="2">node</enum>
+      <enum value="3">srlg</enum>
+      <enum value="4">srlg-node</enum>
+    </type>
+  </typedef>
+  <typedef name="Xtc-auto-route-metric">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">relative</enum>
+      <enum value="3">constant</enum>
+    </type>
+  </typedef>
+  <typedef name="Xtc-end-point">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">end-point-type-ipv4</enum>
+      <enum value="2">end-point-type-ipv6</enum>
+    </type>
+  </typedef>
+  <augment path="/a1:sr">
+    <traffic-engineering config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/sr/xtc/c/tr-eng/</xr-path>
+      <xr-xml-map>xtc_agent_cfg:TrafficEngineering</xr-xml-map>
+      <xr-task>basic-services</xr-task>
+      <out-of-resources config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/oor/</xr-path>
+        <xr-xml-map>xtc_agent_cfg:OutOfResources</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <maximum-ls-ps config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/oor/a/max-lsps</xr-path>
+          <xr-xml-map>xtc_agent_cfg:MaximumLSPs</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="0..4294967295">
+            <type-name>uint32</type-name>
+          </type>
+          <default>0</default>
+        </maximum-ls-ps>
+      </out-of-resources>
+      <on-demand-colors config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/</xr-path>
+        <xr-xml-map>xtc_agent_cfg:OnDemandColorTable</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <on-demand-color config="true" key="color" node="list">
+          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/</xr-path>
+          <xr-xml-map>xtc_agent_cfg:OnDemandColor</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <on-demand-color-dyn-mpls config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/b/dyn_mpls/</xr-path>
+            <xr-xml-map>xtc_agent_cfg:OnDemandColorDynMPLS</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <on-demand-color-dyn-mpls-metric config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/b/dyn_mpls/c/metric/</xr-path>
+              <xr-xml-map>xtc_agent_cfg:OnDemandColorDynMPLSMetric</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <metric-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/b/dyn_mpls/c/metric/b/metric_type</xr-path>
+                <xr-xml-map>xtc_agent_cfg:MetricType</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <type>
+                  <type-name>Xtc-metric</type-name>
+                </type>
+              </metric-type>
+              <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/b/dyn_mpls/c/metric/a/enable</xr-path>
+                <xr-xml-map>xtc_agent_cfg:Enable</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-sch-type>Configured</xr-sch-type>
+                <type>
+                  <type-name>empty</type-name>
+                </type>
+              </enable>
+              <metric-margin config="true" is-key="false" node="container" presence="false">
+                <xr-is-packed/>
+                <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/b/dyn_mpls/c/metric/c/margin`</xr-path>
+                <xr-xml-map>xtc_agent_cfg:MetricMargin</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-pack-format>%d%d%d</xr-pack-format>
+                <value-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/b/dyn_mpls/c/metric/c/margin`0</xr-path>
+                  <xr-xml-map>xtc_agent_cfg:ValueType</xr-xml-map>
+                  <xr-task>basic-services</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <type>
+                    <type-name>Xtc-metric-value</type-name>
+                  </type>
+                </value-type>
+                <absolute-value config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/b/dyn_mpls/c/metric/c/margin`1</xr-path>
+                  <xr-xml-map>xtc_agent_cfg:AbsoluteValue</xr-xml-map>
+                  <xr-task>basic-services</xr-task>
+                  <xr-sch-type>ZeroRange</xr-sch-type>
+                  <when>../value-type = 'absolute'</when>
+                  <type range="0..2147483647">
+                    <type-name>uint32</type-name>
+                  </type>
+                </absolute-value>
+                <relative-value config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/b/dyn_mpls/c/metric/c/margin`2</xr-path>
+                  <xr-xml-map>xtc_agent_cfg:RelativeValue</xr-xml-map>
+                  <xr-task>basic-services</xr-task>
+                  <xr-sch-type>ZeroRange</xr-sch-type>
+                  <when>../value-type = 'relative'</when>
+                  <type range="0..2147483647">
+                    <type-name>uint32</type-name>
+                  </type>
+                </relative-value>
+              </metric-margin>
+            </on-demand-color-dyn-mpls-metric>
+            <on-demand-color-dyn-mpls-pce config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/b/dyn_mpls/b/pce/</xr-path>
+              <xr-xml-map>xtc_agent_cfg:OnDemandColorDynMPLS_PCE</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/b/dyn_mpls/b/pce/a/enable</xr-path>
+                <xr-xml-map>xtc_agent_cfg:Enable</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-sch-type>Configured</xr-sch-type>
+                <type>
+                  <type-name>empty</type-name>
+                </type>
+              </enable>
+            </on-demand-color-dyn-mpls-pce>
+            <disjoint-path config="true" is-key="false" node="container" presence="true">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-is-packed/>
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/b/dyn_mpls/d/disjoint_path`</xr-path>
+              <xr-xml-map>xtc_agent_cfg:DisjointPath</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-pack-format>%d%d%d</xr-pack-format>
+              <group-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/b/dyn_mpls/d/disjoint_path`0</xr-path>
+                <xr-xml-map>xtc_agent_cfg:GroupID</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="1..65535">
+                  <type-name>uint32</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </group-id>
+              <disjointness-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/b/dyn_mpls/d/disjoint_path`1</xr-path>
+                <xr-xml-map>xtc_agent_cfg:DisjointnessType</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <type>
+                  <type-name>Xtc-disjointness</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </disjointness-type>
+              <sub-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/b/dyn_mpls/d/disjoint_path`2</xr-path>
+                <xr-xml-map>xtc_agent_cfg:SubID</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="1..65535">
+                  <type-name>uint32</type-name>
+                </type>
+              </sub-id>
+            </disjoint-path>
+            <on-demand-color-dyn-mpls-flex-algorithm config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/b/dyn_mpls/d/sid_alg</xr-path>
+              <xr-xml-map>xtc_agent_cfg:OnDemandColorDynMPLSFlexAlgorithm</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="128..255">
+                <type-name>uint32</type-name>
+              </type>
+            </on-demand-color-dyn-mpls-flex-algorithm>
+            <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/b/dyn_mpls/a/enable</xr-path>
+              <xr-xml-map>xtc_agent_cfg:Enable</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </enable>
+            <affinity-rules config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/b/dyn_mpls/d/affinity/</xr-path>
+              <xr-xml-map>xtc_agent_cfg:AffinityRuleTable</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <affinity-rule config="true" key="rule" node="list">
+                <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/b/dyn_mpls/d/affinity/b/rule/&lt;xtc_agent_cfg_AffinityRule_AffinityRule&gt;/</xr-path>
+                <xr-xml-map>xtc_agent_cfg:AffinityRule</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <rule config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/b/dyn_mpls/d/affinity/b/rule/&lt;xtc_agent_cfg_AffinityRule_AffinityRule&gt;/</xr-path>
+                  <xr-xml-map>xtc_agent_cfg:Rule</xr-xml-map>
+                  <xr-task>basic-services</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <xr-sch-arg-name>&lt;xtc_agent_cfg_AffinityRule_AffinityRule&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>Xtc-affinity-rule</type-name>
+                  </type>
+                </rule>
+                <affinity-name config="true" key="affinity-name" node="list">
+                  <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/b/dyn_mpls/d/affinity/b/rule/&lt;xtc_agent_cfg_AffinityRule_AffinityRule&gt;/b/affinity_name/&lt;xtc_agent_cfg_AffinityName_AffinityName&gt;</xr-path>
+                  <xr-xml-map>xtc_agent_cfg:AffinityName</xr-xml-map>
+                  <xr-task>basic-services</xr-task>
+                  <affinity-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                    <xr-data-handler>ignore</xr-data-handler>
+                    <xr-create-item-relative-path/>
+                    <xr-primitive-type>string</xr-primitive-type>
+                    <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/b/dyn_mpls/d/affinity/b/rule/&lt;xtc_agent_cfg_AffinityRule_AffinityRule&gt;/b/affinity_name/&lt;xtc_agent_cfg_AffinityName_AffinityName&gt;</xr-path>
+                    <xr-xml-map>xtc_agent_cfg:AffinityName</xr-xml-map>
+                    <xr-task>basic-services</xr-task>
+                    <xr-sch-type>BoundedString</xr-sch-type>
+                    <xr-sch-arg-name>&lt;xtc_agent_cfg_AffinityName_AffinityName&gt;</xr-sch-arg-name>
+                    <type length="1..32">
+                      <type-name>xr:Cisco-ios-xr-string</type-name>
+                    </type>
+                  </affinity-name>
+                </affinity-name>
+              </affinity-rule>
+            </affinity-rules>
+          </on-demand-color-dyn-mpls>
+          <bandwidth config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/b/bandwidth</xr-path>
+            <xr-xml-map>xtc_agent_cfg:Bandwidth</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1..4294967295">
+              <type-name>uint32</type-name>
+            </type>
+          </bandwidth>
+          <color config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/</xr-path>
+            <xr-xml-map>xtc_agent_cfg:Color</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <xr-sch-arg-name>&lt;xtc_agent_cfg_OnDemandColor_Color&gt;</xr-sch-arg-name>
+            <type range="1..4294967295">
+              <type-name>uint32</type-name>
+            </type>
+          </color>
+          <maximum-sid-depth config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/c/msd</xr-path>
+            <xr-xml-map>xtc_agent_cfg:MaximumSIDDepth</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1..255">
+              <type-name>uint32</type-name>
+            </type>
+          </maximum-sid-depth>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/on-demand-color/&lt;xtc_agent_cfg_OnDemandColor_Color&gt;/a/enable</xr-path>
+            <xr-xml-map>xtc_agent_cfg:Enable</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </enable>
+        </on-demand-color>
+      </on-demand-colors>
+      <segments config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/exp_path/</xr-path>
+        <xr-xml-map>xtc_agent_cfg:SegmentListTable</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <segment config="true" key="path-name" node="list">
+          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/exp_path/&lt;xtc_agent_cfg_SegmentList_PathName&gt;/</xr-path>
+          <xr-xml-map>xtc_agent_cfg:SegmentList</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <segments config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/exp_path/&lt;xtc_agent_cfg_SegmentList_PathName&gt;/b/index/</xr-path>
+            <xr-xml-map>xtc_agent_cfg:SegmentTable</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <segment config="true" key="segment-index" node="list">
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/exp_path/&lt;xtc_agent_cfg_SegmentList_PathName&gt;/b/index/&lt;xtc_agent_cfg_Segment_Index&gt;</xr-path>
+              <xr-xml-map>xtc_agent_cfg:Segment</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-pack-format>%d%s%d</xr-pack-format>
+              <segment-index config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%s%d</xr-pack-format>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/exp_path/&lt;xtc_agent_cfg_SegmentList_PathName&gt;/b/index/&lt;xtc_agent_cfg_Segment_Index&gt;</xr-path>
+                <xr-xml-map>xtc_agent_cfg:SegmentIndex</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-sch-arg-name>&lt;xtc_agent_cfg_Segment_Index&gt;</xr-sch-arg-name>
+                <type range="1..65535">
+                  <type-name>uint32</type-name>
+                </type>
+              </segment-index>
+              <segment-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%s%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/exp_path/&lt;xtc_agent_cfg_SegmentList_PathName&gt;/b/index/&lt;xtc_agent_cfg_Segment_Index&gt;`0</xr-path>
+                <xr-xml-map>xtc_agent_cfg:SegmentType</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <type>
+                  <type-name>Xtc-segment</type-name>
+                </type>
+              </segment-type>
+              <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%s%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/exp_path/&lt;xtc_agent_cfg_SegmentList_PathName&gt;/b/index/&lt;xtc_agent_cfg_Segment_Index&gt;`1</xr-path>
+                <xr-xml-map>xtc_agent_cfg:Address</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-sch-type>IPV4AddressString</xr-sch-type>
+                <when>../segment-type = 'ipv4-address'</when>
+                <type>
+                  <type-name>inet:ipv4-address-no-zone</type-name>
+                </type>
+              </address>
+              <mpls-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%s%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/exp_path/&lt;xtc_agent_cfg_SegmentList_PathName&gt;/b/index/&lt;xtc_agent_cfg_Segment_Index&gt;`2</xr-path>
+                <xr-xml-map>xtc_agent_cfg:MPLSLabel</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-sch-type>ZeroRange</xr-sch-type>
+                <when>../segment-type = 'mpls-label'</when>
+                <type range="0..1048575">
+                  <type-name>uint32</type-name>
+                </type>
+              </mpls-label>
+            </segment>
+          </segments>
+          <path-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/exp_path/&lt;xtc_agent_cfg_SegmentList_PathName&gt;/</xr-path>
+            <xr-xml-map>xtc_agent_cfg:PathName</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-sch-type>BoundedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;xtc_agent_cfg_SegmentList_PathName&gt;</xr-sch-arg-name>
+            <type length="1..128">
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </path-name>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/exp_path/&lt;xtc_agent_cfg_SegmentList_PathName&gt;/a/enable</xr-path>
+            <xr-xml-map>xtc_agent_cfg:Enable</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </enable>
+        </segment>
+      </segments>
+      <logging config="true" is-key="false" node="container" presence="true">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/logging/</xr-path>
+        <xr-xml-map>xtc_agent_cfg:Logging</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <policy-status config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/logging/policy/status</xr-path>
+          <xr-xml-map>xtc_agent_cfg:PolicyStatus</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </policy-status>
+      </logging>
+      <timers config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/timers/</xr-path>
+        <xr-xml-map>xtc_agent_cfg:Timers</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <cleanup-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/timers/b/cleanup-timer</xr-path>
+          <xr-xml-map>xtc_agent_cfg:CleanupDelay</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="0..300">
+            <type-name>uint32</type-name>
+          </type>
+          <default>10</default>
+        </cleanup-delay>
+        <install-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/timers/a/install-timer</xr-path>
+          <xr-xml-map>xtc_agent_cfg:InstallDelay</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="0..300">
+            <type-name>uint32</type-name>
+          </type>
+          <default>10</default>
+        </install-delay>
+        <periodic-reoptimization config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/timers/b/reopt-timer</xr-path>
+          <xr-xml-map>xtc_agent_cfg:PeriodicReoptimization</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="0..86400">
+            <type-name>uint32</type-name>
+          </type>
+          <default>600</default>
+        </periodic-reoptimization>
+      </timers>
+      <binding-sid-rules config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/binding-sid/</xr-path>
+        <xr-xml-map>xtc_agent_cfg:BindingSIDRules</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <explicit config="true" is-key="false" node="container" presence="true">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/binding-sid/explicit/</xr-path>
+          <xr-xml-map>xtc_agent_cfg:Explicit</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <rule config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/binding-sid/explicit/rules</xr-path>
+            <xr-xml-map>xtc_agent_cfg:Rule</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Xtc-binding-sidexplicit-rule</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </rule>
+        </explicit>
+        <dynamic-binding-sid-rules config="true" is-key="false" node="container" presence="true">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/binding-sid/dynamic/</xr-path>
+          <xr-xml-map>xtc_agent_cfg:DynamicBindingSIDRules</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <dynamic-binding-sid-rule config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/binding-sid/dynamic/rules</xr-path>
+            <xr-xml-map>xtc_agent_cfg:DynamicBindingSIDRule</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Xtc-binding-sid-dynamic-rule</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </dynamic-binding-sid-rule>
+        </dynamic-binding-sid-rules>
+      </binding-sid-rules>
+      <policies config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/</xr-path>
+        <xr-xml-map>xtc_agent_cfg:PolicyTable</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <policy config="true" key="policy-name" node="list">
+          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/</xr-path>
+          <xr-xml-map>xtc_agent_cfg:Policy</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <steering config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/z/steering/</xr-path>
+            <xr-xml-map>xtc_agent_cfg:Steering</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <applications config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/z/steering/application/</xr-path>
+              <xr-xml-map>xtc_agent_cfg:ApplicationTable</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <application config="true" key="application" node="list">
+                <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/z/steering/application/&lt;xtc_agent_cfg_Application_Application&gt;/</xr-path>
+                <xr-xml-map>xtc_agent_cfg:Application</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <disable config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/z/steering/application/&lt;xtc_agent_cfg_Application_Application&gt;/disable</xr-path>
+                  <xr-xml-map>xtc_agent_cfg:Disable</xr-xml-map>
+                  <xr-task>basic-services</xr-task>
+                  <xr-sch-type>Configured</xr-sch-type>
+                  <type>
+                    <type-name>empty</type-name>
+                  </type>
+                </disable>
+                <application config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/z/steering/application/&lt;xtc_agent_cfg_Application_Application&gt;/</xr-path>
+                  <xr-xml-map>xtc_agent_cfg:Application</xr-xml-map>
+                  <xr-task>basic-services</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <xr-sch-arg-name>&lt;xtc_agent_cfg_Application_Application&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>Xtc-steering-application</type-name>
+                  </type>
+                </application>
+              </application>
+            </applications>
+          </steering>
+          <binding-sid config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/b/binding_sid`</xr-path>
+            <xr-xml-map>xtc_agent_cfg:BindingSID</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <binding-sid-type config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/b/binding_sid`0</xr-path>
+              <xr-xml-map>xtc_agent_cfg:BindingSIDType</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Xtc-binding-sid</type-name>
+              </type>
+            </binding-sid-type>
+            <mpls-label config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/b/binding_sid`1</xr-path>
+              <xr-xml-map>xtc_agent_cfg:MPLSLabel</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <when>../binding-sid-type = 'mpls-label-specified'</when>
+              <type range="16..1048575">
+                <type-name>uint32</type-name>
+              </type>
+            </mpls-label>
+          </binding-sid>
+          <policy-color-endpoint config="true" is-key="false" node="container" presence="true">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/b/color_endpoint`</xr-path>
+            <xr-xml-map>xtc_agent_cfg:PolicyColorEndpoint</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-pack-format>%d%d%s</xr-pack-format>
+            <color config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/b/color_endpoint`0</xr-path>
+              <xr-xml-map>xtc_agent_cfg:Color</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="1..4294967295">
+                <type-name>uint32</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </color>
+            <end-point-type config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/b/color_endpoint`1</xr-path>
+              <xr-xml-map>xtc_agent_cfg:EndPointType</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Xtc-end-point</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </end-point-type>
+            <end-point-address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/b/color_endpoint`2</xr-path>
+              <xr-xml-map>xtc_agent_cfg:EndPointAddress</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>IPAddressString</xr-sch-type>
+              <type>
+                <type-name>inet:ip-address-no-zone</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </end-point-address>
+          </policy-color-endpoint>
+          <auto-route config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/f/autoroute/</xr-path>
+            <xr-xml-map>xtc_agent_cfg:AutoRoute</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <auto-route-metric config="true" is-key="false" node="container" presence="false">
+              <xr-is-packed/>
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/f/autoroute/b/metric`</xr-path>
+              <xr-xml-map>xtc_agent_cfg:AutoRouteMetric</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-pack-format>%d%d%d</xr-pack-format>
+              <autoroute-metric-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/f/autoroute/b/metric`0</xr-path>
+                <xr-xml-map>xtc_agent_cfg:AutorouteMetricType</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <type>
+                  <type-name>Xtc-auto-route-metric</type-name>
+                </type>
+              </autoroute-metric-type>
+              <metric-relative-value config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/f/autoroute/b/metric`1</xr-path>
+                <xr-xml-map>xtc_agent_cfg:MetricRelativeValue</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-sch-type>SignedRange</xr-sch-type>
+                <type range="-10..10">
+                  <type-name>int32</type-name>
+                </type>
+              </metric-relative-value>
+              <metric-constant-value config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/f/autoroute/b/metric`2</xr-path>
+                <xr-xml-map>xtc_agent_cfg:MetricConstantValue</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="1..2147483647">
+                  <type-name>uint32</type-name>
+                </type>
+              </metric-constant-value>
+            </auto-route-metric>
+            <include-prefixes config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/f/autoroute/c/include/</xr-path>
+              <xr-xml-map>xtc_agent_cfg:IncludePrefixTable</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <include-prefix config="true" key="af-type prefix-address prefix-length" node="list">
+                <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/f/autoroute/c/include/&lt;xtc_agent_cfg_IncludePrefix_AFType&gt;,&lt;xtc_agent_cfg_IncludePrefix_prefix_address&gt;,&lt;xtc_agent_cfg_IncludePrefix_prefix_length&gt;</xr-path>
+                <xr-xml-map>xtc_agent_cfg:IncludePrefix</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <af-type config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-create-item-relative-path/>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/f/autoroute/c/include/&lt;xtc_agent_cfg_IncludePrefix_AFType&gt;,&lt;xtc_agent_cfg_IncludePrefix_prefix_address&gt;,&lt;xtc_agent_cfg_IncludePrefix_prefix_length&gt;</xr-path>
+                  <xr-xml-map>xtc_agent_cfg:AFType</xr-xml-map>
+                  <xr-task>basic-services</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <xr-sch-arg-name>&lt;xtc_agent_cfg_IncludePrefix_AFType&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>Xtc-address-family</type-name>
+                  </type>
+                </af-type>
+                <prefix-address config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-create-item-relative-path/>
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/f/autoroute/c/include/&lt;xtc_agent_cfg_IncludePrefix_AFType&gt;,&lt;xtc_agent_cfg_IncludePrefix_prefix_address&gt;,&lt;xtc_agent_cfg_IncludePrefix_prefix_length&gt;</xr-path>
+                  <xr-xml-map>xtc_agent_cfg:PrefixAddress</xr-xml-map>
+                  <xr-task>basic-services</xr-task>
+                  <xr-sch-type>IPAddressString</xr-sch-type>
+                  <xr-sch-arg-name>&lt;xtc_agent_cfg_IncludePrefix_prefix_address&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>inet:ip-address-no-zone</type-name>
+                  </type>
+                </prefix-address>
+                <prefix-length config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-create-item-relative-path/>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/f/autoroute/c/include/&lt;xtc_agent_cfg_IncludePrefix_AFType&gt;,&lt;xtc_agent_cfg_IncludePrefix_prefix_address&gt;,&lt;xtc_agent_cfg_IncludePrefix_prefix_length&gt;</xr-path>
+                  <xr-xml-map>xtc_agent_cfg:PrefixLength</xr-xml-map>
+                  <xr-task>basic-services</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <xr-sch-arg-name>&lt;xtc_agent_cfg_IncludePrefix_prefix_length&gt;</xr-sch-arg-name>
+                  <type range="0..32">
+                    <type-name>uint32</type-name>
+                  </type>
+                </prefix-length>
+              </include-prefix>
+            </include-prefixes>
+            <force-sr-include config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/f/autoroute/b/force_sspf_capable/enable</xr-path>
+              <xr-xml-map>xtc_agent_cfg:ForceSRInclude</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </force-sr-include>
+            <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/f/autoroute/a/enable</xr-path>
+              <xr-xml-map>xtc_agent_cfg:Enable</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </enable>
+          </auto-route>
+          <candidate-paths config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/</xr-path>
+            <xr-xml-map>xtc_agent_cfg:CandidatePaths</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <preferences config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/</xr-path>
+              <xr-xml-map>xtc_agent_cfg:PreferenceTable</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <preference config="true" key="path-index" node="list">
+                <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/</xr-path>
+                <xr-xml-map>xtc_agent_cfg:Preference</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <constraints config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/d/constraints/</xr-path>
+                  <xr-xml-map>xtc_agent_cfg:Constraints</xr-xml-map>
+                  <xr-task>basic-services</xr-task>
+                  <disjoint-path config="true" is-key="false" node="container" presence="true">
+                    <xr-data-handler>ignore</xr-data-handler>
+                    <xr-is-packed/>
+                    <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/d/constraints/e/disjoint_path`</xr-path>
+                    <xr-xml-map>xtc_agent_cfg:DisjointPath</xr-xml-map>
+                    <xr-task>basic-services</xr-task>
+                    <xr-pack-format>%d%d%d</xr-pack-format>
+                    <group-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/d/constraints/e/disjoint_path`0</xr-path>
+                      <xr-xml-map>xtc_agent_cfg:GroupID</xr-xml-map>
+                      <xr-task>basic-services</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <type range="1..65535">
+                        <type-name>uint32</type-name>
+                      </type>
+                      <mandatory>true</mandatory>
+                    </group-id>
+                    <disjointness-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/d/constraints/e/disjoint_path`1</xr-path>
+                      <xr-xml-map>xtc_agent_cfg:DisjointnessType</xr-xml-map>
+                      <xr-task>basic-services</xr-task>
+                      <xr-sch-type>Enum</xr-sch-type>
+                      <type>
+                        <type-name>Xtc-disjointness</type-name>
+                      </type>
+                      <mandatory>true</mandatory>
+                    </disjointness-type>
+                    <sub-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/d/constraints/e/disjoint_path`2</xr-path>
+                      <xr-xml-map>xtc_agent_cfg:SubID</xr-xml-map>
+                      <xr-task>basic-services</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <type range="1..65535">
+                        <type-name>uint32</type-name>
+                      </type>
+                    </sub-id>
+                  </disjoint-path>
+                  <segment-rules config="true" is-key="false" node="container" presence="true">
+                    <xr-data-handler>ignore</xr-data-handler>
+                    <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/d/constraints/b/segments/</xr-path>
+                    <xr-xml-map>xtc_agent_cfg:SegmentRules</xr-xml-map>
+                    <xr-task>basic-services</xr-task>
+                    <sid-algorithm config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-primitive-type>uint32</xr-primitive-type>
+                      <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/d/constraints/b/segments/algorithm</xr-path>
+                      <xr-xml-map>xtc_agent_cfg:SIDAlgorithm</xr-xml-map>
+                      <xr-task>basic-services</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <type range="128..255">
+                        <type-name>uint32</type-name>
+                      </type>
+                      <mandatory>true</mandatory>
+                    </sid-algorithm>
+                  </segment-rules>
+                  <affinity-rules config="true" is-key="false" node="container" presence="false">
+                    <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/d/constraints/d/affinity/</xr-path>
+                    <xr-xml-map>xtc_agent_cfg:AffinityRuleTable</xr-xml-map>
+                    <xr-task>basic-services</xr-task>
+                    <affinity-rule config="true" key="rule" node="list">
+                      <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/d/constraints/d/affinity/b/rule/&lt;xtc_agent_cfg_AffinityRule_AffinityRule&gt;/</xr-path>
+                      <xr-xml-map>xtc_agent_cfg:AffinityRule</xr-xml-map>
+                      <xr-task>basic-services</xr-task>
+                      <rule config="true" is-key="true" is-yang-key="true" node="leaf">
+                        <xr-data-handler>ignore</xr-data-handler>
+                        <xr-primitive-type>uint32</xr-primitive-type>
+                        <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/d/constraints/d/affinity/b/rule/&lt;xtc_agent_cfg_AffinityRule_AffinityRule&gt;/</xr-path>
+                        <xr-xml-map>xtc_agent_cfg:Rule</xr-xml-map>
+                        <xr-task>basic-services</xr-task>
+                        <xr-sch-type>Enum</xr-sch-type>
+                        <xr-sch-arg-name>&lt;xtc_agent_cfg_AffinityRule_AffinityRule&gt;</xr-sch-arg-name>
+                        <type>
+                          <type-name>Xtc-affinity-rule</type-name>
+                        </type>
+                      </rule>
+                      <affinity-name config="true" key="affinity-name" node="list">
+                        <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/d/constraints/d/affinity/b/rule/&lt;xtc_agent_cfg_AffinityRule_AffinityRule&gt;/b/affinity_name/&lt;xtc_agent_cfg_AffinityName_AffinityName&gt;</xr-path>
+                        <xr-xml-map>xtc_agent_cfg:AffinityName</xr-xml-map>
+                        <xr-task>basic-services</xr-task>
+                        <affinity-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                          <xr-data-handler>ignore</xr-data-handler>
+                          <xr-create-item-relative-path/>
+                          <xr-primitive-type>string</xr-primitive-type>
+                          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/d/constraints/d/affinity/b/rule/&lt;xtc_agent_cfg_AffinityRule_AffinityRule&gt;/b/affinity_name/&lt;xtc_agent_cfg_AffinityName_AffinityName&gt;</xr-path>
+                          <xr-xml-map>xtc_agent_cfg:AffinityName</xr-xml-map>
+                          <xr-task>basic-services</xr-task>
+                          <xr-sch-type>BoundedString</xr-sch-type>
+                          <xr-sch-arg-name>&lt;xtc_agent_cfg_AffinityName_AffinityName&gt;</xr-sch-arg-name>
+                          <type length="1..32">
+                            <type-name>xr:Cisco-ios-xr-string</type-name>
+                          </type>
+                        </affinity-name>
+                      </affinity-name>
+                    </affinity-rule>
+                  </affinity-rules>
+                </constraints>
+                <path-infos config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/b/info/</xr-path>
+                  <xr-xml-map>xtc_agent_cfg:PathInfoTable</xr-xml-map>
+                  <xr-task>basic-services</xr-task>
+                  <path-info config="true" key="type hop-type segment-list-name" node="list">
+                    <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/b/info/a/&lt;xtc_agent_cfg_PathInfo_PathType&gt;,&lt;xtc_agent_cfg_PathInfo_HopType&gt;,&lt;xtc_agent_cfg_PathInfo_PathName&gt;/</xr-path>
+                    <xr-xml-map>xtc_agent_cfg:PathInfo</xr-xml-map>
+                    <xr-task>basic-services</xr-task>
+                    <metric config="true" is-key="false" node="container" presence="false">
+                      <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/b/info/a/&lt;xtc_agent_cfg_PathInfo_PathType&gt;,&lt;xtc_agent_cfg_PathInfo_HopType&gt;,&lt;xtc_agent_cfg_PathInfo_PathName&gt;/b/metric/</xr-path>
+                      <xr-xml-map>xtc_agent_cfg:Metric</xr-xml-map>
+                      <xr-task>basic-services</xr-task>
+                      <sid-limit config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-primitive-type>uint32</xr-primitive-type>
+                        <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/b/info/a/&lt;xtc_agent_cfg_PathInfo_PathType&gt;,&lt;xtc_agent_cfg_PathInfo_HopType&gt;,&lt;xtc_agent_cfg_PathInfo_PathName&gt;/b/metric/b/sid_limit</xr-path>
+                        <xr-xml-map>xtc_agent_cfg:SIDLimit</xr-xml-map>
+                        <xr-task>basic-services</xr-task>
+                        <xr-sch-type>Range</xr-sch-type>
+                        <type range="1..255">
+                          <type-name>uint32</type-name>
+                        </type>
+                      </sid-limit>
+                      <metric-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-primitive-type>uint32</xr-primitive-type>
+                        <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/b/info/a/&lt;xtc_agent_cfg_PathInfo_PathType&gt;,&lt;xtc_agent_cfg_PathInfo_HopType&gt;,&lt;xtc_agent_cfg_PathInfo_PathName&gt;/b/metric/b/metric_type</xr-path>
+                        <xr-xml-map>xtc_agent_cfg:MetricType</xr-xml-map>
+                        <xr-task>basic-services</xr-task>
+                        <xr-sch-type>Enum</xr-sch-type>
+                        <type>
+                          <type-name>Xtc-metric</type-name>
+                        </type>
+                      </metric-type>
+                      <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-primitive-type>uint32</xr-primitive-type>
+                        <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/b/info/a/&lt;xtc_agent_cfg_PathInfo_PathType&gt;,&lt;xtc_agent_cfg_PathInfo_HopType&gt;,&lt;xtc_agent_cfg_PathInfo_PathName&gt;/b/metric/a/enable</xr-path>
+                        <xr-xml-map>xtc_agent_cfg:Enable</xr-xml-map>
+                        <xr-task>basic-services</xr-task>
+                        <xr-sch-type>Configured</xr-sch-type>
+                        <type>
+                          <type-name>empty</type-name>
+                        </type>
+                      </enable>
+                      <metric-margin config="true" is-key="false" node="container" presence="false">
+                        <xr-is-packed/>
+                        <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/b/info/a/&lt;xtc_agent_cfg_PathInfo_PathType&gt;,&lt;xtc_agent_cfg_PathInfo_HopType&gt;,&lt;xtc_agent_cfg_PathInfo_PathName&gt;/b/metric/c/margin`</xr-path>
+                        <xr-xml-map>xtc_agent_cfg:MetricMargin</xr-xml-map>
+                        <xr-task>basic-services</xr-task>
+                        <xr-pack-format>%d%d%d</xr-pack-format>
+                        <value-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-is-packed/>
+                          <xr-pack-format>%d%d%d</xr-pack-format>
+                          <xr-pack-elem-size>1</xr-pack-elem-size>
+                          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/b/info/a/&lt;xtc_agent_cfg_PathInfo_PathType&gt;,&lt;xtc_agent_cfg_PathInfo_HopType&gt;,&lt;xtc_agent_cfg_PathInfo_PathName&gt;/b/metric/c/margin`0</xr-path>
+                          <xr-xml-map>xtc_agent_cfg:ValueType</xr-xml-map>
+                          <xr-task>basic-services</xr-task>
+                          <xr-sch-type>Enum</xr-sch-type>
+                          <type>
+                            <type-name>Xtc-metric-value</type-name>
+                          </type>
+                        </value-type>
+                        <absolute-value config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-is-packed/>
+                          <xr-pack-format>%d%d%d</xr-pack-format>
+                          <xr-pack-elem-size>1</xr-pack-elem-size>
+                          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/b/info/a/&lt;xtc_agent_cfg_PathInfo_PathType&gt;,&lt;xtc_agent_cfg_PathInfo_HopType&gt;,&lt;xtc_agent_cfg_PathInfo_PathName&gt;/b/metric/c/margin`1</xr-path>
+                          <xr-xml-map>xtc_agent_cfg:AbsoluteValue</xr-xml-map>
+                          <xr-task>basic-services</xr-task>
+                          <xr-sch-type>ZeroRange</xr-sch-type>
+                          <when>../value-type = 'absolute'</when>
+                          <type range="0..2147483647">
+                            <type-name>uint32</type-name>
+                          </type>
+                        </absolute-value>
+                        <relative-value config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-is-packed/>
+                          <xr-pack-format>%d%d%d</xr-pack-format>
+                          <xr-pack-elem-size>1</xr-pack-elem-size>
+                          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/b/info/a/&lt;xtc_agent_cfg_PathInfo_PathType&gt;,&lt;xtc_agent_cfg_PathInfo_HopType&gt;,&lt;xtc_agent_cfg_PathInfo_PathName&gt;/b/metric/c/margin`2</xr-path>
+                          <xr-xml-map>xtc_agent_cfg:RelativeValue</xr-xml-map>
+                          <xr-task>basic-services</xr-task>
+                          <xr-sch-type>ZeroRange</xr-sch-type>
+                          <when>../value-type = 'relative'</when>
+                          <type range="0..2147483647">
+                            <type-name>uint32</type-name>
+                          </type>
+                        </relative-value>
+                      </metric-margin>
+                    </metric>
+                    <pcep config="true" is-key="false" node="container" presence="false">
+                      <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/b/info/a/&lt;xtc_agent_cfg_PathInfo_PathType&gt;,&lt;xtc_agent_cfg_PathInfo_HopType&gt;,&lt;xtc_agent_cfg_PathInfo_PathName&gt;/b/pce/</xr-path>
+                      <xr-xml-map>xtc_agent_cfg:PCEP</xr-xml-map>
+                      <xr-task>basic-services</xr-task>
+                      <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-primitive-type>uint32</xr-primitive-type>
+                        <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/b/info/a/&lt;xtc_agent_cfg_PathInfo_PathType&gt;,&lt;xtc_agent_cfg_PathInfo_HopType&gt;,&lt;xtc_agent_cfg_PathInfo_PathName&gt;/b/pce/a/enable</xr-path>
+                        <xr-xml-map>xtc_agent_cfg:Enable</xr-xml-map>
+                        <xr-task>basic-services</xr-task>
+                        <xr-sch-type>Configured</xr-sch-type>
+                        <type>
+                          <type-name>empty</type-name>
+                        </type>
+                      </enable>
+                    </pcep>
+                    <weight config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-primitive-type>uint32</xr-primitive-type>
+                      <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/b/info/a/&lt;xtc_agent_cfg_PathInfo_PathType&gt;,&lt;xtc_agent_cfg_PathInfo_HopType&gt;,&lt;xtc_agent_cfg_PathInfo_PathName&gt;/b/weight</xr-path>
+                      <xr-xml-map>xtc_agent_cfg:Weight</xr-xml-map>
+                      <xr-task>basic-services</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <type range="1..4294967295">
+                        <type-name>uint32</type-name>
+                      </type>
+                    </weight>
+                    <type config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-data-handler>ignore</xr-data-handler>
+                      <xr-primitive-type>uint32</xr-primitive-type>
+                      <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/b/info/a/&lt;xtc_agent_cfg_PathInfo_PathType&gt;,&lt;xtc_agent_cfg_PathInfo_HopType&gt;,&lt;xtc_agent_cfg_PathInfo_PathName&gt;/</xr-path>
+                      <xr-xml-map>xtc_agent_cfg:Type</xr-xml-map>
+                      <xr-task>basic-services</xr-task>
+                      <xr-sch-type>Enum</xr-sch-type>
+                      <xr-sch-arg-name>&lt;xtc_agent_cfg_PathInfo_PathType&gt;</xr-sch-arg-name>
+                      <type>
+                        <type-name>Xtc-path</type-name>
+                      </type>
+                    </type>
+                    <hop-type config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-data-handler>ignore</xr-data-handler>
+                      <xr-primitive-type>uint32</xr-primitive-type>
+                      <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/b/info/a/&lt;xtc_agent_cfg_PathInfo_PathType&gt;,&lt;xtc_agent_cfg_PathInfo_HopType&gt;,&lt;xtc_agent_cfg_PathInfo_PathName&gt;/</xr-path>
+                      <xr-xml-map>xtc_agent_cfg:HopType</xr-xml-map>
+                      <xr-task>basic-services</xr-task>
+                      <xr-sch-type>Enum</xr-sch-type>
+                      <xr-sch-arg-name>&lt;xtc_agent_cfg_PathInfo_HopType&gt;</xr-sch-arg-name>
+                      <type>
+                        <type-name>Xtc-path-hop</type-name>
+                      </type>
+                    </hop-type>
+                    <segment-list-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-data-handler>ignore</xr-data-handler>
+                      <xr-primitive-type>string</xr-primitive-type>
+                      <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/b/info/a/&lt;xtc_agent_cfg_PathInfo_PathType&gt;,&lt;xtc_agent_cfg_PathInfo_HopType&gt;,&lt;xtc_agent_cfg_PathInfo_PathName&gt;/</xr-path>
+                      <xr-xml-map>xtc_agent_cfg:SegmentListName</xr-xml-map>
+                      <xr-task>basic-services</xr-task>
+                      <xr-sch-type>BoundedString</xr-sch-type>
+                      <xr-sch-arg-name>&lt;xtc_agent_cfg_PathInfo_PathName&gt;</xr-sch-arg-name>
+                      <type length="1..128">
+                        <type-name>xr:Cisco-ios-xr-string</type-name>
+                      </type>
+                    </segment-list-name>
+                    <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-primitive-type>uint32</xr-primitive-type>
+                      <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/b/info/a/&lt;xtc_agent_cfg_PathInfo_PathType&gt;,&lt;xtc_agent_cfg_PathInfo_HopType&gt;,&lt;xtc_agent_cfg_PathInfo_PathName&gt;/a/enable</xr-path>
+                      <xr-xml-map>xtc_agent_cfg:Enable</xr-xml-map>
+                      <xr-task>basic-services</xr-task>
+                      <xr-sch-type>Configured</xr-sch-type>
+                      <type>
+                        <type-name>empty</type-name>
+                      </type>
+                    </enable>
+                  </path-info>
+                </path-infos>
+                <path-index config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/</xr-path>
+                  <xr-xml-map>xtc_agent_cfg:PathIndex</xr-xml-map>
+                  <xr-task>basic-services</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <xr-sch-arg-name>&lt;xtc_agent_cfg_Preference_Preference&gt;</xr-sch-arg-name>
+                  <type range="1..65535">
+                    <type-name>uint32</type-name>
+                  </type>
+                </path-index>
+                <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_agent_cfg_Preference_Preference&gt;/a/enable</xr-path>
+                  <xr-xml-map>xtc_agent_cfg:Enable</xr-xml-map>
+                  <xr-task>basic-services</xr-task>
+                  <xr-sch-type>Configured</xr-sch-type>
+                  <type>
+                    <type-name>empty</type-name>
+                  </type>
+                </enable>
+              </preference>
+            </preferences>
+            <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/h/path/a/enable</xr-path>
+              <xr-xml-map>xtc_agent_cfg:Enable</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </enable>
+          </candidate-paths>
+          <forward-class config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/e/fwd_class</xr-path>
+            <xr-xml-map>xtc_agent_cfg:ForwardClass</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1..7">
+              <type-name>uint32</type-name>
+            </type>
+          </forward-class>
+          <ipv6-disable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/z/ipv6_disable</xr-path>
+            <xr-xml-map>xtc_agent_cfg:IPV6Disable</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </ipv6-disable>
+          <shutdown config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/g/shutdown</xr-path>
+            <xr-xml-map>xtc_agent_cfg:Shutdown</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </shutdown>
+          <bandwidth config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/b/bandwidth</xr-path>
+            <xr-xml-map>xtc_agent_cfg:Bandwidth</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1..4294967295">
+              <type-name>uint32</type-name>
+            </type>
+          </bandwidth>
+          <policy-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/</xr-path>
+            <xr-xml-map>xtc_agent_cfg:PolicyName</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-sch-type>BoundedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;xtc_agent_cfg_Policy_PolicyName&gt;</xr-sch-arg-name>
+            <type length="1..59">
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </policy-name>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/policy/&lt;xtc_agent_cfg_Policy_PolicyName&gt;/a/enable</xr-path>
+            <xr-xml-map>xtc_agent_cfg:Enable</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </enable>
+        </policy>
+      </policies>
+      <srte-interfaces config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/if/</xr-path>
+        <xr-xml-map>xtc_agent_cfg:SRTEInterfaceTable</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <srte-interface config="true" key="srte-interface-name" node="list">
+          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/if/&lt;xtc_agent_cfg_SRTEInterface_arg185&gt;/</xr-path>
+          <xr-xml-map>xtc_agent_cfg:SRTEInterface</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <interface-affinities config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/if/&lt;xtc_agent_cfg_SRTEInterface_arg185&gt;/b/affinity/</xr-path>
+            <xr-xml-map>xtc_agent_cfg:InterfaceAffinityTable</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <interface-affinity config="true" key="affinity-name" node="list">
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/if/&lt;xtc_agent_cfg_SRTEInterface_arg185&gt;/b/affinity/b/affinity_name/&lt;xtc_agent_cfg_InterfaceAffinity_AffinityName&gt;</xr-path>
+              <xr-xml-map>xtc_agent_cfg:InterfaceAffinity</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <affinity-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-create-item-relative-path/>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/if/&lt;xtc_agent_cfg_SRTEInterface_arg185&gt;/b/affinity/b/affinity_name/&lt;xtc_agent_cfg_InterfaceAffinity_AffinityName&gt;</xr-path>
+                <xr-xml-map>xtc_agent_cfg:AffinityName</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-sch-type>BoundedString</xr-sch-type>
+                <xr-sch-arg-name>&lt;xtc_agent_cfg_InterfaceAffinity_AffinityName&gt;</xr-sch-arg-name>
+                <type length="1..32">
+                  <type-name>xr:Cisco-ios-xr-string</type-name>
+                </type>
+              </affinity-name>
+            </interface-affinity>
+          </interface-affinities>
+          <interface-metric config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/if/&lt;xtc_agent_cfg_SRTEInterface_arg185&gt;/metric</xr-path>
+            <xr-xml-map>xtc_agent_cfg:InterfaceMetric</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-sch-type>ZeroRange</xr-sch-type>
+            <type range="0..2147483647">
+              <type-name>uint32</type-name>
+            </type>
+          </interface-metric>
+          <srte-interface-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/if/&lt;xtc_agent_cfg_SRTEInterface_arg185&gt;/</xr-path>
+            <xr-xml-map>xtc_agent_cfg:SRTEInterfaceName</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-sch-type>InterfaceForward</xr-sch-type>
+            <xr-sch-arg-name>&lt;xtc_agent_cfg_SRTEInterface_arg185&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+          </srte-interface-name>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/if/&lt;xtc_agent_cfg_SRTEInterface_arg185&gt;/a/enable</xr-path>
+            <xr-xml-map>xtc_agent_cfg:Enable</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </enable>
+        </srte-interface>
+      </srte-interfaces>
+      <pcc config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/sr/xtc/c/tr-eng/pcc/</xr-path>
+        <xr-xml-map>xtc_agent_cfg:PCC</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <pce-peers config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/pcc/c/peer/</xr-path>
+          <xr-xml-map>xtc_agent_cfg:PCEPeerTable</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <pce-peer config="true" key="pce-address" node="list">
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/pcc/c/peer/&lt;xtc_agent_cfg_PCEPeer_pce_address&gt;/</xr-path>
+            <xr-xml-map>xtc_agent_cfg:PCEPeer</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <password config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/pcc/c/peer/&lt;xtc_agent_cfg_PCEPeer_pce_address&gt;/c/pass</xr-path>
+              <xr-xml-map>xtc_agent_cfg:Password</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <type length="1..25">
+                <type-name>string</type-name>
+              </type>
+            </password>
+            <keychain config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/pcc/c/peer/&lt;xtc_agent_cfg_PCEPeer_pce_address&gt;/d/keychain</xr-path>
+              <xr-xml-map>xtc_agent_cfg:Keychain</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <type length="1..32">
+                <type-name>string</type-name>
+              </type>
+            </keychain>
+            <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/pcc/c/peer/&lt;xtc_agent_cfg_PCEPeer_pce_address&gt;/a/enable</xr-path>
+              <xr-xml-map>xtc_agent_cfg:Enable</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </enable>
+            <precedence config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/pcc/c/peer/&lt;xtc_agent_cfg_PCEPeer_pce_address&gt;/b/prec</xr-path>
+              <xr-xml-map>xtc_agent_cfg:Precedence</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="0..255">
+                <type-name>uint32</type-name>
+              </type>
+            </precedence>
+            <pce-address config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/pcc/c/peer/&lt;xtc_agent_cfg_PCEPeer_pce_address&gt;/</xr-path>
+              <xr-xml-map>xtc_agent_cfg:PCEAddress</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>IPAddressString</xr-sch-type>
+              <xr-sch-arg-name>&lt;xtc_agent_cfg_PCEPeer_pce_address&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ip-address-no-zone</type-name>
+              </type>
+            </pce-address>
+          </pce-peer>
+        </pce-peers>
+        <pce-addresses config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/pcc/c/pce/</xr-path>
+          <xr-xml-map>xtc_agent_cfg:PCEAddressTable</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <pce-address config="true" key="pce-address" node="list">
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/pcc/c/pce/&lt;xtc_agent_cfg_PCEAddress_pce_address&gt;</xr-path>
+            <xr-xml-map>xtc_agent_cfg:PCEAddress</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <pce-address config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/pcc/c/pce/&lt;xtc_agent_cfg_PCEAddress_pce_address&gt;</xr-path>
+              <xr-xml-map>xtc_agent_cfg:PCEAddress</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>IPAddressString</xr-sch-type>
+              <xr-sch-arg-name>&lt;xtc_agent_cfg_PCEAddress_pce_address&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ip-address-no-zone</type-name>
+              </type>
+            </pce-address>
+            <precedence config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/sr/xtc/c/tr-eng/pcc/c/pce/&lt;xtc_agent_cfg_PCEAddress_pce_address&gt;</xr-path>
+              <xr-xml-map>xtc_agent_cfg:Precedence</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="0..255">
+                <type-name>uint32</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </precedence>
+          </pce-address>
+        </pce-addresses>
+        <dead-timer-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/pcc/tc/deadtimer_timer</xr-path>
+          <xr-xml-map>xtc_agent_cfg:DeadTimerInterval</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..255">
+            <type-name>uint32</type-name>
+          </type>
+        </dead-timer-interval>
+        <pcc-centric config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/pcc/f/pcc_centric</xr-path>
+          <xr-xml-map>xtc_agent_cfg:PCCCentric</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </pcc-centric>
+        <report-all config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/pcc/d/report_all</xr-path>
+          <xr-xml-map>xtc_agent_cfg:ReportAll</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </report-all>
+        <keepalive-timer-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/pcc/tb/keepalive_timer</xr-path>
+          <xr-xml-map>xtc_agent_cfg:KeepaliveTimerInterval</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="0..255">
+            <type-name>uint32</type-name>
+          </type>
+        </keepalive-timer-interval>
+        <initiated-state-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/pcc/td/initiated_state_timer</xr-path>
+          <xr-xml-map>xtc_agent_cfg:InitiatedStateInterval</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="15..14400">
+            <type-name>uint32</type-name>
+          </type>
+        </initiated-state-interval>
+        <source-address config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/pcc/b/address</xr-path>
+          <xr-xml-map>xtc_agent_cfg:SourceAddress</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>IPAddressString</xr-sch-type>
+          <type>
+            <type-name>inet:ip-address-no-zone</type-name>
+          </type>
+        </source-address>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/pcc/a/enable</xr-path>
+          <xr-xml-map>xtc_agent_cfg:Enable</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </enable>
+        <initiated-orphan-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/pcc/te/initiated_orphan_timer</xr-path>
+          <xr-xml-map>xtc_agent_cfg:InitiatedOrphanInterval</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="10..180">
+            <type-name>uint32</type-name>
+          </type>
+        </initiated-orphan-interval>
+        <delegation-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/pcc/ta/delegation_timeout</xr-path>
+          <xr-xml-map>xtc_agent_cfg:DelegationTimeout</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="0..3600">
+            <type-name>uint32</type-name>
+          </type>
+        </delegation-timeout>
+      </pcc>
+      <affinity-maps config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/affinity/</xr-path>
+        <xr-xml-map>xtc_agent_cfg:AffinityMapTable</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <affinity-map config="true" key="affinity-name" node="list">
+          <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/affinity/b/bitmask/b/affinity_name/&lt;xtc_agent_cfg_AffinityMap_AffinityName&gt;</xr-path>
+          <xr-xml-map>xtc_agent_cfg:AffinityMap</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <affinity-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/affinity/b/bitmask/b/affinity_name/&lt;xtc_agent_cfg_AffinityMap_AffinityName&gt;</xr-path>
+            <xr-xml-map>xtc_agent_cfg:AffinityName</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-sch-type>BoundedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;xtc_agent_cfg_AffinityMap_AffinityName&gt;</xr-sch-arg-name>
+            <type length="1..32">
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </affinity-name>
+          <bit-position config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/affinity/b/bitmask/b/affinity_name/&lt;xtc_agent_cfg_AffinityMap_AffinityName&gt;</xr-path>
+            <xr-xml-map>xtc_agent_cfg:BitPosition</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..31">
+              <type-name>uint32</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </bit-position>
+        </affinity-map>
+      </affinity-maps>
+      <te-latency config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/sr/xtc/c/tr-eng/b/te-latency</xr-path>
+        <xr-xml-map>xtc_agent_cfg:TELatency</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </te-latency>
+      <maximum-sid-depth config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/sr/xtc/c/tr-eng/c/msd</xr-path>
+        <xr-xml-map>xtc_agent_cfg:MaximumSIDDepth</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..255">
+          <type-name>uint32</type-name>
+        </type>
+      </maximum-sid-depth>
+      <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/sr/xtc/c/tr-eng/a/enable</xr-path>
+        <xr-xml-map>xtc_agent_cfg:Enable</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </enable>
+    </traffic-engineering>
+  </augment>
+</Cisco-IOS-XR-infra-xtc-agent-cfg>

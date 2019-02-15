@@ -1,0 +1,544 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-manageability-object-tracking-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-manageability-object-tracking-cfg" revision="2017-09-07">
+  <files>
+    <file revision="2017-09-07" submodule="false">Cisco-IOS-XR-manageability-object-tracking-cfg.yang</file>
+  </files>
+  <prefix>manageability-object-tracking-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="dt1">Cisco-IOS-XR-manageability-object-tracking-datatypes</import>
+  <import prefix="a1">Cisco-IOS-XR-ifmgr-cfg</import>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <track-name config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>string</xr-primitive-type>
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/track_name</xr-path>
+      <xr-xml-map>manageability-object-tracking_interface_cfg:TrackName</xr-xml-map>
+      <xr-task>interface</xr-task>
+      <xr-sch-type>BoundedString</xr-sch-type>
+      <type>
+        <type-name>dt1:Object-tracking-name-string</type-name>
+      </type>
+    </track-name>
+  </augment>
+  <object-trackings config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/object_tracking/</xr-path>
+    <xr-xml-map>manageability-object-tracking_cfg:ObjectTrackingTable</xr-xml-map>
+    <xr-task>sysmgr</xr-task>
+    <object-tracking config="true" key="track-name" node="list">
+      <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/</xr-path>
+      <xr-xml-map>manageability-object-tracking_cfg:ObjectTracking</xr-xml-map>
+      <xr-task>sysmgr</xr-task>
+      <action config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/action/</xr-path>
+        <xr-xml-map>manageability-object-tracking_cfg:Action</xr-xml-map>
+        <xr-task>sysmgr</xr-task>
+        <action-err-dis config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/action/errdis/</xr-path>
+          <xr-xml-map>manageability-object-tracking_cfg:ActionErrDisTable</xr-xml-map>
+          <xr-task>sysmgr</xr-task>
+          <action-err-di config="true" key="track-state-type interface-name" node="list">
+            <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/action/errdis/&lt;manageability-object-tracking_cfg_ActionErrDis_state&gt;/&lt;manageability-object-tracking_cfg_ActionErrDis_interface&gt;/</xr-path>
+            <xr-xml-map>manageability-object-tracking_cfg:ActionErrDis</xr-xml-map>
+            <xr-task>sysmgr</xr-task>
+            <track-state-type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/action/errdis/&lt;manageability-object-tracking_cfg_ActionErrDis_state&gt;/&lt;manageability-object-tracking_cfg_ActionErrDis_interface&gt;/v</xr-path>
+              <xr-xml-map>manageability-object-tracking_cfg:TrackStateType</xr-xml-map>
+              <xr-task>sysmgr</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-sch-arg-name>&lt;manageability-object-tracking_cfg_ActionErrDis_state&gt;</xr-sch-arg-name>
+              <type range="0..1">
+                <type-name>uint32</type-name>
+              </type>
+            </track-state-type>
+            <interface-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-create-item-relative-path/>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/action/errdis/&lt;manageability-object-tracking_cfg_ActionErrDis_state&gt;/&lt;manageability-object-tracking_cfg_ActionErrDis_interface&gt;/v</xr-path>
+              <xr-xml-map>manageability-object-tracking_cfg:InterfaceName</xr-xml-map>
+              <xr-task>sysmgr</xr-task>
+              <xr-sch-type>InterfaceForward</xr-sch-type>
+              <xr-sch-arg-name>&lt;manageability-object-tracking_cfg_ActionErrDis_interface&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-name>
+          </action-err-di>
+        </action-err-dis>
+        <actions-enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/action/a</xr-path>
+          <xr-xml-map>manageability-object-tracking_cfg:ActionsEnable</xr-xml-map>
+          <xr-task>sysmgr</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </actions-enable>
+      </action>
+      <type-bfd-rtr config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/0x9/</xr-path>
+        <xr-xml-map>manageability-object-tracking_cfg:TypeBfdRtr</xr-xml-map>
+        <xr-task>sysmgr</xr-task>
+        <bfd-rtr config="true" is-key="false" node="container" presence="true">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-is-packed/>
+          <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/0x9/bfdrtr`</xr-path>
+          <xr-xml-map>manageability-object-tracking_cfg:BfdRtr</xr-xml-map>
+          <xr-task>sysmgr</xr-task>
+          <xr-pack-format>%d%d%s%N</xr-pack-format>
+          <rate config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%s%N</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/0x9/bfdrtr`0</xr-path>
+            <xr-xml-map>manageability-object-tracking_cfg:Rate</xr-xml-map>
+            <xr-task>sysmgr</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1..5000">
+              <type-name>uint32</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </rate>
+          <debounce-count config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%s%N</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/0x9/bfdrtr`1</xr-path>
+            <xr-xml-map>manageability-object-tracking_cfg:DebounceCount</xr-xml-map>
+            <xr-task>sysmgr</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1..10">
+              <type-name>uint32</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </debounce-count>
+          <interface-name config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%s%N</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/0x9/bfdrtr`2</xr-path>
+            <xr-xml-map>manageability-object-tracking_cfg:InterfaceName</xr-xml-map>
+            <xr-task>sysmgr</xr-task>
+            <xr-sch-type>InterfaceForward</xr-sch-type>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </interface-name>
+          <dest-address config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%s%N</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/0x9/bfdrtr`3</xr-path>
+            <xr-xml-map>manageability-object-tracking_cfg:DestAddress</xr-xml-map>
+            <xr-task>sysmgr</xr-task>
+            <xr-sch-type>IPV4Address</xr-sch-type>
+            <type>
+              <type-name>inet:ipv4-address-no-zone</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </dest-address>
+        </bfd-rtr>
+      </type-bfd-rtr>
+      <type-interface config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/interface/0x1/info/</xr-path>
+        <xr-xml-map>manageability-object-tracking_cfg:TypeInterface</xr-xml-map>
+        <xr-task>sysmgr</xr-task>
+        <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/interface/0x1/info/interface</xr-path>
+          <xr-xml-map>manageability-object-tracking_cfg:Interface</xr-xml-map>
+          <xr-task>sysmgr</xr-task>
+          <xr-sch-type>InterfaceForward</xr-sch-type>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </interface>
+      </type-interface>
+      <type-rtr config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/rtr/0x5/</xr-path>
+        <xr-xml-map>manageability-object-tracking_cfg:TypeRtr</xr-xml-map>
+        <xr-task>sysmgr</xr-task>
+        <rtr config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/rtr/0x5/op_id</xr-path>
+          <xr-xml-map>manageability-object-tracking_cfg:Rtr</xr-xml-map>
+          <xr-task>sysmgr</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..2048">
+            <type-name>uint32</type-name>
+          </type>
+        </rtr>
+      </type-rtr>
+      <type-list config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/</xr-path>
+        <xr-xml-map>manageability-object-tracking_cfg:TypeList</xr-xml-map>
+        <xr-task>sysmgr</xr-task>
+        <threshold-weight config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x7/</xr-path>
+          <xr-xml-map>manageability-object-tracking_cfg:ThresholdWeight</xr-xml-map>
+          <xr-task>sysmgr</xr-task>
+          <threshold-limits config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x7/thld_limits`</xr-path>
+            <xr-xml-map>manageability-object-tracking_cfg:ThresholdLimits</xr-xml-map>
+            <xr-task>sysmgr</xr-task>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <up config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x7/thld_limits`0</xr-path>
+              <xr-xml-map>manageability-object-tracking_cfg:Up</xr-xml-map>
+              <xr-task>sysmgr</xr-task>
+              <xr-sch-type>Integer</xr-sch-type>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </up>
+            <down config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x7/thld_limits`1</xr-path>
+              <xr-xml-map>manageability-object-tracking_cfg:Down</xr-xml-map>
+              <xr-task>sysmgr</xr-task>
+              <xr-sch-type>Integer</xr-sch-type>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+              <default>0</default>
+            </down>
+          </threshold-limits>
+        </threshold-weight>
+        <threshold-percentage-object config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x8/object/</xr-path>
+          <xr-xml-map>manageability-object-tracking_cfg:ThresholdPercentageObject</xr-xml-map>
+          <xr-task>sysmgr</xr-task>
+          <object config="true" key="object" node="list">
+            <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x8/object/&lt;manageability-object-tracking_cfg_Object_object&gt;/</xr-path>
+            <xr-xml-map>manageability-object-tracking_cfg:Object</xr-xml-map>
+            <xr-task>sysmgr</xr-task>
+            <object-weight config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x8/object/&lt;manageability-object-tracking_cfg_Object_object&gt;/a</xr-path>
+              <xr-xml-map>manageability-object-tracking_cfg:ObjectWeight</xr-xml-map>
+              <xr-task>sysmgr</xr-task>
+              <xr-sch-type>Integer</xr-sch-type>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+              <default>1</default>
+            </object-weight>
+            <object config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x8/object/&lt;manageability-object-tracking_cfg_Object_object&gt;/</xr-path>
+              <xr-xml-map>manageability-object-tracking_cfg:Object</xr-xml-map>
+              <xr-task>sysmgr</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <xr-sch-arg-name>&lt;manageability-object-tracking_cfg_Object_object&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>dt1:Object-tracking-name-string</type-name>
+              </type>
+            </object>
+          </object>
+        </threshold-percentage-object>
+        <threshold-percentage config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x8/</xr-path>
+          <xr-xml-map>manageability-object-tracking_cfg:ThresholdPercentage</xr-xml-map>
+          <xr-task>sysmgr</xr-task>
+          <threshold-limits config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x8/thld_limits`</xr-path>
+            <xr-xml-map>manageability-object-tracking_cfg:ThresholdLimits</xr-xml-map>
+            <xr-task>sysmgr</xr-task>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <up config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x8/thld_limits`0</xr-path>
+              <xr-xml-map>manageability-object-tracking_cfg:Up</xr-xml-map>
+              <xr-task>sysmgr</xr-task>
+              <xr-sch-type>Integer</xr-sch-type>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </up>
+            <down config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x8/thld_limits`1</xr-path>
+              <xr-xml-map>manageability-object-tracking_cfg:Down</xr-xml-map>
+              <xr-task>sysmgr</xr-task>
+              <xr-sch-type>Integer</xr-sch-type>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+              <default>0</default>
+            </down>
+          </threshold-limits>
+        </threshold-percentage>
+        <threshold-weight-object config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x7/object/</xr-path>
+          <xr-xml-map>manageability-object-tracking_cfg:ThresholdWeightObject</xr-xml-map>
+          <xr-task>sysmgr</xr-task>
+          <object config="true" key="object" node="list">
+            <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x7/object/&lt;manageability-object-tracking_cfg_Object_object&gt;/</xr-path>
+            <xr-xml-map>manageability-object-tracking_cfg:Object</xr-xml-map>
+            <xr-task>sysmgr</xr-task>
+            <object-weight config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x7/object/&lt;manageability-object-tracking_cfg_Object_object&gt;/a</xr-path>
+              <xr-xml-map>manageability-object-tracking_cfg:ObjectWeight</xr-xml-map>
+              <xr-task>sysmgr</xr-task>
+              <xr-sch-type>Integer</xr-sch-type>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+              <default>1</default>
+            </object-weight>
+            <object config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x7/object/&lt;manageability-object-tracking_cfg_Object_object&gt;/</xr-path>
+              <xr-xml-map>manageability-object-tracking_cfg:Object</xr-xml-map>
+              <xr-task>sysmgr</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <xr-sch-arg-name>&lt;manageability-object-tracking_cfg_Object_object&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>dt1:Object-tracking-name-string</type-name>
+              </type>
+            </object>
+          </object>
+        </threshold-weight-object>
+        <threshold-percentage-object-enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x8/a</xr-path>
+          <xr-xml-map>manageability-object-tracking_cfg:ThresholdPercentageObjectEnable</xr-xml-map>
+          <xr-task>sysmgr</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </threshold-percentage-object-enable>
+        <threshold-weight-object-enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x7/a</xr-path>
+          <xr-xml-map>manageability-object-tracking_cfg:ThresholdWeightObjectEnable</xr-xml-map>
+          <xr-task>sysmgr</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </threshold-weight-object-enable>
+      </type-list>
+      <type-route config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/route/0x2/info/</xr-path>
+        <xr-xml-map>manageability-object-tracking_cfg:TypeRoute</xr-xml-map>
+        <xr-task>sysmgr</xr-task>
+        <ip-address config="true" is-key="false" node="container" presence="true">
+          <xr-presence-packed/>
+          <xr-is-packed/>
+          <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/route/0x2/info/ip_address`</xr-path>
+          <xr-xml-map>manageability-object-tracking_cfg:IPAddress</xr-xml-map>
+          <xr-task>sysmgr</xr-task>
+          <xr-pack-format>%N%N</xr-pack-format>
+          <address config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%N%N</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/route/0x2/info/ip_address`0</xr-path>
+            <xr-xml-map>manageability-object-tracking_cfg:Address</xr-xml-map>
+            <xr-task>sysmgr</xr-task>
+            <xr-sch-type>IPV4Address</xr-sch-type>
+            <type>
+              <type-name>inet:ipv4-address-no-zone</type-name>
+            </type>
+          </address>
+          <mask config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%N%N</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/route/0x2/info/ip_address`1</xr-path>
+            <xr-xml-map>manageability-object-tracking_cfg:Mask</xr-xml-map>
+            <xr-task>sysmgr</xr-task>
+            <xr-sch-type>IPV4Address</xr-sch-type>
+            <type>
+              <type-name>inet:ipv4-address-no-zone</type-name>
+            </type>
+          </mask>
+        </ip-address>
+        <vrf config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/route/0x2/info/vrf</xr-path>
+          <xr-xml-map>manageability-object-tracking_cfg:VRF</xr-xml-map>
+          <xr-task>sysmgr</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <type length="1..32">
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </vrf>
+      </type-route>
+      <type-boolean-list config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/</xr-path>
+        <xr-xml-map>manageability-object-tracking_cfg:TypeBooleanList</xr-xml-map>
+        <xr-task>sysmgr</xr-task>
+        <or-objects config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x4/object/</xr-path>
+          <xr-xml-map>manageability-object-tracking_cfg:OrObjectTable</xr-xml-map>
+          <xr-task>sysmgr</xr-task>
+          <or-object config="true" key="object" node="list">
+            <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x4/object/&lt;manageability-object-tracking_cfg_OrObject_object&gt;/</xr-path>
+            <xr-xml-map>manageability-object-tracking_cfg:OrObject</xr-xml-map>
+            <xr-task>sysmgr</xr-task>
+            <object-sign config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x4/object/&lt;manageability-object-tracking_cfg_OrObject_object&gt;/a</xr-path>
+              <xr-xml-map>manageability-object-tracking_cfg:ObjectSign</xr-xml-map>
+              <xr-task>sysmgr</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>dt1:Object-tracking-boolean-sign</type-name>
+              </type>
+            </object-sign>
+            <object config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x4/object/&lt;manageability-object-tracking_cfg_OrObject_object&gt;/</xr-path>
+              <xr-xml-map>manageability-object-tracking_cfg:Object</xr-xml-map>
+              <xr-task>sysmgr</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <xr-sch-arg-name>&lt;manageability-object-tracking_cfg_OrObject_object&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>dt1:Object-tracking-name-string</type-name>
+              </type>
+            </object>
+          </or-object>
+        </or-objects>
+        <and-objects config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x3/object/</xr-path>
+          <xr-xml-map>manageability-object-tracking_cfg:AndObjectTable</xr-xml-map>
+          <xr-task>sysmgr</xr-task>
+          <and-object config="true" key="object-name" node="list">
+            <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x3/object/&lt;manageability-object-tracking_cfg_AndObject_object&gt;/</xr-path>
+            <xr-xml-map>manageability-object-tracking_cfg:AndObject</xr-xml-map>
+            <xr-task>sysmgr</xr-task>
+            <object-sign config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x3/object/&lt;manageability-object-tracking_cfg_AndObject_object&gt;/a</xr-path>
+              <xr-xml-map>manageability-object-tracking_cfg:ObjectSign</xr-xml-map>
+              <xr-task>sysmgr</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>dt1:Object-tracking-boolean-sign</type-name>
+              </type>
+            </object-sign>
+            <object-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x3/object/&lt;manageability-object-tracking_cfg_AndObject_object&gt;/</xr-path>
+              <xr-xml-map>manageability-object-tracking_cfg:ObjectName</xr-xml-map>
+              <xr-task>sysmgr</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <xr-sch-arg-name>&lt;manageability-object-tracking_cfg_AndObject_object&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>dt1:Object-tracking-name-string</type-name>
+              </type>
+            </object-name>
+          </and-object>
+        </and-objects>
+      </type-boolean-list>
+      <delay-up config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/delay_up</xr-path>
+        <xr-xml-map>manageability-object-tracking_cfg:DelayUp</xr-xml-map>
+        <xr-task>sysmgr</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type>
+          <type-name>dt1:Object-tracking-delay</type-name>
+        </type>
+      </delay-up>
+      <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/a</xr-path>
+        <xr-xml-map>manageability-object-tracking_cfg:Enable</xr-xml-map>
+        <xr-task>sysmgr</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </enable>
+      <delay-down config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/delay_down</xr-path>
+        <xr-xml-map>manageability-object-tracking_cfg:DelayDown</xr-xml-map>
+        <xr-task>sysmgr</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type>
+          <type-name>dt1:Object-tracking-delay</type-name>
+        </type>
+      </delay-down>
+      <type-interface-enable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/interface/0x1/a</xr-path>
+        <xr-xml-map>manageability-object-tracking_cfg:TypeInterfaceEnable</xr-xml-map>
+        <xr-task>sysmgr</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </type-interface-enable>
+      <type-route-enable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/route/0x2/a</xr-path>
+        <xr-xml-map>manageability-object-tracking_cfg:TypeRouteEnable</xr-xml-map>
+        <xr-task>sysmgr</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </type-route-enable>
+      <type-boolean-list-and-enable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x3/a</xr-path>
+        <xr-xml-map>manageability-object-tracking_cfg:TypeBooleanListAndEnable</xr-xml-map>
+        <xr-task>sysmgr</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </type-boolean-list-and-enable>
+      <type-boolean-list-or-enable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/type/list/0x4/a</xr-path>
+        <xr-xml-map>manageability-object-tracking_cfg:TypeBooleanListOrEnable</xr-xml-map>
+        <xr-task>sysmgr</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </type-boolean-list-or-enable>
+      <track-name config="true" is-key="true" is-yang-key="true" node="leaf">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/gl/object_tracking/track/&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;/</xr-path>
+        <xr-xml-map>manageability-object-tracking_cfg:TrackName</xr-xml-map>
+        <xr-task>sysmgr</xr-task>
+        <xr-sch-type>BoundedString</xr-sch-type>
+        <xr-sch-arg-name>&lt;manageability-object-tracking_cfg_ObjectTracking_track&gt;</xr-sch-arg-name>
+        <type>
+          <type-name>dt1:Object-tracking-name-string</type-name>
+        </type>
+      </track-name>
+    </object-tracking>
+  </object-trackings>
+</Cisco-IOS-XR-manageability-object-tracking-cfg>

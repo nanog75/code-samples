@@ -1,0 +1,1783 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-mpls-static-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-mpls-static-oper" revision="2017-05-01">
+  <files>
+    <file revision="2017-05-01" submodule="false">Cisco-IOS-XR-mpls-static-oper.yang</file>
+    <file revision="2017-05-01" submodule="true">Cisco-IOS-XR-mpls-static-oper-sub1.yang</file>
+  </files>
+  <prefix>mpls-static-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="inet">ietf-inet-types</import>
+  <typedef name="Mgmt-mpls-static-path-status">
+    <type node="enumeration">
+      <enum>path-next-hop-none</enum>
+      <enum>path-next-hop-interface-down</enum>
+      <enum>path-next-hop-valid</enum>
+      <enum>resolve-failed</enum>
+      <enum>frr-backup</enum>
+      <enum>backup</enum>
+    </type>
+  </typedef>
+  <typedef name="Mgmt-static-lsp-afi">
+    <type node="enumeration">
+      <enum value="0">not-applicable</enum>
+      <enum value="1">ipv4</enum>
+      <enum value="2">ipv6</enum>
+    </type>
+  </typedef>
+  <typedef name="Mpls-static-path-role">
+    <type node="enumeration">
+      <enum>primary</enum>
+      <enum>backup</enum>
+      <enum>primary-and-backup</enum>
+    </type>
+  </typedef>
+  <typedef name="Mgmt-static-path">
+    <type node="enumeration">
+      <enum>cross-connect-path</enum>
+      <enum>pop-lookup-path</enum>
+    </type>
+  </typedef>
+  <typedef name="Static-ipv6-address">
+    <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+    <type>
+      <type-name>inet:ipv6-address</type-name>
+    </type>
+  </typedef>
+  <typedef name="Mgmt-static-addr">
+    <type node="enumeration">
+      <enum value="0">not-applicable</enum>
+      <enum value="1">ipv4</enum>
+      <enum value="2">ipv6</enum>
+    </type>
+  </typedef>
+  <typedef name="Mgmt-mpls-static-label-status">
+    <type node="enumeration">
+      <enum>not-created</enum>
+      <enum>vrf-down</enum>
+      <enum>rewrite-vrf-down</enum>
+      <enum>lsd-disconnected</enum>
+      <enum>lsd-failed</enum>
+      <enum>wait-for-lsd-reply</enum>
+      <enum>label-created</enum>
+      <enum>label-create-failed</enum>
+      <enum>label-rewrite-failed</enum>
+      <enum>rewrite-next-hop-interface-down</enum>
+      <enum>label-discrepancy</enum>
+      <enum>rewrite-discrepancy</enum>
+      <enum>rewrite-nexthop-unresolved</enum>
+      <enum>label-status-unknown</enum>
+    </type>
+  </typedef>
+  <typedef name="Mgmt-mpls-static-label-mode">
+    <type node="enumeration">
+      <enum>none</enum>
+      <enum>per-prefix</enum>
+      <enum>per-vrf</enum>
+      <enum>cross-connect</enum>
+    </type>
+  </typedef>
+  <mpls-static config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/mpls_static/gl/</xr-path>
+    <xr-xml-map>mpls_static_oper:MPLSStatic</xr-xml-map>
+    <xr-task>mpls-static</xr-task>
+    <vrfs config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/mpls_static/gl/vrf/</xr-path>
+      <xr-xml-map>mpls_static_oper:VRFTable</xr-xml-map>
+      <xr-task>mpls-static</xr-task>
+      <vrf config="false" key="vrf-name" node="list">
+        <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/</xr-path>
+        <xr-xml-map>mpls_static_oper:VRF</xr-xml-map>
+        <xr-task>mpls-static</xr-task>
+        <lsps config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/</xr-path>
+          <xr-xml-map>mpls_static_oper:LSPTable</xr-xml-map>
+          <xr-task>mpls-static</xr-task>
+          <xr-filterlist>MPLSStaticDiscrepancyFilter</xr-filterlist>
+          <xr-filterlist>MPLSStaticErrorFilter</xr-filterlist>
+          <lsp config="false" key="lsp-name" node="list">
+            <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;</xr-path>
+            <xr-xml-map>mpls_static_oper:LSP</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-grp-name>mpls_static_lsp_info</xr-bag-grp-name>
+            <xr-bag>mpls_static.bag</xr-bag>
+            <lsp-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;</xr-path>
+              <xr-xml-map>mpls_static_oper:LSPName</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;mpls_static_oper_LSP_lsp_name&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </lsp-name>
+            <label config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label</xr-path>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-version>9 0</xr-bag-version>
+              <prefix config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.Prefix</xr-path>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-version>9 0</xr-bag-version>
+                <prefix config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.Prefix.Prefix</xr-path>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <af-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.Prefix.Prefix.AFName</xr-path>
+                    <xr-xml-map>mpls_static:AFName</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>9 0</xr-bag-version>
+                    <type>
+                      <type-name>Mgmt-static-addr</type-name>
+                    </type>
+                  </af-name>
+                  <ipv4-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.Prefix.Prefix.IPv4Prefix</xr-path>
+                    <xr-xml-map>mpls_static:IPv4Prefix</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                    <xr-bag-version>9 0</xr-bag-version>
+                    <when>../af-name = 'ipv4'</when>
+                    <type>
+                      <type-name>inet:ipv4-address</type-name>
+                    </type>
+                  </ipv4-prefix>
+                  <ipv6-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.Prefix.Prefix.IPv6Prefix</xr-path>
+                    <xr-xml-map>mpls_static:IPv6Prefix</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                    <xr-bag-version>9 0</xr-bag-version>
+                    <when>../af-name = 'ipv6'</when>
+                    <type>
+                      <type-name>Static-ipv6-address</type-name>
+                    </type>
+                  </ipv6-prefix>
+                </prefix>
+                <prefix-length config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.Prefix.PrefixLength</xr-path>
+                  <xr-xml-map>mpls_static:PrefixLength</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </prefix-length>
+              </prefix>
+              <pathset-resolve-nh config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.PathsetResolveNH</xr-path>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-version>9 0</xr-bag-version>
+                <af-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.PathsetResolveNH.AFName</xr-path>
+                  <xr-xml-map>mpls_static:AFName</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <type>
+                    <type-name>Mgmt-static-addr</type-name>
+                  </type>
+                </af-name>
+                <ipv4-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.PathsetResolveNH.IPv4Prefix</xr-path>
+                  <xr-xml-map>mpls_static:IPv4Prefix</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <when>../af-name = 'ipv4'</when>
+                  <type>
+                    <type-name>inet:ipv4-address</type-name>
+                  </type>
+                </ipv4-prefix>
+                <ipv6-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.PathsetResolveNH.IPv6Prefix</xr-path>
+                  <xr-xml-map>mpls_static:IPv6Prefix</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <when>../af-name = 'ipv6'</when>
+                  <type>
+                    <type-name>Static-ipv6-address</type-name>
+                  </type>
+                </ipv6-prefix>
+              </pathset-resolve-nh>
+              <backup-pathset-resolve-nh config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.BackupPathsetResolveNH</xr-path>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-version>9 0</xr-bag-version>
+                <af-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.BackupPathsetResolveNH.AFName</xr-path>
+                  <xr-xml-map>mpls_static:AFName</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <type>
+                    <type-name>Mgmt-static-addr</type-name>
+                  </type>
+                </af-name>
+                <ipv4-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.BackupPathsetResolveNH.IPv4Prefix</xr-path>
+                  <xr-xml-map>mpls_static:IPv4Prefix</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <when>../af-name = 'ipv4'</when>
+                  <type>
+                    <type-name>inet:ipv4-address</type-name>
+                  </type>
+                </ipv4-prefix>
+                <ipv6-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.BackupPathsetResolveNH.IPv6Prefix</xr-path>
+                  <xr-xml-map>mpls_static:IPv6Prefix</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <when>../af-name = 'ipv6'</when>
+                  <type>
+                    <type-name>Static-ipv6-address</type-name>
+                  </type>
+                </ipv6-prefix>
+              </backup-pathset-resolve-nh>
+              <label config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.Label</xr-path>
+                <xr-xml-map>mpls_static:Label</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </label>
+              <label-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.LabelMode</xr-path>
+                <xr-xml-map>mpls_static:LabelMode</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>Mgmt-mpls-static-label-mode</type-name>
+                </type>
+              </label-mode>
+              <label-status config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.LabelStatus</xr-path>
+                <xr-xml-map>mpls_static:LabelStatus</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>Mgmt-mpls-static-label-status</type-name>
+                </type>
+              </label-status>
+              <vrf-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.VRFName</xr-path>
+                <xr-xml-map>mpls_static:VRFName</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </vrf-name>
+              <pathset-via-resolve config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.PathsetViaResolve</xr-path>
+                <xr-xml-map>mpls_static:PathsetViaResolve</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </pathset-via-resolve>
+              <backup-pathset-via-resolve config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.BackupPathsetViaResolve</xr-path>
+                <xr-xml-map>mpls_static:BackupPathsetViaResolve</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </backup-pathset-via-resolve>
+              <address-family config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.AddressFamily</xr-path>
+                <xr-xml-map>mpls_static:AddressFamily</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>Mgmt-static-addr</type-name>
+                </type>
+              </address-family>
+              <path-info config="false" node="list">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.PathInfo[&lt;bag_arg1&gt;]</xr-path>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-version>9 0</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+                <nexthop config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.PathInfo[&lt;bag_arg1&gt;].Nexthop</xr-path>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <address config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.PathInfo[&lt;bag_arg1&gt;].Nexthop.Address</xr-path>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-bag-version>9 0</xr-bag-version>
+                    <af-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.PathInfo[&lt;bag_arg1&gt;].Nexthop.Address.AFName</xr-path>
+                      <xr-xml-map>mpls_static:AFName</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                      <xr-bag-version>9 0</xr-bag-version>
+                      <type>
+                        <type-name>Mgmt-static-addr</type-name>
+                      </type>
+                    </af-name>
+                    <ipv4-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.PathInfo[&lt;bag_arg1&gt;].Nexthop.Address.IPv4Prefix</xr-path>
+                      <xr-xml-map>mpls_static:IPv4Prefix</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                      <xr-bag-version>9 0</xr-bag-version>
+                      <when>../af-name = 'ipv4'</when>
+                      <type>
+                        <type-name>inet:ipv4-address</type-name>
+                      </type>
+                    </ipv4-prefix>
+                    <ipv6-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.PathInfo[&lt;bag_arg1&gt;].Nexthop.Address.IPv6Prefix</xr-path>
+                      <xr-xml-map>mpls_static:IPv6Prefix</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                      <xr-bag-version>9 0</xr-bag-version>
+                      <when>../af-name = 'ipv6'</when>
+                      <type>
+                        <type-name>Static-ipv6-address</type-name>
+                      </type>
+                    </ipv6-prefix>
+                  </address>
+                  <label config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.PathInfo[&lt;bag_arg1&gt;].Nexthop.Label</xr-path>
+                    <xr-xml-map>mpls_static:Label</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>9 0</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </label>
+                  <interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.PathInfo[&lt;bag_arg1&gt;].Nexthop.InterfaceName</xr-path>
+                    <xr-xml-map>mpls_static:InterfaceName</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                    <xr-bag-version>9 0</xr-bag-version>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </interface-name>
+                  <afi config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.PathInfo[&lt;bag_arg1&gt;].Nexthop.AFI</xr-path>
+                    <xr-xml-map>mpls_static:AFI</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>9 0</xr-bag-version>
+                    <type>
+                      <type-name>Mgmt-static-lsp-afi</type-name>
+                    </type>
+                  </afi>
+                </nexthop>
+                <path-number config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.PathInfo[&lt;bag_arg1&gt;].PathNumber</xr-path>
+                  <xr-xml-map>mpls_static:PathNumber</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </path-number>
+                <type config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.PathInfo[&lt;bag_arg1&gt;].Type</xr-path>
+                  <xr-xml-map>mpls_static:Type</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <type>
+                    <type-name>Mgmt-static-path</type-name>
+                  </type>
+                </type>
+                <path-role config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.PathInfo[&lt;bag_arg1&gt;].PathRole</xr-path>
+                  <xr-xml-map>mpls_static:PathRole</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <type>
+                    <type-name>Mpls-static-path-role</type-name>
+                  </type>
+                </path-role>
+                <path-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.PathInfo[&lt;bag_arg1&gt;].PathId</xr-path>
+                  <xr-xml-map>mpls_static:PathId</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </path-id>
+                <backup-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.PathInfo[&lt;bag_arg1&gt;].BackupId</xr-path>
+                  <xr-xml-map>mpls_static:BackupId</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </backup-id>
+                <status config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.PathInfo[&lt;bag_arg1&gt;].Status</xr-path>
+                  <xr-xml-map>mpls_static:Status</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <type>
+                    <type-name>Mgmt-mpls-static-path-status</type-name>
+                  </type>
+                </status>
+              </path-info>
+              <backup-path-info config="false" node="list">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.BackupPathInfo[&lt;bag_arg2&gt;]</xr-path>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-version>9 0</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+                <nexthop config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop</xr-path>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <address config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop.Address</xr-path>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-bag-version>9 0</xr-bag-version>
+                    <af-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop.Address.AFName</xr-path>
+                      <xr-xml-map>mpls_static:AFName</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                      <xr-bag-version>9 0</xr-bag-version>
+                      <type>
+                        <type-name>Mgmt-static-addr</type-name>
+                      </type>
+                    </af-name>
+                    <ipv4-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop.Address.IPv4Prefix</xr-path>
+                      <xr-xml-map>mpls_static:IPv4Prefix</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                      <xr-bag-version>9 0</xr-bag-version>
+                      <when>../af-name = 'ipv4'</when>
+                      <type>
+                        <type-name>inet:ipv4-address</type-name>
+                      </type>
+                    </ipv4-prefix>
+                    <ipv6-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop.Address.IPv6Prefix</xr-path>
+                      <xr-xml-map>mpls_static:IPv6Prefix</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                      <xr-bag-version>9 0</xr-bag-version>
+                      <when>../af-name = 'ipv6'</when>
+                      <type>
+                        <type-name>Static-ipv6-address</type-name>
+                      </type>
+                    </ipv6-prefix>
+                  </address>
+                  <label config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop.Label</xr-path>
+                    <xr-xml-map>mpls_static:Label</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>9 0</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </label>
+                  <interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop.InterfaceName</xr-path>
+                    <xr-xml-map>mpls_static:InterfaceName</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                    <xr-bag-version>9 0</xr-bag-version>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </interface-name>
+                  <afi config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop.AFI</xr-path>
+                    <xr-xml-map>mpls_static:AFI</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>9 0</xr-bag-version>
+                    <type>
+                      <type-name>Mgmt-static-lsp-afi</type-name>
+                    </type>
+                  </afi>
+                </nexthop>
+                <path-number config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.BackupPathInfo[&lt;bag_arg2&gt;].PathNumber</xr-path>
+                  <xr-xml-map>mpls_static:PathNumber</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </path-number>
+                <type config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.BackupPathInfo[&lt;bag_arg2&gt;].Type</xr-path>
+                  <xr-xml-map>mpls_static:Type</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <type>
+                    <type-name>Mgmt-static-path</type-name>
+                  </type>
+                </type>
+                <path-role config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.BackupPathInfo[&lt;bag_arg2&gt;].PathRole</xr-path>
+                  <xr-xml-map>mpls_static:PathRole</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <type>
+                    <type-name>Mpls-static-path-role</type-name>
+                  </type>
+                </path-role>
+                <path-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.BackupPathInfo[&lt;bag_arg2&gt;].PathId</xr-path>
+                  <xr-xml-map>mpls_static:PathId</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </path-id>
+                <backup-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.BackupPathInfo[&lt;bag_arg2&gt;].BackupId</xr-path>
+                  <xr-xml-map>mpls_static:BackupId</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </backup-id>
+                <status config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.Label.BackupPathInfo[&lt;bag_arg2&gt;].Status</xr-path>
+                  <xr-xml-map>mpls_static:Status</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <type>
+                    <type-name>Mgmt-mpls-static-path-status</type-name>
+                  </type>
+                </status>
+              </backup-path-info>
+            </label>
+            <lsp-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/lsp/&lt;mpls_static_oper_LSP_lsp_name&gt;~mpls_static_lsp_info.LSPName</xr-path>
+              <xr-xml-map>mpls_static:lsp-name-xr</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>9 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </lsp-name-xr>
+          </lsp>
+        </lsps>
+        <vrf-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/</xr-path>
+          <xr-xml-map>mpls_static_oper:VRFName</xr-xml-map>
+          <xr-task>mpls-static</xr-task>
+          <xr-sch-type>VRF_Name</xr-sch-type>
+          <xr-sch-arg-name>&lt;mpls_static_oper_VRF_vrf_name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </vrf-name>
+        <local-labels config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/</xr-path>
+          <xr-xml-map>mpls_static_oper:LocalLabelTable</xr-xml-map>
+          <xr-task>mpls-static</xr-task>
+          <xr-filterlist>MPLSStaticDiscrepancyFilter</xr-filterlist>
+          <xr-filterlist>MPLSStaticErrorFilter</xr-filterlist>
+          <local-label config="false" key="local-label-id" node="list">
+            <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;</xr-path>
+            <xr-xml-map>mpls_static_oper:LocalLabel</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-grp-name>mpls_static_lbl_info</xr-bag-grp-name>
+            <xr-bag>mpls_static.bag</xr-bag>
+            <local-label-id config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;</xr-path>
+              <xr-xml-map>mpls_static_oper:LocalLabelID</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-sch-arg-name>&lt;mpls_static_oper_LocalLabel_label&gt;</xr-sch-arg-name>
+              <type range="16..1048575">
+                <type-name>uint32</type-name>
+              </type>
+            </local-label-id>
+            <prefix config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.Prefix</xr-path>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-version>9 0</xr-bag-version>
+              <prefix config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.Prefix.Prefix</xr-path>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-version>9 0</xr-bag-version>
+                <af-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.Prefix.Prefix.AFName</xr-path>
+                  <xr-xml-map>mpls_static:AFName</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <type>
+                    <type-name>Mgmt-static-addr</type-name>
+                  </type>
+                </af-name>
+                <ipv4-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.Prefix.Prefix.IPv4Prefix</xr-path>
+                  <xr-xml-map>mpls_static:IPv4Prefix</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <when>../af-name = 'ipv4'</when>
+                  <type>
+                    <type-name>inet:ipv4-address</type-name>
+                  </type>
+                </ipv4-prefix>
+                <ipv6-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.Prefix.Prefix.IPv6Prefix</xr-path>
+                  <xr-xml-map>mpls_static:IPv6Prefix</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <when>../af-name = 'ipv6'</when>
+                  <type>
+                    <type-name>Static-ipv6-address</type-name>
+                  </type>
+                </ipv6-prefix>
+              </prefix>
+              <prefix-length config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.Prefix.PrefixLength</xr-path>
+                <xr-xml-map>mpls_static:PrefixLength</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </prefix-length>
+            </prefix>
+            <pathset-resolve-nh config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathsetResolveNH</xr-path>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-version>9 0</xr-bag-version>
+              <af-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathsetResolveNH.AFName</xr-path>
+                <xr-xml-map>mpls_static:AFName</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>Mgmt-static-addr</type-name>
+                </type>
+              </af-name>
+              <ipv4-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathsetResolveNH.IPv4Prefix</xr-path>
+                <xr-xml-map>mpls_static:IPv4Prefix</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <when>../af-name = 'ipv4'</when>
+                <type>
+                  <type-name>inet:ipv4-address</type-name>
+                </type>
+              </ipv4-prefix>
+              <ipv6-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathsetResolveNH.IPv6Prefix</xr-path>
+                <xr-xml-map>mpls_static:IPv6Prefix</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <when>../af-name = 'ipv6'</when>
+                <type>
+                  <type-name>Static-ipv6-address</type-name>
+                </type>
+              </ipv6-prefix>
+            </pathset-resolve-nh>
+            <backup-pathset-resolve-nh config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathsetResolveNH</xr-path>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-version>9 0</xr-bag-version>
+              <af-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathsetResolveNH.AFName</xr-path>
+                <xr-xml-map>mpls_static:AFName</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>Mgmt-static-addr</type-name>
+                </type>
+              </af-name>
+              <ipv4-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathsetResolveNH.IPv4Prefix</xr-path>
+                <xr-xml-map>mpls_static:IPv4Prefix</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <when>../af-name = 'ipv4'</when>
+                <type>
+                  <type-name>inet:ipv4-address</type-name>
+                </type>
+              </ipv4-prefix>
+              <ipv6-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathsetResolveNH.IPv6Prefix</xr-path>
+                <xr-xml-map>mpls_static:IPv6Prefix</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <when>../af-name = 'ipv6'</when>
+                <type>
+                  <type-name>Static-ipv6-address</type-name>
+                </type>
+              </ipv6-prefix>
+            </backup-pathset-resolve-nh>
+            <label config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.Label</xr-path>
+              <xr-xml-map>mpls_static:Label</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>9 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </label>
+            <label-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.LabelMode</xr-path>
+              <xr-xml-map>mpls_static:LabelMode</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>9 0</xr-bag-version>
+              <type>
+                <type-name>Mgmt-mpls-static-label-mode</type-name>
+              </type>
+            </label-mode>
+            <label-status config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.LabelStatus</xr-path>
+              <xr-xml-map>mpls_static:LabelStatus</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>9 0</xr-bag-version>
+              <type>
+                <type-name>Mgmt-mpls-static-label-status</type-name>
+              </type>
+            </label-status>
+            <vrf-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.VRFName</xr-path>
+              <xr-xml-map>mpls_static:VRFName</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>9 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </vrf-name>
+            <pathset-via-resolve config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathsetViaResolve</xr-path>
+              <xr-xml-map>mpls_static:PathsetViaResolve</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>9 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </pathset-via-resolve>
+            <backup-pathset-via-resolve config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathsetViaResolve</xr-path>
+              <xr-xml-map>mpls_static:BackupPathsetViaResolve</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>9 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </backup-pathset-via-resolve>
+            <address-family config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.AddressFamily</xr-path>
+              <xr-xml-map>mpls_static:AddressFamily</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>9 0</xr-bag-version>
+              <type>
+                <type-name>Mgmt-static-addr</type-name>
+              </type>
+            </address-family>
+            <path-info config="false" node="list">
+              <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;]</xr-path>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-version>9 0</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+              <nexthop config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].Nexthop</xr-path>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-version>9 0</xr-bag-version>
+                <address config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].Nexthop.Address</xr-path>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <af-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].Nexthop.Address.AFName</xr-path>
+                    <xr-xml-map>mpls_static:AFName</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>9 0</xr-bag-version>
+                    <type>
+                      <type-name>Mgmt-static-addr</type-name>
+                    </type>
+                  </af-name>
+                  <ipv4-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].Nexthop.Address.IPv4Prefix</xr-path>
+                    <xr-xml-map>mpls_static:IPv4Prefix</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                    <xr-bag-version>9 0</xr-bag-version>
+                    <when>../af-name = 'ipv4'</when>
+                    <type>
+                      <type-name>inet:ipv4-address</type-name>
+                    </type>
+                  </ipv4-prefix>
+                  <ipv6-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].Nexthop.Address.IPv6Prefix</xr-path>
+                    <xr-xml-map>mpls_static:IPv6Prefix</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                    <xr-bag-version>9 0</xr-bag-version>
+                    <when>../af-name = 'ipv6'</when>
+                    <type>
+                      <type-name>Static-ipv6-address</type-name>
+                    </type>
+                  </ipv6-prefix>
+                </address>
+                <label config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].Nexthop.Label</xr-path>
+                  <xr-xml-map>mpls_static:Label</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </label>
+                <interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].Nexthop.InterfaceName</xr-path>
+                  <xr-xml-map>mpls_static:InterfaceName</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </interface-name>
+                <afi config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].Nexthop.AFI</xr-path>
+                  <xr-xml-map>mpls_static:AFI</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <type>
+                    <type-name>Mgmt-static-lsp-afi</type-name>
+                  </type>
+                </afi>
+              </nexthop>
+              <path-number config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].PathNumber</xr-path>
+                <xr-xml-map>mpls_static:PathNumber</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </path-number>
+              <type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].Type</xr-path>
+                <xr-xml-map>mpls_static:Type</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>Mgmt-static-path</type-name>
+                </type>
+              </type>
+              <path-role config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].PathRole</xr-path>
+                <xr-xml-map>mpls_static:PathRole</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>Mpls-static-path-role</type-name>
+                </type>
+              </path-role>
+              <path-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].PathId</xr-path>
+                <xr-xml-map>mpls_static:PathId</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </path-id>
+              <backup-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].BackupId</xr-path>
+                <xr-xml-map>mpls_static:BackupId</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </backup-id>
+              <status config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].Status</xr-path>
+                <xr-xml-map>mpls_static:Status</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>Mgmt-mpls-static-path-status</type-name>
+                </type>
+              </status>
+            </path-info>
+            <backup-path-info config="false" node="list">
+              <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;]</xr-path>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-version>9 0</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+              <nexthop config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop</xr-path>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-version>9 0</xr-bag-version>
+                <address config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop.Address</xr-path>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <af-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop.Address.AFName</xr-path>
+                    <xr-xml-map>mpls_static:AFName</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>9 0</xr-bag-version>
+                    <type>
+                      <type-name>Mgmt-static-addr</type-name>
+                    </type>
+                  </af-name>
+                  <ipv4-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop.Address.IPv4Prefix</xr-path>
+                    <xr-xml-map>mpls_static:IPv4Prefix</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                    <xr-bag-version>9 0</xr-bag-version>
+                    <when>../af-name = 'ipv4'</when>
+                    <type>
+                      <type-name>inet:ipv4-address</type-name>
+                    </type>
+                  </ipv4-prefix>
+                  <ipv6-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop.Address.IPv6Prefix</xr-path>
+                    <xr-xml-map>mpls_static:IPv6Prefix</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                    <xr-bag-version>9 0</xr-bag-version>
+                    <when>../af-name = 'ipv6'</when>
+                    <type>
+                      <type-name>Static-ipv6-address</type-name>
+                    </type>
+                  </ipv6-prefix>
+                </address>
+                <label config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop.Label</xr-path>
+                  <xr-xml-map>mpls_static:Label</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </label>
+                <interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop.InterfaceName</xr-path>
+                  <xr-xml-map>mpls_static:InterfaceName</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </interface-name>
+                <afi config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop.AFI</xr-path>
+                  <xr-xml-map>mpls_static:AFI</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>9 0</xr-bag-version>
+                  <type>
+                    <type-name>Mgmt-static-lsp-afi</type-name>
+                  </type>
+                </afi>
+              </nexthop>
+              <path-number config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].PathNumber</xr-path>
+                <xr-xml-map>mpls_static:PathNumber</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </path-number>
+              <type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].Type</xr-path>
+                <xr-xml-map>mpls_static:Type</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>Mgmt-static-path</type-name>
+                </type>
+              </type>
+              <path-role config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].PathRole</xr-path>
+                <xr-xml-map>mpls_static:PathRole</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>Mpls-static-path-role</type-name>
+                </type>
+              </path-role>
+              <path-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].PathId</xr-path>
+                <xr-xml-map>mpls_static:PathId</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </path-id>
+              <backup-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].BackupId</xr-path>
+                <xr-xml-map>mpls_static:BackupId</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </backup-id>
+              <status config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/vrf/&lt;mpls_static_oper_VRF_vrf_name&gt;/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].Status</xr-path>
+                <xr-xml-map>mpls_static:Status</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>Mgmt-mpls-static-path-status</type-name>
+                </type>
+              </status>
+            </backup-path-info>
+          </local-label>
+        </local-labels>
+      </vrf>
+    </vrfs>
+    <summary config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/mpls_static/gl/summary</xr-path>
+      <xr-xml-map>mpls_static_oper:Summary</xr-xml-map>
+      <xr-task>mpls-static</xr-task>
+      <xr-bag-grp-name>mpls_static_summary</xr-bag-grp-name>
+      <xr-bag>mpls_static.bag</xr-bag>
+      <lsp-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mpls_static/gl/summary~mpls_static_summary.LSPCount</xr-path>
+        <xr-xml-map>mpls_static:LSPCount</xr-xml-map>
+        <xr-task>mpls-static</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>9 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </lsp-count>
+      <label-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mpls_static/gl/summary~mpls_static_summary.LabelCount</xr-path>
+        <xr-xml-map>mpls_static:LabelCount</xr-xml-map>
+        <xr-task>mpls-static</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>9 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </label-count>
+      <label-error-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mpls_static/gl/summary~mpls_static_summary.LabelErrorCount</xr-path>
+        <xr-xml-map>mpls_static:LabelErrorCount</xr-xml-map>
+        <xr-task>mpls-static</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>9 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </label-error-count>
+      <label-discrepancy-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mpls_static/gl/summary~mpls_static_summary.LabelDiscrepancyCount</xr-path>
+        <xr-xml-map>mpls_static:LabelDiscrepancyCount</xr-xml-map>
+        <xr-task>mpls-static</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>9 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </label-discrepancy-count>
+      <vrf-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mpls_static/gl/summary~mpls_static_summary.VRFCount</xr-path>
+        <xr-xml-map>mpls_static:VRFCount</xr-xml-map>
+        <xr-task>mpls-static</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>9 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </vrf-count>
+      <active-vrf-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mpls_static/gl/summary~mpls_static_summary.ActiveVRFCount</xr-path>
+        <xr-xml-map>mpls_static:ActiveVRFCount</xr-xml-map>
+        <xr-task>mpls-static</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>9 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </active-vrf-count>
+      <interface-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mpls_static/gl/summary~mpls_static_summary.InterfaceCount</xr-path>
+        <xr-xml-map>mpls_static:InterfaceCount</xr-xml-map>
+        <xr-task>mpls-static</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>9 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </interface-count>
+      <interface-foward-reference-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mpls_static/gl/summary~mpls_static_summary.InterfaceFowardReferenceCount</xr-path>
+        <xr-xml-map>mpls_static:InterfaceFowardReferenceCount</xr-xml-map>
+        <xr-task>mpls-static</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>9 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </interface-foward-reference-count>
+      <mpls-enabled-interface-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mpls_static/gl/summary~mpls_static_summary.MPLSEnabledInterfaceCount</xr-path>
+        <xr-xml-map>mpls_static:MPLSEnabledInterfaceCount</xr-xml-map>
+        <xr-task>mpls-static</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>9 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </mpls-enabled-interface-count>
+      <ipv4-res-nh-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mpls_static/gl/summary~mpls_static_summary.IPv4ResNHCount</xr-path>
+        <xr-xml-map>mpls_static:IPv4ResNHCount</xr-xml-map>
+        <xr-task>mpls-static</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>9 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv4-res-nh-count>
+      <ipv6-res-nh-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mpls_static/gl/summary~mpls_static_summary.IPv6ResNHCount</xr-path>
+        <xr-xml-map>mpls_static:IPv6ResNHCount</xr-xml-map>
+        <xr-task>mpls-static</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>9 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv6-res-nh-count>
+      <lsd-connected config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mpls_static/gl/summary~mpls_static_summary.LSDConnected</xr-path>
+        <xr-xml-map>mpls_static:LSDConnected</xr-xml-map>
+        <xr-task>mpls-static</xr-task>
+        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+        <xr-bag-version>9 0</xr-bag-version>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </lsd-connected>
+      <im-connected config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mpls_static/gl/summary~mpls_static_summary.IMConnected</xr-path>
+        <xr-xml-map>mpls_static:IMConnected</xr-xml-map>
+        <xr-task>mpls-static</xr-task>
+        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+        <xr-bag-version>9 0</xr-bag-version>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </im-connected>
+      <rsi-connected config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mpls_static/gl/summary~mpls_static_summary.RSIConnected</xr-path>
+        <xr-xml-map>mpls_static:RSIConnected</xr-xml-map>
+        <xr-task>mpls-static</xr-task>
+        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+        <xr-bag-version>9 0</xr-bag-version>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </rsi-connected>
+      <ribv4-connected config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mpls_static/gl/summary~mpls_static_summary.RIBV4Connected</xr-path>
+        <xr-xml-map>mpls_static:RIBV4Connected</xr-xml-map>
+        <xr-task>mpls-static</xr-task>
+        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+        <xr-bag-version>9 0</xr-bag-version>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </ribv4-connected>
+      <ribv6-connected config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mpls_static/gl/summary~mpls_static_summary.RIBV6Connected</xr-path>
+        <xr-xml-map>mpls_static:RIBV6Connected</xr-xml-map>
+        <xr-task>mpls-static</xr-task>
+        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+        <xr-bag-version>9 0</xr-bag-version>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </ribv6-connected>
+    </summary>
+    <local-labels config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/mpls_static/gl/local-label/</xr-path>
+      <xr-xml-map>mpls_static_oper:LocalLabelTable</xr-xml-map>
+      <xr-task>mpls-static</xr-task>
+      <xr-filterlist>MPLSStaticDiscrepancyFilter</xr-filterlist>
+      <xr-filterlist>MPLSStaticErrorFilter</xr-filterlist>
+      <local-label config="false" key="local-label-id" node="list">
+        <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;</xr-path>
+        <xr-xml-map>mpls_static_oper:LocalLabel</xr-xml-map>
+        <xr-task>mpls-static</xr-task>
+        <xr-bag-grp-name>mpls_static_lbl_info</xr-bag-grp-name>
+        <xr-bag>mpls_static.bag</xr-bag>
+        <local-label-id config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;</xr-path>
+          <xr-xml-map>mpls_static_oper:LocalLabelID</xr-xml-map>
+          <xr-task>mpls-static</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <xr-sch-arg-name>&lt;mpls_static_oper_LocalLabel_label&gt;</xr-sch-arg-name>
+          <type range="16..1048575">
+            <type-name>uint32</type-name>
+          </type>
+        </local-label-id>
+        <prefix config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.Prefix</xr-path>
+          <xr-task>mpls-static</xr-task>
+          <xr-bag-version>9 0</xr-bag-version>
+          <prefix config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.Prefix.Prefix</xr-path>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-version>9 0</xr-bag-version>
+            <af-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.Prefix.Prefix.AFName</xr-path>
+              <xr-xml-map>mpls_static:AFName</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>9 0</xr-bag-version>
+              <type>
+                <type-name>Mgmt-static-addr</type-name>
+              </type>
+            </af-name>
+            <ipv4-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.Prefix.Prefix.IPv4Prefix</xr-path>
+              <xr-xml-map>mpls_static:IPv4Prefix</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>9 0</xr-bag-version>
+              <when>../af-name = 'ipv4'</when>
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </ipv4-prefix>
+            <ipv6-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.Prefix.Prefix.IPv6Prefix</xr-path>
+              <xr-xml-map>mpls_static:IPv6Prefix</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>9 0</xr-bag-version>
+              <when>../af-name = 'ipv6'</when>
+              <type>
+                <type-name>Static-ipv6-address</type-name>
+              </type>
+            </ipv6-prefix>
+          </prefix>
+          <prefix-length config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.Prefix.PrefixLength</xr-path>
+            <xr-xml-map>mpls_static:PrefixLength</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>9 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </prefix-length>
+        </prefix>
+        <pathset-resolve-nh config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathsetResolveNH</xr-path>
+          <xr-task>mpls-static</xr-task>
+          <xr-bag-version>9 0</xr-bag-version>
+          <af-name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathsetResolveNH.AFName</xr-path>
+            <xr-xml-map>mpls_static:AFName</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>9 0</xr-bag-version>
+            <type>
+              <type-name>Mgmt-static-addr</type-name>
+            </type>
+          </af-name>
+          <ipv4-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathsetResolveNH.IPv4Prefix</xr-path>
+            <xr-xml-map>mpls_static:IPv4Prefix</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>9 0</xr-bag-version>
+            <when>../af-name = 'ipv4'</when>
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </ipv4-prefix>
+          <ipv6-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathsetResolveNH.IPv6Prefix</xr-path>
+            <xr-xml-map>mpls_static:IPv6Prefix</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>9 0</xr-bag-version>
+            <when>../af-name = 'ipv6'</when>
+            <type>
+              <type-name>Static-ipv6-address</type-name>
+            </type>
+          </ipv6-prefix>
+        </pathset-resolve-nh>
+        <backup-pathset-resolve-nh config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathsetResolveNH</xr-path>
+          <xr-task>mpls-static</xr-task>
+          <xr-bag-version>9 0</xr-bag-version>
+          <af-name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathsetResolveNH.AFName</xr-path>
+            <xr-xml-map>mpls_static:AFName</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>9 0</xr-bag-version>
+            <type>
+              <type-name>Mgmt-static-addr</type-name>
+            </type>
+          </af-name>
+          <ipv4-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathsetResolveNH.IPv4Prefix</xr-path>
+            <xr-xml-map>mpls_static:IPv4Prefix</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>9 0</xr-bag-version>
+            <when>../af-name = 'ipv4'</when>
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </ipv4-prefix>
+          <ipv6-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathsetResolveNH.IPv6Prefix</xr-path>
+            <xr-xml-map>mpls_static:IPv6Prefix</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>9 0</xr-bag-version>
+            <when>../af-name = 'ipv6'</when>
+            <type>
+              <type-name>Static-ipv6-address</type-name>
+            </type>
+          </ipv6-prefix>
+        </backup-pathset-resolve-nh>
+        <label config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.Label</xr-path>
+          <xr-xml-map>mpls_static:Label</xr-xml-map>
+          <xr-task>mpls-static</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>9 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </label>
+        <label-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.LabelMode</xr-path>
+          <xr-xml-map>mpls_static:LabelMode</xr-xml-map>
+          <xr-task>mpls-static</xr-task>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>9 0</xr-bag-version>
+          <type>
+            <type-name>Mgmt-mpls-static-label-mode</type-name>
+          </type>
+        </label-mode>
+        <label-status config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.LabelStatus</xr-path>
+          <xr-xml-map>mpls_static:LabelStatus</xr-xml-map>
+          <xr-task>mpls-static</xr-task>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>9 0</xr-bag-version>
+          <type>
+            <type-name>Mgmt-mpls-static-label-status</type-name>
+          </type>
+        </label-status>
+        <vrf-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.VRFName</xr-path>
+          <xr-xml-map>mpls_static:VRFName</xr-xml-map>
+          <xr-task>mpls-static</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>9 0</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </vrf-name>
+        <pathset-via-resolve config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathsetViaResolve</xr-path>
+          <xr-xml-map>mpls_static:PathsetViaResolve</xr-xml-map>
+          <xr-task>mpls-static</xr-task>
+          <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+          <xr-bag-version>9 0</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </pathset-via-resolve>
+        <backup-pathset-via-resolve config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathsetViaResolve</xr-path>
+          <xr-xml-map>mpls_static:BackupPathsetViaResolve</xr-xml-map>
+          <xr-task>mpls-static</xr-task>
+          <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+          <xr-bag-version>9 0</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </backup-pathset-via-resolve>
+        <address-family config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.AddressFamily</xr-path>
+          <xr-xml-map>mpls_static:AddressFamily</xr-xml-map>
+          <xr-task>mpls-static</xr-task>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>9 0</xr-bag-version>
+          <type>
+            <type-name>Mgmt-static-addr</type-name>
+          </type>
+        </address-family>
+        <path-info config="false" node="list">
+          <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;]</xr-path>
+          <xr-task>mpls-static</xr-task>
+          <xr-bag-version>9 0</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+          <nexthop config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].Nexthop</xr-path>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-version>9 0</xr-bag-version>
+            <address config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].Nexthop.Address</xr-path>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-version>9 0</xr-bag-version>
+              <af-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].Nexthop.Address.AFName</xr-path>
+                <xr-xml-map>mpls_static:AFName</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>Mgmt-static-addr</type-name>
+                </type>
+              </af-name>
+              <ipv4-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].Nexthop.Address.IPv4Prefix</xr-path>
+                <xr-xml-map>mpls_static:IPv4Prefix</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <when>../af-name = 'ipv4'</when>
+                <type>
+                  <type-name>inet:ipv4-address</type-name>
+                </type>
+              </ipv4-prefix>
+              <ipv6-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].Nexthop.Address.IPv6Prefix</xr-path>
+                <xr-xml-map>mpls_static:IPv6Prefix</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <when>../af-name = 'ipv6'</when>
+                <type>
+                  <type-name>Static-ipv6-address</type-name>
+                </type>
+              </ipv6-prefix>
+            </address>
+            <label config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].Nexthop.Label</xr-path>
+              <xr-xml-map>mpls_static:Label</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>9 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </label>
+            <interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].Nexthop.InterfaceName</xr-path>
+              <xr-xml-map>mpls_static:InterfaceName</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>9 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </interface-name>
+            <afi config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].Nexthop.AFI</xr-path>
+              <xr-xml-map>mpls_static:AFI</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>9 0</xr-bag-version>
+              <type>
+                <type-name>Mgmt-static-lsp-afi</type-name>
+              </type>
+            </afi>
+          </nexthop>
+          <path-number config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].PathNumber</xr-path>
+            <xr-xml-map>mpls_static:PathNumber</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>9 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </path-number>
+          <type config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].Type</xr-path>
+            <xr-xml-map>mpls_static:Type</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>9 0</xr-bag-version>
+            <type>
+              <type-name>Mgmt-static-path</type-name>
+            </type>
+          </type>
+          <path-role config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].PathRole</xr-path>
+            <xr-xml-map>mpls_static:PathRole</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>9 0</xr-bag-version>
+            <type>
+              <type-name>Mpls-static-path-role</type-name>
+            </type>
+          </path-role>
+          <path-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].PathId</xr-path>
+            <xr-xml-map>mpls_static:PathId</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>9 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </path-id>
+          <backup-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].BackupId</xr-path>
+            <xr-xml-map>mpls_static:BackupId</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>9 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </backup-id>
+          <status config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.PathInfo[&lt;bag_arg1&gt;].Status</xr-path>
+            <xr-xml-map>mpls_static:Status</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>9 0</xr-bag-version>
+            <type>
+              <type-name>Mgmt-mpls-static-path-status</type-name>
+            </type>
+          </status>
+        </path-info>
+        <backup-path-info config="false" node="list">
+          <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;]</xr-path>
+          <xr-task>mpls-static</xr-task>
+          <xr-bag-version>9 0</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+          <nexthop config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop</xr-path>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-version>9 0</xr-bag-version>
+            <address config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop.Address</xr-path>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-version>9 0</xr-bag-version>
+              <af-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop.Address.AFName</xr-path>
+                <xr-xml-map>mpls_static:AFName</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <type>
+                  <type-name>Mgmt-static-addr</type-name>
+                </type>
+              </af-name>
+              <ipv4-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop.Address.IPv4Prefix</xr-path>
+                <xr-xml-map>mpls_static:IPv4Prefix</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <when>../af-name = 'ipv4'</when>
+                <type>
+                  <type-name>inet:ipv4-address</type-name>
+                </type>
+              </ipv4-prefix>
+              <ipv6-prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop.Address.IPv6Prefix</xr-path>
+                <xr-xml-map>mpls_static:IPv6Prefix</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>9 0</xr-bag-version>
+                <when>../af-name = 'ipv6'</when>
+                <type>
+                  <type-name>Static-ipv6-address</type-name>
+                </type>
+              </ipv6-prefix>
+            </address>
+            <label config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop.Label</xr-path>
+              <xr-xml-map>mpls_static:Label</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>9 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </label>
+            <interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop.InterfaceName</xr-path>
+              <xr-xml-map>mpls_static:InterfaceName</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>9 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </interface-name>
+            <afi config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].Nexthop.AFI</xr-path>
+              <xr-xml-map>mpls_static:AFI</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>9 0</xr-bag-version>
+              <type>
+                <type-name>Mgmt-static-lsp-afi</type-name>
+              </type>
+            </afi>
+          </nexthop>
+          <path-number config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].PathNumber</xr-path>
+            <xr-xml-map>mpls_static:PathNumber</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>9 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </path-number>
+          <type config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].Type</xr-path>
+            <xr-xml-map>mpls_static:Type</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>9 0</xr-bag-version>
+            <type>
+              <type-name>Mgmt-static-path</type-name>
+            </type>
+          </type>
+          <path-role config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].PathRole</xr-path>
+            <xr-xml-map>mpls_static:PathRole</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>9 0</xr-bag-version>
+            <type>
+              <type-name>Mpls-static-path-role</type-name>
+            </type>
+          </path-role>
+          <path-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].PathId</xr-path>
+            <xr-xml-map>mpls_static:PathId</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>9 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </path-id>
+          <backup-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].BackupId</xr-path>
+            <xr-xml-map>mpls_static:BackupId</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>9 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </backup-id>
+          <status config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mpls_static/gl/local-label/&lt;mpls_static_oper_LocalLabel_label&gt;~mpls_static_lbl_info.BackupPathInfo[&lt;bag_arg2&gt;].Status</xr-path>
+            <xr-xml-map>mpls_static:Status</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>9 0</xr-bag-version>
+            <type>
+              <type-name>Mgmt-mpls-static-path-status</type-name>
+            </type>
+          </status>
+        </backup-path-info>
+      </local-label>
+    </local-labels>
+  </mpls-static>
+</Cisco-IOS-XR-mpls-static-oper>

@@ -1,0 +1,15 @@
+---
+- hosts: routers_netconf
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Configure BGP on the router
+    netconf_config:
+      host: "{{ ansible_host }}"
+      port: "{{ netconf_port }}"
+      username: "{{ ansible_user }}"
+      password: "{{ ansible_password }}"
+      hostkey_verify: no
+      look_for_keys: false
+      xml: "{{ lookup('file', xml_file) }}"

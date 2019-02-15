@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-sysadmin-entity-sensor-mib ns="http://www.cisco.com/ns/yang/Cisco-IOS-XR-sysadmin-entity-sensor-mib" revision="2017-04-12">
+  <files>
+    <file revision="2017-04-12" submodule="false">Cisco-IOS-XR-sysadmin-entity-sensor-mib.yang</file>
+  </files>
+  <prefix>CISCO_ENTITY_SENSOR_MIB</prefix>
+  <import prefix="yang">ietf-yang-types</import>
+  <import prefix="tailf">tailf-common</import>
+  <import prefix="SNMPv2-TC">SNMPv2-TC</import>
+  <import prefix="ENTITY-MIB">Cisco-IOS-XR-sysadmin-entity-mib</import>
+  <typedef name="SensorDataType">
+    <type node="enumeration">
+      <enum value="1">other</enum>
+      <enum value="2">unknown</enum>
+      <enum value="3">voltsAC</enum>
+      <enum value="4">voltsDC</enum>
+      <enum value="5">amperes</enum>
+      <enum value="6">watts</enum>
+      <enum value="7">hertz</enum>
+      <enum value="8">celsius</enum>
+      <enum value="9">percentRH</enum>
+      <enum value="10">rpm</enum>
+      <enum value="11">cmm</enum>
+      <enum value="12">truthvalue</enum>
+      <enum value="13">specialEnum</enum>
+    </type>
+  </typedef>
+  <typedef name="SensorDataScale">
+    <type node="enumeration">
+      <enum value="1">yocto</enum>
+      <enum value="2">zepto</enum>
+      <enum value="3">atto</enum>
+      <enum value="4">femto</enum>
+      <enum value="5">pico</enum>
+      <enum value="6">nano</enum>
+      <enum value="7">micro</enum>
+      <enum value="8">milli</enum>
+      <enum value="9">units</enum>
+      <enum value="10">kilo</enum>
+      <enum value="11">mega</enum>
+      <enum value="12">giga</enum>
+      <enum value="13">tera</enum>
+      <enum value="14">exa</enum>
+      <enum value="15">peta</enum>
+      <enum value="16">zetta</enum>
+      <enum value="17">yotta</enum>
+    </type>
+  </typedef>
+  <typedef name="SensorPrecision">
+    <type range="-8 .. 9">
+      <type-name>int32</type-name>
+    </type>
+  </typedef>
+  <typedef name="SensorValue">
+    <type range="-1000000000 .. 1000000000">
+      <type-name>int32</type-name>
+    </type>
+  </typedef>
+  <typedef name="SensorStatus">
+    <type node="enumeration">
+      <enum value="1">ok</enum>
+      <enum value="2">unavailable</enum>
+      <enum value="3">nonoperational</enum>
+    </type>
+  </typedef>
+  <typedef name="SensorValueUpdateRate">
+    <type range="0 .. 999999999">
+      <type-name>int32</type-name>
+    </type>
+  </typedef>
+  <typedef name="SensorThresholdSeverity">
+    <type node="enumeration">
+      <enum value="1">other</enum>
+      <enum value="10">minor</enum>
+      <enum value="20">major</enum>
+      <enum value="30">critical</enum>
+    </type>
+  </typedef>
+  <typedef name="SensorThresholdRelation">
+    <type node="enumeration">
+      <enum value="1">lessThan</enum>
+      <enum value="2">lessOrEqual</enum>
+      <enum value="3">greaterThan</enum>
+      <enum value="4">greaterOrEqual</enum>
+      <enum value="5">equalTo</enum>
+      <enum value="6">notEqualTo</enum>
+    </type>
+  </typedef>
+  <typedef name="entSensorMeasuredEntityType">
+    <type range="0 .. 2147483647">
+      <type-name>int32</type-name>
+    </type>
+  </typedef>
+  <typedef name="entSensorThresholdIndexType">
+    <type range="1 .. 99999999">
+      <type-name>int32</type-name>
+    </type>
+  </typedef>
+  <CISCO-ENTITY-SENSOR-MIB config="true" is-key="false" node="container" presence="false">
+    <entSensorValueTable config="true" is-key="false" node="container" presence="false">
+      <entSensorValueEntry config="true" key="entPhysicalIndex" node="list">
+        <xr-path/>
+        <entPhysicalIndex config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>ENTITY-MIB:PhysicalIndex</type-name>
+          </type>
+        </entPhysicalIndex>
+        <entSensorType config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SensorDataType</type-name>
+          </type>
+        </entSensorType>
+        <entSensorScale config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SensorDataScale</type-name>
+          </type>
+        </entSensorScale>
+        <entSensorPrecision config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SensorPrecision</type-name>
+          </type>
+        </entSensorPrecision>
+        <entSensorValue config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SensorValue</type-name>
+          </type>
+        </entSensorValue>
+        <entSensorStatus config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SensorStatus</type-name>
+          </type>
+        </entSensorStatus>
+        <entSensorValueTimeStamp config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>yang:timestamp</type-name>
+          </type>
+        </entSensorValueTimeStamp>
+        <entSensorValueUpdateRate config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SensorValueUpdateRate</type-name>
+          </type>
+        </entSensorValueUpdateRate>
+        <entSensorMeasuredEntity config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>entSensorMeasuredEntityType</type-name>
+          </type>
+        </entSensorMeasuredEntity>
+      </entSensorValueEntry>
+    </entSensorValueTable>
+    <entSensorThresholdTable config="true" is-key="false" node="container" presence="false">
+      <entSensorThresholdEntry config="true" key="entPhysicalIndex entSensorThresholdIndex" node="list">
+        <xr-path/>
+        <entPhysicalIndex config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>ENTITY-MIB:PhysicalIndex</type-name>
+          </type>
+        </entPhysicalIndex>
+        <entSensorThresholdIndex config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>entSensorThresholdIndexType</type-name>
+          </type>
+        </entSensorThresholdIndex>
+        <entSensorThresholdSeverity config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SensorThresholdSeverity</type-name>
+          </type>
+        </entSensorThresholdSeverity>
+        <entSensorThresholdRelation config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SensorThresholdRelation</type-name>
+          </type>
+        </entSensorThresholdRelation>
+        <entSensorThresholdValue config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SensorValue</type-name>
+          </type>
+        </entSensorThresholdValue>
+        <entSensorThresholdEvaluation config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SNMPv2-TC:TruthValue</type-name>
+          </type>
+        </entSensorThresholdEvaluation>
+        <entSensorThresholdNotificationEnable config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SNMPv2-TC:TruthValue</type-name>
+          </type>
+        </entSensorThresholdNotificationEnable>
+      </entSensorThresholdEntry>
+    </entSensorThresholdTable>
+  </CISCO-ENTITY-SENSOR-MIB>
+</Cisco-IOS-XR-sysadmin-entity-sensor-mib>

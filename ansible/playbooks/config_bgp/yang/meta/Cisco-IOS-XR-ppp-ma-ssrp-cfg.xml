@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ppp-ma-ssrp-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ppp-ma-ssrp-cfg" revision="2015-11-09">
+  <files>
+    <file revision="2015-11-09" submodule="false">Cisco-IOS-XR-ppp-ma-ssrp-cfg.yang</file>
+  </files>
+  <prefix>ppp-ma-ssrp-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-config-mda-cfg</import>
+  <import prefix="a2">Cisco-IOS-XR-ifmgr-cfg</import>
+  <augment path="/a2:interface-configurations/a2:interface-configuration">
+    <ssrp-session config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ssrp/</xr-path>
+      <xr-xml-map>ssrp_cfg_session:SSRPSession</xr-xml-map>
+      <xr-task>interface</xr-task>
+      <group-id config="true" is-key="false" node="container" presence="false">
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ssrp/groupid`</xr-path>
+        <xr-xml-map>ssrp_cfg_session:GroupID</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <group config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ssrp/groupid`0</xr-path>
+          <xr-xml-map>ssrp_cfg_session:Group</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..65535">
+            <type-name>uint32</type-name>
+          </type>
+        </group>
+        <id config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ssrp/groupid`1</xr-path>
+          <xr-xml-map>ssrp_cfg_session:ID</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..4294967295">
+            <type-name>uint32</type-name>
+          </type>
+        </id>
+      </group-id>
+    </ssrp-session>
+  </augment>
+  <augment path="/a1:active-nodes/a1:active-node">
+    <ssrp-group config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/ssrp/</xr-path>
+      <xr-xml-map>ssrp_cfg_group:SSRPGroup</xr-xml-map>
+      <xr-scope>exported</xr-scope>
+      <groups config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/ssrp/group/</xr-path>
+        <xr-xml-map>ssrp_cfg_group:GroupTable</xr-xml-map>
+        <xr-scope>exported</xr-scope>
+        <group config="true" key="group-id" node="list">
+          <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/ssrp/group/&lt;ssrp_cfg_group_Group_group-id&gt;/</xr-path>
+          <xr-xml-map>ssrp_cfg_group:Group</xr-xml-map>
+          <xr-scope>exported</xr-scope>
+          <profile config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/ssrp/group/&lt;ssrp_cfg_group_Group_group-id&gt;/profile</xr-path>
+            <xr-xml-map>ssrp_cfg_group:Profile</xr-xml-map>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </profile>
+          <group-id config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-pathformat>decimal</xr-pathformat>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/ssrp/group/&lt;ssrp_cfg_group_Group_group-id&gt;/</xr-path>
+            <xr-xml-map>ssrp_cfg_group:GroupID</xr-xml-map>
+            <xr-sch-type>Range</xr-sch-type>
+            <xr-sch-arg-name>&lt;ssrp_cfg_group_Group_group-id&gt;</xr-sch-arg-name>
+            <type range="1..65535">
+              <type-name>uint32</type-name>
+            </type>
+          </group-id>
+        </group>
+      </groups>
+    </ssrp-group>
+  </augment>
+  <ssrp config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/ssrp/</xr-path>
+    <xr-xml-map>ssrp_gbl_config:SSRP</xr-xml-map>
+    <xr-task>ppp</xr-task>
+    <xr-scope>exported</xr-scope>
+    <profiles config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ssrp/profile/</xr-path>
+      <xr-xml-map>ssrp_gbl_config:ProfileTable</xr-xml-map>
+      <xr-task>ppp</xr-task>
+      <xr-scope>exported</xr-scope>
+      <profile config="true" key="name" node="list">
+        <xr-path>/cfg/gl/ssrp/profile/&lt;ssrp_gbl_config_Profile_profile-name&gt;/</xr-path>
+        <xr-xml-map>ssrp_gbl_config:Profile</xr-xml-map>
+        <xr-task>ppp</xr-task>
+        <xr-scope>exported</xr-scope>
+        <max-hops config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ssrp/profile/&lt;ssrp_gbl_config_Profile_profile-name&gt;/max-hops</xr-path>
+          <xr-xml-map>ssrp_gbl_config:MaxHops</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..255">
+            <type-name>uint32</type-name>
+          </type>
+        </max-hops>
+        <peer-ipv4-address config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>inaddr</xr-primitive-type>
+          <xr-path>/cfg/gl/ssrp/profile/&lt;ssrp_gbl_config_Profile_profile-name&gt;/peer-ipv4-address</xr-path>
+          <xr-xml-map>ssrp_gbl_config:PeerIpv4Address</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-sch-type>IPV4Address</xr-sch-type>
+          <type>
+            <type-name>inet:ipv4-address-no-zone</type-name>
+          </type>
+        </peer-ipv4-address>
+        <name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/ssrp/profile/&lt;ssrp_gbl_config_Profile_profile-name&gt;/</xr-path>
+          <xr-xml-map>ssrp_gbl_config:Name</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;ssrp_gbl_config_Profile_profile-name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </name>
+      </profile>
+    </profiles>
+  </ssrp>
+</Cisco-IOS-XR-ppp-ma-ssrp-cfg>

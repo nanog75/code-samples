@@ -1,0 +1,21 @@
+---
+
+- name: Verify IPv4 connectivity to routes learnt via Open/R 
+  hosts: routers_netconf
+  connection: local
+  gather_facts: no
+
+  vars_files:
+    - './ping_variables.yml'
+  tasks:
+    - name: Reachability of loopbacks learnt via Open/R 
+      ip_destination_reachable:
+        host: '{{ ansible_host }}'
+        destination: '{{ item }}'
+        min_success_rate: 100
+        source_ip: '{{ loopback0_ip }}'
+        netconf_port: '{{ netconf_port }}'
+        username: '{{ ansible_user }}'
+        password: '{{ ansible_password }}'
+      loop: '{{ loopback_list }}'
+# End of playbook

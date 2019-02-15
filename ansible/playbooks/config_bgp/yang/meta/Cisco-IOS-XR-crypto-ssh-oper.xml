@@ -1,0 +1,1211 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-crypto-ssh-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-crypto-ssh-oper" revision="2017-08-25">
+  <files>
+    <file revision="2017-08-25" submodule="false">Cisco-IOS-XR-crypto-ssh-oper.yang</file>
+    <file revision="2017-08-25" submodule="true">Cisco-IOS-XR-crypto-ssh-oper-sub1.yang</file>
+  </files>
+  <prefix>crypto-ssh-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="Connection">
+    <type node="enumeration">
+      <enum value="0">undefined</enum>
+      <enum value="1">shell</enum>
+      <enum value="2">exec</enum>
+      <enum value="3">scp</enum>
+      <enum value="4">sftp-subsystem</enum>
+      <enum value="5">netconf-subsystem</enum>
+      <enum value="6">tl1-subsystem</enum>
+      <enum value="7">netconf-xml-subsystem</enum>
+    </type>
+  </typedef>
+  <typedef name="Authen">
+    <type node="enumeration">
+      <enum value="0">password</enum>
+      <enum value="1">rsa-public-key</enum>
+      <enum value="2">keyboard-interactive</enum>
+    </type>
+  </typedef>
+  <typedef name="Version">
+    <type node="enumeration">
+      <enum value="0">v2</enum>
+      <enum value="1">v1</enum>
+    </type>
+  </typedef>
+  <typedef name="States">
+    <type node="enumeration">
+      <enum value="1">open</enum>
+      <enum value="2">version-ok</enum>
+      <enum value="3">key-exchange-initialize</enum>
+      <enum value="4">key-exchange-dh</enum>
+      <enum value="5">new-keys</enum>
+      <enum value="6">authenticate-information</enum>
+      <enum value="7">authenticated</enum>
+      <enum value="8">channel-open</enum>
+      <enum value="9">pty-open</enum>
+      <enum value="10">session-open</enum>
+      <enum value="11">rekey</enum>
+      <enum value="12">suspended</enum>
+      <enum value="13">session-closed</enum>
+    </type>
+  </typedef>
+  <typedef name="Mac">
+    <type node="enumeration">
+      <enum value="-1">mac-not-applicable</enum>
+      <enum value="0">hmac-md5</enum>
+      <enum value="1">hmac-sha1</enum>
+      <enum value="2">hmac-sha2-256</enum>
+      <enum value="3">hmac-sha2-512</enum>
+      <enum value="4">aes-gcm</enum>
+    </type>
+  </typedef>
+  <typedef name="Cipher">
+    <type node="enumeration">
+      <enum value="-1">cipher-not-applicable</enum>
+      <enum value="0">aes128-cbc</enum>
+      <enum value="1">aes192-cbc</enum>
+      <enum value="2">aes256-cbc</enum>
+      <enum value="3">triple-des-cbc</enum>
+      <enum value="4">aes128-ctr</enum>
+      <enum value="5">aes192-ctr</enum>
+      <enum value="6">aes256-ctr</enum>
+      <enum value="7">aes128-gcm</enum>
+      <enum value="8">aes256-gcm</enum>
+    </type>
+  </typedef>
+  <typedef name="Hostkey">
+    <type node="enumeration">
+      <enum value="-1">host-key-not-applicable</enum>
+      <enum value="0">ssh-dss</enum>
+      <enum value="1">ssh-rsa</enum>
+      <enum value="2">ecdsa-sha2-nistp521</enum>
+      <enum value="3">ecdsa-sha2-nistp384</enum>
+      <enum value="4">ecdsa-sha2-nistp256</enum>
+    </type>
+  </typedef>
+  <typedef name="Kex-name">
+    <type node="enumeration">
+      <enum value="-1">kex-not-applicable</enum>
+      <enum value="0">diffie-hellman-group1</enum>
+      <enum value="1">diffie-hellman-group14</enum>
+      <enum value="2">diffie-hellman-group15</enum>
+      <enum value="3">diffie-hellman-group16</enum>
+      <enum value="4">diffie-hellman-group17</enum>
+      <enum value="5">diffie-hellman-group18</enum>
+      <enum value="6">ecdh-nistp256</enum>
+      <enum value="7">ecdh-nistp384</enum>
+      <enum value="8">ecdh-nistp521</enum>
+      <enum value="9">password-authenticated</enum>
+    </type>
+  </typedef>
+  <ssh1 config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/crypto-ssh/</xr-path>
+    <xr-xml-map>crypto_ssh_oper:SSH1</xr-xml-map>
+    <xr-task>crypto</xr-task>
+    <kex config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/crypto-ssh/kex/</xr-path>
+      <xr-xml-map>crypto_ssh_oper:Kex</xr-xml-map>
+      <xr-task>crypto</xr-task>
+      <nodes config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/crypto-ssh/kex/node/</xr-path>
+        <xr-xml-map>crypto_ssh_oper:NodeTable</xr-xml-map>
+        <xr-task>crypto</xr-task>
+        <node config="false" key="node-name" node="list">
+          <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;</xr-path>
+          <xr-xml-map>crypto_ssh_oper:Node</xr-xml-map>
+          <xr-task>crypto</xr-task>
+          <xr-bag-grp-name>ssh_session_detail</xr-bag-grp-name>
+          <xr-bag>ssh_xml.bag</xr-bag>
+          <node-name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-pathformat>hex_nozerox</xr-pathformat>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;</xr-path>
+            <xr-xml-map>crypto_ssh_oper:NodeName</xr-xml-map>
+            <xr-task>crypto</xr-task>
+            <xr-sch-type>NodeID</xr-sch-type>
+            <xr-sch-arg-name>&lt;crypto_ssh_oper_Node_Node&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Node-id</type-name>
+            </type>
+          </node-name>
+          <incoming-sessions config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;~ssh_session_detail.IncomingSessions</xr-path>
+            <xr-task>crypto</xr-task>
+            <xr-bag-version>0 5</xr-bag-version>
+            <session-detail-info config="false" node="list">
+              <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;]</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag>ssh_xml.bag</xr-bag>
+              <xr-bag-dll>libssh_xml_bag_desc.dll</xr-bag-dll>
+              <xr-bag-list-next>NextSession</xr-bag-list-next>
+              <xr-bag-version>0 5</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg5&gt;</xr-internal-key>
+              <session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].SessionID</xr-path>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </session-id>
+              <key-exchange config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].KeyExchange</xr-path>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>Kex-name</type-name>
+                </type>
+              </key-exchange>
+              <public-key config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].PublicKey</xr-path>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>Hostkey</type-name>
+                </type>
+              </public-key>
+              <in-cipher config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].InCipher</xr-path>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>Cipher</type-name>
+                </type>
+              </in-cipher>
+              <out-cipher config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].OutCipher</xr-path>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>Cipher</type-name>
+                </type>
+              </out-cipher>
+              <in-mac config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].InMAC</xr-path>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>Mac</type-name>
+                </type>
+              </in-mac>
+              <out-mac config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].OutMAC</xr-path>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>Mac</type-name>
+                </type>
+              </out-mac>
+              <start-time config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].Start_Time</xr-path>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </start-time>
+              <end-time config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].End_Time</xr-path>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </end-time>
+            </session-detail-info>
+          </incoming-sessions>
+          <outgoing-connections config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;~ssh_session_detail.OutgoingConnections</xr-path>
+            <xr-task>crypto</xr-task>
+            <xr-bag-version>0 5</xr-bag-version>
+            <session-detail-info config="false" node="list">
+              <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;]</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag>ssh_xml.bag</xr-bag>
+              <xr-bag-dll>libssh_xml_bag_desc.dll</xr-bag-dll>
+              <xr-bag-list-next>NextSession</xr-bag-list-next>
+              <xr-bag-version>0 5</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg5&gt;</xr-internal-key>
+              <session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].SessionID</xr-path>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </session-id>
+              <key-exchange config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].KeyExchange</xr-path>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>Kex-name</type-name>
+                </type>
+              </key-exchange>
+              <public-key config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].PublicKey</xr-path>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>Hostkey</type-name>
+                </type>
+              </public-key>
+              <in-cipher config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].InCipher</xr-path>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>Cipher</type-name>
+                </type>
+              </in-cipher>
+              <out-cipher config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].OutCipher</xr-path>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>Cipher</type-name>
+                </type>
+              </out-cipher>
+              <in-mac config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].InMAC</xr-path>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>Mac</type-name>
+                </type>
+              </in-mac>
+              <out-mac config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].OutMAC</xr-path>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>Mac</type-name>
+                </type>
+              </out-mac>
+              <start-time config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].Start_Time</xr-path>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </start-time>
+              <end-time config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/kex/node/&lt;crypto_ssh_oper_Node_Node&gt;~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].End_Time</xr-path>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </end-time>
+            </session-detail-info>
+          </outgoing-connections>
+        </node>
+      </nodes>
+    </kex>
+  </ssh1>
+  <ssh config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/crypto-ssh/gl/</xr-path>
+    <xr-xml-map>crypto_ssh_oper:SSH</xr-xml-map>
+    <xr-task>crypto</xr-task>
+    <session config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/crypto-ssh/gl/session_xml/</xr-path>
+      <xr-xml-map>crypto_ssh_oper:Session</xr-xml-map>
+      <xr-task>crypto</xr-task>
+      <rekey config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/crypto-ssh/gl/session_xml/rekey</xr-path>
+        <xr-xml-map>crypto_ssh_oper:Rekey</xr-xml-map>
+        <xr-task>crypto</xr-task>
+        <xr-bag-grp-name>ssh_session_rekey</xr-bag-grp-name>
+        <xr-bag>ssh_xml.bag</xr-bag>
+        <incoming-sessions config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/crypto-ssh/gl/session_xml/rekey~ssh_session_rekey.IncomingSessions</xr-path>
+          <xr-task>crypto</xr-task>
+          <xr-bag-version>0 5</xr-bag-version>
+          <session-rekey-info config="false" node="list">
+            <xr-path>/oper/crypto-ssh/gl/session_xml/rekey~ssh_session_rekey.IncomingSessions[&lt;bag_arg6&gt;]</xr-path>
+            <xr-task>crypto</xr-task>
+            <xr-bag>ssh_xml.bag</xr-bag>
+            <xr-bag-dll>libssh_xml_bag_desc.dll</xr-bag-dll>
+            <xr-bag-list-next>NextSession</xr-bag-list-next>
+            <xr-bag-version>0 5</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg6&gt;</xr-internal-key>
+            <session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/rekey~ssh_session_rekey.IncomingSessions[&lt;bag_arg6&gt;].SessionID</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </session-id>
+            <session-rekey-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/rekey~ssh_session_rekey.IncomingSessions[&lt;bag_arg6&gt;].SessionRekeyCount</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </session-rekey-count>
+            <time-to-rekey config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/rekey~ssh_session_rekey.IncomingSessions[&lt;bag_arg6&gt;].TimeToRekey</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </time-to-rekey>
+            <volume-to-rekey config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/rekey~ssh_session_rekey.IncomingSessions[&lt;bag_arg6&gt;].VolumeToRekey</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </volume-to-rekey>
+          </session-rekey-info>
+        </incoming-sessions>
+        <outgoing-connections config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/crypto-ssh/gl/session_xml/rekey~ssh_session_rekey.OutgoingConnections</xr-path>
+          <xr-task>crypto</xr-task>
+          <xr-bag-version>0 5</xr-bag-version>
+          <session-rekey-info config="false" node="list">
+            <xr-path>/oper/crypto-ssh/gl/session_xml/rekey~ssh_session_rekey.OutgoingConnections[&lt;bag_arg6&gt;]</xr-path>
+            <xr-task>crypto</xr-task>
+            <xr-bag>ssh_xml.bag</xr-bag>
+            <xr-bag-dll>libssh_xml_bag_desc.dll</xr-bag-dll>
+            <xr-bag-list-next>NextSession</xr-bag-list-next>
+            <xr-bag-version>0 5</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg6&gt;</xr-internal-key>
+            <session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/rekey~ssh_session_rekey.OutgoingConnections[&lt;bag_arg6&gt;].SessionID</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </session-id>
+            <session-rekey-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/rekey~ssh_session_rekey.OutgoingConnections[&lt;bag_arg6&gt;].SessionRekeyCount</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </session-rekey-count>
+            <time-to-rekey config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/rekey~ssh_session_rekey.OutgoingConnections[&lt;bag_arg6&gt;].TimeToRekey</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </time-to-rekey>
+            <volume-to-rekey config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/rekey~ssh_session_rekey.OutgoingConnections[&lt;bag_arg6&gt;].VolumeToRekey</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </volume-to-rekey>
+          </session-rekey-info>
+        </outgoing-connections>
+      </rekey>
+      <history-detail config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/crypto-ssh/gl/session_xml/history_detail</xr-path>
+        <xr-xml-map>crypto_ssh_oper:HistoryDetail</xr-xml-map>
+        <xr-task>crypto</xr-task>
+        <xr-bag-grp-name>ssh_session_detail</xr-bag-grp-name>
+        <xr-bag>ssh_xml.bag</xr-bag>
+        <incoming-sessions config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/crypto-ssh/gl/session_xml/history_detail~ssh_session_detail.IncomingSessions</xr-path>
+          <xr-task>crypto</xr-task>
+          <xr-bag-version>0 5</xr-bag-version>
+          <session-detail-info config="false" node="list">
+            <xr-path>/oper/crypto-ssh/gl/session_xml/history_detail~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;]</xr-path>
+            <xr-task>crypto</xr-task>
+            <xr-bag>ssh_xml.bag</xr-bag>
+            <xr-bag-dll>libssh_xml_bag_desc.dll</xr-bag-dll>
+            <xr-bag-list-next>NextSession</xr-bag-list-next>
+            <xr-bag-version>0 5</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg5&gt;</xr-internal-key>
+            <session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history_detail~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].SessionID</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </session-id>
+            <key-exchange config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history_detail~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].KeyExchange</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Kex-name</type-name>
+              </type>
+            </key-exchange>
+            <public-key config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history_detail~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].PublicKey</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Hostkey</type-name>
+              </type>
+            </public-key>
+            <in-cipher config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history_detail~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].InCipher</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Cipher</type-name>
+              </type>
+            </in-cipher>
+            <out-cipher config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history_detail~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].OutCipher</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Cipher</type-name>
+              </type>
+            </out-cipher>
+            <in-mac config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history_detail~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].InMAC</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Mac</type-name>
+              </type>
+            </in-mac>
+            <out-mac config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history_detail~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].OutMAC</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Mac</type-name>
+              </type>
+            </out-mac>
+            <start-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history_detail~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].Start_Time</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </start-time>
+            <end-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history_detail~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].End_Time</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </end-time>
+          </session-detail-info>
+        </incoming-sessions>
+        <outgoing-connections config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/crypto-ssh/gl/session_xml/history_detail~ssh_session_detail.OutgoingConnections</xr-path>
+          <xr-task>crypto</xr-task>
+          <xr-bag-version>0 5</xr-bag-version>
+          <session-detail-info config="false" node="list">
+            <xr-path>/oper/crypto-ssh/gl/session_xml/history_detail~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;]</xr-path>
+            <xr-task>crypto</xr-task>
+            <xr-bag>ssh_xml.bag</xr-bag>
+            <xr-bag-dll>libssh_xml_bag_desc.dll</xr-bag-dll>
+            <xr-bag-list-next>NextSession</xr-bag-list-next>
+            <xr-bag-version>0 5</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg5&gt;</xr-internal-key>
+            <session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history_detail~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].SessionID</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </session-id>
+            <key-exchange config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history_detail~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].KeyExchange</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Kex-name</type-name>
+              </type>
+            </key-exchange>
+            <public-key config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history_detail~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].PublicKey</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Hostkey</type-name>
+              </type>
+            </public-key>
+            <in-cipher config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history_detail~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].InCipher</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Cipher</type-name>
+              </type>
+            </in-cipher>
+            <out-cipher config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history_detail~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].OutCipher</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Cipher</type-name>
+              </type>
+            </out-cipher>
+            <in-mac config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history_detail~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].InMAC</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Mac</type-name>
+              </type>
+            </in-mac>
+            <out-mac config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history_detail~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].OutMAC</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Mac</type-name>
+              </type>
+            </out-mac>
+            <start-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history_detail~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].Start_Time</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </start-time>
+            <end-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history_detail~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].End_Time</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </end-time>
+          </session-detail-info>
+        </outgoing-connections>
+      </history-detail>
+      <brief config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/crypto-ssh/gl/session_xml/brief</xr-path>
+        <xr-xml-map>crypto_ssh_oper:Brief</xr-xml-map>
+        <xr-task>crypto</xr-task>
+        <xr-bag-grp-name>ssh_session_brief</xr-bag-grp-name>
+        <xr-bag>ssh_xml.bag</xr-bag>
+        <incoming-sessions config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.IncomingSessions</xr-path>
+          <xr-task>crypto</xr-task>
+          <xr-bag-version>0 5</xr-bag-version>
+          <session-brief-info config="false" node="list">
+            <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.IncomingSessions[&lt;bag_arg1&gt;]</xr-path>
+            <xr-task>crypto</xr-task>
+            <xr-bag>ssh_xml.bag</xr-bag>
+            <xr-bag-dll>libssh_xml_bag_desc.dll</xr-bag-dll>
+            <xr-bag-list-next>NextSession</xr-bag-list-next>
+            <xr-bag-version>0 5</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+            <session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.IncomingSessions[&lt;bag_arg1&gt;].SessionID</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </session-id>
+            <node-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.IncomingSessions[&lt;bag_arg1&gt;].NodeName</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>nodeid_td</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>xr:Node-id</type-name>
+              </type>
+            </node-name>
+            <session-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.IncomingSessions[&lt;bag_arg1&gt;].SessionState</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>States</type-name>
+              </type>
+            </session-state>
+            <user-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.IncomingSessions[&lt;bag_arg1&gt;].UserID</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </user-id>
+            <host-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.IncomingSessions[&lt;bag_arg1&gt;].HostAddress</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </host-address>
+            <version config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.IncomingSessions[&lt;bag_arg1&gt;].Version</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Version</type-name>
+              </type>
+            </version>
+            <authentication-type config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.IncomingSessions[&lt;bag_arg1&gt;].AuthenticationType</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Authen</type-name>
+              </type>
+            </authentication-type>
+            <mc-info config="false" node="list">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.IncomingSessions[&lt;bag_arg1&gt;].McInfo[&lt;bag_arg2&gt;]</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-version>0 5</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+              <channel-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.IncomingSessions[&lt;bag_arg1&gt;].McInfo[&lt;bag_arg2&gt;].ChannelID</xr-path>
+                <xr-xml-map>ssh_xml:ChannelID</xr-xml-map>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </channel-id>
+              <connection-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.IncomingSessions[&lt;bag_arg1&gt;].McInfo[&lt;bag_arg2&gt;].ConnectionType</xr-path>
+                <xr-xml-map>ssh_xml:ConnectionType</xr-xml-map>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>Connection</type-name>
+                </type>
+              </connection-type>
+              <vty-line-number config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.IncomingSessions[&lt;bag_arg1&gt;].McInfo[&lt;bag_arg2&gt;].VTYLineNumber</xr-path>
+                <xr-xml-map>ssh_xml:VTYLineNumber</xr-xml-map>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </vty-line-number>
+              <vty-assigned config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.IncomingSessions[&lt;bag_arg1&gt;].McInfo[&lt;bag_arg2&gt;].VTYAssigned</xr-path>
+                <xr-xml-map>ssh_xml:VTYAssigned</xr-xml-map>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </vty-assigned>
+            </mc-info>
+          </session-brief-info>
+        </incoming-sessions>
+        <outgoing-sessions config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.OutgoingSessions</xr-path>
+          <xr-task>crypto</xr-task>
+          <xr-bag-version>0 5</xr-bag-version>
+          <session-brief-info config="false" node="list">
+            <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.OutgoingSessions[&lt;bag_arg1&gt;]</xr-path>
+            <xr-task>crypto</xr-task>
+            <xr-bag>ssh_xml.bag</xr-bag>
+            <xr-bag-dll>libssh_xml_bag_desc.dll</xr-bag-dll>
+            <xr-bag-list-next>NextSession</xr-bag-list-next>
+            <xr-bag-version>0 5</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+            <session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.OutgoingSessions[&lt;bag_arg1&gt;].SessionID</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </session-id>
+            <node-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.OutgoingSessions[&lt;bag_arg1&gt;].NodeName</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>nodeid_td</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>xr:Node-id</type-name>
+              </type>
+            </node-name>
+            <session-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.OutgoingSessions[&lt;bag_arg1&gt;].SessionState</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>States</type-name>
+              </type>
+            </session-state>
+            <user-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.OutgoingSessions[&lt;bag_arg1&gt;].UserID</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </user-id>
+            <host-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.OutgoingSessions[&lt;bag_arg1&gt;].HostAddress</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </host-address>
+            <version config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.OutgoingSessions[&lt;bag_arg1&gt;].Version</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Version</type-name>
+              </type>
+            </version>
+            <authentication-type config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.OutgoingSessions[&lt;bag_arg1&gt;].AuthenticationType</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Authen</type-name>
+              </type>
+            </authentication-type>
+            <mc-info config="false" node="list">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.OutgoingSessions[&lt;bag_arg1&gt;].McInfo[&lt;bag_arg2&gt;]</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-version>0 5</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+              <channel-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.OutgoingSessions[&lt;bag_arg1&gt;].McInfo[&lt;bag_arg2&gt;].ChannelID</xr-path>
+                <xr-xml-map>ssh_xml:ChannelID</xr-xml-map>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </channel-id>
+              <connection-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.OutgoingSessions[&lt;bag_arg1&gt;].McInfo[&lt;bag_arg2&gt;].ConnectionType</xr-path>
+                <xr-xml-map>ssh_xml:ConnectionType</xr-xml-map>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>Connection</type-name>
+                </type>
+              </connection-type>
+              <vty-line-number config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.OutgoingSessions[&lt;bag_arg1&gt;].McInfo[&lt;bag_arg2&gt;].VTYLineNumber</xr-path>
+                <xr-xml-map>ssh_xml:VTYLineNumber</xr-xml-map>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </vty-line-number>
+              <vty-assigned config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/gl/session_xml/brief~ssh_session_brief.OutgoingSessions[&lt;bag_arg1&gt;].McInfo[&lt;bag_arg2&gt;].VTYAssigned</xr-path>
+                <xr-xml-map>ssh_xml:VTYAssigned</xr-xml-map>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </vty-assigned>
+            </mc-info>
+          </session-brief-info>
+        </outgoing-sessions>
+      </brief>
+      <history config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/crypto-ssh/gl/session_xml/history</xr-path>
+        <xr-xml-map>crypto_ssh_oper:History</xr-xml-map>
+        <xr-task>crypto</xr-task>
+        <xr-bag-grp-name>ssh_session_history</xr-bag-grp-name>
+        <xr-bag>ssh_xml.bag</xr-bag>
+        <incoming-sessions config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/crypto-ssh/gl/session_xml/history~ssh_session_history.IncomingSessions</xr-path>
+          <xr-task>crypto</xr-task>
+          <xr-bag-version>0 5</xr-bag-version>
+          <session-history-info config="false" node="list">
+            <xr-path>/oper/crypto-ssh/gl/session_xml/history~ssh_session_history.IncomingSessions[&lt;bag_arg3&gt;]</xr-path>
+            <xr-task>crypto</xr-task>
+            <xr-bag>ssh_xml.bag</xr-bag>
+            <xr-bag-dll>libssh_xml_bag_desc.dll</xr-bag-dll>
+            <xr-bag-list-next>NextSession</xr-bag-list-next>
+            <xr-bag-version>0 5</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+            <session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history~ssh_session_history.IncomingSessions[&lt;bag_arg3&gt;].SessionID</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </session-id>
+            <node-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history~ssh_session_history.IncomingSessions[&lt;bag_arg3&gt;].NodeName</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>nodeid_td</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>xr:Node-id</type-name>
+              </type>
+            </node-name>
+            <user-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history~ssh_session_history.IncomingSessions[&lt;bag_arg3&gt;].UserID</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </user-id>
+            <host-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history~ssh_session_history.IncomingSessions[&lt;bag_arg3&gt;].HostAddress</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </host-address>
+            <version config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history~ssh_session_history.IncomingSessions[&lt;bag_arg3&gt;].Version</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Version</type-name>
+              </type>
+            </version>
+            <authentication-type config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history~ssh_session_history.IncomingSessions[&lt;bag_arg3&gt;].AuthenticationType</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Authen</type-name>
+              </type>
+            </authentication-type>
+            <mc-info config="false" node="list">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/history~ssh_session_history.IncomingSessions[&lt;bag_arg3&gt;].McInfo[&lt;bag_arg4&gt;]</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-version>0 5</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg4&gt;</xr-internal-key>
+              <channel-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/gl/session_xml/history~ssh_session_history.IncomingSessions[&lt;bag_arg3&gt;].McInfo[&lt;bag_arg4&gt;].ChannelID</xr-path>
+                <xr-xml-map>ssh_xml:ChannelID</xr-xml-map>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </channel-id>
+              <connection-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/gl/session_xml/history~ssh_session_history.IncomingSessions[&lt;bag_arg3&gt;].McInfo[&lt;bag_arg4&gt;].ConnectionType</xr-path>
+                <xr-xml-map>ssh_xml:ConnectionType</xr-xml-map>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>Connection</type-name>
+                </type>
+              </connection-type>
+              <vty-line-number config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/gl/session_xml/history~ssh_session_history.IncomingSessions[&lt;bag_arg3&gt;].McInfo[&lt;bag_arg4&gt;].VTYLineNumber</xr-path>
+                <xr-xml-map>ssh_xml:VTYLineNumber</xr-xml-map>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </vty-line-number>
+              <vty-assigned config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/crypto-ssh/gl/session_xml/history~ssh_session_history.IncomingSessions[&lt;bag_arg3&gt;].McInfo[&lt;bag_arg4&gt;].VTYAssigned</xr-path>
+                <xr-xml-map>ssh_xml:VTYAssigned</xr-xml-map>
+                <xr-task>crypto</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>0 5</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </vty-assigned>
+            </mc-info>
+          </session-history-info>
+        </incoming-sessions>
+      </history>
+      <detail config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/crypto-ssh/gl/session_xml/detail</xr-path>
+        <xr-xml-map>crypto_ssh_oper:Detail</xr-xml-map>
+        <xr-task>crypto</xr-task>
+        <xr-bag-grp-name>ssh_session_detail</xr-bag-grp-name>
+        <xr-bag>ssh_xml.bag</xr-bag>
+        <incoming-sessions config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/crypto-ssh/gl/session_xml/detail~ssh_session_detail.IncomingSessions</xr-path>
+          <xr-task>crypto</xr-task>
+          <xr-bag-version>0 5</xr-bag-version>
+          <session-detail-info config="false" node="list">
+            <xr-path>/oper/crypto-ssh/gl/session_xml/detail~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;]</xr-path>
+            <xr-task>crypto</xr-task>
+            <xr-bag>ssh_xml.bag</xr-bag>
+            <xr-bag-dll>libssh_xml_bag_desc.dll</xr-bag-dll>
+            <xr-bag-list-next>NextSession</xr-bag-list-next>
+            <xr-bag-version>0 5</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg5&gt;</xr-internal-key>
+            <session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/detail~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].SessionID</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </session-id>
+            <key-exchange config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/detail~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].KeyExchange</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Kex-name</type-name>
+              </type>
+            </key-exchange>
+            <public-key config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/detail~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].PublicKey</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Hostkey</type-name>
+              </type>
+            </public-key>
+            <in-cipher config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/detail~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].InCipher</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Cipher</type-name>
+              </type>
+            </in-cipher>
+            <out-cipher config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/detail~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].OutCipher</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Cipher</type-name>
+              </type>
+            </out-cipher>
+            <in-mac config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/detail~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].InMAC</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Mac</type-name>
+              </type>
+            </in-mac>
+            <out-mac config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/detail~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].OutMAC</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Mac</type-name>
+              </type>
+            </out-mac>
+            <start-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/detail~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].Start_Time</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </start-time>
+            <end-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/detail~ssh_session_detail.IncomingSessions[&lt;bag_arg5&gt;].End_Time</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </end-time>
+          </session-detail-info>
+        </incoming-sessions>
+        <outgoing-connections config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/crypto-ssh/gl/session_xml/detail~ssh_session_detail.OutgoingConnections</xr-path>
+          <xr-task>crypto</xr-task>
+          <xr-bag-version>0 5</xr-bag-version>
+          <session-detail-info config="false" node="list">
+            <xr-path>/oper/crypto-ssh/gl/session_xml/detail~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;]</xr-path>
+            <xr-task>crypto</xr-task>
+            <xr-bag>ssh_xml.bag</xr-bag>
+            <xr-bag-dll>libssh_xml_bag_desc.dll</xr-bag-dll>
+            <xr-bag-list-next>NextSession</xr-bag-list-next>
+            <xr-bag-version>0 5</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg5&gt;</xr-internal-key>
+            <session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/detail~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].SessionID</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </session-id>
+            <key-exchange config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/detail~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].KeyExchange</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Kex-name</type-name>
+              </type>
+            </key-exchange>
+            <public-key config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/detail~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].PublicKey</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Hostkey</type-name>
+              </type>
+            </public-key>
+            <in-cipher config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/detail~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].InCipher</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Cipher</type-name>
+              </type>
+            </in-cipher>
+            <out-cipher config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/detail~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].OutCipher</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Cipher</type-name>
+              </type>
+            </out-cipher>
+            <in-mac config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/detail~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].InMAC</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Mac</type-name>
+              </type>
+            </in-mac>
+            <out-mac config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/detail~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].OutMAC</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>Mac</type-name>
+              </type>
+            </out-mac>
+            <start-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/detail~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].Start_Time</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </start-time>
+            <end-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/crypto-ssh/gl/session_xml/detail~ssh_session_detail.OutgoingConnections[&lt;bag_arg5&gt;].End_Time</xr-path>
+              <xr-task>crypto</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 5</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </end-time>
+          </session-detail-info>
+        </outgoing-connections>
+      </detail>
+    </session>
+  </ssh>
+</Cisco-IOS-XR-crypto-ssh-oper>

@@ -1,0 +1,2950 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-snmp-agent-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-snmp-agent-oper" revision="2017-09-07">
+  <files>
+    <file revision="2017-09-07" submodule="false">Cisco-IOS-XR-snmp-agent-oper.yang</file>
+    <file revision="2017-09-07" submodule="true">Cisco-IOS-XR-snmp-agent-oper-sub1.yang</file>
+    <file revision="2017-09-07" submodule="true">Cisco-IOS-XR-snmp-agent-oper-sub2.yang</file>
+    <file revision="2017-09-07" submodule="true">Cisco-IOS-XR-snmp-agent-oper-sub3.yang</file>
+    <file revision="2017-09-07" submodule="true">Cisco-IOS-XR-snmp-agent-oper-sub4.yang</file>
+    <file revision="2017-09-07" submodule="true">Cisco-IOS-XR-snmp-agent-oper-sub5.yang</file>
+    <file revision="2017-09-07" submodule="true">Cisco-IOS-XR-snmp-agent-oper-sub6.yang</file>
+    <file revision="2017-09-07" submodule="true">Cisco-IOS-XR-snmp-agent-oper-sub7.yang</file>
+  </files>
+  <prefix>snmp-agent-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="Nms-ip">
+    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+    <type>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="Dup-req-drop-status">
+    <type node="enumeration">
+      <enum>disabled</enum>
+      <enum>enabled</enum>
+    </type>
+  </typedef>
+  <typedef name="Snmp-corr-vbind-match">
+    <type node="enumeration">
+      <enum value="0">index</enum>
+      <enum value="1">value</enum>
+    </type>
+  </typedef>
+  <typedef name="Snmp-corr-rule-state">
+    <type node="enumeration">
+      <enum value="0">rule-unapplied</enum>
+      <enum value="1">rule-applied</enum>
+      <enum value="2">rule-applied-all</enum>
+    </type>
+  </typedef>
+  <snmp config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/snmp/gl/</xr-path>
+    <xr-xml-map>snmp_oper:SNMP</xr-xml-map>
+    <xr-task>snmp</xr-task>
+    <xr-scope>exported</xr-scope>
+    <trap-servers config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/snmp/gl/trapq/stats/</xr-path>
+      <xr-xml-map>snmp_oper:TrapServerTable</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <trap-server config="false" node="list">
+        <xr-path>/oper/snmp/gl/trapq/stats/&lt;snmp_oper_TrapServer_host&gt;,&lt;snmp_oper_TrapServer_port&gt;</xr-path>
+        <xr-xml-map>snmp_oper:TrapServer</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-bag-grp-name>snmp_trap_stats</xr-bag-grp-name>
+        <xr-bag>udpsnmp.bag</xr-bag>
+        <trap-host config="false" is-key="true" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/snmp/gl/trapq/stats/&lt;snmp_oper_TrapServer_host&gt;,&lt;snmp_oper_TrapServer_port&gt;</xr-path>
+          <xr-xml-map>snmp_oper:TrapHost</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>EncodedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;snmp_oper_TrapServer_host&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </trap-host>
+        <port config="false" is-key="true" is-yang-key="false" node="leaf">
+          <xr-pathformat>decimal</xr-pathformat>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/snmp/gl/trapq/stats/&lt;snmp_oper_TrapServer_host&gt;,&lt;snmp_oper_TrapServer_port&gt;</xr-path>
+          <xr-xml-map>snmp_oper:Port</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>PortNumber</xr-sch-type>
+          <xr-sch-arg-name>&lt;snmp_oper_TrapServer_port&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>inet:port-number</type-name>
+          </type>
+        </port>
+        <number-of-pkts-in-trap-q config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/trapq/stats/&lt;snmp_oper_TrapServer_host&gt;,&lt;snmp_oper_TrapServer_port&gt;~snmp_trap_stats.NumberOfPktsInTrapQ</xr-path>
+          <xr-xml-map>udpsnmp:NumberOfPktsInTrapQ</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </number-of-pkts-in-trap-q>
+        <max-q-length-of-trap-q config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/trapq/stats/&lt;snmp_oper_TrapServer_host&gt;,&lt;snmp_oper_TrapServer_port&gt;~snmp_trap_stats.MaxQLengthOfTrapQ</xr-path>
+          <xr-xml-map>udpsnmp:MaxQLengthOfTrapQ</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </max-q-length-of-trap-q>
+        <number-of-pkts-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/trapq/stats/&lt;snmp_oper_TrapServer_host&gt;,&lt;snmp_oper_TrapServer_port&gt;~snmp_trap_stats.NumberOfPktsSent</xr-path>
+          <xr-xml-map>udpsnmp:NumberOfPktsSent</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </number-of-pkts-sent>
+        <number-of-pkts-dropped config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/trapq/stats/&lt;snmp_oper_TrapServer_host&gt;,&lt;snmp_oper_TrapServer_port&gt;~snmp_trap_stats.NumberOfPktsDropped</xr-path>
+          <xr-xml-map>udpsnmp:NumberOfPktsDropped</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </number-of-pkts-dropped>
+      </trap-server>
+    </trap-servers>
+    <information config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/snmp/gl/info/</xr-path>
+      <xr-xml-map>snmp_oper:Information</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <hosts config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/HostXml/</xr-path>
+        <xr-xml-map>snmp_oper:HostTable</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <host config="false" key="name" node="list">
+          <xr-path>/oper/snmp/gl/info/HostXml/&lt;snmp_oper_Host_hostname&gt;/</xr-path>
+          <xr-xml-map>snmp_oper:Host</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/snmp/gl/info/HostXml/&lt;snmp_oper_Host_hostname&gt;/</xr-path>
+            <xr-xml-map>snmp_oper:Name</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_oper_Host_hostname&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </name>
+          <host-information config="false" key="user" node="list">
+            <xr-path>/oper/snmp/gl/info/HostXml/&lt;snmp_oper_Host_hostname&gt;/&lt;snmp_oper_HostInformation_users&gt;</xr-path>
+            <xr-xml-map>snmp_oper:HostInformation</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-grp-name>snmp_snmpHostXml</xr-bag-grp-name>
+            <xr-bag>snmpv3mib.bag</xr-bag>
+            <user config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/snmp/gl/info/HostXml/&lt;snmp_oper_Host_hostname&gt;/&lt;snmp_oper_HostInformation_users&gt;</xr-path>
+              <xr-xml-map>snmp_oper:user</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;snmp_oper_HostInformation_users&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </user>
+            <snmp-target-address-t-host config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/HostXml/&lt;snmp_oper_Host_hostname&gt;/&lt;snmp_oper_HostInformation_users&gt;~snmp_snmpHostXml.SNMPTargetAddressTHost</xr-path>
+              <xr-xml-map>snmpv3mib:SNMPTargetAddressTHost</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </snmp-target-address-t-host>
+            <snmp-target-address-port config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/HostXml/&lt;snmp_oper_Host_hostname&gt;/&lt;snmp_oper_HostInformation_users&gt;~snmp_snmpHostXml.SNMPTargetAddressPort</xr-path>
+              <xr-xml-map>snmpv3mib:SNMPTargetAddressPort</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </snmp-target-address-port>
+            <snmp-target-addresstype config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/HostXml/&lt;snmp_oper_Host_hostname&gt;/&lt;snmp_oper_HostInformation_users&gt;~snmp_snmpHostXml.SNMPTargetAddresstype</xr-path>
+              <xr-xml-map>snmpv3mib:SNMPTargetAddresstype</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </snmp-target-addresstype>
+            <snmp-target-params-security-model config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/HostXml/&lt;snmp_oper_Host_hostname&gt;/&lt;snmp_oper_HostInformation_users&gt;~snmp_snmpHostXml.SNMPTargetParamsSecurityModel</xr-path>
+              <xr-xml-map>snmpv3mib:SNMPTargetParamsSecurityModel</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </snmp-target-params-security-model>
+            <snmp-target-params-security-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/HostXml/&lt;snmp_oper_Host_hostname&gt;/&lt;snmp_oper_HostInformation_users&gt;~snmp_snmpHostXml.SNMPTargetParamsSecurityName</xr-path>
+              <xr-xml-map>snmpv3mib:SNMPTargetParamsSecurityName</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </snmp-target-params-security-name>
+            <snmp-target-params-security-level config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/HostXml/&lt;snmp_oper_Host_hostname&gt;/&lt;snmp_oper_HostInformation_users&gt;~snmp_snmpHostXml.SNMPTargetParamsSecurityLevel</xr-path>
+              <xr-xml-map>snmpv3mib:SNMPTargetParamsSecurityLevel</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </snmp-target-params-security-level>
+          </host-information>
+        </host>
+      </hosts>
+      <system-up-time config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/snmptime_edm</xr-path>
+        <xr-xml-map>snmp_oper:SystemUpTime</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-bag-grp-name>snmp_sysuptime_edm</xr-bag-grp-name>
+        <xr-bag>snmp.bag</xr-bag>
+        <system-up-time-edm config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmptime_edm~snmp_sysuptime_edm.SystemUpTime_edm</xr-path>
+          <xr-xml-map>snmp:SystemUpTime_edm</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </system-up-time-edm>
+      </system-up-time>
+      <nms-addresses config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/nms_req_sum/</xr-path>
+        <xr-xml-map>snmp_oper:RequestTypeSummary</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <nms-address config="false" key="nms-addr" node="list">
+          <xr-path>/oper/snmp/gl/info/nms_req_sum/&lt;snmp_oper_NMSAddress_nmsAddr&gt;</xr-path>
+          <xr-xml-map>snmp_oper:NMSAddress</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-grp-name>snmp_req_nms_sum</xr-bag-grp-name>
+          <xr-bag>snmp.bag</xr-bag>
+          <nms-addr config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/snmp/gl/info/nms_req_sum/&lt;snmp_oper_NMSAddress_nmsAddr&gt;</xr-path>
+            <xr-xml-map>snmp_oper:nmsAddr</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_oper_NMSAddress_nmsAddr&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </nms-addr>
+          <nms-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/nms_req_sum/&lt;snmp_oper_NMSAddress_nmsAddr&gt;~snmp_req_nms_sum.NMSAddress</xr-path>
+            <xr-xml-map>snmp:NMSAddress</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </nms-address>
+          <get-request-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/nms_req_sum/&lt;snmp_oper_NMSAddress_nmsAddr&gt;~snmp_req_nms_sum.GetRequestCount</xr-path>
+            <xr-xml-map>snmp:GetRequestCount</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </get-request-count>
+          <getnext-request-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/nms_req_sum/&lt;snmp_oper_NMSAddress_nmsAddr&gt;~snmp_req_nms_sum.GetnextRequestCount</xr-path>
+            <xr-xml-map>snmp:GetnextRequestCount</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </getnext-request-count>
+          <getbulk-request-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/nms_req_sum/&lt;snmp_oper_NMSAddress_nmsAddr&gt;~snmp_req_nms_sum.GetbulkRequestCount</xr-path>
+            <xr-xml-map>snmp:GetbulkRequestCount</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </getbulk-request-count>
+          <set-request-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/nms_req_sum/&lt;snmp_oper_NMSAddress_nmsAddr&gt;~snmp_req_nms_sum.SetRequestCount</xr-path>
+            <xr-xml-map>snmp:SetRequestCount</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </set-request-count>
+          <test-request-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/nms_req_sum/&lt;snmp_oper_NMSAddress_nmsAddr&gt;~snmp_req_nms_sum.TestRequestCount</xr-path>
+            <xr-xml-map>snmp:TestRequestCount</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </test-request-count>
+        </nms-address>
+      </nms-addresses>
+      <engine-id config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/admin/snmp_engineid</xr-path>
+        <xr-xml-map>snmp_oper:EngineID</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-bag-grp-name>snmp_engineid</xr-bag-grp-name>
+        <xr-bag>snmp.bag</xr-bag>
+        <engine-id config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/admin/snmp_engineid~snmp_engineid.EngineID</xr-path>
+          <xr-xml-map>snmp:EngineID</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </engine-id>
+      </engine-id>
+      <rx-queue config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/snmp_rxque</xr-path>
+        <xr-xml-map>snmp_oper:RxQueue</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-bag-grp-name>snmp_rxque</xr-bag-grp-name>
+        <xr-bag>snmp.bag</xr-bag>
+        <qlen config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_rxque~snmp_rxque.qlen</xr-path>
+          <xr-xml-map>snmp:qlen</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </qlen>
+        <in-min config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_rxque~snmp_rxque.in_min</xr-path>
+          <xr-xml-map>snmp:in_min</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </in-min>
+        <in-avg config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_rxque~snmp_rxque.in_avg</xr-path>
+          <xr-xml-map>snmp:in_avg</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </in-avg>
+        <in-max config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_rxque~snmp_rxque.in_max</xr-path>
+          <xr-xml-map>snmp:in_max</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </in-max>
+        <pend-min config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_rxque~snmp_rxque.pend_min</xr-path>
+          <xr-xml-map>snmp:pend_min</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </pend-min>
+        <pend-avg config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_rxque~snmp_rxque.pend_avg</xr-path>
+          <xr-xml-map>snmp:pend_avg</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </pend-avg>
+        <pend-max config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_rxque~snmp_rxque.pend_max</xr-path>
+          <xr-xml-map>snmp:pend_max</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </pend-max>
+        <incoming-q config="false" node="list">
+          <xr-path>/oper/snmp/gl/info/snmp_rxque~snmp_rxque.incomingQ[&lt;bag_arg9&gt;]</xr-path>
+          <xr-task>snmp</xr-task>
+          <xr-bag-version>1 3</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg9&gt;</xr-internal-key>
+          <max-elements>300</max-elements>
+          <min config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/snmp_rxque~snmp_rxque.incomingQ[&lt;bag_arg9&gt;].min</xr-path>
+            <xr-xml-map>snmp:min</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </min>
+          <avg config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/snmp_rxque~snmp_rxque.incomingQ[&lt;bag_arg9&gt;].avg</xr-path>
+            <xr-xml-map>snmp:avg</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </avg>
+          <max config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/snmp_rxque~snmp_rxque.incomingQ[&lt;bag_arg9&gt;].max</xr-path>
+            <xr-xml-map>snmp:max</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </max>
+        </incoming-q>
+        <pending-q config="false" node="list">
+          <xr-path>/oper/snmp/gl/info/snmp_rxque~snmp_rxque.pendingQ[&lt;bag_arg10&gt;]</xr-path>
+          <xr-task>snmp</xr-task>
+          <xr-bag-version>1 3</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg10&gt;</xr-internal-key>
+          <max-elements>300</max-elements>
+          <min config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/snmp_rxque~snmp_rxque.pendingQ[&lt;bag_arg10&gt;].min</xr-path>
+            <xr-xml-map>snmp:min</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </min>
+          <avg config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/snmp_rxque~snmp_rxque.pendingQ[&lt;bag_arg10&gt;].avg</xr-path>
+            <xr-xml-map>snmp:avg</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </avg>
+          <max config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/snmp_rxque~snmp_rxque.pendingQ[&lt;bag_arg10&gt;].max</xr-path>
+            <xr-xml-map>snmp:max</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </max>
+        </pending-q>
+      </rx-queue>
+      <system-name config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/snmp_sysName</xr-path>
+        <xr-xml-map>snmp_oper:SystemName</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-bag-grp-name>snmp_sysname</xr-bag-grp-name>
+        <xr-bag>snmp.bag</xr-bag>
+        <system-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_sysName~snmp_sysname.SystemName</xr-path>
+          <xr-xml-map>snmp:SystemName</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </system-name>
+      </system-name>
+      <request-type-detail config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/agent_stats/</xr-path>
+        <xr-xml-map>snmp_oper:RequestTypeDetail</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <nms-addresses config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/snmp/gl/info/agent_stats/incoming/</xr-path>
+          <xr-xml-map>snmp_oper:incomingQ</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <nms-address config="false" key="nms-addr" node="list">
+            <xr-path>/oper/snmp/gl/info/agent_stats/incoming/&lt;snmp_oper_NMSAddress_nmsAddr&gt;</xr-path>
+            <xr-xml-map>snmp_oper:NMSAddress</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-grp-name>snmp_q_stats_b</xr-bag-grp-name>
+            <xr-bag>snmp.bag</xr-bag>
+            <nms-addr config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/snmp/gl/info/agent_stats/incoming/&lt;snmp_oper_NMSAddress_nmsAddr&gt;</xr-path>
+              <xr-xml-map>snmp_oper:nmsAddr</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;snmp_oper_NMSAddress_nmsAddr&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </nms-addr>
+            <total-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/agent_stats/incoming/&lt;snmp_oper_NMSAddress_nmsAddr&gt;~snmp_q_stats_b.TotalCount</xr-path>
+              <xr-xml-map>snmp:TotalCount</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </total-count>
+            <agent-request-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/agent_stats/incoming/&lt;snmp_oper_NMSAddress_nmsAddr&gt;~snmp_q_stats_b.AgentRequestCount</xr-path>
+              <xr-xml-map>snmp:AgentRequestCount</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </agent-request-count>
+            <interface-request-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/agent_stats/incoming/&lt;snmp_oper_NMSAddress_nmsAddr&gt;~snmp_q_stats_b.InterfaceRequestCount</xr-path>
+              <xr-xml-map>snmp:InterfaceRequestCount</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </interface-request-count>
+            <entity-request-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/agent_stats/incoming/&lt;snmp_oper_NMSAddress_nmsAddr&gt;~snmp_q_stats_b.EntityRequestCount</xr-path>
+              <xr-xml-map>snmp:EntityRequestCount</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </entity-request-count>
+            <route-request-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/agent_stats/incoming/&lt;snmp_oper_NMSAddress_nmsAddr&gt;~snmp_q_stats_b.RouteRequestCount</xr-path>
+              <xr-xml-map>snmp:RouteRequestCount</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </route-request-count>
+            <infra-request-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/agent_stats/incoming/&lt;snmp_oper_NMSAddress_nmsAddr&gt;~snmp_q_stats_b.InfraRequestCount</xr-path>
+              <xr-xml-map>snmp:InfraRequestCount</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </infra-request-count>
+          </nms-address>
+        </nms-addresses>
+      </request-type-detail>
+      <duplicate-drop config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/snmp_dup_request</xr-path>
+        <xr-xml-map>snmp_oper:DuplicateDrop</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-bag-grp-name>snmp_statistics</xr-bag-grp-name>
+        <xr-bag>snmp.bag</xr-bag>
+        <duplicate-request-status config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_dup_request~snmp_statistics.DuplicateRequestStatus</xr-path>
+          <xr-xml-map>snmp:DuplicateRequestStatus</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>Dup-req-drop-status</type-name>
+          </type>
+        </duplicate-request-status>
+        <last-status-change-time config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_dup_request~snmp_statistics.LastStatusChangeTime</xr-path>
+          <xr-xml-map>snmp:LastStatusChangeTime</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </last-status-change-time>
+        <duplicate-drop-configured-timeout config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_dup_request~snmp_statistics.DuplicateDropConfiguredTimeout</xr-path>
+          <xr-xml-map>snmp:DuplicateDropConfiguredTimeout</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </duplicate-drop-configured-timeout>
+        <duplicate-dropped-requests config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_dup_request~snmp_statistics.DuplicateDroppedRequests</xr-path>
+          <xr-xml-map>snmp:DuplicateDroppedRequests</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </duplicate-dropped-requests>
+        <retry-processed-requests config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_dup_request~snmp_statistics.RetryProcessedRequests</xr-path>
+          <xr-xml-map>snmp:RetryProcessedRequests</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </retry-processed-requests>
+        <first-enable-time config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_dup_request~snmp_statistics.FirstEnableTime</xr-path>
+          <xr-xml-map>snmp:FirstEnableTime</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </first-enable-time>
+        <latest-duplicate-dropped-requests config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_dup_request~snmp_statistics.LatestDuplicateDroppedRequests</xr-path>
+          <xr-xml-map>snmp:LatestDuplicateDroppedRequests</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </latest-duplicate-dropped-requests>
+        <latest-retry-processed-requests config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_dup_request~snmp_statistics.LatestRetryProcessedRequests</xr-path>
+          <xr-xml-map>snmp:LatestRetryProcessedRequests</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </latest-retry-processed-requests>
+        <duplicate-request-latest-enable-time config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_dup_request~snmp_statistics.DuplicateRequestLatestEnableTime</xr-path>
+          <xr-xml-map>snmp:DuplicateRequestLatestEnableTime</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </duplicate-request-latest-enable-time>
+        <duplicate-drop-enable-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_dup_request~snmp_statistics.DuplicateDropEnableCount</xr-path>
+          <xr-xml-map>snmp:DuplicateDropEnableCount</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </duplicate-drop-enable-count>
+        <duplicate-drop-disable-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_dup_request~snmp_statistics.DuplicateDropDisableCount</xr-path>
+          <xr-xml-map>snmp:DuplicateDropDisableCount</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </duplicate-drop-disable-count>
+      </duplicate-drop>
+      <bulk-stats-transfers config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/bulkstats/</xr-path>
+        <xr-xml-map>snmp_oper:BulkStatsTransferTable</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <bulk-stats-transfer config="false" key="transfer-name" node="list">
+          <xr-path>/oper/snmp/gl/info/bulkstats/&lt;snmp_oper_BulkStatsTransfer_transfer&gt;</xr-path>
+          <xr-xml-map>snmp_oper:BulkStatsTransfer</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-grp-name>snmp_bulkstats_b</xr-bag-grp-name>
+          <xr-bag>snmp.bag</xr-bag>
+          <transfer-name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/snmp/gl/info/bulkstats/&lt;snmp_oper_BulkStatsTransfer_transfer&gt;</xr-path>
+            <xr-xml-map>snmp_oper:TransferName</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_oper_BulkStatsTransfer_transfer&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </transfer-name>
+          <transfer-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/bulkstats/&lt;snmp_oper_BulkStatsTransfer_transfer&gt;~snmp_bulkstats_b.TransferName</xr-path>
+            <xr-xml-map>snmp:transfer-name-xr</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </transfer-name-xr>
+          <url-primary config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/bulkstats/&lt;snmp_oper_BulkStatsTransfer_transfer&gt;~snmp_bulkstats_b.URLPrimary</xr-path>
+            <xr-xml-map>snmp:URLPrimary</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </url-primary>
+          <url-secondary config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/bulkstats/&lt;snmp_oper_BulkStatsTransfer_transfer&gt;~snmp_bulkstats_b.URLSecondary</xr-path>
+            <xr-xml-map>snmp:URLSecondary</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </url-secondary>
+          <retained-file config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/bulkstats/&lt;snmp_oper_BulkStatsTransfer_transfer&gt;~snmp_bulkstats_b.RetainedFile</xr-path>
+            <xr-xml-map>snmp:RetainedFile</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </retained-file>
+          <time-left config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/bulkstats/&lt;snmp_oper_BulkStatsTransfer_transfer&gt;~snmp_bulkstats_b.TimeLeft</xr-path>
+            <xr-xml-map>snmp:TimeLeft</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </time-left>
+          <retry-left config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/bulkstats/&lt;snmp_oper_BulkStatsTransfer_transfer&gt;~snmp_bulkstats_b.RetryLeft</xr-path>
+            <xr-xml-map>snmp:RetryLeft</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </retry-left>
+        </bulk-stats-transfer>
+      </bulk-stats-transfers>
+      <trap-infos config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/trap_detail/</xr-path>
+        <xr-xml-map>snmp_oper:TrapInfoTable</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <trap-info config="false" node="list">
+          <xr-path>/oper/snmp/gl/info/trap_detail/&lt;snmp_oper_TrapInfo_host&gt;,&lt;snmp_oper_TrapInfo_port&gt;</xr-path>
+          <xr-xml-map>snmp_oper:TrapInfo</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-grp-name>snmp_traps_info</xr-bag-grp-name>
+          <xr-bag>snmp.bag</xr-bag>
+          <trap-host config="false" is-key="true" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/snmp/gl/info/trap_detail/&lt;snmp_oper_TrapInfo_host&gt;,&lt;snmp_oper_TrapInfo_port&gt;</xr-path>
+            <xr-xml-map>snmp_oper:TrapHost</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>EncodedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_oper_TrapInfo_host&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </trap-host>
+          <port config="false" is-key="true" is-yang-key="false" node="leaf">
+            <xr-pathformat>decimal</xr-pathformat>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/oper/snmp/gl/info/trap_detail/&lt;snmp_oper_TrapInfo_host&gt;,&lt;snmp_oper_TrapInfo_port&gt;</xr-path>
+            <xr-xml-map>snmp_oper:Port</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>PortNumber</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_oper_TrapInfo_port&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>inet:port-number</type-name>
+            </type>
+          </port>
+          <host config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/trap_detail/&lt;snmp_oper_TrapInfo_host&gt;,&lt;snmp_oper_TrapInfo_port&gt;~snmp_traps_info.HOST</xr-path>
+            <xr-xml-map>snmp:HOST</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </host>
+          <port-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/trap_detail/&lt;snmp_oper_TrapInfo_host&gt;,&lt;snmp_oper_TrapInfo_port&gt;~snmp_traps_info.Port</xr-path>
+            <xr-xml-map>snmp:port-xr</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </port-xr>
+          <trap-oid-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/trap_detail/&lt;snmp_oper_TrapInfo_host&gt;,&lt;snmp_oper_TrapInfo_port&gt;~snmp_traps_info.TrapOIDCount</xr-path>
+            <xr-xml-map>snmp:TrapOIDCount</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </trap-oid-count>
+          <trap-oi-dinfo config="false" node="list">
+            <xr-path>/oper/snmp/gl/info/trap_detail/&lt;snmp_oper_TrapInfo_host&gt;,&lt;snmp_oper_TrapInfo_port&gt;~snmp_traps_info.TrapOIDinfo[&lt;bag_arg12&gt;]</xr-path>
+            <xr-task>snmp</xr-task>
+            <xr-bag-version>1 3</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg12&gt;</xr-internal-key>
+            <trap-oid config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/trap_detail/&lt;snmp_oper_TrapInfo_host&gt;,&lt;snmp_oper_TrapInfo_port&gt;~snmp_traps_info.TrapOIDinfo[&lt;bag_arg12&gt;].TrapOID</xr-path>
+              <xr-xml-map>snmp:TrapOID</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </trap-oid>
+            <count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/trap_detail/&lt;snmp_oper_TrapInfo_host&gt;,&lt;snmp_oper_TrapInfo_port&gt;~snmp_traps_info.TrapOIDinfo[&lt;bag_arg12&gt;].Count</xr-path>
+              <xr-xml-map>snmp:Count</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </count>
+            <drop-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/trap_detail/&lt;snmp_oper_TrapInfo_host&gt;,&lt;snmp_oper_TrapInfo_port&gt;~snmp_traps_info.TrapOIDinfo[&lt;bag_arg12&gt;].DropCount</xr-path>
+              <xr-xml-map>snmp:DropCount</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </drop-count>
+            <retry-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/trap_detail/&lt;snmp_oper_TrapInfo_host&gt;,&lt;snmp_oper_TrapInfo_port&gt;~snmp_traps_info.TrapOIDinfo[&lt;bag_arg12&gt;].RetryCount</xr-path>
+              <xr-xml-map>snmp:RetryCount</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </retry-count>
+            <lastsent-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/trap_detail/&lt;snmp_oper_TrapInfo_host&gt;,&lt;snmp_oper_TrapInfo_port&gt;~snmp_traps_info.TrapOIDinfo[&lt;bag_arg12&gt;].LastsentTime</xr-path>
+              <xr-xml-map>snmp:LastsentTime</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </lastsent-time>
+            <lasrdrop-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/trap_detail/&lt;snmp_oper_TrapInfo_host&gt;,&lt;snmp_oper_TrapInfo_port&gt;~snmp_traps_info.TrapOIDinfo[&lt;bag_arg12&gt;].LasrdropTime</xr-path>
+              <xr-xml-map>snmp:LasrdropTime</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </lasrdrop-time>
+          </trap-oi-dinfo>
+        </trap-info>
+      </trap-infos>
+      <poll-oids config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/oid_stats/</xr-path>
+        <xr-xml-map>snmp_oper:PollPDU</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <poll-oid config="false" key="object-id" node="list">
+          <xr-path>/oper/snmp/gl/info/oid_stats/&lt;snmp_oper_PollOID_OID&gt;</xr-path>
+          <xr-xml-map>snmp_oper:PollOID</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-grp-name>snmp_oid_stats_b</xr-bag-grp-name>
+          <xr-bag>snmp_oid_stats_show.bag</xr-bag>
+          <object-id config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/snmp/gl/info/oid_stats/&lt;snmp_oper_PollOID_OID&gt;</xr-path>
+            <xr-xml-map>snmp_oper:ObjectID</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_oper_PollOID_OID&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </object-id>
+          <nms-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/oid_stats/&lt;snmp_oper_PollOID_OID&gt;~snmp_oid_stats_b.NmsCount</xr-path>
+            <xr-xml-map>snmp_oid_stats_show:NmsCount</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </nms-count>
+          <nms config="false" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-path>/oper/snmp/gl/info/oid_stats/&lt;snmp_oper_PollOID_OID&gt;~snmp_oid_stats_b.Nms[&lt;bag_arg15&gt;]</xr-path>
+            <xr-xml-map>snmp_oid_stats_show:Nms</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg15&gt;</xr-internal-key>
+            <type>
+              <type-name>Nms-ip</type-name>
+            </type>
+            <max-elements>15</max-elements>
+          </nms>
+          <request-count config="false" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-path>/oper/snmp/gl/info/oid_stats/&lt;snmp_oper_PollOID_OID&gt;~snmp_oid_stats_b.RequestCount[&lt;bag_arg16&gt;]</xr-path>
+            <xr-xml-map>snmp_oid_stats_show:RequestCount</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg16&gt;</xr-internal-key>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+            <max-elements>15</max-elements>
+          </request-count>
+        </poll-oid>
+      </poll-oids>
+      <infom-details config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/inform_detail/</xr-path>
+        <xr-xml-map>snmp_oper:InfomTable</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <infom-detail config="false" node="list">
+          <xr-path>/oper/snmp/gl/info/inform_detail/&lt;snmp_oper_InfomDetail_host&gt;,&lt;snmp_oper_InfomDetail_port&gt;</xr-path>
+          <xr-xml-map>snmp_oper:InfomDetail</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-grp-name>snmp_traps_info</xr-bag-grp-name>
+          <xr-bag>snmp.bag</xr-bag>
+          <trap-host config="false" is-key="true" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/snmp/gl/info/inform_detail/&lt;snmp_oper_InfomDetail_host&gt;,&lt;snmp_oper_InfomDetail_port&gt;</xr-path>
+            <xr-xml-map>snmp_oper:TrapHost</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>EncodedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_oper_InfomDetail_host&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </trap-host>
+          <port config="false" is-key="true" is-yang-key="false" node="leaf">
+            <xr-pathformat>decimal</xr-pathformat>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/oper/snmp/gl/info/inform_detail/&lt;snmp_oper_InfomDetail_host&gt;,&lt;snmp_oper_InfomDetail_port&gt;</xr-path>
+            <xr-xml-map>snmp_oper:Port</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>PortNumber</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_oper_InfomDetail_port&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>inet:port-number</type-name>
+            </type>
+          </port>
+          <host config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/inform_detail/&lt;snmp_oper_InfomDetail_host&gt;,&lt;snmp_oper_InfomDetail_port&gt;~snmp_traps_info.HOST</xr-path>
+            <xr-xml-map>snmp:HOST</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </host>
+          <port-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/inform_detail/&lt;snmp_oper_InfomDetail_host&gt;,&lt;snmp_oper_InfomDetail_port&gt;~snmp_traps_info.Port</xr-path>
+            <xr-xml-map>snmp:port-xr</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </port-xr>
+          <trap-oid-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/inform_detail/&lt;snmp_oper_InfomDetail_host&gt;,&lt;snmp_oper_InfomDetail_port&gt;~snmp_traps_info.TrapOIDCount</xr-path>
+            <xr-xml-map>snmp:TrapOIDCount</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </trap-oid-count>
+          <trap-oi-dinfo config="false" node="list">
+            <xr-path>/oper/snmp/gl/info/inform_detail/&lt;snmp_oper_InfomDetail_host&gt;,&lt;snmp_oper_InfomDetail_port&gt;~snmp_traps_info.TrapOIDinfo[&lt;bag_arg12&gt;]</xr-path>
+            <xr-task>snmp</xr-task>
+            <xr-bag-version>1 3</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg12&gt;</xr-internal-key>
+            <trap-oid config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/inform_detail/&lt;snmp_oper_InfomDetail_host&gt;,&lt;snmp_oper_InfomDetail_port&gt;~snmp_traps_info.TrapOIDinfo[&lt;bag_arg12&gt;].TrapOID</xr-path>
+              <xr-xml-map>snmp:TrapOID</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </trap-oid>
+            <count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/inform_detail/&lt;snmp_oper_InfomDetail_host&gt;,&lt;snmp_oper_InfomDetail_port&gt;~snmp_traps_info.TrapOIDinfo[&lt;bag_arg12&gt;].Count</xr-path>
+              <xr-xml-map>snmp:Count</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </count>
+            <drop-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/inform_detail/&lt;snmp_oper_InfomDetail_host&gt;,&lt;snmp_oper_InfomDetail_port&gt;~snmp_traps_info.TrapOIDinfo[&lt;bag_arg12&gt;].DropCount</xr-path>
+              <xr-xml-map>snmp:DropCount</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </drop-count>
+            <retry-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/inform_detail/&lt;snmp_oper_InfomDetail_host&gt;,&lt;snmp_oper_InfomDetail_port&gt;~snmp_traps_info.TrapOIDinfo[&lt;bag_arg12&gt;].RetryCount</xr-path>
+              <xr-xml-map>snmp:RetryCount</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </retry-count>
+            <lastsent-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/inform_detail/&lt;snmp_oper_InfomDetail_host&gt;,&lt;snmp_oper_InfomDetail_port&gt;~snmp_traps_info.TrapOIDinfo[&lt;bag_arg12&gt;].LastsentTime</xr-path>
+              <xr-xml-map>snmp:LastsentTime</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </lastsent-time>
+            <lasrdrop-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/inform_detail/&lt;snmp_oper_InfomDetail_host&gt;,&lt;snmp_oper_InfomDetail_port&gt;~snmp_traps_info.TrapOIDinfo[&lt;bag_arg12&gt;].LasrdropTime</xr-path>
+              <xr-xml-map>snmp:LasrdropTime</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </lasrdrop-time>
+          </trap-oi-dinfo>
+        </infom-detail>
+      </infom-details>
+      <statistics config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/snmp_stats/current</xr-path>
+        <xr-xml-map>snmp_oper:Statistics</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-bag-grp-name>snmp_stats</xr-bag-grp-name>
+        <xr-bag>snmp.bag</xr-bag>
+        <packets-received config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.PacketsReceived</xr-path>
+          <xr-xml-map>snmp:PacketsReceived</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </packets-received>
+        <bad-versions-received config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.BadVersionsReceived</xr-path>
+          <xr-xml-map>snmp:BadVersionsReceived</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </bad-versions-received>
+        <bad-community-names-received config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.BadCommunityNamesReceived</xr-path>
+          <xr-xml-map>snmp:BadCommunityNamesReceived</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </bad-community-names-received>
+        <bad-community-uses-received config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.BadCommunityUsesReceived</xr-path>
+          <xr-xml-map>snmp:BadCommunityUsesReceived</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </bad-community-uses-received>
+        <asn-parse-errors-received config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.ASNParseErrorsReceived</xr-path>
+          <xr-xml-map>snmp:ASNParseErrorsReceived</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </asn-parse-errors-received>
+        <silent-drop-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.SilentDropCount</xr-path>
+          <xr-xml-map>snmp:SilentDropCount</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </silent-drop-count>
+        <proxy-drop-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.ProxyDropCount</xr-path>
+          <xr-xml-map>snmp:ProxyDropCount</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </proxy-drop-count>
+        <too-big-packet-received config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.TooBigPacketReceived</xr-path>
+          <xr-xml-map>snmp:TooBigPacketReceived</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </too-big-packet-received>
+        <max-packet-size config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.MaxPacketSize</xr-path>
+          <xr-xml-map>snmp:MaxPacketSize</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </max-packet-size>
+        <no-such-names-received config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.NoSuchNamesReceived</xr-path>
+          <xr-xml-map>snmp:NoSuchNamesReceived</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </no-such-names-received>
+        <bad-values-received config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.BadValuesReceived</xr-path>
+          <xr-xml-map>snmp:BadValuesReceived</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </bad-values-received>
+        <read-only-received config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.ReadOnlyReceived</xr-path>
+          <xr-xml-map>snmp:ReadOnlyReceived</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </read-only-received>
+        <total-general-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.TotalGeneralErrors</xr-path>
+          <xr-xml-map>snmp:TotalGeneralErrors</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </total-general-errors>
+        <total-requested-variables config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.TotalRequestedVariables</xr-path>
+          <xr-xml-map>snmp:TotalRequestedVariables</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </total-requested-variables>
+        <total-set-variables-received config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.TotalSetVariablesReceived</xr-path>
+          <xr-xml-map>snmp:TotalSetVariablesReceived</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </total-set-variables-received>
+        <get-requests-received config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.GetRequestsReceived</xr-path>
+          <xr-xml-map>snmp:GetRequestsReceived</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </get-requests-received>
+        <get-next-requests-received config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.GetNextRequestsReceived</xr-path>
+          <xr-xml-map>snmp:GetNextRequestsReceived</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </get-next-requests-received>
+        <set-requests-received config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.SetRequestsReceived</xr-path>
+          <xr-xml-map>snmp:SetRequestsReceived</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </set-requests-received>
+        <get-responses-received config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.GetResponsesReceived</xr-path>
+          <xr-xml-map>snmp:GetResponsesReceived</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </get-responses-received>
+        <traps-received config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.TrapsReceived</xr-path>
+          <xr-xml-map>snmp:TrapsReceived</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </traps-received>
+        <total-packets-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.TotalPacketsSent</xr-path>
+          <xr-xml-map>snmp:TotalPacketsSent</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </total-packets-sent>
+        <too-big-packets-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.TooBigPacketsSent</xr-path>
+          <xr-xml-map>snmp:TooBigPacketsSent</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </too-big-packets-sent>
+        <no-such-names-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.NoSuchNamesSent</xr-path>
+          <xr-xml-map>snmp:NoSuchNamesSent</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </no-such-names-sent>
+        <bad-values-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.BadValuesSent</xr-path>
+          <xr-xml-map>snmp:BadValuesSent</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </bad-values-sent>
+        <general-errors-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.GeneralErrorsSent</xr-path>
+          <xr-xml-map>snmp:GeneralErrorsSent</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </general-errors-sent>
+        <get-requests-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.GetRequestsSent</xr-path>
+          <xr-xml-map>snmp:GetRequestsSent</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </get-requests-sent>
+        <get-next-request-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.GetNextRequestSent</xr-path>
+          <xr-xml-map>snmp:GetNextRequestSent</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </get-next-request-sent>
+        <set-requests-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.SetRequestsSent</xr-path>
+          <xr-xml-map>snmp:SetRequestsSent</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </set-requests-sent>
+        <get-responses-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.GetResponsesSent</xr-path>
+          <xr-xml-map>snmp:GetResponsesSent</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </get-responses-sent>
+        <traps-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_stats/current~snmp_stats.TrapsSent</xr-path>
+          <xr-xml-map>snmp:TrapsSent</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </traps-sent>
+      </statistics>
+      <incoming-queue config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/inq_stats</xr-path>
+        <xr-xml-map>snmp_oper:IncomingQueue</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-bag-grp-name>snmp_incomingQ_stats_entry</xr-bag-grp-name>
+        <xr-bag>snmp.bag</xr-bag>
+        <queue-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/inq_stats~snmp_incomingQ_stats_entry.QueueCount</xr-path>
+          <xr-xml-map>snmp:QueueCount</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </queue-count>
+        <inq-entry config="false" node="list">
+          <xr-path>/oper/snmp/gl/info/inq_stats~snmp_incomingQ_stats_entry.inqEntry[&lt;bag_arg6&gt;]</xr-path>
+          <xr-task>snmp</xr-task>
+          <xr-bag-version>1 3</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg6&gt;</xr-internal-key>
+          <max-elements>16</max-elements>
+          <address-of-queue config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/inq_stats~snmp_incomingQ_stats_entry.inqEntry[&lt;bag_arg6&gt;].AddressOfQueue</xr-path>
+            <xr-xml-map>snmp:AddressOfQueue</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </address-of-queue>
+          <request-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/inq_stats~snmp_incomingQ_stats_entry.inqEntry[&lt;bag_arg6&gt;].RequestCount</xr-path>
+            <xr-xml-map>snmp:RequestCount</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </request-count>
+          <processed-request-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/inq_stats~snmp_incomingQ_stats_entry.inqEntry[&lt;bag_arg6&gt;].ProcessedRequestCount</xr-path>
+            <xr-xml-map>snmp:ProcessedRequestCount</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </processed-request-count>
+          <last-access-time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/inq_stats~snmp_incomingQ_stats_entry.inqEntry[&lt;bag_arg6&gt;].LastAccessTime</xr-path>
+            <xr-xml-map>snmp:LastAccessTime</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </last-access-time>
+          <priority config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/inq_stats~snmp_incomingQ_stats_entry.inqEntry[&lt;bag_arg6&gt;].Priority</xr-path>
+            <xr-xml-map>snmp:Priority</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </priority>
+        </inq-entry>
+      </incoming-queue>
+      <context-mapping config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/ctx_mapping_xml</xr-path>
+        <xr-xml-map>snmp_oper:ContextMapping</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-bag-grp-name>snmp_ctx_mapping_xml</xr-bag-grp-name>
+        <xr-bag>snmp.bag</xr-bag>
+        <contex-mapping config="false" node="list">
+          <xr-path>/oper/snmp/gl/info/ctx_mapping_xml~snmp_ctx_mapping_xml.ContexMapping[&lt;bag_arg8&gt;]</xr-path>
+          <xr-task>snmp</xr-task>
+          <xr-bag-version>1 3</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg8&gt;</xr-internal-key>
+          <context config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/ctx_mapping_xml~snmp_ctx_mapping_xml.ContexMapping[&lt;bag_arg8&gt;].Context</xr-path>
+            <xr-xml-map>snmp:Context</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </context>
+          <feature-name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/ctx_mapping_xml~snmp_ctx_mapping_xml.ContexMapping[&lt;bag_arg8&gt;].FeatureName</xr-path>
+            <xr-xml-map>snmp:FeatureName</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </feature-name>
+          <instance config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/ctx_mapping_xml~snmp_ctx_mapping_xml.ContexMapping[&lt;bag_arg8&gt;].Instance</xr-path>
+            <xr-xml-map>snmp:Instance</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </instance>
+          <topology config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/ctx_mapping_xml~snmp_ctx_mapping_xml.ContexMapping[&lt;bag_arg8&gt;].Topology</xr-path>
+            <xr-xml-map>snmp:Topology</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </topology>
+          <feature config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/ctx_mapping_xml~snmp_ctx_mapping_xml.ContexMapping[&lt;bag_arg8&gt;].Feature</xr-path>
+            <xr-xml-map>snmp:Feature</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </feature>
+        </contex-mapping>
+      </context-mapping>
+      <trap-oids config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/traps/</xr-path>
+        <xr-xml-map>snmp_oper:TrapOIDTable</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <trap-oid config="false" key="trap-oid" node="list">
+          <xr-path>/oper/snmp/gl/info/traps/&lt;snmp_oper_TrapOID_TrapOID&gt;</xr-path>
+          <xr-xml-map>snmp_oper:TrapOID</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-grp-name>snmp_traps_count</xr-bag-grp-name>
+          <xr-bag>snmp.bag</xr-bag>
+          <trap-oid config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/snmp/gl/info/traps/&lt;snmp_oper_TrapOID_TrapOID&gt;</xr-path>
+            <xr-xml-map>snmp_oper:TrapOID</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_oper_TrapOID_TrapOID&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </trap-oid>
+          <trap-oid-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/traps/&lt;snmp_oper_TrapOID_TrapOID&gt;~snmp_traps_count.TrapOIDCount</xr-path>
+            <xr-xml-map>snmp:TrapOIDCount</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </trap-oid-count>
+          <trap-oid-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/traps/&lt;snmp_oper_TrapOID_TrapOID&gt;~snmp_traps_count.TrapOID</xr-path>
+            <xr-xml-map>snmp:trap-oid-xr</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </trap-oid-xr>
+        </trap-oid>
+      </trap-oids>
+      <nm-spackets config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/overloadq/</xr-path>
+        <xr-xml-map>snmp_oper:OverloadQueue</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <nm-spacket config="false" key="packetcount" node="list">
+          <xr-path>/oper/snmp/gl/info/overloadq/&lt;snmp_oper_NMSpacket_count&gt;</xr-path>
+          <xr-xml-map>snmp_oper:NMSpacket</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-grp-name>snmp_overload_stats</xr-bag-grp-name>
+          <xr-bag>snmp_overload.bag</xr-bag>
+          <packetcount config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/snmp/gl/info/overloadq/&lt;snmp_oper_NMSpacket_count&gt;</xr-path>
+            <xr-xml-map>snmp_oper:Packetcount</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_oper_NMSpacket_count&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </packetcount>
+          <number-of-nmsq-pkts-dropped config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/overloadq/&lt;snmp_oper_NMSpacket_count&gt;~snmp_overload_stats.NumberOfNMSQPktsDropped</xr-path>
+            <xr-xml-map>snmp_overload:NumberOfNMSQPktsDropped</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </number-of-nmsq-pkts-dropped>
+          <number-of-pkts-dropped config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/overloadq/&lt;snmp_oper_NMSpacket_count&gt;~snmp_overload_stats.NumberOfPktsDropped</xr-path>
+            <xr-xml-map>snmp_overload:NumberOfPktsDropped</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </number-of-pkts-dropped>
+          <overload-start-time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/overloadq/&lt;snmp_oper_NMSpacket_count&gt;~snmp_overload_stats.OverloadStartTime</xr-path>
+            <xr-xml-map>snmp_overload:OverloadStartTime</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </overload-start-time>
+          <overload-end-time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/overloadq/&lt;snmp_oper_NMSpacket_count&gt;~snmp_overload_stats.OverloadEndTime</xr-path>
+            <xr-xml-map>snmp_overload:OverloadEndTime</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </overload-end-time>
+        </nm-spacket>
+      </nm-spackets>
+      <mibs config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/mibs/</xr-path>
+        <xr-xml-map>snmp_oper:MIBTable</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <mib config="false" key="name" node="list">
+          <xr-path>/oper/snmp/gl/info/mibs/&lt;snmp_oper_MIB_mibname&gt;/</xr-path>
+          <xr-xml-map>snmp_oper:MIB</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <oids config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/snmp/gl/info/mibs/&lt;snmp_oper_MIB_mibname&gt;/oid/</xr-path>
+            <xr-xml-map>snmp_oper:OIDTable</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <oid config="false" key="oid" node="list">
+              <xr-path>/oper/snmp/gl/info/mibs/&lt;snmp_oper_MIB_mibname&gt;/oid/&lt;snmp_oper_OID_oid&gt;</xr-path>
+              <xr-xml-map>snmp_oper:OID</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <oid config="false" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/oper/snmp/gl/info/mibs/&lt;snmp_oper_MIB_mibname&gt;/oid/&lt;snmp_oper_OID_oid&gt;</xr-path>
+                <xr-xml-map>snmp_oper:OID</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>EncodedString</xr-sch-type>
+                <xr-sch-arg-name>&lt;snmp_oper_OID_oid&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </oid>
+              <oid-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/oper/snmp/gl/info/mibs/&lt;snmp_oper_MIB_mibname&gt;/oid/&lt;snmp_oper_OID_oid&gt;</xr-path>
+                <xr-xml-map>snmp_oper:OIDName</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </oid-name>
+            </oid>
+          </oids>
+          <mib-information config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/snmp/gl/info/mibs/&lt;snmp_oper_MIB_mibname&gt;/mib_info</xr-path>
+            <xr-xml-map>snmp_oper:MIBInformation</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-grp-name>snmp_mib_info</xr-bag-grp-name>
+            <xr-bag>snmp.bag</xr-bag>
+            <mib-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/mibs/&lt;snmp_oper_MIB_mibname&gt;/mib_info~snmp_mib_info.MIBName</xr-path>
+              <xr-xml-map>snmp:MIBName</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </mib-name>
+            <dll-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/mibs/&lt;snmp_oper_MIB_mibname&gt;/mib_info~snmp_mib_info.DLLName</xr-path>
+              <xr-xml-map>snmp:DLLName</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </dll-name>
+            <mib-config-filename config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/mibs/&lt;snmp_oper_MIB_mibname&gt;/mib_info~snmp_mib_info.MIBConfigFilename</xr-path>
+              <xr-xml-map>snmp:MIBConfigFilename</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </mib-config-filename>
+            <is-mib-loaded config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/mibs/&lt;snmp_oper_MIB_mibname&gt;/mib_info~snmp_mib_info.IsMIBLoaded</xr-path>
+              <xr-xml-map>snmp:IsMIBLoaded</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </is-mib-loaded>
+            <dll-capabilities config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/mibs/&lt;snmp_oper_MIB_mibname&gt;/mib_info~snmp_mib_info.DLLCapabilities</xr-path>
+              <xr-xml-map>snmp:DLLCapabilities</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </dll-capabilities>
+            <trap-strings config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/mibs/&lt;snmp_oper_MIB_mibname&gt;/mib_info~snmp_mib_info.TrapStrings</xr-path>
+              <xr-xml-map>snmp:TrapStrings</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </trap-strings>
+            <timeout config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/mibs/&lt;snmp_oper_MIB_mibname&gt;/mib_info~snmp_mib_info.Timeout</xr-path>
+              <xr-xml-map>snmp:Timeout</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </timeout>
+            <load-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/mibs/&lt;snmp_oper_MIB_mibname&gt;/mib_info~snmp_mib_info.LoadTime</xr-path>
+              <xr-xml-map>snmp:LoadTime</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </load-time>
+          </mib-information>
+          <name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/snmp/gl/info/mibs/&lt;snmp_oper_MIB_mibname&gt;/</xr-path>
+            <xr-xml-map>snmp_oper:Name</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_oper_MIB_mibname&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </name>
+        </mib>
+      </mibs>
+      <serial-numbers config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/pdu_end/</xr-path>
+        <xr-xml-map>snmp_oper:PDUStatistics</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <serial-number config="false" node="list">
+          <xr-path>/oper/snmp/gl/info/pdu_end/&lt;snmp_oper_SerialNumber_SerNum&gt;,&lt;snmp_oper_SerialNumber_ReqID&gt;,&lt;snmp_oper_SerialNumber_Port&gt;</xr-path>
+          <xr-xml-map>snmp_oper:SerialNumber</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-grp-name>snmp_pdu_stats</xr-bag-grp-name>
+          <xr-bag>snmp.bag</xr-bag>
+          <number config="false" is-key="true" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/snmp/gl/info/pdu_end/&lt;snmp_oper_SerialNumber_SerNum&gt;,&lt;snmp_oper_SerialNumber_ReqID&gt;,&lt;snmp_oper_SerialNumber_Port&gt;</xr-path>
+            <xr-xml-map>snmp_oper:Number</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_oper_SerialNumber_SerNum&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </number>
+          <req-id config="false" is-key="true" is-yang-key="false" node="leaf">
+            <xr-pathformat>decimal</xr-pathformat>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/oper/snmp/gl/info/pdu_end/&lt;snmp_oper_SerialNumber_SerNum&gt;,&lt;snmp_oper_SerialNumber_ReqID&gt;,&lt;snmp_oper_SerialNumber_Port&gt;</xr-path>
+            <xr-xml-map>snmp_oper:ReqID</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>Integer</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_oper_SerialNumber_ReqID&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </req-id>
+          <port config="false" is-key="true" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/oper/snmp/gl/info/pdu_end/&lt;snmp_oper_SerialNumber_SerNum&gt;,&lt;snmp_oper_SerialNumber_ReqID&gt;,&lt;snmp_oper_SerialNumber_Port&gt;</xr-path>
+            <xr-xml-map>snmp_oper:Port</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>PortNumber</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_oper_SerialNumber_Port&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>inet:port-number</type-name>
+            </type>
+          </port>
+          <nms config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/pdu_end/&lt;snmp_oper_SerialNumber_SerNum&gt;,&lt;snmp_oper_SerialNumber_ReqID&gt;,&lt;snmp_oper_SerialNumber_Port&gt;~snmp_pdu_stats.NMS</xr-path>
+            <xr-xml-map>snmp:NMS</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </nms>
+          <request-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/pdu_end/&lt;snmp_oper_SerialNumber_SerNum&gt;,&lt;snmp_oper_SerialNumber_ReqID&gt;,&lt;snmp_oper_SerialNumber_Port&gt;~snmp_pdu_stats.RequestID</xr-path>
+            <xr-xml-map>snmp:RequestID</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </request-id>
+          <port-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/pdu_end/&lt;snmp_oper_SerialNumber_SerNum&gt;,&lt;snmp_oper_SerialNumber_ReqID&gt;,&lt;snmp_oper_SerialNumber_Port&gt;~snmp_pdu_stats.Port</xr-path>
+            <xr-xml-map>snmp:port-xr</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </port-xr>
+          <pdu-type config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/pdu_end/&lt;snmp_oper_SerialNumber_SerNum&gt;,&lt;snmp_oper_SerialNumber_ReqID&gt;,&lt;snmp_oper_SerialNumber_Port&gt;~snmp_pdu_stats.PDUType</xr-path>
+            <xr-xml-map>snmp:PDUType</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </pdu-type>
+          <error-status config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/pdu_end/&lt;snmp_oper_SerialNumber_SerNum&gt;,&lt;snmp_oper_SerialNumber_ReqID&gt;,&lt;snmp_oper_SerialNumber_Port&gt;~snmp_pdu_stats.ErrorStatus</xr-path>
+            <xr-xml-map>snmp:ErrorStatus</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </error-status>
+          <serial-num config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/pdu_end/&lt;snmp_oper_SerialNumber_SerNum&gt;,&lt;snmp_oper_SerialNumber_ReqID&gt;,&lt;snmp_oper_SerialNumber_Port&gt;~snmp_pdu_stats.SerialNum</xr-path>
+            <xr-xml-map>snmp:SerialNum</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </serial-num>
+          <input-q config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/pdu_end/&lt;snmp_oper_SerialNumber_SerNum&gt;,&lt;snmp_oper_SerialNumber_ReqID&gt;,&lt;snmp_oper_SerialNumber_Port&gt;~snmp_pdu_stats.InputQ</xr-path>
+            <xr-xml-map>snmp:InputQ</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </input-q>
+          <output-q config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/pdu_end/&lt;snmp_oper_SerialNumber_SerNum&gt;,&lt;snmp_oper_SerialNumber_ReqID&gt;,&lt;snmp_oper_SerialNumber_Port&gt;~snmp_pdu_stats.OutputQ</xr-path>
+            <xr-xml-map>snmp:OutputQ</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </output-q>
+          <pending-q config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/pdu_end/&lt;snmp_oper_SerialNumber_SerNum&gt;,&lt;snmp_oper_SerialNumber_ReqID&gt;,&lt;snmp_oper_SerialNumber_Port&gt;~snmp_pdu_stats.PendingQ</xr-path>
+            <xr-xml-map>snmp:PendingQ</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </pending-q>
+          <response-out config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/pdu_end/&lt;snmp_oper_SerialNumber_SerNum&gt;,&lt;snmp_oper_SerialNumber_ReqID&gt;,&lt;snmp_oper_SerialNumber_Port&gt;~snmp_pdu_stats.ResponseOut</xr-path>
+            <xr-xml-map>snmp:ResponseOut</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </response-out>
+        </serial-number>
+      </serial-numbers>
+      <drop-nms-addresses config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/pdu_drop_stats/</xr-path>
+        <xr-xml-map>snmp_oper:DropPDU</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <drop-nms-address config="false" key="nms-addr" node="list">
+          <xr-path>/oper/snmp/gl/info/pdu_drop_stats/&lt;snmp_oper_DropNMSAddress_nmsAddr&gt;</xr-path>
+          <xr-xml-map>snmp_oper:DropNMSAddress</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-grp-name>snmp_pdu_drop_stats</xr-bag-grp-name>
+          <xr-bag>snmp.bag</xr-bag>
+          <nms-addr config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/snmp/gl/info/pdu_drop_stats/&lt;snmp_oper_DropNMSAddress_nmsAddr&gt;</xr-path>
+            <xr-xml-map>snmp_oper:nmsAddr</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_oper_DropNMSAddress_nmsAddr&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </nms-addr>
+          <nms-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/pdu_drop_stats/&lt;snmp_oper_DropNMSAddress_nmsAddr&gt;~snmp_pdu_drop_stats.NMSAddress</xr-path>
+            <xr-xml-map>snmp:NMSAddress</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </nms-address>
+          <incoming-q-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/pdu_drop_stats/&lt;snmp_oper_DropNMSAddress_nmsAddr&gt;~snmp_pdu_drop_stats.IncomingQCount</xr-path>
+            <xr-xml-map>snmp:IncomingQCount</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </incoming-q-count>
+          <threshold-incoming-q-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/pdu_drop_stats/&lt;snmp_oper_DropNMSAddress_nmsAddr&gt;~snmp_pdu_drop_stats.ThresholdIncomingQCount</xr-path>
+            <xr-xml-map>snmp:ThresholdIncomingQCount</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </threshold-incoming-q-count>
+          <encode-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/pdu_drop_stats/&lt;snmp_oper_DropNMSAddress_nmsAddr&gt;~snmp_pdu_drop_stats.EncodeCount</xr-path>
+            <xr-xml-map>snmp:EncodeCount</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </encode-count>
+          <duplicate-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/pdu_drop_stats/&lt;snmp_oper_DropNMSAddress_nmsAddr&gt;~snmp_pdu_drop_stats.DuplicateCount</xr-path>
+            <xr-xml-map>snmp:DuplicateCount</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </duplicate-count>
+          <stack-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/pdu_drop_stats/&lt;snmp_oper_DropNMSAddress_nmsAddr&gt;~snmp_pdu_drop_stats.StackCount</xr-path>
+            <xr-xml-map>snmp:StackCount</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </stack-count>
+          <aipc-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/pdu_drop_stats/&lt;snmp_oper_DropNMSAddress_nmsAddr&gt;~snmp_pdu_drop_stats.AIPCCount</xr-path>
+            <xr-xml-map>snmp:AIPCCount</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </aipc-count>
+          <overload-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/pdu_drop_stats/&lt;snmp_oper_DropNMSAddress_nmsAddr&gt;~snmp_pdu_drop_stats.OverloadCount</xr-path>
+            <xr-xml-map>snmp:OverloadCount</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </overload-count>
+          <timeout-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/pdu_drop_stats/&lt;snmp_oper_DropNMSAddress_nmsAddr&gt;~snmp_pdu_drop_stats.TimeoutCount</xr-path>
+            <xr-xml-map>snmp:TimeoutCount</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </timeout-count>
+          <internal-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/pdu_drop_stats/&lt;snmp_oper_DropNMSAddress_nmsAddr&gt;~snmp_pdu_drop_stats.InternalCount</xr-path>
+            <xr-xml-map>snmp:InternalCount</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </internal-count>
+        </drop-nms-address>
+      </drop-nms-addresses>
+      <views config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/ViewXml/</xr-path>
+        <xr-xml-map>snmp_oper:ViewTable</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <view config="false" key="name" node="list">
+          <xr-path>/oper/snmp/gl/info/ViewXml/&lt;snmp_oper_View_view&gt;/</xr-path>
+          <xr-xml-map>snmp_oper:View</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/snmp/gl/info/ViewXml/&lt;snmp_oper_View_view&gt;/</xr-path>
+            <xr-xml-map>snmp_oper:Name</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_oper_View_view&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </name>
+          <view-information config="false" key="object-id" node="list">
+            <xr-path>/oper/snmp/gl/info/ViewXml/&lt;snmp_oper_View_view&gt;/&lt;snmp_oper_ViewInformation_OID&gt;</xr-path>
+            <xr-xml-map>snmp_oper:ViewInformation</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-grp-name>snmp_snmpViewXmlEntry</xr-bag-grp-name>
+            <xr-bag>snmpv3mib.bag</xr-bag>
+            <object-id config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/snmp/gl/info/ViewXml/&lt;snmp_oper_View_view&gt;/&lt;snmp_oper_ViewInformation_OID&gt;</xr-path>
+              <xr-xml-map>snmp_oper:ObjectID</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;snmp_oper_ViewInformation_OID&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </object-id>
+            <snmp-view-family-type config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/ViewXml/&lt;snmp_oper_View_view&gt;/&lt;snmp_oper_ViewInformation_OID&gt;~snmp_snmpViewXmlEntry.SNMPViewFamilyType</xr-path>
+              <xr-xml-map>snmpv3mib:SNMPViewFamilyType</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </snmp-view-family-type>
+            <snmp-view-family-storage-type config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/ViewXml/&lt;snmp_oper_View_view&gt;/&lt;snmp_oper_ViewInformation_OID&gt;~snmp_snmpViewXmlEntry.SNMPViewFamilyStorageType</xr-path>
+              <xr-xml-map>snmpv3mib:SNMPViewFamilyStorageType</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </snmp-view-family-storage-type>
+            <snmp-view-family-status config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/info/ViewXml/&lt;snmp_oper_View_view&gt;/&lt;snmp_oper_ViewInformation_OID&gt;~snmp_snmpViewXmlEntry.SNMPViewFamilyStatus</xr-path>
+              <xr-xml-map>snmpv3mib:SNMPViewFamilyStatus</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </snmp-view-family-status>
+          </view-information>
+        </view>
+      </views>
+      <system-descr config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/snmp_sysDescr</xr-path>
+        <xr-xml-map>snmp_oper:SystemDescr</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-bag-grp-name>snmp_sysdescr</xr-bag-grp-name>
+        <xr-bag>snmp.bag</xr-bag>
+        <sys-descr config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_sysDescr~snmp_sysdescr.SysDescr</xr-path>
+          <xr-xml-map>snmp:SysDescr</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </sys-descr>
+      </system-descr>
+      <tables config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/tables/</xr-path>
+        <xr-xml-map>snmp_oper:Tables</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <groups config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/snmp/gl/info/tables/vacmAccessTable/</xr-path>
+          <xr-xml-map>snmp_oper:GroupTable</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <group config="false" key="name" node="list">
+            <xr-path>/oper/snmp/gl/info/tables/vacmAccessTable/&lt;snmp_oper_Group_groupname&gt;/</xr-path>
+            <xr-xml-map>snmp_oper:Group</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <group-informations config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/snmp/gl/info/tables/vacmAccessTable/&lt;snmp_oper_Group_groupname&gt;/________/</xr-path>
+              <xr-xml-map>snmp_oper:temp</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <group-information config="false" node="list">
+                <xr-path>/oper/snmp/gl/info/tables/vacmAccessTable/&lt;snmp_oper_Group_groupname&gt;/________/&lt;snmp_oper_GroupInformation_modnum&gt;,&lt;snmp_oper_GroupInformation_level&gt;</xr-path>
+                <xr-xml-map>snmp_oper:GroupInformation</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-bag-grp-name>snmp_vacmAccessEntry</xr-bag-grp-name>
+                <xr-bag>snmpv3mib.bag</xr-bag>
+                <modelnumber config="false" is-key="true" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/oper/snmp/gl/info/tables/vacmAccessTable/&lt;snmp_oper_Group_groupname&gt;/________/&lt;snmp_oper_GroupInformation_modnum&gt;,&lt;snmp_oper_GroupInformation_level&gt;</xr-path>
+                  <xr-xml-map>snmp_oper:Modelnumber</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-sch-type>String</xr-sch-type>
+                  <xr-sch-arg-name>&lt;snmp_oper_GroupInformation_modnum&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>xr:Cisco-ios-xr-string</type-name>
+                  </type>
+                </modelnumber>
+                <level config="false" is-key="true" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/oper/snmp/gl/info/tables/vacmAccessTable/&lt;snmp_oper_Group_groupname&gt;/________/&lt;snmp_oper_GroupInformation_modnum&gt;,&lt;snmp_oper_GroupInformation_level&gt;</xr-path>
+                  <xr-xml-map>snmp_oper:level</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-sch-type>String</xr-sch-type>
+                  <xr-sch-arg-name>&lt;snmp_oper_GroupInformation_level&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>xr:Cisco-ios-xr-string</type-name>
+                  </type>
+                </level>
+                <vacm-access-read-view-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/snmp/gl/info/tables/vacmAccessTable/&lt;snmp_oper_Group_groupname&gt;/________/&lt;snmp_oper_GroupInformation_modnum&gt;,&lt;snmp_oper_GroupInformation_level&gt;~snmp_vacmAccessEntry.VACMAccessReadViewName</xr-path>
+                  <xr-xml-map>snmpv3mib:VACMAccessReadViewName</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>0 1</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </vacm-access-read-view-name>
+                <vacm-access-write-view-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/snmp/gl/info/tables/vacmAccessTable/&lt;snmp_oper_Group_groupname&gt;/________/&lt;snmp_oper_GroupInformation_modnum&gt;,&lt;snmp_oper_GroupInformation_level&gt;~snmp_vacmAccessEntry.VACMAccessWriteViewName</xr-path>
+                  <xr-xml-map>snmpv3mib:VACMAccessWriteViewName</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>0 1</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </vacm-access-write-view-name>
+                <vacm-access-notify-view-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/snmp/gl/info/tables/vacmAccessTable/&lt;snmp_oper_Group_groupname&gt;/________/&lt;snmp_oper_GroupInformation_modnum&gt;,&lt;snmp_oper_GroupInformation_level&gt;~snmp_vacmAccessEntry.VACMAccessNotifyViewName</xr-path>
+                  <xr-xml-map>snmpv3mib:VACMAccessNotifyViewName</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>0 1</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </vacm-access-notify-view-name>
+                <vacm-access-status config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/snmp/gl/info/tables/vacmAccessTable/&lt;snmp_oper_Group_groupname&gt;/________/&lt;snmp_oper_GroupInformation_modnum&gt;,&lt;snmp_oper_GroupInformation_level&gt;~snmp_vacmAccessEntry.VACMAccessStatus</xr-path>
+                  <xr-xml-map>snmpv3mib:VACMAccessStatus</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>0 1</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </vacm-access-status>
+              </group-information>
+            </group-informations>
+            <name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/snmp/gl/info/tables/vacmAccessTable/&lt;snmp_oper_Group_groupname&gt;/</xr-path>
+              <xr-xml-map>snmp_oper:Name</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;snmp_oper_Group_groupname&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </name>
+          </group>
+        </groups>
+        <user-engine-ids config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/snmp/gl/info/tables/usmUserTable/</xr-path>
+          <xr-xml-map>snmp_oper:UserTable</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <user-engine-id config="false" key="engine-id" node="list">
+            <xr-path>/oper/snmp/gl/info/tables/usmUserTable/&lt;snmp_oper_userEngineId_engineId&gt;/</xr-path>
+            <xr-xml-map>snmp_oper:userEngineId</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <engine-id config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/snmp/gl/info/tables/usmUserTable/&lt;snmp_oper_userEngineId_engineId&gt;/</xr-path>
+              <xr-xml-map>snmp_oper:EngineId</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;snmp_oper_userEngineId_engineId&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </engine-id>
+            <user-name config="false" key="user-name" node="list">
+              <xr-path>/oper/snmp/gl/info/tables/usmUserTable/&lt;snmp_oper_userEngineId_engineId&gt;/&lt;snmp_oper_UserName_userName&gt;</xr-path>
+              <xr-xml-map>snmp_oper:UserName</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-grp-name>snmp_usmUserEntry</xr-bag-grp-name>
+              <xr-bag>snmpv3mib.bag</xr-bag>
+              <user-name config="false" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/oper/snmp/gl/info/tables/usmUserTable/&lt;snmp_oper_userEngineId_engineId&gt;/&lt;snmp_oper_UserName_userName&gt;</xr-path>
+                <xr-xml-map>snmp_oper:UserName</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <xr-sch-arg-name>&lt;snmp_oper_UserName_userName&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>xr:Cisco-ios-xr-string</type-name>
+                </type>
+              </user-name>
+              <usm-user-storage-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/snmp/gl/info/tables/usmUserTable/&lt;snmp_oper_userEngineId_engineId&gt;/&lt;snmp_oper_UserName_userName&gt;~snmp_usmUserEntry.USMUserStorageType</xr-path>
+                <xr-xml-map>snmpv3mib:USMUserStorageType</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </usm-user-storage-type>
+              <usm-user-status config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/snmp/gl/info/tables/usmUserTable/&lt;snmp_oper_userEngineId_engineId&gt;/&lt;snmp_oper_UserName_userName&gt;~snmp_usmUserEntry.USMUserStatus</xr-path>
+                <xr-xml-map>snmpv3mib:USMUserStatus</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </usm-user-status>
+            </user-name>
+          </user-engine-id>
+        </user-engine-ids>
+      </tables>
+      <system-oid config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/snmp_sysObjID</xr-path>
+        <xr-xml-map>snmp_oper:SystemOID</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-bag-grp-name>snmp_sysobjid</xr-bag-grp-name>
+        <xr-bag>snmp.bag</xr-bag>
+        <sys-obj-id config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_sysObjID~snmp_sysobjid.SysObjID</xr-path>
+          <xr-xml-map>snmp:SysObjID</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </sys-obj-id>
+      </system-oid>
+      <trap-queue config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/info/snmp_trapque</xr-path>
+        <xr-xml-map>snmp_oper:TrapQueue</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-bag-grp-name>snmp_trapque</xr-bag-grp-name>
+        <xr-bag>snmp.bag</xr-bag>
+        <trap-min config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_trapque~snmp_trapque.trap_min</xr-path>
+          <xr-xml-map>snmp:trap_min</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </trap-min>
+        <trap-avg config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_trapque~snmp_trapque.trap_avg</xr-path>
+          <xr-xml-map>snmp:trap_avg</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </trap-avg>
+        <trap-max config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/info/snmp_trapque~snmp_trapque.trap_max</xr-path>
+          <xr-xml-map>snmp:trap_max</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </trap-max>
+        <trap-q config="false" node="list">
+          <xr-path>/oper/snmp/gl/info/snmp_trapque~snmp_trapque.trapQ[&lt;bag_arg11&gt;]</xr-path>
+          <xr-task>snmp</xr-task>
+          <xr-bag-version>1 3</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg11&gt;</xr-internal-key>
+          <max-elements>300</max-elements>
+          <min config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/snmp_trapque~snmp_trapque.trapQ[&lt;bag_arg11&gt;].min</xr-path>
+            <xr-xml-map>snmp:min</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </min>
+          <avg config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/snmp_trapque~snmp_trapque.trapQ[&lt;bag_arg11&gt;].avg</xr-path>
+            <xr-xml-map>snmp:avg</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </avg>
+          <max config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/info/snmp_trapque~snmp_trapque.trapQ[&lt;bag_arg11&gt;].max</xr-path>
+            <xr-xml-map>snmp:max</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </max>
+        </trap-q>
+      </trap-queue>
+    </information>
+    <interfaces config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/snmp/gl/ifindex/</xr-path>
+      <xr-xml-map>snmp_oper:InterfaceTable</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <interface config="false" key="name" node="list">
+        <xr-path>/oper/snmp/gl/ifindex/&lt;snmp_oper_Interface_interface&gt;</xr-path>
+        <xr-xml-map>snmp_oper:Interface</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/snmp/gl/ifindex/&lt;snmp_oper_Interface_interface&gt;</xr-path>
+          <xr-xml-map>snmp_oper:Name</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>InterfaceName</xr-sch-type>
+          <xr-sch-arg-name>&lt;snmp_oper_Interface_interface&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </name>
+        <interface-index config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/snmp/gl/ifindex/&lt;snmp_oper_Interface_interface&gt;</xr-path>
+          <xr-xml-map>snmp_oper:InterfaceIndex</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Integer</xr-sch-type>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </interface-index>
+      </interface>
+    </interfaces>
+    <correlator config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/snmp/gl/correlator/</xr-path>
+      <xr-xml-map>snmp_corr_oper:Correlator</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <rule-details config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/correlator/ruledetails/</xr-path>
+        <xr-xml-map>snmp_corr_oper:RuleDetailTable</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-filterlist>TrapCorrRuleNameListFilter</xr-filterlist>
+        <rule-detail config="false" key="rule-name" node="list">
+          <xr-path>/oper/snmp/gl/correlator/ruledetails/&lt;snmp_corr_oper_RuleDetail_rulename&gt;</xr-path>
+          <xr-xml-map>snmp_corr_oper:RuleDetail</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-grp-name>snmp_corr_rule_detail_bag</xr-bag-grp-name>
+          <xr-bag>snmp_corr.bag</xr-bag>
+          <rule-name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/snmp/gl/correlator/ruledetails/&lt;snmp_corr_oper_RuleDetail_rulename&gt;</xr-path>
+            <xr-xml-map>snmp_corr_oper:RuleName</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>EncodedBoundedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_corr_oper_RuleDetail_rulename&gt;</xr-sch-arg-name>
+            <type length="1..32">
+              <type-name>string</type-name>
+            </type>
+          </rule-name>
+          <rule-summary config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/snmp/gl/correlator/ruledetails/&lt;snmp_corr_oper_RuleDetail_rulename&gt;~snmp_corr_rule_detail_bag.RuleSummary</xr-path>
+            <xr-task>snmp</xr-task>
+            <xr-bag-version>2 1</xr-bag-version>
+            <rule-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/correlator/ruledetails/&lt;snmp_corr_oper_RuleDetail_rulename&gt;~snmp_corr_rule_detail_bag.RuleSummary.RuleName</xr-path>
+              <xr-xml-map>snmp_corr:RuleName</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>2 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </rule-name>
+            <rule-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/correlator/ruledetails/&lt;snmp_corr_oper_RuleDetail_rulename&gt;~snmp_corr_rule_detail_bag.RuleSummary.RuleState</xr-path>
+              <xr-xml-map>snmp_corr:RuleState</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 1</xr-bag-version>
+              <type>
+                <type-name>Snmp-corr-rule-state</type-name>
+              </type>
+            </rule-state>
+            <buffered-traps-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/correlator/ruledetails/&lt;snmp_corr_oper_RuleDetail_rulename&gt;~snmp_corr_rule_detail_bag.RuleSummary.BufferedTrapsCount</xr-path>
+              <xr-xml-map>snmp_corr:BufferedTrapsCount</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </buffered-traps-count>
+          </rule-summary>
+          <root-cause config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/snmp/gl/correlator/ruledetails/&lt;snmp_corr_oper_RuleDetail_rulename&gt;~snmp_corr_rule_detail_bag.Rootcause</xr-path>
+            <xr-task>snmp</xr-task>
+            <xr-bag-version>2 1</xr-bag-version>
+            <oid config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/correlator/ruledetails/&lt;snmp_corr_oper_RuleDetail_rulename&gt;~snmp_corr_rule_detail_bag.Rootcause.OID</xr-path>
+              <xr-xml-map>snmp_corr:OID</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>2 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </oid>
+            <var-bind config="false" node="list">
+              <xr-path>/oper/snmp/gl/correlator/ruledetails/&lt;snmp_corr_oper_RuleDetail_rulename&gt;~snmp_corr_rule_detail_bag.Rootcause.VarBinds[&lt;bag_arg1&gt;]</xr-path>
+              <xr-task>snmp</xr-task>
+              <xr-bag-version>2 1</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+              <oid config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/snmp/gl/correlator/ruledetails/&lt;snmp_corr_oper_RuleDetail_rulename&gt;~snmp_corr_rule_detail_bag.Rootcause.VarBinds[&lt;bag_arg1&gt;].OID</xr-path>
+                <xr-xml-map>snmp_corr:OID</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>2 1</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </oid>
+              <match-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/snmp/gl/correlator/ruledetails/&lt;snmp_corr_oper_RuleDetail_rulename&gt;~snmp_corr_rule_detail_bag.Rootcause.VarBinds[&lt;bag_arg1&gt;].MatchType</xr-path>
+                <xr-xml-map>snmp_corr:MatchType</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>2 1</xr-bag-version>
+                <type>
+                  <type-name>Snmp-corr-vbind-match</type-name>
+                </type>
+              </match-type>
+              <reg-exp config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/snmp/gl/correlator/ruledetails/&lt;snmp_corr_oper_RuleDetail_rulename&gt;~snmp_corr_rule_detail_bag.Rootcause.VarBinds[&lt;bag_arg1&gt;].RegExp</xr-path>
+                <xr-xml-map>snmp_corr:RegExp</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>2 1</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </reg-exp>
+            </var-bind>
+          </root-cause>
+          <timeout config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/correlator/ruledetails/&lt;snmp_corr_oper_RuleDetail_rulename&gt;~snmp_corr_rule_detail_bag.Timeout</xr-path>
+            <xr-xml-map>snmp_corr:Timeout</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>2 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </timeout>
+          <non-rootcaus config="false" node="list">
+            <xr-path>/oper/snmp/gl/correlator/ruledetails/&lt;snmp_corr_oper_RuleDetail_rulename&gt;~snmp_corr_rule_detail_bag.NonRootcauses[&lt;bag_arg2&gt;]</xr-path>
+            <xr-task>snmp</xr-task>
+            <xr-bag-version>2 1</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+            <oid config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/correlator/ruledetails/&lt;snmp_corr_oper_RuleDetail_rulename&gt;~snmp_corr_rule_detail_bag.NonRootcauses[&lt;bag_arg2&gt;].OID</xr-path>
+              <xr-xml-map>snmp_corr:OID</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>2 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </oid>
+            <var-bind config="false" node="list">
+              <xr-path>/oper/snmp/gl/correlator/ruledetails/&lt;snmp_corr_oper_RuleDetail_rulename&gt;~snmp_corr_rule_detail_bag.NonRootcauses[&lt;bag_arg2&gt;].VarBinds[&lt;bag_arg1&gt;]</xr-path>
+              <xr-task>snmp</xr-task>
+              <xr-bag-version>2 1</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+              <oid config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/snmp/gl/correlator/ruledetails/&lt;snmp_corr_oper_RuleDetail_rulename&gt;~snmp_corr_rule_detail_bag.NonRootcauses[&lt;bag_arg2&gt;].VarBinds[&lt;bag_arg1&gt;].OID</xr-path>
+                <xr-xml-map>snmp_corr:OID</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>2 1</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </oid>
+              <match-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/snmp/gl/correlator/ruledetails/&lt;snmp_corr_oper_RuleDetail_rulename&gt;~snmp_corr_rule_detail_bag.NonRootcauses[&lt;bag_arg2&gt;].VarBinds[&lt;bag_arg1&gt;].MatchType</xr-path>
+                <xr-xml-map>snmp_corr:MatchType</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>2 1</xr-bag-version>
+                <type>
+                  <type-name>Snmp-corr-vbind-match</type-name>
+                </type>
+              </match-type>
+              <reg-exp config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/snmp/gl/correlator/ruledetails/&lt;snmp_corr_oper_RuleDetail_rulename&gt;~snmp_corr_rule_detail_bag.NonRootcauses[&lt;bag_arg2&gt;].VarBinds[&lt;bag_arg1&gt;].RegExp</xr-path>
+                <xr-xml-map>snmp_corr:RegExp</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>2 1</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </reg-exp>
+            </var-bind>
+          </non-rootcaus>
+          <apply-host config="false" node="list">
+            <xr-path>/oper/snmp/gl/correlator/ruledetails/&lt;snmp_corr_oper_RuleDetail_rulename&gt;~snmp_corr_rule_detail_bag.ApplyHosts[&lt;bag_arg3&gt;]</xr-path>
+            <xr-task>snmp</xr-task>
+            <xr-bag-version>2 1</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+            <ip-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/correlator/ruledetails/&lt;snmp_corr_oper_RuleDetail_rulename&gt;~snmp_corr_rule_detail_bag.ApplyHosts[&lt;bag_arg3&gt;].IPAddress</xr-path>
+              <xr-xml-map>snmp_corr:IPAddress</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>2 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </ip-address>
+            <port config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/correlator/ruledetails/&lt;snmp_corr_oper_RuleDetail_rulename&gt;~snmp_corr_rule_detail_bag.ApplyHosts[&lt;bag_arg3&gt;].Port</xr-path>
+              <xr-xml-map>snmp_corr:Port</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>2 1</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </port>
+          </apply-host>
+        </rule-detail>
+      </rule-details>
+      <buffer-status config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/correlator/correlator-info</xr-path>
+        <xr-xml-map>snmp_corr_oper:BufferStatus</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-bag-grp-name>snmp_corr_buffer_info_bag</xr-bag-grp-name>
+        <xr-bag>snmp_corr.bag</xr-bag>
+        <current-size config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/correlator/correlator-info~snmp_corr_buffer_info_bag.CurrentSize</xr-path>
+          <xr-xml-map>snmp_corr:CurrentSize</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>2 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </current-size>
+        <configured-size config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/correlator/correlator-info~snmp_corr_buffer_info_bag.ConfiguredSize</xr-path>
+          <xr-xml-map>snmp_corr:ConfiguredSize</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>2 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </configured-size>
+      </buffer-status>
+      <rule-set-details config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/correlator/rulesets/</xr-path>
+        <xr-xml-map>snmp_corr_oper:RulesetDetailTable</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-filterlist>TrapCorrRulesetNameListFilter</xr-filterlist>
+        <rule-set-detail config="false" key="rule-set-name" node="list">
+          <xr-path>/oper/snmp/gl/correlator/rulesets/&lt;snmp_corr_oper_RulesetDetail_rulesetname&gt;</xr-path>
+          <xr-xml-map>snmp_corr_oper:RulesetDetail</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-grp-name>snmp_corr_ruleset_detail_bag</xr-bag-grp-name>
+          <xr-bag>snmp_corr.bag</xr-bag>
+          <rule-set-name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/snmp/gl/correlator/rulesets/&lt;snmp_corr_oper_RulesetDetail_rulesetname&gt;</xr-path>
+            <xr-xml-map>snmp_corr_oper:RulesetName</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>EncodedBoundedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_corr_oper_RulesetDetail_rulesetname&gt;</xr-sch-arg-name>
+            <type length="1..32">
+              <type-name>string</type-name>
+            </type>
+          </rule-set-name>
+          <rule-set-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/correlator/rulesets/&lt;snmp_corr_oper_RulesetDetail_rulesetname&gt;~snmp_corr_ruleset_detail_bag.RuleSetName</xr-path>
+            <xr-xml-map>snmp_corr:rule-set-name-xr</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </rule-set-name-xr>
+          <rules config="false" node="list">
+            <xr-path>/oper/snmp/gl/correlator/rulesets/&lt;snmp_corr_oper_RulesetDetail_rulesetname&gt;~snmp_corr_ruleset_detail_bag.Rules[&lt;bag_arg4&gt;]</xr-path>
+            <xr-task>snmp</xr-task>
+            <xr-bag-version>2 1</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg4&gt;</xr-internal-key>
+            <rule-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/correlator/rulesets/&lt;snmp_corr_oper_RulesetDetail_rulesetname&gt;~snmp_corr_ruleset_detail_bag.Rules[&lt;bag_arg4&gt;].RuleName</xr-path>
+              <xr-xml-map>snmp_corr:RuleName</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>2 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </rule-name>
+            <rule-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/correlator/rulesets/&lt;snmp_corr_oper_RulesetDetail_rulesetname&gt;~snmp_corr_ruleset_detail_bag.Rules[&lt;bag_arg4&gt;].RuleState</xr-path>
+              <xr-xml-map>snmp_corr:RuleState</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 1</xr-bag-version>
+              <type>
+                <type-name>Snmp-corr-rule-state</type-name>
+              </type>
+            </rule-state>
+            <buffered-traps-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/correlator/rulesets/&lt;snmp_corr_oper_RulesetDetail_rulesetname&gt;~snmp_corr_ruleset_detail_bag.Rules[&lt;bag_arg4&gt;].BufferedTrapsCount</xr-path>
+              <xr-xml-map>snmp_corr:BufferedTrapsCount</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </buffered-traps-count>
+          </rules>
+        </rule-set-detail>
+      </rule-set-details>
+      <traps config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/snmp/gl/correlator/buffer/</xr-path>
+        <xr-xml-map>snmp_corr_oper:TrapTable</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-filterlist>TrapCorrBufferCorrelationIDListFilter</xr-filterlist>
+        <xr-filterlist>TrapCorrBufferCorrelationRuleNameListFilter</xr-filterlist>
+        <trap config="false" key="entry-id" node="list">
+          <xr-path>/oper/snmp/gl/correlator/buffer/&lt;snmp_corr_oper_Trap_entryid&gt;</xr-path>
+          <xr-xml-map>snmp_corr_oper:Trap</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-grp-name>snmp_corr_trap_buffer_bag</xr-bag-grp-name>
+          <xr-bag>snmp_corr.bag</xr-bag>
+          <entry-id config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-pathformat>decimal</xr-pathformat>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/oper/snmp/gl/correlator/buffer/&lt;snmp_corr_oper_Trap_entryid&gt;</xr-path>
+            <xr-xml-map>snmp_corr_oper:EntryID</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>Integer</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_corr_oper_Trap_entryid&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </entry-id>
+          <trap-info config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/snmp/gl/correlator/buffer/&lt;snmp_corr_oper_Trap_entryid&gt;~snmp_corr_trap_buffer_bag.TrapInfo</xr-path>
+            <xr-task>snmp</xr-task>
+            <xr-bag-version>2 1</xr-bag-version>
+            <oid config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/correlator/buffer/&lt;snmp_corr_oper_Trap_entryid&gt;~snmp_corr_trap_buffer_bag.TrapInfo.OID</xr-path>
+              <xr-xml-map>snmp_corr:OID</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>2 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </oid>
+            <relative-timestamp config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/correlator/buffer/&lt;snmp_corr_oper_Trap_entryid&gt;~snmp_corr_trap_buffer_bag.TrapInfo.RelativeTimestamp</xr-path>
+              <xr-xml-map>snmp_corr:RelativeTimestamp</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </relative-timestamp>
+            <timestamp config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/snmp/gl/correlator/buffer/&lt;snmp_corr_oper_Trap_entryid&gt;~snmp_corr_trap_buffer_bag.TrapInfo.Timestamp</xr-path>
+              <xr-xml-map>snmp_corr:Timestamp</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>2 1</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </timestamp>
+            <var-bind config="false" node="list">
+              <xr-path>/oper/snmp/gl/correlator/buffer/&lt;snmp_corr_oper_Trap_entryid&gt;~snmp_corr_trap_buffer_bag.TrapInfo.VarBind[&lt;bag_arg5&gt;]</xr-path>
+              <xr-task>snmp</xr-task>
+              <xr-bag-version>2 1</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg5&gt;</xr-internal-key>
+              <oid config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/snmp/gl/correlator/buffer/&lt;snmp_corr_oper_Trap_entryid&gt;~snmp_corr_trap_buffer_bag.TrapInfo.VarBind[&lt;bag_arg5&gt;].OID</xr-path>
+                <xr-xml-map>snmp_corr:OID</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>2 1</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </oid>
+              <value config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/snmp/gl/correlator/buffer/&lt;snmp_corr_oper_Trap_entryid&gt;~snmp_corr_trap_buffer_bag.TrapInfo.VarBind[&lt;bag_arg5&gt;].Value</xr-path>
+                <xr-xml-map>snmp_corr:Value</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>2 1</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </value>
+            </var-bind>
+          </trap-info>
+          <correlation-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/correlator/buffer/&lt;snmp_corr_oper_Trap_entryid&gt;~snmp_corr_trap_buffer_bag.CorrelationID</xr-path>
+            <xr-xml-map>snmp_corr:CorrelationID</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>2 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </correlation-id>
+          <is-root-cause config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/correlator/buffer/&lt;snmp_corr_oper_Trap_entryid&gt;~snmp_corr_trap_buffer_bag.IsRootcause</xr-path>
+            <xr-xml-map>snmp_corr:IsRootcause</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>2 1</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </is-root-cause>
+          <rule-name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/snmp/gl/correlator/buffer/&lt;snmp_corr_oper_Trap_entryid&gt;~snmp_corr_trap_buffer_bag.RuleName</xr-path>
+            <xr-xml-map>snmp_corr:RuleName</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </rule-name>
+        </trap>
+      </traps>
+    </correlator>
+    <interface-indexes config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/snmp/gl/ifname/</xr-path>
+      <xr-xml-map>snmp_oper:InterfaceIndexTable</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <interface-index config="false" key="interface-index" node="list">
+        <xr-path>/oper/snmp/gl/ifname/&lt;snmp_oper_InterfaceIndex_ifindex&gt;</xr-path>
+        <xr-xml-map>snmp_oper:InterfaceIndex</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <interface-index config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/snmp/gl/ifname/&lt;snmp_oper_InterfaceIndex_ifindex&gt;</xr-path>
+          <xr-xml-map>snmp_oper:InterfaceIndex</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Integer</xr-sch-type>
+          <xr-sch-arg-name>&lt;snmp_oper_InterfaceIndex_ifindex&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </interface-index>
+        <interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/snmp/gl/ifname/&lt;snmp_oper_InterfaceIndex_ifindex&gt;</xr-path>
+          <xr-xml-map>snmp_oper:InterfaceName</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </interface-name>
+      </interface-index>
+    </interface-indexes>
+    <if-indexes config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/snmp/gl/ifname-mdt/</xr-path>
+      <xr-xml-map>snmp_oper:InterfaceDataTable</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <if-index config="false" key="interface-index" node="list">
+        <xr-path>/oper/snmp/gl/ifname-mdt/&lt;snmp_oper_IfIndex_ifindex&gt;</xr-path>
+        <xr-xml-map>snmp_oper:IfIndex</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-bag-grp-name>snmp_ifindex_ifname</xr-bag-grp-name>
+        <xr-bag>ifindex_edm.bag</xr-bag>
+        <interface-index config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/snmp/gl/ifname-mdt/&lt;snmp_oper_IfIndex_ifindex&gt;</xr-path>
+          <xr-xml-map>snmp_oper:InterfaceIndex</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Integer</xr-sch-type>
+          <xr-sch-arg-name>&lt;snmp_oper_IfIndex_ifindex&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </interface-index>
+        <interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/snmp/gl/ifname-mdt/&lt;snmp_oper_IfIndex_ifindex&gt;~snmp_ifindex_ifname.InterfaceName</xr-path>
+          <xr-xml-map>ifindex_edm:InterfaceName</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </interface-name>
+      </if-index>
+    </if-indexes>
+  </snmp>
+</Cisco-IOS-XR-snmp-agent-oper>

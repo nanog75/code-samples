@@ -26,40 +26,6 @@ def config_oc_bgp_ipv4():
     protocol.config.name = "default"
 
     protocol.bgp.global_.config.as_ = 65000
-    protocol.bgp.global_.config.router_id = "172.16.1.1"
-
-    afi_safi = protocol.bgp.global_.afi_safis.AfiSafi()
-    afi_safi.afi_safi_name = oc_bgp_types.IPV4UNICAST()
-    afi_safi.config.afi_safi_name = oc_bgp_types.IPV4UNICAST()
-    afi_safi.config.enabled = True
-    protocol.bgp.global_.afi_safis.afi_safi.append(afi_safi)
-
-
-    peer_group = protocol.bgp.peer_groups.PeerGroup()                    
-    peer_group.peer_group_name = "IBGP"
-    peer_group.config.peer_group_name = "IBGP"
-    peer_group.config.peer_as = 65000 
-    peer_group.transport.config.local_address = "172.16.1.1"
-
-    afi_safi = peer_group.afi_safis.AfiSafi()   
-    afi_safi.afi_safi_name = oc_bgp_types.IPV4UNICAST()
-    afi_safi.config.afi_safi_name = oc_bgp_types.IPV4UNICAST()
-    afi_safi.config.enabled = True                            
-    peer_group.afi_safis.afi_safi.append(afi_safi) 
-    protocol.bgp.peer_groups.peer_group.append(peer_group)
-
-    neighbor = protocol.bgp.neighbors.Neighbor()
-    
-    neighbor.neighbor_address = "172.16.4.1"
-    neighbor.config.neighbor_address = "172.16.4.1"
-    neighbor.config.peer_group = "IBGP"
-    afi_safi = neighbor.afi_safis.AfiSafi()
-    afi_safi.afi_safi_name = oc_bgp_types.IPV4UNICAST()
-    afi_safi.config.afi_safi_name = oc_bgp_types.IPV4UNICAST()
-    afi_safi.config.enabled = True                            
-    neighbor.afi_safis.afi_safi.append(afi_safi)
-    
-    protocol.bgp.neighbors.neighbor.append(neighbor)
 
     ni.protocols.protocol.append(protocol)
 

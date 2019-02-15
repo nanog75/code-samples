@@ -1,0 +1,356 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-flowspec-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-flowspec-oper" revision="2015-11-09">
+  <files>
+    <file revision="2015-11-09" submodule="false">Cisco-IOS-XR-flowspec-oper.yang</file>
+    <file revision="2015-11-09" submodule="true">Cisco-IOS-XR-flowspec-oper-sub1.yang</file>
+  </files>
+  <prefix>flowspec-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="Fs-client">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">bgp</enum>
+      <enum value="1">one-pk</enum>
+      <enum value="2">policy</enum>
+      <enum value="3">ha</enum>
+      <enum value="4">test</enum>
+    </type>
+  </typedef>
+  <typedef name="Fs-mgr-client-state">
+    <type node="enumeration">
+      <enum>dormant</enum>
+      <enum>connected</enum>
+      <enum>replay</enum>
+      <enum>unconfigured</enum>
+    </type>
+  </typedef>
+  <flow-spec config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/flowspec/gl/</xr-path>
+    <xr-xml-map>show_fs:FlowSpec</xr-xml-map>
+    <xr-task>network</xr-task>
+    <clients config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/flowspec/gl/client/</xr-path>
+      <xr-xml-map>show_fs:ClientTable</xr-xml-map>
+      <xr-task>network</xr-task>
+      <client config="false" node="list">
+        <xr-path>/oper/flowspec/gl/client/&lt;show_fs_Client_arg104&gt;,&lt;show_fs_Client_arg105&gt;</xr-path>
+        <xr-xml-map>show_fs:Client</xr-xml-map>
+        <xr-task>network</xr-task>
+        <xr-bag-grp-name>fs_mgr_client</xr-bag-grp-name>
+        <xr-bag>fs_mgr_show.bag</xr-bag>
+        <client-type config="false" is-key="true" is-yang-key="false" node="leaf">
+          <xr-pathformat>decimal</xr-pathformat>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/flowspec/gl/client/&lt;show_fs_Client_arg104&gt;,&lt;show_fs_Client_arg105&gt;</xr-path>
+          <xr-xml-map>show_fs:ClientType</xr-xml-map>
+          <xr-task>network</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <xr-sch-arg-name>&lt;show_fs_Client_arg104&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>Fs-client</type-name>
+          </type>
+        </client-type>
+        <client-id config="false" is-key="true" is-yang-key="false" node="leaf">
+          <xr-pathformat>decimal</xr-pathformat>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/flowspec/gl/client/&lt;show_fs_Client_arg104&gt;,&lt;show_fs_Client_arg105&gt;</xr-path>
+          <xr-xml-map>show_fs:ClientID</xr-xml-map>
+          <xr-task>network</xr-task>
+          <xr-sch-type>Integer</xr-sch-type>
+          <xr-sch-arg-name>&lt;show_fs_Client_arg105&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </client-id>
+        <client-state config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/flowspec/gl/client/&lt;show_fs_Client_arg104&gt;,&lt;show_fs_Client_arg105&gt;~fs_mgr_client.ClientState</xr-path>
+          <xr-xml-map>fs_mgr_show:ClientState</xr-xml-map>
+          <xr-task>network</xr-task>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>1 0</xr-bag-version>
+          <type>
+            <type-name>Fs-mgr-client-state</type-name>
+          </type>
+        </client-state>
+        <client-flows config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/flowspec/gl/client/&lt;show_fs_Client_arg104&gt;,&lt;show_fs_Client_arg105&gt;~fs_mgr_client.ClientFlows</xr-path>
+          <xr-xml-map>fs_mgr_show:ClientFlows</xr-xml-map>
+          <xr-task>network</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </client-flows>
+      </client>
+    </clients>
+    <summary config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/flowspec/gl/summary</xr-path>
+      <xr-xml-map>show_fs:Summary</xr-xml-map>
+      <xr-task>network</xr-task>
+      <xr-bag-grp-name>fs_mgr_summary</xr-bag-grp-name>
+      <xr-bag>fs_mgr_show.bag</xr-bag>
+      <vrfafi-tables config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/flowspec/gl/summary~fs_mgr_summary.VRFAFITables</xr-path>
+        <xr-xml-map>fs_mgr_show:VRFAFITables</xr-xml-map>
+        <xr-task>network</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </vrfafi-tables>
+      <flows config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/flowspec/gl/summary~fs_mgr_summary.Flows</xr-path>
+        <xr-xml-map>fs_mgr_show:Flows</xr-xml-map>
+        <xr-task>network</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </flows>
+    </summary>
+    <vrfs config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/flowspec/gl/vrf/</xr-path>
+      <xr-xml-map>show_fs:VRFTable</xr-xml-map>
+      <xr-task>network</xr-task>
+      <vrf config="false" key="vrf-name" node="list">
+        <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/</xr-path>
+        <xr-xml-map>show_fs:VRF</xr-xml-map>
+        <xr-task>network</xr-task>
+        <xr-scope>exported</xr-scope>
+        <afs config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/</xr-path>
+          <xr-xml-map>show_fs:AFTable</xr-xml-map>
+          <xr-task>network</xr-task>
+          <af config="false" key="af-name" node="list">
+            <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/</xr-path>
+            <xr-xml-map>show_fs:AF</xr-xml-map>
+            <xr-task>network</xr-task>
+            <table-summary config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/tbl-summary</xr-path>
+              <xr-xml-map>show_fs:TableSummary</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-grp-name>fs_mgr_tbl_summary</xr-bag-grp-name>
+              <xr-bag>fs_mgr_show.bag</xr-bag>
+              <total-flows config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/tbl-summary~fs_mgr_tbl_summary.TotalFlows</xr-path>
+                <xr-xml-map>fs_mgr_show:TotalFlows</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </total-flows>
+              <service-policies config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/tbl-summary~fs_mgr_tbl_summary.ServicePolicies</xr-path>
+                <xr-xml-map>fs_mgr_show:ServicePolicies</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </service-policies>
+              <local-install-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/tbl-summary~fs_mgr_tbl_summary.LocalInstallEnabled</xr-path>
+                <xr-xml-map>fs_mgr_show:LocalInstallEnabled</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </local-install-enabled>
+            </table-summary>
+            <nlris config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/nlri/</xr-path>
+              <xr-xml-map>show_fs:NLRITable</xr-xml-map>
+              <xr-task>network</xr-task>
+              <nlri config="false" key="nlri-bytes" node="list">
+                <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/nlri/&lt;show_fs_NLRI_arg103&gt;</xr-path>
+                <xr-xml-map>show_fs:NLRI</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-grp-name>fs_mgr_nlri</xr-bag-grp-name>
+                <xr-bag>fs_mgr_show.bag</xr-bag>
+                <nlri-bytes config="false" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/nlri/&lt;show_fs_NLRI_arg103&gt;</xr-path>
+                  <xr-xml-map>show_fs:NLRIBytes</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-sch-type>String</xr-sch-type>
+                  <xr-sch-arg-name>&lt;show_fs_NLRI_arg103&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>xr:Cisco-ios-xr-string</type-name>
+                  </type>
+                </nlri-bytes>
+                <flow-statistics config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/nlri/&lt;show_fs_NLRI_arg103&gt;~fs_mgr_nlri.FlowStatistics</xr-path>
+                  <xr-task>network</xr-task>
+                  <xr-bag-version>1 0</xr-bag-version>
+                  <classified config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/nlri/&lt;show_fs_NLRI_arg103&gt;~fs_mgr_nlri.FlowStatistics.Classified</xr-path>
+                    <xr-task>network</xr-task>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <packets config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/nlri/&lt;show_fs_NLRI_arg103&gt;~fs_mgr_nlri.FlowStatistics.Classified.Packets</xr-path>
+                      <xr-xml-map>fs_mgr_show:Packets</xr-xml-map>
+                      <xr-task>network</xr-task>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </packets>
+                    <bytes config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/nlri/&lt;show_fs_NLRI_arg103&gt;~fs_mgr_nlri.FlowStatistics.Classified.Bytes</xr-path>
+                      <xr-xml-map>fs_mgr_show:Bytes</xr-xml-map>
+                      <xr-task>network</xr-task>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </bytes>
+                  </classified>
+                  <dropped config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/nlri/&lt;show_fs_NLRI_arg103&gt;~fs_mgr_nlri.FlowStatistics.Dropped</xr-path>
+                    <xr-task>network</xr-task>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <packets config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/nlri/&lt;show_fs_NLRI_arg103&gt;~fs_mgr_nlri.FlowStatistics.Dropped.Packets</xr-path>
+                      <xr-xml-map>fs_mgr_show:Packets</xr-xml-map>
+                      <xr-task>network</xr-task>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </packets>
+                    <bytes config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/nlri/&lt;show_fs_NLRI_arg103&gt;~fs_mgr_nlri.FlowStatistics.Dropped.Bytes</xr-path>
+                      <xr-xml-map>fs_mgr_show:Bytes</xr-xml-map>
+                      <xr-task>network</xr-task>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </bytes>
+                  </dropped>
+                </flow-statistics>
+              </nlri>
+            </nlris>
+            <flows config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/flow/</xr-path>
+              <xr-xml-map>show_fs:FlowTable</xr-xml-map>
+              <xr-task>network</xr-task>
+              <flow config="false" key="flow-notation" node="list">
+                <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/flow/&lt;show_fs_Flow_arg104&gt;</xr-path>
+                <xr-xml-map>show_fs:Flow</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-grp-name>fs_mgr_nlri</xr-bag-grp-name>
+                <xr-bag>fs_mgr_show.bag</xr-bag>
+                <flow-notation config="false" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/flow/&lt;show_fs_Flow_arg104&gt;</xr-path>
+                  <xr-xml-map>show_fs:FlowNotation</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-sch-type>EncodedString</xr-sch-type>
+                  <xr-sch-arg-name>&lt;show_fs_Flow_arg104&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </flow-notation>
+                <flow-statistics config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/flow/&lt;show_fs_Flow_arg104&gt;~fs_mgr_nlri.FlowStatistics</xr-path>
+                  <xr-task>network</xr-task>
+                  <xr-bag-version>1 0</xr-bag-version>
+                  <classified config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/flow/&lt;show_fs_Flow_arg104&gt;~fs_mgr_nlri.FlowStatistics.Classified</xr-path>
+                    <xr-task>network</xr-task>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <packets config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/flow/&lt;show_fs_Flow_arg104&gt;~fs_mgr_nlri.FlowStatistics.Classified.Packets</xr-path>
+                      <xr-xml-map>fs_mgr_show:Packets</xr-xml-map>
+                      <xr-task>network</xr-task>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </packets>
+                    <bytes config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/flow/&lt;show_fs_Flow_arg104&gt;~fs_mgr_nlri.FlowStatistics.Classified.Bytes</xr-path>
+                      <xr-xml-map>fs_mgr_show:Bytes</xr-xml-map>
+                      <xr-task>network</xr-task>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </bytes>
+                  </classified>
+                  <dropped config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/flow/&lt;show_fs_Flow_arg104&gt;~fs_mgr_nlri.FlowStatistics.Dropped</xr-path>
+                    <xr-task>network</xr-task>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <packets config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/flow/&lt;show_fs_Flow_arg104&gt;~fs_mgr_nlri.FlowStatistics.Dropped.Packets</xr-path>
+                      <xr-xml-map>fs_mgr_show:Packets</xr-xml-map>
+                      <xr-task>network</xr-task>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </packets>
+                    <bytes config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/flow/&lt;show_fs_Flow_arg104&gt;~fs_mgr_nlri.FlowStatistics.Dropped.Bytes</xr-path>
+                      <xr-xml-map>fs_mgr_show:Bytes</xr-xml-map>
+                      <xr-task>network</xr-task>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </bytes>
+                  </dropped>
+                </flow-statistics>
+              </flow>
+            </flows>
+            <af-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/afi/&lt;show_fs_AF_arg101&gt;/</xr-path>
+              <xr-xml-map>show_fs:AFName</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;show_fs_AF_arg101&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </af-name>
+          </af>
+        </afs>
+        <vrf-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/flowspec/gl/vrf/&lt;show_fs_VRF_arg100&gt;/</xr-path>
+          <xr-xml-map>show_fs:VRFName</xr-xml-map>
+          <xr-task>network</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;show_fs_VRF_arg100&gt;</xr-sch-arg-name>
+          <type length="1..32">
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </vrf-name>
+      </vrf>
+    </vrfs>
+  </flow-spec>
+</Cisco-IOS-XR-flowspec-oper>

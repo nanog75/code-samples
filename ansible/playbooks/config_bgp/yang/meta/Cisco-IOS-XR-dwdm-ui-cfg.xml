@@ -1,0 +1,986 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-dwdm-ui-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-dwdm-ui-cfg" revision="2017-05-01">
+  <files>
+    <file revision="2017-05-01" submodule="false">Cisco-IOS-XR-dwdm-ui-cfg.yang</file>
+  </files>
+  <prefix>dwdm-ui-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-ifmgr-cfg</import>
+  <typedef name="Prbs-pattern">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">null</enum>
+      <enum value="2">pn11</enum>
+      <enum value="3">pn23</enum>
+      <enum value="4">pn31</enum>
+    </type>
+  </typedef>
+  <typedef name="Proactive">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">default</enum>
+      <enum value="2">graceful</enum>
+    </type>
+  </typedef>
+  <typedef name="Expected-tti">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="3">expected-tti-ascii</enum>
+      <enum value="4">expected-tti-hex</enum>
+    </type>
+  </typedef>
+  <typedef name="Fec">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">standard</enum>
+      <enum value="2">enhanced</enum>
+      <enum value="3">high-gain-hd</enum>
+      <enum value="4">long-haul-hd</enum>
+      <enum value="5">high-gain-sd</enum>
+      <enum value="6">long-haul-sd</enum>
+      <enum value="7">ci-bch</enum>
+      <enum value="8">high-gain-multivendor-hd</enum>
+      <enum value="9">sd-everest</enum>
+      <enum value="10">sd-denali</enum>
+    </type>
+  </typedef>
+  <typedef name="Framing">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">opu1e</enum>
+      <enum value="2">opu2e</enum>
+    </type>
+  </typedef>
+  <typedef name="Otu-threshold">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">prefec-sd</enum>
+      <enum value="1">prefec-sf</enum>
+      <enum value="4">otu-sd</enum>
+      <enum value="5">otu-sf</enum>
+    </type>
+  </typedef>
+  <typedef name="Dwdm-loopback">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">line</enum>
+      <enum value="2">internal</enum>
+    </type>
+  </typedef>
+  <typedef name="Efec">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">i.4</enum>
+      <enum value="2">i.7</enum>
+    </type>
+  </typedef>
+  <typedef name="Odu-alarm">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="14">oci</enum>
+      <enum value="15">odu-ais</enum>
+      <enum value="16">lck</enum>
+      <enum value="17">odu-bdi</enum>
+      <enum value="20">odu-sf</enum>
+      <enum value="21">odu-sd</enum>
+      <enum value="22">plm</enum>
+      <enum value="23">odu-tim</enum>
+    </type>
+  </typedef>
+  <typedef name="Prbs-mode">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">source</enum>
+      <enum value="1">sink</enum>
+      <enum value="2">source-sink</enum>
+      <enum value="3">invalid</enum>
+    </type>
+  </typedef>
+  <typedef name="Tx-tti">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">tx-tti-ascii</enum>
+      <enum value="1">tx-tti-hex</enum>
+    </type>
+  </typedef>
+  <typedef name="Otu-alarm">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">los</enum>
+      <enum value="1">lof</enum>
+      <enum value="2">lom</enum>
+      <enum value="6">iae</enum>
+      <enum value="7">otu-bdi</enum>
+      <enum value="8">otu-tim</enum>
+      <enum value="10">otu-sf</enum>
+      <enum value="11">otu-sd</enum>
+      <enum value="24">fec-mismatch</enum>
+      <enum value="31">prefec-sd-ber</enum>
+      <enum value="32">prefec-sf-ber</enum>
+    </type>
+  </typedef>
+  <typedef name="Dwdm-admin-state">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">out-of-service</enum>
+      <enum value="1">in-service</enum>
+      <enum value="2">maintenance</enum>
+      <enum value="3">in-service-config-allowed</enum>
+    </type>
+  </typedef>
+  <typedef name="Odu-threshold">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="8">odu-sd</enum>
+      <enum value="9">odu-sf</enum>
+    </type>
+  </typedef>
+  <typedef name="Wave-channel-num">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">default</enum>
+      <enum value="1">channel-wavelength</enum>
+      <enum value="2">channel-frequency</enum>
+      <enum value="4">100mhz-frequency</enum>
+    </type>
+  </typedef>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <maintenance-embargo config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/maintenance/embargo</xr-path>
+      <xr-xml-map>dwdm_ui_interface_cfg:MaintenanceEmbargo</xr-xml-map>
+      <xr-task>interface</xr-task>
+      <xr-sch-type>Boolean</xr-sch-type>
+      <type>
+        <type-name>boolean</type-name>
+      </type>
+    </maintenance-embargo>
+  </augment>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <dwdm config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/</xr-path>
+      <xr-xml-map>dwdm_ui_interface_cfg:DWDM</xr-xml-map>
+      <xr-task>dwdm</xr-task>
+      <network-srlgs config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/network_srlg/set/</xr-path>
+        <xr-xml-map>dwdm_ui_interface_cfg:NetworkSrlgTable</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <network-srlg config="true" key="set-id" node="list">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/network_srlg/set/&lt;dwdm_ui_interface_cfg_NetworkSrlg_arg10&gt;</xr-path>
+          <xr-xml-map>dwdm_ui_interface_cfg:NetworkSrlg</xr-xml-map>
+          <xr-task>dwdm</xr-task>
+          <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+          <set-id config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/network_srlg/set/&lt;dwdm_ui_interface_cfg_NetworkSrlg_arg10&gt;</xr-path>
+            <xr-xml-map>dwdm_ui_interface_cfg:SetId</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <xr-sch-arg-name>&lt;dwdm_ui_interface_cfg_NetworkSrlg_arg10&gt;</xr-sch-arg-name>
+            <type range="1..17">
+              <type-name>uint32</type-name>
+            </type>
+          </set-id>
+          <srlg1 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/network_srlg/set/&lt;dwdm_ui_interface_cfg_NetworkSrlg_arg10&gt;`0</xr-path>
+            <xr-xml-map>dwdm_ui_interface_cfg:Srlg1</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..4294967294">
+              <type-name>uint32</type-name>
+            </type>
+          </srlg1>
+          <srlg2 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/network_srlg/set/&lt;dwdm_ui_interface_cfg_NetworkSrlg_arg10&gt;`1</xr-path>
+            <xr-xml-map>dwdm_ui_interface_cfg:Srlg2</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..4294967294">
+              <type-name>uint32</type-name>
+            </type>
+          </srlg2>
+          <srlg3 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/network_srlg/set/&lt;dwdm_ui_interface_cfg_NetworkSrlg_arg10&gt;`2</xr-path>
+            <xr-xml-map>dwdm_ui_interface_cfg:Srlg3</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..4294967294">
+              <type-name>uint32</type-name>
+            </type>
+          </srlg3>
+          <srlg4 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/network_srlg/set/&lt;dwdm_ui_interface_cfg_NetworkSrlg_arg10&gt;`3</xr-path>
+            <xr-xml-map>dwdm_ui_interface_cfg:Srlg4</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..4294967294">
+              <type-name>uint32</type-name>
+            </type>
+          </srlg4>
+          <srlg5 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/network_srlg/set/&lt;dwdm_ui_interface_cfg_NetworkSrlg_arg10&gt;`4</xr-path>
+            <xr-xml-map>dwdm_ui_interface_cfg:Srlg5</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..4294967294">
+              <type-name>uint32</type-name>
+            </type>
+          </srlg5>
+          <srlg6 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/network_srlg/set/&lt;dwdm_ui_interface_cfg_NetworkSrlg_arg10&gt;`5</xr-path>
+            <xr-xml-map>dwdm_ui_interface_cfg:Srlg6</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..4294967294">
+              <type-name>uint32</type-name>
+            </type>
+          </srlg6>
+        </network-srlg>
+      </network-srlgs>
+      <g709 config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/</xr-path>
+        <xr-xml-map>dwdm_ui_interface_cfg:G709</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <odu config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/odu/</xr-path>
+          <xr-xml-map>dwdm_ui_interface_cfg:ODU</xr-xml-map>
+          <xr-task>dwdm</xr-task>
+          <odu-reports config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/odu/report/</xr-path>
+            <xr-xml-map>dwdm_ui_interface_cfg:ODUReportTable</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <odu-report config="true" key="alarm" node="list">
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/odu/report/&lt;dwdm_ui_interface_cfg_ODUReport_Alarm&gt;</xr-path>
+              <xr-xml-map>dwdm_ui_interface_cfg:ODUReport</xr-xml-map>
+              <xr-task>dwdm</xr-task>
+              <alarm config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-create-item-relative-path/>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/odu/report/&lt;dwdm_ui_interface_cfg_ODUReport_Alarm&gt;</xr-path>
+                <xr-xml-map>dwdm_ui_interface_cfg:Alarm</xr-xml-map>
+                <xr-task>dwdm</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-sch-arg-name>&lt;dwdm_ui_interface_cfg_ODUReport_Alarm&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>Odu-alarm</type-name>
+                </type>
+              </alarm>
+            </odu-report>
+          </odu-reports>
+          <odu-thresholds config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/odu/threshold/</xr-path>
+            <xr-xml-map>dwdm_ui_interface_cfg:ODUThresholdTable</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <odu-threshold config="true" key="threshold" node="list">
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/odu/threshold/&lt;dwdm_ui_interface_cfg_ODUThreshold_Threshold&gt;</xr-path>
+              <xr-xml-map>dwdm_ui_interface_cfg:ODUThreshold</xr-xml-map>
+              <xr-task>dwdm</xr-task>
+              <threshold config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/odu/threshold/&lt;dwdm_ui_interface_cfg_ODUThreshold_Threshold&gt;</xr-path>
+                <xr-xml-map>dwdm_ui_interface_cfg:Threshold</xr-xml-map>
+                <xr-task>dwdm</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-sch-arg-name>&lt;dwdm_ui_interface_cfg_ODUThreshold_Threshold&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>Odu-threshold</type-name>
+                </type>
+              </threshold>
+              <threshold-value config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/odu/threshold/&lt;dwdm_ui_interface_cfg_ODUThreshold_Threshold&gt;</xr-path>
+                <xr-xml-map>dwdm_ui_interface_cfg:ThresholdValue</xr-xml-map>
+                <xr-task>dwdm</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="1..9">
+                  <type-name>uint32</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </threshold-value>
+            </odu-threshold>
+          </odu-thresholds>
+          <odu-expected-tti config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/odu/tti/exp-tti/0x3`</xr-path>
+            <xr-xml-map>dwdm_ui_interface_cfg:ODUExpectedTTI</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-pack-format>%d%s%s</xr-pack-format>
+            <string-type config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/odu/tti/exp-tti/0x3`0</xr-path>
+              <xr-xml-map>dwdm_ui_interface_cfg:StringType</xr-xml-map>
+              <xr-task>dwdm</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Expected-tti</type-name>
+              </type>
+            </string-type>
+            <ascii-string config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/odu/tti/exp-tti/0x3`1</xr-path>
+              <xr-xml-map>dwdm_ui_interface_cfg:AsciiString</xr-xml-map>
+              <xr-task>dwdm</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <when>../string-type = 'expected-tti-ascii'</when>
+              <type length="1..64">
+                <type-name>string</type-name>
+              </type>
+            </ascii-string>
+            <hex-string config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/odu/tti/exp-tti/0x3`2</xr-path>
+              <xr-xml-map>dwdm_ui_interface_cfg:HexString</xr-xml-map>
+              <xr-task>dwdm</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <when>../string-type = 'expected-tti-hex'</when>
+              <type length="1..128">
+                <type-name>string</type-name>
+              </type>
+            </hex-string>
+          </odu-expected-tti>
+          <odu-tx-tti config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/odu/tti/tx-tti/0x3`</xr-path>
+            <xr-xml-map>dwdm_ui_interface_cfg:ODUTxTTI</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-pack-format>%d%s%s</xr-pack-format>
+            <string-type config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/odu/tti/tx-tti/0x3`0</xr-path>
+              <xr-xml-map>dwdm_ui_interface_cfg:StringType</xr-xml-map>
+              <xr-task>dwdm</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Tx-tti</type-name>
+              </type>
+            </string-type>
+            <ascii-string config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/odu/tti/tx-tti/0x3`1</xr-path>
+              <xr-xml-map>dwdm_ui_interface_cfg:AsciiString</xr-xml-map>
+              <xr-task>dwdm</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <when>../string-type = 'tx-tti-ascii'</when>
+              <type length="1..64">
+                <type-name>string</type-name>
+              </type>
+            </ascii-string>
+            <hex-string config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/odu/tti/tx-tti/0x3`2</xr-path>
+              <xr-xml-map>dwdm_ui_interface_cfg:HexString</xr-xml-map>
+              <xr-task>dwdm</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <when>../string-type = 'tx-tti-hex'</when>
+              <type length="1..128">
+                <type-name>string</type-name>
+              </type>
+            </hex-string>
+          </odu-tx-tti>
+        </odu>
+        <otu config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/</xr-path>
+          <xr-xml-map>dwdm_ui_interface_cfg:OTU</xr-xml-map>
+          <xr-task>dwdm</xr-task>
+          <otu-expected-tti config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/tti/exp-tti/0x3`</xr-path>
+            <xr-xml-map>dwdm_ui_interface_cfg:OTUExpectedTTI</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-pack-format>%d%s%s</xr-pack-format>
+            <string-type config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/tti/exp-tti/0x3`0</xr-path>
+              <xr-xml-map>dwdm_ui_interface_cfg:StringType</xr-xml-map>
+              <xr-task>dwdm</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Expected-tti</type-name>
+              </type>
+            </string-type>
+            <ascii-string config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/tti/exp-tti/0x3`1</xr-path>
+              <xr-xml-map>dwdm_ui_interface_cfg:AsciiString</xr-xml-map>
+              <xr-task>dwdm</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <when>../string-type = 'expected-tti-ascii'</when>
+              <type length="1..64">
+                <type-name>string</type-name>
+              </type>
+            </ascii-string>
+            <hex-string config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/tti/exp-tti/0x3`2</xr-path>
+              <xr-xml-map>dwdm_ui_interface_cfg:HexString</xr-xml-map>
+              <xr-task>dwdm</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <when>../string-type = 'expected-tti-hex'</when>
+              <type length="1..128">
+                <type-name>string</type-name>
+              </type>
+            </hex-string>
+          </otu-expected-tti>
+          <otu-thresholds config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/threshold/</xr-path>
+            <xr-xml-map>dwdm_ui_interface_cfg:OTUThresholdTable</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <otu-threshold config="true" key="threshold" node="list">
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/threshold/&lt;dwdm_ui_interface_cfg_OTUThreshold_Threshold&gt;</xr-path>
+              <xr-xml-map>dwdm_ui_interface_cfg:OTUThreshold</xr-xml-map>
+              <xr-task>dwdm</xr-task>
+              <threshold config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/threshold/&lt;dwdm_ui_interface_cfg_OTUThreshold_Threshold&gt;</xr-path>
+                <xr-xml-map>dwdm_ui_interface_cfg:Threshold</xr-xml-map>
+                <xr-task>dwdm</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-sch-arg-name>&lt;dwdm_ui_interface_cfg_OTUThreshold_Threshold&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>Otu-threshold</type-name>
+                </type>
+              </threshold>
+              <threshold-value config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/threshold/&lt;dwdm_ui_interface_cfg_OTUThreshold_Threshold&gt;</xr-path>
+                <xr-xml-map>dwdm_ui_interface_cfg:ThresholdValue</xr-xml-map>
+                <xr-task>dwdm</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="1..9">
+                  <type-name>uint32</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </threshold-value>
+            </otu-threshold>
+          </otu-thresholds>
+          <frr config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/proactive/</xr-path>
+            <xr-xml-map>dwdm_ui_interface_cfg:FRR</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <trigger-window config="true" is-key="false" node="container" presence="true">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-is-packed/>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/proactive/0x2`</xr-path>
+              <xr-xml-map>dwdm_ui_interface_cfg:TriggerWindow</xr-xml-map>
+              <xr-task>dwdm</xr-task>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <window config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/proactive/0x2`0</xr-path>
+                <xr-xml-map>dwdm_ui_interface_cfg:Window</xr-xml-map>
+                <xr-task>dwdm</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="10..10000">
+                  <type-name>uint32</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </window>
+              <dummy config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/proactive/0x2`1</xr-path>
+                <xr-xml-map>dwdm_ui_interface_cfg:Dummy</xr-xml-map>
+                <xr-task>dwdm</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="0..2">
+                  <type-name>uint32</type-name>
+                </type>
+              </dummy>
+            </trigger-window>
+            <revert-threshold config="true" is-key="false" node="container" presence="true">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-is-packed/>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/proactive/0x1`</xr-path>
+              <xr-xml-map>dwdm_ui_interface_cfg:RevertThreshold</xr-xml-map>
+              <xr-task>dwdm</xr-task>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <ber-base config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/proactive/0x1`0</xr-path>
+                <xr-xml-map>dwdm_ui_interface_cfg:BERBase</xr-xml-map>
+                <xr-task>dwdm</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="1..9">
+                  <type-name>uint32</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </ber-base>
+              <ber-power config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/proactive/0x1`1</xr-path>
+                <xr-xml-map>dwdm_ui_interface_cfg:BERPower</xr-xml-map>
+                <xr-task>dwdm</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="3..10">
+                  <type-name>uint32</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </ber-power>
+            </revert-threshold>
+            <trigger-threshold config="true" is-key="false" node="container" presence="true">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-is-packed/>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/proactive/0x0`</xr-path>
+              <xr-xml-map>dwdm_ui_interface_cfg:TriggerThreshold</xr-xml-map>
+              <xr-task>dwdm</xr-task>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <ber-base config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/proactive/0x0`0</xr-path>
+                <xr-xml-map>dwdm_ui_interface_cfg:BERBase</xr-xml-map>
+                <xr-task>dwdm</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="1..9">
+                  <type-name>uint32</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </ber-base>
+              <ber-power config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/proactive/0x0`1</xr-path>
+                <xr-xml-map>dwdm_ui_interface_cfg:BERPower</xr-xml-map>
+                <xr-task>dwdm</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="2..9">
+                  <type-name>uint32</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </ber-power>
+            </trigger-threshold>
+            <revert-window config="true" is-key="false" node="container" presence="true">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-is-packed/>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/proactive/0x3`</xr-path>
+              <xr-xml-map>dwdm_ui_interface_cfg:RevertWindow</xr-xml-map>
+              <xr-task>dwdm</xr-task>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <window config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/proactive/0x3`0</xr-path>
+                <xr-xml-map>dwdm_ui_interface_cfg:Window</xr-xml-map>
+                <xr-task>dwdm</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="500..100000">
+                  <type-name>uint32</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </window>
+              <dummy config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/proactive/0x3`1</xr-path>
+                <xr-xml-map>dwdm_ui_interface_cfg:Dummy</xr-xml-map>
+                <xr-task>dwdm</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="0..2">
+                  <type-name>uint32</type-name>
+                </type>
+              </dummy>
+            </revert-window>
+          </frr>
+          <otu-reports config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/report/</xr-path>
+            <xr-xml-map>dwdm_ui_interface_cfg:OTUReportTable</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <otu-report config="true" key="alarm" node="list">
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/report/&lt;dwdm_ui_interface_cfg_OTUReport_Alarm&gt;</xr-path>
+              <xr-xml-map>dwdm_ui_interface_cfg:OTUReport</xr-xml-map>
+              <xr-task>dwdm</xr-task>
+              <alarm config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-create-item-relative-path/>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/report/&lt;dwdm_ui_interface_cfg_OTUReport_Alarm&gt;</xr-path>
+                <xr-xml-map>dwdm_ui_interface_cfg:Alarm</xr-xml-map>
+                <xr-task>dwdm</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-sch-arg-name>&lt;dwdm_ui_interface_cfg_OTUReport_Alarm&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>Otu-alarm</type-name>
+                </type>
+              </alarm>
+            </otu-report>
+          </otu-reports>
+          <otu-tx-tti config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/tti/tx-tti/0x3`</xr-path>
+            <xr-xml-map>dwdm_ui_interface_cfg:OTUTxTTI</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-pack-format>%d%s%s</xr-pack-format>
+            <string-type config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/tti/tx-tti/0x3`0</xr-path>
+              <xr-xml-map>dwdm_ui_interface_cfg:StringType</xr-xml-map>
+              <xr-task>dwdm</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Tx-tti</type-name>
+              </type>
+            </string-type>
+            <ascii-string config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/tti/tx-tti/0x3`1</xr-path>
+              <xr-xml-map>dwdm_ui_interface_cfg:AsciiString</xr-xml-map>
+              <xr-task>dwdm</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <when>../string-type = 'tx-tti-ascii'</when>
+              <type length="1..64">
+                <type-name>string</type-name>
+              </type>
+            </ascii-string>
+            <hex-string config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/otu/tti/tx-tti/0x3`2</xr-path>
+              <xr-xml-map>dwdm_ui_interface_cfg:HexString</xr-xml-map>
+              <xr-task>dwdm</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <when>../string-type = 'tx-tti-hex'</when>
+              <type length="1..128">
+                <type-name>string</type-name>
+              </type>
+            </hex-string>
+          </otu-tx-tti>
+        </otu>
+        <prbs config="true" is-key="false" node="container" presence="true">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-is-packed/>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/prbs`</xr-path>
+          <xr-xml-map>dwdm_ui_interface_cfg:PRBS</xr-xml-map>
+          <xr-task>dwdm</xr-task>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <prbs-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/prbs`0</xr-path>
+            <xr-xml-map>dwdm_ui_interface_cfg:PRBSMode</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Prbs-mode</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </prbs-mode>
+          <prbs-pattern config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/prbs`1</xr-path>
+            <xr-xml-map>dwdm_ui_interface_cfg:PRBSPattern</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Prbs-pattern</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </prbs-pattern>
+        </prbs>
+        <fec config="true" is-key="false" node="container" presence="true">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-is-packed/>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/zfec_mode`</xr-path>
+          <xr-xml-map>dwdm_ui_interface_cfg:FEC</xr-xml-map>
+          <xr-task>dwdm</xr-task>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <fec-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/zfec_mode`0</xr-path>
+            <xr-xml-map>dwdm_ui_interface_cfg:FECMode</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Fec</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </fec-mode>
+          <efec-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/zfec_mode`1</xr-path>
+            <xr-xml-map>dwdm_ui_interface_cfg:EFECMode</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <xr-default-set/>
+            <type>
+              <type-name>Efec</type-name>
+            </type>
+            <default>none</default>
+          </efec-mode>
+        </fec>
+        <proactive config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/2</xr-path>
+          <xr-xml-map>dwdm_ui_interface_cfg:Proactive</xr-xml-map>
+          <xr-task>dwdm</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Proactive</type-name>
+          </type>
+        </proactive>
+        <bdi-to-gais config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/client_gais</xr-path>
+          <xr-xml-map>dwdm_ui_interface_cfg:BDIToGAIS</xr-xml-map>
+          <xr-task>dwdm</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </bdi-to-gais>
+        <tim-to-gais config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/tim_client_gais</xr-path>
+          <xr-xml-map>dwdm_ui_interface_cfg:TIMToGAIS</xr-xml-map>
+          <xr-task>dwdm</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </tim-to-gais>
+        <proactive-logging-file config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/signal_log</xr-path>
+          <xr-xml-map>dwdm_ui_interface_cfg:ProactiveLoggingFile</xr-xml-map>
+          <xr-task>dwdm</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <type length="1..128">
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </proactive-logging-file>
+        <tti-processing config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/tim_process</xr-path>
+          <xr-xml-map>dwdm_ui_interface_cfg:TTIProcessing</xr-xml-map>
+          <xr-task>dwdm</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </tti-processing>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/0</xr-path>
+          <xr-xml-map>dwdm_ui_interface_cfg:Enable</xr-xml-map>
+          <xr-task>dwdm</xr-task>
+          <xr-sch-type>Boolean</xr-sch-type>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </enable>
+        <framing config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/g709/framing_mode</xr-path>
+          <xr-xml-map>dwdm_ui_interface_cfg:Framing</xr-xml-map>
+          <xr-task>dwdm</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Framing</type-name>
+          </type>
+        </framing>
+      </g709>
+      <wavelength config="true" is-key="false" node="container" presence="true">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/wavelength`</xr-path>
+        <xr-xml-map>dwdm_ui_interface_cfg:Wavelength</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-pack-format>%d%d%s</xr-pack-format>
+        <wave-channel config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/wavelength`0</xr-path>
+          <xr-xml-map>dwdm_ui_interface_cfg:WaveChannel</xr-xml-map>
+          <xr-task>dwdm</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..1568362">
+            <type-name>uint32</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </wave-channel>
+        <wave-channel-number config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/wavelength`1</xr-path>
+          <xr-xml-map>dwdm_ui_interface_cfg:WaveChannelNumber</xr-xml-map>
+          <xr-task>dwdm</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Wave-channel-num</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </wave-channel-number>
+        <prog-frequency config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/wavelength`2</xr-path>
+          <xr-xml-map>dwdm_ui_interface_cfg:ProgFrequency</xr-xml-map>
+          <xr-task>dwdm</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <type length="1..128">
+            <type-name>string</type-name>
+          </type>
+        </prog-frequency>
+      </wavelength>
+      <enable-vtxp config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/vtxp_enable</xr-path>
+        <xr-xml-map>dwdm_ui_interface_cfg:EnableVTXP</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>Boolean</xr-sch-type>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </enable-vtxp>
+      <network-port-id config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/network_port_id</xr-path>
+        <xr-xml-map>dwdm_ui_interface_cfg:NetworkPortId</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>BoundedString</xr-sch-type>
+        <type length="1..64">
+          <type-name>string</type-name>
+        </type>
+      </network-port-id>
+      <transport-admin-state config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/transportAdminState</xr-path>
+        <xr-xml-map>dwdm_ui_interface_cfg:TransportAdminState</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Dwdm-admin-state</type-name>
+        </type>
+        <default>out-of-service</default>
+      </transport-admin-state>
+      <laser config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/DWDM_CFG_LASER_SHUT</xr-path>
+        <xr-xml-map>dwdm_ui_interface_cfg:Laser</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>FalseOnly</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </laser>
+      <transmit-power config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/tx_power</xr-path>
+        <xr-xml-map>dwdm_ui_interface_cfg:TransmitPower</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>SignedRange</xr-sch-type>
+        <type range="-190..10">
+          <type-name>int32</type-name>
+        </type>
+      </transmit-power>
+      <rx-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/rx_threshold</xr-path>
+        <xr-xml-map>dwdm_ui_interface_cfg:RxThreshold</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>SignedRange</xr-sch-type>
+        <type range="-350..50">
+          <type-name>int32</type-name>
+        </type>
+      </rx-threshold>
+      <network-connection-id config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/network_conn_id</xr-path>
+        <xr-xml-map>dwdm_ui_interface_cfg:NetworkConnectionId</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>BoundedString</xr-sch-type>
+        <type length="1..64">
+          <type-name>string</type-name>
+        </type>
+      </network-connection-id>
+      <loopback config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dwdm/loopback</xr-path>
+        <xr-xml-map>dwdm_ui_interface_cfg:Loopback</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Dwdm-loopback</type-name>
+        </type>
+        <default>none</default>
+      </loopback>
+    </dwdm>
+  </augment>
+</Cisco-IOS-XR-dwdm-ui-cfg>

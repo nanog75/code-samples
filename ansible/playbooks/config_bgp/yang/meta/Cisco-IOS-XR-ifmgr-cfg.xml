@@ -1,0 +1,316 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ifmgr-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg" revision="2017-09-07">
+  <files>
+    <file revision="2017-09-07" submodule="false">Cisco-IOS-XR-ifmgr-cfg.yang</file>
+  </files>
+  <prefix>ifmgr-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="Interface-mode-enum">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">default</enum>
+      <enum value="1">point-to-point</enum>
+      <enum value="2">multipoint</enum>
+      <enum value="3">l2-transport</enum>
+    </type>
+  </typedef>
+  <typedef name="Interface-active">
+    <xr-sch-type>StringList</xr-sch-type>
+    <type>
+      <pattern>(act)|(pre)</pattern>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="Secondary-admin-state-enum">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">normal</enum>
+      <enum value="1">maintenance</enum>
+    </type>
+  </typedef>
+  <typedef name="Link-status-enum">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">default</enum>
+      <enum value="1">disable</enum>
+      <enum value="2">software-interfaces</enum>
+    </type>
+  </typedef>
+  <global-interface-configuration config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/if/</xr-path>
+    <xr-xml-map>ifmgr_cfg:GlobalInterfaceConfiguration</xr-xml-map>
+    <xr-task>interface</xr-task>
+    <link-status config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/if/link-status</xr-path>
+      <xr-xml-map>ifmgr_cfg:LinkStatus</xr-xml-map>
+      <xr-task>interface</xr-task>
+      <xr-sch-type>Enum</xr-sch-type>
+      <type>
+        <type-name>Link-status-enum</type-name>
+      </type>
+      <default>default</default>
+    </link-status>
+  </global-interface-configuration>
+  <interface-configurations config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/if/</xr-path>
+    <xr-xml-map>ifmgr_cfg:InterfaceConfigurationTable</xr-xml-map>
+    <xr-task>interface</xr-task>
+    <interface-configuration config="true" key="active interface-name" node="list">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/</xr-path>
+      <xr-xml-map>ifmgr_cfg:InterfaceConfiguration</xr-xml-map>
+      <xr-task>interface</xr-task>
+      <xr-scope>exported</xr-scope>
+      <xr-delete-dependent>InterfaceModeNonPhysical InterfaceVirtual</xr-delete-dependent>
+      <xr-bind>act/</xr-bind>
+      <dampening config="true" is-key="false" node="container" presence="false">
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dampening`</xr-path>
+        <xr-xml-map>ifmgr_cfg:Dampening</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+        <args config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dampening`0</xr-path>
+          <xr-xml-map>ifmgr_cfg:Args</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type node="enumeration">
+            <enum value="0">default-values</enum>
+            <enum value="1">specify-half-life</enum>
+            <enum value="4">specify-all</enum>
+            <enum value="5">specify-rp</enum>
+          </type>
+        </args>
+        <half-life config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dampening`1</xr-path>
+          <xr-xml-map>ifmgr_cfg:HalfLife</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <when>../args = 'specify-half-life' or ../args = 'specify-all' or ../args = 'specify-rp'</when>
+          <type range="1..45">
+            <type-name>uint32</type-name>
+          </type>
+        </half-life>
+        <reuse-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dampening`2</xr-path>
+          <xr-xml-map>ifmgr_cfg:ReuseThreshold</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <when>../args = 'specify-all' or ../args = 'specify-rp'</when>
+          <type range="1..20000">
+            <type-name>uint32</type-name>
+          </type>
+        </reuse-threshold>
+        <suppress-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dampening`3</xr-path>
+          <xr-xml-map>ifmgr_cfg:SuppressThreshold</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <when>../args = 'specify-all' or ../args = 'specify-rp'</when>
+          <type range="1..20000">
+            <type-name>uint32</type-name>
+          </type>
+        </suppress-threshold>
+        <suppress-time config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dampening`4</xr-path>
+          <xr-xml-map>ifmgr_cfg:SuppressTime</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <when>../args = 'specify-all' or ../args = 'specify-rp'</when>
+          <type range="1..255">
+            <type-name>uint32</type-name>
+          </type>
+        </suppress-time>
+        <restart-penalty config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/dampening`5</xr-path>
+          <xr-xml-map>ifmgr_cfg:RestartPenalty</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <when>../args = 'specify-rp'</when>
+          <type range="0..20000">
+            <type-name>uint32</type-name>
+          </type>
+        </restart-penalty>
+      </dampening>
+      <mtus config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/mtu/</xr-path>
+        <xr-xml-map>ifmgr_cfg:MTUConfiguration</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <mtu config="true" key="owner" node="list">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/mtu/&lt;ifmgr_cfg_MTU_owner&gt;</xr-path>
+          <xr-xml-map>ifmgr_cfg:MTU</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <owner config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/mtu/&lt;ifmgr_cfg_MTU_owner&gt;</xr-path>
+            <xr-xml-map>ifmgr_cfg:Owner</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;ifmgr_cfg_MTU_owner&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </owner>
+          <mtu config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/mtu/&lt;ifmgr_cfg_MTU_owner&gt;</xr-path>
+            <xr-xml-map>ifmgr_cfg:MTU</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="64..65535">
+              <type-name>uint32</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </mtu>
+        </mtu>
+      </mtus>
+      <encapsulation config="true" is-key="false" node="container" presence="false">
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ord_e/im/encap`</xr-path>
+        <xr-xml-map>ifmgr_cfg:Encapsulation</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-pack-format>%s%d</xr-pack-format>
+        <encapsulation config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%s%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ord_e/im/encap`0</xr-path>
+          <xr-xml-map>ifmgr_cfg:Encapsulation</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </encapsulation>
+        <capsulation-options config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%s%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ord_e/im/encap`1</xr-path>
+          <xr-xml-map>ifmgr_cfg:CapsulationOptions</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-sch-type>Integer</xr-sch-type>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </capsulation-options>
+      </encapsulation>
+      <shutdown config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ord_x/im/shutdown</xr-path>
+        <xr-xml-map>ifmgr_cfg:Shutdown</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </shutdown>
+      <interface-virtual config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/v</xr-path>
+        <xr-xml-map>ifmgr_cfg:InterfaceVirtual</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-sch-type>TrueOnly</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </interface-virtual>
+      <secondary-admin-state config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/secondary-admin-state</xr-path>
+        <xr-xml-map>ifmgr_cfg:SecondaryAdminState</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Secondary-admin-state-enum</type-name>
+        </type>
+      </secondary-admin-state>
+      <interface-mode-non-physical config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/i</xr-path>
+        <xr-xml-map>ifmgr_cfg:InterfaceModeNonPhysical</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Interface-mode-enum</type-name>
+        </type>
+        <default>default</default>
+      </interface-mode-non-physical>
+      <bandwidth config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/im/bw</xr-path>
+        <xr-xml-map>ifmgr_cfg:Bandwidth</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..4294967295">
+          <type-name>uint32</type-name>
+        </type>
+      </bandwidth>
+      <link-status config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/link-status</xr-path>
+        <xr-xml-map>ifmgr_cfg:LinkStatus</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </link-status>
+      <description config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/aa/description</xr-path>
+        <xr-xml-map>ifmgr_cfg:Description</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-sch-type>String</xr-sch-type>
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </description>
+      <active config="true" is-key="true" is-yang-key="true" node="leaf" pattern-is-stringlist="true">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/</xr-path>
+        <xr-xml-map>ifmgr_cfg:Active</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-sch-type>StringList</xr-sch-type>
+        <xr-sch-arg-name>&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;</xr-sch-arg-name>
+        <type>
+          <type-name>Interface-active</type-name>
+        </type>
+      </active>
+      <interface-name config="true" is-key="true" is-yang-key="true" node="leaf">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-create-item-relative-path>aya</xr-create-item-relative-path>
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/</xr-path>
+        <xr-xml-map>ifmgr_cfg:InterfaceName</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-sch-type>InterfaceName</xr-sch-type>
+        <xr-sch-arg-name>&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;</xr-sch-arg-name>
+        <type>
+          <type-name>xr:Interface-name</type-name>
+        </type>
+      </interface-name>
+    </interface-configuration>
+  </interface-configurations>
+</Cisco-IOS-XR-ifmgr-cfg>

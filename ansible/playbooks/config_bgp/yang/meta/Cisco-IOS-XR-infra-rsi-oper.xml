@@ -1,0 +1,1239 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-infra-rsi-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-infra-rsi-oper" revision="2017-09-07">
+  <files>
+    <file revision="2017-09-07" submodule="false">Cisco-IOS-XR-infra-rsi-oper.yang</file>
+    <file revision="2017-09-07" submodule="true">Cisco-IOS-XR-infra-rsi-oper-sub1.yang</file>
+    <file revision="2017-09-07" submodule="true">Cisco-IOS-XR-infra-rsi-oper-sub2.yang</file>
+  </files>
+  <prefix>infra-rsi-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="Source">
+    <type node="enumeration">
+      <enum value="1">configured</enum>
+      <enum value="2">from-group</enum>
+      <enum value="4">inherited</enum>
+      <enum value="8">from-optical</enum>
+      <enum value="17">configured-and-notified</enum>
+      <enum value="18">from-group-and-notified</enum>
+      <enum value="20">inherited-and-notified</enum>
+      <enum value="24">from-optical-and-notified</enum>
+    </type>
+  </typedef>
+  <typedef name="Priority">
+    <type node="enumeration">
+      <enum value="0">critical</enum>
+      <enum value="1">high</enum>
+      <enum value="2">medium</enum>
+      <enum value="3">low</enum>
+      <enum value="4">very-low</enum>
+      <enum value="5">invald</enum>
+    </type>
+  </typedef>
+  <typedef name="String1">
+    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+    <type>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <vrf-group config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/rsi_agent/</xr-path>
+    <xr-xml-map>rsi_vrfgroup_oper:VRFGroup</xr-xml-map>
+    <xr-task>ip-services</xr-task>
+    <nodes config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/rsi_agent/node/</xr-path>
+      <xr-xml-map>rsi_vrfgroup_oper:NodeTable</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <node config="false" key="node-name" node="list">
+        <xr-path>/oper/rsi_agent/node/&lt;rsi_vrfgroup_oper_Node_node-id&gt;/</xr-path>
+        <xr-xml-map>rsi_vrfgroup_oper:Node</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <groups config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/rsi_agent/node/&lt;rsi_vrfgroup_oper_Node_node-id&gt;/vrfgroup/</xr-path>
+          <xr-xml-map>rsi_vrfgroup_oper:GroupTable</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <group config="false" key="group-name" node="list">
+            <xr-path>/oper/rsi_agent/node/&lt;rsi_vrfgroup_oper_Node_node-id&gt;/vrfgroup/&lt;rsi_vrfgroup_oper_Group_group&gt;</xr-path>
+            <xr-xml-map>rsi_vrfgroup_oper:Group</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-bag-grp-name>rsi_vrfgroup_group_show</xr-bag-grp-name>
+            <xr-bag>rsi_agent.bag</xr-bag>
+            <group-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/rsi_agent/node/&lt;rsi_vrfgroup_oper_Node_node-id&gt;/vrfgroup/&lt;rsi_vrfgroup_oper_Group_group&gt;</xr-path>
+              <xr-xml-map>rsi_vrfgroup_oper:GroupName</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <xr-sch-arg-name>&lt;rsi_vrfgroup_oper_Group_group&gt;</xr-sch-arg-name>
+              <type length="1..32">
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </group-name>
+            <vr-fs config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/rsi_agent/node/&lt;rsi_vrfgroup_oper_Node_node-id&gt;/vrfgroup/&lt;rsi_vrfgroup_oper_Group_group&gt;~rsi_vrfgroup_group_show.VRFs</xr-path>
+              <xr-xml-map>rsi_agent:VRFs</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 5</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </vr-fs>
+            <forward-reference config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/rsi_agent/node/&lt;rsi_vrfgroup_oper_Node_node-id&gt;/vrfgroup/&lt;rsi_vrfgroup_oper_Group_group&gt;~rsi_vrfgroup_group_show.ForwardReference</xr-path>
+              <xr-xml-map>rsi_agent:ForwardReference</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 5</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </forward-reference>
+            <vrf config="false" node="list">
+              <xr-path>/oper/rsi_agent/node/&lt;rsi_vrfgroup_oper_Node_node-id&gt;/vrfgroup/&lt;rsi_vrfgroup_oper_Group_group&gt;~rsi_vrfgroup_group_show.VRF[&lt;bag_arg22&gt;]</xr-path>
+              <xr-task>ip-services</xr-task>
+              <xr-bag-version>1 5</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg22&gt;</xr-internal-key>
+              <vrf-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/rsi_agent/node/&lt;rsi_vrfgroup_oper_Node_node-id&gt;/vrfgroup/&lt;rsi_vrfgroup_oper_Group_group&gt;~rsi_vrfgroup_group_show.VRF[&lt;bag_arg22&gt;].VRFName</xr-path>
+                <xr-xml-map>rsi_agent:VRFName</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>1 5</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </vrf-name>
+            </vrf>
+          </group>
+        </groups>
+        <node-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-pathformat>hex_nozerox</xr-pathformat>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/rsi_agent/node/&lt;rsi_vrfgroup_oper_Node_node-id&gt;/</xr-path>
+          <xr-xml-map>rsi_vrfgroup_oper:NodeName</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>NodeID</xr-sch-type>
+          <xr-sch-arg-name>&lt;rsi_vrfgroup_oper_Node_node-id&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Node-id</type-name>
+          </type>
+        </node-name>
+      </node>
+    </nodes>
+  </vrf-group>
+  <srlg config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/srlg/</xr-path>
+    <xr-xml-map>rsi_srlg_oper_gl:SRLG</xr-xml-map>
+    <xr-task>basic-services</xr-task>
+    <xr-scope>exported</xr-scope>
+    <groups config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/srlg/gl/group/</xr-path>
+      <xr-xml-map>rsi_srlg_oper_gl:GroupTable</xr-xml-map>
+      <xr-task>basic-services</xr-task>
+      <group config="false" key="group-name" node="list">
+        <xr-path>/oper/srlg/gl/group/&lt;rsi_srlg_oper_gl_Group_group_name&gt;</xr-path>
+        <xr-xml-map>rsi_srlg_oper_gl:Group</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <xr-bag-grp-name>rsi_srlg_group_show</xr-bag-grp-name>
+        <xr-bag>rsi_agent.bag</xr-bag>
+        <group-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/srlg/gl/group/&lt;rsi_srlg_oper_gl_Group_group_name&gt;</xr-path>
+          <xr-xml-map>rsi_srlg_oper_gl:GroupName</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;rsi_srlg_oper_gl_Group_group_name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </group-name>
+        <group-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srlg/gl/group/&lt;rsi_srlg_oper_gl_Group_group_name&gt;~rsi_srlg_group_show.GroupName</xr-path>
+          <xr-xml-map>rsi_agent:group-name-xr</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 5</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </group-name-xr>
+        <group-values config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srlg/gl/group/&lt;rsi_srlg_oper_gl_Group_group_name&gt;~rsi_srlg_group_show.GroupValues</xr-path>
+          <xr-xml-map>rsi_agent:GroupValues</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 5</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </group-values>
+        <srlg-attribute config="false" node="list">
+          <xr-path>/oper/srlg/gl/group/&lt;rsi_srlg_oper_gl_Group_group_name&gt;~rsi_srlg_group_show.SRLGAttribute[&lt;bag_arg21&gt;]</xr-path>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-version>1 5</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg21&gt;</xr-internal-key>
+          <srlg-value config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/srlg/gl/group/&lt;rsi_srlg_oper_gl_Group_group_name&gt;~rsi_srlg_group_show.SRLGAttribute[&lt;bag_arg21&gt;].SRLGValue</xr-path>
+            <xr-xml-map>rsi_agent:SRLGValue</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 5</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </srlg-value>
+          <priority config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/srlg/gl/group/&lt;rsi_srlg_oper_gl_Group_group_name&gt;~rsi_srlg_group_show.SRLGAttribute[&lt;bag_arg21&gt;].Priority</xr-path>
+            <xr-xml-map>rsi_agent:Priority</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>1 5</xr-bag-version>
+            <type>
+              <type-name>Priority</type-name>
+            </type>
+          </priority>
+          <srlg-index config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/srlg/gl/group/&lt;rsi_srlg_oper_gl_Group_group_name&gt;~rsi_srlg_group_show.SRLGAttribute[&lt;bag_arg21&gt;].SRLGIndex</xr-path>
+            <xr-xml-map>rsi_agent:SRLGIndex</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+            <xr-bag-version>1 5</xr-bag-version>
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </srlg-index>
+        </srlg-attribute>
+      </group>
+    </groups>
+    <interfaces config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/srlg/gl/if/brief/</xr-path>
+      <xr-xml-map>rsi_srlg_oper_gl:InterfaceTable</xr-xml-map>
+      <xr-task>basic-services</xr-task>
+      <interface config="false" key="interface-name" node="list">
+        <xr-path>/oper/srlg/gl/if/brief/&lt;rsi_srlg_oper_gl_Interface_if_name&gt;</xr-path>
+        <xr-xml-map>rsi_srlg_oper_gl:Interface</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <xr-bag-grp-name>rsi_srlg_intf_brief_show</xr-bag-grp-name>
+        <xr-bag>rsi_agent.bag</xr-bag>
+        <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/srlg/gl/if/brief/&lt;rsi_srlg_oper_gl_Interface_if_name&gt;</xr-path>
+          <xr-xml-map>rsi_srlg_oper_gl:InterfaceName</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>InterfaceForward</xr-sch-type>
+          <xr-sch-arg-name>&lt;rsi_srlg_oper_gl_Interface_if_name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </interface-name>
+        <interface-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srlg/gl/if/brief/&lt;rsi_srlg_oper_gl_Interface_if_name&gt;~rsi_srlg_intf_brief_show.InterfaceName</xr-path>
+          <xr-xml-map>rsi_agent:interface-name-xr</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 5</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </interface-name-xr>
+        <value-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srlg/gl/if/brief/&lt;rsi_srlg_oper_gl_Interface_if_name&gt;~rsi_srlg_intf_brief_show.ValueCount</xr-path>
+          <xr-xml-map>rsi_agent:ValueCount</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 5</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </value-count>
+        <registrations config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srlg/gl/if/brief/&lt;rsi_srlg_oper_gl_Interface_if_name&gt;~rsi_srlg_intf_brief_show.Registrations</xr-path>
+          <xr-xml-map>rsi_agent:Registrations</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 5</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </registrations>
+        <srlg-value config="false" is-key="false" is-yang-key="false" node="leaf-list">
+          <xr-path>/oper/srlg/gl/if/brief/&lt;rsi_srlg_oper_gl_Interface_if_name&gt;~rsi_srlg_intf_brief_show.SRLGValues[&lt;bag_arg25&gt;]</xr-path>
+          <xr-xml-map>rsi_agent:SRLGValues</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 5</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg25&gt;</xr-internal-key>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </srlg-value>
+      </interface>
+    </interfaces>
+    <rsips config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/srlg/gl/rsip/</xr-path>
+      <xr-xml-map>rsi_srlg_oper_gl:RsipTable</xr-xml-map>
+      <xr-task>basic-services</xr-task>
+      <rsip config="false" key="rsip-name" node="list">
+        <xr-path>/oper/srlg/gl/rsip/&lt;rsi_srlg_oper_gl_Rsip_rsip_name&gt;</xr-path>
+        <xr-xml-map>rsi_srlg_oper_gl:Rsip</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <xr-bag-grp-name>rsi_srlg_rsip_show</xr-bag-grp-name>
+        <xr-bag>rsi_agent.bag</xr-bag>
+        <rsip-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/srlg/gl/rsip/&lt;rsi_srlg_oper_gl_Rsip_rsip_name&gt;</xr-path>
+          <xr-xml-map>rsi_srlg_oper_gl:RsipName</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>InterfaceForward</xr-sch-type>
+          <xr-sch-arg-name>&lt;rsi_srlg_oper_gl_Rsip_rsip_name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </rsip-name>
+        <optical-layer-interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srlg/gl/rsip/&lt;rsi_srlg_oper_gl_Rsip_rsip_name&gt;~rsi_srlg_rsip_show.OpticalLayerInterfaceName</xr-path>
+          <xr-xml-map>rsi_agent:OpticalLayerInterfaceName</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 5</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </optical-layer-interface-name>
+        <registrations config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srlg/gl/rsip/&lt;rsi_srlg_oper_gl_Rsip_rsip_name&gt;~rsi_srlg_rsip_show.Registrations</xr-path>
+          <xr-xml-map>rsi_agent:Registrations</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 5</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </registrations>
+        <interface-values config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srlg/gl/rsip/&lt;rsi_srlg_oper_gl_Rsip_rsip_name&gt;~rsi_srlg_rsip_show.InterfaceValues</xr-path>
+          <xr-xml-map>rsi_agent:InterfaceValues</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 5</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </interface-values>
+        <srlg-attribute config="false" node="list">
+          <xr-path>/oper/srlg/gl/rsip/&lt;rsi_srlg_oper_gl_Rsip_rsip_name&gt;~rsi_srlg_rsip_show.SRLGAttribute[&lt;bag_arg24&gt;]</xr-path>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-version>1 5</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg24&gt;</xr-internal-key>
+          <srlg-value config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/srlg/gl/rsip/&lt;rsi_srlg_oper_gl_Rsip_rsip_name&gt;~rsi_srlg_rsip_show.SRLGAttribute[&lt;bag_arg24&gt;].SRLGValue</xr-path>
+            <xr-xml-map>rsi_agent:SRLGValue</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 5</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </srlg-value>
+          <priority config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/srlg/gl/rsip/&lt;rsi_srlg_oper_gl_Rsip_rsip_name&gt;~rsi_srlg_rsip_show.SRLGAttribute[&lt;bag_arg24&gt;].Priority</xr-path>
+            <xr-xml-map>rsi_agent:Priority</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>1 5</xr-bag-version>
+            <type>
+              <type-name>Priority</type-name>
+            </type>
+          </priority>
+          <srlg-index config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/srlg/gl/rsip/&lt;rsi_srlg_oper_gl_Rsip_rsip_name&gt;~rsi_srlg_rsip_show.SRLGAttribute[&lt;bag_arg24&gt;].SRLGIndex</xr-path>
+            <xr-xml-map>rsi_agent:SRLGIndex</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+            <xr-bag-version>1 5</xr-bag-version>
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </srlg-index>
+        </srlg-attribute>
+      </rsip>
+    </rsips>
+    <srlg-maps config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/srlg/gl/map/name/</xr-path>
+      <xr-xml-map>rsi_srlg_oper_gl:SRLGMapTable</xr-xml-map>
+      <xr-task>basic-services</xr-task>
+      <srlg-map config="false" key="srlg-name" node="list">
+        <xr-path>/oper/srlg/gl/map/name/&lt;rsi_srlg_oper_gl_SRLGMap_srlgname&gt;</xr-path>
+        <xr-xml-map>rsi_srlg_oper_gl:SRLGMap</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <xr-bag-grp-name>rsi_srlg_name_value_show</xr-bag-grp-name>
+        <xr-bag>rsi_agent.bag</xr-bag>
+        <srlg-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/srlg/gl/map/name/&lt;rsi_srlg_oper_gl_SRLGMap_srlgname&gt;</xr-path>
+          <xr-xml-map>rsi_srlg_oper_gl:SRLGName</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;rsi_srlg_oper_gl_SRLGMap_srlgname&gt;</xr-sch-arg-name>
+          <type length="1..64">
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </srlg-name>
+        <srlg-value config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srlg/gl/map/name/&lt;rsi_srlg_oper_gl_SRLGMap_srlgname&gt;~rsi_srlg_name_value_show.SRLGValue</xr-path>
+          <xr-xml-map>rsi_agent:SRLGValue</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 5</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </srlg-value>
+        <srlg-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srlg/gl/map/name/&lt;rsi_srlg_oper_gl_SRLGMap_srlgname&gt;~rsi_srlg_name_value_show.SRLGName</xr-path>
+          <xr-xml-map>rsi_agent:srlg-name-xr</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 5</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </srlg-name-xr>
+      </srlg-map>
+    </srlg-maps>
+    <nodes config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/srlg/node/</xr-path>
+      <xr-xml-map>rsi_srlg_oper:NodeTable</xr-xml-map>
+      <xr-task>basic-services</xr-task>
+      <xr-compatibility>2.0</xr-compatibility>
+      <node config="false" key="node-name" node="list">
+        <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/</xr-path>
+        <xr-xml-map>rsi_srlg_oper:Node</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <srlg-maps config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/map/name/</xr-path>
+          <xr-xml-map>rsi_srlg_oper:SRLGMapTable</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <srlg-map config="false" key="srlg-name" node="list">
+            <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/map/name/&lt;rsi_srlg_oper_SRLGMap_srlgname&gt;</xr-path>
+            <xr-xml-map>rsi_srlg_oper:SRLGMap</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-bag-grp-name>rsi_srlg_name_value_show</xr-bag-grp-name>
+            <xr-bag>rsi_agent.bag</xr-bag>
+            <srlg-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/map/name/&lt;rsi_srlg_oper_SRLGMap_srlgname&gt;</xr-path>
+              <xr-xml-map>rsi_srlg_oper:SRLGName</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <xr-sch-arg-name>&lt;rsi_srlg_oper_SRLGMap_srlgname&gt;</xr-sch-arg-name>
+              <type length="1..64">
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </srlg-name>
+            <srlg-value config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/map/name/&lt;rsi_srlg_oper_SRLGMap_srlgname&gt;~rsi_srlg_name_value_show.SRLGValue</xr-path>
+              <xr-xml-map>rsi_agent:SRLGValue</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 5</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </srlg-value>
+            <srlg-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/map/name/&lt;rsi_srlg_oper_SRLGMap_srlgname&gt;~rsi_srlg_name_value_show.SRLGName</xr-path>
+              <xr-xml-map>rsi_agent:srlg-name-xr</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 5</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </srlg-name-xr>
+          </srlg-map>
+        </srlg-maps>
+        <groups config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/group/</xr-path>
+          <xr-xml-map>rsi_srlg_oper:GroupTable</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <group config="false" key="group-name" node="list">
+            <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/group/&lt;rsi_srlg_oper_Group_group_name&gt;</xr-path>
+            <xr-xml-map>rsi_srlg_oper:Group</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-bag-grp-name>rsi_srlg_group_show</xr-bag-grp-name>
+            <xr-bag>rsi_agent.bag</xr-bag>
+            <group-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/group/&lt;rsi_srlg_oper_Group_group_name&gt;</xr-path>
+              <xr-xml-map>rsi_srlg_oper:GroupName</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;rsi_srlg_oper_Group_group_name&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </group-name>
+            <group-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/group/&lt;rsi_srlg_oper_Group_group_name&gt;~rsi_srlg_group_show.GroupName</xr-path>
+              <xr-xml-map>rsi_agent:group-name-xr</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 5</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </group-name-xr>
+            <group-values config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/group/&lt;rsi_srlg_oper_Group_group_name&gt;~rsi_srlg_group_show.GroupValues</xr-path>
+              <xr-xml-map>rsi_agent:GroupValues</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 5</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </group-values>
+            <srlg-attribute config="false" node="list">
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/group/&lt;rsi_srlg_oper_Group_group_name&gt;~rsi_srlg_group_show.SRLGAttribute[&lt;bag_arg21&gt;]</xr-path>
+              <xr-task>basic-services</xr-task>
+              <xr-bag-version>1 5</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg21&gt;</xr-internal-key>
+              <srlg-value config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/group/&lt;rsi_srlg_oper_Group_group_name&gt;~rsi_srlg_group_show.SRLGAttribute[&lt;bag_arg21&gt;].SRLGValue</xr-path>
+                <xr-xml-map>rsi_agent:SRLGValue</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 5</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </srlg-value>
+              <priority config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/group/&lt;rsi_srlg_oper_Group_group_name&gt;~rsi_srlg_group_show.SRLGAttribute[&lt;bag_arg21&gt;].Priority</xr-path>
+                <xr-xml-map>rsi_agent:Priority</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 5</xr-bag-version>
+                <type>
+                  <type-name>Priority</type-name>
+                </type>
+              </priority>
+              <srlg-index config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/group/&lt;rsi_srlg_oper_Group_group_name&gt;~rsi_srlg_group_show.SRLGAttribute[&lt;bag_arg21&gt;].SRLGIndex</xr-path>
+                <xr-xml-map>rsi_agent:SRLGIndex</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 5</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </srlg-index>
+            </srlg-attribute>
+          </group>
+        </groups>
+        <inherit-nodes config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/inheritloc/</xr-path>
+          <xr-xml-map>rsi_srlg_oper:InheritNodeTable</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <inherit-node config="false" key="inherit-node-name" node="list">
+            <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/inheritloc/&lt;rsi_srlg_oper_InheritNode_pq-nodename&gt;</xr-path>
+            <xr-xml-map>rsi_srlg_oper:InheritNode</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-bag-grp-name>rsi_srlg_inhloc_show</xr-bag-grp-name>
+            <xr-bag>rsi_agent.bag</xr-bag>
+            <inherit-node-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/inheritloc/&lt;rsi_srlg_oper_InheritNode_pq-nodename&gt;</xr-path>
+              <xr-xml-map>rsi_srlg_oper:InheritNodeName</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>PQNodeIDString</xr-sch-type>
+              <xr-sch-arg-name>&lt;rsi_srlg_oper_InheritNode_pq-nodename&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Pq-node-id</type-name>
+              </type>
+            </inherit-node-name>
+            <node-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/inheritloc/&lt;rsi_srlg_oper_InheritNode_pq-nodename&gt;~rsi_srlg_inhloc_show.NodeName</xr-path>
+              <xr-xml-map>rsi_agent:NodeName</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 5</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </node-name>
+            <node-values config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/inheritloc/&lt;rsi_srlg_oper_InheritNode_pq-nodename&gt;~rsi_srlg_inhloc_show.NodeValues</xr-path>
+              <xr-xml-map>rsi_agent:NodeValues</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 5</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </node-values>
+            <srlg-attribute config="false" node="list">
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/inheritloc/&lt;rsi_srlg_oper_InheritNode_pq-nodename&gt;~rsi_srlg_inhloc_show.SRLGAttribute[&lt;bag_arg23&gt;]</xr-path>
+              <xr-task>basic-services</xr-task>
+              <xr-bag-version>1 5</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg23&gt;</xr-internal-key>
+              <srlg-value config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/inheritloc/&lt;rsi_srlg_oper_InheritNode_pq-nodename&gt;~rsi_srlg_inhloc_show.SRLGAttribute[&lt;bag_arg23&gt;].SRLGValue</xr-path>
+                <xr-xml-map>rsi_agent:SRLGValue</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 5</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </srlg-value>
+              <priority config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/inheritloc/&lt;rsi_srlg_oper_InheritNode_pq-nodename&gt;~rsi_srlg_inhloc_show.SRLGAttribute[&lt;bag_arg23&gt;].Priority</xr-path>
+                <xr-xml-map>rsi_agent:Priority</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 5</xr-bag-version>
+                <type>
+                  <type-name>Priority</type-name>
+                </type>
+              </priority>
+              <srlg-index config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/inheritloc/&lt;rsi_srlg_oper_InheritNode_pq-nodename&gt;~rsi_srlg_inhloc_show.SRLGAttribute[&lt;bag_arg23&gt;].SRLGIndex</xr-path>
+                <xr-xml-map>rsi_agent:SRLGIndex</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 5</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </srlg-index>
+            </srlg-attribute>
+          </inherit-node>
+        </inherit-nodes>
+        <interfaces config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/if/brief/</xr-path>
+          <xr-xml-map>rsi_srlg_oper:InterfaceTable</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <interface config="false" key="interface-name" node="list">
+            <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/if/brief/&lt;rsi_srlg_oper_Interface_if_name&gt;</xr-path>
+            <xr-xml-map>rsi_srlg_oper:Interface</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-bag-grp-name>rsi_srlg_intf_brief_show</xr-bag-grp-name>
+            <xr-bag>rsi_agent.bag</xr-bag>
+            <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/if/brief/&lt;rsi_srlg_oper_Interface_if_name&gt;</xr-path>
+              <xr-xml-map>rsi_srlg_oper:InterfaceName</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>InterfaceForward</xr-sch-type>
+              <xr-sch-arg-name>&lt;rsi_srlg_oper_Interface_if_name&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-name>
+            <interface-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/if/brief/&lt;rsi_srlg_oper_Interface_if_name&gt;~rsi_srlg_intf_brief_show.InterfaceName</xr-path>
+              <xr-xml-map>rsi_agent:interface-name-xr</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 5</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </interface-name-xr>
+            <value-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/if/brief/&lt;rsi_srlg_oper_Interface_if_name&gt;~rsi_srlg_intf_brief_show.ValueCount</xr-path>
+              <xr-xml-map>rsi_agent:ValueCount</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 5</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </value-count>
+            <registrations config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/if/brief/&lt;rsi_srlg_oper_Interface_if_name&gt;~rsi_srlg_intf_brief_show.Registrations</xr-path>
+              <xr-xml-map>rsi_agent:Registrations</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 5</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </registrations>
+            <srlg-value config="false" is-key="false" is-yang-key="false" node="leaf-list">
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/if/brief/&lt;rsi_srlg_oper_Interface_if_name&gt;~rsi_srlg_intf_brief_show.SRLGValues[&lt;bag_arg25&gt;]</xr-path>
+              <xr-xml-map>rsi_agent:SRLGValues</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 5</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg25&gt;</xr-internal-key>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </srlg-value>
+          </interface>
+        </interfaces>
+        <interface-details config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/if/detail/</xr-path>
+          <xr-xml-map>rsi_srlg_oper:InterfaceDetailTable</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <interface-detail config="false" key="interface-name" node="list">
+            <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/if/detail/&lt;rsi_srlg_oper_InterfaceDetail_if_name&gt;</xr-path>
+            <xr-xml-map>rsi_srlg_oper:InterfaceDetail</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-bag-grp-name>rsi_srlg_intf_detail_show</xr-bag-grp-name>
+            <xr-bag>rsi_agent.bag</xr-bag>
+            <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/if/detail/&lt;rsi_srlg_oper_InterfaceDetail_if_name&gt;</xr-path>
+              <xr-xml-map>rsi_srlg_oper:InterfaceName</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>InterfaceForward</xr-sch-type>
+              <xr-sch-arg-name>&lt;rsi_srlg_oper_InterfaceDetail_if_name&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-name>
+            <groups config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/if/detail/&lt;rsi_srlg_oper_InterfaceDetail_if_name&gt;~rsi_srlg_intf_detail_show.Groups</xr-path>
+              <xr-xml-map>rsi_agent:Groups</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 5</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </groups>
+            <nodes config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/if/detail/&lt;rsi_srlg_oper_InterfaceDetail_if_name&gt;~rsi_srlg_intf_detail_show.Nodes</xr-path>
+              <xr-xml-map>rsi_agent:Nodes</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 5</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </nodes>
+            <srlg-attribute config="false" node="list">
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/if/detail/&lt;rsi_srlg_oper_InterfaceDetail_if_name&gt;~rsi_srlg_intf_detail_show.SRLGAttribute[&lt;bag_arg26&gt;]</xr-path>
+              <xr-task>basic-services</xr-task>
+              <xr-bag-version>1 5</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg26&gt;</xr-internal-key>
+              <srlg-value config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/if/detail/&lt;rsi_srlg_oper_InterfaceDetail_if_name&gt;~rsi_srlg_intf_detail_show.SRLGAttribute[&lt;bag_arg26&gt;].SRLGValue</xr-path>
+                <xr-xml-map>rsi_agent:SRLGValue</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 5</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </srlg-value>
+              <priority config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/if/detail/&lt;rsi_srlg_oper_InterfaceDetail_if_name&gt;~rsi_srlg_intf_detail_show.SRLGAttribute[&lt;bag_arg26&gt;].Priority</xr-path>
+                <xr-xml-map>rsi_agent:Priority</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 5</xr-bag-version>
+                <type>
+                  <type-name>Priority</type-name>
+                </type>
+              </priority>
+              <source config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/if/detail/&lt;rsi_srlg_oper_InterfaceDetail_if_name&gt;~rsi_srlg_intf_detail_show.SRLGAttribute[&lt;bag_arg26&gt;].Source</xr-path>
+                <xr-xml-map>rsi_agent:Source</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 5</xr-bag-version>
+                <type>
+                  <type-name>Source</type-name>
+                </type>
+              </source>
+              <source-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/if/detail/&lt;rsi_srlg_oper_InterfaceDetail_if_name&gt;~rsi_srlg_intf_detail_show.SRLGAttribute[&lt;bag_arg26&gt;].SourceName</xr-path>
+                <xr-xml-map>rsi_agent:SourceName</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>1 5</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </source-name>
+              <srlg-index config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/if/detail/&lt;rsi_srlg_oper_InterfaceDetail_if_name&gt;~rsi_srlg_intf_detail_show.SRLGAttribute[&lt;bag_arg26&gt;].SRLGIndex</xr-path>
+                <xr-xml-map>rsi_agent:SRLGIndex</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 5</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </srlg-index>
+            </srlg-attribute>
+            <rsip config="false" node="list">
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/if/detail/&lt;rsi_srlg_oper_InterfaceDetail_if_name&gt;~rsi_srlg_intf_detail_show.RSIPList[&lt;bag_arg27&gt;]</xr-path>
+              <xr-task>basic-services</xr-task>
+              <xr-bag-version>1 5</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg27&gt;</xr-internal-key>
+              <rsip-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/if/detail/&lt;rsi_srlg_oper_InterfaceDetail_if_name&gt;~rsi_srlg_intf_detail_show.RSIPList[&lt;bag_arg27&gt;].RSIPName</xr-path>
+                <xr-xml-map>rsi_agent:RSIPName</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>1 5</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </rsip-name>
+            </rsip>
+          </interface-detail>
+        </interface-details>
+        <srlg-values config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/val/</xr-path>
+          <xr-xml-map>rsi_srlg_oper:SRLGValueTable</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <srlg-value config="false" key="value" node="list">
+            <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/val/&lt;rsi_srlg_oper_SRLGValue_val&gt;</xr-path>
+            <xr-xml-map>rsi_srlg_oper:SRLGValue</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-bag-grp-name>rsi_srlg_intf_show</xr-bag-grp-name>
+            <xr-bag>rsi_agent.bag</xr-bag>
+            <value config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/val/&lt;rsi_srlg_oper_SRLGValue_val&gt;</xr-path>
+              <xr-xml-map>rsi_srlg_oper:Value</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>Integer</xr-sch-type>
+              <xr-sch-arg-name>&lt;rsi_srlg_oper_SRLGValue_val&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </value>
+            <interface-name config="false" is-key="false" is-yang-key="false" node="leaf-list">
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/val/&lt;rsi_srlg_oper_SRLGValue_val&gt;~rsi_srlg_intf_show.InterfaceName[&lt;bag_arg20&gt;]</xr-path>
+              <xr-xml-map>rsi_agent:InterfaceName</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 5</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg20&gt;</xr-internal-key>
+              <type>
+                <type-name>String1</type-name>
+              </type>
+            </interface-name>
+          </srlg-value>
+        </srlg-values>
+        <interface-srlg-names config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/name/</xr-path>
+          <xr-xml-map>rsi_srlg_oper:InterfaceSRLGNameTable</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <interface-srlg-name config="false" key="srlg-name" node="list">
+            <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/name/&lt;rsi_srlg_oper_InterfaceSRLGName_srlgname&gt;</xr-path>
+            <xr-xml-map>rsi_srlg_oper:InterfaceSRLGName</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-bag-grp-name>rsi_srlg_name_intf_show</xr-bag-grp-name>
+            <xr-bag>rsi_agent.bag</xr-bag>
+            <srlg-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/name/&lt;rsi_srlg_oper_InterfaceSRLGName_srlgname&gt;</xr-path>
+              <xr-xml-map>rsi_srlg_oper:SRLGName</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <xr-sch-arg-name>&lt;rsi_srlg_oper_InterfaceSRLGName_srlgname&gt;</xr-sch-arg-name>
+              <type length="1..64">
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </srlg-name>
+            <interfaces config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/name/&lt;rsi_srlg_oper_InterfaceSRLGName_srlgname&gt;~rsi_srlg_name_intf_show.Interfaces</xr-path>
+              <xr-task>basic-services</xr-task>
+              <xr-bag-version>1 5</xr-bag-version>
+              <interface-name config="false" is-key="false" is-yang-key="false" node="leaf-list">
+                <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/name/&lt;rsi_srlg_oper_InterfaceSRLGName_srlgname&gt;~rsi_srlg_name_intf_show.Interfaces.InterfaceName[&lt;bag_arg20&gt;]</xr-path>
+                <xr-xml-map>rsi_agent:InterfaceName</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>1 5</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg20&gt;</xr-internal-key>
+                <type>
+                  <type-name>String1</type-name>
+                </type>
+              </interface-name>
+            </interfaces>
+            <srlg-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/name/&lt;rsi_srlg_oper_InterfaceSRLGName_srlgname&gt;~rsi_srlg_name_intf_show.SRLGName</xr-path>
+              <xr-xml-map>rsi_agent:srlg-name-xr</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 5</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </srlg-name-xr>
+            <srlg-value config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/name/&lt;rsi_srlg_oper_InterfaceSRLGName_srlgname&gt;~rsi_srlg_name_intf_show.SRLGValue</xr-path>
+              <xr-xml-map>rsi_agent:SRLGValue</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 5</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </srlg-value>
+          </interface-srlg-name>
+        </interface-srlg-names>
+        <node-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-pathformat>hex_nozerox</xr-pathformat>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/srlg/node/&lt;rsi_srlg_oper_Node_node-id&gt;/</xr-path>
+          <xr-xml-map>rsi_srlg_oper:NodeName</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>NodeID</xr-sch-type>
+          <xr-sch-arg-name>&lt;rsi_srlg_oper_Node_node-id&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Node-id</type-name>
+          </type>
+        </node-name>
+      </node>
+    </nodes>
+    <interface-srlg-names config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/srlg/gl/name/</xr-path>
+      <xr-xml-map>rsi_srlg_oper_gl:InterfaceSRLGNameTable</xr-xml-map>
+      <xr-task>basic-services</xr-task>
+      <interface-srlg-name config="false" key="srlg-name" node="list">
+        <xr-path>/oper/srlg/gl/name/&lt;rsi_srlg_oper_gl_InterfaceSRLGName_srlgname&gt;</xr-path>
+        <xr-xml-map>rsi_srlg_oper_gl:InterfaceSRLGName</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <xr-bag-grp-name>rsi_srlg_name_intf_show</xr-bag-grp-name>
+        <xr-bag>rsi_agent.bag</xr-bag>
+        <srlg-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/srlg/gl/name/&lt;rsi_srlg_oper_gl_InterfaceSRLGName_srlgname&gt;</xr-path>
+          <xr-xml-map>rsi_srlg_oper_gl:SRLGName</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;rsi_srlg_oper_gl_InterfaceSRLGName_srlgname&gt;</xr-sch-arg-name>
+          <type length="1..64">
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </srlg-name>
+        <interfaces config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/srlg/gl/name/&lt;rsi_srlg_oper_gl_InterfaceSRLGName_srlgname&gt;~rsi_srlg_name_intf_show.Interfaces</xr-path>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-version>1 5</xr-bag-version>
+          <interface-name config="false" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-path>/oper/srlg/gl/name/&lt;rsi_srlg_oper_gl_InterfaceSRLGName_srlgname&gt;~rsi_srlg_name_intf_show.Interfaces.InterfaceName[&lt;bag_arg20&gt;]</xr-path>
+            <xr-xml-map>rsi_agent:InterfaceName</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 5</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg20&gt;</xr-internal-key>
+            <type>
+              <type-name>String1</type-name>
+            </type>
+          </interface-name>
+        </interfaces>
+        <srlg-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srlg/gl/name/&lt;rsi_srlg_oper_gl_InterfaceSRLGName_srlgname&gt;~rsi_srlg_name_intf_show.SRLGName</xr-path>
+          <xr-xml-map>rsi_agent:srlg-name-xr</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 5</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </srlg-name-xr>
+        <srlg-value config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srlg/gl/name/&lt;rsi_srlg_oper_gl_InterfaceSRLGName_srlgname&gt;~rsi_srlg_name_intf_show.SRLGValue</xr-path>
+          <xr-xml-map>rsi_agent:SRLGValue</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 5</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </srlg-value>
+      </interface-srlg-name>
+    </interface-srlg-names>
+    <inherit-nodes config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/srlg/gl/inheritloc/</xr-path>
+      <xr-xml-map>rsi_srlg_oper_gl:InheritNodeTable</xr-xml-map>
+      <xr-task>basic-services</xr-task>
+      <inherit-node config="false" key="inherit-node-name" node="list">
+        <xr-path>/oper/srlg/gl/inheritloc/&lt;rsi_srlg_oper_gl_InheritNode_pq-nodename&gt;</xr-path>
+        <xr-xml-map>rsi_srlg_oper_gl:InheritNode</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <xr-bag-grp-name>rsi_srlg_inhloc_show</xr-bag-grp-name>
+        <xr-bag>rsi_agent.bag</xr-bag>
+        <inherit-node-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/srlg/gl/inheritloc/&lt;rsi_srlg_oper_gl_InheritNode_pq-nodename&gt;</xr-path>
+          <xr-xml-map>rsi_srlg_oper_gl:InheritNodeName</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>PQNodeIDString</xr-sch-type>
+          <xr-sch-arg-name>&lt;rsi_srlg_oper_gl_InheritNode_pq-nodename&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Pq-node-id</type-name>
+          </type>
+        </inherit-node-name>
+        <node-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srlg/gl/inheritloc/&lt;rsi_srlg_oper_gl_InheritNode_pq-nodename&gt;~rsi_srlg_inhloc_show.NodeName</xr-path>
+          <xr-xml-map>rsi_agent:NodeName</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 5</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </node-name>
+        <node-values config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srlg/gl/inheritloc/&lt;rsi_srlg_oper_gl_InheritNode_pq-nodename&gt;~rsi_srlg_inhloc_show.NodeValues</xr-path>
+          <xr-xml-map>rsi_agent:NodeValues</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 5</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </node-values>
+        <srlg-attribute config="false" node="list">
+          <xr-path>/oper/srlg/gl/inheritloc/&lt;rsi_srlg_oper_gl_InheritNode_pq-nodename&gt;~rsi_srlg_inhloc_show.SRLGAttribute[&lt;bag_arg23&gt;]</xr-path>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-version>1 5</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg23&gt;</xr-internal-key>
+          <srlg-value config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/srlg/gl/inheritloc/&lt;rsi_srlg_oper_gl_InheritNode_pq-nodename&gt;~rsi_srlg_inhloc_show.SRLGAttribute[&lt;bag_arg23&gt;].SRLGValue</xr-path>
+            <xr-xml-map>rsi_agent:SRLGValue</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 5</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </srlg-value>
+          <priority config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/srlg/gl/inheritloc/&lt;rsi_srlg_oper_gl_InheritNode_pq-nodename&gt;~rsi_srlg_inhloc_show.SRLGAttribute[&lt;bag_arg23&gt;].Priority</xr-path>
+            <xr-xml-map>rsi_agent:Priority</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>1 5</xr-bag-version>
+            <type>
+              <type-name>Priority</type-name>
+            </type>
+          </priority>
+          <srlg-index config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/srlg/gl/inheritloc/&lt;rsi_srlg_oper_gl_InheritNode_pq-nodename&gt;~rsi_srlg_inhloc_show.SRLGAttribute[&lt;bag_arg23&gt;].SRLGIndex</xr-path>
+            <xr-xml-map>rsi_agent:SRLGIndex</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+            <xr-bag-version>1 5</xr-bag-version>
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </srlg-index>
+        </srlg-attribute>
+      </inherit-node>
+    </inherit-nodes>
+    <srlg-values config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/srlg/gl/val/</xr-path>
+      <xr-xml-map>rsi_srlg_oper_gl:SRLGValueTable</xr-xml-map>
+      <xr-task>basic-services</xr-task>
+      <srlg-value config="false" key="value" node="list">
+        <xr-path>/oper/srlg/gl/val/&lt;rsi_srlg_oper_gl_SRLGValue_val&gt;</xr-path>
+        <xr-xml-map>rsi_srlg_oper_gl:SRLGValue</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <xr-bag-grp-name>rsi_srlg_intf_show</xr-bag-grp-name>
+        <xr-bag>rsi_agent.bag</xr-bag>
+        <value config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/srlg/gl/val/&lt;rsi_srlg_oper_gl_SRLGValue_val&gt;</xr-path>
+          <xr-xml-map>rsi_srlg_oper_gl:Value</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>Integer</xr-sch-type>
+          <xr-sch-arg-name>&lt;rsi_srlg_oper_gl_SRLGValue_val&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </value>
+        <interface-name config="false" is-key="false" is-yang-key="false" node="leaf-list">
+          <xr-path>/oper/srlg/gl/val/&lt;rsi_srlg_oper_gl_SRLGValue_val&gt;~rsi_srlg_intf_show.InterfaceName[&lt;bag_arg20&gt;]</xr-path>
+          <xr-xml-map>rsi_agent:InterfaceName</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 5</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg20&gt;</xr-internal-key>
+          <type>
+            <type-name>String1</type-name>
+          </type>
+        </interface-name>
+      </srlg-value>
+    </srlg-values>
+    <interface-details config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/srlg/gl/if/detail/</xr-path>
+      <xr-xml-map>rsi_srlg_oper_gl:InterfaceDetailTable</xr-xml-map>
+      <xr-task>basic-services</xr-task>
+      <interface-detail config="false" key="interface-name" node="list">
+        <xr-path>/oper/srlg/gl/if/detail/&lt;rsi_srlg_oper_gl_InterfaceDetail_if_name&gt;</xr-path>
+        <xr-xml-map>rsi_srlg_oper_gl:InterfaceDetail</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <xr-bag-grp-name>rsi_srlg_intf_detail_show</xr-bag-grp-name>
+        <xr-bag>rsi_agent.bag</xr-bag>
+        <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/srlg/gl/if/detail/&lt;rsi_srlg_oper_gl_InterfaceDetail_if_name&gt;</xr-path>
+          <xr-xml-map>rsi_srlg_oper_gl:InterfaceName</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>InterfaceForward</xr-sch-type>
+          <xr-sch-arg-name>&lt;rsi_srlg_oper_gl_InterfaceDetail_if_name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </interface-name>
+        <groups config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srlg/gl/if/detail/&lt;rsi_srlg_oper_gl_InterfaceDetail_if_name&gt;~rsi_srlg_intf_detail_show.Groups</xr-path>
+          <xr-xml-map>rsi_agent:Groups</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 5</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </groups>
+        <nodes config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srlg/gl/if/detail/&lt;rsi_srlg_oper_gl_InterfaceDetail_if_name&gt;~rsi_srlg_intf_detail_show.Nodes</xr-path>
+          <xr-xml-map>rsi_agent:Nodes</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 5</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </nodes>
+        <srlg-attribute config="false" node="list">
+          <xr-path>/oper/srlg/gl/if/detail/&lt;rsi_srlg_oper_gl_InterfaceDetail_if_name&gt;~rsi_srlg_intf_detail_show.SRLGAttribute[&lt;bag_arg26&gt;]</xr-path>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-version>1 5</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg26&gt;</xr-internal-key>
+          <srlg-value config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/srlg/gl/if/detail/&lt;rsi_srlg_oper_gl_InterfaceDetail_if_name&gt;~rsi_srlg_intf_detail_show.SRLGAttribute[&lt;bag_arg26&gt;].SRLGValue</xr-path>
+            <xr-xml-map>rsi_agent:SRLGValue</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 5</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </srlg-value>
+          <priority config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/srlg/gl/if/detail/&lt;rsi_srlg_oper_gl_InterfaceDetail_if_name&gt;~rsi_srlg_intf_detail_show.SRLGAttribute[&lt;bag_arg26&gt;].Priority</xr-path>
+            <xr-xml-map>rsi_agent:Priority</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>1 5</xr-bag-version>
+            <type>
+              <type-name>Priority</type-name>
+            </type>
+          </priority>
+          <source config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/srlg/gl/if/detail/&lt;rsi_srlg_oper_gl_InterfaceDetail_if_name&gt;~rsi_srlg_intf_detail_show.SRLGAttribute[&lt;bag_arg26&gt;].Source</xr-path>
+            <xr-xml-map>rsi_agent:Source</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>1 5</xr-bag-version>
+            <type>
+              <type-name>Source</type-name>
+            </type>
+          </source>
+          <source-name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/srlg/gl/if/detail/&lt;rsi_srlg_oper_gl_InterfaceDetail_if_name&gt;~rsi_srlg_intf_detail_show.SRLGAttribute[&lt;bag_arg26&gt;].SourceName</xr-path>
+            <xr-xml-map>rsi_agent:SourceName</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 5</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </source-name>
+          <srlg-index config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/srlg/gl/if/detail/&lt;rsi_srlg_oper_gl_InterfaceDetail_if_name&gt;~rsi_srlg_intf_detail_show.SRLGAttribute[&lt;bag_arg26&gt;].SRLGIndex</xr-path>
+            <xr-xml-map>rsi_agent:SRLGIndex</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+            <xr-bag-version>1 5</xr-bag-version>
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </srlg-index>
+        </srlg-attribute>
+        <rsip config="false" node="list">
+          <xr-path>/oper/srlg/gl/if/detail/&lt;rsi_srlg_oper_gl_InterfaceDetail_if_name&gt;~rsi_srlg_intf_detail_show.RSIPList[&lt;bag_arg27&gt;]</xr-path>
+          <xr-task>basic-services</xr-task>
+          <xr-bag-version>1 5</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg27&gt;</xr-internal-key>
+          <rsip-name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/srlg/gl/if/detail/&lt;rsi_srlg_oper_gl_InterfaceDetail_if_name&gt;~rsi_srlg_intf_detail_show.RSIPList[&lt;bag_arg27&gt;].RSIPName</xr-path>
+            <xr-xml-map>rsi_agent:RSIPName</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 5</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </rsip-name>
+        </rsip>
+      </interface-detail>
+    </interface-details>
+  </srlg>
+  <selective-vrf-download config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/rsi_master/gl/svd/</xr-path>
+    <xr-xml-map>rsi_svd_oper:SelectiveVRFDownload</xr-xml-map>
+    <xr-task>ip-services</xr-task>
+    <state config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/rsi_master/gl/svd/state</xr-path>
+      <xr-xml-map>rsi_svd_oper:State</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <xr-bag-grp-name>rsi_master_state</xr-bag-grp-name>
+      <xr-bag>rsi_master.bag</xr-bag>
+      <is-svd-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/rsi_master/gl/svd/state~rsi_master_state.IsSVDEnabled</xr-path>
+        <xr-xml-map>rsi_master:IsSVDEnabled</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </is-svd-enabled>
+      <is-svd-enabled-cfg config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/rsi_master/gl/svd/state~rsi_master_state.IsSVDEnabledCfg</xr-path>
+        <xr-xml-map>rsi_master:IsSVDEnabledCfg</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </is-svd-enabled-cfg>
+    </state>
+  </selective-vrf-download>
+</Cisco-IOS-XR-infra-rsi-oper>

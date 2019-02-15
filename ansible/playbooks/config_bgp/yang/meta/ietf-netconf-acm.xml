@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+<ietf-netconf-acm ns="urn:ietf:params:xml:ns:yang:ietf-netconf-acm" revision="2012-02-22">
+  <files>
+    <file revision="2012-02-22" submodule="false">ietf-netconf-acm.yang</file>
+  </files>
+  <prefix>nacm</prefix>
+  <organization>IETF NETCONF (Network Configuration) Working Group</organization>
+  <import prefix="yang">ietf-yang-types</import>
+  <typedef name="user-name-type">
+    <type length="1..max">
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="matchall-string-type">
+    <type>
+      <pattern>\*</pattern>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="access-operations-type">
+    <type node="bits">
+      <bit>create</bit>
+      <bit>read</bit>
+      <bit>update</bit>
+      <bit>delete</bit>
+      <bit>exec</bit>
+    </type>
+  </typedef>
+  <typedef name="group-name-type">
+    <type length="1..max">
+      <pattern>[^\*].*</pattern>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="action-type">
+    <type node="enumeration">
+      <enum>permit</enum>
+      <enum>deny</enum>
+    </type>
+  </typedef>
+  <typedef name="node-instance-identifier">
+    <type>
+      <type-name>yang:xpath1.0</type-name>
+    </type>
+  </typedef>
+  <nacm config="true" is-key="false" node="container" presence="false">
+    <enable-nacm config="true" is-key="false" is-yang-key="false" node="leaf">
+      <type>
+        <type-name>boolean</type-name>
+      </type>
+      <default>true</default>
+    </enable-nacm>
+    <read-default config="true" is-key="false" is-yang-key="false" node="leaf">
+      <type>
+        <type-name>action-type</type-name>
+      </type>
+      <default>permit</default>
+    </read-default>
+    <write-default config="true" is-key="false" is-yang-key="false" node="leaf">
+      <type>
+        <type-name>action-type</type-name>
+      </type>
+      <default>deny</default>
+    </write-default>
+    <exec-default config="true" is-key="false" is-yang-key="false" node="leaf">
+      <type>
+        <type-name>action-type</type-name>
+      </type>
+      <default>permit</default>
+    </exec-default>
+    <enable-external-groups config="true" is-key="false" is-yang-key="false" node="leaf">
+      <type>
+        <type-name>boolean</type-name>
+      </type>
+      <default>true</default>
+    </enable-external-groups>
+    <denied-operations config="true" is-key="false" is-yang-key="false" node="leaf">
+      <type>
+        <type-name>yang:zero-based-counter32</type-name>
+      </type>
+      <mandatory>true</mandatory>
+    </denied-operations>
+    <denied-data-writes config="true" is-key="false" is-yang-key="false" node="leaf">
+      <type>
+        <type-name>yang:zero-based-counter32</type-name>
+      </type>
+      <mandatory>true</mandatory>
+    </denied-data-writes>
+    <denied-notifications config="true" is-key="false" is-yang-key="false" node="leaf">
+      <type>
+        <type-name>yang:zero-based-counter32</type-name>
+      </type>
+      <mandatory>true</mandatory>
+    </denied-notifications>
+    <groups config="true" is-key="false" node="container" presence="false">
+      <group config="true" key="name" node="list">
+        <name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <type>
+            <type-name>group-name-type</type-name>
+          </type>
+        </name>
+        <user-name config="true" is-key="false" is-yang-key="false" node="leaf-list">
+          <type>
+            <type-name>user-name-type</type-name>
+          </type>
+        </user-name>
+      </group>
+    </groups>
+    <rule-list config="true" key="name" node="list">
+      <name config="true" is-key="true" is-yang-key="true" node="leaf">
+        <xr-data-handler>ignore</xr-data-handler>
+        <type length="1..max">
+          <type-name>string</type-name>
+        </type>
+      </name>
+      <group config="true" is-key="false" is-yang-key="false" node="leaf-list">
+        <type node="union">
+          <type>
+            <type-name>matchall-string-type</type-name>
+          </type>
+          <type>
+            <type-name>group-name-type</type-name>
+          </type>
+        </type>
+      </group>
+      <rule config="true" key="name" node="list">
+        <name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <type length="1..max">
+            <type-name>string</type-name>
+          </type>
+        </name>
+        <module-name config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="union">
+            <type>
+              <type-name>matchall-string-type</type-name>
+            </type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </type>
+          <default>*</default>
+        </module-name>
+        <rpc-name config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="union">
+            <type>
+              <type-name>matchall-string-type</type-name>
+            </type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </type>
+        </rpc-name>
+        <notification-name config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="union">
+            <type>
+              <type-name>matchall-string-type</type-name>
+            </type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </type>
+        </notification-name>
+        <path config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>node-instance-identifier</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </path>
+        <access-operations config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="union">
+            <type>
+              <type-name>matchall-string-type</type-name>
+            </type>
+            <type>
+              <type-name>access-operations-type</type-name>
+            </type>
+          </type>
+          <default>*</default>
+        </access-operations>
+        <action config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>action-type</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </action>
+        <comment config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </comment>
+      </rule>
+    </rule-list>
+  </nacm>
+</ietf-netconf-acm>

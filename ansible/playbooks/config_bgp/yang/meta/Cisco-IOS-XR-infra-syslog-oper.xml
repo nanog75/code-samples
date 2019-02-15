@@ -1,0 +1,757 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-infra-syslog-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-infra-syslog-oper" revision="2018-02-23">
+  <files>
+    <file revision="2018-02-23" submodule="false">Cisco-IOS-XR-infra-syslog-oper.yang</file>
+    <file revision="2018-02-22" submodule="true">Cisco-IOS-XR-infra-syslog-oper-sub1.yang</file>
+  </files>
+  <prefix>infra-syslog-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="yang">ietf-yang-types</import>
+  <typedef name="System-message-severity">
+    <type node="enumeration">
+      <enum value="-1">message-severity-unknown</enum>
+      <enum value="0">message-severity-emergency</enum>
+      <enum value="1">message-severity-alert</enum>
+      <enum value="2">message-severity-critical</enum>
+      <enum value="3">message-severity-error</enum>
+      <enum value="4">message-severity-warning</enum>
+      <enum value="5">message-severity-notice</enum>
+      <enum value="6">message-severity-informational</enum>
+      <enum value="7">message-severity-debug</enum>
+    </type>
+  </typedef>
+  <get-syslog config="false" is-key="false" node="rpc" presence="false">
+    <input config="false" is-key="false" node="input">
+      <filters config="false" is-key="false" node="container" presence="false">
+        <must>start-time or end-time</must>
+        <start-time config="false" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+        </start-time>
+        <end-time config="false" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+        </end-time>
+      </filters>
+    </input>
+    <output config="false" is-key="false" node="output">
+      <data config="false" is-key="false" node="container" presence="false">
+        <syslog config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/syslog/gl/</xr-path>
+          <xr-xml-map>infra_syslog_oper:Syslog</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <messages config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/syslog/gl/logging/</xr-path>
+            <xr-xml-map>infra_syslog_oper:MessageTable</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-filterlist>SystemMessageFilter</xr-filterlist>
+            <message config="false" key="message-id" node="list">
+              <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;</xr-path>
+              <xr-xml-map>infra_syslog_oper:Message</xr-xml-map>
+              <xr-task>logging</xr-task>
+              <xr-bag-grp-name>system_message</xr-bag-grp-name>
+              <xr-bag>infra_syslog.bag</xr-bag>
+              <message-id config="false" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-pathformat>decimal</xr-pathformat>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;</xr-path>
+                <xr-xml-map>infra_syslog_oper:MessageID</xr-xml-map>
+                <xr-task>logging</xr-task>
+                <xr-sch-type>Integer</xr-sch-type>
+                <xr-sch-arg-name>&lt;infra_syslog_oper_Message_id&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </message-id>
+              <card-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;~system_message.CardType</xr-path>
+                <xr-xml-map>infra_syslog:CardType</xr-xml-map>
+                <xr-task>logging</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </card-type>
+              <node-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;~system_message.NodeName</xr-path>
+                <xr-xml-map>infra_syslog:NodeName</xr-xml-map>
+                <xr-task>logging</xr-task>
+                <xr-bag-primitive-type>nodeid_td</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>xr:Node-id</type-name>
+                </type>
+              </node-name>
+              <time-stamp config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;~system_message.TimeStamp</xr-path>
+                <xr-xml-map>infra_syslog:TimeStamp</xr-xml-map>
+                <xr-task>logging</xr-task>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </time-stamp>
+              <time-of-day config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;~system_message.TimeOfDay</xr-path>
+                <xr-xml-map>infra_syslog:TimeOfDay</xr-xml-map>
+                <xr-task>logging</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </time-of-day>
+              <time-zone config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;~system_message.TimeZone</xr-path>
+                <xr-xml-map>infra_syslog:TimeZone</xr-xml-map>
+                <xr-task>logging</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </time-zone>
+              <process-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;~system_message.ProcessName</xr-path>
+                <xr-xml-map>infra_syslog:ProcessName</xr-xml-map>
+                <xr-task>logging</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </process-name>
+              <category config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;~system_message.Category</xr-path>
+                <xr-xml-map>infra_syslog:Category</xr-xml-map>
+                <xr-task>logging</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </category>
+              <group config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;~system_message.Group</xr-path>
+                <xr-xml-map>infra_syslog:Group</xr-xml-map>
+                <xr-task>logging</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </group>
+              <message-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;~system_message.MessageName</xr-path>
+                <xr-xml-map>infra_syslog:MessageName</xr-xml-map>
+                <xr-task>logging</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </message-name>
+              <severity config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;~system_message.Severity</xr-path>
+                <xr-xml-map>infra_syslog:Severity</xr-xml-map>
+                <xr-task>logging</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>System-message-severity</type-name>
+                </type>
+              </severity>
+              <text config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;~system_message.Text</xr-path>
+                <xr-xml-map>infra_syslog:Text</xr-xml-map>
+                <xr-task>logging</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </text>
+            </message>
+          </messages>
+        </syslog>
+      </data>
+    </output>
+  </get-syslog>
+  <logging config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/logging/gl/</xr-path>
+    <xr-xml-map>infra_syslog_oper:Logging</xr-xml-map>
+    <xr-task>logging</xr-task>
+    <history config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/logging/gl/mib/</xr-path>
+      <xr-xml-map>infra_syslog_oper:History</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <properties config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/oper/logging/gl/mib/properties</xr-path>
+        <xr-xml-map>infra_syslog_oper:Properties</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-sch-type>String</xr-sch-type>
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </properties>
+      <message config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/oper/logging/gl/mib/msg/1</xr-path>
+        <xr-xml-map>infra_syslog_oper:Message</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-sch-type>String</xr-sch-type>
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </message>
+    </history>
+  </logging>
+  <syslog config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/syslog/gl/</xr-path>
+    <xr-xml-map>infra_syslog_oper:Syslog</xr-xml-map>
+    <xr-task>logging</xr-task>
+    <logging-files config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/syslog/gl/logging-files</xr-path>
+      <xr-xml-map>infra_syslog_oper:LoggingFiles</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <xr-bag-grp-name>file_log_list_path</xr-bag-grp-name>
+      <xr-bag>infra_syslog.bag</xr-bag>
+      <file-log-detail config="false" node="list">
+        <xr-path>/oper/syslog/gl/logging-files~file_log_list_path.FileLogDetail[&lt;bag_arg4&gt;]</xr-path>
+        <xr-task>logging</xr-task>
+        <xr-bag-version>2 3</xr-bag-version>
+        <xr-internal-key>&lt;bag_arg4&gt;</xr-internal-key>
+        <file-path config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-files~file_log_list_path.FileLogDetail[&lt;bag_arg4&gt;].FilePath</xr-path>
+          <xr-xml-map>infra_syslog:FilePath</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </file-path>
+        <file-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-files~file_log_list_path.FileLogDetail[&lt;bag_arg4&gt;].FileName</xr-path>
+          <xr-xml-map>infra_syslog:FileName</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </file-name>
+      </file-log-detail>
+    </logging-files>
+    <an-remote-servers config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/syslog/gl/logging-an</xr-path>
+      <xr-xml-map>infra_syslog_oper:ANRemoteServers</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <xr-bag-grp-name>an_remote_log_servers</xr-bag-grp-name>
+      <xr-bag>infra_syslog.bag</xr-bag>
+      <an-remote-log-server config="false" node="list">
+        <xr-path>/oper/syslog/gl/logging-an~an_remote_log_servers.ANRemoteLogServer[&lt;bag_arg5&gt;]</xr-path>
+        <xr-task>logging</xr-task>
+        <xr-bag-version>2 3</xr-bag-version>
+        <xr-internal-key>&lt;bag_arg5&gt;</xr-internal-key>
+        <ip-address config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-an~an_remote_log_servers.ANRemoteLogServer[&lt;bag_arg5&gt;].IPAddress</xr-path>
+          <xr-xml-map>infra_syslog:IPAddress</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </ip-address>
+        <vrf-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-an~an_remote_log_servers.ANRemoteLogServer[&lt;bag_arg5&gt;].VRFName</xr-path>
+          <xr-xml-map>infra_syslog:VRFName</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </vrf-name>
+        <vrf-severity config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-an~an_remote_log_servers.ANRemoteLogServer[&lt;bag_arg5&gt;].VRFSeverity</xr-path>
+          <xr-xml-map>infra_syslog:VRFSeverity</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </vrf-severity>
+        <rh-discriminator config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-an~an_remote_log_servers.ANRemoteLogServer[&lt;bag_arg5&gt;].RH_Discriminator</xr-path>
+          <xr-xml-map>infra_syslog:RH_Discriminator</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </rh-discriminator>
+      </an-remote-log-server>
+    </an-remote-servers>
+    <messages config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/syslog/gl/logging/</xr-path>
+      <xr-xml-map>infra_syslog_oper:MessageTable</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <xr-filterlist>LocationFilter</xr-filterlist>
+      <xr-filterlist>TimestampFilter</xr-filterlist>
+      <xr-filterlist>MessageFilter</xr-filterlist>
+      <xr-filterlist>ProcessNameFilter</xr-filterlist>
+      <xr-filterlist>LastNumberOfEntryFilter</xr-filterlist>
+      <message config="false" key="message-id" node="list">
+        <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;</xr-path>
+        <xr-xml-map>infra_syslog_oper:Message</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-bag-grp-name>system_message</xr-bag-grp-name>
+        <xr-bag>infra_syslog.bag</xr-bag>
+        <message-id config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-pathformat>decimal</xr-pathformat>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;</xr-path>
+          <xr-xml-map>infra_syslog_oper:MessageID</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>Integer</xr-sch-type>
+          <xr-sch-arg-name>&lt;infra_syslog_oper_Message_id&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </message-id>
+        <card-type config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;~system_message.CardType</xr-path>
+          <xr-xml-map>infra_syslog:CardType</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </card-type>
+        <node-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;~system_message.NodeName</xr-path>
+          <xr-xml-map>infra_syslog:NodeName</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>nodeid_td</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>xr:Node-id</type-name>
+          </type>
+        </node-name>
+        <time-stamp config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;~system_message.TimeStamp</xr-path>
+          <xr-xml-map>infra_syslog:TimeStamp</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </time-stamp>
+        <time-of-day config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;~system_message.TimeOfDay</xr-path>
+          <xr-xml-map>infra_syslog:TimeOfDay</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </time-of-day>
+        <time-zone config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;~system_message.TimeZone</xr-path>
+          <xr-xml-map>infra_syslog:TimeZone</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </time-zone>
+        <process-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;~system_message.ProcessName</xr-path>
+          <xr-xml-map>infra_syslog:ProcessName</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </process-name>
+        <category config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;~system_message.Category</xr-path>
+          <xr-xml-map>infra_syslog:Category</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </category>
+        <group config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;~system_message.Group</xr-path>
+          <xr-xml-map>infra_syslog:Group</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </group>
+        <message-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;~system_message.MessageName</xr-path>
+          <xr-xml-map>infra_syslog:MessageName</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </message-name>
+        <severity config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;~system_message.Severity</xr-path>
+          <xr-xml-map>infra_syslog:Severity</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>System-message-severity</type-name>
+          </type>
+        </severity>
+        <text config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging/&lt;infra_syslog_oper_Message_id&gt;~system_message.Text</xr-path>
+          <xr-xml-map>infra_syslog:Text</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </text>
+      </message>
+    </messages>
+    <logging-statistics config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/syslog/gl/logging-statistics/stats</xr-path>
+      <xr-xml-map>infra_syslog_oper:LoggingStatistics</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <xr-bag-grp-name>system_message_statistics</xr-bag-grp-name>
+      <xr-bag>infra_syslog.bag</xr-bag>
+      <logging-stats config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.LoggingStats</xr-path>
+        <xr-task>logging</xr-task>
+        <xr-bag-version>2 3</xr-bag-version>
+        <is-log-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.LoggingStats.IsLogEnabled</xr-path>
+          <xr-xml-map>infra_syslog:IsLogEnabled</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </is-log-enabled>
+        <drop-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.LoggingStats.DropCount</xr-path>
+          <xr-xml-map>infra_syslog:DropCount</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </drop-count>
+        <flush-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.LoggingStats.FlushCount</xr-path>
+          <xr-xml-map>infra_syslog:FlushCount</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </flush-count>
+        <overrun-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.LoggingStats.OverrunCount</xr-path>
+          <xr-xml-map>infra_syslog:OverrunCount</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </overrun-count>
+      </logging-stats>
+      <console-logging-stats config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.ConsoleLoggingStats</xr-path>
+        <xr-task>logging</xr-task>
+        <xr-bag-version>2 3</xr-bag-version>
+        <is-log-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.ConsoleLoggingStats.IsLogEnabled</xr-path>
+          <xr-xml-map>infra_syslog:IsLogEnabled</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </is-log-enabled>
+        <severity config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.ConsoleLoggingStats.Severity</xr-path>
+          <xr-xml-map>infra_syslog:Severity</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>System-message-severity</type-name>
+          </type>
+        </severity>
+        <message-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.ConsoleLoggingStats.MessageCount</xr-path>
+          <xr-xml-map>infra_syslog:MessageCount</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </message-count>
+        <buffer-size config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.ConsoleLoggingStats.BufferSize</xr-path>
+          <xr-xml-map>infra_syslog:BufferSize</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </buffer-size>
+      </console-logging-stats>
+      <monitor-logging-stats config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.MonitorLoggingStats</xr-path>
+        <xr-task>logging</xr-task>
+        <xr-bag-version>2 3</xr-bag-version>
+        <is-log-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.MonitorLoggingStats.IsLogEnabled</xr-path>
+          <xr-xml-map>infra_syslog:IsLogEnabled</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </is-log-enabled>
+        <severity config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.MonitorLoggingStats.Severity</xr-path>
+          <xr-xml-map>infra_syslog:Severity</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>System-message-severity</type-name>
+          </type>
+        </severity>
+        <message-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.MonitorLoggingStats.MessageCount</xr-path>
+          <xr-xml-map>infra_syslog:MessageCount</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </message-count>
+        <buffer-size config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.MonitorLoggingStats.BufferSize</xr-path>
+          <xr-xml-map>infra_syslog:BufferSize</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </buffer-size>
+      </monitor-logging-stats>
+      <trap-logging-stats config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.TrapLoggingStats</xr-path>
+        <xr-task>logging</xr-task>
+        <xr-bag-version>2 3</xr-bag-version>
+        <is-log-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.TrapLoggingStats.IsLogEnabled</xr-path>
+          <xr-xml-map>infra_syslog:IsLogEnabled</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </is-log-enabled>
+        <severity config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.TrapLoggingStats.Severity</xr-path>
+          <xr-xml-map>infra_syslog:Severity</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>System-message-severity</type-name>
+          </type>
+        </severity>
+        <message-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.TrapLoggingStats.MessageCount</xr-path>
+          <xr-xml-map>infra_syslog:MessageCount</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </message-count>
+        <buffer-size config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.TrapLoggingStats.BufferSize</xr-path>
+          <xr-xml-map>infra_syslog:BufferSize</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </buffer-size>
+      </trap-logging-stats>
+      <buffer-logging-stats config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.BufferLoggingStats</xr-path>
+        <xr-task>logging</xr-task>
+        <xr-bag-version>2 3</xr-bag-version>
+        <is-log-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.BufferLoggingStats.IsLogEnabled</xr-path>
+          <xr-xml-map>infra_syslog:IsLogEnabled</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </is-log-enabled>
+        <severity config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.BufferLoggingStats.Severity</xr-path>
+          <xr-xml-map>infra_syslog:Severity</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>System-message-severity</type-name>
+          </type>
+        </severity>
+        <message-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.BufferLoggingStats.MessageCount</xr-path>
+          <xr-xml-map>infra_syslog:MessageCount</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </message-count>
+        <buffer-size config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.BufferLoggingStats.BufferSize</xr-path>
+          <xr-xml-map>infra_syslog:BufferSize</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </buffer-size>
+      </buffer-logging-stats>
+      <remote-logging-stat config="false" node="list">
+        <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.RemoteLoggingStats[&lt;bag_arg1&gt;]</xr-path>
+        <xr-task>logging</xr-task>
+        <xr-bag-version>2 3</xr-bag-version>
+        <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+        <remote-host-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.RemoteLoggingStats[&lt;bag_arg1&gt;].RemoteHostname</xr-path>
+          <xr-xml-map>infra_syslog:RemoteHostname</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </remote-host-name>
+        <message-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.RemoteLoggingStats[&lt;bag_arg1&gt;].MessageCount</xr-path>
+          <xr-xml-map>infra_syslog:MessageCount</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </message-count>
+      </remote-logging-stat>
+      <tls-remote-logging-stat config="false" node="list">
+        <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.TLSRemoteLoggingStats[&lt;bag_arg2&gt;]</xr-path>
+        <xr-task>logging</xr-task>
+        <xr-bag-version>2 3</xr-bag-version>
+        <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+        <remote-host-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.TLSRemoteLoggingStats[&lt;bag_arg2&gt;].RemoteHostname</xr-path>
+          <xr-xml-map>infra_syslog:RemoteHostname</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </remote-host-name>
+        <message-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.TLSRemoteLoggingStats[&lt;bag_arg2&gt;].MessageCount</xr-path>
+          <xr-xml-map>infra_syslog:MessageCount</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </message-count>
+      </tls-remote-logging-stat>
+      <file-logging-stat config="false" node="list">
+        <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.FileLoggingStats[&lt;bag_arg3&gt;]</xr-path>
+        <xr-task>logging</xr-task>
+        <xr-bag-version>2 3</xr-bag-version>
+        <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+        <file-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.FileLoggingStats[&lt;bag_arg3&gt;].FileName</xr-path>
+          <xr-xml-map>infra_syslog:FileName</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </file-name>
+        <message-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/syslog/gl/logging-statistics/stats~system_message_statistics.FileLoggingStats[&lt;bag_arg3&gt;].MessageCount</xr-path>
+          <xr-xml-map>infra_syslog:MessageCount</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>2 3</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </message-count>
+      </file-logging-stat>
+    </logging-statistics>
+  </syslog>
+</Cisco-IOS-XR-infra-syslog-oper>

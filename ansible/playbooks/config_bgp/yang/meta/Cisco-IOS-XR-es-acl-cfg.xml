@@ -1,0 +1,258 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-es-acl-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-es-acl-cfg" revision="2018-02-26">
+  <files>
+    <file revision="2018-02-26" submodule="false">Cisco-IOS-XR-es-acl-cfg.yang</file>
+    <file revision="2018-02-26" submodule="true">Cisco-IOS-XR-es-ace-cfg.yang</file>
+  </files>
+  <prefix>es-acl-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="dt1">Cisco-IOS-XR-common-acl-datatypes</import>
+  <import prefix="es-acl-dt">Cisco-IOS-XR-es-acl-datatypes</import>
+  <typedef name="Es-acl-name">
+    <xr-sch-type>BoundedString</xr-sch-type>
+    <type length="1..64">
+      <type-name>xr:Cisco-ios-xr-string</type-name>
+    </type>
+  </typedef>
+  <typedef name="es-acl-grant-enum">
+    <type node="enumeration">
+      <enum value="0">deny</enum>
+      <enum value="1">permit</enum>
+    </type>
+  </typedef>
+  <typedef name="es-acl-address">
+    <type>
+      <pattern>([0-9a-fA-F]{1,4}(\.[0-9a-fA-F]{1,4}){2})</pattern>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <es-acl config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/es-acl/</xr-path>
+    <xr-xml-map>es_acl_cfg:ES_ACL</xr-xml-map>
+    <xr-task>ethernet-services &amp; acl</xr-task>
+    <accesses config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/es-acl/list/</xr-path>
+      <xr-xml-map>es_acl_cfg:AccessListTable</xr-xml-map>
+      <xr-task>ethernet-services &amp; acl</xr-task>
+      <access config="true" key="name" node="list">
+        <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/</xr-path>
+        <xr-xml-map>es_acl_cfg:AccessList</xr-xml-map>
+        <xr-task>ethernet-services &amp; acl</xr-task>
+        <access-list-entries config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/sequencetable/</xr-path>
+          <xr-xml-map>es_acl_cfg:AccessListEntryTable</xr-xml-map>
+          <xr-task>ethernet-services &amp; acl</xr-task>
+          <access-list-entry config="true" key="sequence-number" node="list">
+            <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/sequencetable/&lt;es_acl_cfg_AccessListEntry_seq&gt;</xr-path>
+            <xr-xml-map>es_acl_cfg:AccessListEntry</xr-xml-map>
+            <xr-task>ethernet-services &amp; acl</xr-task>
+            <xr-bag-grp-name>es_acl_config_ace</xr-bag-grp-name>
+            <xr-bag>es_acl_parse.bag</xr-bag>
+            <xr-bag-encoder>xml, ES_ACERule, libesaclparse.dll, es_acl_bag_xml_init, es_acl_xml.xsd</xr-bag-encoder>
+            <xr-bag-name>EsAclAce</xr-bag-name>
+            <sequence-number config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/sequencetable/&lt;es_acl_cfg_AccessListEntry_seq&gt;</xr-path>
+              <xr-xml-map>es_acl_cfg:SequenceNumber</xr-xml-map>
+              <xr-task>ethernet-services &amp; acl</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-sch-arg-name>&lt;es_acl_cfg_AccessListEntry_seq&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>dt1:Acl-sequence-number-range</type-name>
+              </type>
+            </sequence-number>
+            <grant config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/sequencetable/&lt;es_acl_cfg_AccessListEntry_seq&gt;~es_acl_config_ace.Grant</xr-path>
+              <xr-task>ethernet-services &amp; acl</xr-task>
+              <xr-bag-version>0 1</xr-bag-version>
+              <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+              <type>
+                <type-name>es-acl-grant-enum</type-name>
+              </type>
+            </grant>
+            <source-network config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/sequencetable/&lt;es_acl_cfg_AccessListEntry_seq&gt;</xr-path>
+              <xr-task>ethernet-services &amp; acl</xr-task>
+              <source-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/sequencetable/&lt;es_acl_cfg_AccessListEntry_seq&gt;~es_acl_config_ace.SAddr</xr-path>
+                <xr-task>ethernet-services &amp; acl</xr-task>
+                <xr-bag-version> 0 1</xr-bag-version>
+                <xr-sch-type>ESACLAddress</xr-sch-type>
+                <xr-bag-primitive-type>uint16_t[3]</xr-bag-primitive-type>
+                <type>
+                  <type-name>es-acl-address</type-name>
+                </type>
+              </source-address>
+              <source-wild-card-bits config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/sequencetable/&lt;es_acl_cfg_AccessListEntry_seq&gt;~es_acl_config_ace.SrcWildBits</xr-path>
+                <xr-task>ethernet-services &amp; acl</xr-task>
+                <xr-bag-version> 0 1</xr-bag-version>
+                <xr-sch-type>ESACLAddress</xr-sch-type>
+                <xr-bag-primitive-type>uint16_t[3]</xr-bag-primitive-type>
+                <type>
+                  <type-name>es-acl-address</type-name>
+                </type>
+              </source-wild-card-bits>
+            </source-network>
+            <destination-network config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/sequencetable/&lt;es_acl_cfg_AccessListEntry_seq&gt;</xr-path>
+              <xr-task>ethernet-services &amp; acl</xr-task>
+              <destination-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/sequencetable/&lt;es_acl_cfg_AccessListEntry_seq&gt;~es_acl_config_ace.DstAddr</xr-path>
+                <xr-task>ethernet-services &amp; acl</xr-task>
+                <xr-bag-version>0 1</xr-bag-version>
+                <xr-sch-type>ESACLAddress</xr-sch-type>
+                <xr-bag-primitive-type>uint16_t[3]</xr-bag-primitive-type>
+                <type>
+                  <type-name>es-acl-address</type-name>
+                </type>
+              </destination-address>
+              <destination-wild-card-bits config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/sequencetable/&lt;es_acl_cfg_AccessListEntry_seq&gt;~es_acl_config_ace.DstWildBits</xr-path>
+                <xr-task>ethernet-services &amp; acl</xr-task>
+                <xr-bag-version>0 1</xr-bag-version>
+                <xr-sch-type>ESACLAddress</xr-sch-type>
+                <xr-bag-primitive-type>uint16_t[3]</xr-bag-primitive-type>
+                <type>
+                  <type-name>es-acl-address</type-name>
+                </type>
+              </destination-wild-card-bits>
+            </destination-network>
+            <vlan1 config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/sequencetable/&lt;es_acl_cfg_AccessListEntry_seq&gt;~es_acl_config_ace.Vlan1</xr-path>
+              <xr-task>ethernet-services &amp; acl</xr-task>
+              <xr-bag-version>0 1</xr-bag-version>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <type>
+                <type-name>es-acl-dt:Es-acl-vlan-range</type-name>
+              </type>
+            </vlan1>
+            <vlan2 config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/sequencetable/&lt;es_acl_cfg_AccessListEntry_seq&gt;~es_acl_config_ace.Vlan2</xr-path>
+              <xr-task>ethernet-services &amp; acl</xr-task>
+              <xr-bag-version>0 1</xr-bag-version>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <type>
+                <type-name>es-acl-dt:Es-acl-vlan-range</type-name>
+              </type>
+            </vlan2>
+            <cos config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/sequencetable/&lt;es_acl_cfg_AccessListEntry_seq&gt;~es_acl_config_ace.Cos</xr-path>
+              <xr-task>ethernet-services &amp; acl</xr-task>
+              <xr-bag-version>0 1</xr-bag-version>
+              <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+              <type>
+                <type-name>es-acl-dt:Es-acl-cos-range</type-name>
+              </type>
+            </cos>
+            <dei config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/sequencetable/&lt;es_acl_cfg_AccessListEntry_seq&gt;~es_acl_config_ace.Dei</xr-path>
+              <xr-task>ethernet-services &amp; acl</xr-task>
+              <xr-bag-version>0 1</xr-bag-version>
+              <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+              <type>
+                <type-name>es-acl-dt:Es-acl-dei-range</type-name>
+              </type>
+            </dei>
+            <inner-vlan1 config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/sequencetable/&lt;es_acl_cfg_AccessListEntry_seq&gt;~es_acl_config_ace.IVlan1</xr-path>
+              <xr-task>ethernet-services &amp; acl</xr-task>
+              <xr-bag-version>0 1</xr-bag-version>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <type>
+                <type-name>es-acl-dt:Es-acl-vlan-range</type-name>
+              </type>
+            </inner-vlan1>
+            <inner-vlan2 config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/sequencetable/&lt;es_acl_cfg_AccessListEntry_seq&gt;~es_acl_config_ace.IVlan2</xr-path>
+              <xr-task>ethernet-services &amp; acl</xr-task>
+              <xr-bag-version>0 1</xr-bag-version>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <type>
+                <type-name>es-acl-dt:Es-acl-vlan-range</type-name>
+              </type>
+            </inner-vlan2>
+            <inner-cos config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/sequencetable/&lt;es_acl_cfg_AccessListEntry_seq&gt;~es_acl_config_ace.Icos</xr-path>
+              <xr-task>ethernet-services &amp; acl</xr-task>
+              <xr-bag-version>0 1</xr-bag-version>
+              <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+              <type>
+                <type-name>es-acl-dt:Es-acl-cos-range</type-name>
+              </type>
+            </inner-cos>
+            <inner-dei config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/sequencetable/&lt;es_acl_cfg_AccessListEntry_seq&gt;~es_acl_config_ace.Idei</xr-path>
+              <xr-task>ethernet-services &amp; acl</xr-task>
+              <xr-bag-version>0 1</xr-bag-version>
+              <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+              <type>
+                <type-name>es-acl-dt:Es-acl-dei-range</type-name>
+              </type>
+            </inner-dei>
+            <remark config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/sequencetable/&lt;es_acl_cfg_AccessListEntry_seq&gt;~es_acl_config_ace.Remark</xr-path>
+              <xr-task>ethernet-services &amp; acl</xr-task>
+              <xr-bag-version>0 1</xr-bag-version>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <type length="0..255">
+                <type-name>string</type-name>
+              </type>
+            </remark>
+            <ether-type-number config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/sequencetable/&lt;es_acl_cfg_AccessListEntry_seq&gt;~es_acl_config_ace.EthType</xr-path>
+              <xr-task>ethernet-services &amp; acl</xr-task>
+              <xr-bag-version>0 1</xr-bag-version>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-sch-type>HexInteger16</xr-sch-type>
+              <type>
+                <type-name>xr:Hex-integer-16</type-name>
+              </type>
+            </ether-type-number>
+            <capture config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/sequencetable/&lt;es_acl_cfg_AccessListEntry_seq&gt;~es_acl_config_ace.Capture</xr-path>
+              <xr-task>ethernet-services &amp; acl</xr-task>
+              <xr-bag-version>0 1</xr-bag-version>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </capture>
+            <log-option config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/sequencetable/&lt;es_acl_cfg_AccessListEntry_seq&gt;~es_acl_config_ace.LogOption</xr-path>
+              <xr-task>ethernet-services &amp; acl</xr-task>
+              <xr-bag-version>0 1</xr-bag-version>
+              <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+              <type>
+                <type-name>es-acl-dt:Es-acl-log-range</type-name>
+              </type>
+            </log-option>
+            <sequence-str config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/sequencetable/&lt;es_acl_cfg_AccessListEntry_seq&gt;~es_acl_config_ace.SequenceStr</xr-path>
+              <xr-task>ethernet-services &amp; acl</xr-task>
+              <xr-bag-version>0 1</xr-bag-version>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <type length="1..64">
+                <type-name>string</type-name>
+              </type>
+            </sequence-str>
+          </access-list-entry>
+        </access-list-entries>
+        <name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/es-acl/list/&lt;es_acl_cfg_AccessList_name&gt;/</xr-path>
+          <xr-xml-map>es_acl_cfg:Name</xr-xml-map>
+          <xr-task>ethernet-services &amp; acl</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;es_acl_cfg_AccessList_name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>Es-acl-name</type-name>
+          </type>
+        </name>
+      </access>
+    </accesses>
+  </es-acl>
+</Cisco-IOS-XR-es-acl-cfg>

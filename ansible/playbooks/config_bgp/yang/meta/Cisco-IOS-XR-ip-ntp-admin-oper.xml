@@ -1,0 +1,975 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ip-ntp-admin-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ip-ntp-admin-oper" revision="2017-09-07">
+  <files>
+    <file revision="2017-09-07" submodule="false">Cisco-IOS-XR-ip-ntp-admin-oper.yang</file>
+    <file revision="2017-09-07" submodule="true">Cisco-IOS-XR-ip-ntp-admin-oper-sub1.yang</file>
+  </files>
+  <prefix>ip-ntp-admin-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="inet">ietf-inet-types</import>
+  <typedef name="Ntp-peer-status">
+    <type node="enumeration">
+      <enum>ntp-ctl-pst-sel-reject</enum>
+      <enum>ntp-ctl-pst-sel-sane</enum>
+      <enum>ntp-ctl-pst-sel-correct</enum>
+      <enum>ntp-ctl-pst-sel-selcand</enum>
+      <enum>ntp-ctl-pst-sel-sync-cand</enum>
+      <enum>ntp-ctl-pst-sel-distsys-peer</enum>
+      <enum>ntp-ctl-pst-sel-sys-peer</enum>
+      <enum>ntp-ctl-pst-sel-pps</enum>
+    </type>
+  </typedef>
+  <typedef name="Ntp-mode">
+    <type node="enumeration">
+      <enum>ntp-mode-unspec</enum>
+      <enum>ntp-mode-symetric-active</enum>
+      <enum>ntp-mode-symetric-passive</enum>
+      <enum>ntp-mode-client</enum>
+      <enum>ntp-mode-server</enum>
+      <enum>ntp-mode-xcast-server</enum>
+      <enum>ntp-mode-control</enum>
+      <enum>ntp-mode-private</enum>
+      <enum>ntp-mode-xcast-client</enum>
+    </type>
+  </typedef>
+  <typedef name="Clock-update-node">
+    <type node="enumeration">
+      <enum value="0">clk-never-updated</enum>
+      <enum value="1">clk-updated</enum>
+      <enum value="2">clk-no-update-info</enum>
+    </type>
+  </typedef>
+  <typedef name="Ntp-loop-filter-state">
+    <type node="enumeration">
+      <enum value="1">ntp-loop-flt-n-set</enum>
+      <enum value="2">ntp-loop-flt-f-set</enum>
+      <enum value="3">ntp-loop-flt-spik</enum>
+      <enum value="4">ntp-loop-flt-freq</enum>
+      <enum value="5">ntp-loop-flt-sync</enum>
+      <enum value="6">ntp-loop-flt-unkn</enum>
+    </type>
+  </typedef>
+  <typedef name="Ntp-leap">
+    <type node="enumeration">
+      <enum>ntp-leap-no-warning</enum>
+      <enum>ntp-leap-addse-cond</enum>
+      <enum>ntp-leap-delse-cond</enum>
+      <enum>ntp-leap-not-in-sync</enum>
+    </type>
+  </typedef>
+  <ntp config="false" is-key="false" node="container" presence="false">
+    <xr-path>/admin/oper/ip-ntp/</xr-path>
+    <xr-xml-map>ip_ntp_admin_oper:NTP</xr-xml-map>
+    <xr-task>ip-services</xr-task>
+    <racks config="false" is-key="false" node="container" presence="false">
+      <xr-path>/admin/oper/ip-ntp/rack/</xr-path>
+      <xr-xml-map>ip_ntp_admin_oper:RackTable</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <rack config="false" key="number" node="list">
+        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/</xr-path>
+        <xr-xml-map>ip_ntp_admin_oper:Rack</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <slots config="false" is-key="false" node="container" presence="false">
+          <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/</xr-path>
+          <xr-xml-map>ip_ntp_admin_oper:SlotTable</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <slot config="false" key="number" node="list">
+            <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/</xr-path>
+            <xr-xml-map>ip_ntp_admin_oper:Slot</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <instances config="false" is-key="false" node="container" presence="false">
+              <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/</xr-path>
+              <xr-xml-map>ip_ntp_admin_oper:InstanceTable</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <instance config="false" key="number" node="list">
+                <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/</xr-path>
+                <xr-xml-map>ip_ntp_admin_oper:Instance</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <status config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status</xr-path>
+                  <xr-xml-map>ip_ntp_admin_oper:Status</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-grp-name>ntp_edm_status_result</xr-bag-grp-name>
+                  <xr-bag>ip_ntp_admin.bag</xr-bag>
+                  <sys-ref-time config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.SysRefTime</xr-path>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <sec config="false" is-key="false" node="container" presence="false">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.SysRefTime.Sec</xr-path>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <int config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.SysRefTime.Sec.Int</xr-path>
+                        <xr-xml-map>ip_ntp_admin:Int</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </int>
+                    </sec>
+                    <frac-secs config="false" is-key="false" node="container" presence="false">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.SysRefTime.FracSecs</xr-path>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <frac config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.SysRefTime.FracSecs.Frac</xr-path>
+                        <xr-xml-map>ip_ntp_admin:Frac</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </frac>
+                    </frac-secs>
+                  </sys-ref-time>
+                  <sys-drift config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.SysDrift</xr-path>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <sec config="false" is-key="false" node="container" presence="false">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.SysDrift.Sec</xr-path>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <int config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.SysDrift.Sec.Int</xr-path>
+                        <xr-xml-map>ip_ntp_admin:Int</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </int>
+                    </sec>
+                    <frac-secs config="false" is-key="false" node="container" presence="false">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.SysDrift.FracSecs</xr-path>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <frac config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.SysDrift.FracSecs.Frac</xr-path>
+                        <xr-xml-map>ip_ntp_admin:Frac</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </frac>
+                    </frac-secs>
+                  </sys-drift>
+                  <is-ntp-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.IsNtpEnabled</xr-path>
+                    <xr-xml-map>ip_ntp_admin:IsNtpEnabled</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </is-ntp-enabled>
+                  <sys-dispersion config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.SysDispersion</xr-path>
+                    <xr-xml-map>ip_ntp_admin:SysDispersion</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </sys-dispersion>
+                  <sys-offset config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.SysOffset</xr-path>
+                    <xr-xml-map>ip_ntp_admin:SysOffset</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </sys-offset>
+                  <clock-period config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.ClockPeriod</xr-path>
+                    <xr-xml-map>ip_ntp_admin:ClockPeriod</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </clock-period>
+                  <sys-leap config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.SysLeap</xr-path>
+                    <xr-xml-map>ip_ntp_admin:SysLeap</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <type>
+                      <type-name>Ntp-leap</type-name>
+                    </type>
+                  </sys-leap>
+                  <sys-precision config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.SysPrecision</xr-path>
+                    <xr-xml-map>ip_ntp_admin:SysPrecision</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>char</xr-bag-primitive-type>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <type>
+                      <type-name>int8</type-name>
+                    </type>
+                  </sys-precision>
+                  <sys-stratum config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.SysStratum</xr-path>
+                    <xr-xml-map>ip_ntp_admin:SysStratum</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>unsigned char</xr-bag-primitive-type>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <type>
+                      <type-name>uint8</type-name>
+                    </type>
+                  </sys-stratum>
+                  <sys-ref-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.SysRefID</xr-path>
+                    <xr-xml-map>ip_ntp_admin:SysRefID</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <type>
+                      <type-name>inet:ipv4-address</type-name>
+                    </type>
+                  </sys-ref-id>
+                  <sys-root-delay config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.SysRootDelay</xr-path>
+                    <xr-xml-map>ip_ntp_admin:SysRootDelay</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </sys-root-delay>
+                  <sys-root-dispersion config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.SysRootDispersion</xr-path>
+                    <xr-xml-map>ip_ntp_admin:SysRootDispersion</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </sys-root-dispersion>
+                  <loop-filter-state config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.LoopFilterState</xr-path>
+                    <xr-xml-map>ip_ntp_admin:LoopFilterState</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <type>
+                      <type-name>Ntp-loop-filter-state</type-name>
+                    </type>
+                  </loop-filter-state>
+                  <poll-interval config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.PollInterval</xr-path>
+                    <xr-xml-map>ip_ntp_admin:PollInterval</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>unsigned char</xr-bag-primitive-type>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <type>
+                      <type-name>uint8</type-name>
+                    </type>
+                  </poll-interval>
+                  <is-updated config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.IsUpdated</xr-path>
+                    <xr-xml-map>ip_ntp_admin:IsUpdated</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <type>
+                      <type-name>Clock-update-node</type-name>
+                    </type>
+                  </is-updated>
+                  <last-update config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/status~ntp_edm_status_result.LastUpdate</xr-path>
+                    <xr-xml-map>ip_ntp_admin:LastUpdate</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <type>
+                      <type-name>int32</type-name>
+                    </type>
+                  </last-update>
+                </status>
+                <associations config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/2</xr-path>
+                  <xr-xml-map>ip_ntp_admin_oper:Associations</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-grp-name>ntp_edm_assoc_summary_result</xr-bag-grp-name>
+                  <xr-bag>ip_ntp_admin.bag</xr-bag>
+                  <is-ntp-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/2~ntp_edm_assoc_summary_result.IsNtpEnabled</xr-path>
+                    <xr-xml-map>ip_ntp_admin:IsNtpEnabled</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </is-ntp-enabled>
+                  <sys-leap config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/2~ntp_edm_assoc_summary_result.SysLeap</xr-path>
+                    <xr-xml-map>ip_ntp_admin:SysLeap</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <type>
+                      <type-name>Ntp-leap</type-name>
+                    </type>
+                  </sys-leap>
+                  <peer-summary-info config="false" node="list">
+                    <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/2~ntp_edm_assoc_summary_result.PeerSummaryInfo[&lt;bag_arg3&gt;]</xr-path>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+                    <peer-info-common config="false" is-key="false" node="container" presence="false">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/2~ntp_edm_assoc_summary_result.PeerSummaryInfo[&lt;bag_arg3&gt;].PeerInfoCommon</xr-path>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <host-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/2~ntp_edm_assoc_summary_result.PeerSummaryInfo[&lt;bag_arg3&gt;].PeerInfoCommon.HostMode</xr-path>
+                        <xr-xml-map>ip_ntp_admin:HostMode</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>Ntp-mode</type-name>
+                        </type>
+                      </host-mode>
+                      <is-configured config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/2~ntp_edm_assoc_summary_result.PeerSummaryInfo[&lt;bag_arg3&gt;].PeerInfoCommon.IsConfigured</xr-path>
+                        <xr-xml-map>ip_ntp_admin:IsConfigured</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>boolean</type-name>
+                        </type>
+                      </is-configured>
+                      <address config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/2~ntp_edm_assoc_summary_result.PeerSummaryInfo[&lt;bag_arg3&gt;].PeerInfoCommon.Address</xr-path>
+                        <xr-xml-map>ip_ntp_admin:Address</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </address>
+                      <reference-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/2~ntp_edm_assoc_summary_result.PeerSummaryInfo[&lt;bag_arg3&gt;].PeerInfoCommon.ReferenceID</xr-path>
+                        <xr-xml-map>ip_ntp_admin:ReferenceID</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>inet:ipv4-address</type-name>
+                        </type>
+                      </reference-id>
+                      <host-poll config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/2~ntp_edm_assoc_summary_result.PeerSummaryInfo[&lt;bag_arg3&gt;].PeerInfoCommon.HostPoll</xr-path>
+                        <xr-xml-map>ip_ntp_admin:HostPoll</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>unsigned char</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>uint8</type-name>
+                        </type>
+                      </host-poll>
+                      <reachability config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/2~ntp_edm_assoc_summary_result.PeerSummaryInfo[&lt;bag_arg3&gt;].PeerInfoCommon.Reachability</xr-path>
+                        <xr-xml-map>ip_ntp_admin:Reachability</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>unsigned char</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>uint8</type-name>
+                        </type>
+                      </reachability>
+                      <stratum config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/2~ntp_edm_assoc_summary_result.PeerSummaryInfo[&lt;bag_arg3&gt;].PeerInfoCommon.Stratum</xr-path>
+                        <xr-xml-map>ip_ntp_admin:Stratum</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>unsigned char</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>uint8</type-name>
+                        </type>
+                      </stratum>
+                      <status config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/2~ntp_edm_assoc_summary_result.PeerSummaryInfo[&lt;bag_arg3&gt;].PeerInfoCommon.Status</xr-path>
+                        <xr-xml-map>ip_ntp_admin:Status</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>Ntp-peer-status</type-name>
+                        </type>
+                      </status>
+                      <delay config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/2~ntp_edm_assoc_summary_result.PeerSummaryInfo[&lt;bag_arg3&gt;].PeerInfoCommon.Delay</xr-path>
+                        <xr-xml-map>ip_ntp_admin:Delay</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </delay>
+                      <offset config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/2~ntp_edm_assoc_summary_result.PeerSummaryInfo[&lt;bag_arg3&gt;].PeerInfoCommon.Offset</xr-path>
+                        <xr-xml-map>ip_ntp_admin:Offset</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </offset>
+                      <dispersion config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/2~ntp_edm_assoc_summary_result.PeerSummaryInfo[&lt;bag_arg3&gt;].PeerInfoCommon.Dispersion</xr-path>
+                        <xr-xml-map>ip_ntp_admin:Dispersion</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </dispersion>
+                      <is-sys-peer config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/2~ntp_edm_assoc_summary_result.PeerSummaryInfo[&lt;bag_arg3&gt;].PeerInfoCommon.IsSysPeer</xr-path>
+                        <xr-xml-map>ip_ntp_admin:IsSysPeer</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>boolean</type-name>
+                        </type>
+                      </is-sys-peer>
+                    </peer-info-common>
+                    <time-since config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/2~ntp_edm_assoc_summary_result.PeerSummaryInfo[&lt;bag_arg3&gt;].TimeSince</xr-path>
+                      <xr-xml-map>ip_ntp_admin:TimeSince</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>int32_t</xr-bag-primitive-type>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <type>
+                        <type-name>int32</type-name>
+                      </type>
+                    </time-since>
+                  </peer-summary-info>
+                </associations>
+                <associations-detail config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3</xr-path>
+                  <xr-xml-map>ip_ntp_admin_oper:AssociationsDetail</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-grp-name>ntp_edm_assoc_detail_result</xr-bag-grp-name>
+                  <xr-bag>ip_ntp_admin.bag</xr-bag>
+                  <is-ntp-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.IsNtpEnabled</xr-path>
+                    <xr-xml-map>ip_ntp_admin:IsNtpEnabled</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </is-ntp-enabled>
+                  <sys-leap config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.SysLeap</xr-path>
+                    <xr-xml-map>ip_ntp_admin:SysLeap</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <type>
+                      <type-name>Ntp-leap</type-name>
+                    </type>
+                  </sys-leap>
+                  <peer-detail-info config="false" node="list">
+                    <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;]</xr-path>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+                    <peer-info-common config="false" is-key="false" node="container" presence="false">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].PeerInfoCommon</xr-path>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <host-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].PeerInfoCommon.HostMode</xr-path>
+                        <xr-xml-map>ip_ntp_admin:HostMode</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>Ntp-mode</type-name>
+                        </type>
+                      </host-mode>
+                      <is-configured config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].PeerInfoCommon.IsConfigured</xr-path>
+                        <xr-xml-map>ip_ntp_admin:IsConfigured</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>boolean</type-name>
+                        </type>
+                      </is-configured>
+                      <address config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].PeerInfoCommon.Address</xr-path>
+                        <xr-xml-map>ip_ntp_admin:Address</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </address>
+                      <reference-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].PeerInfoCommon.ReferenceID</xr-path>
+                        <xr-xml-map>ip_ntp_admin:ReferenceID</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>inet:ipv4-address</type-name>
+                        </type>
+                      </reference-id>
+                      <host-poll config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].PeerInfoCommon.HostPoll</xr-path>
+                        <xr-xml-map>ip_ntp_admin:HostPoll</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>unsigned char</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>uint8</type-name>
+                        </type>
+                      </host-poll>
+                      <reachability config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].PeerInfoCommon.Reachability</xr-path>
+                        <xr-xml-map>ip_ntp_admin:Reachability</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>unsigned char</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>uint8</type-name>
+                        </type>
+                      </reachability>
+                      <stratum config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].PeerInfoCommon.Stratum</xr-path>
+                        <xr-xml-map>ip_ntp_admin:Stratum</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>unsigned char</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>uint8</type-name>
+                        </type>
+                      </stratum>
+                      <status config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].PeerInfoCommon.Status</xr-path>
+                        <xr-xml-map>ip_ntp_admin:Status</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>Ntp-peer-status</type-name>
+                        </type>
+                      </status>
+                      <delay config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].PeerInfoCommon.Delay</xr-path>
+                        <xr-xml-map>ip_ntp_admin:Delay</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </delay>
+                      <offset config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].PeerInfoCommon.Offset</xr-path>
+                        <xr-xml-map>ip_ntp_admin:Offset</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </offset>
+                      <dispersion config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].PeerInfoCommon.Dispersion</xr-path>
+                        <xr-xml-map>ip_ntp_admin:Dispersion</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </dispersion>
+                      <is-sys-peer config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].PeerInfoCommon.IsSysPeer</xr-path>
+                        <xr-xml-map>ip_ntp_admin:IsSysPeer</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>boolean</type-name>
+                        </type>
+                      </is-sys-peer>
+                    </peer-info-common>
+                    <ref-time config="false" is-key="false" node="container" presence="false">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].RefTime</xr-path>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <sec config="false" is-key="false" node="container" presence="false">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].RefTime.Sec</xr-path>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <int config="false" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].RefTime.Sec.Int</xr-path>
+                          <xr-xml-map>ip_ntp_admin:Int</xr-xml-map>
+                          <xr-task>ip-services</xr-task>
+                          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+                          <xr-bag-version>0 1</xr-bag-version>
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </int>
+                      </sec>
+                      <frac-secs config="false" is-key="false" node="container" presence="false">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].RefTime.FracSecs</xr-path>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <frac config="false" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].RefTime.FracSecs.Frac</xr-path>
+                          <xr-xml-map>ip_ntp_admin:Frac</xr-xml-map>
+                          <xr-task>ip-services</xr-task>
+                          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+                          <xr-bag-version>0 1</xr-bag-version>
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </frac>
+                      </frac-secs>
+                    </ref-time>
+                    <originate-time config="false" is-key="false" node="container" presence="false">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].OriginateTime</xr-path>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <sec config="false" is-key="false" node="container" presence="false">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].OriginateTime.Sec</xr-path>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <int config="false" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].OriginateTime.Sec.Int</xr-path>
+                          <xr-xml-map>ip_ntp_admin:Int</xr-xml-map>
+                          <xr-task>ip-services</xr-task>
+                          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+                          <xr-bag-version>0 1</xr-bag-version>
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </int>
+                      </sec>
+                      <frac-secs config="false" is-key="false" node="container" presence="false">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].OriginateTime.FracSecs</xr-path>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <frac config="false" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].OriginateTime.FracSecs.Frac</xr-path>
+                          <xr-xml-map>ip_ntp_admin:Frac</xr-xml-map>
+                          <xr-task>ip-services</xr-task>
+                          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+                          <xr-bag-version>0 1</xr-bag-version>
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </frac>
+                      </frac-secs>
+                    </originate-time>
+                    <receive-time config="false" is-key="false" node="container" presence="false">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].ReceiveTime</xr-path>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <sec config="false" is-key="false" node="container" presence="false">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].ReceiveTime.Sec</xr-path>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <int config="false" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].ReceiveTime.Sec.Int</xr-path>
+                          <xr-xml-map>ip_ntp_admin:Int</xr-xml-map>
+                          <xr-task>ip-services</xr-task>
+                          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+                          <xr-bag-version>0 1</xr-bag-version>
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </int>
+                      </sec>
+                      <frac-secs config="false" is-key="false" node="container" presence="false">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].ReceiveTime.FracSecs</xr-path>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <frac config="false" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].ReceiveTime.FracSecs.Frac</xr-path>
+                          <xr-xml-map>ip_ntp_admin:Frac</xr-xml-map>
+                          <xr-task>ip-services</xr-task>
+                          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+                          <xr-bag-version>0 1</xr-bag-version>
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </frac>
+                      </frac-secs>
+                    </receive-time>
+                    <transmit-time config="false" is-key="false" node="container" presence="false">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].TransmitTime</xr-path>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <sec config="false" is-key="false" node="container" presence="false">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].TransmitTime.Sec</xr-path>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <int config="false" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].TransmitTime.Sec.Int</xr-path>
+                          <xr-xml-map>ip_ntp_admin:Int</xr-xml-map>
+                          <xr-task>ip-services</xr-task>
+                          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+                          <xr-bag-version>0 1</xr-bag-version>
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </int>
+                      </sec>
+                      <frac-secs config="false" is-key="false" node="container" presence="false">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].TransmitTime.FracSecs</xr-path>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <frac config="false" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].TransmitTime.FracSecs.Frac</xr-path>
+                          <xr-xml-map>ip_ntp_admin:Frac</xr-xml-map>
+                          <xr-task>ip-services</xr-task>
+                          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+                          <xr-bag-version>0 1</xr-bag-version>
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </frac>
+                      </frac-secs>
+                    </transmit-time>
+                    <leap config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].Leap</xr-path>
+                      <xr-xml-map>ip_ntp_admin:Leap</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <type>
+                        <type-name>Ntp-leap</type-name>
+                      </type>
+                    </leap>
+                    <peer-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].PeerMode</xr-path>
+                      <xr-xml-map>ip_ntp_admin:PeerMode</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <type>
+                        <type-name>Ntp-mode</type-name>
+                      </type>
+                    </peer-mode>
+                    <poll-interval config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].PollInterval</xr-path>
+                      <xr-xml-map>ip_ntp_admin:PollInterval</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>unsigned char</xr-bag-primitive-type>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <type>
+                        <type-name>uint8</type-name>
+                      </type>
+                    </poll-interval>
+                    <is-ref-clock config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].IsRefClock</xr-path>
+                      <xr-xml-map>ip_ntp_admin:IsRefClock</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </is-ref-clock>
+                    <is-authenticated config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].IsAuthenticated</xr-path>
+                      <xr-xml-map>ip_ntp_admin:IsAuthenticated</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </is-authenticated>
+                    <root-delay config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].RootDelay</xr-path>
+                      <xr-xml-map>ip_ntp_admin:RootDelay</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <type>
+                        <type-name>string</type-name>
+                      </type>
+                    </root-delay>
+                    <root-dispersion config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].RootDispersion</xr-path>
+                      <xr-xml-map>ip_ntp_admin:RootDispersion</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <type>
+                        <type-name>string</type-name>
+                      </type>
+                    </root-dispersion>
+                    <synch-distance config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].SynchDistance</xr-path>
+                      <xr-xml-map>ip_ntp_admin:SynchDistance</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <type>
+                        <type-name>string</type-name>
+                      </type>
+                    </synch-distance>
+                    <precision config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].Precision</xr-path>
+                      <xr-xml-map>ip_ntp_admin:Precision</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>char</xr-bag-primitive-type>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <type>
+                        <type-name>int8</type-name>
+                      </type>
+                    </precision>
+                    <version config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].Version</xr-path>
+                      <xr-xml-map>ip_ntp_admin:Version</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>unsigned char</xr-bag-primitive-type>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <type>
+                        <type-name>uint8</type-name>
+                      </type>
+                    </version>
+                    <filter-index config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].FilterIndex</xr-path>
+                      <xr-xml-map>ip_ntp_admin:FilterIndex</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </filter-index>
+                    <cast-flags config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].CastFlags</xr-path>
+                      <xr-xml-map>ip_ntp_admin:CastFlags</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>unsigned char</xr-bag-primitive-type>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <type>
+                        <type-name>uint8</type-name>
+                      </type>
+                    </cast-flags>
+                    <filter-detail config="false" node="list">
+                      <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].filter_details[&lt;bag_arg1&gt;]</xr-path>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-version>0 1</xr-bag-version>
+                      <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+                      <max-elements>8</max-elements>
+                      <filter-delay config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].filter_details[&lt;bag_arg1&gt;].filter_delay</xr-path>
+                        <xr-xml-map>ip_ntp_admin:filter_delay</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </filter-delay>
+                      <filter-offset config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].filter_details[&lt;bag_arg1&gt;].filter_offset</xr-path>
+                        <xr-xml-map>ip_ntp_admin:filter_offset</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </filter-offset>
+                      <filter-disp config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/3~ntp_edm_assoc_detail_result.PeerDetailInfo[&lt;bag_arg2&gt;].filter_details[&lt;bag_arg1&gt;].filter_disp</xr-path>
+                        <xr-xml-map>ip_ntp_admin:filter_disp</xr-xml-map>
+                        <xr-task>ip-services</xr-task>
+                        <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                        <xr-bag-version>0 1</xr-bag-version>
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </filter-disp>
+                    </filter-detail>
+                  </peer-detail-info>
+                </associations-detail>
+                <number config="false" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-pathformat>hex_nozerox</xr-pathformat>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/instance/&lt;ip_ntp_admin_oper_Instance_Number&gt;/</xr-path>
+                  <xr-xml-map>ip_ntp_admin_oper:Number</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-sch-type>Integer</xr-sch-type>
+                  <xr-sch-arg-name>&lt;ip_ntp_admin_oper_Instance_Number&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </number>
+              </instance>
+            </instances>
+            <number config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-pathformat>hex_nozerox</xr-pathformat>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/slot/&lt;ip_ntp_admin_oper_Slot_Number&gt;/</xr-path>
+              <xr-xml-map>ip_ntp_admin_oper:Number</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-sch-type>Integer</xr-sch-type>
+              <xr-sch-arg-name>&lt;ip_ntp_admin_oper_Slot_Number&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </number>
+          </slot>
+        </slots>
+        <number config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-pathformat>hex_nozerox</xr-pathformat>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/admin/oper/ip-ntp/rack/&lt;ip_ntp_admin_oper_Rack_Number&gt;/</xr-path>
+          <xr-xml-map>ip_ntp_admin_oper:Number</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>Integer</xr-sch-type>
+          <xr-sch-arg-name>&lt;ip_ntp_admin_oper_Rack_Number&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </number>
+      </rack>
+    </racks>
+  </ntp>
+</Cisco-IOS-XR-ip-ntp-admin-oper>

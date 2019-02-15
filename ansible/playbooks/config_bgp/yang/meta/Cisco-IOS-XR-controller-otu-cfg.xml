@@ -1,0 +1,802 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-controller-otu-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-controller-otu-cfg" revision="2017-05-01">
+  <files>
+    <file revision="2017-05-01" submodule="false">Cisco-IOS-XR-controller-otu-cfg.yang</file>
+  </files>
+  <prefix>controller-otu-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-ifmgr-cfg</import>
+  <typedef name="Otu-forward-error-correction">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">none</enum>
+      <enum value="2">standard</enum>
+      <enum value="4">enhanced-i7</enum>
+      <enum value="8">enhanced-i4</enum>
+      <enum value="16">enhanced-swizzle</enum>
+      <enum value="32">enhanced-hg20</enum>
+      <enum value="64">enhanced-hg7</enum>
+      <enum value="512">enhanced-sd15</enum>
+      <enum value="1024">enhanced-sd27</enum>
+    </type>
+  </typedef>
+  <typedef name="Otn-per-mon">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">disable</enum>
+      <enum value="1">enable</enum>
+    </type>
+  </typedef>
+  <typedef name="Otn-send-tti-type-os">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="10">send-tti-os-ascii/os-ascii</enum>
+      <enum value="12">send-tti-os-hex/os-hex</enum>
+    </type>
+  </typedef>
+  <typedef name="Otn-exp-tti-type-sapi">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="15">exp-tti-sapi-ascii/sapi-ascii</enum>
+    </type>
+  </typedef>
+  <typedef name="Otn-send-tti-type-sapi">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="14">send-tti-sapi-ascii/sapi-ascii</enum>
+    </type>
+  </typedef>
+  <typedef name="Otu-mode">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">mode-invalid</enum>
+      <enum value="1">mode-source</enum>
+      <enum value="2">mode-sink</enum>
+      <enum value="3">mode-source-sink</enum>
+    </type>
+  </typedef>
+  <typedef name="Otn-sec-admin-state">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">normal</enum>
+      <enum value="1">maintenance</enum>
+    </type>
+  </typedef>
+  <typedef name="Otn-exp-tti-type-os">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="11">exp-tti-os-ascii/os-ascii</enum>
+      <enum value="13">exp-tti-os-hex/os-hex</enum>
+    </type>
+  </typedef>
+  <typedef name="Otn-loopback">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="2">line</enum>
+      <enum value="4">internal</enum>
+    </type>
+  </typedef>
+  <typedef name="Otu-pattern">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">pattern-none</enum>
+      <enum value="1">pattern-pn31</enum>
+      <enum value="2">pattern-pn23</enum>
+      <enum value="4">pattern-pn11</enum>
+      <enum value="8">pattern-inverted-pn31</enum>
+      <enum value="16">pattern-inverted-pn11</enum>
+      <enum value="32">pattern-pn15</enum>
+    </type>
+  </typedef>
+  <typedef name="Otn-exp-tti-type-full">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="5">exp-tti-full-ascii/full-ascii</enum>
+      <enum value="7">exp-tti-hex/hex</enum>
+    </type>
+  </typedef>
+  <typedef name="Otn-send-tti-type-full">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="4">send-tti-full-ascii/full-ascii</enum>
+      <enum value="6">send-tti-hex/hex</enum>
+    </type>
+  </typedef>
+  <typedef name="Otn-exp-tti-type-dapi">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="9">exp-tti-dapi-ascii/dapi-ascii</enum>
+    </type>
+  </typedef>
+  <typedef name="Otn-send-tti-type-dapi">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="8">send-tti-dapi-ascii/dapi-ascii</enum>
+    </type>
+  </typedef>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <otu config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/</xr-path>
+      <xr-xml-map>otu_cfg:OTU</xr-xml-map>
+      <xr-task>otn</xr-task>
+      <otn-send-ttitcmos config="true" is-key="false" node="container" presence="false">
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/send/os`</xr-path>
+        <xr-xml-map>otu_cfg:OTNSendTTITCMOS</xr-xml-map>
+        <xr-task>otn</xr-task>
+        <xr-pack-format>%d%s%s</xr-pack-format>
+        <string-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/send/os`0</xr-path>
+          <xr-xml-map>otu_cfg:StringType</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Otn-send-tti-type-os</type-name>
+          </type>
+        </string-type>
+        <osascii-string config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/send/os`1</xr-path>
+          <xr-xml-map>otu_cfg:OSASCIIString</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <when>../string-type = 'send-tti-os-ascii/os-ascii'</when>
+          <type length="1..32">
+            <type-name>string</type-name>
+          </type>
+        </osascii-string>
+        <oshex-string config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/send/os`2</xr-path>
+          <xr-xml-map>otu_cfg:OSHEXString</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <when>../string-type = 'send-tti-os-hex/os-hex'</when>
+          <type length="1..64">
+            <type-name>string</type-name>
+          </type>
+        </oshex-string>
+      </otn-send-ttitcmos>
+      <otn-send-ttitcmdapi config="true" is-key="false" node="container" presence="false">
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/send/dapi`</xr-path>
+        <xr-xml-map>otu_cfg:OTNSendTTITCMDAPI</xr-xml-map>
+        <xr-task>otn</xr-task>
+        <xr-pack-format>%d%s</xr-pack-format>
+        <string-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/send/dapi`0</xr-path>
+          <xr-xml-map>otu_cfg:StringType</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Otn-send-tti-type-dapi</type-name>
+          </type>
+        </string-type>
+        <dapi-ascii-string config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/send/dapi`1</xr-path>
+          <xr-xml-map>otu_cfg:DapiASCIIString</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <when>../string-type = 'send-tti-dapi-ascii/dapi-ascii'</when>
+          <type length="1..14">
+            <type-name>string</type-name>
+          </type>
+        </dapi-ascii-string>
+      </otn-send-ttitcmdapi>
+      <otn-expected-ttisapi config="true" is-key="false" node="container" presence="false">
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/exp/sapi`</xr-path>
+        <xr-xml-map>otu_cfg:OTNExpectedTTISAPI</xr-xml-map>
+        <xr-task>otn</xr-task>
+        <xr-pack-format>%d%s</xr-pack-format>
+        <string-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/exp/sapi`0</xr-path>
+          <xr-xml-map>otu_cfg:StringType</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Otn-exp-tti-type-sapi</type-name>
+          </type>
+        </string-type>
+        <sapi-ascii-string config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/exp/sapi`1</xr-path>
+          <xr-xml-map>otu_cfg:SapiASCIIString</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <when>../string-type = 'exp-tti-sapi-ascii/sapi-ascii'</when>
+          <type length="1..14">
+            <type-name>string</type-name>
+          </type>
+        </sapi-ascii-string>
+      </otn-expected-ttisapi>
+      <proactive-protection config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/</xr-path>
+        <xr-xml-map>otu_cfg:ProactiveProtection</xr-xml-map>
+        <xr-task>otn</xr-task>
+        <trigger-threshold config="true" is-key="false" node="container" presence="false">
+          <xr-is-packed/>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/proactive/0x0`</xr-path>
+          <xr-xml-map>otu_cfg:TriggerThreshold</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <coefficient config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/proactive/0x0`0</xr-path>
+            <xr-xml-map>otu_cfg:Coefficient</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1..9">
+              <type-name>uint32</type-name>
+            </type>
+          </coefficient>
+          <power config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/proactive/0x0`1</xr-path>
+            <xr-xml-map>otu_cfg:Power</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="3..9">
+              <type-name>uint32</type-name>
+            </type>
+          </power>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/proactive/0x0`2</xr-path>
+            <xr-xml-map>otu_cfg:Enable</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </enable>
+        </trigger-threshold>
+        <revert-window config="true" is-key="false" node="container" presence="false">
+          <xr-is-packed/>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/proactive/0x3`</xr-path>
+          <xr-xml-map>otu_cfg:RevertWindow</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <value config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/proactive/0x3`0</xr-path>
+            <xr-xml-map>otu_cfg:Value</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="2000..10000">
+              <type-name>uint32</type-name>
+            </type>
+          </value>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/proactive/0x3`1</xr-path>
+            <xr-xml-map>otu_cfg:Enable</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </enable>
+        </revert-window>
+        <trigger-window config="true" is-key="false" node="container" presence="false">
+          <xr-is-packed/>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/proactive/0x2`</xr-path>
+          <xr-xml-map>otu_cfg:TriggerWindow</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <value config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/proactive/0x2`0</xr-path>
+            <xr-xml-map>otu_cfg:Value</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="10..10000">
+              <type-name>uint32</type-name>
+            </type>
+          </value>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/proactive/0x2`1</xr-path>
+            <xr-xml-map>otu_cfg:Enable</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </enable>
+        </trigger-window>
+        <revert-threshold config="true" is-key="false" node="container" presence="false">
+          <xr-is-packed/>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/proactive/0x1`</xr-path>
+          <xr-xml-map>otu_cfg:RevertThreshold</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <coefficient config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/proactive/0x1`0</xr-path>
+            <xr-xml-map>otu_cfg:Coefficient</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1..9">
+              <type-name>uint32</type-name>
+            </type>
+          </coefficient>
+          <power config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/proactive/0x1`1</xr-path>
+            <xr-xml-map>otu_cfg:Power</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="4..10">
+              <type-name>uint32</type-name>
+            </type>
+          </power>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/proactive/0x1`2</xr-path>
+            <xr-xml-map>otu_cfg:Enable</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </enable>
+        </revert-threshold>
+        <status config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/2</xr-path>
+          <xr-xml-map>otu_cfg:Status</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </status>
+      </proactive-protection>
+      <network-srlgs config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/network_srlg/set/</xr-path>
+        <xr-xml-map>otu_cfg:NetworkSRLGTable</xr-xml-map>
+        <xr-task>otn</xr-task>
+        <network-srlg config="true" key="set-id" node="list">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/network_srlg/set/&lt;otu_cfg_NetworkSRLG_arg10&gt;</xr-path>
+          <xr-xml-map>otu_cfg:NetworkSRLG</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+          <set-id config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/network_srlg/set/&lt;otu_cfg_NetworkSRLG_arg10&gt;</xr-path>
+            <xr-xml-map>otu_cfg:SetID</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <xr-sch-arg-name>&lt;otu_cfg_NetworkSRLG_arg10&gt;</xr-sch-arg-name>
+            <type range="1..17">
+              <type-name>uint32</type-name>
+            </type>
+          </set-id>
+          <srlg1 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/network_srlg/set/&lt;otu_cfg_NetworkSRLG_arg10&gt;`0</xr-path>
+            <xr-xml-map>otu_cfg:SRLG1</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..4294967294">
+              <type-name>uint32</type-name>
+            </type>
+          </srlg1>
+          <srlg2 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/network_srlg/set/&lt;otu_cfg_NetworkSRLG_arg10&gt;`1</xr-path>
+            <xr-xml-map>otu_cfg:SRLG2</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..4294967294">
+              <type-name>uint32</type-name>
+            </type>
+          </srlg2>
+          <srlg3 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/network_srlg/set/&lt;otu_cfg_NetworkSRLG_arg10&gt;`2</xr-path>
+            <xr-xml-map>otu_cfg:SRLG3</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..4294967294">
+              <type-name>uint32</type-name>
+            </type>
+          </srlg3>
+          <srlg4 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/network_srlg/set/&lt;otu_cfg_NetworkSRLG_arg10&gt;`3</xr-path>
+            <xr-xml-map>otu_cfg:SRLG4</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..4294967294">
+              <type-name>uint32</type-name>
+            </type>
+          </srlg4>
+          <srlg5 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/network_srlg/set/&lt;otu_cfg_NetworkSRLG_arg10&gt;`4</xr-path>
+            <xr-xml-map>otu_cfg:SRLG5</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..4294967294">
+              <type-name>uint32</type-name>
+            </type>
+          </srlg5>
+          <srlg6 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/network_srlg/set/&lt;otu_cfg_NetworkSRLG_arg10&gt;`5</xr-path>
+            <xr-xml-map>otu_cfg:SRLG6</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..4294967294">
+              <type-name>uint32</type-name>
+            </type>
+          </srlg6>
+        </network-srlg>
+      </network-srlgs>
+      <otn-send-tti config="true" is-key="false" node="container" presence="false">
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/send/full-tti`</xr-path>
+        <xr-xml-map>otu_cfg:OTNSendTTI</xr-xml-map>
+        <xr-task>otn</xr-task>
+        <xr-pack-format>%d%s%s</xr-pack-format>
+        <string-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/send/full-tti`0</xr-path>
+          <xr-xml-map>otu_cfg:StringType</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Otn-send-tti-type-full</type-name>
+          </type>
+        </string-type>
+        <full-ascii-string config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/send/full-tti`1</xr-path>
+          <xr-xml-map>otu_cfg:FullASCIIString</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <when>../string-type = 'send-tti-full-ascii/full-ascii'</when>
+          <type length="1..64">
+            <type-name>string</type-name>
+          </type>
+        </full-ascii-string>
+        <hex-string config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/send/full-tti`2</xr-path>
+          <xr-xml-map>otu_cfg:HexString</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <when>../string-type = 'send-tti-hex/hex'</when>
+          <type length="1..128">
+            <type-name>string</type-name>
+          </type>
+        </hex-string>
+      </otn-send-tti>
+      <otn-expected-ttitcmdapi config="true" is-key="false" node="container" presence="false">
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/exp/dapi`</xr-path>
+        <xr-xml-map>otu_cfg:OTNExpectedTTITCMDAPI</xr-xml-map>
+        <xr-task>otn</xr-task>
+        <xr-pack-format>%d%s</xr-pack-format>
+        <string-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/exp/dapi`0</xr-path>
+          <xr-xml-map>otu_cfg:StringType</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Otn-exp-tti-type-dapi</type-name>
+          </type>
+        </string-type>
+        <dapi-ascii-string config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/exp/dapi`1</xr-path>
+          <xr-xml-map>otu_cfg:DapiASCIIString</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <when>../string-type = 'exp-tti-dapi-ascii/dapi-ascii'</when>
+          <type length="1..14">
+            <type-name>string</type-name>
+          </type>
+        </dapi-ascii-string>
+      </otn-expected-ttitcmdapi>
+      <otn-send-ttisapi config="true" is-key="false" node="container" presence="false">
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/send/sapi`</xr-path>
+        <xr-xml-map>otu_cfg:OTNSendTTISAPI</xr-xml-map>
+        <xr-task>otn</xr-task>
+        <xr-pack-format>%d%s</xr-pack-format>
+        <string-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/send/sapi`0</xr-path>
+          <xr-xml-map>otu_cfg:StringType</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Otn-send-tti-type-sapi</type-name>
+          </type>
+        </string-type>
+        <sapi-ascii-string config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/send/sapi`1</xr-path>
+          <xr-xml-map>otu_cfg:SapiASCIIString</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <when>../string-type = 'send-tti-sapi-ascii/sapi-ascii'</when>
+          <type length="1..14">
+            <type-name>string</type-name>
+          </type>
+        </sapi-ascii-string>
+      </otn-send-ttisapi>
+      <prbs config="true" is-key="false" node="container" presence="false">
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_b/prbs`</xr-path>
+        <xr-xml-map>otu_cfg:Prbs</xr-xml-map>
+        <xr-task>otn</xr-task>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <mode-value config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_b/prbs`0</xr-path>
+          <xr-xml-map>otu_cfg:ModeValue</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Otu-mode</type-name>
+          </type>
+        </mode-value>
+        <patternvalue config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_b/prbs`1</xr-path>
+          <xr-xml-map>otu_cfg:PatternValue</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Otu-pattern</type-name>
+          </type>
+        </patternvalue>
+      </prbs>
+      <otn-expected-ttitcmos config="true" is-key="false" node="container" presence="false">
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/exp/os`</xr-path>
+        <xr-xml-map>otu_cfg:OTNExpectedTTITCMOS</xr-xml-map>
+        <xr-task>otn</xr-task>
+        <xr-pack-format>%d%s%s</xr-pack-format>
+        <string-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/exp/os`0</xr-path>
+          <xr-xml-map>otu_cfg:StringType</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Otn-exp-tti-type-os</type-name>
+          </type>
+        </string-type>
+        <osascii-string config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/exp/os`1</xr-path>
+          <xr-xml-map>otu_cfg:OSASCIIString</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <when>../string-type = 'exp-tti-os-ascii/os-ascii'</when>
+          <type length="1..32">
+            <type-name>string</type-name>
+          </type>
+        </osascii-string>
+        <oshex-string config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/exp/os`2</xr-path>
+          <xr-xml-map>otu_cfg:OSHEXString</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <when>../string-type = 'exp-tti-os-hex/os-hex'</when>
+          <type length="1..64">
+            <type-name>string</type-name>
+          </type>
+        </oshex-string>
+      </otn-expected-ttitcmos>
+      <otn-expected-tti config="true" is-key="false" node="container" presence="false">
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/exp/full-tti`</xr-path>
+        <xr-xml-map>otu_cfg:OTNExpectedTTI</xr-xml-map>
+        <xr-task>otn</xr-task>
+        <xr-pack-format>%d%s%s</xr-pack-format>
+        <string-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/exp/full-tti`0</xr-path>
+          <xr-xml-map>otu_cfg:StringType</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Otn-exp-tti-type-full</type-name>
+          </type>
+        </string-type>
+        <full-ascii-string config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/exp/full-tti`1</xr-path>
+          <xr-xml-map>otu_cfg:FullASCIIString</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <when>../string-type = 'exp-tti-full-ascii/full-ascii'</when>
+          <type length="1..64">
+            <type-name>string</type-name>
+          </type>
+        </full-ascii-string>
+        <hex-string config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/tti/exp/full-tti`2</xr-path>
+          <xr-xml-map>otu_cfg:HexString</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <when>../string-type = 'exp-tti-hex/hex'</when>
+          <type length="1..128">
+            <type-name>string</type-name>
+          </type>
+        </hex-string>
+      </otn-expected-tti>
+      <gcc config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/Gcc</xr-path>
+        <xr-xml-map>otu_cfg:GCC</xr-xml-map>
+        <xr-task>otn</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </gcc>
+      <sf config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/threshold/0</xr-path>
+        <xr-xml-map>otu_cfg:SF</xr-xml-map>
+        <xr-task>otn</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="5..9">
+          <type-name>uint32</type-name>
+        </type>
+      </sf>
+      <secondary-admin-state config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/secondary-admin-state</xr-path>
+        <xr-xml-map>otu_cfg:SecondaryAdminState</xr-xml-map>
+        <xr-task>otn</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Otn-sec-admin-state</type-name>
+        </type>
+        <default>normal</default>
+      </secondary-admin-state>
+      <sd config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/threshold/1</xr-path>
+        <xr-xml-map>otu_cfg:SD</xr-xml-map>
+        <xr-task>otn</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="5..9">
+          <type-name>uint32</type-name>
+        </type>
+      </sd>
+      <performance-monitoring config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/permon</xr-path>
+        <xr-xml-map>otu_cfg:PerformanceMonitoring</xr-xml-map>
+        <xr-task>otn</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Otn-per-mon</type-name>
+        </type>
+        <default>enable</default>
+      </performance-monitoring>
+      <loopback config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_b/loopback</xr-path>
+        <xr-xml-map>otu_cfg:Loopback</xr-xml-map>
+        <xr-task>otn</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Otn-loopback</type-name>
+        </type>
+      </loopback>
+      <fec config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/otu/otu/ord_a/fec</xr-path>
+        <xr-xml-map>otu_cfg:FEC</xr-xml-map>
+        <xr-task>otn</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Otu-forward-error-correction</type-name>
+        </type>
+        <default>none</default>
+      </fec>
+    </otu>
+  </augment>
+</Cisco-IOS-XR-controller-otu-cfg>

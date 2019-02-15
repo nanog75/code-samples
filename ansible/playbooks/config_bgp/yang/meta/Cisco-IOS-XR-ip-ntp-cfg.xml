@@ -1,0 +1,1114 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ip-ntp-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ip-ntp-cfg" revision="2017-10-15">
+  <files>
+    <file revision="2017-10-15" submodule="false">Cisco-IOS-XR-ip-ntp-cfg.yang</file>
+  </files>
+  <prefix>ip-ntp-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-snmp-agent-cfg</import>
+  <typedef name="Ntp-prefer-peer">
+    <xr-sch-type>Configured</xr-sch-type>
+    <type>
+      <type-name>empty</type-name>
+    </type>
+  </typedef>
+  <typedef name="Ntpdscp">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">ntp-precedence</enum>
+      <enum value="1">ntpdscp</enum>
+    </type>
+  </typedef>
+  <typedef name="Ntp-key-number">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="1..65535">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Ntpttl">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="1..255">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Ntp-burst">
+    <xr-sch-type>Configured</xr-sch-type>
+    <type>
+      <type-name>empty</type-name>
+    </type>
+  </typedef>
+  <typedef name="Ntpi-burst">
+    <xr-sch-type>Configured</xr-sch-type>
+    <type>
+      <type-name>empty</type-name>
+    </type>
+  </typedef>
+  <typedef name="Ntp-version">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="2..4">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Ntp-peer">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">peer</enum>
+      <enum value="1">server</enum>
+    </type>
+  </typedef>
+  <typedef name="Ntp-access-af">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">ipv4</enum>
+      <enum value="1">ipv6</enum>
+    </type>
+  </typedef>
+  <typedef name="Ntp-access">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">peer</enum>
+      <enum value="1">serve</enum>
+      <enum value="2">serve-only</enum>
+      <enum value="3">query-only</enum>
+    </type>
+  </typedef>
+  <augment path="/a1:snmp/a1:notification">
+    <ntp config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/enable/traps/ntp/</xr-path>
+      <xr-xml-map>ciscontpmib_cfg:NTP</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/enable/traps/ntp/enable</xr-path>
+        <xr-xml-map>ciscontpmib_cfg:Enable</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </enable>
+    </ntp>
+  </augment>
+  <ntp config="true" is-key="false" node="container" presence="false">
+    <xr-presence-submode/>
+    <xr-path>/cfg/gl/ip-ntp/aza</xr-path>
+    <xr-xml-map>ip_ntp_cfg:NTP</xr-xml-map>
+    <xr-task>ip-services</xr-task>
+    <admin-types config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip-ntp/admin/</xr-path>
+      <xr-xml-map>ip_ntp_cfg:Admin</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <admin-type config="true" key="peer-type" node="list">
+        <xr-path>/cfg/gl/ip-ntp/admin/&lt;ip_ntp_cfg_AdminType_peer_type&gt;</xr-path>
+        <xr-xml-map>ip_ntp_cfg:AdminType</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-pack-format>%d%d%d%d%d%d%d</xr-pack-format>
+        <peer-type config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ip-ntp/admin/&lt;ip_ntp_cfg_AdminType_peer_type&gt;</xr-path>
+          <xr-xml-map>ip_ntp_cfg:PeerType</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <xr-sch-arg-name>&lt;ip_ntp_cfg_AdminType_peer_type&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>Ntp-peer</type-name>
+          </type>
+        </peer-type>
+        <ntp-version config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/ip-ntp/admin/&lt;ip_ntp_cfg_AdminType_peer_type&gt;`0</xr-path>
+          <xr-xml-map>ip_ntp_cfg:NTPVersion</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>Ntp-version</type-name>
+          </type>
+        </ntp-version>
+        <authentication-key config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/ip-ntp/admin/&lt;ip_ntp_cfg_AdminType_peer_type&gt;`1</xr-path>
+          <xr-xml-map>ip_ntp_cfg:AuthenticationKey</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>Ntp-key-number</type-name>
+          </type>
+        </authentication-key>
+        <min-poll config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/ip-ntp/admin/&lt;ip_ntp_cfg_AdminType_peer_type&gt;`2</xr-path>
+          <xr-xml-map>ip_ntp_cfg:MinPoll</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="4..17">
+            <type-name>uint32</type-name>
+          </type>
+        </min-poll>
+        <max-poll config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/ip-ntp/admin/&lt;ip_ntp_cfg_AdminType_peer_type&gt;`3</xr-path>
+          <xr-xml-map>ip_ntp_cfg:MaxPoll</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="4..17">
+            <type-name>uint32</type-name>
+          </type>
+        </max-poll>
+        <preferred-peer config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/ip-ntp/admin/&lt;ip_ntp_cfg_AdminType_peer_type&gt;`4</xr-path>
+          <xr-xml-map>ip_ntp_cfg:PreferredPeer</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>Ntp-prefer-peer</type-name>
+          </type>
+        </preferred-peer>
+        <burst config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/ip-ntp/admin/&lt;ip_ntp_cfg_AdminType_peer_type&gt;`5</xr-path>
+          <xr-xml-map>ip_ntp_cfg:Burst</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>Ntp-burst</type-name>
+          </type>
+        </burst>
+        <iburst config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/ip-ntp/admin/&lt;ip_ntp_cfg_AdminType_peer_type&gt;`6</xr-path>
+          <xr-xml-map>ip_ntp_cfg:IBurst</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>Ntpi-burst</type-name>
+          </type>
+        </iburst>
+      </admin-type>
+    </admin-types>
+    <peer-vrfs config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip-ntp/peer/</xr-path>
+      <xr-xml-map>ip_ntp_cfg:PeerVRFTable</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <peer-vrf config="true" key="vrf-name" node="list">
+        <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/</xr-path>
+        <xr-xml-map>ip_ntp_cfg:PeerVRF</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <peer-ipv4s config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv4/</xr-path>
+          <xr-xml-map>ip_ntp_cfg:PeerIPV4Table</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <peer-ipv4 config="true" key="address-ipv4" node="list">
+            <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv4/&lt;ip_ntp_cfg_PeerIPV4_peer_addr_v4&gt;/</xr-path>
+            <xr-xml-map>ip_ntp_cfg:PeerIPV4</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <address-ipv4 config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-pathformat>hex_padded_nozerox</xr-pathformat>
+              <xr-primitive-type>inaddr</xr-primitive-type>
+              <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv4/&lt;ip_ntp_cfg_PeerIPV4_peer_addr_v4&gt;/</xr-path>
+              <xr-xml-map>ip_ntp_cfg:AddressIPV4</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-sch-type>IPV4Address</xr-sch-type>
+              <xr-sch-arg-name>&lt;ip_ntp_cfg_PeerIPV4_peer_addr_v4&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </address-ipv4>
+            <peer-type-ipv4 config="true" key="peer-type" node="list">
+              <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv4/&lt;ip_ntp_cfg_PeerIPV4_peer_addr_v4&gt;/&lt;ip_ntp_cfg_PeerTypeIPV4_peer_type&gt;</xr-path>
+              <xr-xml-map>ip_ntp_cfg:PeerTypeIPV4</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-pack-format>%d%d%d%d%d%s%d%d</xr-pack-format>
+              <peer-type config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d%s%d%d</xr-pack-format>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv4/&lt;ip_ntp_cfg_PeerIPV4_peer_addr_v4&gt;/&lt;ip_ntp_cfg_PeerTypeIPV4_peer_type&gt;</xr-path>
+                <xr-xml-map>ip_ntp_cfg:PeerType</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-sch-arg-name>&lt;ip_ntp_cfg_PeerTypeIPV4_peer_type&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>Ntp-peer</type-name>
+                </type>
+              </peer-type>
+              <ntp-version config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d%s%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv4/&lt;ip_ntp_cfg_PeerIPV4_peer_addr_v4&gt;/&lt;ip_ntp_cfg_PeerTypeIPV4_peer_type&gt;`0</xr-path>
+                <xr-xml-map>ip_ntp_cfg:NTPVersion</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type>
+                  <type-name>Ntp-version</type-name>
+                </type>
+              </ntp-version>
+              <authentication-key config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d%s%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv4/&lt;ip_ntp_cfg_PeerIPV4_peer_addr_v4&gt;/&lt;ip_ntp_cfg_PeerTypeIPV4_peer_type&gt;`1</xr-path>
+                <xr-xml-map>ip_ntp_cfg:AuthenticationKey</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type>
+                  <type-name>Ntp-key-number</type-name>
+                </type>
+              </authentication-key>
+              <min-poll config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d%s%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv4/&lt;ip_ntp_cfg_PeerIPV4_peer_addr_v4&gt;/&lt;ip_ntp_cfg_PeerTypeIPV4_peer_type&gt;`2</xr-path>
+                <xr-xml-map>ip_ntp_cfg:MinPoll</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="4..17">
+                  <type-name>uint32</type-name>
+                </type>
+              </min-poll>
+              <max-poll config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d%s%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv4/&lt;ip_ntp_cfg_PeerIPV4_peer_addr_v4&gt;/&lt;ip_ntp_cfg_PeerTypeIPV4_peer_type&gt;`3</xr-path>
+                <xr-xml-map>ip_ntp_cfg:MaxPoll</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="4..17">
+                  <type-name>uint32</type-name>
+                </type>
+              </max-poll>
+              <preferred-peer config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d%s%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv4/&lt;ip_ntp_cfg_PeerIPV4_peer_addr_v4&gt;/&lt;ip_ntp_cfg_PeerTypeIPV4_peer_type&gt;`4</xr-path>
+                <xr-xml-map>ip_ntp_cfg:PreferredPeer</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-sch-type>Configured</xr-sch-type>
+                <type>
+                  <type-name>Ntp-prefer-peer</type-name>
+                </type>
+              </preferred-peer>
+              <source-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d%s%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv4/&lt;ip_ntp_cfg_PeerIPV4_peer_addr_v4&gt;/&lt;ip_ntp_cfg_PeerTypeIPV4_peer_type&gt;`5</xr-path>
+                <xr-xml-map>ip_ntp_cfg:SourceInterface</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-sch-type>InterfaceName</xr-sch-type>
+                <type>
+                  <type-name>xr:Interface-name</type-name>
+                </type>
+              </source-interface>
+              <burst config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d%s%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv4/&lt;ip_ntp_cfg_PeerIPV4_peer_addr_v4&gt;/&lt;ip_ntp_cfg_PeerTypeIPV4_peer_type&gt;`6</xr-path>
+                <xr-xml-map>ip_ntp_cfg:Burst</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-sch-type>Configured</xr-sch-type>
+                <type>
+                  <type-name>Ntp-burst</type-name>
+                </type>
+              </burst>
+              <iburst config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d%s%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv4/&lt;ip_ntp_cfg_PeerIPV4_peer_addr_v4&gt;/&lt;ip_ntp_cfg_PeerTypeIPV4_peer_type&gt;`7</xr-path>
+                <xr-xml-map>ip_ntp_cfg:IBurst</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-sch-type>Configured</xr-sch-type>
+                <type>
+                  <type-name>Ntpi-burst</type-name>
+                </type>
+              </iburst>
+            </peer-type-ipv4>
+          </peer-ipv4>
+        </peer-ipv4s>
+        <peer-ipv6s config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv6/</xr-path>
+          <xr-xml-map>ip_ntp_cfg:PeerIPV6Table</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <peer-ipv6 config="true" key="address-ipv6" node="list">
+            <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv6/&lt;ip_ntp_cfg_PeerIPV6_peer_addr_v6&gt;/</xr-path>
+            <xr-xml-map>ip_ntp_cfg:PeerIPV6</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <address-ipv6 config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv6/&lt;ip_ntp_cfg_PeerIPV6_peer_addr_v6&gt;/</xr-path>
+              <xr-xml-map>ip_ntp_cfg:AddressIPV6</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-sch-type>IPV6AddressString</xr-sch-type>
+              <xr-sch-arg-name>&lt;ip_ntp_cfg_PeerIPV6_peer_addr_v6&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ipv6-address-no-zone</type-name>
+              </type>
+            </address-ipv6>
+            <peer-type-ipv6 config="true" key="peer-type" node="list">
+              <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv6/&lt;ip_ntp_cfg_PeerIPV6_peer_addr_v6&gt;/&lt;ip_ntp_cfg_PeerTypeIPV6_peer_type&gt;</xr-path>
+              <xr-xml-map>ip_ntp_cfg:PeerTypeIPV6</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-pack-format>%d%d%d%d%d%s%d%d%N%N%N%N</xr-pack-format>
+              <peer-type config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d%s%d%d%N%N%N%N</xr-pack-format>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv6/&lt;ip_ntp_cfg_PeerIPV6_peer_addr_v6&gt;/&lt;ip_ntp_cfg_PeerTypeIPV6_peer_type&gt;</xr-path>
+                <xr-xml-map>ip_ntp_cfg:PeerType</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-sch-arg-name>&lt;ip_ntp_cfg_PeerTypeIPV6_peer_type&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>Ntp-peer</type-name>
+                </type>
+              </peer-type>
+              <ntp-version config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d%s%d%d%N%N%N%N</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv6/&lt;ip_ntp_cfg_PeerIPV6_peer_addr_v6&gt;/&lt;ip_ntp_cfg_PeerTypeIPV6_peer_type&gt;`0</xr-path>
+                <xr-xml-map>ip_ntp_cfg:NTPVersion</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type>
+                  <type-name>Ntp-version</type-name>
+                </type>
+              </ntp-version>
+              <authentication-key config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d%s%d%d%N%N%N%N</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv6/&lt;ip_ntp_cfg_PeerIPV6_peer_addr_v6&gt;/&lt;ip_ntp_cfg_PeerTypeIPV6_peer_type&gt;`1</xr-path>
+                <xr-xml-map>ip_ntp_cfg:AuthenticationKey</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type>
+                  <type-name>Ntp-key-number</type-name>
+                </type>
+              </authentication-key>
+              <min-poll config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d%s%d%d%N%N%N%N</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv6/&lt;ip_ntp_cfg_PeerIPV6_peer_addr_v6&gt;/&lt;ip_ntp_cfg_PeerTypeIPV6_peer_type&gt;`2</xr-path>
+                <xr-xml-map>ip_ntp_cfg:MinPoll</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="4..17">
+                  <type-name>uint32</type-name>
+                </type>
+              </min-poll>
+              <max-poll config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d%s%d%d%N%N%N%N</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv6/&lt;ip_ntp_cfg_PeerIPV6_peer_addr_v6&gt;/&lt;ip_ntp_cfg_PeerTypeIPV6_peer_type&gt;`3</xr-path>
+                <xr-xml-map>ip_ntp_cfg:MaxPoll</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="4..17">
+                  <type-name>uint32</type-name>
+                </type>
+              </max-poll>
+              <preferred-peer config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d%s%d%d%N%N%N%N</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv6/&lt;ip_ntp_cfg_PeerIPV6_peer_addr_v6&gt;/&lt;ip_ntp_cfg_PeerTypeIPV6_peer_type&gt;`4</xr-path>
+                <xr-xml-map>ip_ntp_cfg:PreferredPeer</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-sch-type>Configured</xr-sch-type>
+                <type>
+                  <type-name>Ntp-prefer-peer</type-name>
+                </type>
+              </preferred-peer>
+              <source-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d%s%d%d%N%N%N%N</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv6/&lt;ip_ntp_cfg_PeerIPV6_peer_addr_v6&gt;/&lt;ip_ntp_cfg_PeerTypeIPV6_peer_type&gt;`5</xr-path>
+                <xr-xml-map>ip_ntp_cfg:SourceInterface</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-sch-type>InterfaceName</xr-sch-type>
+                <type>
+                  <type-name>xr:Interface-name</type-name>
+                </type>
+              </source-interface>
+              <burst config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d%s%d%d%N%N%N%N</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv6/&lt;ip_ntp_cfg_PeerIPV6_peer_addr_v6&gt;/&lt;ip_ntp_cfg_PeerTypeIPV6_peer_type&gt;`6</xr-path>
+                <xr-xml-map>ip_ntp_cfg:Burst</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-sch-type>Configured</xr-sch-type>
+                <type>
+                  <type-name>Ntp-burst</type-name>
+                </type>
+              </burst>
+              <iburst config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d%s%d%d%N%N%N%N</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv6/&lt;ip_ntp_cfg_PeerIPV6_peer_addr_v6&gt;/&lt;ip_ntp_cfg_PeerTypeIPV6_peer_type&gt;`7</xr-path>
+                <xr-xml-map>ip_ntp_cfg:IBurst</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-sch-type>Configured</xr-sch-type>
+                <type>
+                  <type-name>Ntpi-burst</type-name>
+                </type>
+              </iburst>
+              <address-ipv6 config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d%s%d%d%N%N%N%N</xr-pack-format>
+                <xr-pack-elem-size>4</xr-pack-elem-size>
+                <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/ipv6/&lt;ip_ntp_cfg_PeerIPV6_peer_addr_v6&gt;/&lt;ip_ntp_cfg_PeerTypeIPV6_peer_type&gt;`8</xr-path>
+                <xr-xml-map>ip_ntp_cfg:AddressIPV6</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-sch-type>IPV6Address</xr-sch-type>
+                <type>
+                  <type-name>inet:ipv6-address-no-zone</type-name>
+                </type>
+              </address-ipv6>
+            </peer-type-ipv6>
+          </peer-ipv6>
+        </peer-ipv6s>
+        <vrf-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/ip-ntp/peer/&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;/</xr-path>
+          <xr-xml-map>ip_ntp_cfg:VRFName</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>VRF_Name</xr-sch-type>
+          <xr-sch-arg-name>&lt;ip_ntp_cfg_PeerVRF_vrf_name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </vrf-name>
+      </peer-vrf>
+    </peer-vrfs>
+    <dscp-ipv4 config="true" is-key="false" node="container" presence="true">
+      <xr-data-handler>ignore</xr-data-handler>
+      <xr-is-packed/>
+      <xr-path>/cfg/gl/ip-ntp/ipv4/tos`</xr-path>
+      <xr-xml-map>ip_ntp_cfg:dscpIPv4</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <xr-pack-format>%d%d</xr-pack-format>
+      <mode config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/gl/ip-ntp/ipv4/tos`0</xr-path>
+        <xr-xml-map>ip_ntp_cfg:Mode</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Ntpdscp</type-name>
+        </type>
+        <mandatory>true</mandatory>
+      </mode>
+      <dscp-or-precedence-value config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/gl/ip-ntp/ipv4/tos`1</xr-path>
+        <xr-xml-map>ip_ntp_cfg:DscpOrPrecedenceValue</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..63">
+          <type-name>uint32</type-name>
+        </type>
+        <mandatory>true</mandatory>
+      </dscp-or-precedence-value>
+    </dscp-ipv4>
+    <dscp-ipv6 config="true" is-key="false" node="container" presence="true">
+      <xr-data-handler>ignore</xr-data-handler>
+      <xr-is-packed/>
+      <xr-path>/cfg/gl/ip-ntp/ipv6/tclass`</xr-path>
+      <xr-xml-map>ip_ntp_cfg:dscpIPv6</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <xr-pack-format>%d%d</xr-pack-format>
+      <mode config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/gl/ip-ntp/ipv6/tclass`0</xr-path>
+        <xr-xml-map>ip_ntp_cfg:Mode</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Ntpdscp</type-name>
+        </type>
+        <mandatory>true</mandatory>
+      </mode>
+      <dscp-or-precedence-value config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/gl/ip-ntp/ipv6/tclass`1</xr-path>
+        <xr-xml-map>ip_ntp_cfg:DscpOrPrecedenceValue</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..63">
+          <type-name>uint32</type-name>
+        </type>
+        <mandatory>true</mandatory>
+      </dscp-or-precedence-value>
+    </dscp-ipv6>
+    <sources config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip-ntp/source/</xr-path>
+      <xr-xml-map>ip_ntp_cfg:SourceTable</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <source config="true" key="vrf-name" node="list">
+        <xr-path>/cfg/gl/ip-ntp/source/&lt;ip_ntp_cfg_Source_vrf_name&gt;</xr-path>
+        <xr-xml-map>ip_ntp_cfg:Source</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <vrf-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/ip-ntp/source/&lt;ip_ntp_cfg_Source_vrf_name&gt;</xr-path>
+          <xr-xml-map>ip_ntp_cfg:VRFName</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>VRF_Name</xr-sch-type>
+          <xr-sch-arg-name>&lt;ip_ntp_cfg_Source_vrf_name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </vrf-name>
+        <source-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/ip-ntp/source/&lt;ip_ntp_cfg_Source_vrf_name&gt;</xr-path>
+          <xr-xml-map>ip_ntp_cfg:SourceInterface</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>InterfaceName</xr-sch-type>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </source-interface>
+      </source>
+    </sources>
+    <drift config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip-ntp/drift/</xr-path>
+      <xr-xml-map>ip_ntp_cfg:Drift</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <file config="true" is-key="false" node="container" presence="false">
+        <xr-is-packed/>
+        <xr-path>/cfg/gl/ip-ntp/drift/file`</xr-path>
+        <xr-xml-map>ip_ntp_cfg:File</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-pack-format>%s%s</xr-pack-format>
+        <location config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/ip-ntp/drift/file`0</xr-path>
+          <xr-xml-map>ip_ntp_cfg:Location</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-default-set/>
+          <type>
+            <type-name>string</type-name>
+          </type>
+          <default>PWD</default>
+        </location>
+        <filename config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/ip-ntp/drift/file`1</xr-path>
+          <xr-xml-map>ip_ntp_cfg:Filename</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-default-set/>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </filename>
+      </file>
+      <aging-time config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/ip-ntp/drift/aging-time</xr-path>
+        <xr-xml-map>ip_ntp_cfg:AgingTime</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..65535">
+          <type-name>uint32</type-name>
+        </type>
+      </aging-time>
+    </drift>
+    <authentication config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip-ntp/auth/</xr-path>
+      <xr-xml-map>ip_ntp_cfg:Authentication</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <keys config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/ip-ntp/auth/keys/</xr-path>
+        <xr-xml-map>ip_ntp_cfg:KeyTable</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <key config="true" key="key-number" node="list">
+          <xr-path>/cfg/gl/ip-ntp/auth/keys/&lt;ip_ntp_cfg_Key_auth_key&gt;</xr-path>
+          <xr-xml-map>ip_ntp_cfg:Key</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <key-number config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ip-ntp/auth/keys/&lt;ip_ntp_cfg_Key_auth_key&gt;</xr-path>
+            <xr-xml-map>ip_ntp_cfg:KeyNumber</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <xr-sch-arg-name>&lt;ip_ntp_cfg_Key_auth_key&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>Ntp-key-number</type-name>
+            </type>
+          </key-number>
+          <authentication-key config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/ip-ntp/auth/keys/&lt;ip_ntp_cfg_Key_auth_key&gt;</xr-path>
+            <xr-xml-map>ip_ntp_cfg:AuthenticationKey</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-sch-type>EncryptionString</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </authentication-key>
+        </key>
+      </keys>
+      <trusted-keys config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/ip-ntp/auth/trustedkeys/</xr-path>
+        <xr-xml-map>ip_ntp_cfg:TrustedKeyTable</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <trusted-key config="true" key="key-number" node="list">
+          <xr-path>/cfg/gl/ip-ntp/auth/trustedkeys/&lt;ip_ntp_cfg_TrustedKey_key_num&gt;</xr-path>
+          <xr-xml-map>ip_ntp_cfg:TrustedKey</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <key-number config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-create-item-relative-path/>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ip-ntp/auth/trustedkeys/&lt;ip_ntp_cfg_TrustedKey_key_num&gt;</xr-path>
+            <xr-xml-map>ip_ntp_cfg:KeyNumber</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <xr-sch-arg-name>&lt;ip_ntp_cfg_TrustedKey_key_num&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>Ntp-key-number</type-name>
+            </type>
+          </key-number>
+        </trusted-key>
+      </trusted-keys>
+      <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/ip-ntp/auth/status</xr-path>
+        <xr-xml-map>ip_ntp_cfg:Enable</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </enable>
+    </authentication>
+    <passive config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip-ntp/passive/</xr-path>
+      <xr-xml-map>ip_ntp_cfg:Passive</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/ip-ntp/passive/status</xr-path>
+        <xr-xml-map>ip_ntp_cfg:Enable</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </enable>
+    </passive>
+    <interface-tables config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip-ntp/if/</xr-path>
+      <xr-xml-map>ip_ntp_cfg:InterfaceVRFTable</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <interface-table config="true" key="vrf-name" node="list">
+        <xr-path>/cfg/gl/ip-ntp/if/&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;/</xr-path>
+        <xr-xml-map>ip_ntp_cfg:InterfaceTable</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <vrf-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/ip-ntp/if/&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;/</xr-path>
+          <xr-xml-map>ip_ntp_cfg:VRFName</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>VRF_Name</xr-sch-type>
+          <xr-sch-arg-name>&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </vrf-name>
+        <interface config="true" key="interface" node="list">
+          <xr-path>/cfg/gl/ip-ntp/if/&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;/&lt;ip_ntp_cfg_Interface_int_name&gt;/</xr-path>
+          <xr-xml-map>ip_ntp_cfg:Interface</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <interface-multicast config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/ip-ntp/if/&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;/&lt;ip_ntp_cfg_Interface_int_name&gt;/mcast/</xr-path>
+            <xr-xml-map>ip_ntp_cfg:InterfaceMulticast</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <multicast-clients config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/ip-ntp/if/&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;/&lt;ip_ntp_cfg_Interface_int_name&gt;/mcast/client/</xr-path>
+              <xr-xml-map>ip_ntp_cfg:MulticastClientTable</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <multicast-client config="true" key="ip-address" node="list">
+                <xr-path>/cfg/gl/ip-ntp/if/&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;/&lt;ip_ntp_cfg_Interface_int_name&gt;/mcast/client/&lt;ip_ntp_cfg_MulticastClient_mcast_ip&gt;</xr-path>
+                <xr-xml-map>ip_ntp_cfg:MulticastClient</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <ip-address config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-create-item-relative-path/>
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/cfg/gl/ip-ntp/if/&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;/&lt;ip_ntp_cfg_Interface_int_name&gt;/mcast/client/&lt;ip_ntp_cfg_MulticastClient_mcast_ip&gt;</xr-path>
+                  <xr-xml-map>ip_ntp_cfg:IPAddress</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-sch-type>IPAddress</xr-sch-type>
+                  <xr-sch-arg-name>&lt;ip_ntp_cfg_MulticastClient_mcast_ip&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>inet:ip-address-no-zone</type-name>
+                  </type>
+                </ip-address>
+              </multicast-client>
+            </multicast-clients>
+            <multicast-servers config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/ip-ntp/if/&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;/&lt;ip_ntp_cfg_Interface_int_name&gt;/mcast/server/</xr-path>
+              <xr-xml-map>ip_ntp_cfg:MulticastServerTable</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <multicast-server config="true" key="ip-address" node="list">
+                <xr-path>/cfg/gl/ip-ntp/if/&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;/&lt;ip_ntp_cfg_Interface_int_name&gt;/mcast/server/&lt;ip_ntp_cfg_MulticastServer_mcast_ip&gt;</xr-path>
+                <xr-xml-map>ip_ntp_cfg:MulticastServer</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-pack-format>%d%d%d</xr-pack-format>
+                <ip-address config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d</xr-pack-format>
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/cfg/gl/ip-ntp/if/&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;/&lt;ip_ntp_cfg_Interface_int_name&gt;/mcast/server/&lt;ip_ntp_cfg_MulticastServer_mcast_ip&gt;</xr-path>
+                  <xr-xml-map>ip_ntp_cfg:IPAddress</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-sch-type>IPAddress</xr-sch-type>
+                  <xr-sch-arg-name>&lt;ip_ntp_cfg_MulticastServer_mcast_ip&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>inet:ip-address-no-zone</type-name>
+                  </type>
+                </ip-address>
+                <authentication-key config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/ip-ntp/if/&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;/&lt;ip_ntp_cfg_Interface_int_name&gt;/mcast/server/&lt;ip_ntp_cfg_MulticastServer_mcast_ip&gt;`0</xr-path>
+                  <xr-xml-map>ip_ntp_cfg:AuthenticationKey</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <type>
+                    <type-name>Ntp-key-number</type-name>
+                  </type>
+                </authentication-key>
+                <version config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/ip-ntp/if/&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;/&lt;ip_ntp_cfg_Interface_int_name&gt;/mcast/server/&lt;ip_ntp_cfg_MulticastServer_mcast_ip&gt;`1</xr-path>
+                  <xr-xml-map>ip_ntp_cfg:Version</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <type>
+                    <type-name>Ntp-version</type-name>
+                  </type>
+                </version>
+                <ttl config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/ip-ntp/if/&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;/&lt;ip_ntp_cfg_Interface_int_name&gt;/mcast/server/&lt;ip_ntp_cfg_MulticastServer_mcast_ip&gt;`2</xr-path>
+                  <xr-xml-map>ip_ntp_cfg:TTL</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <type>
+                    <type-name>Ntpttl</type-name>
+                  </type>
+                </ttl>
+              </multicast-server>
+            </multicast-servers>
+          </interface-multicast>
+          <interface-broadcast config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/ip-ntp/if/&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;/&lt;ip_ntp_cfg_Interface_int_name&gt;/bcast/</xr-path>
+            <xr-xml-map>ip_ntp_cfg:InterfaceBroadcast</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <broadcast-servers config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/ip-ntp/if/&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;/&lt;ip_ntp_cfg_Interface_int_name&gt;/bcast/broadcast/</xr-path>
+              <xr-xml-map>ip_ntp_cfg:Broadcast</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <broadcast-server config="true" key="broadcast-type" node="list">
+                <xr-path>/cfg/gl/ip-ntp/if/&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;/&lt;ip_ntp_cfg_Interface_int_name&gt;/bcast/broadcast/&lt;ip_ntp_cfg_BroadcastServer_broadcast_type&gt;</xr-path>
+                <xr-xml-map>ip_ntp_cfg:BroadcastServer</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-pack-format>%N%d%d</xr-pack-format>
+                <broadcast-type config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%N%d%d</xr-pack-format>
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/cfg/gl/ip-ntp/if/&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;/&lt;ip_ntp_cfg_Interface_int_name&gt;/bcast/broadcast/&lt;ip_ntp_cfg_BroadcastServer_broadcast_type&gt;</xr-path>
+                  <xr-xml-map>ip_ntp_cfg:BroadcastType</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-sch-type>String</xr-sch-type>
+                  <xr-sch-arg-name>&lt;ip_ntp_cfg_BroadcastServer_broadcast_type&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>xr:Cisco-ios-xr-string</type-name>
+                  </type>
+                </broadcast-type>
+                <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%N%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/ip-ntp/if/&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;/&lt;ip_ntp_cfg_Interface_int_name&gt;/bcast/broadcast/&lt;ip_ntp_cfg_BroadcastServer_broadcast_type&gt;`0</xr-path>
+                  <xr-xml-map>ip_ntp_cfg:Address</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-sch-type>IPV4Address</xr-sch-type>
+                  <type>
+                    <type-name>inet:ipv4-address-no-zone</type-name>
+                  </type>
+                </address>
+                <authentication-key config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%N%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/ip-ntp/if/&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;/&lt;ip_ntp_cfg_Interface_int_name&gt;/bcast/broadcast/&lt;ip_ntp_cfg_BroadcastServer_broadcast_type&gt;`1</xr-path>
+                  <xr-xml-map>ip_ntp_cfg:AuthenticationKey</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <type>
+                    <type-name>Ntp-key-number</type-name>
+                  </type>
+                </authentication-key>
+                <ntp-version config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%N%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/ip-ntp/if/&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;/&lt;ip_ntp_cfg_Interface_int_name&gt;/bcast/broadcast/&lt;ip_ntp_cfg_BroadcastServer_broadcast_type&gt;`2</xr-path>
+                  <xr-xml-map>ip_ntp_cfg:NTPVersion</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <type>
+                    <type-name>Ntp-version</type-name>
+                  </type>
+                </ntp-version>
+              </broadcast-server>
+            </broadcast-servers>
+            <broadcast-client config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/ip-ntp/if/&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;/&lt;ip_ntp_cfg_Interface_int_name&gt;/bcast/client</xr-path>
+              <xr-xml-map>ip_ntp_cfg:BroadcastClient</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </broadcast-client>
+          </interface-broadcast>
+          <disable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ip-ntp/if/&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;/&lt;ip_ntp_cfg_Interface_int_name&gt;/disabled</xr-path>
+            <xr-xml-map>ip_ntp_cfg:Disable</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </disable>
+          <interface config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-create-item-relative-path>aza</xr-create-item-relative-path>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/ip-ntp/if/&lt;ip_ntp_cfg_InterfaceTable_vrf_name&gt;/&lt;ip_ntp_cfg_Interface_int_name&gt;/</xr-path>
+            <xr-xml-map>ip_ntp_cfg:Interface</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-sch-type>InterfaceName</xr-sch-type>
+            <xr-sch-arg-name>&lt;ip_ntp_cfg_Interface_int_name&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+          </interface>
+        </interface>
+      </interface-table>
+    </interface-tables>
+    <access-group-tables config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip-ntp/access/</xr-path>
+      <xr-xml-map>ip_ntp_cfg:AccessGroupVRFTable</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <access-group-table config="true" key="vrf-name" node="list">
+        <xr-path>/cfg/gl/ip-ntp/access/&lt;ip_ntp_cfg_AccessGroupTable_vrf_name&gt;/</xr-path>
+        <xr-xml-map>ip_ntp_cfg:AccessGroupTable</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <vrf-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/ip-ntp/access/&lt;ip_ntp_cfg_AccessGroupTable_vrf_name&gt;/</xr-path>
+          <xr-xml-map>ip_ntp_cfg:VRFName</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>VRF_Name</xr-sch-type>
+          <xr-sch-arg-name>&lt;ip_ntp_cfg_AccessGroupTable_vrf_name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </vrf-name>
+        <access-group-af-table config="true" key="af" node="list">
+          <xr-path>/cfg/gl/ip-ntp/access/&lt;ip_ntp_cfg_AccessGroupTable_vrf_name&gt;/&lt;ip_ntp_cfg_AccessGroupAFTable_addr_family&gt;/</xr-path>
+          <xr-xml-map>ip_ntp_cfg:AccessGroupAFTable</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <af config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ip-ntp/access/&lt;ip_ntp_cfg_AccessGroupTable_vrf_name&gt;/&lt;ip_ntp_cfg_AccessGroupAFTable_addr_family&gt;/</xr-path>
+            <xr-xml-map>ip_ntp_cfg:AF</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <xr-sch-arg-name>&lt;ip_ntp_cfg_AccessGroupAFTable_addr_family&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>Ntp-access-af</type-name>
+            </type>
+          </af>
+          <access-group config="true" key="access-group-type" node="list">
+            <xr-path>/cfg/gl/ip-ntp/access/&lt;ip_ntp_cfg_AccessGroupTable_vrf_name&gt;/&lt;ip_ntp_cfg_AccessGroupAFTable_addr_family&gt;/&lt;ip_ntp_cfg_AccessGroup_acl_type&gt;</xr-path>
+            <xr-xml-map>ip_ntp_cfg:AccessGroup</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <access-group-type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/ip-ntp/access/&lt;ip_ntp_cfg_AccessGroupTable_vrf_name&gt;/&lt;ip_ntp_cfg_AccessGroupAFTable_addr_family&gt;/&lt;ip_ntp_cfg_AccessGroup_acl_type&gt;</xr-path>
+              <xr-xml-map>ip_ntp_cfg:AccessGroupType</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <xr-sch-arg-name>&lt;ip_ntp_cfg_AccessGroup_acl_type&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>Ntp-access</type-name>
+              </type>
+            </access-group-type>
+            <access-list-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/ip-ntp/access/&lt;ip_ntp_cfg_AccessGroupTable_vrf_name&gt;/&lt;ip_ntp_cfg_AccessGroupAFTable_addr_family&gt;/&lt;ip_ntp_cfg_AccessGroup_acl_type&gt;</xr-path>
+              <xr-xml-map>ip_ntp_cfg:AccessListName</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </access-list-name>
+          </access-group>
+        </access-group-af-table>
+      </access-group-table>
+    </access-group-tables>
+    <max-associations config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/ip-ntp/ma</xr-path>
+      <xr-xml-map>ip_ntp_cfg:MaxAssociations</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <xr-sch-type>Range</xr-sch-type>
+      <type range="0..4294967295">
+        <type-name>uint32</type-name>
+      </type>
+    </max-associations>
+    <master config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/ip-ntp/master</xr-path>
+      <xr-xml-map>ip_ntp_cfg:Master</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <xr-sch-type>Range</xr-sch-type>
+      <type range="1..15">
+        <type-name>uint32</type-name>
+      </type>
+      <default>8</default>
+    </master>
+    <broadcast-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/ip-ntp/bcastdelay</xr-path>
+      <xr-xml-map>ip_ntp_cfg:BroadcastDelay</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <xr-sch-type>Range</xr-sch-type>
+      <type range="1..999999">
+        <type-name>uint32</type-name>
+      </type>
+    </broadcast-delay>
+    <log-internal-sync config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/ip-ntp/log_internal_sync</xr-path>
+      <xr-xml-map>ip_ntp_cfg:LogInternalSync</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <xr-sch-type>Configured</xr-sch-type>
+      <type>
+        <type-name>empty</type-name>
+      </type>
+    </log-internal-sync>
+    <update-calendar config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/ip-ntp/update_calendar</xr-path>
+      <xr-xml-map>ip_ntp_cfg:UpdateCalendar</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <xr-sch-type>Configured</xr-sch-type>
+      <type>
+        <type-name>empty</type-name>
+      </type>
+    </update-calendar>
+  </ntp>
+</Cisco-IOS-XR-ip-ntp-cfg>

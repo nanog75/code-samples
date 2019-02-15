@@ -1,0 +1,495 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ppp-ma-gbl-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ppp-ma-gbl-cfg" revision="2017-11-05">
+  <files>
+    <file revision="2017-11-05" submodule="false">Cisco-IOS-XR-ppp-ma-gbl-cfg.yang</file>
+  </files>
+  <prefix>ppp-ma-gbl-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-subscriber-infra-tmplmgr-cfg</import>
+  <typedef name="Ppp-authentication-method-gbl">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">pap</enum>
+      <enum value="2">chap</enum>
+      <enum value="3">ms-chap</enum>
+    </type>
+  </typedef>
+  <augment path="/a1:dynamic-template/a1:ppps/a1:ppp">
+    <ppp-template config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/</xr-path>
+      <xr-xml-map>ppp_gbl_cfg:PPPTemplate</xr-xml-map>
+      <xr-task>ppp</xr-task>
+      <xr-scope>exported</xr-scope>
+      <fsm config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/fsm/</xr-path>
+        <xr-xml-map>ppp_gbl_fsm_cfg:FSM</xr-xml-map>
+        <xr-task>ppp</xr-task>
+        <max-consecutive-conf-naks config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/fsm/max-failure</xr-path>
+          <xr-xml-map>ppp_gbl_fsm_cfg:MaxConsecutiveConfNaks</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="2..10">
+            <type-name>uint32</type-name>
+          </type>
+          <default>5</default>
+        </max-consecutive-conf-naks>
+        <max-unacknowledged-conf-requests config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/fsm/max-configure</xr-path>
+          <xr-xml-map>ppp_gbl_fsm_cfg:MaxUnacknowledgedConfRequests</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="4..20">
+            <type-name>uint32</type-name>
+          </type>
+          <default>10</default>
+        </max-unacknowledged-conf-requests>
+        <retry-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/fsm/timeout-retry</xr-path>
+          <xr-xml-map>ppp_gbl_fsm_cfg:RetryTimeout</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..10">
+            <type-name>uint32</type-name>
+          </type>
+          <default>3</default>
+        </retry-timeout>
+        <protocol-reject-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/fsm/proto-rej</xr-path>
+          <xr-xml-map>ppp_gbl_fsm_cfg:ProtocolRejectTimeout</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..60">
+            <type-name>uint32</type-name>
+          </type>
+          <default>60</default>
+        </protocol-reject-timeout>
+      </fsm>
+      <lcp config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/lcp/</xr-path>
+        <xr-xml-map>ppp_gbl_lcp_cfg:LCP</xr-xml-map>
+        <xr-task>ppp</xr-task>
+        <absolute-timeout config="true" is-key="false" node="container" presence="false">
+          <xr-is-packed/>
+          <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/lcp/timeout-absolute`</xr-path>
+          <xr-xml-map>ppp_gbl_lcp_cfg:AbsoluteTimeout</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <minutes config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/lcp/timeout-absolute`0</xr-path>
+            <xr-xml-map>ppp_gbl_lcp_cfg:Minutes</xr-xml-map>
+            <xr-task>ppp</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..35000000">
+              <type-name>uint32</type-name>
+            </type>
+          </minutes>
+          <seconds config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/lcp/timeout-absolute`1</xr-path>
+            <xr-xml-map>ppp_gbl_lcp_cfg:Seconds</xr-xml-map>
+            <xr-task>ppp</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..59">
+              <type-name>uint32</type-name>
+            </type>
+          </seconds>
+        </absolute-timeout>
+        <delay config="true" is-key="false" node="container" presence="false">
+          <xr-is-packed/>
+          <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/lcp/delay`</xr-path>
+          <xr-xml-map>ppp_gbl_lcp_cfg:Delay</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <seconds config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/lcp/delay`0</xr-path>
+            <xr-xml-map>ppp_gbl_lcp_cfg:Seconds</xr-xml-map>
+            <xr-task>ppp</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..255">
+              <type-name>uint32</type-name>
+            </type>
+          </seconds>
+          <milliseconds config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/lcp/delay`1</xr-path>
+            <xr-xml-map>ppp_gbl_lcp_cfg:Milliseconds</xr-xml-map>
+            <xr-task>ppp</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..999">
+              <type-name>uint32</type-name>
+            </type>
+          </milliseconds>
+        </delay>
+        <authentication config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/lcp/auth/</xr-path>
+          <xr-xml-map>ppp_gbl_lcp_cfg:Authentication</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <methods config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/lcp/auth/method`</xr-path>
+            <xr-xml-map>ppp_gbl_lcp_cfg:Method</xr-xml-map>
+            <xr-task>ppp</xr-task>
+            <xr-pack-format>%d%d%d</xr-pack-format>
+            <method config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-pack-list-start>0</xr-pack-list-start>
+              <xr-pack-list-end>3</xr-pack-list-end>
+              <xr-internal-key>&lt;pack_arg1&gt;</xr-internal-key>
+              <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/lcp/auth/method`&lt;pack_arg1&gt;</xr-path>
+              <xr-xml-map>ppp_gbl_lcp_cfg:Methods</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Ppp-authentication-method-gbl</type-name>
+              </type>
+              <max-elements>3</max-elements>
+            </method>
+          </methods>
+          <chap-host-name config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/lcp/auth/chap/hostname</xr-path>
+            <xr-xml-map>ppp_gbl_lcp_cfg:CHAPHostname</xr-xml-map>
+            <xr-task>ppp</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </chap-host-name>
+          <pap config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/lcp/auth/pap</xr-path>
+            <xr-xml-map>ppp_gbl_lcp_cfg:PAP</xr-xml-map>
+            <xr-task>ppp</xr-task>
+            <xr-sch-type>Integer</xr-sch-type>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </pap>
+          <mschap-host-name config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/lcp/auth/ms-chap/hostname</xr-path>
+            <xr-xml-map>ppp_gbl_lcp_cfg:MSCHAPHostname</xr-xml-map>
+            <xr-task>ppp</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </mschap-host-name>
+          <max-authentication-failures config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/lcp/auth/max-attempts</xr-path>
+            <xr-xml-map>ppp_gbl_lcp_cfg:MaxAuthenticationFailures</xr-xml-map>
+            <xr-task>ppp</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..10">
+              <type-name>uint32</type-name>
+            </type>
+          </max-authentication-failures>
+          <timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/lcp/auth/timeout</xr-path>
+            <xr-xml-map>ppp_gbl_lcp_cfg:Timeout</xr-xml-map>
+            <xr-task>ppp</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="3..30">
+              <type-name>uint32</type-name>
+            </type>
+            <default>10</default>
+          </timeout>
+        </authentication>
+        <keepalive config="true" is-key="false" node="container" presence="false">
+          <xr-is-packed/>
+          <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/lcp/keepalive`</xr-path>
+          <xr-xml-map>ppp_gbl_lcp_cfg:Keepalive</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <keepalive-disable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/lcp/keepalive`0</xr-path>
+            <xr-xml-map>ppp_gbl_lcp_cfg:KeepaliveDisable</xr-xml-map>
+            <xr-task>ppp</xr-task>
+            <xr-sch-type>Boolean</xr-sch-type>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </keepalive-disable>
+          <interval config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/lcp/keepalive`1</xr-path>
+            <xr-xml-map>ppp_gbl_lcp_cfg:Interval</xr-xml-map>
+            <xr-task>ppp</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <when>../keepalive-disable = 'false'</when>
+            <type range="10..180">
+              <type-name>uint32</type-name>
+            </type>
+          </interval>
+          <retry-count config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/lcp/keepalive`2</xr-path>
+            <xr-xml-map>ppp_gbl_lcp_cfg:RetryCount</xr-xml-map>
+            <xr-task>ppp</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <when>../keepalive-disable = 'false'</when>
+            <type range="1..255">
+              <type-name>uint32</type-name>
+            </type>
+          </retry-count>
+        </keepalive>
+        <renegotiation config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/lcp/renegotiation</xr-path>
+          <xr-xml-map>ppp_gbl_lcp_cfg:Renegotiation</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </renegotiation>
+        <service-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/lcp/service-type</xr-path>
+          <xr-xml-map>ppp_gbl_lcp_cfg:ServiceType</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="0..15">
+            <type-name>uint32</type-name>
+          </type>
+          <default>0</default>
+        </service-type>
+        <send-term-request-on-shut-down config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/lcp/send-term-request-on-shutdown</xr-path>
+          <xr-xml-map>ppp_gbl_lcp_cfg:SendTermRequestOnShutDown</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </send-term-request-on-shut-down>
+        <mru-ignore config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/lcp/mru-ignore</xr-path>
+          <xr-xml-map>ppp_gbl_lcp_cfg:MRUIgnore</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </mru-ignore>
+      </lcp>
+      <ipv6cp config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/ipv6cp/</xr-path>
+        <xr-xml-map>ppp_gbl_ipv6cp_cfg:IPv6CP</xr-xml-map>
+        <xr-task>ppp</xr-task>
+        <passive config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/ipv6cp/passive</xr-path>
+          <xr-xml-map>ppp_gbl_ipv6cp_cfg:Passive</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </passive>
+        <renegotiation config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/ipv6cp/renegotiation</xr-path>
+          <xr-xml-map>ppp_gbl_ipv6cp_cfg:Renegotiation</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </renegotiation>
+        <peer-interface-id config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/ipv6cp/peer-interface-id</xr-path>
+          <xr-xml-map>ppp_gbl_ipv6cp_cfg:PeerInterfaceID</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </peer-interface-id>
+        <protocol-reject config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/ipv6cp/prot-rej</xr-path>
+          <xr-xml-map>ppp_gbl_ipv6cp_cfg:ProtocolReject</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </protocol-reject>
+      </ipv6cp>
+      <ipcp config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/ipcp/</xr-path>
+        <xr-xml-map>ppp_gbl_ipcp_cfg:IPCP</xr-xml-map>
+        <xr-task>ppp</xr-task>
+        <wins config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/ipcp/wins/</xr-path>
+          <xr-xml-map>ppp_gbl_ipcp_cfg:WINS</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <wins-addresses config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/ipcp/wins/addresses`</xr-path>
+            <xr-xml-map>ppp_gbl_ipcp_cfg:WINSAddresses</xr-xml-map>
+            <xr-task>ppp</xr-task>
+            <xr-pack-format>%N%N</xr-pack-format>
+            <primary config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%N%N</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/ipcp/wins/addresses`0</xr-path>
+              <xr-xml-map>ppp_gbl_ipcp_cfg:Primary</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-sch-type>IPV4Address</xr-sch-type>
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </primary>
+            <secondary config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%N%N</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/ipcp/wins/addresses`1</xr-path>
+              <xr-xml-map>ppp_gbl_ipcp_cfg:Secondary</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-sch-type>IPV4Address</xr-sch-type>
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </secondary>
+          </wins-addresses>
+        </wins>
+        <dns config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/ipcp/dns/</xr-path>
+          <xr-xml-map>ppp_gbl_ipcp_cfg:DNS</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <dns-addresses config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/ipcp/dns/addresses`</xr-path>
+            <xr-xml-map>ppp_gbl_ipcp_cfg:DNSAddresses</xr-xml-map>
+            <xr-task>ppp</xr-task>
+            <xr-pack-format>%N%N</xr-pack-format>
+            <primary config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%N%N</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/ipcp/dns/addresses`0</xr-path>
+              <xr-xml-map>ppp_gbl_ipcp_cfg:Primary</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-sch-type>IPV4Address</xr-sch-type>
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </primary>
+            <secondary config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%N%N</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/ipcp/dns/addresses`1</xr-path>
+              <xr-xml-map>ppp_gbl_ipcp_cfg:Secondary</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-sch-type>IPV4Address</xr-sch-type>
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </secondary>
+          </dns-addresses>
+        </dns>
+        <peer-address config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/ipcp/peer-address/</xr-path>
+          <xr-xml-map>ppp_gbl_ipcp_cfg:PeerAddress</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <default config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>inaddr</xr-primitive-type>
+            <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/ipcp/peer-address/default</xr-path>
+            <xr-xml-map>ppp_gbl_ipcp_cfg:Default</xr-xml-map>
+            <xr-task>ppp</xr-task>
+            <xr-sch-type>IPV4Address</xr-sch-type>
+            <type>
+              <type-name>inet:ipv4-address-no-zone</type-name>
+            </type>
+          </default>
+          <pool config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/ipcp/peer-address/pool</xr-path>
+            <xr-xml-map>ppp_gbl_ipcp_cfg:Pool</xr-xml-map>
+            <xr-task>ppp</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </pool>
+        </peer-address>
+        <renegotiation config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/ipcp/renegotiation</xr-path>
+          <xr-xml-map>ppp_gbl_ipcp_cfg:Renegotiation</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </renegotiation>
+        <passive config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/ipcp/passive</xr-path>
+          <xr-xml-map>ppp_gbl_ipcp_cfg:Passive</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </passive>
+        <protocol-reject config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/ipcp/prot-rej</xr-path>
+          <xr-xml-map>ppp_gbl_ipcp_cfg:ProtocolReject</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </protocol-reject>
+        <peer-netmask config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>inaddr</xr-primitive-type>
+          <xr-path>/cfg/gl/dynamic-templates/ppp/&lt;subscriber_infra_subdb_cfg_PPP_name&gt;/ppp/ipcp/peer-netmask</xr-path>
+          <xr-xml-map>ppp_gbl_ipcp_cfg:PeerNetmask</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-sch-type>IPV4Address</xr-sch-type>
+          <type>
+            <type-name>inet:ipv4-address-no-zone</type-name>
+          </type>
+        </peer-netmask>
+      </ipcp>
+    </ppp-template>
+  </augment>
+</Cisco-IOS-XR-ppp-ma-gbl-cfg>

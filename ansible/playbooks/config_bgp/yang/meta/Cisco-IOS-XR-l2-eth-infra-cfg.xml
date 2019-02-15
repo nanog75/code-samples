@@ -1,0 +1,1229 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-l2-eth-infra-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-l2-eth-infra-cfg" revision="2017-05-01">
+  <files>
+    <file revision="2017-05-01" submodule="false">Cisco-IOS-XR-l2-eth-infra-cfg.yang</file>
+  </files>
+  <prefix>l2-eth-infra-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="yang">ietf-yang-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="dt1">Cisco-IOS-XR-l2-eth-infra-datatypes</import>
+  <import prefix="a1">Cisco-IOS-XR-ifmgr-cfg</import>
+  <import prefix="a2">Cisco-IOS-XR-l2vpn-cfg</import>
+  <typedef name="L2-protocol-name">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">cdp</enum>
+      <enum value="1">stp</enum>
+      <enum value="2">vtp</enum>
+      <enum value="3">pvst</enum>
+      <enum value="4">cpsv</enum>
+    </type>
+  </typedef>
+  <typedef name="L2-protocol-mode">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">forward</enum>
+      <enum value="1">drop</enum>
+      <enum value="2">tunnel</enum>
+      <enum value="3">reverse-tunnel</enum>
+    </type>
+  </typedef>
+  <typedef name="Egress-filtering">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">egress-filtering-type-strict</enum>
+      <enum value="2">egress-filtering-type-disable</enum>
+      <enum value="3">egress-filtering-type-default</enum>
+    </type>
+  </typedef>
+  <typedef name="Filtering">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">filtering-type-dot1q</enum>
+      <enum value="1">filtering-type-dot1ad</enum>
+    </type>
+  </typedef>
+  <typedef name="L2-protocol-mpls-exp-bits-value">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="0..7">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <vlan-sub-configuration config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/vlan_sub/</xr-path>
+      <xr-xml-map>vlan_interface_cfg:VLANSubConfiguration</xr-xml-map>
+      <xr-task>vlan</xr-task>
+      <xr-scope>exported</xr-scope>
+      <vlan-identifier config="true" is-key="false" node="container" presence="true">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/vlan_sub/vlan_id`</xr-path>
+        <xr-xml-map>vlan_interface_cfg:VLANIdentifier</xr-xml-map>
+        <xr-task>vlan</xr-task>
+        <xr-pack-format>%d%d%d</xr-pack-format>
+        <vlan-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/vlan_sub/vlan_id`0</xr-path>
+          <xr-xml-map>vlan_interface_cfg:VlanType</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </vlan-type>
+        <first-tag config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/vlan_sub/vlan_id`1</xr-path>
+          <xr-xml-map>vlan_interface_cfg:FirstTag</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </first-tag>
+        <second-tag config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/vlan_sub/vlan_id`2</xr-path>
+          <xr-xml-map>vlan_interface_cfg:SecondTag</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag-or-null</type-name>
+          </type>
+        </second-tag>
+      </vlan-identifier>
+    </vlan-sub-configuration>
+  </augment>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <ethernet-service config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/</xr-path>
+      <xr-xml-map>vlan_interface_cfg:EthernetService</xr-xml-map>
+      <xr-task>interface</xr-task>
+      <local-traffic-default-encapsulation config="true" is-key="false" node="container" presence="true">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/def_tag`</xr-path>
+        <xr-xml-map>vlan_interface_cfg:LocalTrafficDefaultEncapsulation</xr-xml-map>
+        <xr-task>vlan</xr-task>
+        <xr-pack-format>%d%d%d</xr-pack-format>
+        <outer-tag-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/def_tag`0</xr-path>
+          <xr-xml-map>vlan_interface_cfg:OuterTagType</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </outer-tag-type>
+        <outer-vlan-id config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/def_tag`1</xr-path>
+          <xr-xml-map>vlan_interface_cfg:OuterVLANId</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </outer-vlan-id>
+        <inner-vlan-id config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/def_tag`2</xr-path>
+          <xr-xml-map>vlan_interface_cfg:InnerVLANId</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+        </inner-vlan-id>
+      </local-traffic-default-encapsulation>
+      <encapsulation config="true" is-key="false" node="container" presence="true">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`</xr-path>
+        <xr-xml-map>vlan_interface_cfg:Encapsulation</xr-xml-map>
+        <xr-task>vlan</xr-task>
+        <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+        <outer-tag-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`0</xr-path>
+          <xr-xml-map>vlan_interface_cfg:OuterTagType</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>dt1:Match</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </outer-tag-type>
+        <outer-range1-low config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`1</xr-path>
+          <xr-xml-map>vlan_interface_cfg:OuterRange1Low</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag-or-any</type-name>
+          </type>
+        </outer-range1-low>
+        <outer-range1-high config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`2</xr-path>
+          <xr-xml-map>vlan_interface_cfg:OuterRange1High</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag-or-native</type-name>
+          </type>
+        </outer-range1-high>
+        <inner-tag-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`3</xr-path>
+          <xr-xml-map>vlan_interface_cfg:InnerTagType</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>dt1:Match</type-name>
+          </type>
+        </inner-tag-type>
+        <inner-range1-low config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`4</xr-path>
+          <xr-xml-map>vlan_interface_cfg:InnerRange1Low</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag-or-any</type-name>
+          </type>
+        </inner-range1-low>
+        <inner-range1-high config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`5</xr-path>
+          <xr-xml-map>vlan_interface_cfg:InnerRange1High</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+        </inner-range1-high>
+        <additional-range1-low config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`6</xr-path>
+          <xr-xml-map>vlan_interface_cfg:AdditionalRange1Low</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag-or-cvp</type-name>
+          </type>
+        </additional-range1-low>
+        <additional-range1-high config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`7</xr-path>
+          <xr-xml-map>vlan_interface_cfg:AdditionalRange1High</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+        </additional-range1-high>
+        <additional-range2-low config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`8</xr-path>
+          <xr-xml-map>vlan_interface_cfg:AdditionalRange2Low</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag-or-cvp</type-name>
+          </type>
+        </additional-range2-low>
+        <additional-range2-high config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`9</xr-path>
+          <xr-xml-map>vlan_interface_cfg:AdditionalRange2High</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+        </additional-range2-high>
+        <additional-range3-low config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`10</xr-path>
+          <xr-xml-map>vlan_interface_cfg:AdditionalRange3Low</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag-or-cvp</type-name>
+          </type>
+        </additional-range3-low>
+        <additional-range3-high config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`11</xr-path>
+          <xr-xml-map>vlan_interface_cfg:AdditionalRange3High</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+        </additional-range3-high>
+        <additional-range4-low config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`12</xr-path>
+          <xr-xml-map>vlan_interface_cfg:AdditionalRange4Low</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag-or-cvp</type-name>
+          </type>
+        </additional-range4-low>
+        <additional-range4-high config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`13</xr-path>
+          <xr-xml-map>vlan_interface_cfg:AdditionalRange4High</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+        </additional-range4-high>
+        <additional-range5-low config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`14</xr-path>
+          <xr-xml-map>vlan_interface_cfg:AdditionalRange5Low</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag-or-cvp</type-name>
+          </type>
+        </additional-range5-low>
+        <additional-range5-high config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`15</xr-path>
+          <xr-xml-map>vlan_interface_cfg:AdditionalRange5High</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+        </additional-range5-high>
+        <additional-range6-low config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`16</xr-path>
+          <xr-xml-map>vlan_interface_cfg:AdditionalRange6Low</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag-or-cvp</type-name>
+          </type>
+        </additional-range6-low>
+        <additional-range6-high config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`17</xr-path>
+          <xr-xml-map>vlan_interface_cfg:AdditionalRange6High</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+        </additional-range6-high>
+        <additional-range7-low config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`18</xr-path>
+          <xr-xml-map>vlan_interface_cfg:AdditionalRange7Low</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag-or-cvp</type-name>
+          </type>
+        </additional-range7-low>
+        <additional-range7-high config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`19</xr-path>
+          <xr-xml-map>vlan_interface_cfg:AdditionalRange7High</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+        </additional-range7-high>
+        <additional-range8-low config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`20</xr-path>
+          <xr-xml-map>vlan_interface_cfg:AdditionalRange8Low</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag-or-cvp</type-name>
+          </type>
+        </additional-range8-low>
+        <additional-range8-high config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`21</xr-path>
+          <xr-xml-map>vlan_interface_cfg:AdditionalRange8High</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+        </additional-range8-high>
+        <outer-class-of-service config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`22</xr-path>
+          <xr-xml-map>vlan_interface_cfg:OuterClassOfService</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Class-of-service</type-name>
+          </type>
+        </outer-class-of-service>
+        <inner-class-of-service config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`23</xr-path>
+          <xr-xml-map>vlan_interface_cfg:InnerClassOfService</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Class-of-service</type-name>
+          </type>
+        </inner-class-of-service>
+        <payload-ethertype-match config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`24</xr-path>
+          <xr-xml-map>vlan_interface_cfg:PayloadEthertypeMatch</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>dt1:Ethertype-match</type-name>
+          </type>
+        </payload-ethertype-match>
+        <ingress-source-mac config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>3</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`25</xr-path>
+          <xr-xml-map>vlan_interface_cfg:IngressSourceMAC</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>MACAddress</xr-sch-type>
+          <type>
+            <type-name>yang:mac-address</type-name>
+          </type>
+        </ingress-source-mac>
+        <ingress-destination-mac config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>3</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`28</xr-path>
+          <xr-xml-map>vlan_interface_cfg:IngressDestinationMAC</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>MACAddress</xr-sch-type>
+          <type>
+            <type-name>yang:mac-address</type-name>
+          </type>
+        </ingress-destination-mac>
+        <exact config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/en`31</xr-path>
+          <xr-xml-map>vlan_interface_cfg:Exact</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </exact>
+      </encapsulation>
+      <rewrite config="true" is-key="false" node="container" presence="true">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/rw`</xr-path>
+        <xr-xml-map>vlan_interface_cfg:Rewrite</xr-xml-map>
+        <xr-task>vlan</xr-task>
+        <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+        <rewrite-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/rw`0</xr-path>
+          <xr-xml-map>vlan_interface_cfg:RewriteType</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>dt1:Rewrite</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </rewrite-type>
+        <outer-tag-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/rw`1</xr-path>
+          <xr-xml-map>vlan_interface_cfg:OuterTagType</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>dt1:Match</type-name>
+          </type>
+        </outer-tag-type>
+        <outer-tag-value config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/rw`2</xr-path>
+          <xr-xml-map>vlan_interface_cfg:OuterTagValue</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+        </outer-tag-value>
+        <inner-tag-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/rw`3</xr-path>
+          <xr-xml-map>vlan_interface_cfg:InnerTagType</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>dt1:Match</type-name>
+          </type>
+        </inner-tag-type>
+        <inner-tag-value config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/efp/rw`4</xr-path>
+          <xr-xml-map>vlan_interface_cfg:InnerTagValue</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+        </inner-tag-value>
+      </rewrite>
+    </ethernet-service>
+  </augment>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <ethernet-bng config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/</xr-path>
+      <xr-xml-map>eth_infra_bng_intf_cfg:EthernetBNG</xr-xml-map>
+      <xr-task>interface</xr-task>
+      <ambiguous-encapsulation config="true" is-key="false" node="container" presence="true">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`</xr-path>
+        <xr-xml-map>eth_infra_bng_intf_cfg:AmbiguousEncapsulation</xr-xml-map>
+        <xr-task>vlan</xr-task>
+        <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+        <outer-tag-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`0</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:OuterTagType</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>dt1:Match</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </outer-tag-type>
+        <outer-range1-low config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`1</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:OuterRange1Low</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag-or-any</type-name>
+          </type>
+        </outer-range1-low>
+        <outer-range1-high config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`2</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:OuterRange1High</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag-or-native</type-name>
+          </type>
+        </outer-range1-high>
+        <inner-tag-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`3</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:InnerTagType</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>dt1:Match</type-name>
+          </type>
+        </inner-tag-type>
+        <inner-range1-low config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`4</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:InnerRange1Low</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag-or-any</type-name>
+          </type>
+        </inner-range1-low>
+        <inner-range1-high config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`5</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:InnerRange1High</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+        </inner-range1-high>
+        <additional-range1-low config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`6</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:AdditionalRange1Low</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag-or-cvp</type-name>
+          </type>
+        </additional-range1-low>
+        <additional-range1-high config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`7</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:AdditionalRange1High</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+        </additional-range1-high>
+        <additional-range2-low config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`8</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:AdditionalRange2Low</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag-or-cvp</type-name>
+          </type>
+        </additional-range2-low>
+        <additional-range2-high config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`9</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:AdditionalRange2High</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+        </additional-range2-high>
+        <additional-range3-low config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`10</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:AdditionalRange3Low</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag-or-cvp</type-name>
+          </type>
+        </additional-range3-low>
+        <additional-range3-high config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`11</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:AdditionalRange3High</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+        </additional-range3-high>
+        <additional-range4-low config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`12</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:AdditionalRange4Low</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag-or-cvp</type-name>
+          </type>
+        </additional-range4-low>
+        <additional-range4-high config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`13</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:AdditionalRange4High</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+        </additional-range4-high>
+        <additional-range5-low config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`14</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:AdditionalRange5Low</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag-or-cvp</type-name>
+          </type>
+        </additional-range5-low>
+        <additional-range5-high config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`15</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:AdditionalRange5High</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+        </additional-range5-high>
+        <additional-range6-low config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`16</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:AdditionalRange6Low</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag-or-cvp</type-name>
+          </type>
+        </additional-range6-low>
+        <additional-range6-high config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`17</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:AdditionalRange6High</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+        </additional-range6-high>
+        <additional-range7-low config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`18</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:AdditionalRange7Low</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag-or-cvp</type-name>
+          </type>
+        </additional-range7-low>
+        <additional-range7-high config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`19</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:AdditionalRange7High</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+        </additional-range7-high>
+        <additional-range8-low config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`20</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:AdditionalRange8Low</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag-or-cvp</type-name>
+          </type>
+        </additional-range8-low>
+        <additional-range8-high config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`21</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:AdditionalRange8High</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+        </additional-range8-high>
+        <outer-class-of-service config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`22</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:OuterClassOfService</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Class-of-service</type-name>
+          </type>
+        </outer-class-of-service>
+        <inner-class-of-service config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`23</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:InnerClassOfService</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Class-of-service</type-name>
+          </type>
+        </inner-class-of-service>
+        <payload-ethertype-match config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`24</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:PayloadEthertypeMatch</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>dt1:Ethertype-match</type-name>
+          </type>
+        </payload-ethertype-match>
+        <ingress-source-mac config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>3</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`25</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:IngressSourceMAC</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>MACAddress</xr-sch-type>
+          <type>
+            <type-name>yang:mac-address</type-name>
+          </type>
+        </ingress-source-mac>
+        <ingress-destination-mac config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>3</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`28</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:IngressDestinationMAC</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>MACAddress</xr-sch-type>
+          <type>
+            <type-name>yang:mac-address</type-name>
+          </type>
+        </ingress-destination-mac>
+        <exact config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/eth-infra-bng/ambig_encaps`31</xr-path>
+          <xr-xml-map>eth_infra_bng_intf_cfg:Exact</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </exact>
+      </ambiguous-encapsulation>
+    </ethernet-bng>
+  </augment>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <mac-accounting config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/mac-acc/</xr-path>
+      <xr-xml-map>ether_mac_acc_cfg:MACAccounting</xr-xml-map>
+      <xr-task>interface</xr-task>
+      <ingress config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/mac-acc/in</xr-path>
+        <xr-xml-map>ether_mac_acc_cfg:Ingress</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </ingress>
+      <egress config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/mac-acc/out</xr-path>
+        <xr-xml-map>ether_mac_acc_cfg:Egress</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </egress>
+    </mac-accounting>
+  </augment>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <ethernet-features config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ethernet/</xr-path>
+      <xr-xml-map>ether_intf_feature_cfg:EthernetFeatures</xr-xml-map>
+      <xr-task>interface</xr-task>
+      <xr-scope>exported</xr-scope>
+      <filtering config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ethernet/filtering</xr-path>
+        <xr-xml-map>l2protocols_ether_interface_cfg:Filtering</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Filtering</type-name>
+        </type>
+      </filtering>
+    </ethernet-features>
+  </augment>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <carrier-delay config="true" is-key="false" node="container" presence="false">
+      <xr-is-packed/>
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/carrier-delay`</xr-path>
+      <xr-xml-map>vlan_interface_cfg:CarrierDelay</xr-xml-map>
+      <xr-task>interface</xr-task>
+      <xr-pack-format>%d%d</xr-pack-format>
+      <carrier-delay-up config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/carrier-delay`0</xr-path>
+        <xr-xml-map>vlan_interface_cfg:CarrierDelayUp</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..65535">
+          <type-name>uint32</type-name>
+        </type>
+      </carrier-delay-up>
+      <carrier-delay-down config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/carrier-delay`1</xr-path>
+        <xr-xml-map>vlan_interface_cfg:CarrierDelayDown</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </carrier-delay-down>
+    </carrier-delay>
+  </augment>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <vlan-trunk-configuration config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/vlan_trunk/</xr-path>
+      <xr-xml-map>vlan_interface_cfg:VLANTrunkConfiguration</xr-xml-map>
+      <xr-task>vlan</xr-task>
+      <native-vlan-identifier config="true" is-key="false" node="container" presence="true">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/vlan_trunk/native_vlan_id`</xr-path>
+        <xr-xml-map>vlan_interface_cfg:NativeVLANIdentifier</xr-xml-map>
+        <xr-task>vlan</xr-task>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <vlan-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/vlan_trunk/native_vlan_id`0</xr-path>
+          <xr-xml-map>vlan_interface_cfg:VlanType</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </vlan-type>
+        <vlan-identifier config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/vlan_trunk/native_vlan_id`1</xr-path>
+          <xr-xml-map>vlan_interface_cfg:VLANIdentifier</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </vlan-identifier>
+      </native-vlan-identifier>
+      <vlan-switched config="true" is-key="false" node="container" presence="false">
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/vlan_trunk/vlan_switched`</xr-path>
+        <xr-xml-map>vlan_interface_cfg:VLANSwitched</xr-xml-map>
+        <xr-task>vlan</xr-task>
+        <xr-pack-format>%d%d%d%s</xr-pack-format>
+        <mode config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/vlan_trunk/vlan_switched`0</xr-path>
+          <xr-xml-map>vlan_interface_cfg:Mode</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>dt1:Vs-mode</type-name>
+          </type>
+        </mode>
+        <access-vlan config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/vlan_trunk/vlan_switched`1</xr-path>
+          <xr-xml-map>vlan_interface_cfg:AccessVLAN</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <when>../mode = 'access'</when>
+          <type>
+            <type-name>dt1:Vlan-tag</type-name>
+          </type>
+        </access-vlan>
+        <trunk-tag-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/vlan_trunk/vlan_switched`2</xr-path>
+          <xr-xml-map>vlan_interface_cfg:TrunkTagType</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <when>../mode = 'trunk'</when>
+          <type>
+            <type-name>dt1:Vlan</type-name>
+          </type>
+        </trunk-tag-type>
+        <trunk-vla-ns config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/vlan_trunk/vlan_switched`3</xr-path>
+          <xr-xml-map>vlan_interface_cfg:TrunkVLANs</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <when>../mode = 'trunk'</when>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </trunk-vla-ns>
+      </vlan-switched>
+      <tunneling-ethertype config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/vlan_trunk/tunnel_etype</xr-path>
+        <xr-xml-map>vlan_interface_cfg:TunnelingEthertype</xr-xml-map>
+        <xr-task>vlan</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type node="enumeration">
+          <enum value="37120">0x9100</enum>
+          <enum value="37376">0x9200</enum>
+        </type>
+      </tunneling-ethertype>
+    </vlan-trunk-configuration>
+  </augment>
+  <augment path="/a1:interface-configurations/a1:interface-configuration/a2:l2-transport">
+    <l2-protocols config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/l2transport/l2pt/</xr-path>
+      <xr-xml-map>ether_l2pt_cfg:L2ProtocolTable</xr-xml-map>
+      <xr-task>l2vpn</xr-task>
+      <l2-protocol config="true" key="l2-protocol-name" node="list">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/l2transport/l2pt/&lt;ether_l2pt_cfg_L2Protocol_L2ProtocolName&gt;</xr-path>
+        <xr-xml-map>ether_l2pt_cfg:L2Protocol</xr-xml-map>
+        <xr-task>l2vpn</xr-task>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <l2-protocol-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/l2transport/l2pt/&lt;ether_l2pt_cfg_L2Protocol_L2ProtocolName&gt;</xr-path>
+          <xr-xml-map>ether_l2pt_cfg:L2ProtocolName</xr-xml-map>
+          <xr-task>l2vpn</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <xr-sch-arg-name>&lt;ether_l2pt_cfg_L2Protocol_L2ProtocolName&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>L2-protocol-name</type-name>
+          </type>
+        </l2-protocol-name>
+        <mode config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/l2transport/l2pt/&lt;ether_l2pt_cfg_L2Protocol_L2ProtocolName&gt;`0</xr-path>
+          <xr-xml-map>ether_l2pt_cfg:Mode</xr-xml-map>
+          <xr-task>l2vpn</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>L2-protocol-mode</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </mode>
+        <mpls-exp-bits-value config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/l2transport/l2pt/&lt;ether_l2pt_cfg_L2Protocol_L2ProtocolName&gt;`1</xr-path>
+          <xr-xml-map>ether_l2pt_cfg:MPLSExpBitsValue</xr-xml-map>
+          <xr-task>l2vpn</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>L2-protocol-mpls-exp-bits-value</type-name>
+          </type>
+        </mpls-exp-bits-value>
+      </l2-protocol>
+    </l2-protocols>
+  </augment>
+  <augment path="/a1:interface-configurations/a1:interface-configuration/a2:l2-transport">
+    <propagate-remote-status config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/l2transport/prop-rem-status</xr-path>
+      <xr-xml-map>l2protocols_ether_interface_cfg:PropagateRemoteStatus</xr-xml-map>
+      <xr-task>l2vpn</xr-task>
+      <xr-sch-type>Configured</xr-sch-type>
+      <type>
+        <type-name>empty</type-name>
+      </type>
+    </propagate-remote-status>
+  </augment>
+  <augment path="/a1:interface-configurations/a1:interface-configuration/a2:l2-transport">
+    <l2-ethernet-features config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/l2transport/ethernet/</xr-path>
+      <xr-xml-map>ether_intf_feature_cfg:L2EthernetFeatures</xr-xml-map>
+      <xr-task>interface</xr-task>
+      <xr-scope>exported</xr-scope>
+      <egress-filtering config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/l2transport/ethernet/egress-filter</xr-path>
+        <xr-xml-map>l2protocols_ether_interface_cfg:EgressFiltering</xr-xml-map>
+        <xr-task>vlan</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Egress-filtering</type-name>
+        </type>
+        <default>egress-filtering-type-default</default>
+      </egress-filtering>
+      <source-bypass-egress-filtering config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/l2transport/ethernet/src-bypass-egress-filter</xr-path>
+        <xr-xml-map>l2protocols_ether_interface_cfg:SourceBypassEgressFiltering</xr-xml-map>
+        <xr-task>vlan</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </source-bypass-egress-filtering>
+    </l2-ethernet-features>
+  </augment>
+  <ethernet-features config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/ethernet/</xr-path>
+    <xr-xml-map>ether_gl_feature_cfg:EthernetFeatures</xr-xml-map>
+    <xr-task>ethernet-services</xr-task>
+    <xr-scope>exported</xr-scope>
+    <egress-filtering config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ethernet/egress-filter/</xr-path>
+      <xr-xml-map>ether_gl_cfg:EgressFiltering</xr-xml-map>
+      <xr-task>ethernet-services</xr-task>
+      <egress-filtering-default-on config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/ethernet/egress-filter/default-on</xr-path>
+        <xr-xml-map>ether_gl_cfg:EgressFilteringDefaultOn</xr-xml-map>
+        <xr-task>ethernet-services</xr-task>
+        <xr-sch-type>TrueOnly</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </egress-filtering-default-on>
+    </egress-filtering>
+  </ethernet-features>
+</Cisco-IOS-XR-l2-eth-infra-cfg>

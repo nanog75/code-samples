@@ -1,0 +1,1784 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ipv4-io-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-io-oper" revision="2015-10-20">
+  <files>
+    <file revision="2015-10-20" submodule="false">Cisco-IOS-XR-ipv4-io-oper.yang</file>
+    <file revision="2015-10-20" submodule="true">Cisco-IOS-XR-ipv4-io-oper-sub2.yang</file>
+    <file revision="2015-10-20" submodule="true">Cisco-IOS-XR-ipv4-io-oper-sub1.yang</file>
+  </files>
+  <prefix>ipv4-io-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="inet">ietf-inet-types</import>
+  <typedef name="Im-state-enum">
+    <type node="enumeration">
+      <enum>im-state-not-ready</enum>
+      <enum>im-state-admin-down</enum>
+      <enum>im-state-down</enum>
+      <enum>im-state-up</enum>
+      <enum>im-state-shutdown</enum>
+      <enum>im-state-err-disable</enum>
+      <enum>im-state-down-immediate</enum>
+      <enum>im-state-down-immediate-admin</enum>
+      <enum>im-state-down-graceful</enum>
+      <enum>im-state-begin-shutdown</enum>
+      <enum>im-state-end-shutdown</enum>
+      <enum>im-state-begin-error-disable</enum>
+      <enum>im-state-end-error-disable</enum>
+      <enum>im-state-begin-down-graceful</enum>
+      <enum>im-state-reset</enum>
+      <enum>im-state-operational</enum>
+      <enum>im-state-not-operational</enum>
+      <enum>im-state-unknown</enum>
+      <enum>im-state-last</enum>
+    </type>
+  </typedef>
+  <typedef name="Ipv4-ma-oper-config">
+    <type node="enumeration">
+      <enum value="0">ipv4-ma-oper-client-none</enum>
+      <enum value="1">ipv4-ma-oper-non-oc-client</enum>
+      <enum value="2">ipv4-ma-oper-oc-client</enum>
+    </type>
+  </typedef>
+  <typedef name="Rpf-mode">
+    <type node="enumeration">
+      <enum>strict</enum>
+      <enum>loose</enum>
+    </type>
+  </typedef>
+  <typedef name="Str">
+    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+    <type>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="Ipv4-ma-oper-line-state">
+    <type node="enumeration">
+      <enum>unknown</enum>
+      <enum>shutdown</enum>
+      <enum>down</enum>
+      <enum>up</enum>
+    </type>
+  </typedef>
+  <ipv4-network config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/ipv4-io/</xr-path>
+    <xr-xml-map>ipv4_io_oper:IPV4Network</xr-xml-map>
+    <xr-task>network</xr-task>
+    <xr-scope>exported</xr-scope>
+    <nodes config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ipv4-io/node/</xr-path>
+      <xr-xml-map>ipv4_io_oper:NodeTable</xr-xml-map>
+      <xr-task>network</xr-task>
+      <node config="false" key="node-name" node="list">
+        <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/</xr-path>
+        <xr-xml-map>ipv4_io_oper:Node</xr-xml-map>
+        <xr-task>network</xr-task>
+        <interface-data config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/</xr-path>
+          <xr-xml-map>ipv4_io_oper:InterfaceData</xr-xml-map>
+          <xr-task>network</xr-task>
+          <vrfs config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/</xr-path>
+            <xr-xml-map>ipv4_io_oper:VRFTable</xr-xml-map>
+            <xr-task>network</xr-task>
+            <vrf config="false" key="vrf-name" node="list">
+              <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/</xr-path>
+              <xr-xml-map>ipv4_io_oper:VRF</xr-xml-map>
+              <xr-task>network</xr-task>
+              <briefs config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifbrief/</xr-path>
+                <xr-xml-map>ipv4_io_oper:BriefTable</xr-xml-map>
+                <xr-task>network</xr-task>
+                <brief config="false" key="interface-name" node="list">
+                  <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifbrief/&lt;ipv4_io_oper_Brief_Interface&gt;</xr-path>
+                  <xr-xml-map>ipv4_io_oper:Brief</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-bag-grp-name>ipv4_if_brief</xr-bag-grp-name>
+                  <xr-bag>ipv4_ma_oper_interface.bag</xr-bag>
+                  <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+                    <xr-data-handler>ignore</xr-data-handler>
+                    <xr-primitive-type>string</xr-primitive-type>
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifbrief/&lt;ipv4_io_oper_Brief_Interface&gt;</xr-path>
+                    <xr-xml-map>ipv4_io_oper:InterfaceName</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-sch-type>InterfaceName</xr-sch-type>
+                    <xr-sch-arg-name>&lt;ipv4_io_oper_Brief_Interface&gt;</xr-sch-arg-name>
+                    <type>
+                      <type-name>xr:Interface-name</type-name>
+                    </type>
+                  </interface-name>
+                  <primary-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifbrief/&lt;ipv4_io_oper_Brief_Interface&gt;~ipv4_if_brief.PrimaryAddress</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:PrimaryAddress</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>inet:ipv4-address</type-name>
+                    </type>
+                  </primary-address>
+                  <vrf-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifbrief/&lt;ipv4_io_oper_Brief_Interface&gt;~ipv4_if_brief.VRF_ID</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:VRF_ID</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </vrf-id>
+                  <vrf-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifbrief/&lt;ipv4_io_oper_Brief_Interface&gt;~ipv4_if_brief.VRFName</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:VRFName</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </vrf-name>
+                  <line-state config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifbrief/&lt;ipv4_io_oper_Brief_Interface&gt;~ipv4_if_brief.LineState</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:LineState</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>Ipv4-ma-oper-line-state</type-name>
+                    </type>
+                  </line-state>
+                </brief>
+              </briefs>
+              <details config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/</xr-path>
+                <xr-xml-map>ipv4_io_oper:DetailTable</xr-xml-map>
+                <xr-task>network</xr-task>
+                <detail config="false" key="interface-name" node="list">
+                  <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;</xr-path>
+                  <xr-xml-map>ipv4_io_oper:Detail</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-bag-grp-name>ipv4_if_detail</xr-bag-grp-name>
+                  <xr-bag>ipv4_ma_oper_interface.bag</xr-bag>
+                  <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+                    <xr-data-handler>ignore</xr-data-handler>
+                    <xr-primitive-type>string</xr-primitive-type>
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;</xr-path>
+                    <xr-xml-map>ipv4_io_oper:InterfaceName</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-sch-type>InterfaceName</xr-sch-type>
+                    <xr-sch-arg-name>&lt;ipv4_io_oper_Detail_Interface&gt;</xr-sch-arg-name>
+                    <type>
+                      <type-name>xr:Interface-name</type-name>
+                    </type>
+                  </interface-name>
+                  <acl config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.ACL</xr-path>
+                    <xr-task>network</xr-task>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <inbound config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.ACL.Inbound</xr-path>
+                      <xr-xml-map>ipv4_ma_oper_interface:Inbound</xr-xml-map>
+                      <xr-task>network</xr-task>
+                      <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>string</type-name>
+                      </type>
+                    </inbound>
+                    <outbound config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.ACL.Outbound</xr-path>
+                      <xr-xml-map>ipv4_ma_oper_interface:Outbound</xr-xml-map>
+                      <xr-task>network</xr-task>
+                      <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>string</type-name>
+                      </type>
+                    </outbound>
+                    <common-in-bound config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.ACL.CommonInBound</xr-path>
+                      <xr-xml-map>ipv4_ma_oper_interface:CommonInBound</xr-xml-map>
+                      <xr-task>network</xr-task>
+                      <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>string</type-name>
+                      </type>
+                    </common-in-bound>
+                    <common-out-bound config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.ACL.CommonOutBound</xr-path>
+                      <xr-xml-map>ipv4_ma_oper_interface:CommonOutBound</xr-xml-map>
+                      <xr-task>network</xr-task>
+                      <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>string</type-name>
+                      </type>
+                    </common-out-bound>
+                  </acl>
+                  <multi-acl config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.MultiACL</xr-path>
+                    <xr-task>network</xr-task>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <inbound config="false" node="list">
+                      <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.MultiACL.inbound[&lt;bag_arg4&gt;]</xr-path>
+                      <xr-task>network</xr-task>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <xr-internal-key>&lt;bag_arg4&gt;</xr-internal-key>
+                      <max-elements>5</max-elements>
+                      <entry config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.MultiACL.inbound[&lt;bag_arg4&gt;]</xr-path>
+                        <xr-xml-map>ipv4_ma_oper_interface:inbound</xr-xml-map>
+                        <xr-task>network</xr-task>
+                        <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                        <xr-bag-version>1 1</xr-bag-version>
+                        <type>
+                          <type-name>Str</type-name>
+                        </type>
+                      </entry>
+                    </inbound>
+                    <outbound config="false" node="list">
+                      <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.MultiACL.outbound[&lt;bag_arg5&gt;]</xr-path>
+                      <xr-task>network</xr-task>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <xr-internal-key>&lt;bag_arg5&gt;</xr-internal-key>
+                      <max-elements>5</max-elements>
+                      <entry config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.MultiACL.outbound[&lt;bag_arg5&gt;]</xr-path>
+                        <xr-xml-map>ipv4_ma_oper_interface:outbound</xr-xml-map>
+                        <xr-task>network</xr-task>
+                        <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                        <xr-bag-version>1 1</xr-bag-version>
+                        <type>
+                          <type-name>Str</type-name>
+                        </type>
+                      </entry>
+                    </outbound>
+                    <common config="false" node="list">
+                      <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.MultiACL.common[&lt;bag_arg6&gt;]</xr-path>
+                      <xr-task>network</xr-task>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <xr-internal-key>&lt;bag_arg6&gt;</xr-internal-key>
+                      <max-elements>5</max-elements>
+                      <entry config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.MultiACL.common[&lt;bag_arg6&gt;]</xr-path>
+                        <xr-xml-map>ipv4_ma_oper_interface:common</xr-xml-map>
+                        <xr-task>network</xr-task>
+                        <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                        <xr-bag-version>1 1</xr-bag-version>
+                        <type>
+                          <type-name>Str</type-name>
+                        </type>
+                      </entry>
+                    </common>
+                  </multi-acl>
+                  <helper-address config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.HelperAddress</xr-path>
+                    <xr-task>network</xr-task>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <address-array config="false" node="list">
+                      <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.HelperAddress.AddressArray[&lt;bag_arg7&gt;]</xr-path>
+                      <xr-task>network</xr-task>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <xr-internal-key>&lt;bag_arg7&gt;</xr-internal-key>
+                      <entry config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.HelperAddress.AddressArray[&lt;bag_arg7&gt;]</xr-path>
+                        <xr-xml-map>ipv4_ma_oper_interface:AddressArray</xr-xml-map>
+                        <xr-task>network</xr-task>
+                        <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                        <xr-bag-version>1 1</xr-bag-version>
+                        <type>
+                          <type-name>inet:ipv4-address</type-name>
+                        </type>
+                      </entry>
+                    </address-array>
+                  </helper-address>
+                  <rpf config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.RPF</xr-path>
+                    <xr-task>network</xr-task>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <enable config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.RPF.Enable</xr-path>
+                      <xr-xml-map>ipv4_ma_oper_interface:Enable</xr-xml-map>
+                      <xr-task>network</xr-task>
+                      <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </enable>
+                    <allow-default-route config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.RPF.AllowDefaultRoute</xr-path>
+                      <xr-xml-map>ipv4_ma_oper_interface:AllowDefaultRoute</xr-xml-map>
+                      <xr-task>network</xr-task>
+                      <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </allow-default-route>
+                    <allow-self-ping config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.RPF.AllowSelfPing</xr-path>
+                      <xr-xml-map>ipv4_ma_oper_interface:AllowSelfPing</xr-xml-map>
+                      <xr-task>network</xr-task>
+                      <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </allow-self-ping>
+                    <mode config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.RPF.Mode</xr-path>
+                      <xr-xml-map>ipv4_ma_oper_interface:Mode</xr-xml-map>
+                      <xr-task>network</xr-task>
+                      <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>Rpf-mode</type-name>
+                      </type>
+                    </mode>
+                  </rpf>
+                  <bgp-pa config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.BGP_PA</xr-path>
+                    <xr-task>network</xr-task>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <input config="false" is-key="false" node="container" presence="false">
+                      <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.BGP_PA.Input</xr-path>
+                      <xr-task>network</xr-task>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <enable config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.BGP_PA.Input.Enable</xr-path>
+                        <xr-xml-map>ipv4_ma_oper_interface:Enable</xr-xml-map>
+                        <xr-task>network</xr-task>
+                        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                        <xr-bag-version>1 1</xr-bag-version>
+                        <type>
+                          <type-name>boolean</type-name>
+                        </type>
+                      </enable>
+                      <source config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.BGP_PA.Input.Source</xr-path>
+                        <xr-xml-map>ipv4_ma_oper_interface:Source</xr-xml-map>
+                        <xr-task>network</xr-task>
+                        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                        <xr-bag-version>1 1</xr-bag-version>
+                        <type>
+                          <type-name>boolean</type-name>
+                        </type>
+                      </source>
+                      <destination config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.BGP_PA.Input.Destination</xr-path>
+                        <xr-xml-map>ipv4_ma_oper_interface:Destination</xr-xml-map>
+                        <xr-task>network</xr-task>
+                        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                        <xr-bag-version>1 1</xr-bag-version>
+                        <type>
+                          <type-name>boolean</type-name>
+                        </type>
+                      </destination>
+                    </input>
+                    <output config="false" is-key="false" node="container" presence="false">
+                      <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.BGP_PA.Output</xr-path>
+                      <xr-task>network</xr-task>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <enable config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.BGP_PA.Output.Enable</xr-path>
+                        <xr-xml-map>ipv4_ma_oper_interface:Enable</xr-xml-map>
+                        <xr-task>network</xr-task>
+                        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                        <xr-bag-version>1 1</xr-bag-version>
+                        <type>
+                          <type-name>boolean</type-name>
+                        </type>
+                      </enable>
+                      <source config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.BGP_PA.Output.Source</xr-path>
+                        <xr-xml-map>ipv4_ma_oper_interface:Source</xr-xml-map>
+                        <xr-task>network</xr-task>
+                        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                        <xr-bag-version>1 1</xr-bag-version>
+                        <type>
+                          <type-name>boolean</type-name>
+                        </type>
+                      </source>
+                      <destination config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.BGP_PA.Output.Destination</xr-path>
+                        <xr-xml-map>ipv4_ma_oper_interface:Destination</xr-xml-map>
+                        <xr-task>network</xr-task>
+                        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                        <xr-bag-version>1 1</xr-bag-version>
+                        <type>
+                          <type-name>boolean</type-name>
+                        </type>
+                      </destination>
+                    </output>
+                  </bgp-pa>
+                  <pub-utime config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.pub_utime</xr-path>
+                    <xr-task>network</xr-task>
+                    <xr-bag-version>1 1</xr-bag-version>
+                  </pub-utime>
+                  <idb-utime config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.idb_utime</xr-path>
+                    <xr-task>network</xr-task>
+                    <xr-bag-version>1 1</xr-bag-version>
+                  </idb-utime>
+                  <caps-utime config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.caps_utime</xr-path>
+                    <xr-task>network</xr-task>
+                    <xr-bag-version>1 1</xr-bag-version>
+                  </caps-utime>
+                  <fwd-en-utime config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.fwd_en_utime</xr-path>
+                    <xr-task>network</xr-task>
+                    <xr-bag-version>1 1</xr-bag-version>
+                  </fwd-en-utime>
+                  <fwd-dis-utime config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.fwd_dis_utime</xr-path>
+                    <xr-task>network</xr-task>
+                    <xr-bag-version>1 1</xr-bag-version>
+                  </fwd-dis-utime>
+                  <primary-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.PrimaryAddress</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:PrimaryAddress</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>inet:ipv4-address</type-name>
+                    </type>
+                  </primary-address>
+                  <vrf-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.VRF_ID</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:VRF_ID</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </vrf-id>
+                  <line-state config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.LineState</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:LineState</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>Ipv4-ma-oper-line-state</type-name>
+                    </type>
+                  </line-state>
+                  <prefix-length config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.PrefixLength</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:PrefixLength</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </prefix-length>
+                  <route-tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.RouteTag</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:RouteTag</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </route-tag>
+                  <mtu config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.MTU</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:MTU</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </mtu>
+                  <unreachable config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.Unreachable</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:Unreachable</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </unreachable>
+                  <redirect config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.Redirect</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:Redirect</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </redirect>
+                  <direct-broadcast config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.DirectBroadcast</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:DirectBroadcast</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </direct-broadcast>
+                  <mask-reply config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.MaskReply</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:MaskReply</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </mask-reply>
+                  <rg-id-exists config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.RG_IDExists</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:RG_IDExists</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </rg-id-exists>
+                  <mlacp-active config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.mLACPActive</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:mLACPActive</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </mlacp-active>
+                  <unnumbered-interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.UnnumberedInterfaceName</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:UnnumberedInterfaceName</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </unnumbered-interface-name>
+                  <next-unnumbered-interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.NextUnnumberedInterfaceName</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:NextUnnumberedInterfaceName</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </next-unnumbered-interface-name>
+                  <proxy-arp-disabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.ProxyARPDisabled</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:ProxyARPDisabled</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </proxy-arp-disabled>
+                  <flow-tag-src config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.FLOW_TAG_SRC</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:FLOW_TAG_SRC</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </flow-tag-src>
+                  <flow-tag-dst config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.FLOW_TAG_DST</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:FLOW_TAG_DST</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </flow-tag-dst>
+                  <config-flags config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.ConfigFlags</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:ConfigFlags</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint16</type-name>
+                    </type>
+                  </config-flags>
+                  <oper-flags config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.OperFlags</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:OperFlags</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </oper-flags>
+                  <arm-flags config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.ArmFlags</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:ArmFlags</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint16</type-name>
+                    </type>
+                  </arm-flags>
+                  <state-recvd-frm-im config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.StateRecvdFrmIM</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:StateRecvdFrmIM</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>Ipv4-ma-oper-line-state</type-name>
+                    </type>
+                  </state-recvd-frm-im>
+                  <cflct-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.CflctAddress</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:CflctAddress</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>inet:ipv4-address</type-name>
+                    </type>
+                  </cflct-address>
+                  <client-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.ClientType</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:ClientType</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>Ipv4-ma-oper-config</type-name>
+                    </type>
+                  </client-type>
+                  <is-or-event config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.IsOrEvent</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:IsOrEvent</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </is-or-event>
+                  <or-im-state config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.OrImState</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:OrImState</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>Im-state-enum</type-name>
+                    </type>
+                  </or-im-state>
+                  <idb-pointer config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.IdbPointer</xr-path>
+                    <xr-xml-map>ipv4_ma_oper_interface:IdbPointer</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </idb-pointer>
+                  <multicast-group config="false" node="list">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.MulticastGroups[&lt;bag_arg8&gt;]</xr-path>
+                    <xr-task>network</xr-task>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <xr-internal-key>&lt;bag_arg8&gt;</xr-internal-key>
+                    <group-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.MulticastGroups[&lt;bag_arg8&gt;].GroupAddress</xr-path>
+                      <xr-xml-map>ipv4_ma_oper_interface:GroupAddress</xr-xml-map>
+                      <xr-task>network</xr-task>
+                      <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>inet:ipv4-address</type-name>
+                      </type>
+                    </group-address>
+                  </multicast-group>
+                  <secondary-address config="false" node="list">
+                    <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.SecondaryAddress[&lt;bag_arg9&gt;]</xr-path>
+                    <xr-task>network</xr-task>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <xr-internal-key>&lt;bag_arg9&gt;</xr-internal-key>
+                    <address config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.SecondaryAddress[&lt;bag_arg9&gt;].Address</xr-path>
+                      <xr-xml-map>ipv4_ma_oper_interface:Address</xr-xml-map>
+                      <xr-task>network</xr-task>
+                      <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>inet:ipv4-address</type-name>
+                      </type>
+                    </address>
+                    <prefix-length config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.SecondaryAddress[&lt;bag_arg9&gt;].PrefixLength</xr-path>
+                      <xr-xml-map>ipv4_ma_oper_interface:PrefixLength</xr-xml-map>
+                      <xr-task>network</xr-task>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </prefix-length>
+                    <route-tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/1/ifdetail/&lt;ipv4_io_oper_Detail_Interface&gt;~ipv4_if_detail.SecondaryAddress[&lt;bag_arg9&gt;].RouteTag</xr-path>
+                      <xr-xml-map>ipv4_ma_oper_interface:RouteTag</xr-xml-map>
+                      <xr-task>network</xr-task>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </route-tag>
+                  </secondary-address>
+                </detail>
+              </details>
+              <vrf-name config="false" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/vrf/&lt;ipv4_io_oper_VRF_vrfid&gt;/</xr-path>
+                <xr-xml-map>ipv4_io_oper:VRFName</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-sch-type>VRF_ID</xr-sch-type>
+                <xr-sch-arg-name>&lt;ipv4_io_oper_VRF_vrfid&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>xr:Cisco-ios-xr-string</type-name>
+                </type>
+              </vrf-name>
+            </vrf>
+          </vrfs>
+          <summary config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/ifsummary</xr-path>
+            <xr-xml-map>ipv4_io_oper:Summary</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-bag-grp-name>ipv4_if_summary</xr-bag-grp-name>
+            <xr-bag>ipv4_ma_oper_interface.bag</xr-bag>
+            <if-up-up config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/ifsummary~ipv4_if_summary.IFUpUp</xr-path>
+              <xr-task>network</xr-task>
+              <xr-bag-version>1 1</xr-bag-version>
+              <ip-assigned config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/ifsummary~ipv4_if_summary.IFUpUp.IPAssigned</xr-path>
+                <xr-xml-map>ipv4_ma_oper_interface:IPAssigned</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </ip-assigned>
+              <ip-unnumbered config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/ifsummary~ipv4_if_summary.IFUpUp.IPUnnumbered</xr-path>
+                <xr-xml-map>ipv4_ma_oper_interface:IPUnnumbered</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </ip-unnumbered>
+              <ip-unassigned config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/ifsummary~ipv4_if_summary.IFUpUp.IPUnassigned</xr-path>
+                <xr-xml-map>ipv4_ma_oper_interface:IPUnassigned</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </ip-unassigned>
+            </if-up-up>
+            <if-up-down config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/ifsummary~ipv4_if_summary.IFUpDown</xr-path>
+              <xr-task>network</xr-task>
+              <xr-bag-version>1 1</xr-bag-version>
+              <ip-assigned config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/ifsummary~ipv4_if_summary.IFUpDown.IPAssigned</xr-path>
+                <xr-xml-map>ipv4_ma_oper_interface:IPAssigned</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </ip-assigned>
+              <ip-unnumbered config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/ifsummary~ipv4_if_summary.IFUpDown.IPUnnumbered</xr-path>
+                <xr-xml-map>ipv4_ma_oper_interface:IPUnnumbered</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </ip-unnumbered>
+              <ip-unassigned config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/ifsummary~ipv4_if_summary.IFUpDown.IPUnassigned</xr-path>
+                <xr-xml-map>ipv4_ma_oper_interface:IPUnassigned</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </ip-unassigned>
+            </if-up-down>
+            <if-down-down config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/ifsummary~ipv4_if_summary.IFDownDown</xr-path>
+              <xr-task>network</xr-task>
+              <xr-bag-version>1 1</xr-bag-version>
+              <ip-assigned config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/ifsummary~ipv4_if_summary.IFDownDown.IPAssigned</xr-path>
+                <xr-xml-map>ipv4_ma_oper_interface:IPAssigned</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </ip-assigned>
+              <ip-unnumbered config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/ifsummary~ipv4_if_summary.IFDownDown.IPUnnumbered</xr-path>
+                <xr-xml-map>ipv4_ma_oper_interface:IPUnnumbered</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </ip-unnumbered>
+              <ip-unassigned config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/ifsummary~ipv4_if_summary.IFDownDown.IPUnassigned</xr-path>
+                <xr-xml-map>ipv4_ma_oper_interface:IPUnassigned</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </ip-unassigned>
+            </if-down-down>
+            <if-shutdown-down config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/ifsummary~ipv4_if_summary.IFShutdownDown</xr-path>
+              <xr-task>network</xr-task>
+              <xr-bag-version>1 1</xr-bag-version>
+              <ip-assigned config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/ifsummary~ipv4_if_summary.IFShutdownDown.IPAssigned</xr-path>
+                <xr-xml-map>ipv4_ma_oper_interface:IPAssigned</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </ip-assigned>
+              <ip-unnumbered config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/ifsummary~ipv4_if_summary.IFShutdownDown.IPUnnumbered</xr-path>
+                <xr-xml-map>ipv4_ma_oper_interface:IPUnnumbered</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </ip-unnumbered>
+              <ip-unassigned config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/ifsummary~ipv4_if_summary.IFShutdownDown.IPUnassigned</xr-path>
+                <xr-xml-map>ipv4_ma_oper_interface:IPUnassigned</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </ip-unassigned>
+            </if-shutdown-down>
+            <if-up-down-basecaps-up config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/if/ifsummary~ipv4_if_summary.IFUpDownBasecapsUp</xr-path>
+              <xr-xml-map>ipv4_ma_oper_interface:IFUpDownBasecapsUp</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </if-up-down-basecaps-up>
+          </summary>
+        </interface-data>
+        <statistics config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/</xr-path>
+          <xr-xml-map>ipv4_io_oper:Statistics</xr-xml-map>
+          <xr-task>network</xr-task>
+          <traffic config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats</xr-path>
+            <xr-xml-map>ipv4_io_oper:Traffic</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-bag-grp-name>ip_traffic</xr-bag-grp-name>
+            <xr-bag>ipv4_io_traffic.bag</xr-bag>
+            <ipv4-stats config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats</xr-path>
+              <xr-task>network</xr-task>
+              <xr-bag-version>0 1</xr-bag-version>
+              <input-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.InputPackets</xr-path>
+                <xr-xml-map>ipv4_io_traffic:InputPackets</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </input-packets>
+              <received-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.ReceivedPackets</xr-path>
+                <xr-xml-map>ipv4_io_traffic:ReceivedPackets</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </received-packets>
+              <format-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.FormatErrors</xr-path>
+                <xr-xml-map>ipv4_io_traffic:FormatErrors</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </format-errors>
+              <bad-hop-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.BadHopCount</xr-path>
+                <xr-xml-map>ipv4_io_traffic:BadHopCount</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </bad-hop-count>
+              <bad-source-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.BadSourceAddress</xr-path>
+                <xr-xml-map>ipv4_io_traffic:BadSourceAddress</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </bad-source-address>
+              <bad-header config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.BadHeader</xr-path>
+                <xr-xml-map>ipv4_io_traffic:BadHeader</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </bad-header>
+              <no-protocol config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.NoProtocol</xr-path>
+                <xr-xml-map>ipv4_io_traffic:NoProtocol</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </no-protocol>
+              <no-gateway config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.NoGateway</xr-path>
+                <xr-xml-map>ipv4_io_traffic:NoGateway</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </no-gateway>
+              <reassemble-input config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.ReassembleInput</xr-path>
+                <xr-xml-map>ipv4_io_traffic:ReassembleInput</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </reassemble-input>
+              <reassembled config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.Reassembled</xr-path>
+                <xr-xml-map>ipv4_io_traffic:Reassembled</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </reassembled>
+              <reassemble-timeout config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.ReassembleTimeout</xr-path>
+                <xr-xml-map>ipv4_io_traffic:ReassembleTimeout</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </reassemble-timeout>
+              <reassemble-max-drop config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.ReassembleMaxDrop</xr-path>
+                <xr-xml-map>ipv4_io_traffic:ReassembleMaxDrop</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </reassemble-max-drop>
+              <reassemble-failed config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.ReassembleFailed</xr-path>
+                <xr-xml-map>ipv4_io_traffic:ReassembleFailed</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </reassemble-failed>
+              <options-present config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.OptionsPresent</xr-path>
+                <xr-xml-map>ipv4_io_traffic:OptionsPresent</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </options-present>
+              <bad-option config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.BadOption</xr-path>
+                <xr-xml-map>ipv4_io_traffic:BadOption</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </bad-option>
+              <unknown-option config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.UnknownOption</xr-path>
+                <xr-xml-map>ipv4_io_traffic:UnknownOption</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </unknown-option>
+              <bad-security-option config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.BadSecurityOption</xr-path>
+                <xr-xml-map>ipv4_io_traffic:BadSecurityOption</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </bad-security-option>
+              <basic-security-option config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.BasicSecurityOption</xr-path>
+                <xr-xml-map>ipv4_io_traffic:BasicSecurityOption</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </basic-security-option>
+              <extended-security-option config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.ExtendedSecurityOption</xr-path>
+                <xr-xml-map>ipv4_io_traffic:ExtendedSecurityOption</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </extended-security-option>
+              <cipso-option config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.CipsoOption</xr-path>
+                <xr-xml-map>ipv4_io_traffic:CipsoOption</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </cipso-option>
+              <strict-source-route-option config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.StrictSourceRouteOption</xr-path>
+                <xr-xml-map>ipv4_io_traffic:StrictSourceRouteOption</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </strict-source-route-option>
+              <loose-source-route-option config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.LooseSourceRouteOption</xr-path>
+                <xr-xml-map>ipv4_io_traffic:LooseSourceRouteOption</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </loose-source-route-option>
+              <record-route-option config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.RecordRouteOption</xr-path>
+                <xr-xml-map>ipv4_io_traffic:RecordRouteOption</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </record-route-option>
+              <sid-option config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.SIDOption</xr-path>
+                <xr-xml-map>ipv4_io_traffic:SIDOption</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </sid-option>
+              <timestamp-option config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.TimestampOption</xr-path>
+                <xr-xml-map>ipv4_io_traffic:TimestampOption</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </timestamp-option>
+              <router-alert-option config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.RouterAlertOption</xr-path>
+                <xr-xml-map>ipv4_io_traffic:RouterAlertOption</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </router-alert-option>
+              <noop-option config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.NOOPOption</xr-path>
+                <xr-xml-map>ipv4_io_traffic:NOOPOption</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </noop-option>
+              <end-option config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.EndOption</xr-path>
+                <xr-xml-map>ipv4_io_traffic:EndOption</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </end-option>
+              <packets-output config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.PacketsOutput</xr-path>
+                <xr-xml-map>ipv4_io_traffic:PacketsOutput</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </packets-output>
+              <packets-forwarded config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.PacketsForwarded</xr-path>
+                <xr-xml-map>ipv4_io_traffic:PacketsForwarded</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </packets-forwarded>
+              <packets-fragmented config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.PacketsFragmented</xr-path>
+                <xr-xml-map>ipv4_io_traffic:PacketsFragmented</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </packets-fragmented>
+              <fragment-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.FragmentCount</xr-path>
+                <xr-xml-map>ipv4_io_traffic:FragmentCount</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </fragment-count>
+              <encapsulation-failed config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.EncapsulationFailed</xr-path>
+                <xr-xml-map>ipv4_io_traffic:EncapsulationFailed</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </encapsulation-failed>
+              <no-router config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.NoRouter</xr-path>
+                <xr-xml-map>ipv4_io_traffic:NoRouter</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </no-router>
+              <packet-too-big config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.PacketTooBig</xr-path>
+                <xr-xml-map>ipv4_io_traffic:PacketTooBig</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </packet-too-big>
+              <multicast-in config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.MulticastIn</xr-path>
+                <xr-xml-map>ipv4_io_traffic:MulticastIn</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </multicast-in>
+              <multicast-out config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.MulticastOut</xr-path>
+                <xr-xml-map>ipv4_io_traffic:MulticastOut</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </multicast-out>
+              <broadcast-in config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.BroadcastIn</xr-path>
+                <xr-xml-map>ipv4_io_traffic:BroadcastIn</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </broadcast-in>
+              <broadcast-out config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.BroadcastOut</xr-path>
+                <xr-xml-map>ipv4_io_traffic:BroadcastOut</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </broadcast-out>
+              <lisp-v4-encap config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.LispV4Encap</xr-path>
+                <xr-xml-map>ipv4_io_traffic:LispV4Encap</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </lisp-v4-encap>
+              <lisp-v4-decap config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.LispV4Decap</xr-path>
+                <xr-xml-map>ipv4_io_traffic:LispV4Decap</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </lisp-v4-decap>
+              <lisp-v6-encap config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.LispV6Encap</xr-path>
+                <xr-xml-map>ipv4_io_traffic:LispV6Encap</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </lisp-v6-encap>
+              <lisp-v6-decap config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.LispV6Decap</xr-path>
+                <xr-xml-map>ipv4_io_traffic:LispV6Decap</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </lisp-v6-decap>
+              <lisp-encap-error config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.LispEncapError</xr-path>
+                <xr-xml-map>ipv4_io_traffic:LispEncapError</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </lisp-encap-error>
+              <lisp-decap-error config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.IPv4Stats.LispDecapError</xr-path>
+                <xr-xml-map>ipv4_io_traffic:LispDecapError</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </lisp-decap-error>
+            </ipv4-stats>
+            <icmp-stats config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats</xr-path>
+              <xr-task>network</xr-task>
+              <xr-bag-version>0 1</xr-bag-version>
+              <received config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.Received</xr-path>
+                <xr-xml-map>ipv4_io_traffic:Received</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </received>
+              <checksum-error config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.ChecksumError</xr-path>
+                <xr-xml-map>ipv4_io_traffic:ChecksumError</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </checksum-error>
+              <unknown config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.Unknown</xr-path>
+                <xr-xml-map>ipv4_io_traffic:Unknown</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </unknown>
+              <output config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.Output</xr-path>
+                <xr-xml-map>ipv4_io_traffic:Output</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </output>
+              <admin-unreachable-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.AdminUnreachableSent</xr-path>
+                <xr-xml-map>ipv4_io_traffic:AdminUnreachableSent</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </admin-unreachable-sent>
+              <network-unreachable-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.NetworkUnreachableSent</xr-path>
+                <xr-xml-map>ipv4_io_traffic:NetworkUnreachableSent</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </network-unreachable-sent>
+              <host-unreachable-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.HostUnreachableSent</xr-path>
+                <xr-xml-map>ipv4_io_traffic:HostUnreachableSent</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </host-unreachable-sent>
+              <protocol-unreachable-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.ProtocolUnreachableSent</xr-path>
+                <xr-xml-map>ipv4_io_traffic:ProtocolUnreachableSent</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </protocol-unreachable-sent>
+              <port-unreachable-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.PortUnreachableSent</xr-path>
+                <xr-xml-map>ipv4_io_traffic:PortUnreachableSent</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </port-unreachable-sent>
+              <fragment-unreachable-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.FragmentUnreachableSent</xr-path>
+                <xr-xml-map>ipv4_io_traffic:FragmentUnreachableSent</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </fragment-unreachable-sent>
+              <admin-unreachable-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.AdminUnreachableReceived</xr-path>
+                <xr-xml-map>ipv4_io_traffic:AdminUnreachableReceived</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </admin-unreachable-received>
+              <network-unreachable-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.NetworkUnreachableReceived</xr-path>
+                <xr-xml-map>ipv4_io_traffic:NetworkUnreachableReceived</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </network-unreachable-received>
+              <host-unreachable-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.HostUnreachableReceived</xr-path>
+                <xr-xml-map>ipv4_io_traffic:HostUnreachableReceived</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </host-unreachable-received>
+              <protocol-unreachable-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.ProtocolUnreachableReceived</xr-path>
+                <xr-xml-map>ipv4_io_traffic:ProtocolUnreachableReceived</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </protocol-unreachable-received>
+              <port-unreachable-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.PortUnreachableReceived</xr-path>
+                <xr-xml-map>ipv4_io_traffic:PortUnreachableReceived</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </port-unreachable-received>
+              <fragment-unreachable-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.FragmentUnreachableReceived</xr-path>
+                <xr-xml-map>ipv4_io_traffic:FragmentUnreachableReceived</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </fragment-unreachable-received>
+              <hopcount-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.HopcountSent</xr-path>
+                <xr-xml-map>ipv4_io_traffic:HopcountSent</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </hopcount-sent>
+              <reassembly-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.ReassemblySent</xr-path>
+                <xr-xml-map>ipv4_io_traffic:ReassemblySent</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </reassembly-sent>
+              <hopcount-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.HopcountReceived</xr-path>
+                <xr-xml-map>ipv4_io_traffic:HopcountReceived</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </hopcount-received>
+              <reassebly-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.ReasseblyReceived</xr-path>
+                <xr-xml-map>ipv4_io_traffic:ReasseblyReceived</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </reassebly-received>
+              <param-error-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.ParamErrorReceived</xr-path>
+                <xr-xml-map>ipv4_io_traffic:ParamErrorReceived</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </param-error-received>
+              <param-error-send config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.ParamErrorSend</xr-path>
+                <xr-xml-map>ipv4_io_traffic:ParamErrorSend</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </param-error-send>
+              <echo-request-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.EchoRequestSent</xr-path>
+                <xr-xml-map>ipv4_io_traffic:EchoRequestSent</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </echo-request-sent>
+              <echo-request-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.EchoRequestReceived</xr-path>
+                <xr-xml-map>ipv4_io_traffic:EchoRequestReceived</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </echo-request-received>
+              <echo-reply-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.EchoReplySent</xr-path>
+                <xr-xml-map>ipv4_io_traffic:EchoReplySent</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </echo-reply-sent>
+              <echo-reply-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.EchoReplyReceived</xr-path>
+                <xr-xml-map>ipv4_io_traffic:EchoReplyReceived</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </echo-reply-received>
+              <mask-request-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.MaskRequestSent</xr-path>
+                <xr-xml-map>ipv4_io_traffic:MaskRequestSent</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </mask-request-sent>
+              <mask-request-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.MaskRequestReceived</xr-path>
+                <xr-xml-map>ipv4_io_traffic:MaskRequestReceived</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </mask-request-received>
+              <mask-reply-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.MaskReplySent</xr-path>
+                <xr-xml-map>ipv4_io_traffic:MaskReplySent</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </mask-reply-sent>
+              <mask-reply-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.MaskReplyReceived</xr-path>
+                <xr-xml-map>ipv4_io_traffic:MaskReplyReceived</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </mask-reply-received>
+              <source-quench-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.SourceQuenchReceived</xr-path>
+                <xr-xml-map>ipv4_io_traffic:SourceQuenchReceived</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </source-quench-received>
+              <redirect-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.RedirectReceived</xr-path>
+                <xr-xml-map>ipv4_io_traffic:RedirectReceived</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </redirect-received>
+              <redirect-send config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.RedirectSend</xr-path>
+                <xr-xml-map>ipv4_io_traffic:RedirectSend</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </redirect-send>
+              <timestamp-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.TimestampReceived</xr-path>
+                <xr-xml-map>ipv4_io_traffic:TimestampReceived</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </timestamp-received>
+              <timestamp-reply-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.TimestampReplyReceived</xr-path>
+                <xr-xml-map>ipv4_io_traffic:TimestampReplyReceived</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </timestamp-reply-received>
+              <router-advert-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.RouterAdvertReceived</xr-path>
+                <xr-xml-map>ipv4_io_traffic:RouterAdvertReceived</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </router-advert-received>
+              <router-solicit-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/stats/traffic_stats~ip_traffic.ICMPStats.RouterSolicitReceived</xr-path>
+                <xr-xml-map>ipv4_io_traffic:RouterSolicitReceived</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </router-solicit-received>
+            </icmp-stats>
+          </traffic>
+        </statistics>
+        <node-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-pathformat>hex_nozerox</xr-pathformat>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/ipv4-io/node/&lt;ipv4_io_oper_Node_Node&gt;/</xr-path>
+          <xr-xml-map>ipv4_io_oper:NodeName</xr-xml-map>
+          <xr-task>network</xr-task>
+          <xr-sch-type>NodeID</xr-sch-type>
+          <xr-sch-arg-name>&lt;ipv4_io_oper_Node_Node&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Node-id</type-name>
+          </type>
+        </node-name>
+      </node>
+    </nodes>
+  </ipv4-network>
+</Cisco-IOS-XR-ipv4-io-oper>

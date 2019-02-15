@@ -1,0 +1,248 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ip-domain-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ip-domain-oper" revision="2017-05-01">
+  <files>
+    <file revision="2017-05-01" submodule="false">Cisco-IOS-XR-ip-domain-oper.yang</file>
+    <file revision="2017-05-01" submodule="true">Cisco-IOS-XR-ip-domain-oper-sub1.yang</file>
+  </files>
+  <prefix>ip-domain-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="inet">ietf-inet-types</import>
+  <identity name="Host-address-base"/>
+  <identity name="ipv4">
+    <base>Host-address-base</base>
+    <xr-identity-str-value>ipv4</xr-identity-str-value>
+    <xr-identity-int-value>2</xr-identity-int-value>
+  </identity>
+  <identity name="ipv6">
+    <base>Host-address-base</base>
+    <xr-identity-str-value>ipv6</xr-identity-str-value>
+    <xr-identity-int-value>10</xr-identity-int-value>
+  </identity>
+  <typedef name="String1">
+    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+    <type length="0..256">
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="Domain-ipv6-address">
+    <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+    <type>
+      <type-name>inet:ipv6-address</type-name>
+    </type>
+  </typedef>
+  <typedef name="Host-address">
+    <type node="identityref">
+      <base>Host-address-base</base>
+    </type>
+  </typedef>
+  <typedef name="Server-domain-lkup">
+    <type node="enumeration">
+      <enum value="0">static-mapping</enum>
+      <enum value="1">domain-service</enum>
+    </type>
+  </typedef>
+  <ip-domain config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/ip-domain/gl/</xr-path>
+    <xr-xml-map>ip_domain_oper:IPDomain</xr-xml-map>
+    <xr-task>ip-services</xr-task>
+    <xr-scope>exported</xr-scope>
+    <vrfs config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ip-domain/gl/vrf/</xr-path>
+      <xr-xml-map>ip_domain_vrf_oper:VRFTable</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <xr-compatibility>2.0</xr-compatibility>
+      <vrf config="false" key="vrf-name" node="list">
+        <xr-path>/oper/ip-domain/gl/vrf/&lt;ip_domain_vrf_oper_VRF_vrf&gt;/</xr-path>
+        <xr-xml-map>ip_domain_vrf_oper:VRF</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <server config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ip-domain/gl/vrf/&lt;ip_domain_vrf_oper_VRF_vrf&gt;/server</xr-path>
+          <xr-xml-map>ip_domain_vrf_oper:Server</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-bag-grp-name>domain_sh_server_bag</xr-bag-grp-name>
+          <xr-bag>ip_domain.bag</xr-bag>
+          <domain-lookup config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-domain/gl/vrf/&lt;ip_domain_vrf_oper_VRF_vrf&gt;/server~domain_sh_server_bag.DomainLookup</xr-path>
+            <xr-xml-map>ip_domain:DomainLookup</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>Server-domain-lkup</type-name>
+            </type>
+          </domain-lookup>
+          <domain-name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-domain/gl/vrf/&lt;ip_domain_vrf_oper_VRF_vrf&gt;/server~domain_sh_server_bag.DomainName</xr-path>
+            <xr-xml-map>ip_domain:DomainName</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type length="0..256">
+              <type-name>string</type-name>
+            </type>
+          </domain-name>
+          <domain config="false" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-path>/oper/ip-domain/gl/vrf/&lt;ip_domain_vrf_oper_VRF_vrf&gt;/server~domain_sh_server_bag.DomainList[&lt;bag_arg4&gt;]</xr-path>
+            <xr-xml-map>ip_domain:DomainList</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg4&gt;</xr-internal-key>
+            <type>
+              <type-name>String1</type-name>
+            </type>
+          </domain>
+          <server-address config="false" node="list">
+            <xr-path>/oper/ip-domain/gl/vrf/&lt;ip_domain_vrf_oper_VRF_vrf&gt;/server~domain_sh_server_bag.ServerAddressList[&lt;bag_arg3&gt;]</xr-path>
+            <xr-task>ip-services</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+            <af-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-domain/gl/vrf/&lt;ip_domain_vrf_oper_VRF_vrf&gt;/server~domain_sh_server_bag.ServerAddressList[&lt;bag_arg3&gt;].AFName</xr-path>
+              <xr-xml-map>ip_domain:AFName</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>Host-address</type-name>
+              </type>
+            </af-name>
+            <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-domain/gl/vrf/&lt;ip_domain_vrf_oper_VRF_vrf&gt;/server~domain_sh_server_bag.ServerAddressList[&lt;bag_arg3&gt;].IPv4Address</xr-path>
+              <xr-xml-map>ip_domain:IPv4Address</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <when>../af-name = 'ipv4'</when>
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </ipv4-address>
+            <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-domain/gl/vrf/&lt;ip_domain_vrf_oper_VRF_vrf&gt;/server~domain_sh_server_bag.ServerAddressList[&lt;bag_arg3&gt;].IPv6Address</xr-path>
+              <xr-xml-map>ip_domain:IPv6Address</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <when>../af-name = 'ipv6'</when>
+              <type>
+                <type-name>Domain-ipv6-address</type-name>
+              </type>
+            </ipv6-address>
+          </server-address>
+        </server>
+        <hosts config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ip-domain/gl/vrf/&lt;ip_domain_vrf_oper_VRF_vrf&gt;/host/</xr-path>
+          <xr-xml-map>ip_domain_vrf_oper:HostTable</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <host config="false" key="host-name" node="list">
+            <xr-path>/oper/ip-domain/gl/vrf/&lt;ip_domain_vrf_oper_VRF_vrf&gt;/host/&lt;ip_domain_vrf_oper_Host_hname&gt;</xr-path>
+            <xr-xml-map>ip_domain_vrf_oper:Host</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-bag-grp-name>domain_sh_hosts_bag</xr-bag-grp-name>
+            <xr-bag>ip_domain.bag</xr-bag>
+            <host-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/ip-domain/gl/vrf/&lt;ip_domain_vrf_oper_VRF_vrf&gt;/host/&lt;ip_domain_vrf_oper_Host_hname&gt;</xr-path>
+              <xr-xml-map>ip_domain_vrf_oper:Hostname</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-sch-type>EncodedString</xr-sch-type>
+              <xr-sch-arg-name>&lt;ip_domain_vrf_oper_Host_hname&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </host-name>
+            <host-alias-list config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ip-domain/gl/vrf/&lt;ip_domain_vrf_oper_VRF_vrf&gt;/host/&lt;ip_domain_vrf_oper_Host_hname&gt;~domain_sh_hosts_bag.HostAliasList</xr-path>
+              <xr-task>ip-services</xr-task>
+              <xr-bag-version>1 0</xr-bag-version>
+              <host-alias config="false" is-key="false" is-yang-key="false" node="leaf-list">
+                <xr-path>/oper/ip-domain/gl/vrf/&lt;ip_domain_vrf_oper_VRF_vrf&gt;/host/&lt;ip_domain_vrf_oper_Host_hname&gt;~domain_sh_hosts_bag.HostAliasList.HostAlias[&lt;bag_arg5&gt;]</xr-path>
+                <xr-xml-map>ip_domain:HostAlias</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg5&gt;</xr-internal-key>
+                <type>
+                  <type-name>String1</type-name>
+                </type>
+              </host-alias>
+            </host-alias-list>
+            <af-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-domain/gl/vrf/&lt;ip_domain_vrf_oper_VRF_vrf&gt;/host/&lt;ip_domain_vrf_oper_Host_hname&gt;~domain_sh_hosts_bag.AFName</xr-path>
+              <xr-xml-map>ip_domain:AFName</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>Host-address</type-name>
+              </type>
+            </af-name>
+            <age config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-domain/gl/vrf/&lt;ip_domain_vrf_oper_VRF_vrf&gt;/host/&lt;ip_domain_vrf_oper_Host_hname&gt;~domain_sh_hosts_bag.Age</xr-path>
+              <xr-xml-map>ip_domain:Age</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </age>
+            <host-address config="false" node="list">
+              <xr-path>/oper/ip-domain/gl/vrf/&lt;ip_domain_vrf_oper_VRF_vrf&gt;/host/&lt;ip_domain_vrf_oper_Host_hname&gt;~domain_sh_hosts_bag.HostAddressList[&lt;bag_arg6&gt;]</xr-path>
+              <xr-task>ip-services</xr-task>
+              <xr-bag-version>1 0</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg6&gt;</xr-internal-key>
+              <af-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ip-domain/gl/vrf/&lt;ip_domain_vrf_oper_VRF_vrf&gt;/host/&lt;ip_domain_vrf_oper_Host_hname&gt;~domain_sh_hosts_bag.HostAddressList[&lt;bag_arg6&gt;].AFName</xr-path>
+                <xr-xml-map>ip_domain:AFName</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>Host-address</type-name>
+                </type>
+              </af-name>
+              <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ip-domain/gl/vrf/&lt;ip_domain_vrf_oper_VRF_vrf&gt;/host/&lt;ip_domain_vrf_oper_Host_hname&gt;~domain_sh_hosts_bag.HostAddressList[&lt;bag_arg6&gt;].IPv4Address</xr-path>
+                <xr-xml-map>ip_domain:IPv4Address</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <when>../af-name = 'ipv4'</when>
+                <type>
+                  <type-name>inet:ipv4-address</type-name>
+                </type>
+              </ipv4-address>
+              <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ip-domain/gl/vrf/&lt;ip_domain_vrf_oper_VRF_vrf&gt;/host/&lt;ip_domain_vrf_oper_Host_hname&gt;~domain_sh_hosts_bag.HostAddressList[&lt;bag_arg6&gt;].IPv6Address</xr-path>
+                <xr-xml-map>ip_domain:IPv6Address</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <when>../af-name = 'ipv6'</when>
+                <type>
+                  <type-name>Domain-ipv6-address</type-name>
+                </type>
+              </ipv6-address>
+            </host-address>
+          </host>
+        </hosts>
+        <vrf-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/ip-domain/gl/vrf/&lt;ip_domain_vrf_oper_VRF_vrf&gt;/</xr-path>
+          <xr-xml-map>ip_domain_vrf_oper:VRFName</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>VRF_Name</xr-sch-type>
+          <xr-sch-arg-name>&lt;ip_domain_vrf_oper_VRF_vrf&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </vrf-name>
+      </vrf>
+    </vrfs>
+  </ip-domain>
+</Cisco-IOS-XR-ip-domain-oper>

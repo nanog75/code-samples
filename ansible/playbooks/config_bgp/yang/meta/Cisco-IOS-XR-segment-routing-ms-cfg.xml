@@ -1,0 +1,342 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-segment-routing-ms-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-segment-routing-ms-cfg" revision="2017-09-07">
+  <files>
+    <file revision="2017-09-07" submodule="false">Cisco-IOS-XR-segment-routing-ms-cfg.yang</file>
+  </files>
+  <prefix>segment-routing-ms-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="Srms-mi-flag">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">disable</enum>
+      <enum value="1">enable</enum>
+    </type>
+  </typedef>
+  <typedef name="Srms-address-family">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">ipv4</enum>
+      <enum value="2">ipv6</enum>
+    </type>
+  </typedef>
+  <typedef name="Srlb-string">
+    <xr-sch-type>StringList</xr-sch-type>
+    <type>
+      <pattern>(srlb_default)</pattern>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="Sid-type-list">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">absolute</enum>
+      <enum value="2">index</enum>
+    </type>
+  </typedef>
+  <sr config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/sr/</xr-path>
+    <xr-xml-map>srms_cfg:SR</xr-xml-map>
+    <xr-task>basic-services</xr-task>
+    <xr-scope>exported</xr-scope>
+    <local-block config="true" is-key="false" node="container" presence="true">
+      <xr-data-handler>ignore</xr-data-handler>
+      <xr-is-packed/>
+      <xr-path>/cfg/gl/sr/lb/range`</xr-path>
+      <xr-xml-map>srms_cfg:LocalBlock</xr-xml-map>
+      <xr-task>basic-services</xr-task>
+      <xr-pack-format>%d%d</xr-pack-format>
+      <lower-bound config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/gl/sr/lb/range`0</xr-path>
+        <xr-xml-map>srms_cfg:LowerBound</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="15000..1048574">
+          <type-name>uint32</type-name>
+        </type>
+        <mandatory>true</mandatory>
+      </lower-bound>
+      <upper-bound config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/gl/sr/lb/range`1</xr-path>
+        <xr-xml-map>srms_cfg:UpperBound</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="15001..1048575">
+          <type-name>uint32</type-name>
+        </type>
+        <mandatory>true</mandatory>
+      </upper-bound>
+    </local-block>
+    <mappings config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/sr/ms/</xr-path>
+      <xr-xml-map>srms_cfg:MS</xr-xml-map>
+      <xr-task>basic-services</xr-task>
+      <mapping config="true" key="af ip mask" node="list">
+        <xr-path>/cfg/gl/sr/ms/&lt;srms_cfg_Mapping_AF&gt;/&lt;srms_cfg_Mapping_IP&gt;,&lt;srms_cfg_Mapping_Mask&gt;</xr-path>
+        <xr-xml-map>srms_cfg:Mapping</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <xr-pack-format>%d%d%d</xr-pack-format>
+        <af config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/sr/ms/&lt;srms_cfg_Mapping_AF&gt;/&lt;srms_cfg_Mapping_IP&gt;,&lt;srms_cfg_Mapping_Mask&gt;</xr-path>
+          <xr-xml-map>srms_cfg:AF</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <xr-sch-arg-name>&lt;srms_cfg_Mapping_AF&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>Srms-address-family</type-name>
+          </type>
+        </af>
+        <ip config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/sr/ms/&lt;srms_cfg_Mapping_AF&gt;/&lt;srms_cfg_Mapping_IP&gt;,&lt;srms_cfg_Mapping_Mask&gt;</xr-path>
+          <xr-xml-map>srms_cfg:IP</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>IPAddress</xr-sch-type>
+          <xr-sch-arg-name>&lt;srms_cfg_Mapping_IP&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>inet:ip-address-no-zone</type-name>
+          </type>
+        </ip>
+        <mask config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/sr/ms/&lt;srms_cfg_Mapping_AF&gt;/&lt;srms_cfg_Mapping_IP&gt;,&lt;srms_cfg_Mapping_Mask&gt;</xr-path>
+          <xr-xml-map>srms_cfg:Mask</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <xr-sch-arg-name>&lt;srms_cfg_Mapping_Mask&gt;</xr-sch-arg-name>
+          <type range="1..128">
+            <type-name>uint32</type-name>
+          </type>
+        </mask>
+        <sid-start config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/sr/ms/&lt;srms_cfg_Mapping_AF&gt;/&lt;srms_cfg_Mapping_IP&gt;,&lt;srms_cfg_Mapping_Mask&gt;`0</xr-path>
+          <xr-xml-map>srms_cfg:SidStart</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>ZeroRange</xr-sch-type>
+          <type range="0..1048575">
+            <type-name>uint32</type-name>
+          </type>
+        </sid-start>
+        <sid-range config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/sr/ms/&lt;srms_cfg_Mapping_AF&gt;/&lt;srms_cfg_Mapping_IP&gt;,&lt;srms_cfg_Mapping_Mask&gt;`1</xr-path>
+          <xr-xml-map>srms_cfg:SidRange</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>ZeroRange</xr-sch-type>
+          <type range="0..1048575">
+            <type-name>uint32</type-name>
+          </type>
+        </sid-range>
+        <flag-attached config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/sr/ms/&lt;srms_cfg_Mapping_AF&gt;/&lt;srms_cfg_Mapping_IP&gt;,&lt;srms_cfg_Mapping_Mask&gt;`2</xr-path>
+          <xr-xml-map>srms_cfg:FlagAttached</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Srms-mi-flag</type-name>
+          </type>
+        </flag-attached>
+      </mapping>
+    </mappings>
+    <adjacency-sid config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/sr/adj_sid/</xr-path>
+      <xr-xml-map>srms_cfg:AdjacencySID</xr-xml-map>
+      <xr-task>basic-services</xr-task>
+      <interfaces config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/sr/adj_sid/intf/</xr-path>
+        <xr-xml-map>srms_cfg:InterfaceTable</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <interface config="true" key="interface" node="list">
+          <xr-path>/cfg/gl/sr/adj_sid/intf/&lt;srms_cfg_Interface_Interface&gt;/</xr-path>
+          <xr-xml-map>srms_cfg:Interface</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <address-families config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/sr/adj_sid/intf/&lt;srms_cfg_Interface_Interface&gt;/af/</xr-path>
+            <xr-xml-map>srms_cfg:AddressFamilyTable</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <address-family config="true" key="address-family" node="list">
+              <xr-path>/cfg/gl/sr/adj_sid/intf/&lt;srms_cfg_Interface_Interface&gt;/af/&lt;srms_cfg_AddressFamily_AddressFamily&gt;/unicast/</xr-path>
+              <xr-xml-map>srms_cfg:AddressFamily</xr-xml-map>
+              <xr-task>basic-services</xr-task>
+              <next-hops config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/sr/adj_sid/intf/&lt;srms_cfg_Interface_Interface&gt;/af/&lt;srms_cfg_AddressFamily_AddressFamily&gt;/unicast/next_hop/</xr-path>
+                <xr-xml-map>srms_cfg:NextHopTable</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <next-hop config="true" key="ip-addr" node="list">
+                  <xr-path>/cfg/gl/sr/adj_sid/intf/&lt;srms_cfg_Interface_Interface&gt;/af/&lt;srms_cfg_AddressFamily_AddressFamily&gt;/unicast/next_hop/&lt;srms_cfg_NextHop_IPAddr&gt;/</xr-path>
+                  <xr-xml-map>srms_cfg:NextHop</xr-xml-map>
+                  <xr-task>basic-services</xr-task>
+                  <must>(count(../next-hop)=1) or ((count(../next-hop[ip-addr='0.0.0.0'])=0) and (count(../next-hop[ip-addr='::0'])=0))</must>
+                  <l2-adjacency-sid config="true" is-key="false" node="container" presence="false">
+                    <xr-is-packed/>
+                    <xr-path>/cfg/gl/sr/adj_sid/intf/&lt;srms_cfg_Interface_Interface&gt;/af/&lt;srms_cfg_AddressFamily_AddressFamily&gt;/unicast/next_hop/&lt;srms_cfg_NextHop_IPAddr&gt;/sid`</xr-path>
+                    <xr-xml-map>srms_cfg:L2AdjacencySID</xr-xml-map>
+                    <xr-task>basic-services</xr-task>
+                    <xr-pack-format>%d%d%d%s</xr-pack-format>
+                    <sid-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/sr/adj_sid/intf/&lt;srms_cfg_Interface_Interface&gt;/af/&lt;srms_cfg_AddressFamily_AddressFamily&gt;/unicast/next_hop/&lt;srms_cfg_NextHop_IPAddr&gt;/sid`0</xr-path>
+                      <xr-xml-map>srms_cfg:SIDType</xr-xml-map>
+                      <xr-task>basic-services</xr-task>
+                      <xr-sch-type>Enum</xr-sch-type>
+                      <type>
+                        <type-name>Sid-type-list</type-name>
+                      </type>
+                    </sid-type>
+                    <absolute-sid config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/sr/adj_sid/intf/&lt;srms_cfg_Interface_Interface&gt;/af/&lt;srms_cfg_AddressFamily_AddressFamily&gt;/unicast/next_hop/&lt;srms_cfg_NextHop_IPAddr&gt;/sid`1</xr-path>
+                      <xr-xml-map>srms_cfg:AbsoluteSID</xr-xml-map>
+                      <xr-task>basic-services</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <when>../sid-type = 'absolute'</when>
+                      <type range="15000..1048575">
+                        <type-name>uint32</type-name>
+                      </type>
+                    </absolute-sid>
+                    <index-sid config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/sr/adj_sid/intf/&lt;srms_cfg_Interface_Interface&gt;/af/&lt;srms_cfg_AddressFamily_AddressFamily&gt;/unicast/next_hop/&lt;srms_cfg_NextHop_IPAddr&gt;/sid`2</xr-path>
+                      <xr-xml-map>srms_cfg:IndexSID</xr-xml-map>
+                      <xr-task>basic-services</xr-task>
+                      <xr-sch-type>ZeroRange</xr-sch-type>
+                      <when>../sid-type = 'index'</when>
+                      <type range="0..1048575">
+                        <type-name>uint32</type-name>
+                      </type>
+                    </index-sid>
+                    <srlb config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/sr/adj_sid/intf/&lt;srms_cfg_Interface_Interface&gt;/af/&lt;srms_cfg_AddressFamily_AddressFamily&gt;/unicast/next_hop/&lt;srms_cfg_NextHop_IPAddr&gt;/sid`3</xr-path>
+                      <xr-xml-map>srms_cfg:SRLB</xr-xml-map>
+                      <xr-task>basic-services</xr-task>
+                      <xr-sch-type>StringList</xr-sch-type>
+                      <when>../sid-type = 'absolute' or ../sid-type = 'index'</when>
+                      <type>
+                        <type-name>Srlb-string</type-name>
+                      </type>
+                      <mandatory>true</mandatory>
+                    </srlb>
+                  </l2-adjacency-sid>
+                  <ip-addr config="true" is-key="true" is-yang-key="true" node="leaf">
+                    <xr-data-handler>ignore</xr-data-handler>
+                    <xr-primitive-type>string</xr-primitive-type>
+                    <xr-path>/cfg/gl/sr/adj_sid/intf/&lt;srms_cfg_Interface_Interface&gt;/af/&lt;srms_cfg_AddressFamily_AddressFamily&gt;/unicast/next_hop/&lt;srms_cfg_NextHop_IPAddr&gt;/</xr-path>
+                    <xr-xml-map>srms_cfg:IPAddr</xr-xml-map>
+                    <xr-task>basic-services</xr-task>
+                    <xr-sch-type>IPAddress</xr-sch-type>
+                    <xr-sch-arg-name>&lt;srms_cfg_NextHop_IPAddr&gt;</xr-sch-arg-name>
+                    <type>
+                      <type-name>inet:ip-address-no-zone</type-name>
+                    </type>
+                  </ip-addr>
+                </next-hop>
+              </next-hops>
+              <address-family config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/sr/adj_sid/intf/&lt;srms_cfg_Interface_Interface&gt;/af/&lt;srms_cfg_AddressFamily_AddressFamily&gt;/unicast/</xr-path>
+                <xr-xml-map>srms_cfg:AddressFamily</xr-xml-map>
+                <xr-task>basic-services</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-sch-arg-name>&lt;srms_cfg_AddressFamily_AddressFamily&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>Srms-address-family</type-name>
+                </type>
+              </address-family>
+            </address-family>
+          </address-families>
+          <interface config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/sr/adj_sid/intf/&lt;srms_cfg_Interface_Interface&gt;/</xr-path>
+            <xr-xml-map>srms_cfg:Interface</xr-xml-map>
+            <xr-task>basic-services</xr-task>
+            <xr-sch-type>InterfaceName</xr-sch-type>
+            <xr-sch-arg-name>&lt;srms_cfg_Interface_Interface&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+          </interface>
+        </interface>
+      </interfaces>
+    </adjacency-sid>
+    <global-block config="true" is-key="false" node="container" presence="true">
+      <xr-data-handler>ignore</xr-data-handler>
+      <xr-is-packed/>
+      <xr-path>/cfg/gl/sr/gb/range`</xr-path>
+      <xr-xml-map>srms_cfg:GlobalBlock</xr-xml-map>
+      <xr-task>basic-services</xr-task>
+      <xr-pack-format>%d%d</xr-pack-format>
+      <lower-bound config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/gl/sr/gb/range`0</xr-path>
+        <xr-xml-map>srms_cfg:LowerBound</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="16000..1048574">
+          <type-name>uint32</type-name>
+        </type>
+        <mandatory>true</mandatory>
+      </lower-bound>
+      <upper-bound config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/gl/sr/gb/range`1</xr-path>
+        <xr-xml-map>srms_cfg:UpperBound</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="16001..1048575">
+          <type-name>uint32</type-name>
+        </type>
+        <mandatory>true</mandatory>
+      </upper-bound>
+    </global-block>
+    <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/sr/submode</xr-path>
+      <xr-xml-map>srms_cfg:Enable</xr-xml-map>
+      <xr-task>basic-services</xr-task>
+      <xr-sch-type>Configured</xr-sch-type>
+      <type>
+        <type-name>empty</type-name>
+      </type>
+    </enable>
+  </sr>
+</Cisco-IOS-XR-segment-routing-ms-cfg>

@@ -1,0 +1,1092 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-aaa-aaacore-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-aaa-aaacore-cfg" revision="2018-09-04">
+  <files>
+    <file revision="2018-09-04" submodule="false">Cisco-IOS-XR-aaa-aaacore-cfg.yang</file>
+  </files>
+  <prefix>aaa-aaacore-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="dt1">Cisco-IOS-XR-aaa-lib-datatypes</import>
+  <import prefix="a1">Cisco-IOS-XR-aaa-lib-cfg</import>
+  <import prefix="a2">Cisco-IOS-XR-ifmgr-cfg</import>
+  <typedef name="Nas-port-value">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">async</enum>
+      <enum value="1">sync</enum>
+      <enum value="2">isdn</enum>
+      <enum value="3">isdn-async-v120</enum>
+      <enum value="4">isdn-async-v110</enum>
+      <enum value="5">virtual</enum>
+      <enum value="6">isdn-async-piafs</enum>
+      <enum value="9">x75</enum>
+      <enum value="15">ethernet</enum>
+      <enum value="30">pppoa</enum>
+      <enum value="31">pppoeoa</enum>
+      <enum value="32">pppoeoe</enum>
+      <enum value="33">pppoeovlan</enum>
+      <enum value="34">pppoeoqinq</enum>
+      <enum value="35">virtual-pppoeoe</enum>
+      <enum value="36">virtual-pppoeovlan</enum>
+      <enum value="37">virtual-pppoeoqinaq</enum>
+      <enum value="38">ipsec</enum>
+      <enum value="39">ipoeoe</enum>
+      <enum value="40">ipoeovlan</enum>
+      <enum value="41">ipoeoqinq</enum>
+      <enum value="42">virtual-ipoeoe</enum>
+      <enum value="43">virtual-ipoeovlan</enum>
+      <enum value="44">virtual-ipoeoqinq</enum>
+    </type>
+  </typedef>
+  <typedef name="Aaa-list">
+    <xr-sch-type>StringList</xr-sch-type>
+    <type>
+      <pattern>(subscriber)|(service)|(policy-if)|(prepaid)|(dot1x)</pattern>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="Aaa-service-accounting">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">extended</enum>
+      <enum value="2">brief</enum>
+    </type>
+  </typedef>
+  <augment path="/a2:interface-configurations/a2:interface-configuration">
+    <aaa-table config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/aaa/</xr-path>
+      <xr-xml-map>cfg_service_accounting:AAATable</xr-xml-map>
+      <xr-task>interface</xr-task>
+      <xr-scope>exported</xr-scope>
+      <radius config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/aaa/radius/</xr-path>
+        <xr-xml-map>cfg_service_accounting:Radius</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <attribute config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/aaa/radius/attribute/</xr-path>
+          <xr-xml-map>cfg_service_accounting:Attribute</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <nas-port-type config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/aaa/radius/attribute/nas-port-type</xr-path>
+            <xr-xml-map>cfg_service_accounting:NASPortType</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Nas-port-value</type-name>
+            </type>
+          </nas-port-type>
+          <nas-identifier config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/aaa/radius/attribute/nas-identifier</xr-path>
+            <xr-xml-map>cfg_service_accounting:NASIdentifier</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </nas-identifier>
+        </attribute>
+      </radius>
+    </aaa-table>
+  </augment>
+  <augment path="/a1:aaa">
+    <aaa-subscriber config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/aaa/aaa-subscriber/</xr-path>
+      <xr-xml-map>aaa_method_list_cfg:AAASubscriber</xr-xml-map>
+      <xr-task>aaa</xr-task>
+      <xr-scope>exported</xr-scope>
+      <policy-if-authors config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/aaa-subscriber/policy-author/</xr-path>
+        <xr-xml-map>aaa_method_list_cfg:PolicyIfAuthorTable</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <policy-if-author config="true" key="type listname" node="list">
+          <xr-path>/cfg/gl/aaa/aaa-subscriber/policy-author/&lt;aaa_method_list_cfg_PolicyIfAuthor_listtype&gt;/&lt;aaa_method_list_cfg_PolicyIfAuthor_listname&gt;</xr-path>
+          <xr-xml-map>aaa_method_list_cfg:PolicyIfAuthor</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+          <type config="true" is-key="true" is-yang-key="true" node="leaf" pattern-is-stringlist="true">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/aaa-subscriber/policy-author/&lt;aaa_method_list_cfg_PolicyIfAuthor_listtype&gt;/&lt;aaa_method_list_cfg_PolicyIfAuthor_listname&gt;</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:Type</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>StringList</xr-sch-type>
+            <xr-sch-arg-name>&lt;aaa_method_list_cfg_PolicyIfAuthor_listtype&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>Aaa-list</type-name>
+            </type>
+          </type>
+          <listname config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/aaa-subscriber/policy-author/&lt;aaa_method_list_cfg_PolicyIfAuthor_listtype&gt;/&lt;aaa_method_list_cfg_PolicyIfAuthor_listname&gt;</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:Listname</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;aaa_method_list_cfg_PolicyIfAuthor_listname&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </listname>
+          <method config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-pack-list-start>0</xr-pack-list-start>
+            <xr-pack-list-end>4</xr-pack-list-end>
+            <xr-internal-key>&lt;pack_arg1&gt;</xr-internal-key>
+            <xr-path>/cfg/gl/aaa/aaa-subscriber/policy-author/&lt;aaa_method_list_cfg_PolicyIfAuthor_listtype&gt;/&lt;aaa_method_list_cfg_PolicyIfAuthor_listname&gt;`&lt;pack_arg1&gt;</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:Methods</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>dt1:Aaa-method</type-name>
+            </type>
+            <min-elements>1</min-elements>
+            <max-elements>4</max-elements>
+          </method>
+          <server-group-name config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-pack-list-start>4</xr-pack-list-start>
+            <xr-pack-list-end>8</xr-pack-list-end>
+            <xr-internal-key>&lt;pack_arg2&gt;</xr-internal-key>
+            <xr-path>/cfg/gl/aaa/aaa-subscriber/policy-author/&lt;aaa_method_list_cfg_PolicyIfAuthor_listtype&gt;/&lt;aaa_method_list_cfg_PolicyIfAuthor_listname&gt;`&lt;pack_arg2&gt;</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:ServerGroupNames</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <max-elements>4</max-elements>
+          </server-group-name>
+        </policy-if-author>
+      </policy-if-authors>
+      <accountings config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/aaa-subscriber/accounting/</xr-path>
+        <xr-xml-map>aaa_method_list_cfg:AccountingTable</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <accounting config="true" key="type listname" node="list">
+          <xr-path>/cfg/gl/aaa/aaa-subscriber/accounting/&lt;aaa_method_list_cfg_Accounting_listtype&gt;/&lt;aaa_method_list_cfg_Accounting_listname&gt;</xr-path>
+          <xr-xml-map>aaa_method_list_cfg:Accounting</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-pack-format>%d%d%d%d%d%s%s%s%s</xr-pack-format>
+          <type config="true" is-key="true" is-yang-key="true" node="leaf" pattern-is-stringlist="true">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/aaa-subscriber/accounting/&lt;aaa_method_list_cfg_Accounting_listtype&gt;/&lt;aaa_method_list_cfg_Accounting_listname&gt;</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:Type</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>StringList</xr-sch-type>
+            <xr-sch-arg-name>&lt;aaa_method_list_cfg_Accounting_listtype&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>Aaa-list</type-name>
+            </type>
+          </type>
+          <listname config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/aaa-subscriber/accounting/&lt;aaa_method_list_cfg_Accounting_listtype&gt;/&lt;aaa_method_list_cfg_Accounting_listname&gt;</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:Listname</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;aaa_method_list_cfg_Accounting_listname&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </listname>
+          <broadcast config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/aaa-subscriber/accounting/&lt;aaa_method_list_cfg_Accounting_listtype&gt;/&lt;aaa_method_list_cfg_Accounting_listname&gt;`0</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:Broadcast</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>dt1:Aaa-accounting-broadcast</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </broadcast>
+          <method config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-pack-list-start>1</xr-pack-list-start>
+            <xr-pack-list-end>5</xr-pack-list-end>
+            <xr-internal-key>&lt;pack_arg3&gt;</xr-internal-key>
+            <xr-path>/cfg/gl/aaa/aaa-subscriber/accounting/&lt;aaa_method_list_cfg_Accounting_listtype&gt;/&lt;aaa_method_list_cfg_Accounting_listname&gt;`&lt;pack_arg3&gt;</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:Methods</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>dt1:Aaa-method</type-name>
+            </type>
+            <max-elements>4</max-elements>
+          </method>
+          <server-group-name config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-pack-list-start>5</xr-pack-list-start>
+            <xr-pack-list-end>9</xr-pack-list-end>
+            <xr-internal-key>&lt;pack_arg4&gt;</xr-internal-key>
+            <xr-path>/cfg/gl/aaa/aaa-subscriber/accounting/&lt;aaa_method_list_cfg_Accounting_listtype&gt;/&lt;aaa_method_list_cfg_Accounting_listname&gt;`&lt;pack_arg4&gt;</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:ServerGroupNames</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <max-elements>4</max-elements>
+          </server-group-name>
+        </accounting>
+      </accountings>
+      <service-accounting config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/aaa-subscriber/service-accounting/</xr-path>
+        <xr-xml-map>cfg_service_accounting:ServiceAccounting</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/aaa-subscriber/service-accounting/type</xr-path>
+          <xr-xml-map>cfg_service_accounting:Type</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Aaa-service-accounting</type-name>
+          </type>
+        </type>
+      </service-accounting>
+      <prepaid-authors config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/aaa-subscriber/prepaid-author/</xr-path>
+        <xr-xml-map>aaa_method_list_cfg:PrepaidAuthorTable</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <prepaid-author config="true" key="type listname" node="list">
+          <xr-path>/cfg/gl/aaa/aaa-subscriber/prepaid-author/&lt;aaa_method_list_cfg_PrepaidAuthor_listtype&gt;/&lt;aaa_method_list_cfg_PrepaidAuthor_listname&gt;</xr-path>
+          <xr-xml-map>aaa_method_list_cfg:PrepaidAuthor</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+          <type config="true" is-key="true" is-yang-key="true" node="leaf" pattern-is-stringlist="true">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/aaa-subscriber/prepaid-author/&lt;aaa_method_list_cfg_PrepaidAuthor_listtype&gt;/&lt;aaa_method_list_cfg_PrepaidAuthor_listname&gt;</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:Type</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>StringList</xr-sch-type>
+            <xr-sch-arg-name>&lt;aaa_method_list_cfg_PrepaidAuthor_listtype&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>Aaa-list</type-name>
+            </type>
+          </type>
+          <listname config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/aaa-subscriber/prepaid-author/&lt;aaa_method_list_cfg_PrepaidAuthor_listtype&gt;/&lt;aaa_method_list_cfg_PrepaidAuthor_listname&gt;</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:Listname</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;aaa_method_list_cfg_PrepaidAuthor_listname&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </listname>
+          <method config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-pack-list-start>0</xr-pack-list-start>
+            <xr-pack-list-end>4</xr-pack-list-end>
+            <xr-internal-key>&lt;pack_arg5&gt;</xr-internal-key>
+            <xr-path>/cfg/gl/aaa/aaa-subscriber/prepaid-author/&lt;aaa_method_list_cfg_PrepaidAuthor_listtype&gt;/&lt;aaa_method_list_cfg_PrepaidAuthor_listname&gt;`&lt;pack_arg5&gt;</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:Methods</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>dt1:Aaa-method</type-name>
+            </type>
+            <min-elements>1</min-elements>
+            <max-elements>4</max-elements>
+          </method>
+          <server-group-name config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-pack-list-start>4</xr-pack-list-start>
+            <xr-pack-list-end>8</xr-pack-list-end>
+            <xr-internal-key>&lt;pack_arg6&gt;</xr-internal-key>
+            <xr-path>/cfg/gl/aaa/aaa-subscriber/prepaid-author/&lt;aaa_method_list_cfg_PrepaidAuthor_listtype&gt;/&lt;aaa_method_list_cfg_PrepaidAuthor_listname&gt;`&lt;pack_arg6&gt;</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:ServerGroupNames</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <max-elements>4</max-elements>
+          </server-group-name>
+        </prepaid-author>
+      </prepaid-authors>
+      <authorizations config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/aaa-subscriber/authorization/</xr-path>
+        <xr-xml-map>aaa_method_list_cfg:AuthorizationTable</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <authorization config="true" key="type listname" node="list">
+          <xr-path>/cfg/gl/aaa/aaa-subscriber/authorization/&lt;aaa_method_list_cfg_Authorization_listtype&gt;/&lt;aaa_method_list_cfg_Authorization_listname&gt;</xr-path>
+          <xr-xml-map>aaa_method_list_cfg:Authorization</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+          <type config="true" is-key="true" is-yang-key="true" node="leaf" pattern-is-stringlist="true">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/aaa-subscriber/authorization/&lt;aaa_method_list_cfg_Authorization_listtype&gt;/&lt;aaa_method_list_cfg_Authorization_listname&gt;</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:Type</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>StringList</xr-sch-type>
+            <xr-sch-arg-name>&lt;aaa_method_list_cfg_Authorization_listtype&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>Aaa-list</type-name>
+            </type>
+          </type>
+          <listname config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/aaa-subscriber/authorization/&lt;aaa_method_list_cfg_Authorization_listtype&gt;/&lt;aaa_method_list_cfg_Authorization_listname&gt;</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:Listname</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;aaa_method_list_cfg_Authorization_listname&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </listname>
+          <method config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-pack-list-start>0</xr-pack-list-start>
+            <xr-pack-list-end>4</xr-pack-list-end>
+            <xr-internal-key>&lt;pack_arg7&gt;</xr-internal-key>
+            <xr-path>/cfg/gl/aaa/aaa-subscriber/authorization/&lt;aaa_method_list_cfg_Authorization_listtype&gt;/&lt;aaa_method_list_cfg_Authorization_listname&gt;`&lt;pack_arg7&gt;</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:Methods</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>dt1:Aaa-method</type-name>
+            </type>
+            <min-elements>1</min-elements>
+            <max-elements>4</max-elements>
+          </method>
+          <server-group-name config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-pack-list-start>4</xr-pack-list-start>
+            <xr-pack-list-end>8</xr-pack-list-end>
+            <xr-internal-key>&lt;pack_arg8&gt;</xr-internal-key>
+            <xr-path>/cfg/gl/aaa/aaa-subscriber/authorization/&lt;aaa_method_list_cfg_Authorization_listtype&gt;/&lt;aaa_method_list_cfg_Authorization_listname&gt;`&lt;pack_arg8&gt;</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:ServerGroupNames</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <max-elements>4</max-elements>
+          </server-group-name>
+        </authorization>
+      </authorizations>
+      <authentications config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/aaa-subscriber/authentication/</xr-path>
+        <xr-xml-map>aaa_method_list_cfg:AuthenticationTable</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <authentication config="true" key="type listname" node="list">
+          <xr-path>/cfg/gl/aaa/aaa-subscriber/authentication/&lt;aaa_method_list_cfg_Authentication_listtype&gt;/&lt;aaa_method_list_cfg_Authentication_listname&gt;</xr-path>
+          <xr-xml-map>aaa_method_list_cfg:Authentication</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+          <type config="true" is-key="true" is-yang-key="true" node="leaf" pattern-is-stringlist="true">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/aaa-subscriber/authentication/&lt;aaa_method_list_cfg_Authentication_listtype&gt;/&lt;aaa_method_list_cfg_Authentication_listname&gt;</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:Type</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>StringList</xr-sch-type>
+            <xr-sch-arg-name>&lt;aaa_method_list_cfg_Authentication_listtype&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>Aaa-list</type-name>
+            </type>
+          </type>
+          <listname config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/aaa-subscriber/authentication/&lt;aaa_method_list_cfg_Authentication_listtype&gt;/&lt;aaa_method_list_cfg_Authentication_listname&gt;</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:Listname</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;aaa_method_list_cfg_Authentication_listname&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </listname>
+          <method config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-pack-list-start>0</xr-pack-list-start>
+            <xr-pack-list-end>4</xr-pack-list-end>
+            <xr-internal-key>&lt;pack_arg9&gt;</xr-internal-key>
+            <xr-path>/cfg/gl/aaa/aaa-subscriber/authentication/&lt;aaa_method_list_cfg_Authentication_listtype&gt;/&lt;aaa_method_list_cfg_Authentication_listname&gt;`&lt;pack_arg9&gt;</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:Methods</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>dt1:Aaa-method</type-name>
+            </type>
+            <min-elements>1</min-elements>
+            <max-elements>4</max-elements>
+          </method>
+          <server-group-name config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-pack-list-start>4</xr-pack-list-start>
+            <xr-pack-list-end>8</xr-pack-list-end>
+            <xr-internal-key>&lt;pack_arg10&gt;</xr-internal-key>
+            <xr-path>/cfg/gl/aaa/aaa-subscriber/authentication/&lt;aaa_method_list_cfg_Authentication_listtype&gt;/&lt;aaa_method_list_cfg_Authentication_listname&gt;`&lt;pack_arg10&gt;</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:ServerGroupNames</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <max-elements>4</max-elements>
+          </server-group-name>
+        </authentication>
+      </authentications>
+    </aaa-subscriber>
+  </augment>
+  <augment path="/a1:aaa">
+    <aaa-mobile config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/aaa/mobile-accounting/</xr-path>
+      <xr-xml-map>aaa_method_list_cfg:AAAMobile</xr-xml-map>
+      <xr-task>aaa</xr-task>
+      <xr-scope>exported</xr-scope>
+      <mobiles config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/mobile-accounting/mobile/</xr-path>
+        <xr-xml-map>aaa_method_list_cfg:MobileTable</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <mobile config="true" key="listname" node="list">
+          <xr-path>/cfg/gl/aaa/mobile-accounting/mobile/&lt;aaa_method_list_cfg_Mobile_listname&gt;</xr-path>
+          <xr-xml-map>aaa_method_list_cfg:Mobile</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-pack-format>%d%d%d%d%d%s%s%s%s</xr-pack-format>
+          <listname config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/mobile-accounting/mobile/&lt;aaa_method_list_cfg_Mobile_listname&gt;</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:Listname</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;aaa_method_list_cfg_Mobile_listname&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </listname>
+          <broadcast config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/mobile-accounting/mobile/&lt;aaa_method_list_cfg_Mobile_listname&gt;`0</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:Broadcast</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>dt1:Aaa-accounting-broadcast</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </broadcast>
+          <method config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-pack-list-start>1</xr-pack-list-start>
+            <xr-pack-list-end>5</xr-pack-list-end>
+            <xr-internal-key>&lt;pack_arg11&gt;</xr-internal-key>
+            <xr-path>/cfg/gl/aaa/mobile-accounting/mobile/&lt;aaa_method_list_cfg_Mobile_listname&gt;`&lt;pack_arg11&gt;</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:Methods</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>dt1:Aaa-method</type-name>
+            </type>
+            <max-elements>4</max-elements>
+          </method>
+          <server-group-name config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-pack-list-start>5</xr-pack-list-start>
+            <xr-pack-list-end>9</xr-pack-list-end>
+            <xr-internal-key>&lt;pack_arg12&gt;</xr-internal-key>
+            <xr-path>/cfg/gl/aaa/mobile-accounting/mobile/&lt;aaa_method_list_cfg_Mobile_listname&gt;`&lt;pack_arg12&gt;</xr-path>
+            <xr-xml-map>aaa_method_list_cfg:ServerGroupNames</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <max-elements>4</max-elements>
+          </server-group-name>
+        </mobile>
+      </mobiles>
+    </aaa-mobile>
+  </augment>
+  <augment path="/a1:aaa">
+    <aaa-dot1x config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/aaa/aaa-dot1x/</xr-path>
+      <xr-xml-map>cfg_dot1x_method_list:AAADot1x</xr-xml-map>
+      <xr-task>aaa</xr-task>
+      <xr-scope>exported</xr-scope>
+      <authentications config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/aaa-dot1x/authentication/</xr-path>
+        <xr-xml-map>cfg_dot1x_method_list:AuthenticationTable</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <authentication config="true" key="type listname" node="list">
+          <xr-path>/cfg/gl/aaa/aaa-dot1x/authentication/&lt;cfg_dot1x_method_list_Authentication_listtype&gt;/&lt;cfg_dot1x_method_list_Authentication_listname&gt;</xr-path>
+          <xr-xml-map>cfg_dot1x_method_list:Authentication</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+          <type config="true" is-key="true" is-yang-key="true" node="leaf" pattern-is-stringlist="true">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/aaa-dot1x/authentication/&lt;cfg_dot1x_method_list_Authentication_listtype&gt;/&lt;cfg_dot1x_method_list_Authentication_listname&gt;</xr-path>
+            <xr-xml-map>cfg_dot1x_method_list:Type</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>StringList</xr-sch-type>
+            <xr-sch-arg-name>&lt;cfg_dot1x_method_list_Authentication_listtype&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>Aaa-list</type-name>
+            </type>
+          </type>
+          <listname config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/aaa-dot1x/authentication/&lt;cfg_dot1x_method_list_Authentication_listtype&gt;/&lt;cfg_dot1x_method_list_Authentication_listname&gt;</xr-path>
+            <xr-xml-map>cfg_dot1x_method_list:Listname</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;cfg_dot1x_method_list_Authentication_listname&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </listname>
+          <method config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-pack-list-start>0</xr-pack-list-start>
+            <xr-pack-list-end>4</xr-pack-list-end>
+            <xr-internal-key>&lt;pack_arg13&gt;</xr-internal-key>
+            <xr-path>/cfg/gl/aaa/aaa-dot1x/authentication/&lt;cfg_dot1x_method_list_Authentication_listtype&gt;/&lt;cfg_dot1x_method_list_Authentication_listname&gt;`&lt;pack_arg13&gt;</xr-path>
+            <xr-xml-map>cfg_dot1x_method_list:Methods</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>dt1:Aaa-method</type-name>
+            </type>
+            <min-elements>1</min-elements>
+            <max-elements>4</max-elements>
+          </method>
+          <server-group-name config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%s%s%s%s</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-pack-list-start>4</xr-pack-list-start>
+            <xr-pack-list-end>8</xr-pack-list-end>
+            <xr-internal-key>&lt;pack_arg14&gt;</xr-internal-key>
+            <xr-path>/cfg/gl/aaa/aaa-dot1x/authentication/&lt;cfg_dot1x_method_list_Authentication_listtype&gt;/&lt;cfg_dot1x_method_list_Authentication_listname&gt;`&lt;pack_arg14&gt;</xr-path>
+            <xr-xml-map>cfg_dot1x_method_list:ServerGroupNames</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <max-elements>4</max-elements>
+          </server-group-name>
+        </authentication>
+      </authentications>
+    </aaa-dot1x>
+  </augment>
+  <augment path="/a1:aaa">
+    <radius-attribute config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/aaa/attribute/</xr-path>
+      <xr-xml-map>aaa_attribute_cfg:RADIUSAttribute</xr-xml-map>
+      <xr-task>aaa</xr-task>
+      <xr-scope>exported</xr-scope>
+      <nas-port-id config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/attribute/nas-port-id/</xr-path>
+        <xr-xml-map>aaa_attribute_cfg:NASPortID</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <formats config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/aaa/attribute/nas-port-id/format/</xr-path>
+          <xr-xml-map>aaa_attribute_cfg:FormatTable</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <format config="true" key="type" node="list">
+            <xr-path>/cfg/gl/aaa/attribute/nas-port-id/format/&lt;aaa_attribute_cfg_Format_porttype&gt;/</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:Format</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/attribute/nas-port-id/format/&lt;aaa_attribute_cfg_Format_porttype&gt;/str</xr-path>
+              <xr-xml-map>aaa_attribute_cfg:Type</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-sch-arg-name>&lt;aaa_attribute_cfg_Format_porttype&gt;</xr-sch-arg-name>
+              <type range="0..45">
+                <type-name>uint32</type-name>
+              </type>
+            </type>
+            <format-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/attribute/nas-port-id/format/&lt;aaa_attribute_cfg_Format_porttype&gt;/str</xr-path>
+              <xr-xml-map>aaa_attribute_cfg:FormatName</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </format-name>
+          </format>
+        </formats>
+      </nas-port-id>
+      <calling-station config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/attribute/calling-station-id/</xr-path>
+        <xr-xml-map>aaa_attribute_cfg:CallingStation</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <formats config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/aaa/attribute/calling-station-id/format/</xr-path>
+          <xr-xml-map>aaa_attribute_cfg:FormatTable</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <format config="true" key="type" node="list">
+            <xr-path>/cfg/gl/aaa/attribute/calling-station-id/format/&lt;aaa_attribute_cfg_Format_porttype&gt;/</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:Format</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/attribute/calling-station-id/format/&lt;aaa_attribute_cfg_Format_porttype&gt;/str</xr-path>
+              <xr-xml-map>aaa_attribute_cfg:Type</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-sch-arg-name>&lt;aaa_attribute_cfg_Format_porttype&gt;</xr-sch-arg-name>
+              <type range="0..45">
+                <type-name>uint32</type-name>
+              </type>
+            </type>
+            <format-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/attribute/calling-station-id/format/&lt;aaa_attribute_cfg_Format_porttype&gt;/str</xr-path>
+              <xr-xml-map>aaa_attribute_cfg:FormatName</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </format-name>
+          </format>
+        </formats>
+      </calling-station>
+      <called-station config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/attribute/called-station-id/</xr-path>
+        <xr-xml-map>aaa_attribute_cfg:CalledStation</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <formats config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/aaa/attribute/called-station-id/format/</xr-path>
+          <xr-xml-map>aaa_attribute_cfg:FormatTable</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <format config="true" key="type" node="list">
+            <xr-path>/cfg/gl/aaa/attribute/called-station-id/format/&lt;aaa_attribute_cfg_Format_porttype&gt;/</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:Format</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/attribute/called-station-id/format/&lt;aaa_attribute_cfg_Format_porttype&gt;/str</xr-path>
+              <xr-xml-map>aaa_attribute_cfg:Type</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-sch-arg-name>&lt;aaa_attribute_cfg_Format_porttype&gt;</xr-sch-arg-name>
+              <type range="0..45">
+                <type-name>uint32</type-name>
+              </type>
+            </type>
+            <format-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/attribute/called-station-id/format/&lt;aaa_attribute_cfg_Format_porttype&gt;/str</xr-path>
+              <xr-xml-map>aaa_attribute_cfg:FormatName</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </format-name>
+          </format>
+        </formats>
+      </called-station>
+      <nas-port config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/attribute/nas-port/</xr-path>
+        <xr-xml-map>aaa_attribute_cfg:NASPort</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <format-extendeds config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/aaa/attribute/nas-port/format/</xr-path>
+          <xr-xml-map>aaa_attribute_cfg:FormatExtendedTable</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <format-extended config="true" key="value type" node="list">
+            <xr-path>/cfg/gl/aaa/attribute/nas-port/format/&lt;aaa_attribute_cfg_FormatExtended_formattype&gt;/&lt;aaa_attribute_cfg_FormatExtended_porttype&gt;/</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:FormatExtended</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <format-identifier config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/attribute/nas-port/format/&lt;aaa_attribute_cfg_FormatExtended_formattype&gt;/&lt;aaa_attribute_cfg_FormatExtended_porttype&gt;/str</xr-path>
+              <xr-xml-map>aaa_attribute_cfg:FormatIdentifier</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <type length="1..32">
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </format-identifier>
+            <value config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/attribute/nas-port/format/&lt;aaa_attribute_cfg_FormatExtended_formattype&gt;/&lt;aaa_attribute_cfg_FormatExtended_porttype&gt;/</xr-path>
+              <xr-xml-map>aaa_attribute_cfg:Value</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;aaa_attribute_cfg_FormatExtended_formattype&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </value>
+            <type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/attribute/nas-port/format/&lt;aaa_attribute_cfg_FormatExtended_formattype&gt;/&lt;aaa_attribute_cfg_FormatExtended_porttype&gt;/</xr-path>
+              <xr-xml-map>aaa_attribute_cfg:Type</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-sch-arg-name>&lt;aaa_attribute_cfg_FormatExtended_porttype&gt;</xr-sch-arg-name>
+              <type range="0..45">
+                <type-name>uint32</type-name>
+              </type>
+            </type>
+          </format-extended>
+        </format-extendeds>
+      </nas-port>
+      <format-others config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/attribute/format/</xr-path>
+        <xr-xml-map>aaa_attribute_cfg:FormatOthersTable</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <format-other config="true" key="nas-port-type-name" node="list">
+          <xr-path>/cfg/gl/aaa/attribute/format/&lt;aaa_attribute_cfg_FormatOthers_porttypename&gt;/</xr-path>
+          <xr-xml-map>aaa_attribute_cfg:FormatOthers</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-pack-format>%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d</xr-pack-format>
+          <nas-port-type-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d</xr-pack-format>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/attribute/format/&lt;aaa_attribute_cfg_FormatOthers_porttypename&gt;/config</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:NASPortTypeName</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;aaa_attribute_cfg_FormatOthers_porttypename&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </nas-port-type-name>
+          <attribute-config1 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/attribute/format/&lt;aaa_attribute_cfg_FormatOthers_porttypename&gt;/config`0</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:AttributeConfig1</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </attribute-config1>
+          <attribute-config2 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/attribute/format/&lt;aaa_attribute_cfg_FormatOthers_porttypename&gt;/config`1</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:AttributeConfig2</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </attribute-config2>
+          <attribute-config3 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/attribute/format/&lt;aaa_attribute_cfg_FormatOthers_porttypename&gt;/config`2</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:AttributeConfig3</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </attribute-config3>
+          <attribute-config4 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/attribute/format/&lt;aaa_attribute_cfg_FormatOthers_porttypename&gt;/config`3</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:AttributeConfig4</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </attribute-config4>
+          <attribute-config5 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/attribute/format/&lt;aaa_attribute_cfg_FormatOthers_porttypename&gt;/config`4</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:AttributeConfig5</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </attribute-config5>
+          <attribute-config6 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/attribute/format/&lt;aaa_attribute_cfg_FormatOthers_porttypename&gt;/config`5</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:AttributeConfig6</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </attribute-config6>
+          <attribute-config7 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/attribute/format/&lt;aaa_attribute_cfg_FormatOthers_porttypename&gt;/config`6</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:AttributeConfig7</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </attribute-config7>
+          <attribute-config8 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/attribute/format/&lt;aaa_attribute_cfg_FormatOthers_porttypename&gt;/config`7</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:AttributeConfig8</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </attribute-config8>
+          <attribute-config9 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/attribute/format/&lt;aaa_attribute_cfg_FormatOthers_porttypename&gt;/config`8</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:AttributeConfig9</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </attribute-config9>
+          <attribute-config10 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/attribute/format/&lt;aaa_attribute_cfg_FormatOthers_porttypename&gt;/config`9</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:AttributeConfig10</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </attribute-config10>
+          <attribute-config11 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/attribute/format/&lt;aaa_attribute_cfg_FormatOthers_porttypename&gt;/config`10</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:AttributeConfig11</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </attribute-config11>
+          <attribute-config12 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/attribute/format/&lt;aaa_attribute_cfg_FormatOthers_porttypename&gt;/config`11</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:AttributeConfig12</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </attribute-config12>
+          <attribute-config13 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/attribute/format/&lt;aaa_attribute_cfg_FormatOthers_porttypename&gt;/config`12</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:AttributeConfig13</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </attribute-config13>
+          <attribute-config14 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/attribute/format/&lt;aaa_attribute_cfg_FormatOthers_porttypename&gt;/config`13</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:AttributeConfig14</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </attribute-config14>
+          <attribute-config15 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/attribute/format/&lt;aaa_attribute_cfg_FormatOthers_porttypename&gt;/config`14</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:AttributeConfig15</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </attribute-config15>
+          <attribute-config16 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/attribute/format/&lt;aaa_attribute_cfg_FormatOthers_porttypename&gt;/config`15</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:AttributeConfig16</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </attribute-config16>
+          <attribute-config17 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/attribute/format/&lt;aaa_attribute_cfg_FormatOthers_porttypename&gt;/config`16</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:AttributeConfig17</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </attribute-config17>
+          <attribute-config18 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/attribute/format/&lt;aaa_attribute_cfg_FormatOthers_porttypename&gt;/config`17</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:AttributeConfig18</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>EncodedString</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </attribute-config18>
+          <attribute-config19 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/attribute/format/&lt;aaa_attribute_cfg_FormatOthers_porttypename&gt;/config`18</xr-path>
+            <xr-xml-map>aaa_attribute_cfg:AttributeConfig19</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1..253">
+              <type-name>uint32</type-name>
+            </type>
+          </attribute-config19>
+        </format-other>
+      </format-others>
+    </radius-attribute>
+  </augment>
+</Cisco-IOS-XR-aaa-aaacore-cfg>

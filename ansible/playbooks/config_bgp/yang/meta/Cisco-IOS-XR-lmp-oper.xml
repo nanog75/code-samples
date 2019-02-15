@@ -1,0 +1,1985 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-lmp-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-lmp-oper" revision="2015-11-09">
+  <files>
+    <file revision="2015-11-09" submodule="false">Cisco-IOS-XR-lmp-oper.yang</file>
+    <file revision="2015-11-09" submodule="true">Cisco-IOS-XR-lmp-oper-sub1.yang</file>
+  </files>
+  <prefix>lmp-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="inet">ietf-inet-types</import>
+  <typedef name="Olmipcc-state">
+    <type node="enumeration">
+      <enum>ipcc-state-oir-removed</enum>
+      <enum>ipcc-state-admin-down</enum>
+      <enum>ipcc-state-down</enum>
+      <enum>ipcc-state-cfg-send</enum>
+      <enum>ipcc-state-cfg-rcv</enum>
+      <enum>ipcc-state-active</enum>
+      <enum>ipcc-state-up</enum>
+      <enum>ipcc-state-going-down</enum>
+      <enum>ipcc-state-unknown</enum>
+    </type>
+  </typedef>
+  <typedef name="Olm-comp-link-lmp-status">
+    <type node="enumeration">
+      <enum>comp-link-lmp-status-if-id-mismatch</enum>
+      <enum>comp-link-lmp-status-switch-cap-mismatch</enum>
+    </type>
+  </typedef>
+  <typedef name="Olm-link-encoding">
+    <type node="enumeration">
+      <enum>none</enum>
+      <enum>packet</enum>
+      <enum>ethernet</enum>
+      <enum>ansi-etsi-pdh</enum>
+      <enum>reserved1</enum>
+      <enum>sdh-sonet</enum>
+      <enum>reserved2</enum>
+      <enum>digital-wrapper</enum>
+      <enum>lambda</enum>
+      <enum>fiber</enum>
+      <enum>reserved3</enum>
+      <enum>fiber-channel</enum>
+      <enum>lencode-unknown</enum>
+    </type>
+  </typedef>
+  <typedef name="Olmte-link-lmp-state">
+    <type node="enumeration">
+      <enum>te-link-lmp-state-down</enum>
+      <enum>te-link-lmp-state-init</enum>
+      <enum>te-link-lmp-state-up</enum>
+      <enum>te-link-lmp-state-degraded</enum>
+      <enum>te-link-lmp-state-unknown</enum>
+    </type>
+  </typedef>
+  <typedef name="Olm-comp-link-lmp-state">
+    <type node="enumeration">
+      <enum>comp-link-lmp-state-down</enum>
+      <enum>comp-link-lmp-state-test</enum>
+      <enum>comp-link-lmp-state-passive-test</enum>
+      <enum>comp-link-lmp-state-up-free</enum>
+      <enum>comp-link-lmp-state-up-allocated</enum>
+      <enum>comp-link-lmp-state-unknown</enum>
+    </type>
+  </typedef>
+  <typedef name="Olm-comp-link-im-state">
+    <type node="enumeration">
+      <enum>comp-link-im-state-oir</enum>
+      <enum>comp-link-im-state-down</enum>
+      <enum>comp-link-im-state-admin-down</enum>
+      <enum>comp-link-im-state-up</enum>
+      <enum>comp-link-im-state-unknown</enum>
+    </type>
+  </typedef>
+  <typedef name="Olm-mux-cap">
+    <type node="enumeration">
+      <enum>psc1</enum>
+      <enum>psc2</enum>
+      <enum>psc3</enum>
+      <enum>psc4</enum>
+      <enum>l2sc</enum>
+      <enum>tdm</enum>
+      <enum>lsc</enum>
+      <enum>fsc</enum>
+      <enum>unknown-mux-cap</enum>
+    </type>
+  </typedef>
+  <typedef name="Olmipcc">
+    <type node="enumeration">
+      <enum>ipcc-type-global-routed</enum>
+      <enum>ipcc-type-global-if-bound</enum>
+      <enum>ipcc-type-ldcc-sdcc</enum>
+      <enum>ipcc-type-unknown</enum>
+    </type>
+  </typedef>
+  <typedef name="Olm-object-owner">
+    <type node="enumeration">
+      <enum>unknown</enum>
+      <enum>ouni</enum>
+      <enum>gmpls-nni</enum>
+      <enum>gmpls-uni</enum>
+    </type>
+  </typedef>
+  <typedef name="Olm-router-id">
+    <type node="enumeration">
+      <enum>not-configured</enum>
+      <enum>global</enum>
+      <enum>protocol-based-address</enum>
+      <enum>interface</enum>
+      <enum>network-element</enum>
+      <enum>unknown-type</enum>
+    </type>
+  </typedef>
+  <typedef name="Ipv6-address">
+    <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+    <type>
+      <type-name>inet:ipv6-address</type-name>
+    </type>
+  </typedef>
+  <typedef name="Olm-addr-type-id">
+    <type node="enumeration">
+      <enum value="0">unknown-address</enum>
+      <enum value="101">ipv4</enum>
+      <enum value="102">ipv6</enum>
+      <enum value="103">unnumbered</enum>
+    </type>
+  </typedef>
+  <lmp config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/ucp-lmp/gl/act/</xr-path>
+    <xr-xml-map>lmp_oper:LMP</xr-xml-map>
+    <xr-task>ouni</xr-task>
+    <xr-scope>exported</xr-scope>
+    <global-status config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ucp-lmp/gl/act/status</xr-path>
+      <xr-xml-map>lmp_oper:GlobalStatus</xr-xml-map>
+      <xr-task>ouni</xr-task>
+      <xr-bag-grp-name>OLMGlobalInfo</xr-bag-grp-name>
+      <xr-bag>ucp_olm.bag</xr-bag>
+      <local-ouni-lmp-node-id config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ucp-lmp/gl/act/status~OLMGlobalInfo.LocalOUNI_LMPNodeID</xr-path>
+        <xr-task>ouni</xr-task>
+        <xr-bag-version>2 0</xr-bag-version>
+        <address config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ucp-lmp/gl/act/status~OLMGlobalInfo.LocalOUNI_LMPNodeID.Address</xr-path>
+          <xr-task>ouni</xr-task>
+          <xr-bag-version>2 0</xr-bag-version>
+          <address-type config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/status~OLMGlobalInfo.LocalOUNI_LMPNodeID.Address.AddressType</xr-path>
+            <xr-xml-map>ucp_olm:AddressType</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>Olm-addr-type-id</type-name>
+            </type>
+          </address-type>
+          <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/status~OLMGlobalInfo.LocalOUNI_LMPNodeID.Address.IPv4Address</xr-path>
+            <xr-xml-map>ucp_olm:IPv4Address</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <when>../address-type = 'ipv4'</when>
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </ipv4-address>
+          <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/status~OLMGlobalInfo.LocalOUNI_LMPNodeID.Address.IPv6Address</xr-path>
+            <xr-xml-map>ucp_olm:IPv6Address</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <when>../address-type = 'ipv6'</when>
+            <type>
+              <type-name>Ipv6-address</type-name>
+            </type>
+          </ipv6-address>
+          <unnumbered-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/status~OLMGlobalInfo.LocalOUNI_LMPNodeID.Address.UnnumberedAddress</xr-path>
+            <xr-xml-map>ucp_olm:UnnumberedAddress</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <when>../address-type = 'unnumbered'</when>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </unnumbered-address>
+        </address>
+      </local-ouni-lmp-node-id>
+      <local-mpls-te-lmp-node-id config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ucp-lmp/gl/act/status~OLMGlobalInfo.LocalMPLS_TE_LMPNodeID</xr-path>
+        <xr-task>ouni</xr-task>
+        <xr-bag-version>2 0</xr-bag-version>
+        <address config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ucp-lmp/gl/act/status~OLMGlobalInfo.LocalMPLS_TE_LMPNodeID.Address</xr-path>
+          <xr-task>ouni</xr-task>
+          <xr-bag-version>2 0</xr-bag-version>
+          <address-type config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/status~OLMGlobalInfo.LocalMPLS_TE_LMPNodeID.Address.AddressType</xr-path>
+            <xr-xml-map>ucp_olm:AddressType</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>Olm-addr-type-id</type-name>
+            </type>
+          </address-type>
+          <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/status~OLMGlobalInfo.LocalMPLS_TE_LMPNodeID.Address.IPv4Address</xr-path>
+            <xr-xml-map>ucp_olm:IPv4Address</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <when>../address-type = 'ipv4'</when>
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </ipv4-address>
+          <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/status~OLMGlobalInfo.LocalMPLS_TE_LMPNodeID.Address.IPv6Address</xr-path>
+            <xr-xml-map>ucp_olm:IPv6Address</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <when>../address-type = 'ipv6'</when>
+            <type>
+              <type-name>Ipv6-address</type-name>
+            </type>
+          </ipv6-address>
+          <unnumbered-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/status~OLMGlobalInfo.LocalMPLS_TE_LMPNodeID.Address.UnnumberedAddress</xr-path>
+            <xr-xml-map>ucp_olm:UnnumberedAddress</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <when>../address-type = 'unnumbered'</when>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </unnumbered-address>
+        </address>
+      </local-mpls-te-lmp-node-id>
+      <local-gmpls-uni-lmp-node-id config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ucp-lmp/gl/act/status~OLMGlobalInfo.LocalGMPLS_UNI_LMPNodeID</xr-path>
+        <xr-task>ouni</xr-task>
+        <xr-bag-version>2 0</xr-bag-version>
+        <address config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ucp-lmp/gl/act/status~OLMGlobalInfo.LocalGMPLS_UNI_LMPNodeID.Address</xr-path>
+          <xr-task>ouni</xr-task>
+          <xr-bag-version>2 0</xr-bag-version>
+          <address-type config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/status~OLMGlobalInfo.LocalGMPLS_UNI_LMPNodeID.Address.AddressType</xr-path>
+            <xr-xml-map>ucp_olm:AddressType</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>Olm-addr-type-id</type-name>
+            </type>
+          </address-type>
+          <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/status~OLMGlobalInfo.LocalGMPLS_UNI_LMPNodeID.Address.IPv4Address</xr-path>
+            <xr-xml-map>ucp_olm:IPv4Address</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <when>../address-type = 'ipv4'</when>
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </ipv4-address>
+          <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/status~OLMGlobalInfo.LocalGMPLS_UNI_LMPNodeID.Address.IPv6Address</xr-path>
+            <xr-xml-map>ucp_olm:IPv6Address</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <when>../address-type = 'ipv6'</when>
+            <type>
+              <type-name>Ipv6-address</type-name>
+            </type>
+          </ipv6-address>
+          <unnumbered-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/status~OLMGlobalInfo.LocalGMPLS_UNI_LMPNodeID.Address.UnnumberedAddress</xr-path>
+            <xr-xml-map>ucp_olm:UnnumberedAddress</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <when>../address-type = 'unnumbered'</when>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </unnumbered-address>
+        </address>
+      </local-gmpls-uni-lmp-node-id>
+      <local-ouni-lmp-node-id-interface config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ucp-lmp/gl/act/status~OLMGlobalInfo.LocalOUNI_LMPNodeIDInterface</xr-path>
+        <xr-xml-map>ucp_olm:LocalOUNI_LMPNodeIDInterface</xr-xml-map>
+        <xr-task>ouni</xr-task>
+        <xr-bag-primitive-type>string</xr-bag-primitive-type>
+        <xr-bag-version>2 0</xr-bag-version>
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </local-ouni-lmp-node-id-interface>
+      <local-ouni-lmp-node-id-type config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ucp-lmp/gl/act/status~OLMGlobalInfo.LocalOUNI_LMPNodeIDType</xr-path>
+        <xr-xml-map>ucp_olm:LocalOUNI_LMPNodeIDType</xr-xml-map>
+        <xr-task>ouni</xr-task>
+        <xr-bag-primitive-type>int</xr-bag-primitive-type>
+        <xr-bag-version>2 0</xr-bag-version>
+        <type>
+          <type-name>Olm-router-id</type-name>
+        </type>
+      </local-ouni-lmp-node-id-type>
+      <is-ouni-config-exist config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ucp-lmp/gl/act/status~OLMGlobalInfo.IsOUNIConfigExist</xr-path>
+        <xr-xml-map>ucp_olm:IsOUNIConfigExist</xr-xml-map>
+        <xr-task>ouni</xr-task>
+        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+        <xr-bag-version>2 0</xr-bag-version>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </is-ouni-config-exist>
+      <is-gmpls-nni-config-exist config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ucp-lmp/gl/act/status~OLMGlobalInfo.IsGMPLS_NNIConfigExist</xr-path>
+        <xr-xml-map>ucp_olm:IsGMPLS_NNIConfigExist</xr-xml-map>
+        <xr-task>ouni</xr-task>
+        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+        <xr-bag-version>2 0</xr-bag-version>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </is-gmpls-nni-config-exist>
+      <is-gmpls-uni-config-exist config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ucp-lmp/gl/act/status~OLMGlobalInfo.IsGMPLS_UNIConfigExist</xr-path>
+        <xr-xml-map>ucp_olm:IsGMPLS_UNIConfigExist</xr-xml-map>
+        <xr-task>ouni</xr-task>
+        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+        <xr-bag-version>2 0</xr-bag-version>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </is-gmpls-uni-config-exist>
+    </global-status>
+    <clients config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ucp-lmp/gl/act/client/</xr-path>
+      <xr-xml-map>lmp_oper:ClientTable</xr-xml-map>
+      <xr-task>ouni</xr-task>
+      <client config="false" key="client-name" node="list">
+        <xr-path>/oper/ucp-lmp/gl/act/client/&lt;lmp_oper_Client_Name&gt;</xr-path>
+        <xr-xml-map>lmp_oper:Client</xr-xml-map>
+        <xr-task>ouni</xr-task>
+        <xr-bag-grp-name>OLMClientInfo</xr-bag-grp-name>
+        <xr-bag>ucp_olm.bag</xr-bag>
+        <client-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/ucp-lmp/gl/act/client/&lt;lmp_oper_Client_Name&gt;</xr-path>
+          <xr-xml-map>lmp_oper:ClientName</xr-xml-map>
+          <xr-task>ouni</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;lmp_oper_Client_Name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </client-name>
+        <connected-time config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ucp-lmp/gl/act/client/&lt;lmp_oper_Client_Name&gt;~OLMClientInfo.ConnectedTime</xr-path>
+          <xr-task>ouni</xr-task>
+          <xr-bag-version>2 0</xr-bag-version>
+          <time-connected config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/client/&lt;lmp_oper_Client_Name&gt;~OLMClientInfo.ConnectedTime.TimeConnected</xr-path>
+            <xr-xml-map>ucp_olm:TimeConnected</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </time-connected>
+        </connected-time>
+        <node-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ucp-lmp/gl/act/client/&lt;lmp_oper_Client_Name&gt;~OLMClientInfo.NodeName</xr-path>
+          <xr-xml-map>ucp_olm:NodeName</xr-xml-map>
+          <xr-task>ouni</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </node-name>
+      </client>
+    </clients>
+    <gmpls-uni config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/</xr-path>
+      <xr-xml-map>lmp_gmpls_uni_oper:GMPLS_UNI</xr-xml-map>
+      <xr-task>ouni</xr-task>
+      <te-links config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/</xr-path>
+        <xr-xml-map>lmp_gmpls_uni_oper:TELinkTable</xr-xml-map>
+        <xr-task>ouni</xr-task>
+        <te-link config="false" key="controller-name" node="list">
+          <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;</xr-path>
+          <xr-xml-map>lmp_gmpls_uni_oper:TELink</xr-xml-map>
+          <xr-task>ouni</xr-task>
+          <xr-bag-grp-name>OLM_TELinkInfo</xr-bag-grp-name>
+          <xr-bag>ucp_olm.bag</xr-bag>
+          <controller-name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;</xr-path>
+            <xr-xml-map>lmp_gmpls_uni_oper:ControllerName</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-sch-type>InterfaceName</xr-sch-type>
+            <xr-sch-arg-name>&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+          </controller-name>
+          <local-link-id config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.LocalLinkID</xr-path>
+            <xr-task>ouni</xr-task>
+            <xr-bag-version>2 0</xr-bag-version>
+            <address config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.LocalLinkID.Address</xr-path>
+              <xr-task>ouni</xr-task>
+              <xr-bag-version>2 0</xr-bag-version>
+              <address-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.LocalLinkID.Address.AddressType</xr-path>
+                <xr-xml-map>ucp_olm:AddressType</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>Olm-addr-type-id</type-name>
+                </type>
+              </address-type>
+              <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.LocalLinkID.Address.IPv4Address</xr-path>
+                <xr-xml-map>ucp_olm:IPv4Address</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../address-type = 'ipv4'</when>
+                <type>
+                  <type-name>inet:ipv4-address</type-name>
+                </type>
+              </ipv4-address>
+              <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.LocalLinkID.Address.IPv6Address</xr-path>
+                <xr-xml-map>ucp_olm:IPv6Address</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../address-type = 'ipv6'</when>
+                <type>
+                  <type-name>Ipv6-address</type-name>
+                </type>
+              </ipv6-address>
+              <unnumbered-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.LocalLinkID.Address.UnnumberedAddress</xr-path>
+                <xr-xml-map>ucp_olm:UnnumberedAddress</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../address-type = 'unnumbered'</when>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </unnumbered-address>
+            </address>
+          </local-link-id>
+          <remote-link-id config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.RemoteLinkID</xr-path>
+            <xr-task>ouni</xr-task>
+            <xr-bag-version>2 0</xr-bag-version>
+            <address config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.RemoteLinkID.Address</xr-path>
+              <xr-task>ouni</xr-task>
+              <xr-bag-version>2 0</xr-bag-version>
+              <address-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.RemoteLinkID.Address.AddressType</xr-path>
+                <xr-xml-map>ucp_olm:AddressType</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>Olm-addr-type-id</type-name>
+                </type>
+              </address-type>
+              <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.RemoteLinkID.Address.IPv4Address</xr-path>
+                <xr-xml-map>ucp_olm:IPv4Address</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../address-type = 'ipv4'</when>
+                <type>
+                  <type-name>inet:ipv4-address</type-name>
+                </type>
+              </ipv4-address>
+              <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.RemoteLinkID.Address.IPv6Address</xr-path>
+                <xr-xml-map>ucp_olm:IPv6Address</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../address-type = 'ipv6'</when>
+                <type>
+                  <type-name>Ipv6-address</type-name>
+                </type>
+              </ipv6-address>
+              <unnumbered-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.RemoteLinkID.Address.UnnumberedAddress</xr-path>
+                <xr-xml-map>ucp_olm:UnnumberedAddress</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../address-type = 'unnumbered'</when>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </unnumbered-address>
+            </address>
+          </remote-link-id>
+          <local-te-link-id config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.LocalTELinkID</xr-path>
+            <xr-task>ouni</xr-task>
+            <xr-bag-version>2 0</xr-bag-version>
+            <address config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.LocalTELinkID.Address</xr-path>
+              <xr-task>ouni</xr-task>
+              <xr-bag-version>2 0</xr-bag-version>
+              <address-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.LocalTELinkID.Address.AddressType</xr-path>
+                <xr-xml-map>ucp_olm:AddressType</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>Olm-addr-type-id</type-name>
+                </type>
+              </address-type>
+              <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.LocalTELinkID.Address.IPv4Address</xr-path>
+                <xr-xml-map>ucp_olm:IPv4Address</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../address-type = 'ipv4'</when>
+                <type>
+                  <type-name>inet:ipv4-address</type-name>
+                </type>
+              </ipv4-address>
+              <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.LocalTELinkID.Address.IPv6Address</xr-path>
+                <xr-xml-map>ucp_olm:IPv6Address</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../address-type = 'ipv6'</when>
+                <type>
+                  <type-name>Ipv6-address</type-name>
+                </type>
+              </ipv6-address>
+              <unnumbered-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.LocalTELinkID.Address.UnnumberedAddress</xr-path>
+                <xr-xml-map>ucp_olm:UnnumberedAddress</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../address-type = 'unnumbered'</when>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </unnumbered-address>
+            </address>
+          </local-te-link-id>
+          <remote-te-link-id config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.RemoteTELinkID</xr-path>
+            <xr-task>ouni</xr-task>
+            <xr-bag-version>2 0</xr-bag-version>
+            <address config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.RemoteTELinkID.Address</xr-path>
+              <xr-task>ouni</xr-task>
+              <xr-bag-version>2 0</xr-bag-version>
+              <address-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.RemoteTELinkID.Address.AddressType</xr-path>
+                <xr-xml-map>ucp_olm:AddressType</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>Olm-addr-type-id</type-name>
+                </type>
+              </address-type>
+              <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.RemoteTELinkID.Address.IPv4Address</xr-path>
+                <xr-xml-map>ucp_olm:IPv4Address</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../address-type = 'ipv4'</when>
+                <type>
+                  <type-name>inet:ipv4-address</type-name>
+                </type>
+              </ipv4-address>
+              <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.RemoteTELinkID.Address.IPv6Address</xr-path>
+                <xr-xml-map>ucp_olm:IPv6Address</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../address-type = 'ipv6'</when>
+                <type>
+                  <type-name>Ipv6-address</type-name>
+                </type>
+              </ipv6-address>
+              <unnumbered-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.RemoteTELinkID.Address.UnnumberedAddress</xr-path>
+                <xr-xml-map>ucp_olm:UnnumberedAddress</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../address-type = 'unnumbered'</when>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </unnumbered-address>
+            </address>
+          </remote-te-link-id>
+          <neighbor-address config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.NeighborAddress</xr-path>
+            <xr-task>ouni</xr-task>
+            <xr-bag-version>2 0</xr-bag-version>
+            <address config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.NeighborAddress.Address</xr-path>
+              <xr-task>ouni</xr-task>
+              <xr-bag-version>2 0</xr-bag-version>
+              <address-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.NeighborAddress.Address.AddressType</xr-path>
+                <xr-xml-map>ucp_olm:AddressType</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>Olm-addr-type-id</type-name>
+                </type>
+              </address-type>
+              <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.NeighborAddress.Address.IPv4Address</xr-path>
+                <xr-xml-map>ucp_olm:IPv4Address</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../address-type = 'ipv4'</when>
+                <type>
+                  <type-name>inet:ipv4-address</type-name>
+                </type>
+              </ipv4-address>
+              <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.NeighborAddress.Address.IPv6Address</xr-path>
+                <xr-xml-map>ucp_olm:IPv6Address</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../address-type = 'ipv6'</when>
+                <type>
+                  <type-name>Ipv6-address</type-name>
+                </type>
+              </ipv6-address>
+              <unnumbered-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.NeighborAddress.Address.UnnumberedAddress</xr-path>
+                <xr-xml-map>ucp_olm:UnnumberedAddress</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../address-type = 'unnumbered'</when>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </unnumbered-address>
+            </address>
+          </neighbor-address>
+          <remote-ipcc-address config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.RemoteIPCCAddress</xr-path>
+            <xr-task>ouni</xr-task>
+            <xr-bag-version>2 0</xr-bag-version>
+            <address config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.RemoteIPCCAddress.Address</xr-path>
+              <xr-task>ouni</xr-task>
+              <xr-bag-version>2 0</xr-bag-version>
+              <address-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.RemoteIPCCAddress.Address.AddressType</xr-path>
+                <xr-xml-map>ucp_olm:AddressType</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>Olm-addr-type-id</type-name>
+                </type>
+              </address-type>
+              <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.RemoteIPCCAddress.Address.IPv4Address</xr-path>
+                <xr-xml-map>ucp_olm:IPv4Address</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../address-type = 'ipv4'</when>
+                <type>
+                  <type-name>inet:ipv4-address</type-name>
+                </type>
+              </ipv4-address>
+              <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.RemoteIPCCAddress.Address.IPv6Address</xr-path>
+                <xr-xml-map>ucp_olm:IPv6Address</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../address-type = 'ipv6'</when>
+                <type>
+                  <type-name>Ipv6-address</type-name>
+                </type>
+              </ipv6-address>
+              <unnumbered-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.RemoteIPCCAddress.Address.UnnumberedAddress</xr-path>
+                <xr-xml-map>ucp_olm:UnnumberedAddress</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../address-type = 'unnumbered'</when>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </unnumbered-address>
+            </address>
+          </remote-ipcc-address>
+          <interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.InterfaceName</xr-path>
+            <xr-xml-map>ucp_olm:InterfaceName</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </interface-name>
+          <protocol-owner config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.ProtocolOwner</xr-path>
+            <xr-xml-map>ucp_olm:ProtocolOwner</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>Olm-object-owner</type-name>
+            </type>
+          </protocol-owner>
+          <neighbor-name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.NeighborName</xr-path>
+            <xr-xml-map>ucp_olm:NeighborName</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </neighbor-name>
+          <ipcc-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.IPCC_ID</xr-path>
+            <xr-xml-map>ucp_olm:IPCC_ID</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </ipcc-id>
+          <ipc-ctype config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.IPCCType</xr-path>
+            <xr-xml-map>ucp_olm:IPCCType</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>Olmipcc</type-name>
+            </type>
+          </ipc-ctype>
+          <ipcc-name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.IPCCName</xr-path>
+            <xr-xml-map>ucp_olm:IPCCName</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </ipcc-name>
+          <local-mux-cap config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.LocalMuxCap</xr-path>
+            <xr-xml-map>ucp_olm:LocalMuxCap</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>Olm-mux-cap</type-name>
+            </type>
+          </local-mux-cap>
+          <remote-mux-cap config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.RemoteMuxCap</xr-path>
+            <xr-xml-map>ucp_olm:RemoteMuxCap</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>Olm-mux-cap</type-name>
+            </type>
+          </remote-mux-cap>
+          <im-state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.IMState</xr-path>
+            <xr-xml-map>ucp_olm:IMState</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>Olm-comp-link-im-state</type-name>
+            </type>
+          </im-state>
+          <lmp-state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.LMPState</xr-path>
+            <xr-xml-map>ucp_olm:LMPState</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>Olm-comp-link-lmp-state</type-name>
+            </type>
+          </lmp-state>
+          <te-link-lmp-state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.TELinkLMPState</xr-path>
+            <xr-xml-map>ucp_olm:TELinkLMPState</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>Olmte-link-lmp-state</type-name>
+            </type>
+          </te-link-lmp-state>
+          <gmpls-te-link-local-minimum-bandwidth config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.GMPLS_TELinkLocalMinimumBandwidth</xr-path>
+            <xr-xml-map>ucp_olm:GMPLS_TELinkLocalMinimumBandwidth</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </gmpls-te-link-local-minimum-bandwidth>
+          <gmpls-te-link-local-maximum-bandwidth config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.GMPLS_TELinkLocalMaximumBandwidth</xr-path>
+            <xr-xml-map>ucp_olm:GMPLS_TELinkLocalMaximumBandwidth</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </gmpls-te-link-local-maximum-bandwidth>
+          <gmpls-te-link-neighbor-minimum-bandwidth config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.GMPLS_TELinkNeighborMinimumBandwidth</xr-path>
+            <xr-xml-map>ucp_olm:GMPLS_TELinkNeighborMinimumBandwidth</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </gmpls-te-link-neighbor-minimum-bandwidth>
+          <gmpls-te-link-neighbor-maximum-bandwidth config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.GMPLS_TELinkNeighborMaximumBandwidth</xr-path>
+            <xr-xml-map>ucp_olm:GMPLS_TELinkNeighborMaximumBandwidth</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </gmpls-te-link-neighbor-maximum-bandwidth>
+          <gmpls-te-link-local-encoding-type config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.GMPLS_TELinkLocalEncodingType</xr-path>
+            <xr-xml-map>ucp_olm:GMPLS_TELinkLocalEncodingType</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>Olm-link-encoding</type-name>
+            </type>
+          </gmpls-te-link-local-encoding-type>
+          <gmpls-te-link-neighbor-encoding-type config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.GMPLS_TELinkNeighborEncodingType</xr-path>
+            <xr-xml-map>ucp_olm:GMPLS_TELinkNeighborEncodingType</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>Olm-link-encoding</type-name>
+            </type>
+          </gmpls-te-link-neighbor-encoding-type>
+          <is-lmp-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.IsLMPEnabled</xr-path>
+            <xr-xml-map>ucp_olm:IsLMPEnabled</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </is-lmp-enabled>
+          <lmp-transmit-msg-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.LMPTransmitMsgID</xr-path>
+            <xr-xml-map>ucp_olm:LMPTransmitMsgID</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </lmp-transmit-msg-id>
+          <lmp-receive-msg-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.LMPReceiveMsgID</xr-path>
+            <xr-xml-map>ucp_olm:LMPReceiveMsgID</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </lmp-receive-msg-id>
+          <lmp-comp-link-status config="false" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/te-link/&lt;lmp_gmpls_uni_oper_TELink_ControllerName&gt;~OLM_TELinkInfo.LMPCompLinkStatus[&lt;bag_arg1&gt;]</xr-path>
+            <xr-xml-map>ucp_olm:LMPCompLinkStatus</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+            <type>
+              <type-name>Olm-comp-link-lmp-status</type-name>
+            </type>
+          </lmp-comp-link-status>
+        </te-link>
+      </te-links>
+      <neighbors config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/</xr-path>
+        <xr-xml-map>lmp_gmpls_uni_oper:NeighborTable</xr-xml-map>
+        <xr-task>ouni</xr-task>
+        <neighbor config="false" key="neighbor-name" node="list">
+          <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;</xr-path>
+          <xr-xml-map>lmp_gmpls_uni_oper:Neighbor</xr-xml-map>
+          <xr-task>ouni</xr-task>
+          <xr-bag-grp-name>OLMNeighborInfo</xr-bag-grp-name>
+          <xr-bag>ucp_olm.bag</xr-bag>
+          <neighbor-name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;</xr-path>
+            <xr-xml-map>lmp_gmpls_uni_oper:NeighborName</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-sch-type>BoundedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;</xr-sch-arg-name>
+            <type length="1..64">
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </neighbor-name>
+          <neighbor-address config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.NeighborAddress</xr-path>
+            <xr-task>ouni</xr-task>
+            <xr-bag-version>2 0</xr-bag-version>
+            <address config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.NeighborAddress.Address</xr-path>
+              <xr-task>ouni</xr-task>
+              <xr-bag-version>2 0</xr-bag-version>
+              <address-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.NeighborAddress.Address.AddressType</xr-path>
+                <xr-xml-map>ucp_olm:AddressType</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>Olm-addr-type-id</type-name>
+                </type>
+              </address-type>
+              <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.NeighborAddress.Address.IPv4Address</xr-path>
+                <xr-xml-map>ucp_olm:IPv4Address</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../address-type = 'ipv4'</when>
+                <type>
+                  <type-name>inet:ipv4-address</type-name>
+                </type>
+              </ipv4-address>
+              <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.NeighborAddress.Address.IPv6Address</xr-path>
+                <xr-xml-map>ucp_olm:IPv6Address</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../address-type = 'ipv6'</when>
+                <type>
+                  <type-name>Ipv6-address</type-name>
+                </type>
+              </ipv6-address>
+              <unnumbered-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.NeighborAddress.Address.UnnumberedAddress</xr-path>
+                <xr-xml-map>ucp_olm:UnnumberedAddress</xr-xml-map>
+                <xr-task>ouni</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../address-type = 'unnumbered'</when>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </unnumbered-address>
+            </address>
+          </neighbor-address>
+          <protocol-owner config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.ProtocolOwner</xr-path>
+            <xr-xml-map>ucp_olm:ProtocolOwner</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>Olm-object-owner</type-name>
+            </type>
+          </protocol-owner>
+          <ipcc-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCC_ID</xr-path>
+            <xr-xml-map>ucp_olm:IPCC_ID</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </ipcc-id>
+          <is-lmp-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IsLMPEnabled</xr-path>
+            <xr-xml-map>ucp_olm:IsLMPEnabled</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </is-lmp-enabled>
+          <is-lmp-config-disabled config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IsLMPConfigDisabled</xr-path>
+            <xr-xml-map>ucp_olm:IsLMPConfigDisabled</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </is-lmp-config-disabled>
+          <lmp-transmit-msg-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.LMPTransmitMsgID</xr-path>
+            <xr-xml-map>ucp_olm:LMPTransmitMsgID</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </lmp-transmit-msg-id>
+          <lmp-receive-msg-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.LMPReceiveMsgID</xr-path>
+            <xr-xml-map>ucp_olm:LMPReceiveMsgID</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </lmp-receive-msg-id>
+          <lmp-link-sum-transmit-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.LMPLinkSumTransmitPackets</xr-path>
+            <xr-xml-map>ucp_olm:LMPLinkSumTransmitPackets</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </lmp-link-sum-transmit-packets>
+          <lmp-link-sum-receive-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.LMPLinkSumReceivePackets</xr-path>
+            <xr-xml-map>ucp_olm:LMPLinkSumReceivePackets</xr-xml-map>
+            <xr-task>ouni</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </lmp-link-sum-receive-packets>
+          <te-link config="false" node="list">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;]</xr-path>
+            <xr-task>ouni</xr-task>
+            <xr-bag-version>2 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+            <local-link-id config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].LocalLinkID</xr-path>
+              <xr-task>ouni</xr-task>
+              <xr-bag-version>2 0</xr-bag-version>
+              <address config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].LocalLinkID.Address</xr-path>
+                <xr-task>ouni</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <address-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].LocalLinkID.Address.AddressType</xr-path>
+                  <xr-xml-map>ucp_olm:AddressType</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Olm-addr-type-id</type-name>
+                  </type>
+                </address-type>
+                <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].LocalLinkID.Address.IPv4Address</xr-path>
+                  <xr-xml-map>ucp_olm:IPv4Address</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'ipv4'</when>
+                  <type>
+                    <type-name>inet:ipv4-address</type-name>
+                  </type>
+                </ipv4-address>
+                <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].LocalLinkID.Address.IPv6Address</xr-path>
+                  <xr-xml-map>ucp_olm:IPv6Address</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'ipv6'</when>
+                  <type>
+                    <type-name>Ipv6-address</type-name>
+                  </type>
+                </ipv6-address>
+                <unnumbered-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].LocalLinkID.Address.UnnumberedAddress</xr-path>
+                  <xr-xml-map>ucp_olm:UnnumberedAddress</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'unnumbered'</when>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </unnumbered-address>
+              </address>
+            </local-link-id>
+            <remote-link-id config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].RemoteLinkID</xr-path>
+              <xr-task>ouni</xr-task>
+              <xr-bag-version>2 0</xr-bag-version>
+              <address config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].RemoteLinkID.Address</xr-path>
+                <xr-task>ouni</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <address-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].RemoteLinkID.Address.AddressType</xr-path>
+                  <xr-xml-map>ucp_olm:AddressType</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Olm-addr-type-id</type-name>
+                  </type>
+                </address-type>
+                <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].RemoteLinkID.Address.IPv4Address</xr-path>
+                  <xr-xml-map>ucp_olm:IPv4Address</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'ipv4'</when>
+                  <type>
+                    <type-name>inet:ipv4-address</type-name>
+                  </type>
+                </ipv4-address>
+                <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].RemoteLinkID.Address.IPv6Address</xr-path>
+                  <xr-xml-map>ucp_olm:IPv6Address</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'ipv6'</when>
+                  <type>
+                    <type-name>Ipv6-address</type-name>
+                  </type>
+                </ipv6-address>
+                <unnumbered-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].RemoteLinkID.Address.UnnumberedAddress</xr-path>
+                  <xr-xml-map>ucp_olm:UnnumberedAddress</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'unnumbered'</when>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </unnumbered-address>
+              </address>
+            </remote-link-id>
+            <local-te-link-id config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].LocalTELinkID</xr-path>
+              <xr-task>ouni</xr-task>
+              <xr-bag-version>2 0</xr-bag-version>
+              <address config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].LocalTELinkID.Address</xr-path>
+                <xr-task>ouni</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <address-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].LocalTELinkID.Address.AddressType</xr-path>
+                  <xr-xml-map>ucp_olm:AddressType</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Olm-addr-type-id</type-name>
+                  </type>
+                </address-type>
+                <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].LocalTELinkID.Address.IPv4Address</xr-path>
+                  <xr-xml-map>ucp_olm:IPv4Address</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'ipv4'</when>
+                  <type>
+                    <type-name>inet:ipv4-address</type-name>
+                  </type>
+                </ipv4-address>
+                <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].LocalTELinkID.Address.IPv6Address</xr-path>
+                  <xr-xml-map>ucp_olm:IPv6Address</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'ipv6'</when>
+                  <type>
+                    <type-name>Ipv6-address</type-name>
+                  </type>
+                </ipv6-address>
+                <unnumbered-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].LocalTELinkID.Address.UnnumberedAddress</xr-path>
+                  <xr-xml-map>ucp_olm:UnnumberedAddress</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'unnumbered'</when>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </unnumbered-address>
+              </address>
+            </local-te-link-id>
+            <remote-te-link-id config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].RemoteTELinkID</xr-path>
+              <xr-task>ouni</xr-task>
+              <xr-bag-version>2 0</xr-bag-version>
+              <address config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].RemoteTELinkID.Address</xr-path>
+                <xr-task>ouni</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <address-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].RemoteTELinkID.Address.AddressType</xr-path>
+                  <xr-xml-map>ucp_olm:AddressType</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Olm-addr-type-id</type-name>
+                  </type>
+                </address-type>
+                <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].RemoteTELinkID.Address.IPv4Address</xr-path>
+                  <xr-xml-map>ucp_olm:IPv4Address</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'ipv4'</when>
+                  <type>
+                    <type-name>inet:ipv4-address</type-name>
+                  </type>
+                </ipv4-address>
+                <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].RemoteTELinkID.Address.IPv6Address</xr-path>
+                  <xr-xml-map>ucp_olm:IPv6Address</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'ipv6'</when>
+                  <type>
+                    <type-name>Ipv6-address</type-name>
+                  </type>
+                </ipv6-address>
+                <unnumbered-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].RemoteTELinkID.Address.UnnumberedAddress</xr-path>
+                  <xr-xml-map>ucp_olm:UnnumberedAddress</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'unnumbered'</when>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </unnumbered-address>
+              </address>
+            </remote-te-link-id>
+            <neighbor-address config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].NeighborAddress</xr-path>
+              <xr-task>ouni</xr-task>
+              <xr-bag-version>2 0</xr-bag-version>
+              <address config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].NeighborAddress.Address</xr-path>
+                <xr-task>ouni</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <address-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].NeighborAddress.Address.AddressType</xr-path>
+                  <xr-xml-map>ucp_olm:AddressType</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Olm-addr-type-id</type-name>
+                  </type>
+                </address-type>
+                <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].NeighborAddress.Address.IPv4Address</xr-path>
+                  <xr-xml-map>ucp_olm:IPv4Address</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'ipv4'</when>
+                  <type>
+                    <type-name>inet:ipv4-address</type-name>
+                  </type>
+                </ipv4-address>
+                <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].NeighborAddress.Address.IPv6Address</xr-path>
+                  <xr-xml-map>ucp_olm:IPv6Address</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'ipv6'</when>
+                  <type>
+                    <type-name>Ipv6-address</type-name>
+                  </type>
+                </ipv6-address>
+                <unnumbered-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].NeighborAddress.Address.UnnumberedAddress</xr-path>
+                  <xr-xml-map>ucp_olm:UnnumberedAddress</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'unnumbered'</when>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </unnumbered-address>
+              </address>
+            </neighbor-address>
+            <remote-ipcc-address config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].RemoteIPCCAddress</xr-path>
+              <xr-task>ouni</xr-task>
+              <xr-bag-version>2 0</xr-bag-version>
+              <address config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].RemoteIPCCAddress.Address</xr-path>
+                <xr-task>ouni</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <address-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].RemoteIPCCAddress.Address.AddressType</xr-path>
+                  <xr-xml-map>ucp_olm:AddressType</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Olm-addr-type-id</type-name>
+                  </type>
+                </address-type>
+                <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].RemoteIPCCAddress.Address.IPv4Address</xr-path>
+                  <xr-xml-map>ucp_olm:IPv4Address</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'ipv4'</when>
+                  <type>
+                    <type-name>inet:ipv4-address</type-name>
+                  </type>
+                </ipv4-address>
+                <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].RemoteIPCCAddress.Address.IPv6Address</xr-path>
+                  <xr-xml-map>ucp_olm:IPv6Address</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'ipv6'</when>
+                  <type>
+                    <type-name>Ipv6-address</type-name>
+                  </type>
+                </ipv6-address>
+                <unnumbered-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].RemoteIPCCAddress.Address.UnnumberedAddress</xr-path>
+                  <xr-xml-map>ucp_olm:UnnumberedAddress</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'unnumbered'</when>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </unnumbered-address>
+              </address>
+            </remote-ipcc-address>
+            <interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].InterfaceName</xr-path>
+              <xr-xml-map>ucp_olm:InterfaceName</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </interface-name>
+            <protocol-owner config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].ProtocolOwner</xr-path>
+              <xr-xml-map>ucp_olm:ProtocolOwner</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Olm-object-owner</type-name>
+              </type>
+            </protocol-owner>
+            <neighbor-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].NeighborName</xr-path>
+              <xr-xml-map>ucp_olm:NeighborName</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </neighbor-name>
+            <ipcc-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].IPCC_ID</xr-path>
+              <xr-xml-map>ucp_olm:IPCC_ID</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </ipcc-id>
+            <ipc-ctype config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].IPCCType</xr-path>
+              <xr-xml-map>ucp_olm:IPCCType</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Olmipcc</type-name>
+              </type>
+            </ipc-ctype>
+            <ipcc-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].IPCCName</xr-path>
+              <xr-xml-map>ucp_olm:IPCCName</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </ipcc-name>
+            <local-mux-cap config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].LocalMuxCap</xr-path>
+              <xr-xml-map>ucp_olm:LocalMuxCap</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Olm-mux-cap</type-name>
+              </type>
+            </local-mux-cap>
+            <remote-mux-cap config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].RemoteMuxCap</xr-path>
+              <xr-xml-map>ucp_olm:RemoteMuxCap</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Olm-mux-cap</type-name>
+              </type>
+            </remote-mux-cap>
+            <im-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].IMState</xr-path>
+              <xr-xml-map>ucp_olm:IMState</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Olm-comp-link-im-state</type-name>
+              </type>
+            </im-state>
+            <lmp-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].LMPState</xr-path>
+              <xr-xml-map>ucp_olm:LMPState</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Olm-comp-link-lmp-state</type-name>
+              </type>
+            </lmp-state>
+            <te-link-lmp-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].TELinkLMPState</xr-path>
+              <xr-xml-map>ucp_olm:TELinkLMPState</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Olmte-link-lmp-state</type-name>
+              </type>
+            </te-link-lmp-state>
+            <gmpls-te-link-local-minimum-bandwidth config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].GMPLS_TELinkLocalMinimumBandwidth</xr-path>
+              <xr-xml-map>ucp_olm:GMPLS_TELinkLocalMinimumBandwidth</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </gmpls-te-link-local-minimum-bandwidth>
+            <gmpls-te-link-local-maximum-bandwidth config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].GMPLS_TELinkLocalMaximumBandwidth</xr-path>
+              <xr-xml-map>ucp_olm:GMPLS_TELinkLocalMaximumBandwidth</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </gmpls-te-link-local-maximum-bandwidth>
+            <gmpls-te-link-neighbor-minimum-bandwidth config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].GMPLS_TELinkNeighborMinimumBandwidth</xr-path>
+              <xr-xml-map>ucp_olm:GMPLS_TELinkNeighborMinimumBandwidth</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </gmpls-te-link-neighbor-minimum-bandwidth>
+            <gmpls-te-link-neighbor-maximum-bandwidth config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].GMPLS_TELinkNeighborMaximumBandwidth</xr-path>
+              <xr-xml-map>ucp_olm:GMPLS_TELinkNeighborMaximumBandwidth</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </gmpls-te-link-neighbor-maximum-bandwidth>
+            <gmpls-te-link-local-encoding-type config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].GMPLS_TELinkLocalEncodingType</xr-path>
+              <xr-xml-map>ucp_olm:GMPLS_TELinkLocalEncodingType</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Olm-link-encoding</type-name>
+              </type>
+            </gmpls-te-link-local-encoding-type>
+            <gmpls-te-link-neighbor-encoding-type config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].GMPLS_TELinkNeighborEncodingType</xr-path>
+              <xr-xml-map>ucp_olm:GMPLS_TELinkNeighborEncodingType</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Olm-link-encoding</type-name>
+              </type>
+            </gmpls-te-link-neighbor-encoding-type>
+            <is-lmp-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].IsLMPEnabled</xr-path>
+              <xr-xml-map>ucp_olm:IsLMPEnabled</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </is-lmp-enabled>
+            <lmp-transmit-msg-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].LMPTransmitMsgID</xr-path>
+              <xr-xml-map>ucp_olm:LMPTransmitMsgID</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </lmp-transmit-msg-id>
+            <lmp-receive-msg-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].LMPReceiveMsgID</xr-path>
+              <xr-xml-map>ucp_olm:LMPReceiveMsgID</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </lmp-receive-msg-id>
+            <lmp-comp-link-status config="false" is-key="false" is-yang-key="false" node="leaf-list">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.TELinkList[&lt;bag_arg2&gt;].LMPCompLinkStatus[&lt;bag_arg1&gt;]</xr-path>
+              <xr-xml-map>ucp_olm:LMPCompLinkStatus</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+              <type>
+                <type-name>Olm-comp-link-lmp-status</type-name>
+              </type>
+            </lmp-comp-link-status>
+          </te-link>
+          <ipcc config="false" node="list">
+            <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;]</xr-path>
+            <xr-task>ouni</xr-task>
+            <xr-bag-version>2 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+            <remote-ipcc-address config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].RemoteIPCCAddress</xr-path>
+              <xr-task>ouni</xr-task>
+              <xr-bag-version>2 0</xr-bag-version>
+              <address config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].RemoteIPCCAddress.Address</xr-path>
+                <xr-task>ouni</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <address-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].RemoteIPCCAddress.Address.AddressType</xr-path>
+                  <xr-xml-map>ucp_olm:AddressType</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Olm-addr-type-id</type-name>
+                  </type>
+                </address-type>
+                <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].RemoteIPCCAddress.Address.IPv4Address</xr-path>
+                  <xr-xml-map>ucp_olm:IPv4Address</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'ipv4'</when>
+                  <type>
+                    <type-name>inet:ipv4-address</type-name>
+                  </type>
+                </ipv4-address>
+                <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].RemoteIPCCAddress.Address.IPv6Address</xr-path>
+                  <xr-xml-map>ucp_olm:IPv6Address</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'ipv6'</when>
+                  <type>
+                    <type-name>Ipv6-address</type-name>
+                  </type>
+                </ipv6-address>
+                <unnumbered-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].RemoteIPCCAddress.Address.UnnumberedAddress</xr-path>
+                  <xr-xml-map>ucp_olm:UnnumberedAddress</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'unnumbered'</when>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </unnumbered-address>
+              </address>
+            </remote-ipcc-address>
+            <source-ip-cc-address config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].SourceIPCCAddress</xr-path>
+              <xr-task>ouni</xr-task>
+              <xr-bag-version>2 0</xr-bag-version>
+              <address config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].SourceIPCCAddress.Address</xr-path>
+                <xr-task>ouni</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <address-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].SourceIPCCAddress.Address.AddressType</xr-path>
+                  <xr-xml-map>ucp_olm:AddressType</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Olm-addr-type-id</type-name>
+                  </type>
+                </address-type>
+                <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].SourceIPCCAddress.Address.IPv4Address</xr-path>
+                  <xr-xml-map>ucp_olm:IPv4Address</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'ipv4'</when>
+                  <type>
+                    <type-name>inet:ipv4-address</type-name>
+                  </type>
+                </ipv4-address>
+                <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].SourceIPCCAddress.Address.IPv6Address</xr-path>
+                  <xr-xml-map>ucp_olm:IPv6Address</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'ipv6'</when>
+                  <type>
+                    <type-name>Ipv6-address</type-name>
+                  </type>
+                </ipv6-address>
+                <unnumbered-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].SourceIPCCAddress.Address.UnnumberedAddress</xr-path>
+                  <xr-xml-map>ucp_olm:UnnumberedAddress</xr-xml-map>
+                  <xr-task>ouni</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <when>../address-type = 'unnumbered'</when>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </unnumbered-address>
+              </address>
+            </source-ip-cc-address>
+            <ipcc-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].IPCC_ID</xr-path>
+              <xr-xml-map>ucp_olm:IPCC_ID</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </ipcc-id>
+            <ipc-ctype config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].IPCCType</xr-path>
+              <xr-xml-map>ucp_olm:IPCCType</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Olmipcc</type-name>
+              </type>
+            </ipc-ctype>
+            <interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].InterfaceName</xr-path>
+              <xr-xml-map>ucp_olm:InterfaceName</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </interface-name>
+            <neighbor-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].NeighborName</xr-path>
+              <xr-xml-map>ucp_olm:NeighborName</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </neighbor-name>
+            <ipcc-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].IPCCState</xr-path>
+              <xr-xml-map>ucp_olm:IPCCState</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Olmipcc-state</type-name>
+              </type>
+            </ipcc-state>
+            <lmp-hello-interval config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].LMPHelloInterval</xr-path>
+              <xr-xml-map>ucp_olm:LMPHelloInterval</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </lmp-hello-interval>
+            <lmp-hello-interval-minimum config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].LMPHelloIntervalMinimum</xr-path>
+              <xr-xml-map>ucp_olm:LMPHelloIntervalMinimum</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </lmp-hello-interval-minimum>
+            <lmp-hello-interval-maximum config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].LMPHelloIntervalMaximum</xr-path>
+              <xr-xml-map>ucp_olm:LMPHelloIntervalMaximum</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </lmp-hello-interval-maximum>
+            <lmp-hello-dead-interval config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].LMPHelloDeadInterval</xr-path>
+              <xr-xml-map>ucp_olm:LMPHelloDeadInterval</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </lmp-hello-dead-interval>
+            <lmp-hello-dead-interval-minimum config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].LMPHelloDeadIntervalMinimum</xr-path>
+              <xr-xml-map>ucp_olm:LMPHelloDeadIntervalMinimum</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </lmp-hello-dead-interval-minimum>
+            <lmp-hello-dead-interval-maximum config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].LMPHelloDeadIntervalMaximum</xr-path>
+              <xr-xml-map>ucp_olm:LMPHelloDeadIntervalMaximum</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </lmp-hello-dead-interval-maximum>
+            <lmp-hello-transmit-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].LMPHelloTransmitPackets</xr-path>
+              <xr-xml-map>ucp_olm:LMPHelloTransmitPackets</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </lmp-hello-transmit-packets>
+            <lmp-hello-receive-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].LMPHelloReceivePackets</xr-path>
+              <xr-xml-map>ucp_olm:LMPHelloReceivePackets</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </lmp-hello-receive-packets>
+            <lmp-hello-transmit-packet-sequence-number config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].LMPHelloTransmitPacketSequenceNumber</xr-path>
+              <xr-xml-map>ucp_olm:LMPHelloTransmitPacketSequenceNumber</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </lmp-hello-transmit-packet-sequence-number>
+            <lmp-hello-receive-packet-sequence-number config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].LMPHelloReceivePacketSequenceNumber</xr-path>
+              <xr-xml-map>ucp_olm:LMPHelloReceivePacketSequenceNumber</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </lmp-hello-receive-packet-sequence-number>
+            <lmp-transmit-msg-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].LMPTransmitMsgID</xr-path>
+              <xr-xml-map>ucp_olm:LMPTransmitMsgID</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </lmp-transmit-msg-id>
+            <lmp-receive-msg-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].LMPReceiveMsgID</xr-path>
+              <xr-xml-map>ucp_olm:LMPReceiveMsgID</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </lmp-receive-msg-id>
+            <lmp-link-sum-transmit-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].LMPLinkSumTransmitPackets</xr-path>
+              <xr-xml-map>ucp_olm:LMPLinkSumTransmitPackets</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </lmp-link-sum-transmit-packets>
+            <lmp-link-sum-receive-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ucp-lmp/gl/act/gmpls-uni/neighbor/&lt;lmp_gmpls_uni_oper_Neighbor_NeighborName&gt;~OLMNeighborInfo.IPCCList[&lt;bag_arg3&gt;].LMPLinkSumReceivePackets</xr-path>
+              <xr-xml-map>ucp_olm:LMPLinkSumReceivePackets</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </lmp-link-sum-receive-packets>
+          </ipcc>
+        </neighbor>
+      </neighbors>
+    </gmpls-uni>
+    <component-link-ids config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ucp-lmp/gl/act/component-link-id/</xr-path>
+      <xr-xml-map>lmp_oper:ComponentLinkIDTable</xr-xml-map>
+      <xr-task>ouni</xr-task>
+      <component-link-id config="false" key="controller-name" node="list">
+        <xr-path>/oper/ucp-lmp/gl/act/component-link-id/&lt;lmp_oper_ComponentLinkID_ControllerName&gt;</xr-path>
+        <xr-xml-map>lmp_oper:ComponentLinkID</xr-xml-map>
+        <xr-task>ouni</xr-task>
+        <xr-bag-grp-name>OLMComponentLinkIDInfo</xr-bag-grp-name>
+        <xr-bag>ucp_olm.bag</xr-bag>
+        <controller-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/ucp-lmp/gl/act/component-link-id/&lt;lmp_oper_ComponentLinkID_ControllerName&gt;</xr-path>
+          <xr-xml-map>lmp_oper:ControllerName</xr-xml-map>
+          <xr-task>ouni</xr-task>
+          <xr-sch-type>InterfaceName</xr-sch-type>
+          <xr-sch-arg-name>&lt;lmp_oper_ComponentLinkID_ControllerName&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </controller-name>
+        <component-interface-id config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ucp-lmp/gl/act/component-link-id/&lt;lmp_oper_ComponentLinkID_ControllerName&gt;~OLMComponentLinkIDInfo.ComponentInterfaceID</xr-path>
+          <xr-xml-map>ucp_olm:ComponentInterfaceID</xr-xml-map>
+          <xr-task>ouni</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </component-interface-id>
+      </component-link-id>
+    </component-link-ids>
+  </lmp>
+</Cisco-IOS-XR-lmp-oper>

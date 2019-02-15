@@ -1,0 +1,743 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-sysadmin-sdr-mgr ns="http://www.cisco.com/ns/yang/Cisco-IOS-XR-sysadmin-sdr-mgr" revision="2018-10-22">
+  <files>
+    <file revision="2018-10-22" submodule="false">Cisco-IOS-XR-sysadmin-sdr-mgr.yang</file>
+  </files>
+  <prefix>calvados_sdr</prefix>
+  <import prefix="tailf">tailf-common</import>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="show_trace">Cisco-IOS-XR-sysadmin-show-trace</import>
+  <typedef name="Location">
+    <type>
+      <pattern>((0?[0-9]|1[1-5]|[bB]\d)/(([rR][pP]|[lL][cC]|[cC][bB])?\d{1,2}))(/[cC][pP][uU]0)?|all</pattern>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="RPLocation">
+    <type>
+      <pattern>((0?[0-9]|1[1-5]|[bB]\d)/(([rR][pP]|[cC][bB])\d{1,2}))(/[cC][pP][uU]0)?</pattern>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="VMLocation">
+    <type>
+      <pattern>((0?[0-9]|1[1-5]|[bB]\d)/((([rR]([sS]){0,1}[pP])|[cC][bB])?\d{1,2})/[V][M](0?[0-9]|1[1-5]))?</pattern>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="VMLocationall">
+    <type>
+      <pattern>((0?[0-9]|1[1-5]|[bB]\d)/((([rR]([sS]){0,1}[pP])|[cC][bB])?\d{1,2})/[V][M](0?[0-9]|1[1-5]))?|all</pattern>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="CardType">
+    <type node="enumeration">
+      <enum>RP</enum>
+      <enum>LC</enum>
+      <enum>CC</enum>
+    </type>
+  </typedef>
+  <typedef name="vm_reload_reason">
+    <type node="enumeration">
+      <enum>CARD_OFFLINE</enum>
+      <enum>CARD_SHUTDOWN</enum>
+      <enum>ALL_VM_RELOAD</enum>
+      <enum>VM_REQUESTED_GRACEFUL_RELOAD</enum>
+      <enum>VM_REQUESTED_UNGRACEFUL_RELOAD</enum>
+      <enum>SDR_CLI_REQUESTED</enum>
+      <enum>SDR_VCPU_VMEM_CHANGED</enum>
+      <enum>SDR_HEARTBEAT_FAILURE</enum>
+      <enum>FIRST_BOOT</enum>
+      <enum>SMU</enum>
+      <enum>REASON_UNKNOWN</enum>
+    </type>
+  </typedef>
+  <sdr-config config="true" is-key="false" node="container" presence="false">
+    <sdr config="true" key="name" node="list">
+      <xr-path/>
+      <name config="true" is-key="true" node="leaf">
+        <type>
+          <pattern>[a-zA-Z0-9_-]{1,30}</pattern>
+          <type-name>string</type-name>
+        </type>
+      </name>
+      <initial-image config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </initial-image>
+      <lead_down_delta config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </lead_down_delta>
+      <pairing-mode config="true" is-key="false" node="leaf">
+        <type node="enumeration">
+          <enum>intra-rack</enum>
+          <enum>inter-rack</enum>
+        </type>
+      </pairing-mode>
+      <issu config="true" is-key="false" node="leaf">
+        <type node="enumeration">
+          <enum>disable</enum>
+        </type>
+      </issu>
+      <resources config="true" is-key="false" node="container" presence="false">
+        <fgid config="true" is-key="false" node="leaf">
+          <type range="25000..524288">
+            <type-name>uint32</type-name>
+          </type>
+        </fgid>
+        <mgmt_ext_vlan config="true" is-key="false" node="leaf">
+          <type range="2..4094">
+            <type-name>uint32</type-name>
+          </type>
+        </mgmt_ext_vlan>
+        <card-type config="true" key="type" node="list">
+          <xr-path/>
+          <type config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>CardType</type-name>
+            </type>
+          </type>
+          <vm-memory config="true" is-key="false" node="leaf">
+            <type range="1..128">
+              <type-name>uint32</type-name>
+            </type>
+          </vm-memory>
+          <vm-cpu config="true" is-key="false" node="leaf">
+            <type range="1..128">
+              <type-name>uint32</type-name>
+            </type>
+          </vm-cpu>
+        </card-type>
+        <disk-space-size config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </disk-space-size>
+      </resources>
+      <location config="true" key="node-location" node="list">
+        <xr-path/>
+        <min-elements>1</min-elements>
+        <max-elements>64</max-elements>
+        <node-location config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>Location</type-name>
+          </type>
+        </node-location>
+      </location>
+      <Action config="true" is-key="false" node="container" presence="false">
+        <re_pair config="false" is-key="false" node="action" prefix="tailf-common">
+          <result config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </result>
+          <result config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </result>
+          <result config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </result>
+        </re_pair>
+        <location config="true" key="node-location" node="list">
+          <xr-path/>
+          <min-elements>1</min-elements>
+          <max-elements>64</max-elements>
+          <node-location config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>VMLocationall</type-name>
+            </type>
+          </node-location>
+          <reload config="false" is-key="false" node="action" prefix="tailf-common">
+            <mandatory>true</mandatory>
+            <force config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>empty</type-name>
+              </type>
+              <mandatory>false</mandatory>
+            </force>
+            <force config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>empty</type-name>
+              </type>
+              <mandatory>false</mandatory>
+            </force>
+            <coredump config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>empty</type-name>
+              </type>
+              <mandatory>false</mandatory>
+            </coredump>
+            <coredump config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>empty</type-name>
+              </type>
+              <mandatory>false</mandatory>
+            </coredump>
+            <force config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>empty</type-name>
+              </type>
+              <mandatory>false</mandatory>
+            </force>
+            <coredump config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>empty</type-name>
+              </type>
+              <mandatory>false</mandatory>
+            </coredump>
+            <mandatory>true</mandatory>
+            <force config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>empty</type-name>
+              </type>
+              <mandatory>false</mandatory>
+            </force>
+            <coredump config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>empty</type-name>
+              </type>
+              <mandatory>false</mandatory>
+            </coredump>
+            <result config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </result>
+            <result config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </result>
+            <mandatory>true</mandatory>
+            <force config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>empty</type-name>
+              </type>
+              <mandatory>false</mandatory>
+            </force>
+            <coredump config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>empty</type-name>
+              </type>
+              <mandatory>false</mandatory>
+            </coredump>
+            <result config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </result>
+          </reload>
+          <shut config="false" is-key="false" node="action" prefix="tailf-common">
+            <result config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </result>
+            <result config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </result>
+            <result config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </result>
+          </shut>
+          <start config="false" is-key="false" node="action" prefix="tailf-common">
+            <result config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </result>
+            <result config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </result>
+            <result config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </result>
+          </start>
+        </location>
+      </Action>
+      <detail config="true" is-key="false" node="container" presence="false">
+        <location config="true" key="node-location" node="list">
+          <xr-path/>
+          <min-elements>1</min-elements>
+          <max-elements>64</max-elements>
+          <node-location config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>VMLocation</type-name>
+            </type>
+          </node-location>
+          <sdr-id config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </sdr-id>
+          <ip-addr config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </ip-addr>
+          <mac-address config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </mac-address>
+          <boot_part config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </boot_part>
+          <data_part config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </data_part>
+          <big_disk config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </big_disk>
+          <vm_id config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </vm_id>
+          <vmcpu config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </vmcpu>
+          <vmmemory config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </vmmemory>
+          <card-type config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </card-type>
+          <card_serial config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </card_serial>
+          <rack-type config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </rack-type>
+          <chassis_serial config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </chassis_serial>
+          <hw_version config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </hw_version>
+          <mgmt_ext_vlan config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </mgmt_ext_vlan>
+          <state config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </state>
+          <start-time config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </start-time>
+          <reboot_count config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </reboot_count>
+          <rh_count config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </rh_count>
+          <reboot_hist1 config="true" key="count" node="list">
+            <xr-path/>
+            <count config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </count>
+            <Time config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </Time>
+            <Reason config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </Reason>
+          </reboot_hist1>
+        </location>
+      </detail>
+      <reboot-history config="true" is-key="false" node="container" presence="false">
+        <reverse config="true" is-key="false" node="container" presence="false">
+          <location config="true" key="node-location" node="list">
+            <xr-path/>
+            <min-elements>1</min-elements>
+            <max-elements>64</max-elements>
+            <node-location config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>VMLocation</type-name>
+              </type>
+            </node-location>
+            <reboot_count config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </reboot_count>
+            <rh_count config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </rh_count>
+            <reboot_hist2 config="true" key="count" node="list">
+              <xr-path/>
+              <count config="true" is-key="true" node="leaf">
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </count>
+              <Time config="true" is-key="false" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </Time>
+              <Reason config="true" is-key="false" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </Reason>
+            </reboot_hist2>
+          </location>
+        </reverse>
+        <default-disp config="true" is-key="false" node="container" presence="false">
+          <location config="true" key="node-location" node="list">
+            <xr-path/>
+            <min-elements>1</min-elements>
+            <max-elements>64</max-elements>
+            <node-location config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>VMLocation</type-name>
+              </type>
+            </node-location>
+            <reboot_count config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </reboot_count>
+            <rh_count config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </rh_count>
+            <reboot_hist2 config="true" key="count" node="list">
+              <xr-path/>
+              <count config="true" is-key="true" node="leaf">
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </count>
+              <Time config="true" is-key="false" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </Time>
+              <Reason config="true" is-key="false" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </Reason>
+            </reboot_hist2>
+          </location>
+        </default-disp>
+      </reboot-history>
+      <nodes config="true" is-key="false" node="container" presence="false">
+        <location config="true" key="node-location" node="list">
+          <xr-path/>
+          <min-elements>1</min-elements>
+          <max-elements>64</max-elements>
+          <node-location config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>VMLocation</type-name>
+            </type>
+          </node-location>
+          <sdr-id config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </sdr-id>
+          <ip-addr config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </ip-addr>
+          <mac-address config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </mac-address>
+          <state config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </state>
+          <start-time config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </start-time>
+          <reload_reason config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </reload_reason>
+          <reboot_count config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </reboot_count>
+          <rh_count config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </rh_count>
+        </location>
+      </nodes>
+      <pairing2 config="true" is-key="false" node="container" presence="false">
+        <pairing-mode config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </pairing-mode>
+        <sdrlead config="true" is-key="false" node="container" presence="false">
+          <rp1 config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </rp1>
+          <rp2 config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </rp2>
+        </sdrlead>
+        <pairing config="true" key="name" node="list">
+          <xr-path/>
+          <min-elements>1</min-elements>
+          <max-elements>64</max-elements>
+          <name config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </name>
+          <rp1 config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </rp1>
+          <rp2 config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </rp2>
+        </pairing>
+      </pairing2>
+      <pairing config="true" key="name" node="list">
+        <xr-path/>
+        <name config="true" is-key="true" node="leaf">
+          <type>
+            <pattern>[a-zA-Z0-9_-]{1,64}</pattern>
+            <type-name>string</type-name>
+          </type>
+        </name>
+        <rp1 config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>RPLocation</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </rp1>
+        <rp2 config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>RPLocation</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </rp2>
+      </pairing>
+    </sdr>
+  </sdr-config>
+  <sdr-manager config="true" is-key="false" node="container" presence="false">
+    <sdr_mgr config="true" is-key="false" node="container" presence="false">
+      <trace config="true" key="buffer" node="list">
+        <xr-path/>
+        <buffer config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </buffer>
+        <location config="true" key="location_name" node="list">
+          <xr-path/>
+          <location_name config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </location_name>
+          <all-options config="true" key="option" node="list">
+            <xr-path/>
+            <option config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </option>
+            <trace-blocks config="true" node="list">
+              <xr-path/>
+              <data config="true" is-key="false" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </data>
+            </trace-blocks>
+          </all-options>
+        </location>
+      </trace>
+    </sdr_mgr>
+  </sdr-manager>
+  <sdr-operation config="true" is-key="false" node="container" presence="false">
+    <sdr config="true" key="name" node="list">
+      <xr-path/>
+      <name config="true" is-key="true" node="leaf">
+        <type>
+          <pattern>[a-zA-Z0-9_-]{1,30}</pattern>
+          <type-name>string</type-name>
+        </type>
+      </name>
+      <nodes config="true" is-key="false" node="container" presence="false">
+        <location config="true" key="node-location node-type" node="list">
+          <xr-path/>
+          <min-elements>1</min-elements>
+          <max-elements>64</max-elements>
+          <node-location config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </node-location>
+          <node-type config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </node-type>
+          <progress config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </progress>
+          <state config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </state>
+        </location>
+      </nodes>
+    </sdr>
+  </sdr-operation>
+  <private-sdr config="true" is-key="false" node="container" presence="false">
+    <sdr-name config="true" key="name" node="list">
+      <xr-path/>
+      <min-elements>0</min-elements>
+      <max-elements>64</max-elements>
+      <name config="true" is-key="true" node="leaf">
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </name>
+      <id config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </id>
+      <lead_rack0 config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </lead_rack0>
+      <lead_rack1 config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </lead_rack1>
+      <pairing config="true" key="num" node="list">
+        <xr-path/>
+        <min-elements>0</min-elements>
+        <max-elements>64</max-elements>
+        <num config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </num>
+        <second_exist config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </second_exist>
+        <rp1_rack config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </rp1_rack>
+        <rp1_slot config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </rp1_slot>
+        <rp2_rack config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </rp2_rack>
+        <rp2_slot config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </rp2_slot>
+      </pairing>
+    </sdr-name>
+  </private-sdr>
+</Cisco-IOS-XR-sysadmin-sdr-mgr>

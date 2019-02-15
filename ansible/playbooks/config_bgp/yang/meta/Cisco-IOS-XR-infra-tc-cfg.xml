@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-infra-tc-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-infra-tc-cfg" revision="2015-11-09">
+  <files>
+    <file revision="2015-11-09" submodule="false">Cisco-IOS-XR-infra-tc-cfg.yang</file>
+  </files>
+  <prefix>infra-tc-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="History-size">
+    <xr-sch-type>RangeEnum</xr-sch-type>
+    <type node="union">
+      <type node="enumeration">
+        <enum value="10">max</enum>
+      </type>
+      <type range="1..10">
+        <type-name>uint32</type-name>
+      </type>
+    </type>
+  </typedef>
+  <typedef name="Collect-ion-interval">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">1-minute</enum>
+      <enum value="2">2-minutes</enum>
+      <enum value="3">3-minutes</enum>
+      <enum value="4">4-minutes</enum>
+      <enum value="5">5-minutes</enum>
+      <enum value="6">6-minutes</enum>
+      <enum value="10">10-minutes</enum>
+      <enum value="12">12-minutes</enum>
+      <enum value="15">15-minutes</enum>
+      <enum value="20">20-minutes</enum>
+      <enum value="30">30-minutes</enum>
+      <enum value="60">60-minutes</enum>
+    </type>
+  </typedef>
+  <typedef name="History-timeout">
+    <xr-sch-type>RangeEnum</xr-sch-type>
+    <type node="union">
+      <type node="enumeration">
+        <enum value="720">max</enum>
+      </type>
+      <type range="0..720">
+        <type-name>uint32</type-name>
+      </type>
+    </type>
+  </typedef>
+  <traffic-collector config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/tc/</xr-path>
+    <xr-xml-map>tc_cfg:TrafficCollector</xr-xml-map>
+    <xr-task>basic-services</xr-task>
+    <external-interfaces config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/tc/if/</xr-path>
+      <xr-xml-map>tc_cfg:ExternalInterfaceTable</xr-xml-map>
+      <xr-task>basic-services</xr-task>
+      <external-interface config="true" key="interface-name" node="list">
+        <xr-path>/cfg/gl/tc/if/&lt;tc_cfg_ExternalInterface_interface_name&gt;/</xr-path>
+        <xr-xml-map>tc_cfg:ExternalInterface</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <xr-scope>exported</xr-scope>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/tc/if/&lt;tc_cfg_ExternalInterface_interface_name&gt;/a</xr-path>
+          <xr-xml-map>tc_cfg:Enable</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </enable>
+        <interface-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/tc/if/&lt;tc_cfg_ExternalInterface_interface_name&gt;/</xr-path>
+          <xr-xml-map>tc_cfg:InterfaceName</xr-xml-map>
+          <xr-task>basic-services</xr-task>
+          <xr-sch-type>InterfaceName</xr-sch-type>
+          <xr-sch-arg-name>&lt;tc_cfg_ExternalInterface_interface_name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </interface-name>
+      </external-interface>
+    </external-interfaces>
+    <statistics config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/tc/stat/</xr-path>
+      <xr-xml-map>tc_cfg:Statistics</xr-xml-map>
+      <xr-task>basic-services</xr-task>
+      <history-size config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/tc/stat/history-size</xr-path>
+        <xr-xml-map>tc_cfg:HistorySize</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <xr-sch-type>RangeEnum</xr-sch-type>
+        <type>
+          <type-name>History-size</type-name>
+        </type>
+      </history-size>
+      <collection-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/tc/stat/collect-interval</xr-path>
+        <xr-xml-map>tc_cfg:CollectionInterval</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Collect-ion-interval</type-name>
+        </type>
+      </collection-interval>
+      <enable-traffic-collector-statistics config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/tc/stat/a</xr-path>
+        <xr-xml-map>tc_cfg:EnableTrafficCollectorStatistics</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </enable-traffic-collector-statistics>
+      <history-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/tc/stat/timeout-interval</xr-path>
+        <xr-xml-map>tc_cfg:HistoryTimeout</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <xr-sch-type>RangeEnum</xr-sch-type>
+        <type>
+          <type-name>History-timeout</type-name>
+        </type>
+      </history-timeout>
+    </statistics>
+    <enable-traffic-collector config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/tc/a</xr-path>
+      <xr-xml-map>tc_cfg:EnableTrafficCollector</xr-xml-map>
+      <xr-task>basic-services</xr-task>
+      <xr-sch-type>Configured</xr-sch-type>
+      <type>
+        <type-name>empty</type-name>
+      </type>
+    </enable-traffic-collector>
+  </traffic-collector>
+</Cisco-IOS-XR-infra-tc-cfg>

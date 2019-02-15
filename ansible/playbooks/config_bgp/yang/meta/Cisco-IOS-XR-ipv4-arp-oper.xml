@@ -1,0 +1,1705 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ipv4-arp-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-arp-oper" revision="2017-05-01">
+  <files>
+    <file revision="2017-05-01" submodule="false">Cisco-IOS-XR-ipv4-arp-oper.yang</file>
+    <file revision="2017-05-01" submodule="true">Cisco-IOS-XR-ipv4-arp-oper-sub2.yang</file>
+    <file revision="2017-05-01" submodule="true">Cisco-IOS-XR-ipv4-arp-oper-sub1.yang</file>
+  </files>
+  <prefix>ipv4-arp-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="yang">ietf-yang-types</import>
+  <typedef name="Arp-gmp-bag-entry">
+    <type node="enumeration">
+      <enum value="0">null</enum>
+      <enum value="1">static</enum>
+      <enum value="2">alias</enum>
+    </type>
+  </typedef>
+  <typedef name="Arp-gmp-bag-encap">
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">arpa</enum>
+      <enum value="2">snap</enum>
+      <enum value="3">ieee802-1q</enum>
+      <enum value="4">srp</enum>
+      <enum value="5">srpa</enum>
+      <enum value="6">srpb</enum>
+    </type>
+  </typedef>
+  <typedef name="Ip-arp-bag-encap">
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">arpa</enum>
+      <enum value="2">snap</enum>
+      <enum value="3">ieee802-1q</enum>
+      <enum value="4">srp</enum>
+      <enum value="5">srpa</enum>
+      <enum value="6">srpb</enum>
+    </type>
+  </typedef>
+  <typedef name="Ip-arp-bag-flags">
+    <type node="enumeration">
+      <enum value="0">flag-none</enum>
+      <enum value="1">flag-dynamic</enum>
+      <enum value="2">flag-evpn-sync</enum>
+      <enum value="3">flag-max</enum>
+    </type>
+  </typedef>
+  <typedef name="Ip-arp-bag-state">
+    <type node="enumeration">
+      <enum value="0">state-none</enum>
+      <enum value="1">state-interface</enum>
+      <enum value="2">state-standby</enum>
+      <enum value="3">state-static</enum>
+      <enum value="4">state-alias</enum>
+      <enum value="5">state-mobile</enum>
+      <enum value="6">state-incomplete</enum>
+      <enum value="7">state-deleted</enum>
+      <enum value="8">state-dynamic</enum>
+      <enum value="9">state-probe</enum>
+      <enum value="10">state-purge-delayed</enum>
+      <enum value="11">state-dhcp</enum>
+      <enum value="12">state-vxlan</enum>
+      <enum value="13">state-evpn-sync</enum>
+      <enum value="14">state-sat</enum>
+      <enum value="15">state-r-sync</enum>
+      <enum value="16">state-max</enum>
+    </type>
+  </typedef>
+  <typedef name="Ip-arp-bag-media">
+    <type node="enumeration">
+      <enum value="0">media-arpa</enum>
+      <enum value="1">media-srp</enum>
+      <enum value="2">media-unknown</enum>
+    </type>
+  </typedef>
+  <typedef name="Arp-resolution-history-status">
+    <type node="enumeration">
+      <enum value="0">status-none</enum>
+      <enum value="1">status-resolution-request</enum>
+      <enum value="2">status-resolved-reply</enum>
+      <enum value="3">status-resolved-grat-arp</enum>
+      <enum value="4">status-resolved-request</enum>
+      <enum value="5">status-resolved-lc-sync</enum>
+      <enum value="6">status-resolved-lc-sync-purge-delay</enum>
+      <enum value="7">status-resolved-client</enum>
+      <enum value="8">status-removed-client</enum>
+      <enum value="9">status-already-resolved</enum>
+      <enum value="10">status-failed</enum>
+      <enum value="11">status-dropped-interface-down</enum>
+      <enum value="12">status-dropped-broadcast-disabled</enum>
+      <enum value="13">status-dropped-interface-unavailable</enum>
+      <enum value="14">status-dropped-bad-subnet</enum>
+      <enum value="15">status-dropped-dynamic-learning-disabled</enum>
+      <enum value="16">status-dropped-out-of-subnet-disabled</enum>
+      <enum value="17">status-removed-client-sweep</enum>
+      <enum value="18">status-added-client</enum>
+      <enum value="19">status-added-v1</enum>
+      <enum value="20">status-removed-v1</enum>
+      <enum value="21">status-resolved-peer-sync</enum>
+      <enum value="22">status-dropped-unsolicited-pak</enum>
+    </type>
+  </typedef>
+  <arp-gmp config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/ipv4-arp-gmp/gl/</xr-path>
+    <xr-xml-map>arp_gmp_oper:ARP_GMP</xr-xml-map>
+    <xr-task>cef</xr-task>
+    <vrf-infos config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ipv4-arp-gmp/gl/vrf-info/</xr-path>
+      <xr-xml-map>arp_gmp_oper:VRFInfoTable</xr-xml-map>
+      <xr-task>cef</xr-task>
+      <vrf-info config="false" key="vrf-name" node="list">
+        <xr-path>/oper/ipv4-arp-gmp/gl/vrf-info/&lt;arp_gmp_oper_VRFInfo_vrf_name&gt;</xr-path>
+        <xr-xml-map>arp_gmp_oper:VRFInfo</xr-xml-map>
+        <xr-task>cef</xr-task>
+        <xr-bag-grp-name>arp_gmp_vrf_entry</xr-bag-grp-name>
+        <xr-bag>arp_gmp_edm.bag</xr-bag>
+        <vrf-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/ipv4-arp-gmp/gl/vrf-info/&lt;arp_gmp_oper_VRFInfo_vrf_name&gt;</xr-path>
+          <xr-xml-map>arp_gmp_oper:VRFName</xr-xml-map>
+          <xr-task>cef</xr-task>
+          <xr-sch-type>VRF_Name</xr-sch-type>
+          <xr-sch-arg-name>&lt;arp_gmp_oper_VRFInfo_vrf_name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </vrf-name>
+        <vrf-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ipv4-arp-gmp/gl/vrf-info/&lt;arp_gmp_oper_VRFInfo_vrf_name&gt;~arp_gmp_vrf_entry.VRFName</xr-path>
+          <xr-xml-map>arp_gmp_edm:vrf-name-xr</xr-xml-map>
+          <xr-task>cef</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </vrf-name-xr>
+        <vrf-id-number config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ipv4-arp-gmp/gl/vrf-info/&lt;arp_gmp_oper_VRFInfo_vrf_name&gt;~arp_gmp_vrf_entry.VRF_IDNumber</xr-path>
+          <xr-xml-map>arp_gmp_edm:VRF_IDNumber</xr-xml-map>
+          <xr-task>cef</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </vrf-id-number>
+        <table-id config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ipv4-arp-gmp/gl/vrf-info/&lt;arp_gmp_oper_VRFInfo_vrf_name&gt;~arp_gmp_vrf_entry.TableID</xr-path>
+          <xr-xml-map>arp_gmp_edm:TableID</xr-xml-map>
+          <xr-task>cef</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </table-id>
+        <rsi-handle config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ipv4-arp-gmp/gl/vrf-info/&lt;arp_gmp_oper_VRFInfo_vrf_name&gt;~arp_gmp_vrf_entry.RSIHandle</xr-path>
+          <xr-xml-map>arp_gmp_edm:RSIHandle</xr-xml-map>
+          <xr-task>cef</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </rsi-handle>
+        <rsi-handle-high config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ipv4-arp-gmp/gl/vrf-info/&lt;arp_gmp_oper_VRFInfo_vrf_name&gt;~arp_gmp_vrf_entry.RSIHandleHigh</xr-path>
+          <xr-xml-map>arp_gmp_edm:RSIHandleHigh</xr-xml-map>
+          <xr-task>cef</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </rsi-handle-high>
+      </vrf-info>
+    </vrf-infos>
+    <vrfs config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ipv4-arp-gmp/gl/vrf/</xr-path>
+      <xr-xml-map>arp_gmp_oper:VRFTable</xr-xml-map>
+      <xr-task>cef</xr-task>
+      <vrf config="false" key="vrf-name" node="list">
+        <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/</xr-path>
+        <xr-xml-map>arp_gmp_oper:VRF</xr-xml-map>
+        <xr-task>cef</xr-task>
+        <configured-ip-addresses config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/config/</xr-path>
+          <xr-xml-map>arp_gmp_oper:ConfiguredIPAddressTable</xr-xml-map>
+          <xr-task>cef</xr-task>
+          <configured-ip-address config="false" key="address" node="list">
+            <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/config/&lt;arp_gmp_oper_ConfiguredIPAddress_ipaddr&gt;</xr-path>
+            <xr-xml-map>arp_gmp_oper:ConfiguredIPAddress</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-grp-name>arp_gmp_config_entry</xr-bag-grp-name>
+            <xr-bag>arp_gmp_edm.bag</xr-bag>
+            <address config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-pathformat>hex_nozerox</xr-pathformat>
+              <xr-primitive-type>inaddr</xr-primitive-type>
+              <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/config/&lt;arp_gmp_oper_ConfiguredIPAddress_ipaddr&gt;</xr-path>
+              <xr-xml-map>arp_gmp_oper:Address</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-sch-type>IPV4Address</xr-sch-type>
+              <xr-sch-arg-name>&lt;arp_gmp_oper_ConfiguredIPAddress_ipaddr&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </address>
+            <ip-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/config/&lt;arp_gmp_oper_ConfiguredIPAddress_ipaddr&gt;~arp_gmp_config_entry.IPAddress</xr-path>
+              <xr-xml-map>arp_gmp_edm:IPAddress</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>0 2</xr-bag-version>
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </ip-address>
+            <hardware-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/config/&lt;arp_gmp_oper_ConfiguredIPAddress_ipaddr&gt;~arp_gmp_config_entry.HardwareAddress</xr-path>
+              <xr-xml-map>arp_gmp_edm:HardwareAddress</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>0 2</xr-bag-version>
+              <type>
+                <type-name>yang:mac-address</type-name>
+              </type>
+            </hardware-address>
+            <encapsulation-type config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/config/&lt;arp_gmp_oper_ConfiguredIPAddress_ipaddr&gt;~arp_gmp_config_entry.EncapsulationType</xr-path>
+              <xr-xml-map>arp_gmp_edm:EncapsulationType</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 2</xr-bag-version>
+              <type>
+                <type-name>Arp-gmp-bag-encap</type-name>
+              </type>
+            </encapsulation-type>
+            <entry-type config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/config/&lt;arp_gmp_oper_ConfiguredIPAddress_ipaddr&gt;~arp_gmp_config_entry.EntryType</xr-path>
+              <xr-xml-map>arp_gmp_edm:EntryType</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 2</xr-bag-version>
+              <type>
+                <type-name>Arp-gmp-bag-entry</type-name>
+              </type>
+            </entry-type>
+          </configured-ip-address>
+        </configured-ip-addresses>
+        <routes config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/route/</xr-path>
+          <xr-xml-map>arp_gmp_oper:RouteTable</xr-xml-map>
+          <xr-task>cef</xr-task>
+          <route config="false" node="list">
+            <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/route/&lt;arp_gmp_oper_Route_ipaddr&gt;,&lt;arp_gmp_oper_Route_prefix&gt;</xr-path>
+            <xr-xml-map>arp_gmp_oper:Route</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-grp-name>arp_gmp_route_entry</xr-bag-grp-name>
+            <xr-bag>arp_gmp_edm.bag</xr-bag>
+            <address config="false" is-key="true" is-yang-key="false" node="leaf">
+              <xr-pathformat>hex_nozerox</xr-pathformat>
+              <xr-primitive-type>inaddr</xr-primitive-type>
+              <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/route/&lt;arp_gmp_oper_Route_ipaddr&gt;,&lt;arp_gmp_oper_Route_prefix&gt;</xr-path>
+              <xr-xml-map>arp_gmp_oper:Address</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-sch-type>IPV4Address</xr-sch-type>
+              <xr-sch-arg-name>&lt;arp_gmp_oper_Route_ipaddr&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </address>
+            <prefix-length config="false" is-key="true" is-yang-key="false" node="leaf">
+              <xr-pathformat>decimal</xr-pathformat>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/route/&lt;arp_gmp_oper_Route_ipaddr&gt;,&lt;arp_gmp_oper_Route_prefix&gt;</xr-path>
+              <xr-xml-map>arp_gmp_oper:PrefixLength</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-sch-arg-name>&lt;arp_gmp_oper_Route_prefix&gt;</xr-sch-arg-name>
+              <type range="0..32">
+                <type-name>uint32</type-name>
+              </type>
+            </prefix-length>
+            <ip-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/route/&lt;arp_gmp_oper_Route_ipaddr&gt;,&lt;arp_gmp_oper_Route_prefix&gt;~arp_gmp_route_entry.IPAddress</xr-path>
+              <xr-xml-map>arp_gmp_edm:IPAddress</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>0 2</xr-bag-version>
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </ip-address>
+            <prefix-length-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/route/&lt;arp_gmp_oper_Route_ipaddr&gt;,&lt;arp_gmp_oper_Route_prefix&gt;~arp_gmp_route_entry.PrefixLength</xr-path>
+              <xr-xml-map>arp_gmp_edm:prefix-length-xr</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+              <xr-bag-version>0 2</xr-bag-version>
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+            </prefix-length-xr>
+            <interface-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/route/&lt;arp_gmp_oper_Route_ipaddr&gt;,&lt;arp_gmp_oper_Route_prefix&gt;~arp_gmp_route_entry.InterfaceName</xr-path>
+              <xr-xml-map>arp_gmp_edm:interface-name-xr</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+              <xr-bag-version>0 2</xr-bag-version>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-name-xr>
+            <interface-name config="false" is-key="false" is-yang-key="false" node="leaf-list">
+              <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/route/&lt;arp_gmp_oper_Route_ipaddr&gt;,&lt;arp_gmp_oper_Route_prefix&gt;~arp_gmp_route_entry.InterfaceNames[&lt;bag_arg5&gt;]</xr-path>
+              <xr-xml-map>arp_gmp_edm:InterfaceNames</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+              <xr-bag-version>0 2</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg5&gt;</xr-internal-key>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-name>
+          </route>
+        </routes>
+        <interface-configured-ips config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/intf/</xr-path>
+          <xr-xml-map>arp_gmp_oper:InterfaceConfiguredIPTable</xr-xml-map>
+          <xr-task>cef</xr-task>
+          <xr-filterlist>ARPGMPInterfaceFilter</xr-filterlist>
+          <interface-configured-ip config="false" node="list">
+            <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/intf/&lt;arp_gmp_oper_InterfaceConfiguredIP_intf&gt;,&lt;arp_gmp_oper_InterfaceConfiguredIP_ipaddr&gt;</xr-path>
+            <xr-xml-map>arp_gmp_oper:InterfaceConfiguredIP</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-grp-name>arp_gmp_intf_entry</xr-bag-grp-name>
+            <xr-bag>arp_gmp_edm.bag</xr-bag>
+            <interface-name config="false" is-key="true" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/intf/&lt;arp_gmp_oper_InterfaceConfiguredIP_intf&gt;,&lt;arp_gmp_oper_InterfaceConfiguredIP_ipaddr&gt;</xr-path>
+              <xr-xml-map>arp_gmp_oper:InterfaceName</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-sch-type>InterfaceName</xr-sch-type>
+              <xr-sch-arg-name>&lt;arp_gmp_oper_InterfaceConfiguredIP_intf&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-name>
+            <address config="false" is-key="true" is-yang-key="false" node="leaf">
+              <xr-pathformat>hex_nozerox</xr-pathformat>
+              <xr-primitive-type>inaddr</xr-primitive-type>
+              <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/intf/&lt;arp_gmp_oper_InterfaceConfiguredIP_intf&gt;,&lt;arp_gmp_oper_InterfaceConfiguredIP_ipaddr&gt;</xr-path>
+              <xr-xml-map>arp_gmp_oper:Address</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-sch-type>IPV4Address</xr-sch-type>
+              <xr-sch-arg-name>&lt;arp_gmp_oper_InterfaceConfiguredIP_ipaddr&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </address>
+            <associated-configuration-entry config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/intf/&lt;arp_gmp_oper_InterfaceConfiguredIP_intf&gt;,&lt;arp_gmp_oper_InterfaceConfiguredIP_ipaddr&gt;~arp_gmp_intf_entry.AssociatedConfigurationEntry</xr-path>
+              <xr-task>cef</xr-task>
+              <xr-bag-version>0 2</xr-bag-version>
+              <ip-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/intf/&lt;arp_gmp_oper_InterfaceConfiguredIP_intf&gt;,&lt;arp_gmp_oper_InterfaceConfiguredIP_ipaddr&gt;~arp_gmp_intf_entry.AssociatedConfigurationEntry.IPAddress</xr-path>
+                <xr-xml-map>arp_gmp_edm:IPAddress</xr-xml-map>
+                <xr-task>cef</xr-task>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>0 2</xr-bag-version>
+                <type>
+                  <type-name>inet:ipv4-address</type-name>
+                </type>
+              </ip-address>
+              <hardware-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/intf/&lt;arp_gmp_oper_InterfaceConfiguredIP_intf&gt;,&lt;arp_gmp_oper_InterfaceConfiguredIP_ipaddr&gt;~arp_gmp_intf_entry.AssociatedConfigurationEntry.HardwareAddress</xr-path>
+                <xr-xml-map>arp_gmp_edm:HardwareAddress</xr-xml-map>
+                <xr-task>cef</xr-task>
+                <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>0 2</xr-bag-version>
+                <type>
+                  <type-name>yang:mac-address</type-name>
+                </type>
+              </hardware-address>
+              <encapsulation-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/intf/&lt;arp_gmp_oper_InterfaceConfiguredIP_intf&gt;,&lt;arp_gmp_oper_InterfaceConfiguredIP_ipaddr&gt;~arp_gmp_intf_entry.AssociatedConfigurationEntry.EncapsulationType</xr-path>
+                <xr-xml-map>arp_gmp_edm:EncapsulationType</xr-xml-map>
+                <xr-task>cef</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 2</xr-bag-version>
+                <type>
+                  <type-name>Arp-gmp-bag-encap</type-name>
+                </type>
+              </encapsulation-type>
+              <entry-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/intf/&lt;arp_gmp_oper_InterfaceConfiguredIP_intf&gt;,&lt;arp_gmp_oper_InterfaceConfiguredIP_ipaddr&gt;~arp_gmp_intf_entry.AssociatedConfigurationEntry.EntryType</xr-path>
+                <xr-xml-map>arp_gmp_edm:EntryType</xr-xml-map>
+                <xr-task>cef</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 2</xr-bag-version>
+                <type>
+                  <type-name>Arp-gmp-bag-entry</type-name>
+                </type>
+              </entry-type>
+            </associated-configuration-entry>
+            <interface-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/intf/&lt;arp_gmp_oper_InterfaceConfiguredIP_intf&gt;,&lt;arp_gmp_oper_InterfaceConfiguredIP_ipaddr&gt;~arp_gmp_intf_entry.InterfaceName</xr-path>
+              <xr-xml-map>arp_gmp_edm:interface-name-xr</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+              <xr-bag-version>0 2</xr-bag-version>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-name-xr>
+            <reference-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/intf/&lt;arp_gmp_oper_InterfaceConfiguredIP_intf&gt;,&lt;arp_gmp_oper_InterfaceConfiguredIP_ipaddr&gt;~arp_gmp_intf_entry.ReferenceCount</xr-path>
+              <xr-xml-map>arp_gmp_edm:ReferenceCount</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>0 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </reference-count>
+          </interface-configured-ip>
+        </interface-configured-ips>
+        <vrf-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/ipv4-arp-gmp/gl/vrf/&lt;arp_gmp_oper_VRF_vrf_name&gt;/</xr-path>
+          <xr-xml-map>arp_gmp_oper:VRFName</xr-xml-map>
+          <xr-task>cef</xr-task>
+          <xr-sch-type>VRF_Name</xr-sch-type>
+          <xr-sch-arg-name>&lt;arp_gmp_oper_VRF_vrf_name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </vrf-name>
+      </vrf>
+    </vrfs>
+  </arp-gmp>
+  <arp config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/ipv4-arp/</xr-path>
+    <xr-xml-map>arp_oper:ARP</xr-xml-map>
+    <xr-task>cef</xr-task>
+    <nodes config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ipv4-arp/node/</xr-path>
+      <xr-xml-map>arp_oper:NodeTable</xr-xml-map>
+      <xr-task>cef</xr-task>
+      <node config="false" key="node-name" node="list">
+        <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/</xr-path>
+        <xr-xml-map>arp_oper:Node</xr-xml-map>
+        <xr-task>cef</xr-task>
+        <resolution-history-dynamic config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/arp-res-hist-dynamic</xr-path>
+          <xr-xml-map>arp_oper:ResolutionHistoryDynamic</xr-xml-map>
+          <xr-task>cef</xr-task>
+          <xr-bag-grp-name>arp_reshist</xr-bag-grp-name>
+          <xr-bag>ip_arp_show.bag</xr-bag>
+          <arp-entry config="false" node="list">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/arp-res-hist-dynamic~arp_reshist.arpEntry[&lt;bag_arg2&gt;]</xr-path>
+            <xr-task>cef</xr-task>
+            <xr-bag-version>3 2</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+            <nsec-timestamp config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/arp-res-hist-dynamic~arp_reshist.arpEntry[&lt;bag_arg2&gt;].NsecTimestamp</xr-path>
+              <xr-xml-map>ip_arp_show:NsecTimestamp</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </nsec-timestamp>
+            <idb-interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/arp-res-hist-dynamic~arp_reshist.arpEntry[&lt;bag_arg2&gt;].IDBInterfaceName</xr-path>
+              <xr-xml-map>ip_arp_show:IDBInterfaceName</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </idb-interface-name>
+            <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/arp-res-hist-dynamic~arp_reshist.arpEntry[&lt;bag_arg2&gt;].IPv4Address</xr-path>
+              <xr-xml-map>ip_arp_show:IPv4Address</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </ipv4-address>
+            <mac-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/arp-res-hist-dynamic~arp_reshist.arpEntry[&lt;bag_arg2&gt;].MACAddress</xr-path>
+              <xr-xml-map>ip_arp_show:MACAddress</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>yang:mac-address</type-name>
+              </type>
+            </mac-address>
+            <status config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/arp-res-hist-dynamic~arp_reshist.arpEntry[&lt;bag_arg2&gt;].Status</xr-path>
+              <xr-xml-map>ip_arp_show:Status</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>Arp-resolution-history-status</type-name>
+              </type>
+            </status>
+            <client-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/arp-res-hist-dynamic~arp_reshist.arpEntry[&lt;bag_arg2&gt;].ClientID</xr-path>
+              <xr-xml-map>ip_arp_show:ClientID</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>int32</type-name>
+              </type>
+            </client-id>
+            <entry-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/arp-res-hist-dynamic~arp_reshist.arpEntry[&lt;bag_arg2&gt;].EntryState</xr-path>
+              <xr-xml-map>ip_arp_show:EntryState</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>int32</type-name>
+              </type>
+            </entry-state>
+            <resolution-request-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/arp-res-hist-dynamic~arp_reshist.arpEntry[&lt;bag_arg2&gt;].ResolutionRequestCount</xr-path>
+              <xr-xml-map>ip_arp_show:ResolutionRequestCount</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </resolution-request-count>
+          </arp-entry>
+        </resolution-history-dynamic>
+        <traffic-vrfs config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/</xr-path>
+          <xr-xml-map>arp_oper:TrafficVRFTable</xr-xml-map>
+          <xr-task>cef</xr-task>
+          <traffic-vrf config="false" key="vrf-name" node="list">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;</xr-path>
+            <xr-xml-map>arp_oper:TrafficVRF</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-grp-name>ip_arp_statistics</xr-bag-grp-name>
+            <xr-bag>ip_arp_show.bag</xr-bag>
+            <vrf-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;</xr-path>
+              <xr-xml-map>arp_oper:VRFName</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-sch-type>EncodedString</xr-sch-type>
+              <xr-sch-arg-name>&lt;arp_oper_TrafficVRF_vrf_name&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </vrf-name>
+            <requests-received config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.RequestsReceived</xr-path>
+              <xr-xml-map>ip_arp_show:RequestsReceived</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </requests-received>
+            <replies-received config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.RepliesReceived</xr-path>
+              <xr-xml-map>ip_arp_show:RepliesReceived</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </replies-received>
+            <requests-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.RequestsSent</xr-path>
+              <xr-xml-map>ip_arp_show:RequestsSent</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </requests-sent>
+            <replies-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.RepliesSent</xr-path>
+              <xr-xml-map>ip_arp_show:RepliesSent</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </replies-sent>
+            <proxy-replies-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.ProxyRepliesSent</xr-path>
+              <xr-xml-map>ip_arp_show:ProxyRepliesSent</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </proxy-replies-sent>
+            <subscr-requests-received config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.SubscrRequestsReceived</xr-path>
+              <xr-xml-map>ip_arp_show:SubscrRequestsReceived</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </subscr-requests-received>
+            <subscr-replies-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.SubscrRepliesSent</xr-path>
+              <xr-xml-map>ip_arp_show:SubscrRepliesSent</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </subscr-replies-sent>
+            <subscr-replies-gratg-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.SubscrRepliesGratgSent</xr-path>
+              <xr-xml-map>ip_arp_show:SubscrRepliesGratgSent</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </subscr-replies-gratg-sent>
+            <local-proxy-replies-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.LocalProxyRepliesSent</xr-path>
+              <xr-xml-map>ip_arp_show:LocalProxyRepliesSent</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </local-proxy-replies-sent>
+            <gratuitous-replies-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.GratuitousRepliesSent</xr-path>
+              <xr-xml-map>ip_arp_show:GratuitousRepliesSent</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </gratuitous-replies-sent>
+            <resolution-requests-received config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.ResolutionRequestsReceived</xr-path>
+              <xr-xml-map>ip_arp_show:ResolutionRequestsReceived</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </resolution-requests-received>
+            <resolution-replies-received config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.ResolutionRepliesReceived</xr-path>
+              <xr-xml-map>ip_arp_show:ResolutionRepliesReceived</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </resolution-replies-received>
+            <resolution-requests-dropped config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.ResolutionRequestsDropped</xr-path>
+              <xr-xml-map>ip_arp_show:ResolutionRequestsDropped</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </resolution-requests-dropped>
+            <out-of-memory-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.OutOfMemoryErrors</xr-path>
+              <xr-xml-map>ip_arp_show:OutOfMemoryErrors</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </out-of-memory-errors>
+            <no-buffer-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.NoBufferErrors</xr-path>
+              <xr-xml-map>ip_arp_show:NoBufferErrors</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </no-buffer-errors>
+            <total-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.TotalEntries</xr-path>
+              <xr-xml-map>ip_arp_show:TotalEntries</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </total-entries>
+            <dynamic-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.DynamicEntries</xr-path>
+              <xr-xml-map>ip_arp_show:DynamicEntries</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </dynamic-entries>
+            <static-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.StaticEntries</xr-path>
+              <xr-xml-map>ip_arp_show:StaticEntries</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </static-entries>
+            <alias-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.AliasEntries</xr-path>
+              <xr-xml-map>ip_arp_show:AliasEntries</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </alias-entries>
+            <interface-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.InterfaceEntries</xr-path>
+              <xr-xml-map>ip_arp_show:InterfaceEntries</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </interface-entries>
+            <standby-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.StandbyEntries</xr-path>
+              <xr-xml-map>ip_arp_show:StandbyEntries</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </standby-entries>
+            <dhcp-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.DHCPEntries</xr-path>
+              <xr-xml-map>ip_arp_show:DHCPEntries</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </dhcp-entries>
+            <vxlan-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.VXLANEntries</xr-path>
+              <xr-xml-map>ip_arp_show:VXLANEntries</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </vxlan-entries>
+            <ip-packets-dropped-node config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.IPPacketsDroppedNode</xr-path>
+              <xr-xml-map>ip_arp_show:IPPacketsDroppedNode</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </ip-packets-dropped-node>
+            <arp-packet-node-out-of-subnet config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.ARPPacketNodeOutOfSubnet</xr-path>
+              <xr-xml-map>ip_arp_show:ARPPacketNodeOutOfSubnet</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </arp-packet-node-out-of-subnet>
+            <ip-packets-dropped-interface config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.IPPacketsDroppedInterface</xr-path>
+              <xr-xml-map>ip_arp_show:IPPacketsDroppedInterface</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </ip-packets-dropped-interface>
+            <arp-packet-interface-out-of-subnet config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.ARPPacketInterfaceOutOfSubnet</xr-path>
+              <xr-xml-map>ip_arp_show:ARPPacketInterfaceOutOfSubnet</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </arp-packet-interface-out-of-subnet>
+            <arp-packet-unsolicited-packet config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.ARPPacketUnsolicitedPacket</xr-path>
+              <xr-xml-map>ip_arp_show:ARPPacketUnsolicitedPacket</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </arp-packet-unsolicited-packet>
+            <idb-structures config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-vrf/&lt;arp_oper_TrafficVRF_vrf_name&gt;~ip_arp_statistics.IDBStructures</xr-path>
+              <xr-xml-map>ip_arp_show:IDBStructures</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </idb-structures>
+          </traffic-vrf>
+        </traffic-vrfs>
+        <traffic-node config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node</xr-path>
+          <xr-xml-map>arp_oper:TrafficNode</xr-xml-map>
+          <xr-task>cef</xr-task>
+          <xr-bag-grp-name>ip_arp_statistics</xr-bag-grp-name>
+          <xr-bag>ip_arp_show.bag</xr-bag>
+          <requests-received config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.RequestsReceived</xr-path>
+            <xr-xml-map>ip_arp_show:RequestsReceived</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </requests-received>
+          <replies-received config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.RepliesReceived</xr-path>
+            <xr-xml-map>ip_arp_show:RepliesReceived</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </replies-received>
+          <requests-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.RequestsSent</xr-path>
+            <xr-xml-map>ip_arp_show:RequestsSent</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </requests-sent>
+          <replies-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.RepliesSent</xr-path>
+            <xr-xml-map>ip_arp_show:RepliesSent</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </replies-sent>
+          <proxy-replies-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.ProxyRepliesSent</xr-path>
+            <xr-xml-map>ip_arp_show:ProxyRepliesSent</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </proxy-replies-sent>
+          <subscr-requests-received config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.SubscrRequestsReceived</xr-path>
+            <xr-xml-map>ip_arp_show:SubscrRequestsReceived</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </subscr-requests-received>
+          <subscr-replies-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.SubscrRepliesSent</xr-path>
+            <xr-xml-map>ip_arp_show:SubscrRepliesSent</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </subscr-replies-sent>
+          <subscr-replies-gratg-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.SubscrRepliesGratgSent</xr-path>
+            <xr-xml-map>ip_arp_show:SubscrRepliesGratgSent</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </subscr-replies-gratg-sent>
+          <local-proxy-replies-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.LocalProxyRepliesSent</xr-path>
+            <xr-xml-map>ip_arp_show:LocalProxyRepliesSent</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </local-proxy-replies-sent>
+          <gratuitous-replies-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.GratuitousRepliesSent</xr-path>
+            <xr-xml-map>ip_arp_show:GratuitousRepliesSent</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </gratuitous-replies-sent>
+          <resolution-requests-received config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.ResolutionRequestsReceived</xr-path>
+            <xr-xml-map>ip_arp_show:ResolutionRequestsReceived</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </resolution-requests-received>
+          <resolution-replies-received config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.ResolutionRepliesReceived</xr-path>
+            <xr-xml-map>ip_arp_show:ResolutionRepliesReceived</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </resolution-replies-received>
+          <resolution-requests-dropped config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.ResolutionRequestsDropped</xr-path>
+            <xr-xml-map>ip_arp_show:ResolutionRequestsDropped</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </resolution-requests-dropped>
+          <out-of-memory-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.OutOfMemoryErrors</xr-path>
+            <xr-xml-map>ip_arp_show:OutOfMemoryErrors</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </out-of-memory-errors>
+          <no-buffer-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.NoBufferErrors</xr-path>
+            <xr-xml-map>ip_arp_show:NoBufferErrors</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </no-buffer-errors>
+          <total-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.TotalEntries</xr-path>
+            <xr-xml-map>ip_arp_show:TotalEntries</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </total-entries>
+          <dynamic-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.DynamicEntries</xr-path>
+            <xr-xml-map>ip_arp_show:DynamicEntries</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </dynamic-entries>
+          <static-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.StaticEntries</xr-path>
+            <xr-xml-map>ip_arp_show:StaticEntries</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </static-entries>
+          <alias-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.AliasEntries</xr-path>
+            <xr-xml-map>ip_arp_show:AliasEntries</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </alias-entries>
+          <interface-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.InterfaceEntries</xr-path>
+            <xr-xml-map>ip_arp_show:InterfaceEntries</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </interface-entries>
+          <standby-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.StandbyEntries</xr-path>
+            <xr-xml-map>ip_arp_show:StandbyEntries</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </standby-entries>
+          <dhcp-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.DHCPEntries</xr-path>
+            <xr-xml-map>ip_arp_show:DHCPEntries</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </dhcp-entries>
+          <vxlan-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.VXLANEntries</xr-path>
+            <xr-xml-map>ip_arp_show:VXLANEntries</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </vxlan-entries>
+          <ip-packets-dropped-node config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.IPPacketsDroppedNode</xr-path>
+            <xr-xml-map>ip_arp_show:IPPacketsDroppedNode</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </ip-packets-dropped-node>
+          <arp-packet-node-out-of-subnet config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.ARPPacketNodeOutOfSubnet</xr-path>
+            <xr-xml-map>ip_arp_show:ARPPacketNodeOutOfSubnet</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </arp-packet-node-out-of-subnet>
+          <ip-packets-dropped-interface config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.IPPacketsDroppedInterface</xr-path>
+            <xr-xml-map>ip_arp_show:IPPacketsDroppedInterface</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </ip-packets-dropped-interface>
+          <arp-packet-interface-out-of-subnet config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.ARPPacketInterfaceOutOfSubnet</xr-path>
+            <xr-xml-map>ip_arp_show:ARPPacketInterfaceOutOfSubnet</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </arp-packet-interface-out-of-subnet>
+          <arp-packet-unsolicited-packet config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.ARPPacketUnsolicitedPacket</xr-path>
+            <xr-xml-map>ip_arp_show:ARPPacketUnsolicitedPacket</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </arp-packet-unsolicited-packet>
+          <idb-structures config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-node~ip_arp_statistics.IDBStructures</xr-path>
+            <xr-xml-map>ip_arp_show:IDBStructures</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </idb-structures>
+        </traffic-node>
+        <resolution-history-client config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/arp-res-hist-client</xr-path>
+          <xr-xml-map>arp_oper:ResolutionHistoryClient</xr-xml-map>
+          <xr-task>cef</xr-task>
+          <xr-bag-grp-name>arp_reshist</xr-bag-grp-name>
+          <xr-bag>ip_arp_show.bag</xr-bag>
+          <arp-entry config="false" node="list">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/arp-res-hist-client~arp_reshist.arpEntry[&lt;bag_arg2&gt;]</xr-path>
+            <xr-task>cef</xr-task>
+            <xr-bag-version>3 2</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+            <nsec-timestamp config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/arp-res-hist-client~arp_reshist.arpEntry[&lt;bag_arg2&gt;].NsecTimestamp</xr-path>
+              <xr-xml-map>ip_arp_show:NsecTimestamp</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </nsec-timestamp>
+            <idb-interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/arp-res-hist-client~arp_reshist.arpEntry[&lt;bag_arg2&gt;].IDBInterfaceName</xr-path>
+              <xr-xml-map>ip_arp_show:IDBInterfaceName</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </idb-interface-name>
+            <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/arp-res-hist-client~arp_reshist.arpEntry[&lt;bag_arg2&gt;].IPv4Address</xr-path>
+              <xr-xml-map>ip_arp_show:IPv4Address</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </ipv4-address>
+            <mac-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/arp-res-hist-client~arp_reshist.arpEntry[&lt;bag_arg2&gt;].MACAddress</xr-path>
+              <xr-xml-map>ip_arp_show:MACAddress</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>yang:mac-address</type-name>
+              </type>
+            </mac-address>
+            <status config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/arp-res-hist-client~arp_reshist.arpEntry[&lt;bag_arg2&gt;].Status</xr-path>
+              <xr-xml-map>ip_arp_show:Status</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>Arp-resolution-history-status</type-name>
+              </type>
+            </status>
+            <client-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/arp-res-hist-client~arp_reshist.arpEntry[&lt;bag_arg2&gt;].ClientID</xr-path>
+              <xr-xml-map>ip_arp_show:ClientID</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>int32</type-name>
+              </type>
+            </client-id>
+            <entry-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/arp-res-hist-client~arp_reshist.arpEntry[&lt;bag_arg2&gt;].EntryState</xr-path>
+              <xr-xml-map>ip_arp_show:EntryState</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>int32</type-name>
+              </type>
+            </entry-state>
+            <resolution-request-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/arp-res-hist-client~arp_reshist.arpEntry[&lt;bag_arg2&gt;].ResolutionRequestCount</xr-path>
+              <xr-xml-map>ip_arp_show:ResolutionRequestCount</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </resolution-request-count>
+          </arp-entry>
+        </resolution-history-client>
+        <entries config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/entry/</xr-path>
+          <xr-xml-map>arp_oper:EntryTable</xr-xml-map>
+          <xr-task>cef</xr-task>
+          <xr-filterlist>ARP_VRF_Filter</xr-filterlist>
+          <xr-filterlist>ARPInterfaceFilter</xr-filterlist>
+          <xr-filterlist>ARP_IPAddressFilter</xr-filterlist>
+          <xr-filterlist>ARPHardwareAddressFilter</xr-filterlist>
+          <xr-filterlist>ARP_VRF_InterfaceFilter</xr-filterlist>
+          <xr-filterlist>ARP_VRF_IPAddressFilter</xr-filterlist>
+          <xr-filterlist>ARP_VRF_HardwareAddressFilter</xr-filterlist>
+          <entry config="false" key="address interface-name" node="list">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/entry/&lt;arp_oper_Entry_ipaddr&gt;,&lt;arp_oper_Entry_ifh&gt;</xr-path>
+            <xr-xml-map>arp_oper:Entry</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-grp-name>ip_arp_table_entry</xr-bag-grp-name>
+            <xr-bag>ip_arp_show.bag</xr-bag>
+            <address config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-pathformat>hex_nozerox</xr-pathformat>
+              <xr-primitive-type>inaddr</xr-primitive-type>
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/entry/&lt;arp_oper_Entry_ipaddr&gt;,&lt;arp_oper_Entry_ifh&gt;</xr-path>
+              <xr-xml-map>arp_oper:Address</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-sch-type>IPV4Address</xr-sch-type>
+              <xr-sch-arg-name>&lt;arp_oper_Entry_ipaddr&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </address>
+            <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-pathformat>hex_nozerox</xr-pathformat>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/entry/&lt;arp_oper_Entry_ipaddr&gt;,&lt;arp_oper_Entry_ifh&gt;</xr-path>
+              <xr-xml-map>arp_oper:InterfaceName</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-sch-type>InterfaceHandle</xr-sch-type>
+              <xr-sch-arg-name>&lt;arp_oper_Entry_ifh&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-name>
+            <media-type config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/entry/&lt;arp_oper_Entry_ipaddr&gt;,&lt;arp_oper_Entry_ifh&gt;~ip_arp_table_entry.MediaType</xr-path>
+              <xr-xml-map>ip_arp_show:MediaType</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>Ip-arp-bag-media</type-name>
+              </type>
+            </media-type>
+            <state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/entry/&lt;arp_oper_Entry_ipaddr&gt;,&lt;arp_oper_Entry_ifh&gt;~ip_arp_table_entry.State</xr-path>
+              <xr-xml-map>ip_arp_show:State</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>Ip-arp-bag-state</type-name>
+              </type>
+            </state>
+            <flag config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/entry/&lt;arp_oper_Entry_ipaddr&gt;,&lt;arp_oper_Entry_ifh&gt;~ip_arp_table_entry.Flag</xr-path>
+              <xr-xml-map>ip_arp_show:Flag</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>Ip-arp-bag-flags</type-name>
+              </type>
+            </flag>
+            <age config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/entry/&lt;arp_oper_Entry_ipaddr&gt;,&lt;arp_oper_Entry_ifh&gt;~ip_arp_table_entry.Age</xr-path>
+              <xr-xml-map>ip_arp_show:Age</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </age>
+            <encapsulation-type config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/entry/&lt;arp_oper_Entry_ipaddr&gt;,&lt;arp_oper_Entry_ifh&gt;~ip_arp_table_entry.EncapsulationType</xr-path>
+              <xr-xml-map>ip_arp_show:EncapsulationType</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>Ip-arp-bag-encap</type-name>
+              </type>
+            </encapsulation-type>
+            <hardware-length config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/entry/&lt;arp_oper_Entry_ipaddr&gt;,&lt;arp_oper_Entry_ifh&gt;~ip_arp_table_entry.HardwareLength</xr-path>
+              <xr-xml-map>ip_arp_show:HardwareLength</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+            </hardware-length>
+            <hardware-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/entry/&lt;arp_oper_Entry_ipaddr&gt;,&lt;arp_oper_Entry_ifh&gt;~ip_arp_table_entry.HardwareAddress</xr-path>
+              <xr-xml-map>ip_arp_show:HardwareAddress</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>yang:mac-address</type-name>
+              </type>
+            </hardware-address>
+          </entry>
+        </entries>
+        <traffic-interfaces config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/</xr-path>
+          <xr-xml-map>arp_oper:TrafficInterfaceTable</xr-xml-map>
+          <xr-task>cef</xr-task>
+          <xr-filterlist>ARP_VRF_Filter</xr-filterlist>
+          <traffic-interface config="false" key="interface-name" node="list">
+            <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;</xr-path>
+            <xr-xml-map>arp_oper:TrafficInterface</xr-xml-map>
+            <xr-task>cef</xr-task>
+            <xr-bag-grp-name>ip_arp_statistics</xr-bag-grp-name>
+            <xr-bag>ip_arp_show.bag</xr-bag>
+            <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-pathformat>hex_nozerox</xr-pathformat>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;</xr-path>
+              <xr-xml-map>arp_oper:InterfaceName</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-sch-type>InterfaceHandle</xr-sch-type>
+              <xr-sch-arg-name>&lt;arp_oper_TrafficInterface_intf&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-name>
+            <requests-received config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.RequestsReceived</xr-path>
+              <xr-xml-map>ip_arp_show:RequestsReceived</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </requests-received>
+            <replies-received config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.RepliesReceived</xr-path>
+              <xr-xml-map>ip_arp_show:RepliesReceived</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </replies-received>
+            <requests-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.RequestsSent</xr-path>
+              <xr-xml-map>ip_arp_show:RequestsSent</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </requests-sent>
+            <replies-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.RepliesSent</xr-path>
+              <xr-xml-map>ip_arp_show:RepliesSent</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </replies-sent>
+            <proxy-replies-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.ProxyRepliesSent</xr-path>
+              <xr-xml-map>ip_arp_show:ProxyRepliesSent</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </proxy-replies-sent>
+            <subscr-requests-received config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.SubscrRequestsReceived</xr-path>
+              <xr-xml-map>ip_arp_show:SubscrRequestsReceived</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </subscr-requests-received>
+            <subscr-replies-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.SubscrRepliesSent</xr-path>
+              <xr-xml-map>ip_arp_show:SubscrRepliesSent</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </subscr-replies-sent>
+            <subscr-replies-gratg-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.SubscrRepliesGratgSent</xr-path>
+              <xr-xml-map>ip_arp_show:SubscrRepliesGratgSent</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </subscr-replies-gratg-sent>
+            <local-proxy-replies-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.LocalProxyRepliesSent</xr-path>
+              <xr-xml-map>ip_arp_show:LocalProxyRepliesSent</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </local-proxy-replies-sent>
+            <gratuitous-replies-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.GratuitousRepliesSent</xr-path>
+              <xr-xml-map>ip_arp_show:GratuitousRepliesSent</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </gratuitous-replies-sent>
+            <resolution-requests-received config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.ResolutionRequestsReceived</xr-path>
+              <xr-xml-map>ip_arp_show:ResolutionRequestsReceived</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </resolution-requests-received>
+            <resolution-replies-received config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.ResolutionRepliesReceived</xr-path>
+              <xr-xml-map>ip_arp_show:ResolutionRepliesReceived</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </resolution-replies-received>
+            <resolution-requests-dropped config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.ResolutionRequestsDropped</xr-path>
+              <xr-xml-map>ip_arp_show:ResolutionRequestsDropped</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </resolution-requests-dropped>
+            <out-of-memory-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.OutOfMemoryErrors</xr-path>
+              <xr-xml-map>ip_arp_show:OutOfMemoryErrors</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </out-of-memory-errors>
+            <no-buffer-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.NoBufferErrors</xr-path>
+              <xr-xml-map>ip_arp_show:NoBufferErrors</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </no-buffer-errors>
+            <total-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.TotalEntries</xr-path>
+              <xr-xml-map>ip_arp_show:TotalEntries</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </total-entries>
+            <dynamic-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.DynamicEntries</xr-path>
+              <xr-xml-map>ip_arp_show:DynamicEntries</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </dynamic-entries>
+            <static-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.StaticEntries</xr-path>
+              <xr-xml-map>ip_arp_show:StaticEntries</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </static-entries>
+            <alias-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.AliasEntries</xr-path>
+              <xr-xml-map>ip_arp_show:AliasEntries</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </alias-entries>
+            <interface-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.InterfaceEntries</xr-path>
+              <xr-xml-map>ip_arp_show:InterfaceEntries</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </interface-entries>
+            <standby-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.StandbyEntries</xr-path>
+              <xr-xml-map>ip_arp_show:StandbyEntries</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </standby-entries>
+            <dhcp-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.DHCPEntries</xr-path>
+              <xr-xml-map>ip_arp_show:DHCPEntries</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </dhcp-entries>
+            <vxlan-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.VXLANEntries</xr-path>
+              <xr-xml-map>ip_arp_show:VXLANEntries</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </vxlan-entries>
+            <ip-packets-dropped-node config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.IPPacketsDroppedNode</xr-path>
+              <xr-xml-map>ip_arp_show:IPPacketsDroppedNode</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </ip-packets-dropped-node>
+            <arp-packet-node-out-of-subnet config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.ARPPacketNodeOutOfSubnet</xr-path>
+              <xr-xml-map>ip_arp_show:ARPPacketNodeOutOfSubnet</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </arp-packet-node-out-of-subnet>
+            <ip-packets-dropped-interface config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.IPPacketsDroppedInterface</xr-path>
+              <xr-xml-map>ip_arp_show:IPPacketsDroppedInterface</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </ip-packets-dropped-interface>
+            <arp-packet-interface-out-of-subnet config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.ARPPacketInterfaceOutOfSubnet</xr-path>
+              <xr-xml-map>ip_arp_show:ARPPacketInterfaceOutOfSubnet</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </arp-packet-interface-out-of-subnet>
+            <arp-packet-unsolicited-packet config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.ARPPacketUnsolicitedPacket</xr-path>
+              <xr-xml-map>ip_arp_show:ARPPacketUnsolicitedPacket</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </arp-packet-unsolicited-packet>
+            <idb-structures config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/traffic-intf/&lt;arp_oper_TrafficInterface_intf&gt;~ip_arp_statistics.IDBStructures</xr-path>
+              <xr-xml-map>ip_arp_show:IDBStructures</xr-xml-map>
+              <xr-task>cef</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </idb-structures>
+          </traffic-interface>
+        </traffic-interfaces>
+        <node-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-pathformat>hex_nozerox</xr-pathformat>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/ipv4-arp/node/&lt;arp_oper_Node_node_id&gt;/</xr-path>
+          <xr-xml-map>arp_oper:NodeName</xr-xml-map>
+          <xr-task>cef</xr-task>
+          <xr-sch-type>NodeID</xr-sch-type>
+          <xr-sch-arg-name>&lt;arp_oper_Node_node_id&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Node-id</type-name>
+          </type>
+        </node-name>
+      </node>
+    </nodes>
+  </arp>
+</Cisco-IOS-XR-ipv4-arp-oper>

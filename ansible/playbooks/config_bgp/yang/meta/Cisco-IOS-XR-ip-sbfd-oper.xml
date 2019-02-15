@@ -1,0 +1,286 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ip-sbfd-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ip-sbfd-oper" revision="2017-09-07">
+  <files>
+    <file revision="2017-09-07" submodule="false">Cisco-IOS-XR-ip-sbfd-oper.yang</file>
+    <file revision="2017-09-07" submodule="true">Cisco-IOS-XR-ip-sbfd-oper-sub1.yang</file>
+  </files>
+  <prefix>ip-sbfd-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="Bfd-discr">
+    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+    <type>
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Bfd-in6-addr">
+    <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+    <type>
+      <type-name>inet:ipv6-address</type-name>
+    </type>
+  </typedef>
+  <typedef name="Bfd-in-addr">
+    <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+    <type>
+      <type-name>inet:ipv4-address</type-name>
+    </type>
+  </typedef>
+  <typedef name="Bfd-af-id">
+    <type node="enumeration">
+      <enum value="0">bfd-af-id-none</enum>
+      <enum value="2">bfd-af-id-ipv4</enum>
+      <enum value="10">bfd-af-id-ipv6</enum>
+    </type>
+  </typedef>
+  <typedef name="Sbfd-address-family">
+    <type node="enumeration">
+      <enum value="1">ipv4</enum>
+      <enum value="2">ipv6</enum>
+    </type>
+  </typedef>
+  <sbfd config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/ip_bfd_v1/gl/</xr-path>
+    <xr-xml-map>ip_sbfd_oper:SBFD</xr-xml-map>
+    <target-identifier config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/</xr-path>
+      <xr-xml-map>ip_sbfd_oper:TargetIdentifier</xr-xml-map>
+      <remote-vrfs config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/remote_discr/vrf/</xr-path>
+        <xr-xml-map>ip_sbfd_oper:RemoteTable</xr-xml-map>
+        <remote-vrf config="false" key="vrf-name" node="list">
+          <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/remote_discr/vrf/&lt;ip_sbfd_oper_RemoteVrf_vrf_name&gt;/</xr-path>
+          <xr-xml-map>ip_sbfd_oper:RemoteVrf</xr-xml-map>
+          <vrf-name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/remote_discr/vrf/&lt;ip_sbfd_oper_RemoteVrf_vrf_name&gt;/</xr-path>
+            <xr-xml-map>ip_sbfd_oper:VRFName</xr-xml-map>
+            <xr-sch-type>VRF_Name</xr-sch-type>
+            <xr-sch-arg-name>&lt;ip_sbfd_oper_RemoteVrf_vrf_name&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </vrf-name>
+          <remote-discriminator config="false" node="list">
+            <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/remote_discr/vrf/&lt;ip_sbfd_oper_RemoteVrf_vrf_name&gt;/&lt;ip_sbfd_oper_RemoteDiscriminator_vrf_name&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_remote_discriminator&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_address&gt;</xr-path>
+            <xr-xml-map>ip_sbfd_oper:RemoteDiscriminator</xr-xml-map>
+            <xr-bag-grp-name>bfd_mgmt_tgt_identifier_remote</xr-bag-grp-name>
+            <xr-bag>ip_bfd_gl_mgmt.bag</xr-bag>
+            <vrf-name config="false" is-key="true" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/remote_discr/vrf/&lt;ip_sbfd_oper_RemoteVrf_vrf_name&gt;/&lt;ip_sbfd_oper_RemoteDiscriminator_vrf_name&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_remote_discriminator&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_address&gt;</xr-path>
+              <xr-xml-map>ip_sbfd_oper:VRFName</xr-xml-map>
+              <xr-sch-type>VRF_Name</xr-sch-type>
+              <xr-sch-arg-name>&lt;ip_sbfd_oper_RemoteDiscriminator_vrf_name&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </vrf-name>
+            <remote-discriminator config="false" is-key="true" is-yang-key="false" node="leaf">
+              <xr-pathformat>hex_nozerox</xr-pathformat>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/remote_discr/vrf/&lt;ip_sbfd_oper_RemoteVrf_vrf_name&gt;/&lt;ip_sbfd_oper_RemoteDiscriminator_vrf_name&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_remote_discriminator&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_address&gt;</xr-path>
+              <xr-xml-map>ip_sbfd_oper:RemoteDiscriminator</xr-xml-map>
+              <xr-sch-type>Integer</xr-sch-type>
+              <xr-sch-arg-name>&lt;ip_sbfd_oper_RemoteDiscriminator_remote_discriminator&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </remote-discriminator>
+            <address config="false" is-key="true" is-yang-key="false" node="leaf">
+              <xr-pathformat>hex_padded_nozerox</xr-pathformat>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/remote_discr/vrf/&lt;ip_sbfd_oper_RemoteVrf_vrf_name&gt;/&lt;ip_sbfd_oper_RemoteDiscriminator_vrf_name&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_remote_discriminator&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_address&gt;</xr-path>
+              <xr-xml-map>ip_sbfd_oper:Address</xr-xml-map>
+              <xr-sch-type>IPAddress</xr-sch-type>
+              <xr-sch-arg-name>&lt;ip_sbfd_oper_RemoteDiscriminator_address&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ip-address-no-zone</type-name>
+              </type>
+            </address>
+            <ip-address config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/remote_discr/vrf/&lt;ip_sbfd_oper_RemoteVrf_vrf_name&gt;/&lt;ip_sbfd_oper_RemoteDiscriminator_vrf_name&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_remote_discriminator&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_address&gt;~bfd_mgmt_tgt_identifier_remote.IPAddress</xr-path>
+              <xr-bag-version>7 0</xr-bag-version>
+              <afi config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/remote_discr/vrf/&lt;ip_sbfd_oper_RemoteVrf_vrf_name&gt;/&lt;ip_sbfd_oper_RemoteDiscriminator_vrf_name&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_remote_discriminator&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_address&gt;~bfd_mgmt_tgt_identifier_remote.IPAddress.AFI</xr-path>
+                <xr-xml-map>ip_bfd_gl_mgmt:AFI</xr-xml-map>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>7 0</xr-bag-version>
+                <type>
+                  <type-name>Bfd-af-id</type-name>
+                </type>
+              </afi>
+              <dummy config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/remote_discr/vrf/&lt;ip_sbfd_oper_RemoteVrf_vrf_name&gt;/&lt;ip_sbfd_oper_RemoteDiscriminator_vrf_name&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_remote_discriminator&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_address&gt;~bfd_mgmt_tgt_identifier_remote.IPAddress.Dummy</xr-path>
+                <xr-xml-map>ip_bfd_gl_mgmt:Dummy</xr-xml-map>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>7 0</xr-bag-version>
+                <when>../afi = 'bfd-af-id-none'</when>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </dummy>
+              <ipv4 config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/remote_discr/vrf/&lt;ip_sbfd_oper_RemoteVrf_vrf_name&gt;/&lt;ip_sbfd_oper_RemoteDiscriminator_vrf_name&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_remote_discriminator&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_address&gt;~bfd_mgmt_tgt_identifier_remote.IPAddress.IPV4</xr-path>
+                <xr-xml-map>ip_bfd_gl_mgmt:IPV4</xr-xml-map>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>7 0</xr-bag-version>
+                <when>../afi = 'bfd-af-id-ipv4'</when>
+                <type>
+                  <type-name>Bfd-in-addr</type-name>
+                </type>
+              </ipv4>
+              <ipv6 config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/remote_discr/vrf/&lt;ip_sbfd_oper_RemoteVrf_vrf_name&gt;/&lt;ip_sbfd_oper_RemoteDiscriminator_vrf_name&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_remote_discriminator&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_address&gt;~bfd_mgmt_tgt_identifier_remote.IPAddress.IPV6</xr-path>
+                <xr-xml-map>ip_bfd_gl_mgmt:IPV6</xr-xml-map>
+                <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>7 0</xr-bag-version>
+                <when>../afi = 'bfd-af-id-ipv6'</when>
+                <type>
+                  <type-name>Bfd-in6-addr</type-name>
+                </type>
+              </ipv6>
+            </ip-address>
+            <tid-type config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/remote_discr/vrf/&lt;ip_sbfd_oper_RemoteVrf_vrf_name&gt;/&lt;ip_sbfd_oper_RemoteDiscriminator_vrf_name&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_remote_discriminator&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_address&gt;~bfd_mgmt_tgt_identifier_remote.TID_Type</xr-path>
+              <xr-xml-map>ip_bfd_gl_mgmt:TID_Type</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>7 0</xr-bag-version>
+              <type>
+                <type-name>Sbfd-address-family</type-name>
+              </type>
+            </tid-type>
+            <discr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/remote_discr/vrf/&lt;ip_sbfd_oper_RemoteVrf_vrf_name&gt;/&lt;ip_sbfd_oper_RemoteDiscriminator_vrf_name&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_remote_discriminator&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_address&gt;~bfd_mgmt_tgt_identifier_remote.Discr</xr-path>
+              <xr-xml-map>ip_bfd_gl_mgmt:Discr</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>7 0</xr-bag-version>
+              <type>
+                <type-name>Bfd-discr</type-name>
+              </type>
+            </discr>
+            <vrf-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/remote_discr/vrf/&lt;ip_sbfd_oper_RemoteVrf_vrf_name&gt;/&lt;ip_sbfd_oper_RemoteDiscriminator_vrf_name&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_remote_discriminator&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_address&gt;~bfd_mgmt_tgt_identifier_remote.VRF_Name</xr-path>
+              <xr-xml-map>ip_bfd_gl_mgmt:vrf-name-xr</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>7 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </vrf-name-xr>
+            <status config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/remote_discr/vrf/&lt;ip_sbfd_oper_RemoteVrf_vrf_name&gt;/&lt;ip_sbfd_oper_RemoteDiscriminator_vrf_name&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_remote_discriminator&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_address&gt;~bfd_mgmt_tgt_identifier_remote.Status</xr-path>
+              <xr-xml-map>ip_bfd_gl_mgmt:Status</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>7 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </status>
+            <discr-src config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/remote_discr/vrf/&lt;ip_sbfd_oper_RemoteVrf_vrf_name&gt;/&lt;ip_sbfd_oper_RemoteDiscriminator_vrf_name&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_remote_discriminator&gt;,&lt;ip_sbfd_oper_RemoteDiscriminator_address&gt;~bfd_mgmt_tgt_identifier_remote.Discr_Src</xr-path>
+              <xr-xml-map>ip_bfd_gl_mgmt:Discr_Src</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>7 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </discr-src>
+          </remote-discriminator>
+        </remote-vrf>
+      </remote-vrfs>
+      <local-vrfs config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/local/vrf/</xr-path>
+        <xr-xml-map>ip_sbfd_oper:LocalTable</xr-xml-map>
+        <local-vrf config="false" key="vrf-name" node="list">
+          <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/local/vrf/&lt;ip_sbfd_oper_LocalVrf_vrf_name&gt;/</xr-path>
+          <xr-xml-map>ip_sbfd_oper:LocalVrf</xr-xml-map>
+          <vrf-name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/local/vrf/&lt;ip_sbfd_oper_LocalVrf_vrf_name&gt;/</xr-path>
+            <xr-xml-map>ip_sbfd_oper:VRFName</xr-xml-map>
+            <xr-sch-type>VRF_Name</xr-sch-type>
+            <xr-sch-arg-name>&lt;ip_sbfd_oper_LocalVrf_vrf_name&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </vrf-name>
+          <local-discriminator config="false" node="list">
+            <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/local/vrf/&lt;ip_sbfd_oper_LocalVrf_vrf_name&gt;/&lt;ip_sbfd_oper_LocalDiscriminator_vrf_name&gt;,&lt;ip_sbfd_oper_LocalDiscriminator_local_discriminator&gt;</xr-path>
+            <xr-xml-map>ip_sbfd_oper:LocalDiscriminator</xr-xml-map>
+            <xr-bag-grp-name>bfd_mgmt_tgt_identifier_local</xr-bag-grp-name>
+            <xr-bag>ip_bfd_gl_mgmt.bag</xr-bag>
+            <local-discriminator config="false" is-key="true" is-yang-key="false" node="leaf">
+              <xr-pathformat>hex_nozerox</xr-pathformat>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/local/vrf/&lt;ip_sbfd_oper_LocalVrf_vrf_name&gt;/&lt;ip_sbfd_oper_LocalDiscriminator_vrf_name&gt;,&lt;ip_sbfd_oper_LocalDiscriminator_local_discriminator&gt;</xr-path>
+              <xr-xml-map>ip_sbfd_oper:LocalDiscriminator</xr-xml-map>
+              <xr-sch-type>Integer</xr-sch-type>
+              <xr-sch-arg-name>&lt;ip_sbfd_oper_LocalDiscriminator_local_discriminator&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </local-discriminator>
+            <vrf-name config="false" is-key="true" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/local/vrf/&lt;ip_sbfd_oper_LocalVrf_vrf_name&gt;/&lt;ip_sbfd_oper_LocalDiscriminator_vrf_name&gt;,&lt;ip_sbfd_oper_LocalDiscriminator_local_discriminator&gt;</xr-path>
+              <xr-xml-map>ip_sbfd_oper:VRFName</xr-xml-map>
+              <xr-sch-type>VRF_Name</xr-sch-type>
+              <xr-sch-arg-name>&lt;ip_sbfd_oper_LocalDiscriminator_vrf_name&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </vrf-name>
+            <discr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/local/vrf/&lt;ip_sbfd_oper_LocalVrf_vrf_name&gt;/&lt;ip_sbfd_oper_LocalDiscriminator_vrf_name&gt;,&lt;ip_sbfd_oper_LocalDiscriminator_local_discriminator&gt;~bfd_mgmt_tgt_identifier_local.Discr</xr-path>
+              <xr-xml-map>ip_bfd_gl_mgmt:Discr</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>7 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </discr>
+            <vrf-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/local/vrf/&lt;ip_sbfd_oper_LocalVrf_vrf_name&gt;/&lt;ip_sbfd_oper_LocalDiscriminator_vrf_name&gt;,&lt;ip_sbfd_oper_LocalDiscriminator_local_discriminator&gt;~bfd_mgmt_tgt_identifier_local.VRF_Name</xr-path>
+              <xr-xml-map>ip_bfd_gl_mgmt:vrf-name-xr</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>7 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </vrf-name-xr>
+            <flags config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/local/vrf/&lt;ip_sbfd_oper_LocalVrf_vrf_name&gt;/&lt;ip_sbfd_oper_LocalDiscriminator_vrf_name&gt;,&lt;ip_sbfd_oper_LocalDiscriminator_local_discriminator&gt;~bfd_mgmt_tgt_identifier_local.Flags</xr-path>
+              <xr-xml-map>ip_bfd_gl_mgmt:Flags</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>7 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </flags>
+            <status config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/local/vrf/&lt;ip_sbfd_oper_LocalVrf_vrf_name&gt;/&lt;ip_sbfd_oper_LocalDiscriminator_vrf_name&gt;,&lt;ip_sbfd_oper_LocalDiscriminator_local_discriminator&gt;~bfd_mgmt_tgt_identifier_local.Status</xr-path>
+              <xr-xml-map>ip_bfd_gl_mgmt:Status</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>7 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </status>
+            <discr-src config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip_bfd_v1/gl/tgt_identifier/local/vrf/&lt;ip_sbfd_oper_LocalVrf_vrf_name&gt;/&lt;ip_sbfd_oper_LocalDiscriminator_vrf_name&gt;,&lt;ip_sbfd_oper_LocalDiscriminator_local_discriminator&gt;~bfd_mgmt_tgt_identifier_local.Discr_Src</xr-path>
+              <xr-xml-map>ip_bfd_gl_mgmt:Discr_Src</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>7 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </discr-src>
+          </local-discriminator>
+        </local-vrf>
+      </local-vrfs>
+    </target-identifier>
+  </sbfd>
+</Cisco-IOS-XR-ip-sbfd-oper>

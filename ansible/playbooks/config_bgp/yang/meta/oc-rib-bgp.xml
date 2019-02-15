@@ -1,0 +1,2901 @@
+<?xml version="1.0"?>
+<openconfig-rib-bgp ns="http://openconfig.net/yang/rib/bgp" oc-ver="0.2.0" revision="2016-04-11">
+  <files>
+    <file revision="2016-04-11" submodule="false">openconfig-rib-bgp.yang</file>
+  </files>
+  <prefix>oc-bgprib</prefix>
+  <organization>OpenConfig working group</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="yang">ietf-yang-types</import>
+  <import prefix="oc-bgpt">openconfig-bgp-types</import>
+  <import prefix="oc-ext">openconfig-extensions</import>
+  <import prefix="oc-bgpribt">openconfig-rib-bgp-types</import>
+  <augment path="/bgp-rib/afi-safis/afi-safi/ipv4-unicast/loc-rib">
+    <routes config="true" is-key="false" node="container" presence="false">
+      <route config="true" node="list">
+        <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>inet:ipv4-prefix</type-name>
+          </type>
+        </prefix>
+        <attributes config="true" is-key="false" node="container" presence="false">
+          <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-bgpt:bgp-origin-attr-type</type-name>
+            </type>
+          </origin>
+          <as-path config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </as-path>
+          <as4-path config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </as4-path>
+          <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </next-hop>
+          <med config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </med>
+          <local-pref config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </local-pref>
+          <atomic-aggr config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </atomic-aggr>
+          <aggregator config="true" is-key="false" node="container" presence="false">
+            <as config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </as>
+            <as4 config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </as4>
+            <address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </address>
+          </aggregator>
+          <community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>oc-bgpt:bgp-std-community-type</type-name>
+            </type>
+          </community>
+        </attributes>
+        <ext-attributes config="true" is-key="false" node="container" presence="false">
+          <originator-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </originator-id>
+          <cluster-list config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </cluster-list>
+          <ext-community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>oc-bgpt:bgp-ext-community-type</type-name>
+            </type>
+          </ext-community>
+          <aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </aigp>
+          <path-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </path-id>
+          <unknown-attribute config="true" key="attr-type" node="list">
+            <attr-type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </attr-type>
+            <attr-len config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </attr-len>
+            <attr-value config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type length="1..65535">
+                <type-name>binary</type-name>
+              </type>
+            </attr-value>
+          </unknown-attribute>
+        </ext-attributes>
+        <last-modified-date config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+        </last-modified-date>
+        <last-update-received config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+        </last-update-received>
+        <valid-route config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </valid-route>
+        <invalid-reason config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="identityref">
+            <base>oc-bgpribt:INVALID_ROUTE_REASON</base>
+          </type>
+        </invalid-reason>
+        <best-path config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </best-path>
+      </route>
+    </routes>
+  </augment>
+  <augment path="/bgp-rib/afi-safis/afi-safi/ipv4-unicast/neighbors/neighbor/adj-rib-in-pre">
+    <routes config="true" is-key="false" node="container" presence="false">
+      <route config="true" node="list">
+        <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>inet:ipv4-prefix</type-name>
+          </type>
+        </prefix>
+        <attributes config="true" is-key="false" node="container" presence="false">
+          <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-bgpt:bgp-origin-attr-type</type-name>
+            </type>
+          </origin>
+          <as-path config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </as-path>
+          <as4-path config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </as4-path>
+          <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </next-hop>
+          <med config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </med>
+          <local-pref config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </local-pref>
+          <atomic-aggr config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </atomic-aggr>
+          <aggregator config="true" is-key="false" node="container" presence="false">
+            <as config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </as>
+            <as4 config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </as4>
+            <address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </address>
+          </aggregator>
+          <community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>oc-bgpt:bgp-std-community-type</type-name>
+            </type>
+          </community>
+        </attributes>
+        <ext-attributes config="true" is-key="false" node="container" presence="false">
+          <originator-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </originator-id>
+          <cluster-list config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </cluster-list>
+          <ext-community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>oc-bgpt:bgp-ext-community-type</type-name>
+            </type>
+          </ext-community>
+          <aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </aigp>
+          <path-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </path-id>
+          <unknown-attribute config="true" key="attr-type" node="list">
+            <attr-type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </attr-type>
+            <attr-len config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </attr-len>
+            <attr-value config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type length="1..65535">
+                <type-name>binary</type-name>
+              </type>
+            </attr-value>
+          </unknown-attribute>
+        </ext-attributes>
+        <last-modified-date config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+        </last-modified-date>
+        <last-update-received config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+        </last-update-received>
+        <valid-route config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </valid-route>
+        <invalid-reason config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="identityref">
+            <base>oc-bgpribt:INVALID_ROUTE_REASON</base>
+          </type>
+        </invalid-reason>
+        <best-path config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </best-path>
+      </route>
+    </routes>
+  </augment>
+  <augment path="/bgp-rib/afi-safis/afi-safi/ipv4-unicast/neighbors/neighbor/adj-rib-in-post">
+    <routes config="true" is-key="false" node="container" presence="false">
+      <route config="true" node="list">
+        <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>inet:ipv4-prefix</type-name>
+          </type>
+        </prefix>
+        <attributes config="true" is-key="false" node="container" presence="false">
+          <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-bgpt:bgp-origin-attr-type</type-name>
+            </type>
+          </origin>
+          <as-path config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </as-path>
+          <as4-path config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </as4-path>
+          <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </next-hop>
+          <med config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </med>
+          <local-pref config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </local-pref>
+          <atomic-aggr config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </atomic-aggr>
+          <aggregator config="true" is-key="false" node="container" presence="false">
+            <as config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </as>
+            <as4 config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </as4>
+            <address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </address>
+          </aggregator>
+          <community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>oc-bgpt:bgp-std-community-type</type-name>
+            </type>
+          </community>
+        </attributes>
+        <ext-attributes config="true" is-key="false" node="container" presence="false">
+          <originator-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </originator-id>
+          <cluster-list config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </cluster-list>
+          <ext-community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>oc-bgpt:bgp-ext-community-type</type-name>
+            </type>
+          </ext-community>
+          <aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </aigp>
+          <path-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </path-id>
+          <unknown-attribute config="true" key="attr-type" node="list">
+            <attr-type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </attr-type>
+            <attr-len config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </attr-len>
+            <attr-value config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type length="1..65535">
+                <type-name>binary</type-name>
+              </type>
+            </attr-value>
+          </unknown-attribute>
+        </ext-attributes>
+        <last-modified-date config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+        </last-modified-date>
+        <last-update-received config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+        </last-update-received>
+        <valid-route config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </valid-route>
+        <invalid-reason config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="identityref">
+            <base>oc-bgpribt:INVALID_ROUTE_REASON</base>
+          </type>
+        </invalid-reason>
+        <best-path config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </best-path>
+      </route>
+    </routes>
+  </augment>
+  <augment path="/bgp-rib/afi-safis/afi-safi/ipv4-unicast/neighbors/neighbor/adj-rib-out-pre">
+    <routes config="true" is-key="false" node="container" presence="false">
+      <route config="true" node="list">
+        <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>inet:ipv4-prefix</type-name>
+          </type>
+        </prefix>
+        <attributes config="true" is-key="false" node="container" presence="false">
+          <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-bgpt:bgp-origin-attr-type</type-name>
+            </type>
+          </origin>
+          <as-path config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </as-path>
+          <as4-path config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </as4-path>
+          <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </next-hop>
+          <med config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </med>
+          <local-pref config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </local-pref>
+          <atomic-aggr config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </atomic-aggr>
+          <aggregator config="true" is-key="false" node="container" presence="false">
+            <as config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </as>
+            <as4 config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </as4>
+            <address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </address>
+          </aggregator>
+          <community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>oc-bgpt:bgp-std-community-type</type-name>
+            </type>
+          </community>
+        </attributes>
+        <ext-attributes config="true" is-key="false" node="container" presence="false">
+          <originator-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </originator-id>
+          <cluster-list config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </cluster-list>
+          <ext-community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>oc-bgpt:bgp-ext-community-type</type-name>
+            </type>
+          </ext-community>
+          <aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </aigp>
+          <path-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </path-id>
+          <unknown-attribute config="true" key="attr-type" node="list">
+            <attr-type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </attr-type>
+            <attr-len config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </attr-len>
+            <attr-value config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type length="1..65535">
+                <type-name>binary</type-name>
+              </type>
+            </attr-value>
+          </unknown-attribute>
+        </ext-attributes>
+        <last-modified-date config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+        </last-modified-date>
+        <last-update-received config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+        </last-update-received>
+        <valid-route config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </valid-route>
+        <invalid-reason config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="identityref">
+            <base>oc-bgpribt:INVALID_ROUTE_REASON</base>
+          </type>
+        </invalid-reason>
+        <best-path config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </best-path>
+      </route>
+    </routes>
+  </augment>
+  <augment path="/bgp-rib/afi-safis/afi-safi/ipv4-unicast/neighbors/neighbor/adj-rib-out-post">
+    <routes config="true" is-key="false" node="container" presence="false">
+      <route config="true" node="list">
+        <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>inet:ipv4-prefix</type-name>
+          </type>
+        </prefix>
+        <attributes config="true" is-key="false" node="container" presence="false">
+          <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-bgpt:bgp-origin-attr-type</type-name>
+            </type>
+          </origin>
+          <as-path config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </as-path>
+          <as4-path config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </as4-path>
+          <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </next-hop>
+          <med config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </med>
+          <local-pref config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </local-pref>
+          <atomic-aggr config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </atomic-aggr>
+          <aggregator config="true" is-key="false" node="container" presence="false">
+            <as config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </as>
+            <as4 config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </as4>
+            <address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </address>
+          </aggregator>
+          <community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>oc-bgpt:bgp-std-community-type</type-name>
+            </type>
+          </community>
+        </attributes>
+        <ext-attributes config="true" is-key="false" node="container" presence="false">
+          <originator-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </originator-id>
+          <cluster-list config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </cluster-list>
+          <ext-community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>oc-bgpt:bgp-ext-community-type</type-name>
+            </type>
+          </ext-community>
+          <aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </aigp>
+          <path-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </path-id>
+          <unknown-attribute config="true" key="attr-type" node="list">
+            <attr-type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </attr-type>
+            <attr-len config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </attr-len>
+            <attr-value config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type length="1..65535">
+                <type-name>binary</type-name>
+              </type>
+            </attr-value>
+          </unknown-attribute>
+        </ext-attributes>
+        <last-modified-date config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+        </last-modified-date>
+        <last-update-received config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+        </last-update-received>
+        <valid-route config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </valid-route>
+        <invalid-reason config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="identityref">
+            <base>oc-bgpribt:INVALID_ROUTE_REASON</base>
+          </type>
+        </invalid-reason>
+        <best-path config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </best-path>
+      </route>
+    </routes>
+  </augment>
+  <augment path="/bgp-rib/afi-safis/afi-safi/ipv6-unicast/loc-rib">
+    <routes config="true" is-key="false" node="container" presence="false">
+      <route config="true" node="list">
+        <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>inet:ipv6-prefix</type-name>
+          </type>
+        </prefix>
+        <attributes config="true" is-key="false" node="container" presence="false">
+          <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-bgpt:bgp-origin-attr-type</type-name>
+            </type>
+          </origin>
+          <as-path config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </as-path>
+          <as4-path config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </as4-path>
+          <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </next-hop>
+          <med config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </med>
+          <local-pref config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </local-pref>
+          <atomic-aggr config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </atomic-aggr>
+          <aggregator config="true" is-key="false" node="container" presence="false">
+            <as config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </as>
+            <as4 config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </as4>
+            <address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </address>
+          </aggregator>
+          <community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>oc-bgpt:bgp-std-community-type</type-name>
+            </type>
+          </community>
+        </attributes>
+        <ext-attributes config="true" is-key="false" node="container" presence="false">
+          <originator-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </originator-id>
+          <cluster-list config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </cluster-list>
+          <ext-community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>oc-bgpt:bgp-ext-community-type</type-name>
+            </type>
+          </ext-community>
+          <aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </aigp>
+          <path-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </path-id>
+          <unknown-attribute config="true" key="attr-type" node="list">
+            <attr-type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </attr-type>
+            <attr-len config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </attr-len>
+            <attr-value config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type length="1..65535">
+                <type-name>binary</type-name>
+              </type>
+            </attr-value>
+          </unknown-attribute>
+        </ext-attributes>
+        <last-modified-date config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+        </last-modified-date>
+        <last-update-received config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+        </last-update-received>
+        <valid-route config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </valid-route>
+        <invalid-reason config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="identityref">
+            <base>oc-bgpribt:INVALID_ROUTE_REASON</base>
+          </type>
+        </invalid-reason>
+        <best-path config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </best-path>
+      </route>
+    </routes>
+  </augment>
+  <augment path="/bgp-rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-in-pre">
+    <routes config="true" is-key="false" node="container" presence="false">
+      <route config="true" node="list">
+        <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>inet:ipv6-prefix</type-name>
+          </type>
+        </prefix>
+        <attributes config="true" is-key="false" node="container" presence="false">
+          <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-bgpt:bgp-origin-attr-type</type-name>
+            </type>
+          </origin>
+          <as-path config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </as-path>
+          <as4-path config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </as4-path>
+          <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </next-hop>
+          <med config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </med>
+          <local-pref config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </local-pref>
+          <atomic-aggr config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </atomic-aggr>
+          <aggregator config="true" is-key="false" node="container" presence="false">
+            <as config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </as>
+            <as4 config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </as4>
+            <address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </address>
+          </aggregator>
+          <community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>oc-bgpt:bgp-std-community-type</type-name>
+            </type>
+          </community>
+        </attributes>
+        <ext-attributes config="true" is-key="false" node="container" presence="false">
+          <originator-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </originator-id>
+          <cluster-list config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </cluster-list>
+          <ext-community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>oc-bgpt:bgp-ext-community-type</type-name>
+            </type>
+          </ext-community>
+          <aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </aigp>
+          <path-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </path-id>
+          <unknown-attribute config="true" key="attr-type" node="list">
+            <attr-type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </attr-type>
+            <attr-len config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </attr-len>
+            <attr-value config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type length="1..65535">
+                <type-name>binary</type-name>
+              </type>
+            </attr-value>
+          </unknown-attribute>
+        </ext-attributes>
+        <last-modified-date config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+        </last-modified-date>
+        <last-update-received config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+        </last-update-received>
+        <valid-route config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </valid-route>
+        <invalid-reason config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="identityref">
+            <base>oc-bgpribt:INVALID_ROUTE_REASON</base>
+          </type>
+        </invalid-reason>
+        <best-path config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </best-path>
+      </route>
+    </routes>
+  </augment>
+  <augment path="/bgp-rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-in-post">
+    <routes config="true" is-key="false" node="container" presence="false">
+      <route config="true" node="list">
+        <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>inet:ipv6-prefix</type-name>
+          </type>
+        </prefix>
+        <attributes config="true" is-key="false" node="container" presence="false">
+          <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-bgpt:bgp-origin-attr-type</type-name>
+            </type>
+          </origin>
+          <as-path config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </as-path>
+          <as4-path config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </as4-path>
+          <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </next-hop>
+          <med config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </med>
+          <local-pref config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </local-pref>
+          <atomic-aggr config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </atomic-aggr>
+          <aggregator config="true" is-key="false" node="container" presence="false">
+            <as config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </as>
+            <as4 config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </as4>
+            <address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </address>
+          </aggregator>
+          <community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>oc-bgpt:bgp-std-community-type</type-name>
+            </type>
+          </community>
+        </attributes>
+        <ext-attributes config="true" is-key="false" node="container" presence="false">
+          <originator-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </originator-id>
+          <cluster-list config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </cluster-list>
+          <ext-community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>oc-bgpt:bgp-ext-community-type</type-name>
+            </type>
+          </ext-community>
+          <aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </aigp>
+          <path-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </path-id>
+          <unknown-attribute config="true" key="attr-type" node="list">
+            <attr-type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </attr-type>
+            <attr-len config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </attr-len>
+            <attr-value config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type length="1..65535">
+                <type-name>binary</type-name>
+              </type>
+            </attr-value>
+          </unknown-attribute>
+        </ext-attributes>
+        <last-modified-date config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+        </last-modified-date>
+        <last-update-received config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+        </last-update-received>
+        <valid-route config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </valid-route>
+        <invalid-reason config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="identityref">
+            <base>oc-bgpribt:INVALID_ROUTE_REASON</base>
+          </type>
+        </invalid-reason>
+        <best-path config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </best-path>
+      </route>
+    </routes>
+  </augment>
+  <augment path="/bgp-rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-pre">
+    <routes config="true" is-key="false" node="container" presence="false">
+      <route config="true" node="list">
+        <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>inet:ipv6-prefix</type-name>
+          </type>
+        </prefix>
+        <attributes config="true" is-key="false" node="container" presence="false">
+          <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-bgpt:bgp-origin-attr-type</type-name>
+            </type>
+          </origin>
+          <as-path config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </as-path>
+          <as4-path config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </as4-path>
+          <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </next-hop>
+          <med config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </med>
+          <local-pref config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </local-pref>
+          <atomic-aggr config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </atomic-aggr>
+          <aggregator config="true" is-key="false" node="container" presence="false">
+            <as config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </as>
+            <as4 config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </as4>
+            <address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </address>
+          </aggregator>
+          <community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>oc-bgpt:bgp-std-community-type</type-name>
+            </type>
+          </community>
+        </attributes>
+        <ext-attributes config="true" is-key="false" node="container" presence="false">
+          <originator-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </originator-id>
+          <cluster-list config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </cluster-list>
+          <ext-community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>oc-bgpt:bgp-ext-community-type</type-name>
+            </type>
+          </ext-community>
+          <aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </aigp>
+          <path-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </path-id>
+          <unknown-attribute config="true" key="attr-type" node="list">
+            <attr-type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </attr-type>
+            <attr-len config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </attr-len>
+            <attr-value config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type length="1..65535">
+                <type-name>binary</type-name>
+              </type>
+            </attr-value>
+          </unknown-attribute>
+        </ext-attributes>
+        <last-modified-date config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+        </last-modified-date>
+        <last-update-received config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+        </last-update-received>
+        <valid-route config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </valid-route>
+        <invalid-reason config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="identityref">
+            <base>oc-bgpribt:INVALID_ROUTE_REASON</base>
+          </type>
+        </invalid-reason>
+        <best-path config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </best-path>
+      </route>
+    </routes>
+  </augment>
+  <augment path="/bgp-rib/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-out-post">
+    <routes config="true" is-key="false" node="container" presence="false">
+      <route config="true" node="list">
+        <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>inet:ipv6-prefix</type-name>
+          </type>
+        </prefix>
+        <attributes config="true" is-key="false" node="container" presence="false">
+          <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-bgpt:bgp-origin-attr-type</type-name>
+            </type>
+          </origin>
+          <as-path config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </as-path>
+          <as4-path config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </as4-path>
+          <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </next-hop>
+          <med config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </med>
+          <local-pref config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </local-pref>
+          <atomic-aggr config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </atomic-aggr>
+          <aggregator config="true" is-key="false" node="container" presence="false">
+            <as config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </as>
+            <as4 config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </as4>
+            <address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </address>
+          </aggregator>
+          <community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>oc-bgpt:bgp-std-community-type</type-name>
+            </type>
+          </community>
+        </attributes>
+        <ext-attributes config="true" is-key="false" node="container" presence="false">
+          <originator-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </originator-id>
+          <cluster-list config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </cluster-list>
+          <ext-community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>oc-bgpt:bgp-ext-community-type</type-name>
+            </type>
+          </ext-community>
+          <aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </aigp>
+          <path-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </path-id>
+          <unknown-attribute config="true" key="attr-type" node="list">
+            <attr-type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </attr-type>
+            <attr-len config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </attr-len>
+            <attr-value config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type length="1..65535">
+                <type-name>binary</type-name>
+              </type>
+            </attr-value>
+          </unknown-attribute>
+        </ext-attributes>
+        <last-modified-date config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+        </last-modified-date>
+        <last-update-received config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+        </last-update-received>
+        <valid-route config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </valid-route>
+        <invalid-reason config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="identityref">
+            <base>oc-bgpribt:INVALID_ROUTE_REASON</base>
+          </type>
+        </invalid-reason>
+        <best-path config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </best-path>
+      </route>
+    </routes>
+  </augment>
+  <bgp-rib config="true" is-key="false" node="container" presence="false">
+    <afi-safis config="true" is-key="false" node="container" presence="false">
+      <afi-safi config="true" key="afi-safi-name" node="list">
+        <afi-safi-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <type node="identityref">
+            <base>oc-bgpt:AFI_SAFI_TYPE</base>
+          </type>
+        </afi-safi-name>
+        <ipv4-unicast config="true" is-key="false" node="container" presence="false">
+          <when>../afi-safi-name = 'oc-bgpt:IPV4_UNICAST'</when>
+          <loc-rib config="true" is-key="false" node="container" presence="false">
+            <num-routes config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </num-routes>
+            <routes config="true" is-key="false" node="container" presence="false">
+              <route config="true" node="list">
+                <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>inet:ipv4-prefix</type-name>
+                  </type>
+                </prefix>
+                <attributes config="true" is-key="false" node="container" presence="false">
+                  <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-bgpt:bgp-origin-attr-type</type-name>
+                    </type>
+                  </origin>
+                  <as-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </as-path>
+                  <as4-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </as4-path>
+                  <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>inet:ip-address</type-name>
+                    </type>
+                  </next-hop>
+                  <med config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </med>
+                  <local-pref config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </local-pref>
+                  <atomic-aggr config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </atomic-aggr>
+                  <aggregator config="true" is-key="false" node="container" presence="false">
+                    <as config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </as>
+                    <as4 config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </as4>
+                    <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>inet:ipv4-address</type-name>
+                      </type>
+                    </address>
+                  </aggregator>
+                  <community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                    <type>
+                      <type-name>oc-bgpt:bgp-std-community-type</type-name>
+                    </type>
+                  </community>
+                </attributes>
+                <ext-attributes config="true" is-key="false" node="container" presence="false">
+                  <originator-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>inet:ipv4-address</type-name>
+                    </type>
+                  </originator-id>
+                  <cluster-list config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                    <type>
+                      <type-name>inet:ipv4-address</type-name>
+                    </type>
+                  </cluster-list>
+                  <ext-community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                    <type>
+                      <type-name>oc-bgpt:bgp-ext-community-type</type-name>
+                    </type>
+                  </ext-community>
+                  <aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </aigp>
+                  <path-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </path-id>
+                  <unknown-attribute config="true" key="attr-type" node="list">
+                    <attr-type config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-data-handler>ignore</xr-data-handler>
+                      <type>
+                        <type-name>uint16</type-name>
+                      </type>
+                    </attr-type>
+                    <attr-len config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>uint16</type-name>
+                      </type>
+                    </attr-len>
+                    <attr-value config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type length="1..65535">
+                        <type-name>binary</type-name>
+                      </type>
+                    </attr-value>
+                  </unknown-attribute>
+                </ext-attributes>
+                <last-modified-date config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:date-and-time</type-name>
+                  </type>
+                </last-modified-date>
+                <last-update-received config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:date-and-time</type-name>
+                  </type>
+                </last-update-received>
+                <valid-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </valid-route>
+                <invalid-reason config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type node="identityref">
+                    <base>oc-bgpribt:INVALID_ROUTE_REASON</base>
+                  </type>
+                </invalid-reason>
+                <best-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </best-path>
+              </route>
+            </routes>
+          </loc-rib>
+          <neighbors config="true" is-key="false" node="container" presence="false">
+            <neighbor config="true" key="neighbor-address" node="list">
+              <neighbor-address config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <type>
+                  <type-name>inet:ip-address</type-name>
+                </type>
+              </neighbor-address>
+              <adj-rib-in-pre config="true" is-key="false" node="container" presence="false">
+                <num-routes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint64</type-name>
+                  </type>
+                </num-routes>
+                <routes config="true" is-key="false" node="container" presence="false">
+                  <route config="true" node="list">
+                    <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>inet:ipv4-prefix</type-name>
+                      </type>
+                    </prefix>
+                    <attributes config="true" is-key="false" node="container" presence="false">
+                      <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>oc-bgpt:bgp-origin-attr-type</type-name>
+                        </type>
+                      </origin>
+                      <as-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </as-path>
+                      <as4-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </as4-path>
+                      <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>inet:ip-address</type-name>
+                        </type>
+                      </next-hop>
+                      <med config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </med>
+                      <local-pref config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </local-pref>
+                      <atomic-aggr config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>boolean</type-name>
+                        </type>
+                      </atomic-aggr>
+                      <aggregator config="true" is-key="false" node="container" presence="false">
+                        <as config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </as>
+                        <as4 config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </as4>
+                        <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>inet:ipv4-address</type-name>
+                          </type>
+                        </address>
+                      </aggregator>
+                      <community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>oc-bgpt:bgp-std-community-type</type-name>
+                        </type>
+                      </community>
+                    </attributes>
+                    <ext-attributes config="true" is-key="false" node="container" presence="false">
+                      <originator-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>inet:ipv4-address</type-name>
+                        </type>
+                      </originator-id>
+                      <cluster-list config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>inet:ipv4-address</type-name>
+                        </type>
+                      </cluster-list>
+                      <ext-community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>oc-bgpt:bgp-ext-community-type</type-name>
+                        </type>
+                      </ext-community>
+                      <aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint64</type-name>
+                        </type>
+                      </aigp>
+                      <path-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </path-id>
+                      <unknown-attribute config="true" key="attr-type" node="list">
+                        <attr-type config="true" is-key="true" is-yang-key="true" node="leaf">
+                          <xr-data-handler>ignore</xr-data-handler>
+                          <type>
+                            <type-name>uint16</type-name>
+                          </type>
+                        </attr-type>
+                        <attr-len config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint16</type-name>
+                          </type>
+                        </attr-len>
+                        <attr-value config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type length="1..65535">
+                            <type-name>binary</type-name>
+                          </type>
+                        </attr-value>
+                      </unknown-attribute>
+                    </ext-attributes>
+                    <last-modified-date config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>yang:date-and-time</type-name>
+                      </type>
+                    </last-modified-date>
+                    <last-update-received config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>yang:date-and-time</type-name>
+                      </type>
+                    </last-update-received>
+                    <valid-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </valid-route>
+                    <invalid-reason config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type node="identityref">
+                        <base>oc-bgpribt:INVALID_ROUTE_REASON</base>
+                      </type>
+                    </invalid-reason>
+                    <best-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </best-path>
+                  </route>
+                </routes>
+              </adj-rib-in-pre>
+              <adj-rib-in-post config="true" is-key="false" node="container" presence="false">
+                <num-routes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint64</type-name>
+                  </type>
+                </num-routes>
+                <routes config="true" is-key="false" node="container" presence="false">
+                  <route config="true" node="list">
+                    <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>inet:ipv4-prefix</type-name>
+                      </type>
+                    </prefix>
+                    <attributes config="true" is-key="false" node="container" presence="false">
+                      <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>oc-bgpt:bgp-origin-attr-type</type-name>
+                        </type>
+                      </origin>
+                      <as-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </as-path>
+                      <as4-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </as4-path>
+                      <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>inet:ip-address</type-name>
+                        </type>
+                      </next-hop>
+                      <med config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </med>
+                      <local-pref config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </local-pref>
+                      <atomic-aggr config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>boolean</type-name>
+                        </type>
+                      </atomic-aggr>
+                      <aggregator config="true" is-key="false" node="container" presence="false">
+                        <as config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </as>
+                        <as4 config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </as4>
+                        <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>inet:ipv4-address</type-name>
+                          </type>
+                        </address>
+                      </aggregator>
+                      <community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>oc-bgpt:bgp-std-community-type</type-name>
+                        </type>
+                      </community>
+                    </attributes>
+                    <ext-attributes config="true" is-key="false" node="container" presence="false">
+                      <originator-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>inet:ipv4-address</type-name>
+                        </type>
+                      </originator-id>
+                      <cluster-list config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>inet:ipv4-address</type-name>
+                        </type>
+                      </cluster-list>
+                      <ext-community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>oc-bgpt:bgp-ext-community-type</type-name>
+                        </type>
+                      </ext-community>
+                      <aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint64</type-name>
+                        </type>
+                      </aigp>
+                      <path-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </path-id>
+                      <unknown-attribute config="true" key="attr-type" node="list">
+                        <attr-type config="true" is-key="true" is-yang-key="true" node="leaf">
+                          <xr-data-handler>ignore</xr-data-handler>
+                          <type>
+                            <type-name>uint16</type-name>
+                          </type>
+                        </attr-type>
+                        <attr-len config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint16</type-name>
+                          </type>
+                        </attr-len>
+                        <attr-value config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type length="1..65535">
+                            <type-name>binary</type-name>
+                          </type>
+                        </attr-value>
+                      </unknown-attribute>
+                    </ext-attributes>
+                    <last-modified-date config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>yang:date-and-time</type-name>
+                      </type>
+                    </last-modified-date>
+                    <last-update-received config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>yang:date-and-time</type-name>
+                      </type>
+                    </last-update-received>
+                    <valid-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </valid-route>
+                    <invalid-reason config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type node="identityref">
+                        <base>oc-bgpribt:INVALID_ROUTE_REASON</base>
+                      </type>
+                    </invalid-reason>
+                    <best-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </best-path>
+                  </route>
+                </routes>
+              </adj-rib-in-post>
+              <adj-rib-out-pre config="true" is-key="false" node="container" presence="false">
+                <num-routes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint64</type-name>
+                  </type>
+                </num-routes>
+                <routes config="true" is-key="false" node="container" presence="false">
+                  <route config="true" node="list">
+                    <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>inet:ipv4-prefix</type-name>
+                      </type>
+                    </prefix>
+                    <attributes config="true" is-key="false" node="container" presence="false">
+                      <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>oc-bgpt:bgp-origin-attr-type</type-name>
+                        </type>
+                      </origin>
+                      <as-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </as-path>
+                      <as4-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </as4-path>
+                      <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>inet:ip-address</type-name>
+                        </type>
+                      </next-hop>
+                      <med config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </med>
+                      <local-pref config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </local-pref>
+                      <atomic-aggr config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>boolean</type-name>
+                        </type>
+                      </atomic-aggr>
+                      <aggregator config="true" is-key="false" node="container" presence="false">
+                        <as config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </as>
+                        <as4 config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </as4>
+                        <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>inet:ipv4-address</type-name>
+                          </type>
+                        </address>
+                      </aggregator>
+                      <community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>oc-bgpt:bgp-std-community-type</type-name>
+                        </type>
+                      </community>
+                    </attributes>
+                    <ext-attributes config="true" is-key="false" node="container" presence="false">
+                      <originator-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>inet:ipv4-address</type-name>
+                        </type>
+                      </originator-id>
+                      <cluster-list config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>inet:ipv4-address</type-name>
+                        </type>
+                      </cluster-list>
+                      <ext-community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>oc-bgpt:bgp-ext-community-type</type-name>
+                        </type>
+                      </ext-community>
+                      <aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint64</type-name>
+                        </type>
+                      </aigp>
+                      <path-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </path-id>
+                      <unknown-attribute config="true" key="attr-type" node="list">
+                        <attr-type config="true" is-key="true" is-yang-key="true" node="leaf">
+                          <xr-data-handler>ignore</xr-data-handler>
+                          <type>
+                            <type-name>uint16</type-name>
+                          </type>
+                        </attr-type>
+                        <attr-len config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint16</type-name>
+                          </type>
+                        </attr-len>
+                        <attr-value config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type length="1..65535">
+                            <type-name>binary</type-name>
+                          </type>
+                        </attr-value>
+                      </unknown-attribute>
+                    </ext-attributes>
+                    <last-modified-date config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>yang:date-and-time</type-name>
+                      </type>
+                    </last-modified-date>
+                    <last-update-received config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>yang:date-and-time</type-name>
+                      </type>
+                    </last-update-received>
+                    <valid-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </valid-route>
+                    <invalid-reason config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type node="identityref">
+                        <base>oc-bgpribt:INVALID_ROUTE_REASON</base>
+                      </type>
+                    </invalid-reason>
+                    <best-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </best-path>
+                  </route>
+                </routes>
+              </adj-rib-out-pre>
+              <adj-rib-out-post config="true" is-key="false" node="container" presence="false">
+                <num-routes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint64</type-name>
+                  </type>
+                </num-routes>
+                <routes config="true" is-key="false" node="container" presence="false">
+                  <route config="true" node="list">
+                    <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>inet:ipv4-prefix</type-name>
+                      </type>
+                    </prefix>
+                    <attributes config="true" is-key="false" node="container" presence="false">
+                      <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>oc-bgpt:bgp-origin-attr-type</type-name>
+                        </type>
+                      </origin>
+                      <as-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </as-path>
+                      <as4-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </as4-path>
+                      <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>inet:ip-address</type-name>
+                        </type>
+                      </next-hop>
+                      <med config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </med>
+                      <local-pref config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </local-pref>
+                      <atomic-aggr config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>boolean</type-name>
+                        </type>
+                      </atomic-aggr>
+                      <aggregator config="true" is-key="false" node="container" presence="false">
+                        <as config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </as>
+                        <as4 config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </as4>
+                        <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>inet:ipv4-address</type-name>
+                          </type>
+                        </address>
+                      </aggregator>
+                      <community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>oc-bgpt:bgp-std-community-type</type-name>
+                        </type>
+                      </community>
+                    </attributes>
+                    <ext-attributes config="true" is-key="false" node="container" presence="false">
+                      <originator-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>inet:ipv4-address</type-name>
+                        </type>
+                      </originator-id>
+                      <cluster-list config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>inet:ipv4-address</type-name>
+                        </type>
+                      </cluster-list>
+                      <ext-community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>oc-bgpt:bgp-ext-community-type</type-name>
+                        </type>
+                      </ext-community>
+                      <aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint64</type-name>
+                        </type>
+                      </aigp>
+                      <path-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </path-id>
+                      <unknown-attribute config="true" key="attr-type" node="list">
+                        <attr-type config="true" is-key="true" is-yang-key="true" node="leaf">
+                          <xr-data-handler>ignore</xr-data-handler>
+                          <type>
+                            <type-name>uint16</type-name>
+                          </type>
+                        </attr-type>
+                        <attr-len config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint16</type-name>
+                          </type>
+                        </attr-len>
+                        <attr-value config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type length="1..65535">
+                            <type-name>binary</type-name>
+                          </type>
+                        </attr-value>
+                      </unknown-attribute>
+                    </ext-attributes>
+                    <last-modified-date config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>yang:date-and-time</type-name>
+                      </type>
+                    </last-modified-date>
+                    <last-update-received config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>yang:date-and-time</type-name>
+                      </type>
+                    </last-update-received>
+                    <valid-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </valid-route>
+                    <invalid-reason config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type node="identityref">
+                        <base>oc-bgpribt:INVALID_ROUTE_REASON</base>
+                      </type>
+                    </invalid-reason>
+                    <best-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </best-path>
+                  </route>
+                </routes>
+              </adj-rib-out-post>
+            </neighbor>
+          </neighbors>
+        </ipv4-unicast>
+        <ipv6-unicast config="true" is-key="false" node="container" presence="false">
+          <when>../afi-safi-name = 'oc-bgpt:IPV6_UNICAST'</when>
+          <loc-rib config="true" is-key="false" node="container" presence="false">
+            <num-routes config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </num-routes>
+            <routes config="true" is-key="false" node="container" presence="false">
+              <route config="true" node="list">
+                <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>inet:ipv6-prefix</type-name>
+                  </type>
+                </prefix>
+                <attributes config="true" is-key="false" node="container" presence="false">
+                  <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-bgpt:bgp-origin-attr-type</type-name>
+                    </type>
+                  </origin>
+                  <as-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </as-path>
+                  <as4-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </as4-path>
+                  <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>inet:ip-address</type-name>
+                    </type>
+                  </next-hop>
+                  <med config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </med>
+                  <local-pref config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </local-pref>
+                  <atomic-aggr config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </atomic-aggr>
+                  <aggregator config="true" is-key="false" node="container" presence="false">
+                    <as config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </as>
+                    <as4 config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </as4>
+                    <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>inet:ipv4-address</type-name>
+                      </type>
+                    </address>
+                  </aggregator>
+                  <community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                    <type>
+                      <type-name>oc-bgpt:bgp-std-community-type</type-name>
+                    </type>
+                  </community>
+                </attributes>
+                <ext-attributes config="true" is-key="false" node="container" presence="false">
+                  <originator-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>inet:ipv4-address</type-name>
+                    </type>
+                  </originator-id>
+                  <cluster-list config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                    <type>
+                      <type-name>inet:ipv4-address</type-name>
+                    </type>
+                  </cluster-list>
+                  <ext-community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                    <type>
+                      <type-name>oc-bgpt:bgp-ext-community-type</type-name>
+                    </type>
+                  </ext-community>
+                  <aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </aigp>
+                  <path-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </path-id>
+                  <unknown-attribute config="true" key="attr-type" node="list">
+                    <attr-type config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-data-handler>ignore</xr-data-handler>
+                      <type>
+                        <type-name>uint16</type-name>
+                      </type>
+                    </attr-type>
+                    <attr-len config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>uint16</type-name>
+                      </type>
+                    </attr-len>
+                    <attr-value config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type length="1..65535">
+                        <type-name>binary</type-name>
+                      </type>
+                    </attr-value>
+                  </unknown-attribute>
+                </ext-attributes>
+                <last-modified-date config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:date-and-time</type-name>
+                  </type>
+                </last-modified-date>
+                <last-update-received config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:date-and-time</type-name>
+                  </type>
+                </last-update-received>
+                <valid-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </valid-route>
+                <invalid-reason config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type node="identityref">
+                    <base>oc-bgpribt:INVALID_ROUTE_REASON</base>
+                  </type>
+                </invalid-reason>
+                <best-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </best-path>
+              </route>
+            </routes>
+          </loc-rib>
+          <neighbors config="true" is-key="false" node="container" presence="false">
+            <neighbor config="true" key="neighbor-address" node="list">
+              <neighbor-address config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <type>
+                  <type-name>inet:ip-address</type-name>
+                </type>
+              </neighbor-address>
+              <adj-rib-in-pre config="true" is-key="false" node="container" presence="false">
+                <num-routes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint64</type-name>
+                  </type>
+                </num-routes>
+                <routes config="true" is-key="false" node="container" presence="false">
+                  <route config="true" node="list">
+                    <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>inet:ipv6-prefix</type-name>
+                      </type>
+                    </prefix>
+                    <attributes config="true" is-key="false" node="container" presence="false">
+                      <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>oc-bgpt:bgp-origin-attr-type</type-name>
+                        </type>
+                      </origin>
+                      <as-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </as-path>
+                      <as4-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </as4-path>
+                      <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>inet:ip-address</type-name>
+                        </type>
+                      </next-hop>
+                      <med config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </med>
+                      <local-pref config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </local-pref>
+                      <atomic-aggr config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>boolean</type-name>
+                        </type>
+                      </atomic-aggr>
+                      <aggregator config="true" is-key="false" node="container" presence="false">
+                        <as config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </as>
+                        <as4 config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </as4>
+                        <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>inet:ipv4-address</type-name>
+                          </type>
+                        </address>
+                      </aggregator>
+                      <community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>oc-bgpt:bgp-std-community-type</type-name>
+                        </type>
+                      </community>
+                    </attributes>
+                    <ext-attributes config="true" is-key="false" node="container" presence="false">
+                      <originator-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>inet:ipv4-address</type-name>
+                        </type>
+                      </originator-id>
+                      <cluster-list config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>inet:ipv4-address</type-name>
+                        </type>
+                      </cluster-list>
+                      <ext-community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>oc-bgpt:bgp-ext-community-type</type-name>
+                        </type>
+                      </ext-community>
+                      <aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint64</type-name>
+                        </type>
+                      </aigp>
+                      <path-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </path-id>
+                      <unknown-attribute config="true" key="attr-type" node="list">
+                        <attr-type config="true" is-key="true" is-yang-key="true" node="leaf">
+                          <xr-data-handler>ignore</xr-data-handler>
+                          <type>
+                            <type-name>uint16</type-name>
+                          </type>
+                        </attr-type>
+                        <attr-len config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint16</type-name>
+                          </type>
+                        </attr-len>
+                        <attr-value config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type length="1..65535">
+                            <type-name>binary</type-name>
+                          </type>
+                        </attr-value>
+                      </unknown-attribute>
+                    </ext-attributes>
+                    <last-modified-date config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>yang:date-and-time</type-name>
+                      </type>
+                    </last-modified-date>
+                    <last-update-received config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>yang:date-and-time</type-name>
+                      </type>
+                    </last-update-received>
+                    <valid-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </valid-route>
+                    <invalid-reason config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type node="identityref">
+                        <base>oc-bgpribt:INVALID_ROUTE_REASON</base>
+                      </type>
+                    </invalid-reason>
+                    <best-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </best-path>
+                  </route>
+                </routes>
+              </adj-rib-in-pre>
+              <adj-rib-in-post config="true" is-key="false" node="container" presence="false">
+                <num-routes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint64</type-name>
+                  </type>
+                </num-routes>
+                <routes config="true" is-key="false" node="container" presence="false">
+                  <route config="true" node="list">
+                    <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>inet:ipv6-prefix</type-name>
+                      </type>
+                    </prefix>
+                    <attributes config="true" is-key="false" node="container" presence="false">
+                      <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>oc-bgpt:bgp-origin-attr-type</type-name>
+                        </type>
+                      </origin>
+                      <as-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </as-path>
+                      <as4-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </as4-path>
+                      <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>inet:ip-address</type-name>
+                        </type>
+                      </next-hop>
+                      <med config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </med>
+                      <local-pref config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </local-pref>
+                      <atomic-aggr config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>boolean</type-name>
+                        </type>
+                      </atomic-aggr>
+                      <aggregator config="true" is-key="false" node="container" presence="false">
+                        <as config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </as>
+                        <as4 config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </as4>
+                        <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>inet:ipv4-address</type-name>
+                          </type>
+                        </address>
+                      </aggregator>
+                      <community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>oc-bgpt:bgp-std-community-type</type-name>
+                        </type>
+                      </community>
+                    </attributes>
+                    <ext-attributes config="true" is-key="false" node="container" presence="false">
+                      <originator-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>inet:ipv4-address</type-name>
+                        </type>
+                      </originator-id>
+                      <cluster-list config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>inet:ipv4-address</type-name>
+                        </type>
+                      </cluster-list>
+                      <ext-community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>oc-bgpt:bgp-ext-community-type</type-name>
+                        </type>
+                      </ext-community>
+                      <aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint64</type-name>
+                        </type>
+                      </aigp>
+                      <path-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </path-id>
+                      <unknown-attribute config="true" key="attr-type" node="list">
+                        <attr-type config="true" is-key="true" is-yang-key="true" node="leaf">
+                          <xr-data-handler>ignore</xr-data-handler>
+                          <type>
+                            <type-name>uint16</type-name>
+                          </type>
+                        </attr-type>
+                        <attr-len config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint16</type-name>
+                          </type>
+                        </attr-len>
+                        <attr-value config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type length="1..65535">
+                            <type-name>binary</type-name>
+                          </type>
+                        </attr-value>
+                      </unknown-attribute>
+                    </ext-attributes>
+                    <last-modified-date config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>yang:date-and-time</type-name>
+                      </type>
+                    </last-modified-date>
+                    <last-update-received config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>yang:date-and-time</type-name>
+                      </type>
+                    </last-update-received>
+                    <valid-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </valid-route>
+                    <invalid-reason config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type node="identityref">
+                        <base>oc-bgpribt:INVALID_ROUTE_REASON</base>
+                      </type>
+                    </invalid-reason>
+                    <best-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </best-path>
+                  </route>
+                </routes>
+              </adj-rib-in-post>
+              <adj-rib-out-pre config="true" is-key="false" node="container" presence="false">
+                <num-routes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint64</type-name>
+                  </type>
+                </num-routes>
+                <routes config="true" is-key="false" node="container" presence="false">
+                  <route config="true" node="list">
+                    <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>inet:ipv6-prefix</type-name>
+                      </type>
+                    </prefix>
+                    <attributes config="true" is-key="false" node="container" presence="false">
+                      <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>oc-bgpt:bgp-origin-attr-type</type-name>
+                        </type>
+                      </origin>
+                      <as-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </as-path>
+                      <as4-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </as4-path>
+                      <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>inet:ip-address</type-name>
+                        </type>
+                      </next-hop>
+                      <med config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </med>
+                      <local-pref config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </local-pref>
+                      <atomic-aggr config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>boolean</type-name>
+                        </type>
+                      </atomic-aggr>
+                      <aggregator config="true" is-key="false" node="container" presence="false">
+                        <as config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </as>
+                        <as4 config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </as4>
+                        <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>inet:ipv4-address</type-name>
+                          </type>
+                        </address>
+                      </aggregator>
+                      <community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>oc-bgpt:bgp-std-community-type</type-name>
+                        </type>
+                      </community>
+                    </attributes>
+                    <ext-attributes config="true" is-key="false" node="container" presence="false">
+                      <originator-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>inet:ipv4-address</type-name>
+                        </type>
+                      </originator-id>
+                      <cluster-list config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>inet:ipv4-address</type-name>
+                        </type>
+                      </cluster-list>
+                      <ext-community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>oc-bgpt:bgp-ext-community-type</type-name>
+                        </type>
+                      </ext-community>
+                      <aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint64</type-name>
+                        </type>
+                      </aigp>
+                      <path-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </path-id>
+                      <unknown-attribute config="true" key="attr-type" node="list">
+                        <attr-type config="true" is-key="true" is-yang-key="true" node="leaf">
+                          <xr-data-handler>ignore</xr-data-handler>
+                          <type>
+                            <type-name>uint16</type-name>
+                          </type>
+                        </attr-type>
+                        <attr-len config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint16</type-name>
+                          </type>
+                        </attr-len>
+                        <attr-value config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type length="1..65535">
+                            <type-name>binary</type-name>
+                          </type>
+                        </attr-value>
+                      </unknown-attribute>
+                    </ext-attributes>
+                    <last-modified-date config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>yang:date-and-time</type-name>
+                      </type>
+                    </last-modified-date>
+                    <last-update-received config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>yang:date-and-time</type-name>
+                      </type>
+                    </last-update-received>
+                    <valid-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </valid-route>
+                    <invalid-reason config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type node="identityref">
+                        <base>oc-bgpribt:INVALID_ROUTE_REASON</base>
+                      </type>
+                    </invalid-reason>
+                    <best-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </best-path>
+                  </route>
+                </routes>
+              </adj-rib-out-pre>
+              <adj-rib-out-post config="true" is-key="false" node="container" presence="false">
+                <num-routes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint64</type-name>
+                  </type>
+                </num-routes>
+                <routes config="true" is-key="false" node="container" presence="false">
+                  <route config="true" node="list">
+                    <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>inet:ipv6-prefix</type-name>
+                      </type>
+                    </prefix>
+                    <attributes config="true" is-key="false" node="container" presence="false">
+                      <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>oc-bgpt:bgp-origin-attr-type</type-name>
+                        </type>
+                      </origin>
+                      <as-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </as-path>
+                      <as4-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>string</type-name>
+                        </type>
+                      </as4-path>
+                      <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>inet:ip-address</type-name>
+                        </type>
+                      </next-hop>
+                      <med config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </med>
+                      <local-pref config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </local-pref>
+                      <atomic-aggr config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>boolean</type-name>
+                        </type>
+                      </atomic-aggr>
+                      <aggregator config="true" is-key="false" node="container" presence="false">
+                        <as config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </as>
+                        <as4 config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint32</type-name>
+                          </type>
+                        </as4>
+                        <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>inet:ipv4-address</type-name>
+                          </type>
+                        </address>
+                      </aggregator>
+                      <community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>oc-bgpt:bgp-std-community-type</type-name>
+                        </type>
+                      </community>
+                    </attributes>
+                    <ext-attributes config="true" is-key="false" node="container" presence="false">
+                      <originator-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>inet:ipv4-address</type-name>
+                        </type>
+                      </originator-id>
+                      <cluster-list config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>inet:ipv4-address</type-name>
+                        </type>
+                      </cluster-list>
+                      <ext-community config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>oc-bgpt:bgp-ext-community-type</type-name>
+                        </type>
+                      </ext-community>
+                      <aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint64</type-name>
+                        </type>
+                      </aigp>
+                      <path-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </path-id>
+                      <unknown-attribute config="true" key="attr-type" node="list">
+                        <attr-type config="true" is-key="true" is-yang-key="true" node="leaf">
+                          <xr-data-handler>ignore</xr-data-handler>
+                          <type>
+                            <type-name>uint16</type-name>
+                          </type>
+                        </attr-type>
+                        <attr-len config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint16</type-name>
+                          </type>
+                        </attr-len>
+                        <attr-value config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type length="1..65535">
+                            <type-name>binary</type-name>
+                          </type>
+                        </attr-value>
+                      </unknown-attribute>
+                    </ext-attributes>
+                    <last-modified-date config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>yang:date-and-time</type-name>
+                      </type>
+                    </last-modified-date>
+                    <last-update-received config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>yang:date-and-time</type-name>
+                      </type>
+                    </last-update-received>
+                    <valid-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </valid-route>
+                    <invalid-reason config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type node="identityref">
+                        <base>oc-bgpribt:INVALID_ROUTE_REASON</base>
+                      </type>
+                    </invalid-reason>
+                    <best-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </best-path>
+                  </route>
+                </routes>
+              </adj-rib-out-post>
+            </neighbor>
+          </neighbors>
+        </ipv6-unicast>
+      </afi-safi>
+    </afi-safis>
+  </bgp-rib>
+</openconfig-rib-bgp>

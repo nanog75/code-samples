@@ -1,0 +1,1304 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-infra-xtc-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-infra-xtc-cfg" revision="2018-07-25">
+  <files>
+    <file revision="2018-07-25" submodule="false">Cisco-IOS-XR-infra-xtc-cfg.yang</file>
+  </files>
+  <prefix>infra-xtc-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="Pce-segment">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">ipv4-address</enum>
+      <enum value="3">mpls-label</enum>
+    </type>
+  </typedef>
+  <typedef name="Pce-path-hop">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">mpls</enum>
+      <enum value="2">srv6</enum>
+    </type>
+  </typedef>
+  <typedef name="Pce-path">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">explicit</enum>
+      <enum value="2">dynamic</enum>
+    </type>
+  </typedef>
+  <typedef name="Pce-disjoint-path">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">link</enum>
+      <enum value="2">node</enum>
+      <enum value="3">srlg</enum>
+      <enum value="4">srlg-node</enum>
+    </type>
+  </typedef>
+  <typedef name="Pce-end-point">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">end-point-type-ipv4</enum>
+      <enum value="2">end-point-type-ipv6</enum>
+    </type>
+  </typedef>
+  <typedef name="Pce-binding-sid">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">mpls-label-specified</enum>
+      <enum value="2">mpls-label-any</enum>
+    </type>
+  </typedef>
+  <typedef name="Pce-metric">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">igp</enum>
+      <enum value="2">te</enum>
+      <enum value="3">hopcount</enum>
+      <enum value="12">latency</enum>
+    </type>
+  </typedef>
+  <typedef name="Pcerest-authentication">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">basic</enum>
+      <enum value="2">digest</enum>
+    </type>
+  </typedef>
+  <typedef name="Pce-explicit-path-hop">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">address</enum>
+      <enum value="2">sid-node</enum>
+      <enum value="3">sid-adjancency</enum>
+      <enum value="4">binding-sid</enum>
+    </type>
+  </typedef>
+  <pce config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/pce/</xr-path>
+    <xr-xml-map>xtc_cfg:PCE</xr-xml-map>
+    <xr-task>config-services</xr-task>
+    <xr-scope>exported</xr-scope>
+    <ipv6-state-syncs config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/pce/j/statesync_ipv6/</xr-path>
+      <xr-xml-map>xtc_cfg:IPV6StateSyncTable</xr-xml-map>
+      <xr-task>config-services</xr-task>
+      <ipv6-state-sync config="true" key="address" node="list">
+        <xr-path>/cfg/gl/pce/j/statesync_ipv6/&lt;xtc_cfg_IPV6StateSync_Address&gt;</xr-path>
+        <xr-xml-map>xtc_cfg:IPV6StateSync</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <address config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-create-item-relative-path/>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/pce/j/statesync_ipv6/&lt;xtc_cfg_IPV6StateSync_Address&gt;</xr-path>
+          <xr-xml-map>xtc_cfg:Address</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>IPV6AddressString</xr-sch-type>
+          <xr-sch-arg-name>&lt;xtc_cfg_IPV6StateSync_Address&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>inet:ipv6-address-no-zone</type-name>
+          </type>
+        </address>
+      </ipv6-state-sync>
+    </ipv6-state-syncs>
+    <pcc-addresses config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/pce/d/pcc_address/</xr-path>
+      <xr-xml-map>xtc_cfg:PCCAddressTable</xr-xml-map>
+      <xr-task>config-services</xr-task>
+      <pcc-address config="true" key="address" node="list">
+        <xr-path>/cfg/gl/pce/d/pcc_address/&lt;xtc_cfg_PCCAddress_Address&gt;/</xr-path>
+        <xr-xml-map>xtc_cfg:PCCAddress</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <lsp-names config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/pce/d/pcc_address/&lt;xtc_cfg_PCCAddress_Address&gt;/b/lsp_name/</xr-path>
+          <xr-xml-map>xtc_cfg:LSPNameTable</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <lsp-name config="true" key="name" node="list">
+            <xr-path>/cfg/gl/pce/d/pcc_address/&lt;xtc_cfg_PCCAddress_Address&gt;/b/lsp_name/&lt;xtc_cfg_LSPName_Name&gt;/</xr-path>
+            <xr-xml-map>xtc_cfg:LSPName</xr-xml-map>
+            <xr-task>config-services</xr-task>
+            <rsvp-te config="true" is-key="false" node="container" presence="true">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-path>/cfg/gl/pce/d/pcc_address/&lt;xtc_cfg_PCCAddress_Address&gt;/b/lsp_name/&lt;xtc_cfg_LSPName_Name&gt;/c/rsvp_te/</xr-path>
+              <xr-xml-map>xtc_cfg:RSVP_TE</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <affinity config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/pce/d/pcc_address/&lt;xtc_cfg_PCCAddress_Address&gt;/b/lsp_name/&lt;xtc_cfg_LSPName_Name&gt;/c/rsvp_te/e/affinity/</xr-path>
+                <xr-xml-map>xtc_cfg:Affinity</xr-xml-map>
+                <xr-task>config-services</xr-task>
+                <include-any config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/pce/d/pcc_address/&lt;xtc_cfg_PCCAddress_Address&gt;/b/lsp_name/&lt;xtc_cfg_LSPName_Name&gt;/c/rsvp_te/e/affinity/include-any</xr-path>
+                  <xr-xml-map>xtc_cfg:IncludeAny</xr-xml-map>
+                  <xr-task>config-services</xr-task>
+                  <xr-sch-type>HexInteger</xr-sch-type>
+                  <type>
+                    <type-name>xr:Hex-integer</type-name>
+                  </type>
+                </include-any>
+                <include-all config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/pce/d/pcc_address/&lt;xtc_cfg_PCCAddress_Address&gt;/b/lsp_name/&lt;xtc_cfg_LSPName_Name&gt;/c/rsvp_te/e/affinity/include-all</xr-path>
+                  <xr-xml-map>xtc_cfg:IncludeAll</xr-xml-map>
+                  <xr-task>config-services</xr-task>
+                  <xr-sch-type>HexInteger</xr-sch-type>
+                  <type>
+                    <type-name>xr:Hex-integer</type-name>
+                  </type>
+                </include-all>
+                <exclude-any config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/pce/d/pcc_address/&lt;xtc_cfg_PCCAddress_Address&gt;/b/lsp_name/&lt;xtc_cfg_LSPName_Name&gt;/c/rsvp_te/e/affinity/exclude-any</xr-path>
+                  <xr-xml-map>xtc_cfg:ExcludeAny</xr-xml-map>
+                  <xr-task>config-services</xr-task>
+                  <xr-sch-type>HexInteger</xr-sch-type>
+                  <type>
+                    <type-name>xr:Hex-integer</type-name>
+                  </type>
+                </exclude-any>
+              </affinity>
+              <priority config="true" is-key="false" node="container" presence="true">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-is-packed/>
+                <xr-path>/cfg/gl/pce/d/pcc_address/&lt;xtc_cfg_PCCAddress_Address&gt;/b/lsp_name/&lt;xtc_cfg_LSPName_Name&gt;/c/rsvp_te/c/priority`</xr-path>
+                <xr-xml-map>xtc_cfg:Priority</xr-xml-map>
+                <xr-task>config-services</xr-task>
+                <xr-pack-format>%d%d</xr-pack-format>
+                <setup-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/pce/d/pcc_address/&lt;xtc_cfg_PCCAddress_Address&gt;/b/lsp_name/&lt;xtc_cfg_LSPName_Name&gt;/c/rsvp_te/c/priority`0</xr-path>
+                  <xr-xml-map>xtc_cfg:SetupPriority</xr-xml-map>
+                  <xr-task>config-services</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <type range="0..7">
+                    <type-name>uint32</type-name>
+                  </type>
+                  <mandatory>true</mandatory>
+                </setup-priority>
+                <hold-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/pce/d/pcc_address/&lt;xtc_cfg_PCCAddress_Address&gt;/b/lsp_name/&lt;xtc_cfg_LSPName_Name&gt;/c/rsvp_te/c/priority`1</xr-path>
+                  <xr-xml-map>xtc_cfg:HoldPriority</xr-xml-map>
+                  <xr-task>config-services</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <type range="0..7">
+                    <type-name>uint32</type-name>
+                  </type>
+                  <mandatory>true</mandatory>
+                </hold-priority>
+              </priority>
+              <fast-protect config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/pce/d/pcc_address/&lt;xtc_cfg_PCCAddress_Address&gt;/b/lsp_name/&lt;xtc_cfg_LSPName_Name&gt;/c/rsvp_te/e/protection</xr-path>
+                <xr-xml-map>xtc_cfg:FastProtect</xr-xml-map>
+                <xr-task>config-services</xr-task>
+                <xr-sch-type>Configured</xr-sch-type>
+                <type>
+                  <type-name>empty</type-name>
+                </type>
+              </fast-protect>
+              <bandwidth config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/pce/d/pcc_address/&lt;xtc_cfg_PCCAddress_Address&gt;/b/lsp_name/&lt;xtc_cfg_LSPName_Name&gt;/c/rsvp_te/b/bw</xr-path>
+                <xr-xml-map>xtc_cfg:Bandwidth</xr-xml-map>
+                <xr-task>config-services</xr-task>
+                <xr-sch-type>Integer</xr-sch-type>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </bandwidth>
+              <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/pce/d/pcc_address/&lt;xtc_cfg_PCCAddress_Address&gt;/b/lsp_name/&lt;xtc_cfg_LSPName_Name&gt;/c/rsvp_te/a/enable</xr-path>
+                <xr-xml-map>xtc_cfg:Enable</xr-xml-map>
+                <xr-task>config-services</xr-task>
+                <xr-sch-type>Configured</xr-sch-type>
+                <type>
+                  <type-name>empty</type-name>
+                </type>
+              </enable>
+            </rsvp-te>
+            <undelegate config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/pce/d/pcc_address/&lt;xtc_cfg_PCCAddress_Address&gt;/b/lsp_name/&lt;xtc_cfg_LSPName_Name&gt;/e/undelegate</xr-path>
+              <xr-xml-map>xtc_cfg:Undelegate</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </undelegate>
+            <explicit-path-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/pce/d/pcc_address/&lt;xtc_cfg_PCCAddress_Address&gt;/b/lsp_name/&lt;xtc_cfg_LSPName_Name&gt;/d/exp_path</xr-path>
+              <xr-xml-map>xtc_cfg:ExplicitPathName</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </explicit-path-name>
+            <name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/pce/d/pcc_address/&lt;xtc_cfg_PCCAddress_Address&gt;/b/lsp_name/&lt;xtc_cfg_LSPName_Name&gt;/</xr-path>
+              <xr-xml-map>xtc_cfg:Name</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;xtc_cfg_LSPName_Name&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </name>
+            <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/pce/d/pcc_address/&lt;xtc_cfg_PCCAddress_Address&gt;/b/lsp_name/&lt;xtc_cfg_LSPName_Name&gt;/a/enable</xr-path>
+              <xr-xml-map>xtc_cfg:Enable</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </enable>
+          </lsp-name>
+        </lsp-names>
+        <address config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/pce/d/pcc_address/&lt;xtc_cfg_PCCAddress_Address&gt;/</xr-path>
+          <xr-xml-map>xtc_cfg:Address</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>IPV4AddressString</xr-sch-type>
+          <xr-sch-arg-name>&lt;xtc_cfg_PCCAddress_Address&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>inet:ipv4-address-no-zone</type-name>
+          </type>
+        </address>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/pce/d/pcc_address/&lt;xtc_cfg_PCCAddress_Address&gt;/a/enable</xr-path>
+          <xr-xml-map>xtc_cfg:Enable</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </enable>
+      </pcc-address>
+    </pcc-addresses>
+    <logging config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/pce/f/logging/</xr-path>
+      <xr-xml-map>xtc_cfg:Logging</xr-xml-map>
+      <xr-task>config-services</xr-task>
+      <no-path config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/pce/f/logging/no-path</xr-path>
+        <xr-xml-map>xtc_cfg:NoPath</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </no-path>
+      <pcerr config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/pce/f/logging/pcerr</xr-path>
+        <xr-xml-map>xtc_cfg:Pcerr</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </pcerr>
+      <fallback config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/pce/f/logging/fallback</xr-path>
+        <xr-xml-map>xtc_cfg:Fallback</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </fallback>
+    </logging>
+    <backoff config="true" is-key="false" node="container" presence="true">
+      <xr-data-handler>ignore</xr-data-handler>
+      <xr-path>/cfg/gl/pce/m/backoff/</xr-path>
+      <xr-xml-map>xtc_cfg:Backoff</xr-xml-map>
+      <xr-task>config-services</xr-task>
+      <ratio config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/pce/m/backoff/b/ratio</xr-path>
+        <xr-xml-map>xtc_cfg:Ratio</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..255">
+          <type-name>uint32</type-name>
+        </type>
+        <default>2</default>
+      </ratio>
+      <threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/pce/m/backoff/d/threshold</xr-path>
+        <xr-xml-map>xtc_cfg:Threshold</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..3600">
+          <type-name>uint32</type-name>
+        </type>
+        <default>0</default>
+      </threshold>
+      <difference config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/pce/m/backoff/c/difference</xr-path>
+        <xr-xml-map>xtc_cfg:Difference</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..255">
+          <type-name>uint32</type-name>
+        </type>
+        <default>2</default>
+      </difference>
+    </backoff>
+    <rest config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/pce/e/rest/</xr-path>
+      <xr-xml-map>xtc_cfg:REST</xr-xml-map>
+      <xr-task>config-services</xr-task>
+      <rest-users config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/pce/e/rest/b/user/</xr-path>
+        <xr-xml-map>xtc_cfg:RESTUserTable</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <rest-user config="true" key="name" node="list">
+          <xr-path>/cfg/gl/pce/e/rest/b/user/&lt;xtc_cfg_RESTUser_Name&gt;/</xr-path>
+          <xr-xml-map>xtc_cfg:RESTUser</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <rest-user-password config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/pce/e/rest/b/user/&lt;xtc_cfg_RESTUser_Name&gt;/b/password</xr-path>
+            <xr-xml-map>xtc_cfg:RESTUserPassword</xr-xml-map>
+            <xr-task>config-services</xr-task>
+            <xr-sch-type>ProprietaryPassword</xr-sch-type>
+            <type>
+              <type-name>xr:Proprietary-password</type-name>
+            </type>
+          </rest-user-password>
+          <name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/pce/e/rest/b/user/&lt;xtc_cfg_RESTUser_Name&gt;/</xr-path>
+            <xr-xml-map>xtc_cfg:Name</xr-xml-map>
+            <xr-task>config-services</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;xtc_cfg_RESTUser_Name&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </name>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/pce/e/rest/b/user/&lt;xtc_cfg_RESTUser_Name&gt;/a/enable</xr-path>
+            <xr-xml-map>xtc_cfg:Enable</xr-xml-map>
+            <xr-task>config-services</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </enable>
+        </rest-user>
+      </rest-users>
+      <rest-authentication config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/pce/e/rest/c/authentication</xr-path>
+        <xr-xml-map>xtc_cfg:RESTAuthentication</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Pcerest-authentication</type-name>
+        </type>
+      </rest-authentication>
+      <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/pce/e/rest/a/enable</xr-path>
+        <xr-xml-map>xtc_cfg:Enable</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </enable>
+    </rest>
+    <state-syncs config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/pce/j/statesync/</xr-path>
+      <xr-xml-map>xtc_cfg:StateSyncTable</xr-xml-map>
+      <xr-task>config-services</xr-task>
+      <state-sync config="true" key="address" node="list">
+        <xr-path>/cfg/gl/pce/j/statesync/&lt;xtc_cfg_StateSync_Address&gt;</xr-path>
+        <xr-xml-map>xtc_cfg:StateSync</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <address config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-create-item-relative-path/>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/pce/j/statesync/&lt;xtc_cfg_StateSync_Address&gt;</xr-path>
+          <xr-xml-map>xtc_cfg:Address</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>IPV4AddressString</xr-sch-type>
+          <xr-sch-arg-name>&lt;xtc_cfg_StateSync_Address&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>inet:ipv4-address-no-zone</type-name>
+          </type>
+        </address>
+      </state-sync>
+    </state-syncs>
+    <segment-routing config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/pce/s/segment-routing/</xr-path>
+      <xr-xml-map>xtc_cfg:SegmentRouting</xr-xml-map>
+      <xr-task>config-services</xr-task>
+      <traffic-engineering config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/</xr-path>
+        <xr-xml-map>xtc_cfg:TrafficEngineering</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <affinity-bits config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/affinity/b/bitmask/b/color/</xr-path>
+          <xr-xml-map>xtc_cfg:AffinityBitTable</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <affinity-bit config="true" key="color-name" node="list">
+            <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/affinity/b/bitmask/b/color/&lt;xtc_cfg_AffinityBit_color_name&gt;</xr-path>
+            <xr-xml-map>xtc_cfg:AffinityBit</xr-xml-map>
+            <xr-task>config-services</xr-task>
+            <color-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/affinity/b/bitmask/b/color/&lt;xtc_cfg_AffinityBit_color_name&gt;</xr-path>
+              <xr-xml-map>xtc_cfg:ColorName</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <xr-sch-arg-name>&lt;xtc_cfg_AffinityBit_color_name&gt;</xr-sch-arg-name>
+              <type length="1..32">
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </color-name>
+            <bit config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/affinity/b/bitmask/b/color/&lt;xtc_cfg_AffinityBit_color_name&gt;</xr-path>
+              <xr-xml-map>xtc_cfg:Bit</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="0..31">
+                <type-name>uint32</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </bit>
+          </affinity-bit>
+        </affinity-bits>
+        <peers config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/</xr-path>
+          <xr-xml-map>xtc_cfg:PeerTable</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <peer config="true" key="peer-addr" node="list">
+            <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/</xr-path>
+            <xr-xml-map>xtc_cfg:Peer</xr-xml-map>
+            <xr-task>config-services</xr-task>
+            <policies config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/</xr-path>
+              <xr-xml-map>xtc_cfg:PolicyTable</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <policy config="true" key="policy-name" node="list">
+                <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/</xr-path>
+                <xr-xml-map>xtc_cfg:Policy</xr-xml-map>
+                <xr-task>config-services</xr-task>
+                <binding-sid config="true" is-key="false" node="container" presence="false">
+                  <xr-is-packed/>
+                  <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/b/binding_sid`</xr-path>
+                  <xr-xml-map>xtc_cfg:BindingSID</xr-xml-map>
+                  <xr-task>config-services</xr-task>
+                  <xr-pack-format>%d%d</xr-pack-format>
+                  <binding-sid-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/b/binding_sid`0</xr-path>
+                    <xr-xml-map>xtc_cfg:BindingSIDType</xr-xml-map>
+                    <xr-task>config-services</xr-task>
+                    <xr-sch-type>Enum</xr-sch-type>
+                    <type>
+                      <type-name>Pce-binding-sid</type-name>
+                    </type>
+                  </binding-sid-type>
+                  <mpls-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/b/binding_sid`1</xr-path>
+                    <xr-xml-map>xtc_cfg:MPLSLabel</xr-xml-map>
+                    <xr-task>config-services</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <when>../binding-sid-type = 'mpls-label-specified'</when>
+                    <type range="16..1048575">
+                      <type-name>uint32</type-name>
+                    </type>
+                  </mpls-label>
+                </binding-sid>
+                <color-endpoint config="true" is-key="false" node="container" presence="false">
+                  <xr-is-packed/>
+                  <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/b/color_endpoint`</xr-path>
+                  <xr-xml-map>xtc_cfg:ColorEndpoint</xr-xml-map>
+                  <xr-task>config-services</xr-task>
+                  <xr-pack-format>%d%d%s</xr-pack-format>
+                  <color config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%s</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/b/color_endpoint`0</xr-path>
+                    <xr-xml-map>xtc_cfg:Color</xr-xml-map>
+                    <xr-task>config-services</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <type range="1..4294967295">
+                      <type-name>uint32</type-name>
+                    </type>
+                  </color>
+                  <end-point-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%s</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/b/color_endpoint`1</xr-path>
+                    <xr-xml-map>xtc_cfg:EndPointType</xr-xml-map>
+                    <xr-task>config-services</xr-task>
+                    <xr-sch-type>Enum</xr-sch-type>
+                    <type>
+                      <type-name>Pce-end-point</type-name>
+                    </type>
+                  </end-point-type>
+                  <end-point-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%s</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/b/color_endpoint`2</xr-path>
+                    <xr-xml-map>xtc_cfg:EndPointAddress</xr-xml-map>
+                    <xr-task>config-services</xr-task>
+                    <xr-sch-type>IPAddressString</xr-sch-type>
+                    <type>
+                      <type-name>inet:ip-address-no-zone</type-name>
+                    </type>
+                  </end-point-address>
+                </color-endpoint>
+                <candidate-paths config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/h/path/</xr-path>
+                  <xr-xml-map>xtc_cfg:CandidatePaths</xr-xml-map>
+                  <xr-task>config-services</xr-task>
+                  <affinity-rules config="true" is-key="false" node="container" presence="false">
+                    <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/h/path/d/affinity/b/rule/</xr-path>
+                    <xr-xml-map>xtc_cfg:AffinityRuleTable</xr-xml-map>
+                    <xr-task>config-services</xr-task>
+                    <affinity-rule config="true" key="rule aff-value" node="list">
+                      <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/h/path/d/affinity/b/rule/&lt;xtc_cfg_AffinityRule_rule&gt;/&lt;xtc_cfg_AffinityRule_aff_value&gt;</xr-path>
+                      <xr-xml-map>xtc_cfg:AffinityRule</xr-xml-map>
+                      <xr-task>config-services</xr-task>
+                      <rule config="true" is-key="true" is-yang-key="true" node="leaf">
+                        <xr-data-handler>ignore</xr-data-handler>
+                        <xr-primitive-type>uint32</xr-primitive-type>
+                        <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/h/path/d/affinity/b/rule/&lt;xtc_cfg_AffinityRule_rule&gt;/&lt;xtc_cfg_AffinityRule_aff_value&gt;</xr-path>
+                        <xr-xml-map>xtc_cfg:Rule</xr-xml-map>
+                        <xr-task>config-services</xr-task>
+                        <xr-sch-type>Range</xr-sch-type>
+                        <xr-sch-arg-name>&lt;xtc_cfg_AffinityRule_rule&gt;</xr-sch-arg-name>
+                        <type range="0..2">
+                          <type-name>uint32</type-name>
+                        </type>
+                      </rule>
+                      <aff-value config="true" is-key="true" is-yang-key="true" node="leaf">
+                        <xr-data-handler>ignore</xr-data-handler>
+                        <xr-create-item-relative-path/>
+                        <xr-primitive-type>string</xr-primitive-type>
+                        <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/h/path/d/affinity/b/rule/&lt;xtc_cfg_AffinityRule_rule&gt;/&lt;xtc_cfg_AffinityRule_aff_value&gt;</xr-path>
+                        <xr-xml-map>xtc_cfg:AffValue</xr-xml-map>
+                        <xr-task>config-services</xr-task>
+                        <xr-sch-type>BoundedString</xr-sch-type>
+                        <xr-sch-arg-name>&lt;xtc_cfg_AffinityRule_aff_value&gt;</xr-sch-arg-name>
+                        <type length="1..32">
+                          <type-name>xr:Cisco-ios-xr-string</type-name>
+                        </type>
+                      </aff-value>
+                    </affinity-rule>
+                  </affinity-rules>
+                  <preferences config="true" is-key="false" node="container" presence="false">
+                    <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/h/path/b/index/</xr-path>
+                    <xr-xml-map>xtc_cfg:PreferenceTable</xr-xml-map>
+                    <xr-task>config-services</xr-task>
+                    <preference config="true" key="path-index" node="list">
+                      <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_cfg_Preference_Preference&gt;/</xr-path>
+                      <xr-xml-map>xtc_cfg:Preference</xr-xml-map>
+                      <xr-task>config-services</xr-task>
+                      <path-infos config="true" is-key="false" node="container" presence="false">
+                        <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_cfg_Preference_Preference&gt;/b/info/</xr-path>
+                        <xr-xml-map>xtc_cfg:PathInfoTable</xr-xml-map>
+                        <xr-task>config-services</xr-task>
+                        <path-info config="true" key="type hop-type segment-list-name" node="list">
+                          <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_cfg_Preference_Preference&gt;/b/info/&lt;xtc_cfg_PathInfo_PathType&gt;,&lt;xtc_cfg_PathInfo_HopType&gt;,&lt;xtc_cfg_PathInfo_PathName&gt;/</xr-path>
+                          <xr-xml-map>xtc_cfg:PathInfo</xr-xml-map>
+                          <xr-task>config-services</xr-task>
+                          <metric config="true" is-key="false" node="container" presence="true">
+                            <xr-data-handler>ignore</xr-data-handler>
+                            <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_cfg_Preference_Preference&gt;/b/info/&lt;xtc_cfg_PathInfo_PathType&gt;,&lt;xtc_cfg_PathInfo_HopType&gt;,&lt;xtc_cfg_PathInfo_PathName&gt;/b/metric/</xr-path>
+                            <xr-xml-map>xtc_cfg:Metric</xr-xml-map>
+                            <xr-task>config-services</xr-task>
+                            <metric-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                              <xr-primitive-type>uint32</xr-primitive-type>
+                              <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_cfg_Preference_Preference&gt;/b/info/&lt;xtc_cfg_PathInfo_PathType&gt;,&lt;xtc_cfg_PathInfo_HopType&gt;,&lt;xtc_cfg_PathInfo_PathName&gt;/b/metric/b/metric_type</xr-path>
+                              <xr-xml-map>xtc_cfg:MetricType</xr-xml-map>
+                              <xr-task>config-services</xr-task>
+                              <xr-sch-type>Enum</xr-sch-type>
+                              <type>
+                                <type-name>Pce-metric</type-name>
+                              </type>
+                              <mandatory>true</mandatory>
+                            </metric-type>
+                          </metric>
+                          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                            <xr-primitive-type>uint32</xr-primitive-type>
+                            <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_cfg_Preference_Preference&gt;/b/info/&lt;xtc_cfg_PathInfo_PathType&gt;,&lt;xtc_cfg_PathInfo_HopType&gt;,&lt;xtc_cfg_PathInfo_PathName&gt;/a/enable</xr-path>
+                            <xr-xml-map>xtc_cfg:Enable</xr-xml-map>
+                            <xr-task>config-services</xr-task>
+                            <xr-sch-type>Configured</xr-sch-type>
+                            <type>
+                              <type-name>empty</type-name>
+                            </type>
+                          </enable>
+                          <type config="true" is-key="true" is-yang-key="true" node="leaf">
+                            <xr-data-handler>ignore</xr-data-handler>
+                            <xr-primitive-type>uint32</xr-primitive-type>
+                            <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_cfg_Preference_Preference&gt;/b/info/&lt;xtc_cfg_PathInfo_PathType&gt;,&lt;xtc_cfg_PathInfo_HopType&gt;,&lt;xtc_cfg_PathInfo_PathName&gt;/</xr-path>
+                            <xr-xml-map>xtc_cfg:Type</xr-xml-map>
+                            <xr-task>config-services</xr-task>
+                            <xr-sch-type>Enum</xr-sch-type>
+                            <xr-sch-arg-name>&lt;xtc_cfg_PathInfo_PathType&gt;</xr-sch-arg-name>
+                            <type>
+                              <type-name>Pce-path</type-name>
+                            </type>
+                          </type>
+                          <hop-type config="true" is-key="true" is-yang-key="true" node="leaf">
+                            <xr-data-handler>ignore</xr-data-handler>
+                            <xr-primitive-type>uint32</xr-primitive-type>
+                            <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_cfg_Preference_Preference&gt;/b/info/&lt;xtc_cfg_PathInfo_PathType&gt;,&lt;xtc_cfg_PathInfo_HopType&gt;,&lt;xtc_cfg_PathInfo_PathName&gt;/</xr-path>
+                            <xr-xml-map>xtc_cfg:HopType</xr-xml-map>
+                            <xr-task>config-services</xr-task>
+                            <xr-sch-type>Enum</xr-sch-type>
+                            <xr-sch-arg-name>&lt;xtc_cfg_PathInfo_HopType&gt;</xr-sch-arg-name>
+                            <type>
+                              <type-name>Pce-path-hop</type-name>
+                            </type>
+                          </hop-type>
+                          <segment-list-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                            <xr-data-handler>ignore</xr-data-handler>
+                            <xr-primitive-type>string</xr-primitive-type>
+                            <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_cfg_Preference_Preference&gt;/b/info/&lt;xtc_cfg_PathInfo_PathType&gt;,&lt;xtc_cfg_PathInfo_HopType&gt;,&lt;xtc_cfg_PathInfo_PathName&gt;/</xr-path>
+                            <xr-xml-map>xtc_cfg:SegmentListName</xr-xml-map>
+                            <xr-task>config-services</xr-task>
+                            <xr-sch-type>BoundedString</xr-sch-type>
+                            <xr-sch-arg-name>&lt;xtc_cfg_PathInfo_PathName&gt;</xr-sch-arg-name>
+                            <type length="1..128">
+                              <type-name>xr:Cisco-ios-xr-string</type-name>
+                            </type>
+                          </segment-list-name>
+                        </path-info>
+                      </path-infos>
+                      <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-primitive-type>uint32</xr-primitive-type>
+                        <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_cfg_Preference_Preference&gt;/a/enable</xr-path>
+                        <xr-xml-map>xtc_cfg:Enable</xr-xml-map>
+                        <xr-task>config-services</xr-task>
+                        <xr-sch-type>Configured</xr-sch-type>
+                        <type>
+                          <type-name>empty</type-name>
+                        </type>
+                      </enable>
+                      <path-index config="true" is-key="true" is-yang-key="true" node="leaf">
+                        <xr-data-handler>ignore</xr-data-handler>
+                        <xr-primitive-type>uint32</xr-primitive-type>
+                        <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/h/path/b/index/&lt;xtc_cfg_Preference_Preference&gt;/</xr-path>
+                        <xr-xml-map>xtc_cfg:PathIndex</xr-xml-map>
+                        <xr-task>config-services</xr-task>
+                        <xr-sch-type>Range</xr-sch-type>
+                        <xr-sch-arg-name>&lt;xtc_cfg_Preference_Preference&gt;</xr-sch-arg-name>
+                        <type range="1..65535">
+                          <type-name>uint32</type-name>
+                        </type>
+                      </path-index>
+                    </preference>
+                  </preferences>
+                  <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-primitive-type>uint32</xr-primitive-type>
+                    <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/h/path/a/enable</xr-path>
+                    <xr-xml-map>xtc_cfg:Enable</xr-xml-map>
+                    <xr-task>config-services</xr-task>
+                    <xr-sch-type>Configured</xr-sch-type>
+                    <type>
+                      <type-name>empty</type-name>
+                    </type>
+                  </enable>
+                </candidate-paths>
+                <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/a/enable</xr-path>
+                  <xr-xml-map>xtc_cfg:Enable</xr-xml-map>
+                  <xr-task>config-services</xr-task>
+                  <xr-sch-type>Configured</xr-sch-type>
+                  <type>
+                    <type-name>empty</type-name>
+                  </type>
+                </enable>
+                <shutdown config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/g/shutdown</xr-path>
+                  <xr-xml-map>xtc_cfg:Shutdown</xr-xml-map>
+                  <xr-task>config-services</xr-task>
+                  <xr-sch-type>Configured</xr-sch-type>
+                  <type>
+                    <type-name>empty</type-name>
+                  </type>
+                </shutdown>
+                <policy-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/c/policy/&lt;xtc_cfg_Policy_PolicyName&gt;/</xr-path>
+                  <xr-xml-map>xtc_cfg:PolicyName</xr-xml-map>
+                  <xr-task>config-services</xr-task>
+                  <xr-sch-type>BoundedString</xr-sch-type>
+                  <xr-sch-arg-name>&lt;xtc_cfg_Policy_PolicyName&gt;</xr-sch-arg-name>
+                  <type length="1..128">
+                    <type-name>xr:Cisco-ios-xr-string</type-name>
+                  </type>
+                </policy-name>
+              </policy>
+            </policies>
+            <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/a/enable</xr-path>
+              <xr-xml-map>xtc_cfg:Enable</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </enable>
+            <peer-addr config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/c/peer/&lt;xtc_cfg_Peer_PeerAddr&gt;/</xr-path>
+              <xr-xml-map>xtc_cfg:PeerAddr</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <xr-sch-type>IPAddressString</xr-sch-type>
+              <xr-sch-arg-name>&lt;xtc_cfg_Peer_PeerAddr&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ip-address-no-zone</type-name>
+              </type>
+            </peer-addr>
+          </peer>
+        </peers>
+        <segments config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/b/exp_path/</xr-path>
+          <xr-xml-map>xtc_cfg:SegmentListTable</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <segment config="true" key="path-name" node="list">
+            <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/b/exp_path/&lt;xtc_cfg_SegmentList_PathName&gt;/</xr-path>
+            <xr-xml-map>xtc_cfg:SegmentList</xr-xml-map>
+            <xr-task>config-services</xr-task>
+            <segments config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/b/exp_path/&lt;xtc_cfg_SegmentList_PathName&gt;/b/index/</xr-path>
+              <xr-xml-map>xtc_cfg:SegmentTable</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <segment config="true" key="segment-index" node="list">
+                <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/b/exp_path/&lt;xtc_cfg_SegmentList_PathName&gt;/b/index/&lt;xtc_cfg_Segment_Index&gt;</xr-path>
+                <xr-xml-map>xtc_cfg:Segment</xr-xml-map>
+                <xr-task>config-services</xr-task>
+                <xr-pack-format>%d%s%d</xr-pack-format>
+                <segment-index config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s%d</xr-pack-format>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/b/exp_path/&lt;xtc_cfg_SegmentList_PathName&gt;/b/index/&lt;xtc_cfg_Segment_Index&gt;</xr-path>
+                  <xr-xml-map>xtc_cfg:SegmentIndex</xr-xml-map>
+                  <xr-task>config-services</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <xr-sch-arg-name>&lt;xtc_cfg_Segment_Index&gt;</xr-sch-arg-name>
+                  <type range="1..65535">
+                    <type-name>uint32</type-name>
+                  </type>
+                </segment-index>
+                <segment-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/b/exp_path/&lt;xtc_cfg_SegmentList_PathName&gt;/b/index/&lt;xtc_cfg_Segment_Index&gt;`0</xr-path>
+                  <xr-xml-map>xtc_cfg:SegmentType</xr-xml-map>
+                  <xr-task>config-services</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <type>
+                    <type-name>Pce-segment</type-name>
+                  </type>
+                </segment-type>
+                <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/b/exp_path/&lt;xtc_cfg_SegmentList_PathName&gt;/b/index/&lt;xtc_cfg_Segment_Index&gt;`1</xr-path>
+                  <xr-xml-map>xtc_cfg:Address</xr-xml-map>
+                  <xr-task>config-services</xr-task>
+                  <xr-sch-type>IPV4AddressString</xr-sch-type>
+                  <when>../segment-type = 'ipv4-address'</when>
+                  <type>
+                    <type-name>inet:ipv4-address-no-zone</type-name>
+                  </type>
+                </address>
+                <mpls-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/b/exp_path/&lt;xtc_cfg_SegmentList_PathName&gt;/b/index/&lt;xtc_cfg_Segment_Index&gt;`2</xr-path>
+                  <xr-xml-map>xtc_cfg:MPLSLabel</xr-xml-map>
+                  <xr-task>config-services</xr-task>
+                  <xr-sch-type>ZeroRange</xr-sch-type>
+                  <when>../segment-type = 'mpls-label'</when>
+                  <type range="0..1048575">
+                    <type-name>uint32</type-name>
+                  </type>
+                </mpls-label>
+              </segment>
+            </segments>
+            <path-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/b/exp_path/&lt;xtc_cfg_SegmentList_PathName&gt;/</xr-path>
+              <xr-xml-map>xtc_cfg:PathName</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <xr-sch-arg-name>&lt;xtc_cfg_SegmentList_PathName&gt;</xr-sch-arg-name>
+              <type length="1..128">
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </path-name>
+          </segment>
+        </segments>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/pce/s/segment-routing/c/tr-eng/a/enable</xr-path>
+          <xr-xml-map>xtc_cfg:Enable</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </enable>
+      </traffic-engineering>
+      <te-latency config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/pce/s/segment-routing/te-latency</xr-path>
+        <xr-xml-map>xtc_cfg:TELatency</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </te-latency>
+      <strict-sid-only config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/pce/s/segment-routing/strict-sid</xr-path>
+        <xr-xml-map>xtc_cfg:StrictSIDOnly</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </strict-sid-only>
+    </segment-routing>
+    <timers config="true" is-key="false" node="container" presence="true">
+      <xr-data-handler>ignore</xr-data-handler>
+      <xr-path>/cfg/gl/pce/i/timers/</xr-path>
+      <xr-xml-map>xtc_cfg:Timers</xr-xml-map>
+      <xr-task>config-services</xr-task>
+      <reoptimization-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/pce/i/timers/b/reoptimization</xr-path>
+        <xr-xml-map>xtc_cfg:ReoptimizationTimer</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="600..86400">
+          <type-name>uint32</type-name>
+        </type>
+        <default>1800</default>
+      </reoptimization-timer>
+      <keepalive config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/pce/i/timers/c/keepalive</xr-path>
+        <xr-xml-map>xtc_cfg:Keepalive</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..255">
+          <type-name>uint32</type-name>
+        </type>
+        <default>30</default>
+      </keepalive>
+      <minimum-peer-keepalive config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/pce/i/timers/d/min-peer-ka</xr-path>
+        <xr-xml-map>xtc_cfg:MinimumPeerKeepalive</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..255">
+          <type-name>uint32</type-name>
+        </type>
+        <default>20</default>
+      </minimum-peer-keepalive>
+    </timers>
+    <netconf config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/pce/f/netconf/</xr-path>
+      <xr-xml-map>xtc_cfg:NETCONF</xr-xml-map>
+      <xr-task>config-services</xr-task>
+      <netconf-ssh config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/pce/f/netconf/b/ssh/</xr-path>
+        <xr-xml-map>xtc_cfg:NETCONFSSH</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <netconf-ssh-password config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/pce/f/netconf/b/ssh/c/password</xr-path>
+          <xr-xml-map>xtc_cfg:NETCONFSSHPassword</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>ProprietaryPassword</xr-sch-type>
+          <type>
+            <type-name>xr:Proprietary-password</type-name>
+          </type>
+        </netconf-ssh-password>
+        <netconf-ssh-user config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/pce/f/netconf/b/ssh/b/user</xr-path>
+          <xr-xml-map>xtc_cfg:NETCONFSSHUser</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </netconf-ssh-user>
+      </netconf-ssh>
+      <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/pce/f/netconf/a/enable</xr-path>
+        <xr-xml-map>xtc_cfg:Enable</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </enable>
+    </netconf>
+    <disjoint-path config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/pce/e/disj_path/</xr-path>
+      <xr-xml-map>xtc_cfg:DisjointPath</xr-xml-map>
+      <xr-task>config-services</xr-task>
+      <groups config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/pce/e/disj_path/group/</xr-path>
+        <xr-xml-map>xtc_cfg:GroupTable</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <group config="true" key="group-id dp-type sub-id" node="list">
+          <xr-path>/cfg/gl/pce/e/disj_path/group/&lt;xtc_cfg_Group_GroupID&gt;/&lt;xtc_cfg_Group_DPType&gt;/&lt;xtc_cfg_Group_SubID&gt;/</xr-path>
+          <xr-xml-map>xtc_cfg:Group</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <group-lsp-records config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/pce/e/disj_path/group/&lt;xtc_cfg_Group_GroupID&gt;/&lt;xtc_cfg_Group_DPType&gt;/&lt;xtc_cfg_Group_SubID&gt;/b/lsp_entries/</xr-path>
+            <xr-xml-map>xtc_cfg:GroupLspRecordTable</xr-xml-map>
+            <xr-task>config-services</xr-task>
+            <group-lsp-record config="true" key="lsp-id" node="list">
+              <xr-path>/cfg/gl/pce/e/disj_path/group/&lt;xtc_cfg_Group_GroupID&gt;/&lt;xtc_cfg_Group_DPType&gt;/&lt;xtc_cfg_Group_SubID&gt;/b/lsp_entries/&lt;xtc_cfg_GroupLspRecord_LspId&gt;</xr-path>
+              <xr-xml-map>xtc_cfg:GroupLspRecord</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <xr-pack-format>%N%s%d</xr-pack-format>
+              <lsp-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%N%s%d</xr-pack-format>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/pce/e/disj_path/group/&lt;xtc_cfg_Group_GroupID&gt;/&lt;xtc_cfg_Group_DPType&gt;/&lt;xtc_cfg_Group_SubID&gt;/b/lsp_entries/&lt;xtc_cfg_GroupLspRecord_LspId&gt;</xr-path>
+                <xr-xml-map>xtc_cfg:LspId</xr-xml-map>
+                <xr-task>config-services</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-sch-arg-name>&lt;xtc_cfg_GroupLspRecord_LspId&gt;</xr-sch-arg-name>
+                <type range="1..2">
+                  <type-name>uint32</type-name>
+                </type>
+              </lsp-id>
+              <ip-addr config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%N%s%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/pce/e/disj_path/group/&lt;xtc_cfg_Group_GroupID&gt;/&lt;xtc_cfg_Group_DPType&gt;/&lt;xtc_cfg_Group_SubID&gt;/b/lsp_entries/&lt;xtc_cfg_GroupLspRecord_LspId&gt;`0</xr-path>
+                <xr-xml-map>xtc_cfg:IpAddr</xr-xml-map>
+                <xr-task>config-services</xr-task>
+                <xr-sch-type>IPV4Address</xr-sch-type>
+                <type>
+                  <type-name>inet:ipv4-address-no-zone</type-name>
+                </type>
+              </ip-addr>
+              <lsp-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%N%s%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/pce/e/disj_path/group/&lt;xtc_cfg_Group_GroupID&gt;/&lt;xtc_cfg_Group_DPType&gt;/&lt;xtc_cfg_Group_SubID&gt;/b/lsp_entries/&lt;xtc_cfg_GroupLspRecord_LspId&gt;`1</xr-path>
+                <xr-xml-map>xtc_cfg:LspName</xr-xml-map>
+                <xr-task>config-services</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </lsp-name>
+              <disj-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%N%s%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/pce/e/disj_path/group/&lt;xtc_cfg_Group_GroupID&gt;/&lt;xtc_cfg_Group_DPType&gt;/&lt;xtc_cfg_Group_SubID&gt;/b/lsp_entries/&lt;xtc_cfg_GroupLspRecord_LspId&gt;`2</xr-path>
+                <xr-xml-map>xtc_cfg:DisjPath</xr-xml-map>
+                <xr-task>config-services</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="0..1">
+                  <type-name>uint32</type-name>
+                </type>
+              </disj-path>
+            </group-lsp-record>
+          </group-lsp-records>
+          <strict config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/pce/e/disj_path/group/&lt;xtc_cfg_Group_GroupID&gt;/&lt;xtc_cfg_Group_DPType&gt;/&lt;xtc_cfg_Group_SubID&gt;/a/strict</xr-path>
+            <xr-xml-map>xtc_cfg:Strict</xr-xml-map>
+            <xr-task>config-services</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </strict>
+          <group-id config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/pce/e/disj_path/group/&lt;xtc_cfg_Group_GroupID&gt;/&lt;xtc_cfg_Group_DPType&gt;/&lt;xtc_cfg_Group_SubID&gt;/</xr-path>
+            <xr-xml-map>xtc_cfg:GroupID</xr-xml-map>
+            <xr-task>config-services</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <xr-sch-arg-name>&lt;xtc_cfg_Group_GroupID&gt;</xr-sch-arg-name>
+            <type range="1..65535">
+              <type-name>uint32</type-name>
+            </type>
+          </group-id>
+          <dp-type config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/pce/e/disj_path/group/&lt;xtc_cfg_Group_GroupID&gt;/&lt;xtc_cfg_Group_DPType&gt;/&lt;xtc_cfg_Group_SubID&gt;/</xr-path>
+            <xr-xml-map>xtc_cfg:DPType</xr-xml-map>
+            <xr-task>config-services</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <xr-sch-arg-name>&lt;xtc_cfg_Group_DPType&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>Pce-disjoint-path</type-name>
+            </type>
+          </dp-type>
+          <sub-id config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/pce/e/disj_path/group/&lt;xtc_cfg_Group_GroupID&gt;/&lt;xtc_cfg_Group_DPType&gt;/&lt;xtc_cfg_Group_SubID&gt;/</xr-path>
+            <xr-xml-map>xtc_cfg:SubID</xr-xml-map>
+            <xr-task>config-services</xr-task>
+            <xr-sch-type>ZeroRange</xr-sch-type>
+            <xr-sch-arg-name>&lt;xtc_cfg_Group_SubID&gt;</xr-sch-arg-name>
+            <type range="0..65535">
+              <type-name>uint32</type-name>
+            </type>
+          </sub-id>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/pce/e/disj_path/group/&lt;xtc_cfg_Group_GroupID&gt;/&lt;xtc_cfg_Group_DPType&gt;/&lt;xtc_cfg_Group_SubID&gt;/a/enable</xr-path>
+            <xr-xml-map>xtc_cfg:Enable</xr-xml-map>
+            <xr-task>config-services</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </enable>
+        </group>
+      </groups>
+      <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/pce/e/disj_path/a/enable</xr-path>
+        <xr-xml-map>xtc_cfg:Enable</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </enable>
+    </disjoint-path>
+    <explicit-paths config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/pce/e/exp_path/</xr-path>
+      <xr-xml-map>xtc_cfg:ExplicitPathTable</xr-xml-map>
+      <xr-task>config-services</xr-task>
+      <explicit-path config="true" key="name" node="list">
+        <xr-path>/cfg/gl/pce/e/exp_path/&lt;xtc_cfg_ExplicitPath_Name&gt;/</xr-path>
+        <xr-xml-map>xtc_cfg:ExplicitPath</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <path-hops config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/pce/e/exp_path/&lt;xtc_cfg_ExplicitPath_Name&gt;/b/index/</xr-path>
+          <xr-xml-map>xtc_cfg:PathHopTable</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <path-hop config="true" key="index" node="list">
+            <xr-path>/cfg/gl/pce/e/exp_path/&lt;xtc_cfg_ExplicitPath_Name&gt;/b/index/&lt;xtc_cfg_PathHop_hop_index&gt;</xr-path>
+            <xr-xml-map>xtc_cfg:PathHop</xr-xml-map>
+            <xr-task>config-services</xr-task>
+            <xr-pack-format>%d%N%N%d</xr-pack-format>
+            <index config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%N%N%d</xr-pack-format>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/pce/e/exp_path/&lt;xtc_cfg_ExplicitPath_Name&gt;/b/index/&lt;xtc_cfg_PathHop_hop_index&gt;</xr-path>
+              <xr-xml-map>xtc_cfg:Index</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-sch-arg-name>&lt;xtc_cfg_PathHop_hop_index&gt;</xr-sch-arg-name>
+              <type range="1..65535">
+                <type-name>uint32</type-name>
+              </type>
+            </index>
+            <hop-type config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%N%N%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/pce/e/exp_path/&lt;xtc_cfg_ExplicitPath_Name&gt;/b/index/&lt;xtc_cfg_PathHop_hop_index&gt;`0</xr-path>
+              <xr-xml-map>xtc_cfg:HopType</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Pce-explicit-path-hop</type-name>
+              </type>
+            </hop-type>
+            <address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%N%N%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/pce/e/exp_path/&lt;xtc_cfg_ExplicitPath_Name&gt;/b/index/&lt;xtc_cfg_PathHop_hop_index&gt;`1</xr-path>
+              <xr-xml-map>xtc_cfg:Address</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <xr-sch-type>IPV4Address</xr-sch-type>
+              <when>../hop-type = 'address' or ../hop-type = 'sid-node' or ../hop-type = 'sid-adjancency'</when>
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+              <default>0.0.0.0</default>
+            </address>
+            <remote-address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%N%N%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/pce/e/exp_path/&lt;xtc_cfg_ExplicitPath_Name&gt;/b/index/&lt;xtc_cfg_PathHop_hop_index&gt;`2</xr-path>
+              <xr-xml-map>xtc_cfg:RemoteAddress</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <xr-sch-type>IPV4Address</xr-sch-type>
+              <when>../hop-type = 'sid-adjancency'</when>
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+              <default>0.0.0.0</default>
+            </remote-address>
+            <mpls-label config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%N%N%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/pce/e/exp_path/&lt;xtc_cfg_ExplicitPath_Name&gt;/b/index/&lt;xtc_cfg_PathHop_hop_index&gt;`3</xr-path>
+              <xr-xml-map>xtc_cfg:MPLSLabel</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <xr-sch-type>ZeroRange</xr-sch-type>
+              <when>../hop-type = 'sid-node' or ../hop-type = 'sid-adjancency' or ../hop-type = 'binding-sid'</when>
+              <type range="0..1048575">
+                <type-name>uint32</type-name>
+              </type>
+              <default>0</default>
+            </mpls-label>
+          </path-hop>
+        </path-hops>
+        <name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/pce/e/exp_path/&lt;xtc_cfg_ExplicitPath_Name&gt;/</xr-path>
+          <xr-xml-map>xtc_cfg:Name</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;xtc_cfg_ExplicitPath_Name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </name>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/pce/e/exp_path/&lt;xtc_cfg_ExplicitPath_Name&gt;/a/enable</xr-path>
+          <xr-xml-map>xtc_cfg:Enable</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </enable>
+      </explicit-path>
+    </explicit-paths>
+    <server-address config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>string</xr-primitive-type>
+      <xr-path>/cfg/gl/pce/b/address</xr-path>
+      <xr-xml-map>xtc_cfg:ServerAddress</xr-xml-map>
+      <xr-task>config-services</xr-task>
+      <xr-sch-type>IPV4AddressString</xr-sch-type>
+      <type>
+        <type-name>inet:ipv4-address-no-zone</type-name>
+      </type>
+    </server-address>
+    <ipv6-server-address config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>string</xr-primitive-type>
+      <xr-path>/cfg/gl/pce/b/address_ipv6</xr-path>
+      <xr-xml-map>xtc_cfg:IPV6ServerAddress</xr-xml-map>
+      <xr-task>config-services</xr-task>
+      <xr-sch-type>IPV6AddressString</xr-sch-type>
+      <type>
+        <type-name>inet:ipv6-address-no-zone</type-name>
+      </type>
+    </ipv6-server-address>
+    <password config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>string</xr-primitive-type>
+      <xr-path>/cfg/gl/pce/l/password</xr-path>
+      <xr-xml-map>xtc_cfg:Password</xr-xml-map>
+      <xr-task>config-services</xr-task>
+      <xr-sch-type>ProprietaryPassword</xr-sch-type>
+      <type>
+        <type-name>xr:Proprietary-password</type-name>
+      </type>
+    </password>
+    <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/pce/a/enable</xr-path>
+      <xr-xml-map>xtc_cfg:Enable</xr-xml-map>
+      <xr-task>config-services</xr-task>
+      <xr-sch-type>Configured</xr-sch-type>
+      <type>
+        <type-name>empty</type-name>
+      </type>
+    </enable>
+  </pce>
+</Cisco-IOS-XR-infra-xtc-cfg>

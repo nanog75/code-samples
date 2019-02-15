@@ -1,0 +1,1484 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-subscriber-srg-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-subscriber-srg-oper" revision="2015-11-09">
+  <files>
+    <file revision="2015-11-09" submodule="false">Cisco-IOS-XR-subscriber-srg-oper.yang</file>
+    <file revision="2015-11-09" submodule="true">Cisco-IOS-XR-subscriber-srg-oper-sub1.yang</file>
+  </files>
+  <prefix>subscriber-srg-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="inet">ietf-inet-types</import>
+  <typedef name="Srg-show-so-reason">
+    <type node="enumeration">
+      <enum value="0">internal</enum>
+      <enum value="1">admin</enum>
+      <enum value="2">peer-up</enum>
+      <enum value="3">peer-down</enum>
+      <enum value="4">object-tracking-status-change</enum>
+      <enum value="5">srg-show-so-reason-max</enum>
+    </type>
+  </typedef>
+  <typedef name="Srg-peer-status">
+    <type node="enumeration">
+      <enum value="0">not-configured</enum>
+      <enum value="1">initialize</enum>
+      <enum value="2">retry</enum>
+      <enum value="3">connect</enum>
+      <enum value="4">listen</enum>
+      <enum value="5">registration</enum>
+      <enum value="6">cleanup</enum>
+      <enum value="7">connected</enum>
+      <enum value="8">established</enum>
+    </type>
+  </typedef>
+  <typedef name="Srg-show-session-error">
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">hard</enum>
+      <enum value="2">soft</enum>
+    </type>
+  </typedef>
+  <typedef name="Srg-show-session-operation">
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">update</enum>
+      <enum value="2">delete</enum>
+      <enum value="3">in-sync</enum>
+    </type>
+  </typedef>
+  <typedef name="Srg-show-comp">
+    <type node="enumeration">
+      <enum value="0">srga</enum>
+      <enum value="1">dhcpv4</enum>
+      <enum value="2">dhcpv6</enum>
+      <enum value="3">pppoe</enum>
+      <enum value="4">ppp</enum>
+      <enum value="5">l2tp</enum>
+      <enum value="6">iedge</enum>
+    </type>
+  </typedef>
+  <typedef name="Srg-show-slave-mode">
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">warm</enum>
+      <enum value="2">hot</enum>
+    </type>
+  </typedef>
+  <typedef name="Srg-show-role">
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">master</enum>
+      <enum value="2">slave</enum>
+    </type>
+  </typedef>
+  <typedef name="Srg-show-im-role">
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">master</enum>
+      <enum value="2">slave</enum>
+    </type>
+  </typedef>
+  <subscriber-redundancy-manager config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/srg/gl/srgm/</xr-path>
+    <xr-xml-map>srg_show:SubscriberRedundancyManager</xr-xml-map>
+    <groups config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/srg/gl/srgm/group/</xr-path>
+      <xr-xml-map>srg_show:GroupTable</xr-xml-map>
+      <group config="false" key="group" node="list">
+        <xr-path>/oper/srg/gl/srgm/group/&lt;srg_show_Group_group&gt;</xr-path>
+        <xr-xml-map>srg_show:Group</xr-xml-map>
+        <xr-bag-grp-name>srg_show_mgr_group_entry</xr-bag-grp-name>
+        <xr-bag>srg_show.bag</xr-bag>
+        <group config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/srg/gl/srgm/group/&lt;srg_show_Group_group&gt;</xr-path>
+          <xr-xml-map>srg_show:Group</xr-xml-map>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;srg_show_Group_group&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </group>
+        <group-id config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srg/gl/srgm/group/&lt;srg_show_Group_group&gt;~srg_show_mgr_group_entry.GroupID</xr-path>
+          <xr-xml-map>srg_show:GroupID</xr-xml-map>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </group-id>
+        <description config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srg/gl/srgm/group/&lt;srg_show_Group_group&gt;~srg_show_mgr_group_entry.Description</xr-path>
+          <xr-xml-map>srg_show:Description</xr-xml-map>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </description>
+        <disabled config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srg/gl/srgm/group/&lt;srg_show_Group_group&gt;~srg_show_mgr_group_entry.Disabled</xr-path>
+          <xr-xml-map>srg_show:Disabled</xr-xml-map>
+          <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </disabled>
+        <role config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srg/gl/srgm/group/&lt;srg_show_Group_group&gt;~srg_show_mgr_group_entry.Role</xr-path>
+          <xr-xml-map>srg_show:Role</xr-xml-map>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>Srg-show-im-role</type-name>
+          </type>
+        </role>
+        <peer-ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srg/gl/srgm/group/&lt;srg_show_Group_group&gt;~srg_show_mgr_group_entry.PeerIPv4Address</xr-path>
+          <xr-xml-map>srg_show:PeerIPv4Address</xr-xml-map>
+          <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>inet:ipv4-address</type-name>
+          </type>
+        </peer-ipv4-address>
+        <peer-ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srg/gl/srgm/group/&lt;srg_show_Group_group&gt;~srg_show_mgr_group_entry.PeerIPv6Address</xr-path>
+          <xr-xml-map>srg_show:PeerIPv6Address</xr-xml-map>
+          <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>inet:ipv6-address</type-name>
+          </type>
+        </peer-ipv6-address>
+        <interface-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srg/gl/srgm/group/&lt;srg_show_Group_group&gt;~srg_show_mgr_group_entry.InterfaceCount</xr-path>
+          <xr-xml-map>srg_show:InterfaceCount</xr-xml-map>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </interface-count>
+        <preferred-role config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srg/gl/srgm/group/&lt;srg_show_Group_group&gt;~srg_show_mgr_group_entry.PreferredRole</xr-path>
+          <xr-xml-map>srg_show:PreferredRole</xr-xml-map>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>Srg-show-role</type-name>
+          </type>
+        </preferred-role>
+        <slave-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srg/gl/srgm/group/&lt;srg_show_Group_group&gt;~srg_show_mgr_group_entry.SlaveMode</xr-path>
+          <xr-xml-map>srg_show:SlaveMode</xr-xml-map>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>Srg-show-slave-mode</type-name>
+          </type>
+        </slave-mode>
+        <object-tracking-status config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srg/gl/srgm/group/&lt;srg_show_Group_group&gt;~srg_show_mgr_group_entry.ObjectTrackingStatus</xr-path>
+          <xr-xml-map>srg_show:ObjectTrackingStatus</xr-xml-map>
+          <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </object-tracking-status>
+        <virtual-mac-address config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srg/gl/srgm/group/&lt;srg_show_Group_group&gt;~srg_show_mgr_group_entry.VirtualMACAddress</xr-path>
+          <xr-xml-map>srg_show:VirtualMACAddress</xr-xml-map>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </virtual-mac-address>
+        <virtual-mac-address-disable config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srg/gl/srgm/group/&lt;srg_show_Group_group&gt;~srg_show_mgr_group_entry.VirtualMACAddressDisable</xr-path>
+          <xr-xml-map>srg_show:VirtualMACAddressDisable</xr-xml-map>
+          <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </virtual-mac-address-disable>
+        <node-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srg/gl/srgm/group/&lt;srg_show_Group_group&gt;~srg_show_mgr_group_entry.NodeName</xr-path>
+          <xr-xml-map>srg_show:NodeName</xr-xml-map>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </node-name>
+      </group>
+    </groups>
+    <summary config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/srg/gl/srgm/summary</xr-path>
+      <xr-xml-map>srg_show:Summary</xr-xml-map>
+      <xr-bag-grp-name>srg_show_mgr_summary</xr-bag-grp-name>
+      <xr-bag>srg_show.bag</xr-bag>
+      <disabled config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/srg/gl/srgm/summary~srg_show_mgr_summary.Disabled</xr-path>
+        <xr-xml-map>srg_show:Disabled</xr-xml-map>
+        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+        <xr-bag-version>2 0</xr-bag-version>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </disabled>
+      <active-state config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/srg/gl/srgm/summary~srg_show_mgr_summary.ActiveState</xr-path>
+        <xr-xml-map>srg_show:ActiveState</xr-xml-map>
+        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+        <xr-bag-version>2 0</xr-bag-version>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </active-state>
+      <preferred-role config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/srg/gl/srgm/summary~srg_show_mgr_summary.PreferredRole</xr-path>
+        <xr-xml-map>srg_show:PreferredRole</xr-xml-map>
+        <xr-bag-primitive-type>int</xr-bag-primitive-type>
+        <xr-bag-version>2 0</xr-bag-version>
+        <type>
+          <type-name>Srg-show-role</type-name>
+        </type>
+      </preferred-role>
+      <slave-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/srg/gl/srgm/summary~srg_show_mgr_summary.SlaveMode</xr-path>
+        <xr-xml-map>srg_show:SlaveMode</xr-xml-map>
+        <xr-bag-primitive-type>int</xr-bag-primitive-type>
+        <xr-bag-version>2 0</xr-bag-version>
+        <type>
+          <type-name>Srg-show-slave-mode</type-name>
+        </type>
+      </slave-mode>
+      <hold-timer config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/srg/gl/srgm/summary~srg_show_mgr_summary.HoldTimer</xr-path>
+        <xr-xml-map>srg_show:HoldTimer</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>2 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </hold-timer>
+      <sync-time config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/srg/gl/srgm/summary~srg_show_mgr_summary.SyncTime</xr-path>
+        <xr-xml-map>srg_show:SyncTime</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>2 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </sync-time>
+      <source-interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/srg/gl/srgm/summary~srg_show_mgr_summary.SourceInterfaceName</xr-path>
+        <xr-xml-map>srg_show:SourceInterfaceName</xr-xml-map>
+        <xr-bag-primitive-type>string</xr-bag-primitive-type>
+        <xr-bag-version>2 0</xr-bag-version>
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </source-interface-name>
+      <vrf-name config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/srg/gl/srgm/summary~srg_show_mgr_summary.VRFName</xr-path>
+        <xr-xml-map>srg_show:VRFName</xr-xml-map>
+        <xr-bag-primitive-type>string</xr-bag-primitive-type>
+        <xr-bag-version>2 0</xr-bag-version>
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </vrf-name>
+      <source-interface-ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/srg/gl/srgm/summary~srg_show_mgr_summary.SourceInterfaceIPv4Address</xr-path>
+        <xr-xml-map>srg_show:SourceInterfaceIPv4Address</xr-xml-map>
+        <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+        <xr-bag-version>2 0</xr-bag-version>
+        <type>
+          <type-name>inet:ipv4-address</type-name>
+        </type>
+      </source-interface-ipv4-address>
+      <source-interface-ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/srg/gl/srgm/summary~srg_show_mgr_summary.SourceInterfaceIPv6Address</xr-path>
+        <xr-xml-map>srg_show:SourceInterfaceIPv6Address</xr-xml-map>
+        <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+        <xr-bag-version>2 0</xr-bag-version>
+        <type>
+          <type-name>inet:ipv6-address</type-name>
+        </type>
+      </source-interface-ipv6-address>
+      <group-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/srg/gl/srgm/summary~srg_show_mgr_summary.GroupCount</xr-path>
+        <xr-xml-map>srg_show:GroupCount</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>2 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </group-count>
+      <disabled-group-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/srg/gl/srgm/summary~srg_show_mgr_summary.DisabledGroupCount</xr-path>
+        <xr-xml-map>srg_show:DisabledGroupCount</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>2 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </disabled-group-count>
+      <master-group-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/srg/gl/srgm/summary~srg_show_mgr_summary.MasterGroupCount</xr-path>
+        <xr-xml-map>srg_show:MasterGroupCount</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>2 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </master-group-count>
+      <slave-group-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/srg/gl/srgm/summary~srg_show_mgr_summary.SlaveGroupCount</xr-path>
+        <xr-xml-map>srg_show:SlaveGroupCount</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>2 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </slave-group-count>
+      <interface-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/srg/gl/srgm/summary~srg_show_mgr_summary.InterfaceCount</xr-path>
+        <xr-xml-map>srg_show:InterfaceCount</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>2 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </interface-count>
+      <master-interface-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/srg/gl/srgm/summary~srg_show_mgr_summary.MasterInterfaceCount</xr-path>
+        <xr-xml-map>srg_show:MasterInterfaceCount</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>2 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </master-interface-count>
+      <slave-interface-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/srg/gl/srgm/summary~srg_show_mgr_summary.SlaveInterfaceCount</xr-path>
+        <xr-xml-map>srg_show:SlaveInterfaceCount</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>2 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </slave-interface-count>
+    </summary>
+    <interfaces config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/srg/gl/srgm/interface/</xr-path>
+      <xr-xml-map>srg_show:Interfaces</xr-xml-map>
+      <interface config="false" key="interface" node="list">
+        <xr-path>/oper/srg/gl/srgm/interface/&lt;srg_show_Interface_interface&gt;</xr-path>
+        <xr-xml-map>srg_show:Interface</xr-xml-map>
+        <xr-bag-grp-name>srg_show_mgr_intf_entry</xr-bag-grp-name>
+        <xr-bag>srg_show.bag</xr-bag>
+        <interface config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/srg/gl/srgm/interface/&lt;srg_show_Interface_interface&gt;</xr-path>
+          <xr-xml-map>srg_show:Interface</xr-xml-map>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;srg_show_Interface_interface&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </interface>
+        <interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srg/gl/srgm/interface/&lt;srg_show_Interface_interface&gt;~srg_show_mgr_intf_entry.InterfaceName</xr-path>
+          <xr-xml-map>srg_show:InterfaceName</xr-xml-map>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </interface-name>
+        <interface-mapping-id config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srg/gl/srgm/interface/&lt;srg_show_Interface_interface&gt;~srg_show_mgr_intf_entry.InterfaceMappingID</xr-path>
+          <xr-xml-map>srg_show:InterfaceMappingID</xr-xml-map>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </interface-mapping-id>
+        <forward-referenced config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srg/gl/srgm/interface/&lt;srg_show_Interface_interface&gt;~srg_show_mgr_intf_entry.ForwardReferenced</xr-path>
+          <xr-xml-map>srg_show:ForwardReferenced</xr-xml-map>
+          <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </forward-referenced>
+        <group-id config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srg/gl/srgm/interface/&lt;srg_show_Interface_interface&gt;~srg_show_mgr_intf_entry.GroupID</xr-path>
+          <xr-xml-map>srg_show:GroupID</xr-xml-map>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </group-id>
+        <role config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/srg/gl/srgm/interface/&lt;srg_show_Interface_interface&gt;~srg_show_mgr_intf_entry.Role</xr-path>
+          <xr-xml-map>srg_show:Role</xr-xml-map>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>Srg-show-im-role</type-name>
+          </type>
+        </role>
+      </interface>
+    </interfaces>
+  </subscriber-redundancy-manager>
+  <subscriber-redundancy-agent config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/iedge/srga/</xr-path>
+    <xr-xml-map>srg_show:SubscriberRedundancyAgent</xr-xml-map>
+    <nodes config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/iedge/srga/node/</xr-path>
+      <xr-xml-map>srg_show:NodeTable</xr-xml-map>
+      <node config="false" key="node-name" node="list">
+        <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/</xr-path>
+        <xr-xml-map>srg_show:Node</xr-xml-map>
+        <group-id-xr config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsession-xml/</xr-path>
+          <xr-xml-map>srg_show:GroupSession</xr-xml-map>
+          <group-id config="false" key="group-id" node="list">
+            <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsession-xml/&lt;srg_show_GroupId_group-id&gt;</xr-path>
+            <xr-xml-map>srg_show:GroupId</xr-xml-map>
+            <xr-bag-grp-name>srg_show_session_entry</xr-bag-grp-name>
+            <xr-bag>srg_show.bag</xr-bag>
+            <group-id config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsession-xml/&lt;srg_show_GroupId_group-id&gt;</xr-path>
+              <xr-xml-map>srg_show:GroupId</xr-xml-map>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;srg_show_GroupId_group-id&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </group-id>
+            <group-id-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsession-xml/&lt;srg_show_GroupId_group-id&gt;~srg_show_session_entry.GroupID</xr-path>
+              <xr-xml-map>srg_show:group-id-xr</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </group-id-xr>
+            <interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsession-xml/&lt;srg_show_GroupId_group-id&gt;~srg_show_session_entry.InterfaceName</xr-path>
+              <xr-xml-map>srg_show:InterfaceName</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </interface-name>
+            <outer-vlan config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsession-xml/&lt;srg_show_GroupId_group-id&gt;~srg_show_session_entry.OuterVLAN</xr-path>
+              <xr-xml-map>srg_show:OuterVLAN</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </outer-vlan>
+            <inner-vlan config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsession-xml/&lt;srg_show_GroupId_group-id&gt;~srg_show_session_entry.InnerVLAN</xr-path>
+              <xr-xml-map>srg_show:InnerVLAN</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </inner-vlan>
+            <session-mac-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsession-xml/&lt;srg_show_GroupId_group-id&gt;~srg_show_session_entry.SessionMACAddress</xr-path>
+              <xr-xml-map>srg_show:SessionMACAddress</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </session-mac-address>
+            <pppoe-session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsession-xml/&lt;srg_show_GroupId_group-id&gt;~srg_show_session_entry.PPPoESessionID</xr-path>
+              <xr-xml-map>srg_show:PPPoESessionID</xr-xml-map>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </pppoe-session-id>
+            <l2tp-tunnel-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsession-xml/&lt;srg_show_GroupId_group-id&gt;~srg_show_session_entry.L2TPTunnelID</xr-path>
+              <xr-xml-map>srg_show:L2TPTunnelID</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </l2tp-tunnel-id>
+            <role-master config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsession-xml/&lt;srg_show_GroupId_group-id&gt;~srg_show_session_entry.RoleMaster</xr-path>
+              <xr-xml-map>srg_show:RoleMaster</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </role-master>
+            <valid-mac-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsession-xml/&lt;srg_show_GroupId_group-id&gt;~srg_show_session_entry.ValidMACAddress</xr-path>
+              <xr-xml-map>srg_show:ValidMACAddress</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </valid-mac-address>
+            <negative-acknowledgement-update-all config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsession-xml/&lt;srg_show_GroupId_group-id&gt;~srg_show_session_entry.NegativeAcknowledgementUpdateAll</xr-path>
+              <xr-xml-map>srg_show:NegativeAcknowledgementUpdateAll</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </negative-acknowledgement-update-all>
+            <session-detailed-information config="false" node="list">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsession-xml/&lt;srg_show_GroupId_group-id&gt;~srg_show_session_entry.SessionDetailedInformation[&lt;bag_arg3&gt;]</xr-path>
+              <xr-bag-version>2 0</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+              <component config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsession-xml/&lt;srg_show_GroupId_group-id&gt;~srg_show_session_entry.SessionDetailedInformation[&lt;bag_arg3&gt;].Component</xr-path>
+                <xr-xml-map>srg_show:Component</xr-xml-map>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>Srg-show-comp</type-name>
+                </type>
+              </component>
+              <operation config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsession-xml/&lt;srg_show_GroupId_group-id&gt;~srg_show_session_entry.SessionDetailedInformation[&lt;bag_arg3&gt;].Operation</xr-path>
+                <xr-xml-map>srg_show:Operation</xr-xml-map>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>Srg-show-session-operation</type-name>
+                </type>
+              </operation>
+              <tx-list-queue-fail config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsession-xml/&lt;srg_show_GroupId_group-id&gt;~srg_show_session_entry.SessionDetailedInformation[&lt;bag_arg3&gt;].TxListQueueFail</xr-path>
+                <xr-xml-map>srg_show:TxListQueueFail</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </tx-list-queue-fail>
+              <marked-for-sweeping config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsession-xml/&lt;srg_show_GroupId_group-id&gt;~srg_show_session_entry.SessionDetailedInformation[&lt;bag_arg3&gt;].MarkedForSweeping</xr-path>
+                <xr-xml-map>srg_show:MarkedForSweeping</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </marked-for-sweeping>
+              <marked-for-cleanup config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsession-xml/&lt;srg_show_GroupId_group-id&gt;~srg_show_session_entry.SessionDetailedInformation[&lt;bag_arg3&gt;].MarkedForCleanup</xr-path>
+                <xr-xml-map>srg_show:MarkedForCleanup</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </marked-for-cleanup>
+            </session-detailed-information>
+            <session-sync-error-information config="false" node="list">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsession-xml/&lt;srg_show_GroupId_group-id&gt;~srg_show_session_entry.SessionSyncErrorInformation[&lt;bag_arg4&gt;]</xr-path>
+              <xr-bag-version>2 0</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg4&gt;</xr-internal-key>
+              <sync-error-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsession-xml/&lt;srg_show_GroupId_group-id&gt;~srg_show_session_entry.SessionSyncErrorInformation[&lt;bag_arg4&gt;].SyncErrorCount</xr-path>
+                <xr-xml-map>srg_show:SyncErrorCount</xr-xml-map>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </sync-error-count>
+              <last-error-code config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsession-xml/&lt;srg_show_GroupId_group-id&gt;~srg_show_session_entry.SessionSyncErrorInformation[&lt;bag_arg4&gt;].LastErrorCode</xr-path>
+                <xr-xml-map>srg_show:LastErrorCode</xr-xml-map>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </last-error-code>
+              <last-error-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsession-xml/&lt;srg_show_GroupId_group-id&gt;~srg_show_session_entry.SessionSyncErrorInformation[&lt;bag_arg4&gt;].LastErrorType</xr-path>
+                <xr-xml-map>srg_show:LastErrorType</xr-xml-map>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>Srg-show-session-error</type-name>
+                </type>
+              </last-error-type>
+            </session-sync-error-information>
+          </group-id>
+        </group-id-xr>
+        <interfaces config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/</xr-path>
+          <xr-xml-map>srg_show:InterfaceTable</xr-xml-map>
+          <interface config="false" key="interface" node="list">
+            <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;</xr-path>
+            <xr-xml-map>srg_show:Interface</xr-xml-map>
+            <xr-bag-grp-name>srg_show_agt_intf_entry</xr-bag-grp-name>
+            <xr-bag>srg_show.bag</xr-bag>
+            <interface config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;</xr-path>
+              <xr-xml-map>srg_show:Interface</xr-xml-map>
+              <xr-sch-type>InterfaceName</xr-sch-type>
+              <xr-sch-arg-name>&lt;srg_show_Interface_interface&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface>
+            <interface-oper config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.InterfaceOper</xr-path>
+              <xr-bag-version>2 0</xr-bag-version>
+              <idb-oper-reg-enable config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.InterfaceOper.IDB_OPER_REG_ENABLE</xr-path>
+                <xr-xml-map>srg_show:IDB_OPER_REG_ENABLE</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-oper-reg-enable>
+              <idb-oper-reg-disable config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.InterfaceOper.IDB_OPER_REG_DISABLE</xr-path>
+                <xr-xml-map>srg_show:IDB_OPER_REG_DISABLE</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-oper-reg-disable>
+              <idb-oper-caps-add config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.InterfaceOper.IDB_OPER_CAPS_ADD</xr-path>
+                <xr-xml-map>srg_show:IDB_OPER_CAPS_ADD</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-oper-caps-add>
+              <idb-oper-caps-remove config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.InterfaceOper.IDB_OPER_CAPS_REMOVE</xr-path>
+                <xr-xml-map>srg_show:IDB_OPER_CAPS_REMOVE</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-oper-caps-remove>
+              <idb-oper-attr-update config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.InterfaceOper.IDB_OPER_ATTR_UPDATE</xr-path>
+                <xr-xml-map>srg_show:IDB_OPER_ATTR_UPDATE</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-oper-attr-update>
+            </interface-oper>
+            <interface-status config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.InterfaceStatus</xr-path>
+              <xr-bag-version>2 0</xr-bag-version>
+              <idb-state-fwd-ref config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.InterfaceStatus.IDB_STATE_FWD_REF</xr-path>
+                <xr-xml-map>srg_show:IDB_STATE_FWD_REF</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-state-fwd-ref>
+              <idb-state-stale config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.InterfaceStatus.IDB_STATE_STALE</xr-path>
+                <xr-xml-map>srg_show:IDB_STATE_STALE</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-state-stale>
+              <idb-state-registered config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.InterfaceStatus.IDB_STATE_REGISTERED</xr-path>
+                <xr-xml-map>srg_show:IDB_STATE_REGISTERED</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-state-registered>
+              <idb-state-caps-added config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.InterfaceStatus.IDB_STATE_CAPS_ADDED</xr-path>
+                <xr-xml-map>srg_show:IDB_STATE_CAPS_ADDED</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-state-caps-added>
+              <idb-state-owned-re-source config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.InterfaceStatus.IDB_STATE_OWNED_RESOURCE</xr-path>
+                <xr-xml-map>srg_show:IDB_STATE_OWNED_RESOURCE</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-state-owned-re-source>
+              <idb-client-eoms-pending config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.InterfaceStatus.IDB_CLIENT_EOMS_PENDING</xr-path>
+                <xr-xml-map>srg_show:IDB_CLIENT_EOMS_PENDING</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-client-eoms-pending>
+              <idb-state-p-end-caps-rem config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.InterfaceStatus.IDB_STATE_PEND_CAPS_REM</xr-path>
+                <xr-xml-map>srg_show:IDB_STATE_PEND_CAPS_REM</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-state-p-end-caps-rem>
+              <idb-state-p-end-reg-disable config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.InterfaceStatus.IDB_STATE_PEND_REG_DISABLE</xr-path>
+                <xr-xml-map>srg_show:IDB_STATE_PEND_REG_DISABLE</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-state-p-end-reg-disable>
+            </interface-status>
+            <interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.InterfaceName</xr-path>
+              <xr-xml-map>srg_show:InterfaceName</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </interface-name>
+            <interface-synchronization-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.InterfaceSynchronizationID</xr-path>
+              <xr-xml-map>srg_show:InterfaceSynchronizationID</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </interface-synchronization-id>
+            <group-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.GroupID</xr-path>
+              <xr-xml-map>srg_show:GroupID</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </group-id>
+            <role config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.Role</xr-path>
+              <xr-xml-map>srg_show:Role</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Srg-show-im-role</type-name>
+              </type>
+            </role>
+            <forward-referenced config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.ForwardReferenced</xr-path>
+              <xr-xml-map>srg_show:ForwardReferenced</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </forward-referenced>
+            <session-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.SessionCount</xr-path>
+              <xr-xml-map>srg_show:SessionCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </session-count>
+            <interface-enable-error-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.InterfaceEnableErrorCount</xr-path>
+              <xr-xml-map>srg_show:InterfaceEnableErrorCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </interface-enable-error-count>
+            <interface-disable-error-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.InterfaceDisableErrorCount</xr-path>
+              <xr-xml-map>srg_show:InterfaceDisableErrorCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </interface-disable-error-count>
+            <interface-caps-add-error-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.InterfaceCapsAddErrorCount</xr-path>
+              <xr-xml-map>srg_show:InterfaceCapsAddErrorCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </interface-caps-add-error-count>
+            <interface-caps-remove-error-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.InterfaceCapsRemoveErrorCount</xr-path>
+              <xr-xml-map>srg_show:InterfaceCapsRemoveErrorCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </interface-caps-remove-error-count>
+            <interface-attribute-update-error-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.InterfaceAttributeUpdateErrorCount</xr-path>
+              <xr-xml-map>srg_show:InterfaceAttributeUpdateErrorCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </interface-attribute-update-error-count>
+            <client-status config="false" node="list">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.client_status[&lt;bag_arg2&gt;]</xr-path>
+              <xr-bag-version>2 0</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+              <component config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.client_status[&lt;bag_arg2&gt;].Component</xr-path>
+                <xr-xml-map>srg_show:Component</xr-xml-map>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>Srg-show-comp</type-name>
+                </type>
+              </component>
+              <srg-show-idb-client-eoms-pending config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.client_status[&lt;bag_arg2&gt;].SRG_SHOW_IDB_CLIENT_EOMS_PENDING</xr-path>
+                <xr-xml-map>srg_show:SRG_SHOW_IDB_CLIENT_EOMS_PENDING</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </srg-show-idb-client-eoms-pending>
+              <srg-show-idb-client-sync-eod-pending config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.client_status[&lt;bag_arg2&gt;].SRG_SHOW_IDB_CLIENT_SYNC_EOD_PENDING</xr-path>
+                <xr-xml-map>srg_show:SRG_SHOW_IDB_CLIENT_SYNC_EOD_PENDING</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </srg-show-idb-client-sync-eod-pending>
+              <session-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/interface-xml/&lt;srg_show_Interface_interface&gt;~srg_show_agt_intf_entry.client_status[&lt;bag_arg2&gt;].session_count</xr-path>
+                <xr-xml-map>srg_show:session_count</xr-xml-map>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </session-count>
+            </client-status>
+          </interface>
+        </interfaces>
+        <group-summaries config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsummary/</xr-path>
+          <xr-xml-map>srg_show:GroupSummaryTable</xr-xml-map>
+          <group-summary config="false" key="group-id" node="list">
+            <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsummary/&lt;srg_show_GroupSummary_group-id&gt;</xr-path>
+            <xr-xml-map>srg_show:GroupSummary</xr-xml-map>
+            <xr-bag-grp-name>srg_agt_show_group_list_entry</xr-bag-grp-name>
+            <xr-bag>srg_show.bag</xr-bag>
+            <group-id config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsummary/&lt;srg_show_GroupSummary_group-id&gt;</xr-path>
+              <xr-xml-map>srg_show:GroupId</xr-xml-map>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;srg_show_GroupSummary_group-id&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </group-id>
+            <group-id-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsummary/&lt;srg_show_GroupSummary_group-id&gt;~srg_agt_show_group_list_entry.GroupID</xr-path>
+              <xr-xml-map>srg_show:group-id-xr</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </group-id-xr>
+            <role config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsummary/&lt;srg_show_GroupSummary_group-id&gt;~srg_agt_show_group_list_entry.Role</xr-path>
+              <xr-xml-map>srg_show:Role</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Srg-show-im-role</type-name>
+              </type>
+            </role>
+            <disabled config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsummary/&lt;srg_show_GroupSummary_group-id&gt;~srg_agt_show_group_list_entry.Disabled</xr-path>
+              <xr-xml-map>srg_show:Disabled</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </disabled>
+            <peer-ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsummary/&lt;srg_show_GroupSummary_group-id&gt;~srg_agt_show_group_list_entry.PeerIPv4Address</xr-path>
+              <xr-xml-map>srg_show:PeerIPv4Address</xr-xml-map>
+              <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </peer-ipv4-address>
+            <peer-ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsummary/&lt;srg_show_GroupSummary_group-id&gt;~srg_agt_show_group_list_entry.PeerIPv6Address</xr-path>
+              <xr-xml-map>srg_show:PeerIPv6Address</xr-xml-map>
+              <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>inet:ipv6-address</type-name>
+              </type>
+            </peer-ipv6-address>
+            <peer-status config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsummary/&lt;srg_show_GroupSummary_group-id&gt;~srg_agt_show_group_list_entry.PeerStatus</xr-path>
+              <xr-xml-map>srg_show:PeerStatus</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Srg-peer-status</type-name>
+              </type>
+            </peer-status>
+            <preferred-role config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsummary/&lt;srg_show_GroupSummary_group-id&gt;~srg_agt_show_group_list_entry.PreferredRole</xr-path>
+              <xr-xml-map>srg_show:PreferredRole</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Srg-show-role</type-name>
+              </type>
+            </preferred-role>
+            <slave-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsummary/&lt;srg_show_GroupSummary_group-id&gt;~srg_agt_show_group_list_entry.SlaveMode</xr-path>
+              <xr-xml-map>srg_show:SlaveMode</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Srg-show-slave-mode</type-name>
+              </type>
+            </slave-mode>
+            <object-tracking-status config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsummary/&lt;srg_show_GroupSummary_group-id&gt;~srg_agt_show_group_list_entry.ObjectTrackingStatus</xr-path>
+              <xr-xml-map>srg_show:ObjectTrackingStatus</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </object-tracking-status>
+            <interface-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsummary/&lt;srg_show_GroupSummary_group-id&gt;~srg_agt_show_group_list_entry.InterfaceCount</xr-path>
+              <xr-xml-map>srg_show:InterfaceCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </interface-count>
+            <session-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsummary/&lt;srg_show_GroupSummary_group-id&gt;~srg_agt_show_group_list_entry.SessionCount</xr-path>
+              <xr-xml-map>srg_show:SessionCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </session-count>
+            <pending-add-session-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/groupsummary/&lt;srg_show_GroupSummary_group-id&gt;~srg_agt_show_group_list_entry.PendingAddSessionCount</xr-path>
+              <xr-xml-map>srg_show:PendingAddSessionCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </pending-add-session-count>
+          </group-summary>
+        </group-summaries>
+        <group-ids config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/</xr-path>
+          <xr-xml-map>srg_show:Group</xr-xml-map>
+          <group-id config="false" key="group-id" node="list">
+            <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;</xr-path>
+            <xr-xml-map>srg_show:GroupId</xr-xml-map>
+            <xr-bag-grp-name>srg_show_group_entry</xr-bag-grp-name>
+            <xr-bag>srg_show.bag</xr-bag>
+            <group-id config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;</xr-path>
+              <xr-xml-map>srg_show:GroupId</xr-xml-map>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;srg_show_GroupId_group-id&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </group-id>
+            <group-id-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.GroupID</xr-path>
+              <xr-xml-map>srg_show:group-id-xr</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </group-id-xr>
+            <description config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.Description</xr-path>
+              <xr-xml-map>srg_show:Description</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </description>
+            <disabled config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.Disabled</xr-path>
+              <xr-xml-map>srg_show:Disabled</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </disabled>
+            <init-role config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.InitRole</xr-path>
+              <xr-xml-map>srg_show:InitRole</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Srg-show-role</type-name>
+              </type>
+            </init-role>
+            <negotiating-role config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.NegotiatingRole</xr-path>
+              <xr-xml-map>srg_show:NegotiatingRole</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Srg-show-role</type-name>
+              </type>
+            </negotiating-role>
+            <current-role config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.CurrentRole</xr-path>
+              <xr-xml-map>srg_show:CurrentRole</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Srg-show-role</type-name>
+              </type>
+            </current-role>
+            <slave-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.SlaveMode</xr-path>
+              <xr-xml-map>srg_show:SlaveMode</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Srg-show-slave-mode</type-name>
+              </type>
+            </slave-mode>
+            <hold-timer config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.HoldTimer</xr-path>
+              <xr-xml-map>srg_show:HoldTimer</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </hold-timer>
+            <virtual-mac-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.VirtualMACAddress</xr-path>
+              <xr-xml-map>srg_show:VirtualMACAddress</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </virtual-mac-address>
+            <virtual-mac-address-disable config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.VirtualMACAddressDisable</xr-path>
+              <xr-xml-map>srg_show:VirtualMACAddressDisable</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </virtual-mac-address-disable>
+            <l2tp-source-ip config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.L2TPSourceIP</xr-path>
+              <xr-xml-map>srg_show:L2TPSourceIP</xr-xml-map>
+              <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </l2tp-source-ip>
+            <core-tracking-object-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.CoreTrackingObjectName</xr-path>
+              <xr-xml-map>srg_show:CoreTrackingObjectName</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </core-tracking-object-name>
+            <core-tracking-object-status config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.CoreTrackingObjectStatus</xr-path>
+              <xr-xml-map>srg_show:CoreTrackingObjectStatus</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </core-tracking-object-status>
+            <access-tracking-object-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.AccessTrackingObjectName</xr-path>
+              <xr-xml-map>srg_show:AccessTrackingObjectName</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </access-tracking-object-name>
+            <access-tracking-object-status config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.AccessTrackingObjectStatus</xr-path>
+              <xr-xml-map>srg_show:AccessTrackingObjectStatus</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </access-tracking-object-status>
+            <object-tracking-status config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.ObjectTrackingStatus</xr-path>
+              <xr-xml-map>srg_show:ObjectTrackingStatus</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </object-tracking-status>
+            <peer-ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.PeerIPv4Address</xr-path>
+              <xr-xml-map>srg_show:PeerIPv4Address</xr-xml-map>
+              <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </peer-ipv4-address>
+            <peer-ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.PeerIPv6Address</xr-path>
+              <xr-xml-map>srg_show:PeerIPv6Address</xr-xml-map>
+              <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>inet:ipv6-address</type-name>
+              </type>
+            </peer-ipv6-address>
+            <peer-status config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.PeerStatus</xr-path>
+              <xr-xml-map>srg_show:PeerStatus</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Srg-peer-status</type-name>
+              </type>
+            </peer-status>
+            <peer-last-negotiation-time-epoch config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.PeerLastNegotiationTimeEpoch</xr-path>
+              <xr-xml-map>srg_show:PeerLastNegotiationTimeEpoch</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </peer-last-negotiation-time-epoch>
+            <peer-last-up-time-epoch config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.PeerLastUpTimeEpoch</xr-path>
+              <xr-xml-map>srg_show:PeerLastUpTimeEpoch</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </peer-last-up-time-epoch>
+            <peer-last-down-time-epoch config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.PeerLastDownTimeEpoch</xr-path>
+              <xr-xml-map>srg_show:PeerLastDownTimeEpoch</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </peer-last-down-time-epoch>
+            <peer-init-role config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.PeerInitRole</xr-path>
+              <xr-xml-map>srg_show:PeerInitRole</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Srg-show-role</type-name>
+              </type>
+            </peer-init-role>
+            <peer-negotiating-role config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.PeerNegotiatingRole</xr-path>
+              <xr-xml-map>srg_show:PeerNegotiatingRole</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Srg-show-role</type-name>
+              </type>
+            </peer-negotiating-role>
+            <peer-current-role config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.PeerCurrentRole</xr-path>
+              <xr-xml-map>srg_show:PeerCurrentRole</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Srg-show-role</type-name>
+              </type>
+            </peer-current-role>
+            <peer-object-tracking-status config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.PeerObjectTrackingStatus</xr-path>
+              <xr-xml-map>srg_show:PeerObjectTrackingStatus</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </peer-object-tracking-status>
+            <last-switchover-time-epoch config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.LastSwitchoverTimeEpoch</xr-path>
+              <xr-xml-map>srg_show:LastSwitchoverTimeEpoch</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </last-switchover-time-epoch>
+            <switchover-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.SwitchoverCount</xr-path>
+              <xr-xml-map>srg_show:SwitchoverCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </switchover-count>
+            <last-switchover-reason config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.LastSwitchoverReason</xr-path>
+              <xr-xml-map>srg_show:LastSwitchoverReason</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Srg-show-so-reason</type-name>
+              </type>
+            </last-switchover-reason>
+            <switchover-hold-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.SwitchoverHoldTime</xr-path>
+              <xr-xml-map>srg_show:SwitchoverHoldTime</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </switchover-hold-time>
+            <session-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.SessionCount</xr-path>
+              <xr-xml-map>srg_show:SessionCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </session-count>
+            <slave-update-failure-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.SlaveUpdateFailureCount</xr-path>
+              <xr-xml-map>srg_show:SlaveUpdateFailureCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </slave-update-failure-count>
+            <tunnel-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.TunnelCount</xr-path>
+              <xr-xml-map>srg_show:TunnelCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tunnel-count>
+            <pending-session-update-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.PendingSessionUpdateCount</xr-path>
+              <xr-xml-map>srg_show:PendingSessionUpdateCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </pending-session-update-count>
+            <pending-session-delete-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.PendingSessionDeleteCount</xr-path>
+              <xr-xml-map>srg_show:PendingSessionDeleteCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </pending-session-delete-count>
+            <interface-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.InterfaceCount</xr-path>
+              <xr-xml-map>srg_show:InterfaceCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </interface-count>
+            <revertive-timer config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.RevertiveTimer</xr-path>
+              <xr-xml-map>srg_show:RevertiveTimer</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </revertive-timer>
+            <switchover-revert-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.SwitchoverRevertTime</xr-path>
+              <xr-xml-map>srg_show:SwitchoverRevertTime</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </switchover-revert-time>
+            <interface config="false" node="list">
+              <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.InterfaceList[&lt;bag_arg1&gt;]</xr-path>
+              <xr-bag-version>2 0</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+              <interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.InterfaceList[&lt;bag_arg1&gt;].InterfaceName</xr-path>
+                <xr-xml-map>srg_show:InterfaceName</xr-xml-map>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </interface-name>
+              <interface-synchronization-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.InterfaceList[&lt;bag_arg1&gt;].InterfaceSynchronizationID</xr-path>
+                <xr-xml-map>srg_show:InterfaceSynchronizationID</xr-xml-map>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </interface-synchronization-id>
+              <forward-referenced config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.InterfaceList[&lt;bag_arg1&gt;].ForwardReferenced</xr-path>
+                <xr-xml-map>srg_show:ForwardReferenced</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </forward-referenced>
+              <session-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/group/&lt;srg_show_GroupId_group-id&gt;~srg_show_group_entry.InterfaceList[&lt;bag_arg1&gt;].SessionCount</xr-path>
+                <xr-xml-map>srg_show:SessionCount</xr-xml-map>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </session-count>
+            </interface>
+          </group-id>
+        </group-ids>
+        <node-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-pathformat>hex_nozerox</xr-pathformat>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/iedge/srga/node/&lt;srg_show_Node_nodeid&gt;/</xr-path>
+          <xr-xml-map>srg_show:NodeName</xr-xml-map>
+          <xr-sch-type>NodeID</xr-sch-type>
+          <xr-sch-arg-name>&lt;srg_show_Node_nodeid&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Node-id</type-name>
+          </type>
+        </node-name>
+      </node>
+    </nodes>
+  </subscriber-redundancy-agent>
+</Cisco-IOS-XR-subscriber-srg-oper>

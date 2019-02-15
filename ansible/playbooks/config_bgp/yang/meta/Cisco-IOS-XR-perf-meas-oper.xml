@@ -1,0 +1,1911 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-perf-meas-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-perf-meas-oper" revision="2017-10-17">
+  <files>
+    <file revision="2017-10-17" submodule="false">Cisco-IOS-XR-perf-meas-oper.yang</file>
+    <file revision="2017-10-17" submodule="true">Cisco-IOS-XR-perf-meas-oper-sub2.yang</file>
+    <file revision="2017-10-17" submodule="true">Cisco-IOS-XR-perf-meas-oper-sub1.yang</file>
+  </files>
+  <prefix>perf-meas-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="yang">ietf-yang-types</import>
+  <typedef name="Pm-advert-reason">
+    <type node="enumeration">
+      <enum>periodic-timer-expired-no-advertisements</enum>
+      <enum>periodic-advertisement-threshold-average</enum>
+      <enum>periodic-advertisement-threshold-minimum</enum>
+      <enum>periodic-advertisement-threshold-maximum</enum>
+      <enum>periodic-advertisement-threshold-variance</enum>
+      <enum>accelerated-advertisement-threshold-minimum</enum>
+      <enum>accelerated-advertisement-upper-bound-minimum</enum>
+      <enum>advertisement-enabled</enum>
+      <enum>advertisement-disabled</enum>
+      <enum>session-unconfigured</enum>
+      <enum>clear-cli-command</enum>
+      <enum>advertise-delay-config</enum>
+      <enum>advertise-delay-unconfig</enum>
+      <enum>received-control-code-error</enum>
+    </type>
+  </typedef>
+  <typedef name="Pm-probe-not-running-reason">
+    <type node="enumeration">
+      <enum>probe-is-running</enum>
+      <enum>platform-not-supported</enum>
+      <enum>nonv1-active-node</enum>
+      <enum>control-code-error</enum>
+      <enum>interface-admin-down</enum>
+      <enum>interface-down</enum>
+      <enum>mpls-capability-not-present</enum>
+      <enum>interface-not-present</enum>
+      <enum>ip-address-not-configured</enum>
+    </type>
+  </typedef>
+  <typedef name="Pm-measurement">
+    <type node="enumeration">
+      <enum>delay-measurement-type</enum>
+    </type>
+  </typedef>
+  <typedef name="Pm-transport">
+    <type node="enumeration">
+      <enum>interface-transport-type</enum>
+      <enum>rsvpte-transport-type</enum>
+      <enum>sr-policy-transport-type</enum>
+    </type>
+  </typedef>
+  <typedef name="Pm-delay-mode">
+    <type node="enumeration">
+      <enum>delay-mode-one-way</enum>
+      <enum>delay-mode-two-way</enum>
+    </type>
+  </typedef>
+  <performance-measurement config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/perf_meas/main/</xr-path>
+    <xr-xml-map>pm_oper:PerformanceMeasurement</xr-xml-map>
+    <nodes config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/perf_meas/main/node/</xr-path>
+      <xr-xml-map>pm_oper:NodeTable</xr-xml-map>
+      <node config="false" key="node" node="list">
+        <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/</xr-path>
+        <xr-xml-map>pm_oper:Node</xr-xml-map>
+        <summary config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary</xr-path>
+          <xr-xml-map>pm_oper:Summary</xr-xml-map>
+          <xr-bag-grp-name>pm_summary_bag</xr-bag-grp-name>
+          <xr-bag>pm_main_show.bag</xr-bag>
+          <delay-summary config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary</xr-path>
+            <xr-bag-version>1 1</xr-bag-version>
+            <interface-delay-summary config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary</xr-path>
+              <xr-bag-version>1 1</xr-bag-version>
+              <delay-profile config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayProfile</xr-path>
+                <xr-bag-version>1 1</xr-bag-version>
+                <probe-interval config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayProfile.ProbeInterval</xr-path>
+                  <xr-xml-map>pm_main_show:ProbeInterval</xr-xml-map>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </probe-interval>
+                <burst-interval config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayProfile.BurstInterval</xr-path>
+                  <xr-xml-map>pm_main_show:BurstInterval</xr-xml-map>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </burst-interval>
+                <burst-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayProfile.BurstCount</xr-path>
+                  <xr-xml-map>pm_main_show:BurstCount</xr-xml-map>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </burst-count>
+                <delay-measurement-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayProfile.DelayMeasurementMode</xr-path>
+                  <xr-xml-map>pm_main_show:DelayMeasurementMode</xr-xml-map>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <type>
+                    <type-name>Pm-delay-mode</type-name>
+                  </type>
+                </delay-measurement-mode>
+                <periodic-advertisement-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayProfile.PeriodicAdvertisementEnabled</xr-path>
+                  <xr-xml-map>pm_main_show:PeriodicAdvertisementEnabled</xr-xml-map>
+                  <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </periodic-advertisement-enabled>
+                <periodic-advertisement-interval config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayProfile.PeriodicAdvertisementInterval</xr-path>
+                  <xr-xml-map>pm_main_show:PeriodicAdvertisementInterval</xr-xml-map>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </periodic-advertisement-interval>
+                <effective-periodic-advertisement-interval config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayProfile.EffectivePeriodicAdvertisementInterval</xr-path>
+                  <xr-xml-map>pm_main_show:EffectivePeriodicAdvertisementInterval</xr-xml-map>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </effective-periodic-advertisement-interval>
+                <periodic-advertisement-threshold config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayProfile.PeriodicAdvertisementThreshold</xr-path>
+                  <xr-xml-map>pm_main_show:PeriodicAdvertisementThreshold</xr-xml-map>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </periodic-advertisement-threshold>
+                <periodic-advertisement-minimum-change config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayProfile.PeriodicAdvertisementMinimumChange</xr-path>
+                  <xr-xml-map>pm_main_show:PeriodicAdvertisementMinimumChange</xr-xml-map>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </periodic-advertisement-minimum-change>
+                <accelerated-advertisement-threshold config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayProfile.AcceleratedAdvertisementThreshold</xr-path>
+                  <xr-xml-map>pm_main_show:AcceleratedAdvertisementThreshold</xr-xml-map>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </accelerated-advertisement-threshold>
+                <accelerated-advertisement-minimum-change config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayProfile.AcceleratedAdvertisementMinimumChange</xr-path>
+                  <xr-xml-map>pm_main_show:AcceleratedAdvertisementMinimumChange</xr-xml-map>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </accelerated-advertisement-minimum-change>
+                <accelerated-advertisement-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayProfile.AcceleratedAdvertisementEnabled</xr-path>
+                  <xr-xml-map>pm_main_show:AcceleratedAdvertisementEnabled</xr-xml-map>
+                  <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </accelerated-advertisement-enabled>
+              </delay-profile>
+              <delay-transport-counters config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayTransportCounters</xr-path>
+                <xr-bag-version>1 1</xr-bag-version>
+                <generic-counters config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayTransportCounters.GenericCounters</xr-path>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <query-packets-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayTransportCounters.GenericCounters.QueryPacketsSent</xr-path>
+                    <xr-xml-map>pm_main_show:QueryPacketsSent</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </query-packets-sent>
+                  <query-packet-sent-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayTransportCounters.GenericCounters.QueryPacketSentErrors</xr-path>
+                    <xr-xml-map>pm_main_show:QueryPacketSentErrors</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </query-packet-sent-errors>
+                  <query-packet-sent-error-no-ip-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayTransportCounters.GenericCounters.QueryPacketSentErrorNoIPAddress</xr-path>
+                    <xr-xml-map>pm_main_show:QueryPacketSentErrorNoIPAddress</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </query-packet-sent-error-no-ip-address>
+                  <query-packets-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayTransportCounters.GenericCounters.QueryPacketsReceived</xr-path>
+                    <xr-xml-map>pm_main_show:QueryPacketsReceived</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </query-packets-received>
+                  <received-packet-error-negative-delay config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayTransportCounters.GenericCounters.ReceivedPacketErrorNegativeDelay</xr-path>
+                    <xr-xml-map>pm_main_show:ReceivedPacketErrorNegativeDelay</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </received-packet-error-negative-delay>
+                  <received-packet-error-delay-exceeds-threshold config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayTransportCounters.GenericCounters.ReceivedPacketErrorDelayExceedsThreshold</xr-path>
+                    <xr-xml-map>pm_main_show:ReceivedPacketErrorDelayExceedsThreshold</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </received-packet-error-delay-exceeds-threshold>
+                  <received-packet-error-missing-tx-timestamp config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayTransportCounters.GenericCounters.ReceivedPacketErrorMissingTxTimestamp</xr-path>
+                    <xr-xml-map>pm_main_show:ReceivedPacketErrorMissingTxTimestamp</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </received-packet-error-missing-tx-timestamp>
+                  <received-packet-error-missing-rx-timestamp config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayTransportCounters.GenericCounters.ReceivedPacketErrorMissingRxTimestamp</xr-path>
+                    <xr-xml-map>pm_main_show:ReceivedPacketErrorMissingRxTimestamp</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </received-packet-error-missing-rx-timestamp>
+                  <received-packet-error-probe-full config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayTransportCounters.GenericCounters.ReceivedPacketErrorProbeFull</xr-path>
+                    <xr-xml-map>pm_main_show:ReceivedPacketErrorProbeFull</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </received-packet-error-probe-full>
+                  <received-packet-error-probe-not-started config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayTransportCounters.GenericCounters.ReceivedPacketErrorProbeNotStarted</xr-path>
+                    <xr-xml-map>pm_main_show:ReceivedPacketErrorProbeNotStarted</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </received-packet-error-probe-not-started>
+                  <received-packet-control-code-error config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayTransportCounters.GenericCounters.ReceivedPacketControlCodeError</xr-path>
+                    <xr-xml-map>pm_main_show:ReceivedPacketControlCodeError</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </received-packet-control-code-error>
+                  <received-packet-control-code-notification config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayTransportCounters.GenericCounters.ReceivedPacketControlCodeNotification</xr-path>
+                    <xr-xml-map>pm_main_show:ReceivedPacketControlCodeNotification</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </received-packet-control-code-notification>
+                  <probes-started config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayTransportCounters.GenericCounters.ProbesStarted</xr-path>
+                    <xr-xml-map>pm_main_show:ProbesStarted</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </probes-started>
+                  <probes-complete config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayTransportCounters.GenericCounters.ProbesComplete</xr-path>
+                    <xr-xml-map>pm_main_show:ProbesComplete</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </probes-complete>
+                  <probes-incomplete config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayTransportCounters.GenericCounters.ProbesIncomplete</xr-path>
+                    <xr-xml-map>pm_main_show:ProbesIncomplete</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </probes-incomplete>
+                  <advertisement config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayTransportCounters.GenericCounters.Advertisement</xr-path>
+                    <xr-xml-map>pm_main_show:Advertisement</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </advertisement>
+                </generic-counters>
+                <exclusive-counters config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayTransportCounters.ExclusiveCounters</xr-path>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <interface-exclusive-counters config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayTransportCounters.ExclusiveCounters.InterfaceExclusiveCounters</xr-path>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <when>../type = 'interface-transport-type'</when>
+                    <query-packet-sent-error-interface-down config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayTransportCounters.ExclusiveCounters.InterfaceExclusiveCounters.QueryPacketSentErrorInterfaceDown</xr-path>
+                      <xr-xml-map>pm_main_show:QueryPacketSentErrorInterfaceDown</xr-xml-map>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </query-packet-sent-error-interface-down>
+                    <query-packet-sent-error-no-mpls-caps config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayTransportCounters.ExclusiveCounters.InterfaceExclusiveCounters.QueryPacketSentErrorNoMPLSCaps</xr-path>
+                      <xr-xml-map>pm_main_show:QueryPacketSentErrorNoMPLSCaps</xr-xml-map>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </query-packet-sent-error-no-mpls-caps>
+                  </interface-exclusive-counters>
+                  <type config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.DelayTransportCounters.ExclusiveCounters.type</xr-path>
+                    <xr-xml-map>pm_main_show:type</xr-xml-map>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>Pm-transport</type-name>
+                    </type>
+                  </type>
+                </exclusive-counters>
+              </delay-transport-counters>
+              <total-delay-sessions config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.InterfaceDelaySummary.TotalDelaySessions</xr-path>
+                <xr-xml-map>pm_main_show:TotalDelaySessions</xr-xml-map>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </total-delay-sessions>
+            </interface-delay-summary>
+            <delay-global-counters config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.DelayGlobalCounters</xr-path>
+              <xr-bag-version>1 1</xr-bag-version>
+              <query-packets-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.DelayGlobalCounters.QueryPacketsSent</xr-path>
+                <xr-xml-map>pm_main_show:QueryPacketsSent</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </query-packets-sent>
+              <query-packets-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.DelayGlobalCounters.QueryPacketsReceived</xr-path>
+                <xr-xml-map>pm_main_show:QueryPacketsReceived</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </query-packets-received>
+              <received-packet-error-invalid-session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.DelayGlobalCounters.ReceivedPacketErrorInvalidSessionID</xr-path>
+                <xr-xml-map>pm_main_show:ReceivedPacketErrorInvalidSessionID</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </received-packet-error-invalid-session-id>
+              <received-packet-error-no-session config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.DelaySummary.DelayGlobalCounters.ReceivedPacketErrorNoSession</xr-path>
+                <xr-xml-map>pm_main_show:ReceivedPacketErrorNoSession</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </received-packet-error-no-session>
+            </delay-global-counters>
+          </delay-summary>
+          <total-interfaces config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/summary~pm_summary_bag.TotalInterfaces</xr-path>
+            <xr-xml-map>pm_main_show:TotalInterfaces</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </total-interfaces>
+        </summary>
+        <interfaces config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/</xr-path>
+          <xr-xml-map>pm_oper:Interfaces</xr-xml-map>
+          <interface-details config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/</xr-path>
+            <xr-xml-map>pm_oper:InterfaceDetailTable</xr-xml-map>
+            <interface-detail config="false" key="interface-name" node="list">
+              <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;</xr-path>
+              <xr-xml-map>pm_oper:InterfaceDetail</xr-xml-map>
+              <xr-bag-grp-name>pm_intf_bag</xr-bag-grp-name>
+              <xr-bag>pm_main_show.bag</xr-bag>
+              <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;</xr-path>
+                <xr-xml-map>pm_oper:InterfaceName</xr-xml-map>
+                <xr-sch-type>InterfaceName</xr-sch-type>
+                <xr-sch-arg-name>&lt;pm_oper_InterfaceDetail_intf_name&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>xr:Interface-name</type-name>
+                </type>
+              </interface-name>
+              <interface-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.InterfaceName</xr-path>
+                <xr-xml-map>pm_main_show:interface-name-xr</xr-xml-map>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </interface-name-xr>
+              <interface-handle config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.InterfaceHandle</xr-path>
+                <xr-xml-map>pm_main_show:InterfaceHandle</xr-xml-map>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </interface-handle>
+              <interface-state config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.InterfaceState</xr-path>
+                <xr-xml-map>pm_main_show:InterfaceState</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </interface-state>
+              <source-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.SourceAddress</xr-path>
+                <xr-xml-map>pm_main_show:SourceAddress</xr-xml-map>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>inet:ipv4-address</type-name>
+                </type>
+              </source-address>
+              <source-v6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.SourceV6Address</xr-path>
+                <xr-xml-map>pm_main_show:SourceV6Address</xr-xml-map>
+                <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>inet:ipv6-address</type-name>
+                </type>
+              </source-v6-address>
+              <source-mac-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.SourceMacAddress</xr-path>
+                <xr-xml-map>pm_main_show:SourceMacAddress</xr-xml-map>
+                <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>yang:mac-address</type-name>
+                </type>
+              </source-mac-address>
+              <primary-vlan-tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.PrimaryVlanTag</xr-path>
+                <xr-xml-map>pm_main_show:PrimaryVlanTag</xr-xml-map>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </primary-vlan-tag>
+              <secondary-vlan-tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.SecondaryVlanTag</xr-path>
+                <xr-xml-map>pm_main_show:SecondaryVlanTag</xr-xml-map>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </secondary-vlan-tag>
+              <delay-measurement-session config="false" node="list">
+                <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;]</xr-path>
+                <xr-bag-version>1 1</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+                <current-probe config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].CurrentProbe</xr-path>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <probe-results config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].CurrentProbe.ProbeResults</xr-path>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <average config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].CurrentProbe.ProbeResults.Average</xr-path>
+                      <xr-xml-map>pm_main_show:Average</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </average>
+                    <minimum config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].CurrentProbe.ProbeResults.Minimum</xr-path>
+                      <xr-xml-map>pm_main_show:Minimum</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </minimum>
+                    <maximum config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].CurrentProbe.ProbeResults.Maximum</xr-path>
+                      <xr-xml-map>pm_main_show:Maximum</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </maximum>
+                    <variance config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].CurrentProbe.ProbeResults.Variance</xr-path>
+                      <xr-xml-map>pm_main_show:Variance</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </variance>
+                  </probe-results>
+                  <probe-start-time-stamp config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].CurrentProbe.ProbeStartTimeStamp</xr-path>
+                    <xr-xml-map>pm_main_show:ProbeStartTimeStamp</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </probe-start-time-stamp>
+                  <next-probe-start-time-remaining-in-millisec config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].CurrentProbe.NextProbeStartTimeRemainingInMillisec</xr-path>
+                    <xr-xml-map>pm_main_show:NextProbeStartTimeRemainingInMillisec</xr-xml-map>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </next-probe-start-time-remaining-in-millisec>
+                  <next-packet-sent-time-remaining-in-millisec config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].CurrentProbe.NextPacketSentTimeRemainingInMillisec</xr-path>
+                    <xr-xml-map>pm_main_show:NextPacketSentTimeRemainingInMillisec</xr-xml-map>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </next-packet-sent-time-remaining-in-millisec>
+                  <number-of-packets-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].CurrentProbe.NumberOfPacketsSent</xr-path>
+                    <xr-xml-map>pm_main_show:NumberOfPacketsSent</xr-xml-map>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </number-of-packets-sent>
+                  <number-of-packets-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].CurrentProbe.NumberOfPacketsReceived</xr-path>
+                    <xr-xml-map>pm_main_show:NumberOfPacketsReceived</xr-xml-map>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </number-of-packets-received>
+                  <probe-not-running-reason config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].CurrentProbe.ProbeNotRunningReason</xr-path>
+                    <xr-xml-map>pm_main_show:ProbeNotRunningReason</xr-xml-map>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>Pm-probe-not-running-reason</type-name>
+                    </type>
+                  </probe-not-running-reason>
+                </current-probe>
+                <session-counters config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionCounters</xr-path>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <generic-counters config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionCounters.GenericCounters</xr-path>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <query-packets-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionCounters.GenericCounters.QueryPacketsSent</xr-path>
+                      <xr-xml-map>pm_main_show:QueryPacketsSent</xr-xml-map>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </query-packets-sent>
+                    <query-packet-sent-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionCounters.GenericCounters.QueryPacketSentErrors</xr-path>
+                      <xr-xml-map>pm_main_show:QueryPacketSentErrors</xr-xml-map>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </query-packet-sent-errors>
+                    <query-packet-sent-error-no-ip-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionCounters.GenericCounters.QueryPacketSentErrorNoIPAddress</xr-path>
+                      <xr-xml-map>pm_main_show:QueryPacketSentErrorNoIPAddress</xr-xml-map>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </query-packet-sent-error-no-ip-address>
+                    <query-packets-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionCounters.GenericCounters.QueryPacketsReceived</xr-path>
+                      <xr-xml-map>pm_main_show:QueryPacketsReceived</xr-xml-map>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </query-packets-received>
+                    <received-packet-error-negative-delay config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionCounters.GenericCounters.ReceivedPacketErrorNegativeDelay</xr-path>
+                      <xr-xml-map>pm_main_show:ReceivedPacketErrorNegativeDelay</xr-xml-map>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </received-packet-error-negative-delay>
+                    <received-packet-error-delay-exceeds-threshold config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionCounters.GenericCounters.ReceivedPacketErrorDelayExceedsThreshold</xr-path>
+                      <xr-xml-map>pm_main_show:ReceivedPacketErrorDelayExceedsThreshold</xr-xml-map>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </received-packet-error-delay-exceeds-threshold>
+                    <received-packet-error-missing-tx-timestamp config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionCounters.GenericCounters.ReceivedPacketErrorMissingTxTimestamp</xr-path>
+                      <xr-xml-map>pm_main_show:ReceivedPacketErrorMissingTxTimestamp</xr-xml-map>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </received-packet-error-missing-tx-timestamp>
+                    <received-packet-error-missing-rx-timestamp config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionCounters.GenericCounters.ReceivedPacketErrorMissingRxTimestamp</xr-path>
+                      <xr-xml-map>pm_main_show:ReceivedPacketErrorMissingRxTimestamp</xr-xml-map>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </received-packet-error-missing-rx-timestamp>
+                    <received-packet-error-probe-full config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionCounters.GenericCounters.ReceivedPacketErrorProbeFull</xr-path>
+                      <xr-xml-map>pm_main_show:ReceivedPacketErrorProbeFull</xr-xml-map>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </received-packet-error-probe-full>
+                    <received-packet-error-probe-not-started config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionCounters.GenericCounters.ReceivedPacketErrorProbeNotStarted</xr-path>
+                      <xr-xml-map>pm_main_show:ReceivedPacketErrorProbeNotStarted</xr-xml-map>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </received-packet-error-probe-not-started>
+                    <received-packet-control-code-error config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionCounters.GenericCounters.ReceivedPacketControlCodeError</xr-path>
+                      <xr-xml-map>pm_main_show:ReceivedPacketControlCodeError</xr-xml-map>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </received-packet-control-code-error>
+                    <received-packet-control-code-notification config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionCounters.GenericCounters.ReceivedPacketControlCodeNotification</xr-path>
+                      <xr-xml-map>pm_main_show:ReceivedPacketControlCodeNotification</xr-xml-map>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </received-packet-control-code-notification>
+                    <probes-started config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionCounters.GenericCounters.ProbesStarted</xr-path>
+                      <xr-xml-map>pm_main_show:ProbesStarted</xr-xml-map>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </probes-started>
+                    <probes-complete config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionCounters.GenericCounters.ProbesComplete</xr-path>
+                      <xr-xml-map>pm_main_show:ProbesComplete</xr-xml-map>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </probes-complete>
+                    <probes-incomplete config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionCounters.GenericCounters.ProbesIncomplete</xr-path>
+                      <xr-xml-map>pm_main_show:ProbesIncomplete</xr-xml-map>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </probes-incomplete>
+                    <advertisement config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionCounters.GenericCounters.Advertisement</xr-path>
+                      <xr-xml-map>pm_main_show:Advertisement</xr-xml-map>
+                      <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint64</type-name>
+                      </type>
+                    </advertisement>
+                  </generic-counters>
+                  <exclusive-counters config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionCounters.ExclusiveCounters</xr-path>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <interface-exclusive-counters config="false" is-key="false" node="container" presence="false">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionCounters.ExclusiveCounters.InterfaceExclusiveCounters</xr-path>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <when>../type = 'interface-transport-type'</when>
+                      <query-packet-sent-error-interface-down config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionCounters.ExclusiveCounters.InterfaceExclusiveCounters.QueryPacketSentErrorInterfaceDown</xr-path>
+                        <xr-xml-map>pm_main_show:QueryPacketSentErrorInterfaceDown</xr-xml-map>
+                        <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                        <xr-bag-version>1 1</xr-bag-version>
+                        <type>
+                          <type-name>uint64</type-name>
+                        </type>
+                      </query-packet-sent-error-interface-down>
+                      <query-packet-sent-error-no-mpls-caps config="false" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionCounters.ExclusiveCounters.InterfaceExclusiveCounters.QueryPacketSentErrorNoMPLSCaps</xr-path>
+                        <xr-xml-map>pm_main_show:QueryPacketSentErrorNoMPLSCaps</xr-xml-map>
+                        <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                        <xr-bag-version>1 1</xr-bag-version>
+                        <type>
+                          <type-name>uint64</type-name>
+                        </type>
+                      </query-packet-sent-error-no-mpls-caps>
+                    </interface-exclusive-counters>
+                    <type config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionCounters.ExclusiveCounters.type</xr-path>
+                      <xr-xml-map>pm_main_show:type</xr-xml-map>
+                      <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>Pm-transport</type-name>
+                      </type>
+                    </type>
+                  </exclusive-counters>
+                </session-counters>
+                <last-advertisement-information config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].LastAdvertisementInformation</xr-path>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <advertised-values config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].LastAdvertisementInformation.AdvertisedValues</xr-path>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <average config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].LastAdvertisementInformation.AdvertisedValues.Average</xr-path>
+                      <xr-xml-map>pm_main_show:Average</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </average>
+                    <minimum config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].LastAdvertisementInformation.AdvertisedValues.Minimum</xr-path>
+                      <xr-xml-map>pm_main_show:Minimum</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </minimum>
+                    <maximum config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].LastAdvertisementInformation.AdvertisedValues.Maximum</xr-path>
+                      <xr-xml-map>pm_main_show:Maximum</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </maximum>
+                    <variance config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].LastAdvertisementInformation.AdvertisedValues.Variance</xr-path>
+                      <xr-xml-map>pm_main_show:Variance</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </variance>
+                  </advertised-values>
+                  <time-of-advertisement config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].LastAdvertisementInformation.TimeOfAdvertisement</xr-path>
+                    <xr-xml-map>pm_main_show:TimeOfAdvertisement</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </time-of-advertisement>
+                  <advertisement-reason config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].LastAdvertisementInformation.AdvertisementReason</xr-path>
+                    <xr-xml-map>pm_main_show:AdvertisementReason</xr-xml-map>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>Pm-advert-reason</type-name>
+                    </type>
+                  </advertisement-reason>
+                </last-advertisement-information>
+                <next-advertisement-information config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].NextAdvertisementInformation</xr-path>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <advertisement-interval-values config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].NextAdvertisementInformation.AdvertisementIntervalValues</xr-path>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <average config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].NextAdvertisementInformation.AdvertisementIntervalValues.Average</xr-path>
+                      <xr-xml-map>pm_main_show:Average</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </average>
+                    <minimum config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].NextAdvertisementInformation.AdvertisementIntervalValues.Minimum</xr-path>
+                      <xr-xml-map>pm_main_show:Minimum</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </minimum>
+                    <maximum config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].NextAdvertisementInformation.AdvertisementIntervalValues.Maximum</xr-path>
+                      <xr-xml-map>pm_main_show:Maximum</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </maximum>
+                    <variance config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].NextAdvertisementInformation.AdvertisementIntervalValues.Variance</xr-path>
+                      <xr-xml-map>pm_main_show:Variance</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </variance>
+                  </advertisement-interval-values>
+                  <advertisement-interval-probes-remaining config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].NextAdvertisementInformation.AdvertisementIntervalProbesRemaining</xr-path>
+                    <xr-xml-map>pm_main_show:AdvertisementIntervalProbesRemaining</xr-xml-map>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </advertisement-interval-probes-remaining>
+                  <rolling-average config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].NextAdvertisementInformation.RollingAverage</xr-path>
+                    <xr-xml-map>pm_main_show:RollingAverage</xr-xml-map>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </rolling-average>
+                </next-advertisement-information>
+                <last-notification-control-code config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].LastNotificationControlCode</xr-path>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <control-code config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].LastNotificationControlCode.ControlCode</xr-path>
+                    <xr-xml-map>pm_main_show:ControlCode</xr-xml-map>
+                    <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint8</type-name>
+                    </type>
+                  </control-code>
+                  <timestamp config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].LastNotificationControlCode.Timestamp</xr-path>
+                    <xr-xml-map>pm_main_show:Timestamp</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </timestamp>
+                </last-notification-control-code>
+                <last-error-control-code config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].LastErrorControlCode</xr-path>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <control-code config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].LastErrorControlCode.ControlCode</xr-path>
+                    <xr-xml-map>pm_main_show:ControlCode</xr-xml-map>
+                    <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint8</type-name>
+                    </type>
+                  </control-code>
+                  <timestamp config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].LastErrorControlCode.Timestamp</xr-path>
+                    <xr-xml-map>pm_main_show:Timestamp</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </timestamp>
+                </last-error-control-code>
+                <session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].SessionId</xr-path>
+                  <xr-xml-map>pm_main_show:SessionId</xr-xml-map>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </session-id>
+                <transport-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].TransportType</xr-path>
+                  <xr-xml-map>pm_main_show:TransportType</xr-xml-map>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <type>
+                    <type-name>Pm-transport</type-name>
+                  </type>
+                </transport-type>
+                <measurement-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].MeasurementType</xr-path>
+                  <xr-xml-map>pm_main_show:MeasurementType</xr-xml-map>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <type>
+                    <type-name>Pm-measurement</type-name>
+                  </type>
+                </measurement-type>
+                <periodic-advertisement-interval-in-sec config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].PeriodicAdvertisementIntervalInSec</xr-path>
+                  <xr-xml-map>pm_main_show:PeriodicAdvertisementIntervalInSec</xr-xml-map>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </periodic-advertisement-interval-in-sec>
+                <probe-history config="false" node="list">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].ProbeHistory[&lt;bag_arg1&gt;]</xr-path>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+                  <measurement-value config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].ProbeHistory[&lt;bag_arg1&gt;].MeasurementValue</xr-path>
+                    <xr-xml-map>pm_main_show:MeasurementValue</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </measurement-value>
+                  <query-timestamp config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/detail/&lt;pm_oper_InterfaceDetail_intf_name&gt;~pm_intf_bag.DelayMeasurementSessions[&lt;bag_arg2&gt;].ProbeHistory[&lt;bag_arg1&gt;].QueryTimestamp</xr-path>
+                    <xr-xml-map>pm_main_show:QueryTimestamp</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </query-timestamp>
+                </probe-history>
+              </delay-measurement-session>
+            </interface-detail>
+          </interface-details>
+          <interface-delay config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/</xr-path>
+            <xr-xml-map>pm_oper:InterfaceDelay</xr-xml-map>
+            <interface-last-aggregations config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-aggregation/</xr-path>
+              <xr-xml-map>pm_oper:InterfaceLastAggregationTable</xr-xml-map>
+              <interface-last-aggregation config="false" key="interface-name" node="list">
+                <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-aggregation/&lt;pm_oper_InterfaceLastAggregation_intf_name&gt;</xr-path>
+                <xr-xml-map>pm_oper:InterfaceLastAggregation</xr-xml-map>
+                <xr-bag-grp-name>pm_intf_last_aggr_bag</xr-bag-grp-name>
+                <xr-bag>pm_main_show.bag</xr-bag>
+                <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-aggregation/&lt;pm_oper_InterfaceLastAggregation_intf_name&gt;</xr-path>
+                  <xr-xml-map>pm_oper:InterfaceName</xr-xml-map>
+                  <xr-sch-type>InterfaceName</xr-sch-type>
+                  <xr-sch-arg-name>&lt;pm_oper_InterfaceLastAggregation_intf_name&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>xr:Interface-name</type-name>
+                  </type>
+                </interface-name>
+                <last-aggregation config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-aggregation/&lt;pm_oper_InterfaceLastAggregation_intf_name&gt;~pm_intf_last_aggr_bag.LastAggregation</xr-path>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <aggregated-probe-values config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-aggregation/&lt;pm_oper_InterfaceLastAggregation_intf_name&gt;~pm_intf_last_aggr_bag.LastAggregation.AggregatedProbeValues</xr-path>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <average config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-aggregation/&lt;pm_oper_InterfaceLastAggregation_intf_name&gt;~pm_intf_last_aggr_bag.LastAggregation.AggregatedProbeValues.Average</xr-path>
+                      <xr-xml-map>pm_main_show:Average</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </average>
+                    <minimum config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-aggregation/&lt;pm_oper_InterfaceLastAggregation_intf_name&gt;~pm_intf_last_aggr_bag.LastAggregation.AggregatedProbeValues.Minimum</xr-path>
+                      <xr-xml-map>pm_main_show:Minimum</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </minimum>
+                    <maximum config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-aggregation/&lt;pm_oper_InterfaceLastAggregation_intf_name&gt;~pm_intf_last_aggr_bag.LastAggregation.AggregatedProbeValues.Maximum</xr-path>
+                      <xr-xml-map>pm_main_show:Maximum</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </maximum>
+                    <variance config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-aggregation/&lt;pm_oper_InterfaceLastAggregation_intf_name&gt;~pm_intf_last_aggr_bag.LastAggregation.AggregatedProbeValues.Variance</xr-path>
+                      <xr-xml-map>pm_main_show:Variance</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </variance>
+                  </aggregated-probe-values>
+                  <aggregation-timestamp config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-aggregation/&lt;pm_oper_InterfaceLastAggregation_intf_name&gt;~pm_intf_last_aggr_bag.LastAggregation.AggregationTimestamp</xr-path>
+                    <xr-xml-map>pm_main_show:AggregationTimestamp</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </aggregation-timestamp>
+                  <aggregation-action config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-aggregation/&lt;pm_oper_InterfaceLastAggregation_intf_name&gt;~pm_intf_last_aggr_bag.LastAggregation.AggregationAction</xr-path>
+                    <xr-xml-map>pm_main_show:AggregationAction</xr-xml-map>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>Pm-advert-reason</type-name>
+                    </type>
+                  </aggregation-action>
+                </last-aggregation>
+              </interface-last-aggregation>
+            </interface-last-aggregations>
+            <interface-probe-histories config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/probe-history/</xr-path>
+              <xr-xml-map>pm_oper:InterfaceProbeHistoryTable</xr-xml-map>
+              <interface-probe-history config="false" key="interface-name" node="list">
+                <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/probe-history/&lt;pm_oper_InterfaceProbeHistory_intf_name&gt;</xr-path>
+                <xr-xml-map>pm_oper:InterfaceProbeHistory</xr-xml-map>
+                <xr-bag-grp-name>pm_intf_probe_history_bag</xr-bag-grp-name>
+                <xr-bag>pm_main_show.bag</xr-bag>
+                <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/probe-history/&lt;pm_oper_InterfaceProbeHistory_intf_name&gt;</xr-path>
+                  <xr-xml-map>pm_oper:InterfaceName</xr-xml-map>
+                  <xr-sch-type>InterfaceName</xr-sch-type>
+                  <xr-sch-arg-name>&lt;pm_oper_InterfaceProbeHistory_intf_name&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>xr:Interface-name</type-name>
+                  </type>
+                </interface-name>
+                <interface-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/probe-history/&lt;pm_oper_InterfaceProbeHistory_intf_name&gt;~pm_intf_probe_history_bag.InterfaceName</xr-path>
+                  <xr-xml-map>pm_main_show:interface-name-xr</xr-xml-map>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </interface-name-xr>
+                <interface-handle config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/probe-history/&lt;pm_oper_InterfaceProbeHistory_intf_name&gt;~pm_intf_probe_history_bag.InterfaceHandle</xr-path>
+                  <xr-xml-map>pm_main_show:InterfaceHandle</xr-xml-map>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </interface-handle>
+                <history config="false" node="list">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/probe-history/&lt;pm_oper_InterfaceProbeHistory_intf_name&gt;~pm_intf_probe_history_bag.History[&lt;bag_arg3&gt;]</xr-path>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+                  <probe-values config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/probe-history/&lt;pm_oper_InterfaceProbeHistory_intf_name&gt;~pm_intf_probe_history_bag.History[&lt;bag_arg3&gt;].ProbeValues</xr-path>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <average config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/probe-history/&lt;pm_oper_InterfaceProbeHistory_intf_name&gt;~pm_intf_probe_history_bag.History[&lt;bag_arg3&gt;].ProbeValues.Average</xr-path>
+                      <xr-xml-map>pm_main_show:Average</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </average>
+                    <minimum config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/probe-history/&lt;pm_oper_InterfaceProbeHistory_intf_name&gt;~pm_intf_probe_history_bag.History[&lt;bag_arg3&gt;].ProbeValues.Minimum</xr-path>
+                      <xr-xml-map>pm_main_show:Minimum</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </minimum>
+                    <maximum config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/probe-history/&lt;pm_oper_InterfaceProbeHistory_intf_name&gt;~pm_intf_probe_history_bag.History[&lt;bag_arg3&gt;].ProbeValues.Maximum</xr-path>
+                      <xr-xml-map>pm_main_show:Maximum</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </maximum>
+                    <variance config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/probe-history/&lt;pm_oper_InterfaceProbeHistory_intf_name&gt;~pm_intf_probe_history_bag.History[&lt;bag_arg3&gt;].ProbeValues.Variance</xr-path>
+                      <xr-xml-map>pm_main_show:Variance</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </variance>
+                  </probe-values>
+                  <probe-start-timestamp config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/probe-history/&lt;pm_oper_InterfaceProbeHistory_intf_name&gt;~pm_intf_probe_history_bag.History[&lt;bag_arg3&gt;].ProbeStartTimestamp</xr-path>
+                    <xr-xml-map>pm_main_show:ProbeStartTimestamp</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </probe-start-timestamp>
+                  <packets-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/probe-history/&lt;pm_oper_InterfaceProbeHistory_intf_name&gt;~pm_intf_probe_history_bag.History[&lt;bag_arg3&gt;].PacketsSent</xr-path>
+                    <xr-xml-map>pm_main_show:PacketsSent</xr-xml-map>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </packets-sent>
+                  <packets-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/probe-history/&lt;pm_oper_InterfaceProbeHistory_intf_name&gt;~pm_intf_probe_history_bag.History[&lt;bag_arg3&gt;].PacketsReceived</xr-path>
+                    <xr-xml-map>pm_main_show:PacketsReceived</xr-xml-map>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </packets-received>
+                </history>
+              </interface-probe-history>
+            </interface-probe-histories>
+            <interface-aggregated-histories config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/aggr-history/</xr-path>
+              <xr-xml-map>pm_oper:InterfaceAggregatedHistoryTable</xr-xml-map>
+              <interface-aggregated-history config="false" key="interface-name" node="list">
+                <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/aggr-history/&lt;pm_oper_InterfaceAggregatedHistory_intf_name&gt;</xr-path>
+                <xr-xml-map>pm_oper:InterfaceAggregatedHistory</xr-xml-map>
+                <xr-bag-grp-name>pm_intf_aggr_history_bag</xr-bag-grp-name>
+                <xr-bag>pm_main_show.bag</xr-bag>
+                <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/aggr-history/&lt;pm_oper_InterfaceAggregatedHistory_intf_name&gt;</xr-path>
+                  <xr-xml-map>pm_oper:InterfaceName</xr-xml-map>
+                  <xr-sch-type>InterfaceName</xr-sch-type>
+                  <xr-sch-arg-name>&lt;pm_oper_InterfaceAggregatedHistory_intf_name&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>xr:Interface-name</type-name>
+                  </type>
+                </interface-name>
+                <interface-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/aggr-history/&lt;pm_oper_InterfaceAggregatedHistory_intf_name&gt;~pm_intf_aggr_history_bag.InterfaceName</xr-path>
+                  <xr-xml-map>pm_main_show:interface-name-xr</xr-xml-map>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </interface-name-xr>
+                <interface-handle config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/aggr-history/&lt;pm_oper_InterfaceAggregatedHistory_intf_name&gt;~pm_intf_aggr_history_bag.InterfaceHandle</xr-path>
+                  <xr-xml-map>pm_main_show:InterfaceHandle</xr-xml-map>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </interface-handle>
+                <history config="false" node="list">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/aggr-history/&lt;pm_oper_InterfaceAggregatedHistory_intf_name&gt;~pm_intf_aggr_history_bag.History[&lt;bag_arg4&gt;]</xr-path>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <xr-internal-key>&lt;bag_arg4&gt;</xr-internal-key>
+                  <aggregated-probe-values config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/aggr-history/&lt;pm_oper_InterfaceAggregatedHistory_intf_name&gt;~pm_intf_aggr_history_bag.History[&lt;bag_arg4&gt;].AggregatedProbeValues</xr-path>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <average config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/aggr-history/&lt;pm_oper_InterfaceAggregatedHistory_intf_name&gt;~pm_intf_aggr_history_bag.History[&lt;bag_arg4&gt;].AggregatedProbeValues.Average</xr-path>
+                      <xr-xml-map>pm_main_show:Average</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </average>
+                    <minimum config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/aggr-history/&lt;pm_oper_InterfaceAggregatedHistory_intf_name&gt;~pm_intf_aggr_history_bag.History[&lt;bag_arg4&gt;].AggregatedProbeValues.Minimum</xr-path>
+                      <xr-xml-map>pm_main_show:Minimum</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </minimum>
+                    <maximum config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/aggr-history/&lt;pm_oper_InterfaceAggregatedHistory_intf_name&gt;~pm_intf_aggr_history_bag.History[&lt;bag_arg4&gt;].AggregatedProbeValues.Maximum</xr-path>
+                      <xr-xml-map>pm_main_show:Maximum</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </maximum>
+                    <variance config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/aggr-history/&lt;pm_oper_InterfaceAggregatedHistory_intf_name&gt;~pm_intf_aggr_history_bag.History[&lt;bag_arg4&gt;].AggregatedProbeValues.Variance</xr-path>
+                      <xr-xml-map>pm_main_show:Variance</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </variance>
+                  </aggregated-probe-values>
+                  <aggregation-timestamp config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/aggr-history/&lt;pm_oper_InterfaceAggregatedHistory_intf_name&gt;~pm_intf_aggr_history_bag.History[&lt;bag_arg4&gt;].AggregationTimestamp</xr-path>
+                    <xr-xml-map>pm_main_show:AggregationTimestamp</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </aggregation-timestamp>
+                  <aggregation-action config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/aggr-history/&lt;pm_oper_InterfaceAggregatedHistory_intf_name&gt;~pm_intf_aggr_history_bag.History[&lt;bag_arg4&gt;].AggregationAction</xr-path>
+                    <xr-xml-map>pm_main_show:AggregationAction</xr-xml-map>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>Pm-advert-reason</type-name>
+                    </type>
+                  </aggregation-action>
+                </history>
+              </interface-aggregated-history>
+            </interface-aggregated-histories>
+            <interface-last-probes config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-probe/</xr-path>
+              <xr-xml-map>pm_oper:InterfaceLastProbeTable</xr-xml-map>
+              <interface-last-probe config="false" key="interface-name" node="list">
+                <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-probe/&lt;pm_oper_InterfaceLastProbe_intf_name&gt;</xr-path>
+                <xr-xml-map>pm_oper:InterfaceLastProbe</xr-xml-map>
+                <xr-bag-grp-name>pm_intf_last_probe_bag</xr-bag-grp-name>
+                <xr-bag>pm_main_show.bag</xr-bag>
+                <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-probe/&lt;pm_oper_InterfaceLastProbe_intf_name&gt;</xr-path>
+                  <xr-xml-map>pm_oper:InterfaceName</xr-xml-map>
+                  <xr-sch-type>InterfaceName</xr-sch-type>
+                  <xr-sch-arg-name>&lt;pm_oper_InterfaceLastProbe_intf_name&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>xr:Interface-name</type-name>
+                  </type>
+                </interface-name>
+                <last-probe config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-probe/&lt;pm_oper_InterfaceLastProbe_intf_name&gt;~pm_intf_last_probe_bag.LastProbe</xr-path>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <probe-values config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-probe/&lt;pm_oper_InterfaceLastProbe_intf_name&gt;~pm_intf_last_probe_bag.LastProbe.ProbeValues</xr-path>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <average config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-probe/&lt;pm_oper_InterfaceLastProbe_intf_name&gt;~pm_intf_last_probe_bag.LastProbe.ProbeValues.Average</xr-path>
+                      <xr-xml-map>pm_main_show:Average</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </average>
+                    <minimum config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-probe/&lt;pm_oper_InterfaceLastProbe_intf_name&gt;~pm_intf_last_probe_bag.LastProbe.ProbeValues.Minimum</xr-path>
+                      <xr-xml-map>pm_main_show:Minimum</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </minimum>
+                    <maximum config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-probe/&lt;pm_oper_InterfaceLastProbe_intf_name&gt;~pm_intf_last_probe_bag.LastProbe.ProbeValues.Maximum</xr-path>
+                      <xr-xml-map>pm_main_show:Maximum</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </maximum>
+                    <variance config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-probe/&lt;pm_oper_InterfaceLastProbe_intf_name&gt;~pm_intf_last_probe_bag.LastProbe.ProbeValues.Variance</xr-path>
+                      <xr-xml-map>pm_main_show:Variance</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </variance>
+                  </probe-values>
+                  <probe-start-timestamp config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-probe/&lt;pm_oper_InterfaceLastProbe_intf_name&gt;~pm_intf_last_probe_bag.LastProbe.ProbeStartTimestamp</xr-path>
+                    <xr-xml-map>pm_main_show:ProbeStartTimestamp</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </probe-start-timestamp>
+                  <packets-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-probe/&lt;pm_oper_InterfaceLastProbe_intf_name&gt;~pm_intf_last_probe_bag.LastProbe.PacketsSent</xr-path>
+                    <xr-xml-map>pm_main_show:PacketsSent</xr-xml-map>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </packets-sent>
+                  <packets-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-probe/&lt;pm_oper_InterfaceLastProbe_intf_name&gt;~pm_intf_last_probe_bag.LastProbe.PacketsReceived</xr-path>
+                    <xr-xml-map>pm_main_show:PacketsReceived</xr-xml-map>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </packets-received>
+                </last-probe>
+              </interface-last-probe>
+            </interface-last-probes>
+            <interface-last-advertisements config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-advertisement/</xr-path>
+              <xr-xml-map>pm_oper:InterfaceLastAdvertisementTable</xr-xml-map>
+              <interface-last-advertisement config="false" key="interface-name" node="list">
+                <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-advertisement/&lt;pm_oper_InterfaceLastAdvertisement_intf_name&gt;</xr-path>
+                <xr-xml-map>pm_oper:InterfaceLastAdvertisement</xr-xml-map>
+                <xr-bag-grp-name>pm_intf_last_advert_bag</xr-bag-grp-name>
+                <xr-bag>pm_main_show.bag</xr-bag>
+                <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-advertisement/&lt;pm_oper_InterfaceLastAdvertisement_intf_name&gt;</xr-path>
+                  <xr-xml-map>pm_oper:InterfaceName</xr-xml-map>
+                  <xr-sch-type>InterfaceName</xr-sch-type>
+                  <xr-sch-arg-name>&lt;pm_oper_InterfaceLastAdvertisement_intf_name&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>xr:Interface-name</type-name>
+                  </type>
+                </interface-name>
+                <last-advertisement config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-advertisement/&lt;pm_oper_InterfaceLastAdvertisement_intf_name&gt;~pm_intf_last_advert_bag.LastAdvertisement</xr-path>
+                  <xr-bag-version>1 1</xr-bag-version>
+                  <advertised-values config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-advertisement/&lt;pm_oper_InterfaceLastAdvertisement_intf_name&gt;~pm_intf_last_advert_bag.LastAdvertisement.AdvertisedValues</xr-path>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <average config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-advertisement/&lt;pm_oper_InterfaceLastAdvertisement_intf_name&gt;~pm_intf_last_advert_bag.LastAdvertisement.AdvertisedValues.Average</xr-path>
+                      <xr-xml-map>pm_main_show:Average</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </average>
+                    <minimum config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-advertisement/&lt;pm_oper_InterfaceLastAdvertisement_intf_name&gt;~pm_intf_last_advert_bag.LastAdvertisement.AdvertisedValues.Minimum</xr-path>
+                      <xr-xml-map>pm_main_show:Minimum</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </minimum>
+                    <maximum config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-advertisement/&lt;pm_oper_InterfaceLastAdvertisement_intf_name&gt;~pm_intf_last_advert_bag.LastAdvertisement.AdvertisedValues.Maximum</xr-path>
+                      <xr-xml-map>pm_main_show:Maximum</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </maximum>
+                    <variance config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-advertisement/&lt;pm_oper_InterfaceLastAdvertisement_intf_name&gt;~pm_intf_last_advert_bag.LastAdvertisement.AdvertisedValues.Variance</xr-path>
+                      <xr-xml-map>pm_main_show:Variance</xr-xml-map>
+                      <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 1</xr-bag-version>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </variance>
+                  </advertised-values>
+                  <time-of-advertisement config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-advertisement/&lt;pm_oper_InterfaceLastAdvertisement_intf_name&gt;~pm_intf_last_advert_bag.LastAdvertisement.TimeOfAdvertisement</xr-path>
+                    <xr-xml-map>pm_main_show:TimeOfAdvertisement</xr-xml-map>
+                    <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>uint64</type-name>
+                    </type>
+                  </time-of-advertisement>
+                  <advertisement-reason config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/intf/delay/last-advertisement/&lt;pm_oper_InterfaceLastAdvertisement_intf_name&gt;~pm_intf_last_advert_bag.LastAdvertisement.AdvertisementReason</xr-path>
+                    <xr-xml-map>pm_main_show:AdvertisementReason</xr-xml-map>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>1 1</xr-bag-version>
+                    <type>
+                      <type-name>Pm-advert-reason</type-name>
+                    </type>
+                  </advertisement-reason>
+                </last-advertisement>
+              </interface-last-advertisement>
+            </interface-last-advertisements>
+          </interface-delay>
+        </interfaces>
+        <node config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/perf_meas/main/node/&lt;pm_oper_Node_node&gt;/</xr-path>
+          <xr-xml-map>pm_oper:Node</xr-xml-map>
+          <xr-sch-type>SysDBNodeID</xr-sch-type>
+          <xr-sch-arg-name>&lt;pm_oper_Node_node&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Node-id</type-name>
+          </type>
+        </node>
+      </node>
+    </nodes>
+  </performance-measurement>
+  <performance-measurement-responder config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/perf_meas/resp/</xr-path>
+    <xr-xml-map>pm_responder_oper:PerformanceMeasurementResponder</xr-xml-map>
+    <nodes config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/perf_meas/resp/node/</xr-path>
+      <xr-xml-map>pm_responder_oper:NodeTable</xr-xml-map>
+      <node config="false" key="node" node="list">
+        <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/</xr-path>
+        <xr-xml-map>pm_responder_oper:Node</xr-xml-map>
+        <summary config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/summary</xr-path>
+          <xr-xml-map>pm_responder_oper:Summary</xr-xml-map>
+          <xr-bag-grp-name>pm_resp_summary_bag</xr-bag-grp-name>
+          <xr-bag>pm_responder_show.bag</xr-bag>
+          <responder-counters config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/summary~pm_resp_summary_bag.ResponderCounters</xr-path>
+            <xr-bag-version>1 2</xr-bag-version>
+            <reply-packet-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/summary~pm_resp_summary_bag.ResponderCounters.ReplyPacketSent</xr-path>
+              <xr-xml-map>pm_responder_show:ReplyPacketSent</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 2</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </reply-packet-sent>
+            <reply-packet-sent-error config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/summary~pm_resp_summary_bag.ResponderCounters.ReplyPacketSentError</xr-path>
+              <xr-xml-map>pm_responder_show:ReplyPacketSentError</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 2</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </reply-packet-sent-error>
+            <query-packet-received config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/summary~pm_resp_summary_bag.ResponderCounters.QueryPacketReceived</xr-path>
+              <xr-xml-map>pm_responder_show:QueryPacketReceived</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 2</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </query-packet-received>
+            <received-packet-error-urotlv-not-present config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/summary~pm_resp_summary_bag.ResponderCounters.ReceivedPacketErrorUROTLVNotPresent</xr-path>
+              <xr-xml-map>pm_responder_show:ReceivedPacketErrorUROTLVNotPresent</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 2</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </received-packet-error-urotlv-not-present>
+            <received-packet-error-invalid-source-port-number config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/summary~pm_resp_summary_bag.ResponderCounters.ReceivedPacketErrorInvalidSourcePortNumber</xr-path>
+              <xr-xml-map>pm_responder_show:ReceivedPacketErrorInvalidSourcePortNumber</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 2</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </received-packet-error-invalid-source-port-number>
+            <received-packet-error-no-source-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/summary~pm_resp_summary_bag.ResponderCounters.ReceivedPacketErrorNoSourceAddress</xr-path>
+              <xr-xml-map>pm_responder_show:ReceivedPacketErrorNoSourceAddress</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 2</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </received-packet-error-no-source-address>
+            <received-packet-error-no-return-path config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/summary~pm_resp_summary_bag.ResponderCounters.ReceivedPacketErrorNoReturnPath</xr-path>
+              <xr-xml-map>pm_responder_show:ReceivedPacketErrorNoReturnPath</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 2</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </received-packet-error-no-return-path>
+            <received-packet-error-invalid-querier-control-code config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/summary~pm_resp_summary_bag.ResponderCounters.ReceivedPacketErrorInvalidQuerierControlCode</xr-path>
+              <xr-xml-map>pm_responder_show:ReceivedPacketErrorInvalidQuerierControlCode</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 2</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </received-packet-error-invalid-querier-control-code>
+            <received-packet-error-unsupported-timestamp-format config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/summary~pm_resp_summary_bag.ResponderCounters.ReceivedPacketErrorUnsupportedTimestampFormat</xr-path>
+              <xr-xml-map>pm_responder_show:ReceivedPacketErrorUnsupportedTimestampFormat</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 2</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </received-packet-error-unsupported-timestamp-format>
+            <received-packet-error-timestamp-not-available config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/summary~pm_resp_summary_bag.ResponderCounters.ReceivedPacketErrorTimestampNotAvailable</xr-path>
+              <xr-xml-map>pm_responder_show:ReceivedPacketErrorTimestampNotAvailable</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 2</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </received-packet-error-timestamp-not-available>
+            <received-packet-error-unsupported-mandatory-tlv config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/summary~pm_resp_summary_bag.ResponderCounters.ReceivedPacketErrorUnsupportedMandatoryTLV</xr-path>
+              <xr-xml-map>pm_responder_show:ReceivedPacketErrorUnsupportedMandatoryTLV</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 2</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </received-packet-error-unsupported-mandatory-tlv>
+            <received-packet-error-invalid-packet config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/summary~pm_resp_summary_bag.ResponderCounters.ReceivedPacketErrorInvalidPacket</xr-path>
+              <xr-xml-map>pm_responder_show:ReceivedPacketErrorInvalidPacket</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 2</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </received-packet-error-invalid-packet>
+          </responder-counters>
+          <total-interfaces config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/summary~pm_resp_summary_bag.TotalInterfaces</xr-path>
+            <xr-xml-map>pm_responder_show:TotalInterfaces</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </total-interfaces>
+          <packet-rate config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/summary~pm_resp_summary_bag.PacketRate</xr-path>
+            <xr-xml-map>pm_responder_show:PacketRate</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </packet-rate>
+          <packet-rate-high-water-mark config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/summary~pm_resp_summary_bag.PacketRateHighWaterMark</xr-path>
+            <xr-xml-map>pm_responder_show:PacketRateHighWaterMark</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </packet-rate-high-water-mark>
+        </summary>
+        <interfaces config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/intf/</xr-path>
+          <xr-xml-map>pm_responder_oper:InterfaceTable</xr-xml-map>
+          <interface config="false" key="interface-name" node="list">
+            <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/intf/&lt;pm_responder_oper_Interface_intf_name&gt;</xr-path>
+            <xr-xml-map>pm_responder_oper:Interface</xr-xml-map>
+            <xr-bag-grp-name>pm_resp_intf_bag</xr-bag-grp-name>
+            <xr-bag>pm_responder_show.bag</xr-bag>
+            <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/intf/&lt;pm_responder_oper_Interface_intf_name&gt;</xr-path>
+              <xr-xml-map>pm_responder_oper:InterfaceName</xr-xml-map>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;pm_responder_oper_Interface_intf_name&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </interface-name>
+            <interface-counters config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/intf/&lt;pm_responder_oper_Interface_intf_name&gt;~pm_resp_intf_bag.InterfaceCounters</xr-path>
+              <xr-bag-version>1 2</xr-bag-version>
+              <reply-packet-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/intf/&lt;pm_responder_oper_Interface_intf_name&gt;~pm_resp_intf_bag.InterfaceCounters.ReplyPacketSent</xr-path>
+                <xr-xml-map>pm_responder_show:ReplyPacketSent</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </reply-packet-sent>
+              <reply-packet-sent-error config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/intf/&lt;pm_responder_oper_Interface_intf_name&gt;~pm_resp_intf_bag.InterfaceCounters.ReplyPacketSentError</xr-path>
+                <xr-xml-map>pm_responder_show:ReplyPacketSentError</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </reply-packet-sent-error>
+              <query-packet-received config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/intf/&lt;pm_responder_oper_Interface_intf_name&gt;~pm_resp_intf_bag.InterfaceCounters.QueryPacketReceived</xr-path>
+                <xr-xml-map>pm_responder_show:QueryPacketReceived</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </query-packet-received>
+              <received-packet-error-urotlv-not-present config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/intf/&lt;pm_responder_oper_Interface_intf_name&gt;~pm_resp_intf_bag.InterfaceCounters.ReceivedPacketErrorUROTLVNotPresent</xr-path>
+                <xr-xml-map>pm_responder_show:ReceivedPacketErrorUROTLVNotPresent</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </received-packet-error-urotlv-not-present>
+              <received-packet-error-invalid-source-port-number config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/intf/&lt;pm_responder_oper_Interface_intf_name&gt;~pm_resp_intf_bag.InterfaceCounters.ReceivedPacketErrorInvalidSourcePortNumber</xr-path>
+                <xr-xml-map>pm_responder_show:ReceivedPacketErrorInvalidSourcePortNumber</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </received-packet-error-invalid-source-port-number>
+              <received-packet-error-no-source-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/intf/&lt;pm_responder_oper_Interface_intf_name&gt;~pm_resp_intf_bag.InterfaceCounters.ReceivedPacketErrorNoSourceAddress</xr-path>
+                <xr-xml-map>pm_responder_show:ReceivedPacketErrorNoSourceAddress</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </received-packet-error-no-source-address>
+              <received-packet-error-no-return-path config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/intf/&lt;pm_responder_oper_Interface_intf_name&gt;~pm_resp_intf_bag.InterfaceCounters.ReceivedPacketErrorNoReturnPath</xr-path>
+                <xr-xml-map>pm_responder_show:ReceivedPacketErrorNoReturnPath</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </received-packet-error-no-return-path>
+              <received-packet-error-invalid-querier-control-code config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/intf/&lt;pm_responder_oper_Interface_intf_name&gt;~pm_resp_intf_bag.InterfaceCounters.ReceivedPacketErrorInvalidQuerierControlCode</xr-path>
+                <xr-xml-map>pm_responder_show:ReceivedPacketErrorInvalidQuerierControlCode</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </received-packet-error-invalid-querier-control-code>
+              <received-packet-error-unsupported-timestamp-format config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/intf/&lt;pm_responder_oper_Interface_intf_name&gt;~pm_resp_intf_bag.InterfaceCounters.ReceivedPacketErrorUnsupportedTimestampFormat</xr-path>
+                <xr-xml-map>pm_responder_show:ReceivedPacketErrorUnsupportedTimestampFormat</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </received-packet-error-unsupported-timestamp-format>
+              <received-packet-error-timestamp-not-available config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/intf/&lt;pm_responder_oper_Interface_intf_name&gt;~pm_resp_intf_bag.InterfaceCounters.ReceivedPacketErrorTimestampNotAvailable</xr-path>
+                <xr-xml-map>pm_responder_show:ReceivedPacketErrorTimestampNotAvailable</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </received-packet-error-timestamp-not-available>
+              <received-packet-error-unsupported-mandatory-tlv config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/intf/&lt;pm_responder_oper_Interface_intf_name&gt;~pm_resp_intf_bag.InterfaceCounters.ReceivedPacketErrorUnsupportedMandatoryTLV</xr-path>
+                <xr-xml-map>pm_responder_show:ReceivedPacketErrorUnsupportedMandatoryTLV</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </received-packet-error-unsupported-mandatory-tlv>
+              <received-packet-error-invalid-packet config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/intf/&lt;pm_responder_oper_Interface_intf_name&gt;~pm_resp_intf_bag.InterfaceCounters.ReceivedPacketErrorInvalidPacket</xr-path>
+                <xr-xml-map>pm_responder_show:ReceivedPacketErrorInvalidPacket</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </received-packet-error-invalid-packet>
+            </interface-counters>
+            <interface-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/intf/&lt;pm_responder_oper_Interface_intf_name&gt;~pm_resp_intf_bag.InterfaceName</xr-path>
+              <xr-xml-map>pm_responder_show:interface-name-xr</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 2</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </interface-name-xr>
+            <interface-handle config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/intf/&lt;pm_responder_oper_Interface_intf_name&gt;~pm_resp_intf_bag.InterfaceHandle</xr-path>
+              <xr-xml-map>pm_responder_show:InterfaceHandle</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </interface-handle>
+            <source-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/intf/&lt;pm_responder_oper_Interface_intf_name&gt;~pm_resp_intf_bag.SourceAddress</xr-path>
+              <xr-xml-map>pm_responder_show:SourceAddress</xr-xml-map>
+              <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>1 2</xr-bag-version>
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </source-address>
+            <source-v6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/intf/&lt;pm_responder_oper_Interface_intf_name&gt;~pm_resp_intf_bag.SourceV6Address</xr-path>
+              <xr-xml-map>pm_responder_show:SourceV6Address</xr-xml-map>
+              <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>1 2</xr-bag-version>
+              <type>
+                <type-name>inet:ipv6-address</type-name>
+              </type>
+            </source-v6-address>
+            <packet-rate config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/intf/&lt;pm_responder_oper_Interface_intf_name&gt;~pm_resp_intf_bag.PacketRate</xr-path>
+              <xr-xml-map>pm_responder_show:PacketRate</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </packet-rate>
+            <packet-rate-high-water-mark config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/intf/&lt;pm_responder_oper_Interface_intf_name&gt;~pm_resp_intf_bag.PacketRateHighWaterMark</xr-path>
+              <xr-xml-map>pm_responder_show:PacketRateHighWaterMark</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </packet-rate-high-water-mark>
+            <cleanup-time-remaining config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/intf/&lt;pm_responder_oper_Interface_intf_name&gt;~pm_resp_intf_bag.CleanupTimeRemaining</xr-path>
+              <xr-xml-map>pm_responder_show:CleanupTimeRemaining</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </cleanup-time-remaining>
+          </interface>
+        </interfaces>
+        <node config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/perf_meas/resp/node/&lt;pm_responder_oper_Node_node&gt;/</xr-path>
+          <xr-xml-map>pm_responder_oper:Node</xr-xml-map>
+          <xr-sch-type>SysDBNodeID</xr-sch-type>
+          <xr-sch-arg-name>&lt;pm_responder_oper_Node_node&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Node-id</type-name>
+          </type>
+        </node>
+      </node>
+    </nodes>
+  </performance-measurement-responder>
+</Cisco-IOS-XR-perf-meas-oper>

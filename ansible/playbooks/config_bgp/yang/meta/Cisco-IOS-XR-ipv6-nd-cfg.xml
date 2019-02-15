@@ -1,0 +1,720 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ipv6-nd-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv6-nd-cfg" revision="2017-05-01">
+  <files>
+    <file revision="2017-05-01" submodule="false">Cisco-IOS-XR-ipv6-nd-cfg.yang</file>
+  </files>
+  <prefix>ipv6-nd-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="yang">ietf-yang-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-ifmgr-cfg</import>
+  <typedef name="Ipv6srp-encapsulation">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="5">srpa</enum>
+      <enum value="6">srpb</enum>
+    </type>
+  </typedef>
+  <typedef name="Ipv6nd-month">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">january</enum>
+      <enum value="1">february</enum>
+      <enum value="2">march</enum>
+      <enum value="3">april</enum>
+      <enum value="4">may</enum>
+      <enum value="5">june</enum>
+      <enum value="6">july</enum>
+      <enum value="7">august</enum>
+      <enum value="8">september</enum>
+      <enum value="9">october</enum>
+      <enum value="10">november</enum>
+      <enum value="11">december</enum>
+    </type>
+  </typedef>
+  <typedef name="Ipv6-nd-router-pref">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">high</enum>
+      <enum value="2">medium</enum>
+      <enum value="3">low</enum>
+    </type>
+  </typedef>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <ipv6-neighbor config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/</xr-path>
+      <xr-xml-map>ipv6_nd_interface_cfg:IPv6Neighbor</xr-xml-map>
+      <xr-task>network &amp; ipv6</xr-task>
+      <raspecific-route-s config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/ra-specific-route/</xr-path>
+        <xr-xml-map>ipv6_nd_interface_cfg:RASPECIFICROUTETable</xr-xml-map>
+        <xr-task>network &amp; ipv6</xr-task>
+        <raspecific-route config="true" key="specific-route" node="list">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/ra-specific-route/&lt;ipv6_nd_interface_cfg_RASPECIFICROUTE_specific_route&gt;</xr-path>
+          <xr-xml-map>ipv6_nd_interface_cfg:RASPECIFICROUTE</xr-xml-map>
+          <xr-task>network &amp; ipv6</xr-task>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <specific-route config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d</xr-pack-format>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/ra-specific-route/&lt;ipv6_nd_interface_cfg_RASPECIFICROUTE_specific_route&gt;</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:SpecificRoute</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>IPV6AddressString</xr-sch-type>
+            <xr-sch-arg-name>&lt;ipv6_nd_interface_cfg_RASPECIFICROUTE_specific_route&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>inet:ipv6-address-no-zone</type-name>
+            </type>
+          </specific-route>
+          <prefix-length config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/ra-specific-route/&lt;ipv6_nd_interface_cfg_RASPECIFICROUTE_specific_route&gt;`0</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:PrefixLength</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>IPV6PrefixLength</xr-sch-type>
+            <type>
+              <type-name>xr:Ipv6-prefix-length</type-name>
+            </type>
+          </prefix-length>
+          <lifetime config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/ra-specific-route/&lt;ipv6_nd_interface_cfg_RASPECIFICROUTE_specific_route&gt;`1</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:Lifetime</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>ZeroRange</xr-sch-type>
+            <type range="0..4294967295">
+              <type-name>uint32</type-name>
+            </type>
+          </lifetime>
+          <preference config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/ra-specific-route/&lt;ipv6_nd_interface_cfg_RASPECIFICROUTE_specific_route&gt;`2</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:Preference</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Ipv6-nd-router-pref</type-name>
+            </type>
+          </preference>
+        </raspecific-route>
+      </raspecific-route-s>
+      <radns-searches config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/ra-dns-search-list/</xr-path>
+        <xr-xml-map>ipv6_nd_interface_cfg:RADNSSearchListTable</xr-xml-map>
+        <xr-task>network &amp; ipv6</xr-task>
+        <radns-search config="true" key="dns-search-list" node="list">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/ra-dns-search-list/&lt;ipv6_nd_interface_cfg_RADNSSearchList_dns_search_list&gt;</xr-path>
+          <xr-xml-map>ipv6_nd_interface_cfg:RADNSSearchList</xr-xml-map>
+          <xr-task>network &amp; ipv6</xr-task>
+          <dns-search-list config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/ra-dns-search-list/&lt;ipv6_nd_interface_cfg_RADNSSearchList_dns_search_list&gt;</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:DNSSearchList</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;ipv6_nd_interface_cfg_RADNSSearchList_dns_search_list&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </dns-search-list>
+          <lifetime config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/ra-dns-search-list/&lt;ipv6_nd_interface_cfg_RADNSSearchList_dns_search_list&gt;</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:Lifetime</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="4..3600">
+              <type-name>uint32</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </lifetime>
+        </radns-search>
+      </radns-searches>
+      <radns-servers config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/ra-dns-server/</xr-path>
+        <xr-xml-map>ipv6_nd_interface_cfg:RADNSServerTable</xr-xml-map>
+        <xr-task>network &amp; ipv6</xr-task>
+        <radns-server config="true" key="dns-server" node="list">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/ra-dns-server/&lt;ipv6_nd_interface_cfg_RADNSServer_dns_server&gt;</xr-path>
+          <xr-xml-map>ipv6_nd_interface_cfg:RADNSServer</xr-xml-map>
+          <xr-task>network &amp; ipv6</xr-task>
+          <dns-server config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/ra-dns-server/&lt;ipv6_nd_interface_cfg_RADNSServer_dns_server&gt;</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:DNSServer</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>IPV6AddressString</xr-sch-type>
+            <xr-sch-arg-name>&lt;ipv6_nd_interface_cfg_RADNSServer_dns_server&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>inet:ipv6-address-no-zone</type-name>
+            </type>
+          </dns-server>
+          <lifetime config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/ra-dns-server/&lt;ipv6_nd_interface_cfg_RADNSServer_dns_server&gt;</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:Lifetime</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="4..3600">
+              <type-name>uint32</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </lifetime>
+        </radns-server>
+      </radns-servers>
+      <ra-interval config="true" is-key="false" node="container" presence="true">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/ra-interval`</xr-path>
+        <xr-xml-map>ipv6_nd_interface_cfg:RAInterval</xr-xml-map>
+        <xr-task>network &amp; ipv6</xr-task>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <maximum config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/ra-interval`0</xr-path>
+          <xr-xml-map>ipv6_nd_interface_cfg:Maximum</xr-xml-map>
+          <xr-task>network &amp; ipv6</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="4..1800">
+            <type-name>uint32</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </maximum>
+        <minimum config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/ra-interval`1</xr-path>
+          <xr-xml-map>ipv6_nd_interface_cfg:Minimum</xr-xml-map>
+          <xr-task>network &amp; ipv6</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="3..1800">
+            <type-name>uint32</type-name>
+          </type>
+        </minimum>
+      </ra-interval>
+      <ipv6-prefixes config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/prefix/</xr-path>
+        <xr-xml-map>ipv6_nd_interface_cfg:IPv6PrefixTable</xr-xml-map>
+        <xr-task>network &amp; ipv6</xr-task>
+        <ipv6-prefix config="true" key="prefix" node="list">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/prefix/&lt;ipv6_nd_interface_cfg_IPv6Prefix_prefix&gt;</xr-path>
+          <xr-xml-map>ipv6_nd_interface_cfg:IPv6Prefix</xr-xml-map>
+          <xr-task>network &amp; ipv6</xr-task>
+          <xr-pack-format>%s%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+          <prefix config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%s%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/prefix/&lt;ipv6_nd_interface_cfg_IPv6Prefix_prefix&gt;</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:Prefix</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>IPV6AddressString</xr-sch-type>
+            <xr-sch-arg-name>&lt;ipv6_nd_interface_cfg_IPv6Prefix_prefix&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>inet:ipv6-address-no-zone</type-name>
+            </type>
+          </prefix>
+          <prefix-zone config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/prefix/&lt;ipv6_nd_interface_cfg_IPv6Prefix_prefix&gt;`0</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:PrefixZone</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>BoundedString</xr-sch-type>
+            <xr-default-set/>
+            <type length="1..9">
+              <type-name>string</type-name>
+            </type>
+          </prefix-zone>
+          <prefix-length config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/prefix/&lt;ipv6_nd_interface_cfg_IPv6Prefix_prefix&gt;`1</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:PrefixLength</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>IPV6PrefixLength</xr-sch-type>
+            <type>
+              <type-name>xr:Ipv6-prefix-length</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </prefix-length>
+          <valid-lifetime config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/prefix/&lt;ipv6_nd_interface_cfg_IPv6Prefix_prefix&gt;`2</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:ValidLifetime</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>ZeroRange</xr-sch-type>
+            <xr-default-set/>
+            <type range="0..4294967295">
+              <type-name>uint32</type-name>
+            </type>
+          </valid-lifetime>
+          <preferred-lifetime config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/prefix/&lt;ipv6_nd_interface_cfg_IPv6Prefix_prefix&gt;`3</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:PreferredLifetime</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>ZeroRange</xr-sch-type>
+            <xr-default-set/>
+            <type range="0..4294967295">
+              <type-name>uint32</type-name>
+            </type>
+          </preferred-lifetime>
+          <off-link config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/prefix/&lt;ipv6_nd_interface_cfg_IPv6Prefix_prefix&gt;`4</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:OffLink</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>Boolean</xr-sch-type>
+            <xr-default-set/>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </off-link>
+          <no-auto-config config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/prefix/&lt;ipv6_nd_interface_cfg_IPv6Prefix_prefix&gt;`5</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:NoAutoConfig</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>Boolean</xr-sch-type>
+            <xr-default-set/>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </no-auto-config>
+          <no-advertize config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/prefix/&lt;ipv6_nd_interface_cfg_IPv6Prefix_prefix&gt;`6</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:NoAdvertize</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>Boolean</xr-sch-type>
+            <xr-default-set/>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </no-advertize>
+          <expiry-month config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/prefix/&lt;ipv6_nd_interface_cfg_IPv6Prefix_prefix&gt;`7</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:ExpiryMonth</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <xr-default-set/>
+            <type>
+              <type-name>Ipv6nd-month</type-name>
+            </type>
+          </expiry-month>
+          <expiry-date config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/prefix/&lt;ipv6_nd_interface_cfg_IPv6Prefix_prefix&gt;`8</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:ExpiryDate</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <xr-default-set/>
+            <type range="1..31">
+              <type-name>uint32</type-name>
+            </type>
+          </expiry-date>
+          <expiry-year config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/prefix/&lt;ipv6_nd_interface_cfg_IPv6Prefix_prefix&gt;`9</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:ExpiryYear</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <xr-default-set/>
+            <type range="2003..2035">
+              <type-name>uint32</type-name>
+            </type>
+          </expiry-year>
+          <expiry-hour config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/prefix/&lt;ipv6_nd_interface_cfg_IPv6Prefix_prefix&gt;`10</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:ExpiryHour</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>ZeroRange</xr-sch-type>
+            <xr-default-set/>
+            <type range="0..23">
+              <type-name>uint32</type-name>
+            </type>
+          </expiry-hour>
+          <expiry-minute config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/prefix/&lt;ipv6_nd_interface_cfg_IPv6Prefix_prefix&gt;`11</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:ExpiryMinute</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>ZeroRange</xr-sch-type>
+            <xr-default-set/>
+            <type range="0..59">
+              <type-name>uint32</type-name>
+            </type>
+          </expiry-minute>
+          <pref-expiry-month config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/prefix/&lt;ipv6_nd_interface_cfg_IPv6Prefix_prefix&gt;`12</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:PrefExpiryMonth</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <xr-default-set/>
+            <type>
+              <type-name>Ipv6nd-month</type-name>
+            </type>
+          </pref-expiry-month>
+          <pref-expiry-date config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/prefix/&lt;ipv6_nd_interface_cfg_IPv6Prefix_prefix&gt;`13</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:PrefExpiryDate</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <xr-default-set/>
+            <type range="1..31">
+              <type-name>uint32</type-name>
+            </type>
+          </pref-expiry-date>
+          <pref-expiry-year config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/prefix/&lt;ipv6_nd_interface_cfg_IPv6Prefix_prefix&gt;`14</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:PrefExpiryYear</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <xr-default-set/>
+            <type range="2003..2035">
+              <type-name>uint32</type-name>
+            </type>
+          </pref-expiry-year>
+          <pref-expiry-hour config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/prefix/&lt;ipv6_nd_interface_cfg_IPv6Prefix_prefix&gt;`15</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:PrefExpiryHour</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>ZeroRange</xr-sch-type>
+            <xr-default-set/>
+            <type range="0..23">
+              <type-name>uint32</type-name>
+            </type>
+          </pref-expiry-hour>
+          <pref-expiry-minute config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%s%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/prefix/&lt;ipv6_nd_interface_cfg_IPv6Prefix_prefix&gt;`16</xr-path>
+            <xr-xml-map>ipv6_nd_interface_cfg:PrefExpiryMinute</xr-xml-map>
+            <xr-task>network &amp; ipv6</xr-task>
+            <xr-sch-type>ZeroRange</xr-sch-type>
+            <xr-default-set/>
+            <type range="0..59">
+              <type-name>uint32</type-name>
+            </type>
+          </pref-expiry-minute>
+        </ipv6-prefix>
+      </ipv6-prefixes>
+      <reachable-time config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/reachable-time</xr-path>
+        <xr-xml-map>ipv6_nd_interface_cfg:ReachableTime</xr-xml-map>
+        <xr-task>network &amp; ipv6</xr-task>
+        <xr-sch-type>ZeroRange</xr-sch-type>
+        <type range="0..3600000">
+          <type-name>uint32</type-name>
+        </type>
+      </reachable-time>
+      <ra-unspecify-hoplimit config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/ra-hoplimit</xr-path>
+        <xr-xml-map>ipv6_nd_interface_cfg:RAUnspecifyHoplimit</xr-xml-map>
+        <xr-task>network &amp; ipv6</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </ra-unspecify-hoplimit>
+      <dad-attempts config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/dad-attempts</xr-path>
+        <xr-xml-map>ipv6_nd_interface_cfg:DADAttempts</xr-xml-map>
+        <xr-task>network &amp; ipv6</xr-task>
+        <xr-sch-type>ZeroRange</xr-sch-type>
+        <type range="0..600">
+          <type-name>uint32</type-name>
+        </type>
+      </dad-attempts>
+      <srp-multicast-encapsulation config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/srp-mcast-encap</xr-path>
+        <xr-xml-map>ipv6_nd_interface_cfg:SRPMulticastEncapsulation</xr-xml-map>
+        <xr-task>network &amp; ipv6</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Ipv6srp-encapsulation</type-name>
+        </type>
+      </srp-multicast-encapsulation>
+      <ns-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/ns-interval</xr-path>
+        <xr-xml-map>ipv6_nd_interface_cfg:NSInterval</xr-xml-map>
+        <xr-task>network &amp; ipv6</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1000..4294967295">
+          <type-name>uint32</type-name>
+        </type>
+      </ns-interval>
+      <cache-limit config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/cache-limit</xr-path>
+        <xr-xml-map>ipv6_nd_interface_cfg:CacheLimit</xr-xml-map>
+        <xr-task>network &amp; ipv6</xr-task>
+        <xr-sch-type>ZeroRange</xr-sch-type>
+        <type range="0..128000">
+          <type-name>uint32</type-name>
+        </type>
+      </cache-limit>
+      <redirect config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/redirects</xr-path>
+        <xr-xml-map>ipv6_nd_interface_cfg:Redirect</xr-xml-map>
+        <xr-task>network &amp; ipv6</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </redirect>
+      <srp-unicast-encapsulation config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/srp-encap</xr-path>
+        <xr-xml-map>ipv6_nd_interface_cfg:SRPUnicastEncapsulation</xr-xml-map>
+        <xr-task>network &amp; ipv6</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Ipv6srp-encapsulation</type-name>
+        </type>
+      </srp-unicast-encapsulation>
+      <ramtu-suppress config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/ra-suppress-mtu</xr-path>
+        <xr-xml-map>ipv6_nd_interface_cfg:RAMTUSuppress</xr-xml-map>
+        <xr-task>network &amp; ipv6</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </ramtu-suppress>
+      <managed-config config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/managed-config-flag</xr-path>
+        <xr-xml-map>ipv6_nd_interface_cfg:ManagedConfig</xr-xml-map>
+        <xr-task>network &amp; ipv6</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </managed-config>
+      <ra-unicast config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/unicast-ra</xr-path>
+        <xr-xml-map>ipv6_nd_interface_cfg:RAUnicast</xr-xml-map>
+        <xr-task>network &amp; ipv6</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </ra-unicast>
+      <ra-lifetime config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/ra-lifetime</xr-path>
+        <xr-xml-map>ipv6_nd_interface_cfg:RALifetime</xr-xml-map>
+        <xr-task>network &amp; ipv6</xr-task>
+        <xr-sch-type>ZeroRange</xr-sch-type>
+        <type range="0..9000">
+          <type-name>uint32</type-name>
+        </type>
+      </ra-lifetime>
+      <other-config config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/other-config-flag</xr-path>
+        <xr-xml-map>ipv6_nd_interface_cfg:OtherConfig</xr-xml-map>
+        <xr-task>network &amp; ipv6</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </other-config>
+      <ra-suppress config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/suppress-ra</xr-path>
+        <xr-xml-map>ipv6_nd_interface_cfg:RASuppress</xr-xml-map>
+        <xr-task>network &amp; ipv6</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </ra-suppress>
+      <router-preference config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/nd/router-preference</xr-path>
+        <xr-xml-map>ipv6_nd_interface_cfg:RouterPreference</xr-xml-map>
+        <xr-task>network &amp; ipv6</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Ipv6-nd-router-pref</type-name>
+        </type>
+      </router-preference>
+    </ipv6-neighbor>
+  </augment>
+  <ipv6-neighbor config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/ipv6/nd/</xr-path>
+    <xr-xml-map>ipv6_nd_cfg:IPv6Neighbor</xr-xml-map>
+    <xr-task>network &amp; ipv6</xr-task>
+    <neighbors config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ipv6/nd/neighbour-config/</xr-path>
+      <xr-xml-map>ipv6_nd_cfg:NeighborTable</xr-xml-map>
+      <xr-task>network &amp; ipv6</xr-task>
+      <neighbor config="true" key="neighbor-address interface-name" node="list">
+        <xr-path>/cfg/gl/ipv6/nd/neighbour-config/&lt;ipv6_nd_cfg_Neighbor_address&gt;,&lt;ipv6_nd_cfg_Neighbor_interface&gt;</xr-path>
+        <xr-xml-map>ipv6_nd_cfg:Neighbor</xr-xml-map>
+        <xr-task>network &amp; ipv6</xr-task>
+        <xr-pack-format>%s%d%d%d%d</xr-pack-format>
+        <neighbor-address config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%s%d%d%d%d</xr-pack-format>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/ipv6/nd/neighbour-config/&lt;ipv6_nd_cfg_Neighbor_address&gt;,&lt;ipv6_nd_cfg_Neighbor_interface&gt;</xr-path>
+          <xr-xml-map>ipv6_nd_cfg:NeighborAddress</xr-xml-map>
+          <xr-task>network &amp; ipv6</xr-task>
+          <xr-sch-type>IPV6AddressHexString</xr-sch-type>
+          <xr-sch-arg-name>&lt;ipv6_nd_cfg_Neighbor_address&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>inet:ipv6-address-no-zone</type-name>
+          </type>
+        </neighbor-address>
+        <interface-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%s%d%d%d%d</xr-pack-format>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/ipv6/nd/neighbour-config/&lt;ipv6_nd_cfg_Neighbor_address&gt;,&lt;ipv6_nd_cfg_Neighbor_interface&gt;</xr-path>
+          <xr-xml-map>ipv6_nd_cfg:InterfaceName</xr-xml-map>
+          <xr-task>network &amp; ipv6</xr-task>
+          <xr-sch-type>InterfaceName</xr-sch-type>
+          <xr-sch-arg-name>&lt;ipv6_nd_cfg_Neighbor_interface&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </interface-name>
+        <zone config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/ipv6/nd/neighbour-config/&lt;ipv6_nd_cfg_Neighbor_address&gt;,&lt;ipv6_nd_cfg_Neighbor_interface&gt;`0</xr-path>
+          <xr-xml-map>ipv6_nd_cfg:Zone</xr-xml-map>
+          <xr-task>network &amp; ipv6</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-default-set/>
+          <type>
+            <type-name>string</type-name>
+          </type>
+          <default>0</default>
+        </zone>
+        <mac-address config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>3</xr-pack-elem-size>
+          <xr-path>/cfg/gl/ipv6/nd/neighbour-config/&lt;ipv6_nd_cfg_Neighbor_address&gt;,&lt;ipv6_nd_cfg_Neighbor_interface&gt;`1</xr-path>
+          <xr-xml-map>ipv6_nd_cfg:MACAddress</xr-xml-map>
+          <xr-task>network &amp; ipv6</xr-task>
+          <xr-sch-type>MACAddress</xr-sch-type>
+          <type>
+            <type-name>yang:mac-address</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </mac-address>
+        <encapsulation config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/ipv6/nd/neighbour-config/&lt;ipv6_nd_cfg_Neighbor_address&gt;,&lt;ipv6_nd_cfg_Neighbor_interface&gt;`4</xr-path>
+          <xr-xml-map>ipv6_nd_cfg:Encapsulation</xr-xml-map>
+          <xr-task>network &amp; ipv6</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <xr-default-set/>
+          <type>
+            <type-name>Ipv6srp-encapsulation</type-name>
+          </type>
+        </encapsulation>
+      </neighbor>
+    </neighbors>
+    <scavenge-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/ipv6/nd/scavenge-timeout</xr-path>
+      <xr-xml-map>ipv6_nd_cfg:ScavengeTimeout</xr-xml-map>
+      <xr-task>network &amp; ipv6</xr-task>
+      <xr-sch-type>Range</xr-sch-type>
+      <type range="1..43200">
+        <type-name>uint32</type-name>
+      </type>
+    </scavenge-timeout>
+  </ipv6-neighbor>
+</Cisco-IOS-XR-ipv6-nd-cfg>

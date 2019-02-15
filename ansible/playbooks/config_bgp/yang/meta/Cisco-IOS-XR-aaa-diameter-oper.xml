@@ -1,0 +1,2474 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-aaa-diameter-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-aaa-diameter-oper" revision="2017-09-07">
+  <files>
+    <file revision="2017-09-07" submodule="false">Cisco-IOS-XR-aaa-diameter-oper.yang</file>
+    <file revision="2017-09-07" submodule="true">Cisco-IOS-XR-aaa-diameter-oper-sub1.yang</file>
+  </files>
+  <prefix>aaa-diameter-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-aaa-locald-oper</import>
+  <typedef name="Peer-state-value">
+    <type node="enumeration">
+      <enum value="0">state-none</enum>
+      <enum value="1">closed</enum>
+      <enum value="2">wait-connection-ack</enum>
+      <enum value="3">wait-cea</enum>
+      <enum value="4">state-open</enum>
+      <enum value="5">closing</enum>
+      <enum value="6">suspect</enum>
+    </type>
+  </typedef>
+  <typedef name="Who-initiated-disconnect">
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">host</enum>
+      <enum value="2">peer</enum>
+    </type>
+  </typedef>
+  <typedef name="Disconnect-cause">
+    <type node="enumeration">
+      <enum value="0">reboot</enum>
+      <enum value="1">busy</enum>
+      <enum value="2">do-not-wait-to-talk</enum>
+    </type>
+  </typedef>
+  <typedef name="Peer">
+    <type node="enumeration">
+      <enum value="0">undefined</enum>
+      <enum value="1">server</enum>
+    </type>
+  </typedef>
+  <typedef name="Security-type-value">
+    <type node="enumeration">
+      <enum value="0">security-type-none</enum>
+      <enum value="1">type</enum>
+      <enum value="2">ipsec</enum>
+    </type>
+  </typedef>
+  <typedef name="Protocol-type-value">
+    <type node="enumeration">
+      <enum value="0">protocol-none</enum>
+      <enum value="1">tcp</enum>
+    </type>
+  </typedef>
+  <augment path="/a1:aaa">
+    <diameter config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/aaa/gl/diameter/</xr-path>
+      <xr-xml-map>aaa_diameter_oper:Diameter</xr-xml-map>
+      <xr-task>aaa</xr-task>
+      <gy config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/aaa/gl/diameter/gy</xr-path>
+        <xr-xml-map>aaa_diameter_oper:Gy</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <xr-bag-grp-name>diameter_gy</xr-bag-grp-name>
+        <xr-bag>show_diameter.bag</xr-bag>
+        <is-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy~diameter_gy.IsEnabled</xr-path>
+          <xr-xml-map>show_diameter:IsEnabled</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </is-enabled>
+        <tx-timer config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy~diameter_gy.TxTimer</xr-path>
+          <xr-xml-map>show_diameter:TxTimer</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </tx-timer>
+        <retransmits config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy~diameter_gy.Retransmits</xr-path>
+          <xr-xml-map>show_diameter:Retransmits</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </retransmits>
+      </gy>
+      <gx-statistics config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/aaa/gl/diameter/gx_stats</xr-path>
+        <xr-xml-map>aaa_diameter_oper:GxStatistics</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <xr-bag-grp-name>diameter_gx_stats</xr-bag-grp-name>
+        <xr-bag>show_diameter.bag</xr-bag>
+        <ccr-init-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.CCRInitMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRInitMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-init-messages>
+        <ccr-init-failed-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.CCRInitFailedMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRInitFailedMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-init-failed-messages>
+        <ccr-init-timed-out-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.CCRInitTimedOutMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRInitTimedOutMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-init-timed-out-messages>
+        <ccr-init-retry-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.CCRInitRetryMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRInitRetryMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-init-retry-messages>
+        <ccr-update-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.CCRUpdateMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRUpdateMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-update-messages>
+        <ccr-update-failed-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.CCRUpdateFailedMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRUpdateFailedMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-update-failed-messages>
+        <ccr-update-timed-out-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.CCRUpdateTimedOutMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRUpdateTimedOutMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-update-timed-out-messages>
+        <ccr-update-retry-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.CCRUpdateRetryMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRUpdateRetryMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-update-retry-messages>
+        <ccr-final-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.CCRFinalMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRFinalMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-final-messages>
+        <ccr-final-failed-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.CCRFinalFailedMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRFinalFailedMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-final-failed-messages>
+        <ccr-final-timed-out-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.CCRFinalTimedOutMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRFinalTimedOutMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-final-timed-out-messages>
+        <ccr-final-retry-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.CCRFinalRetryMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRFinalRetryMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-final-retry-messages>
+        <cca-init-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.CCAInitMessages</xr-path>
+          <xr-xml-map>show_diameter:CCAInitMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </cca-init-messages>
+        <cca-init-error-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.CCAInitErrorMessages</xr-path>
+          <xr-xml-map>show_diameter:CCAInitErrorMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </cca-init-error-messages>
+        <cca-update-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.CCAUpdateMessages</xr-path>
+          <xr-xml-map>show_diameter:CCAUpdateMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </cca-update-messages>
+        <cca-update-error-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.CCAUpdateErrorMessages</xr-path>
+          <xr-xml-map>show_diameter:CCAUpdateErrorMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </cca-update-error-messages>
+        <cca-final-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.CCAFinalMessages</xr-path>
+          <xr-xml-map>show_diameter:CCAFinalMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </cca-final-messages>
+        <cca-final-error-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.CCAFinalErrorMessages</xr-path>
+          <xr-xml-map>show_diameter:CCAFinalErrorMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </cca-final-error-messages>
+        <rar-received-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.RARReceivedMessages</xr-path>
+          <xr-xml-map>show_diameter:RARReceivedMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </rar-received-messages>
+        <rar-received-error-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.RARReceivedErrorMessages</xr-path>
+          <xr-xml-map>show_diameter:RARReceivedErrorMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </rar-received-error-messages>
+        <raa-sent-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.RAASentMessages</xr-path>
+          <xr-xml-map>show_diameter:RAASentMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </raa-sent-messages>
+        <raa-sent-error-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.RAASentErrorMessages</xr-path>
+          <xr-xml-map>show_diameter:RAASentErrorMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </raa-sent-error-messages>
+        <asr-received-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.ASRReceivedMessages</xr-path>
+          <xr-xml-map>show_diameter:ASRReceivedMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </asr-received-messages>
+        <asr-received-error-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.ASRReceivedErrorMessages</xr-path>
+          <xr-xml-map>show_diameter:ASRReceivedErrorMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </asr-received-error-messages>
+        <asa-sent-messsages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.ASASentMesssages</xr-path>
+          <xr-xml-map>show_diameter:ASASentMesssages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </asa-sent-messsages>
+        <asa-sent-error-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.ASASentErrorMessages</xr-path>
+          <xr-xml-map>show_diameter:ASASentErrorMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </asa-sent-error-messages>
+        <session-termination-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.SessionTerminationMessages</xr-path>
+          <xr-xml-map>show_diameter:SessionTerminationMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </session-termination-messages>
+        <unknown-request-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.UnknownRequestMessages</xr-path>
+          <xr-xml-map>show_diameter:UnknownRequestMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </unknown-request-messages>
+        <restore-sessions config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.RestoreSessions</xr-path>
+          <xr-xml-map>show_diameter:RestoreSessions</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </restore-sessions>
+        <open-sessions config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.OpenSessions</xr-path>
+          <xr-xml-map>show_diameter:OpenSessions</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </open-sessions>
+        <close-sessions config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.CloseSessions</xr-path>
+          <xr-xml-map>show_diameter:CloseSessions</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </close-sessions>
+        <active-sessions config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx_stats~diameter_gx_stats.ActiveSessions</xr-path>
+          <xr-xml-map>show_diameter:ActiveSessions</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </active-sessions>
+      </gx-statistics>
+      <gx config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/aaa/gl/diameter/gx</xr-path>
+        <xr-xml-map>aaa_diameter_oper:Gx</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <xr-bag-grp-name>diameter_gx</xr-bag-grp-name>
+        <xr-bag>show_diameter.bag</xr-bag>
+        <is-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx~diameter_gx.IsEnabled</xr-path>
+          <xr-xml-map>show_diameter:IsEnabled</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </is-enabled>
+        <tx-timer config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx~diameter_gx.TxTimer</xr-path>
+          <xr-xml-map>show_diameter:TxTimer</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </tx-timer>
+        <retransmits config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gx~diameter_gx.Retransmits</xr-path>
+          <xr-xml-map>show_diameter:Retransmits</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </retransmits>
+      </gx>
+      <peers config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/aaa/gl/diameter/servers_stats</xr-path>
+        <xr-xml-map>aaa_diameter_oper:Peers</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <xr-bag-grp-name>diameter_peers</xr-bag-grp-name>
+        <xr-bag>show_diameter.bag</xr-bag>
+        <origin-host config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.OriginHost</xr-path>
+          <xr-xml-map>show_diameter:OriginHost</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </origin-host>
+        <origin-realm config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.OriginRealm</xr-path>
+          <xr-xml-map>show_diameter:OriginRealm</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </origin-realm>
+        <source-interface config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.SourceInterface</xr-path>
+          <xr-xml-map>show_diameter:SourceInterface</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </source-interface>
+        <tls-trustpoint config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.TLSTrustpoint</xr-path>
+          <xr-xml-map>show_diameter:TLSTrustpoint</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </tls-trustpoint>
+        <conn-retry-timer config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.ConnRetryTimer</xr-path>
+          <xr-xml-map>show_diameter:ConnRetryTimer</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </conn-retry-timer>
+        <watchdog-timer config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.WatchdogTimer</xr-path>
+          <xr-xml-map>show_diameter:WatchdogTimer</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </watchdog-timer>
+        <transaction-timer config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.TransactionTimer</xr-path>
+          <xr-xml-map>show_diameter:TransactionTimer</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </transaction-timer>
+        <peer-num config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerNum</xr-path>
+          <xr-xml-map>show_diameter:PeerNum</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </peer-num>
+        <trans-total config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.TransTotal</xr-path>
+          <xr-xml-map>show_diameter:TransTotal</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </trans-total>
+        <trans-max config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.TransMax</xr-path>
+          <xr-xml-map>show_diameter:TransMax</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </trans-max>
+        <peer config="false" node="list">
+          <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;]</xr-path>
+          <xr-task>aaa</xr-task>
+          <xr-bag-version>2 0</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+          <peer-name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].PeerName</xr-path>
+            <xr-xml-map>show_diameter:PeerName</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </peer-name>
+          <peer-index config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].PeerIndex</xr-path>
+            <xr-xml-map>show_diameter:PeerIndex</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </peer-index>
+          <address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].Address</xr-path>
+            <xr-xml-map>show_diameter:Address</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </address>
+          <port config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].Port</xr-path>
+            <xr-xml-map>show_diameter:Port</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </port>
+          <port-connect config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].PortConnect</xr-path>
+            <xr-xml-map>show_diameter:PortConnect</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </port-connect>
+          <protocol-type config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].ProtocolType</xr-path>
+            <xr-xml-map>show_diameter:ProtocolType</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>Protocol-type-value</type-name>
+            </type>
+          </protocol-type>
+          <security-type config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].SecurityType</xr-path>
+            <xr-xml-map>show_diameter:SecurityType</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>Security-type-value</type-name>
+            </type>
+          </security-type>
+          <conn-retry-timer config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].ConnRetryTimer</xr-path>
+            <xr-xml-map>show_diameter:ConnRetryTimer</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </conn-retry-timer>
+          <watchdog-timer config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].WatchdogTimer</xr-path>
+            <xr-xml-map>show_diameter:WatchdogTimer</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </watchdog-timer>
+          <transaction-timer config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].TransactionTimer</xr-path>
+            <xr-xml-map>show_diameter:TransactionTimer</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </transaction-timer>
+          <vrf-name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].VRFName</xr-path>
+            <xr-xml-map>show_diameter:VRFName</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </vrf-name>
+          <source-interface config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].SourceInterface</xr-path>
+            <xr-xml-map>show_diameter:SourceInterface</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </source-interface>
+          <destination-host config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].DestinationHost</xr-path>
+            <xr-xml-map>show_diameter:DestinationHost</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </destination-host>
+          <destination-realm config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].DestinationRealm</xr-path>
+            <xr-xml-map>show_diameter:DestinationRealm</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </destination-realm>
+          <peer-type config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].PeerType</xr-path>
+            <xr-xml-map>show_diameter:PeerType</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>Peer</type-name>
+            </type>
+          </peer-type>
+          <firmware-revision config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].FirmwareRevision</xr-path>
+            <xr-xml-map>show_diameter:FirmwareRevision</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </firmware-revision>
+          <state-duration config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].StateDuration</xr-path>
+            <xr-xml-map>show_diameter:StateDuration</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </state-duration>
+          <last-disconnect-cause config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].LastDisconnectCause</xr-path>
+            <xr-xml-map>show_diameter:LastDisconnectCause</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>Disconnect-cause</type-name>
+            </type>
+          </last-disconnect-cause>
+          <who-init-disconnect config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].WhoInitDisconnect</xr-path>
+            <xr-xml-map>show_diameter:WhoInitDisconnect</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>Who-initiated-disconnect</type-name>
+            </type>
+          </who-init-disconnect>
+          <in-as-rs config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].InASRs</xr-path>
+            <xr-xml-map>show_diameter:InASRs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </in-as-rs>
+          <out-as-rs config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].OutASRs</xr-path>
+            <xr-xml-map>show_diameter:OutASRs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </out-as-rs>
+          <in-as-as config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].InASAs</xr-path>
+            <xr-xml-map>show_diameter:InASAs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </in-as-as>
+          <out-as-as config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].OutASAs</xr-path>
+            <xr-xml-map>show_diameter:OutASAs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </out-as-as>
+          <in-ac-rs config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].InACRs</xr-path>
+            <xr-xml-map>show_diameter:InACRs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </in-ac-rs>
+          <out-ac-rs config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].OutACRs</xr-path>
+            <xr-xml-map>show_diameter:OutACRs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </out-ac-rs>
+          <in-ac-as config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].InACAs</xr-path>
+            <xr-xml-map>show_diameter:InACAs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </in-ac-as>
+          <out-ac-as config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].OutACAs</xr-path>
+            <xr-xml-map>show_diameter:OutACAs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </out-ac-as>
+          <in-ce-rs config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].InCERs</xr-path>
+            <xr-xml-map>show_diameter:InCERs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </in-ce-rs>
+          <out-ce-rs config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].OutCERs</xr-path>
+            <xr-xml-map>show_diameter:OutCERs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </out-ce-rs>
+          <in-ce-as config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].InCEAs</xr-path>
+            <xr-xml-map>show_diameter:InCEAs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </in-ce-as>
+          <out-ce-as config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].OutCEAs</xr-path>
+            <xr-xml-map>show_diameter:OutCEAs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </out-ce-as>
+          <in-dw-rs config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].InDWRs</xr-path>
+            <xr-xml-map>show_diameter:InDWRs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </in-dw-rs>
+          <out-dw-rs config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].OutDWRs</xr-path>
+            <xr-xml-map>show_diameter:OutDWRs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </out-dw-rs>
+          <in-dw-as config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].InDWAs</xr-path>
+            <xr-xml-map>show_diameter:InDWAs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </in-dw-as>
+          <out-dw-as config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].OutDWAs</xr-path>
+            <xr-xml-map>show_diameter:OutDWAs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </out-dw-as>
+          <in-dp-rs config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].InDPRs</xr-path>
+            <xr-xml-map>show_diameter:InDPRs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </in-dp-rs>
+          <out-dp-rs config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].OutDPRs</xr-path>
+            <xr-xml-map>show_diameter:OutDPRs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </out-dp-rs>
+          <in-dp-as config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].InDPAs</xr-path>
+            <xr-xml-map>show_diameter:InDPAs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </in-dp-as>
+          <out-dp-as config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].OutDPAs</xr-path>
+            <xr-xml-map>show_diameter:OutDPAs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </out-dp-as>
+          <in-ra-rs config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].InRARs</xr-path>
+            <xr-xml-map>show_diameter:InRARs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </in-ra-rs>
+          <out-ra-rs config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].OutRARs</xr-path>
+            <xr-xml-map>show_diameter:OutRARs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </out-ra-rs>
+          <in-ra-as config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].InRAAs</xr-path>
+            <xr-xml-map>show_diameter:InRAAs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </in-ra-as>
+          <out-ra-as config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].OutRAAs</xr-path>
+            <xr-xml-map>show_diameter:OutRAAs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </out-ra-as>
+          <in-st-rs config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].InSTRs</xr-path>
+            <xr-xml-map>show_diameter:InSTRs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </in-st-rs>
+          <out-st-rs config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].OutSTRs</xr-path>
+            <xr-xml-map>show_diameter:OutSTRs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </out-st-rs>
+          <in-st-as config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].InSTAs</xr-path>
+            <xr-xml-map>show_diameter:InSTAs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </in-st-as>
+          <out-st-as config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].OutSTAs</xr-path>
+            <xr-xml-map>show_diameter:OutSTAs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </out-st-as>
+          <in-cc-rs config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].InCCRs</xr-path>
+            <xr-xml-map>show_diameter:InCCRs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </in-cc-rs>
+          <out-cc-rs config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].OutCCRs</xr-path>
+            <xr-xml-map>show_diameter:OutCCRs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </out-cc-rs>
+          <in-cc-as config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].InCCAs</xr-path>
+            <xr-xml-map>show_diameter:InCCAs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </in-cc-as>
+          <out-cc-as config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].OutCCAs</xr-path>
+            <xr-xml-map>show_diameter:OutCCAs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </out-cc-as>
+          <out-aa-rs config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].OutAARs</xr-path>
+            <xr-xml-map>show_diameter:OutAARs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </out-aa-rs>
+          <in-aa-as config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].InAAAs</xr-path>
+            <xr-xml-map>show_diameter:InAAAs</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </in-aa-as>
+          <malformed-requests config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].MalformedRequests</xr-path>
+            <xr-xml-map>show_diameter:MalformedRequests</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </malformed-requests>
+          <received-proto-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].ReceivedProtoErrors</xr-path>
+            <xr-xml-map>show_diameter:ReceivedProtoErrors</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </received-proto-errors>
+          <sent-proto-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].SentProtoErrors</xr-path>
+            <xr-xml-map>show_diameter:SentProtoErrors</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </sent-proto-errors>
+          <received-transient-fails config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].ReceivedTransientFails</xr-path>
+            <xr-xml-map>show_diameter:ReceivedTransientFails</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </received-transient-fails>
+          <sent-transient-fails config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].SentTransientFails</xr-path>
+            <xr-xml-map>show_diameter:SentTransientFails</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </sent-transient-fails>
+          <received-permanent-fails config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].ReceivedPermanentFails</xr-path>
+            <xr-xml-map>show_diameter:ReceivedPermanentFails</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </received-permanent-fails>
+          <sent-permanent-fails config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].SentPermanentFails</xr-path>
+            <xr-xml-map>show_diameter:SentPermanentFails</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </sent-permanent-fails>
+          <transport-down config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].TransportDown</xr-path>
+            <xr-xml-map>show_diameter:TransportDown</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </transport-down>
+          <state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/servers_stats~diameter_peers.PeerList[&lt;bag_arg1&gt;].State</xr-path>
+            <xr-xml-map>show_diameter:State</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>Peer-state-value</type-name>
+            </type>
+          </state>
+        </peer>
+      </peers>
+      <nas config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/aaa/gl/diameter/nas_session</xr-path>
+        <xr-xml-map>aaa_diameter_oper:NAS</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <xr-bag-grp-name>diameter_nas_list</xr-bag-grp-name>
+        <xr-bag>show_diameter.bag</xr-bag>
+        <aaanas-id config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.AAANASId</xr-path>
+          <xr-xml-map>show_diameter:AAANASId</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </aaanas-id>
+        <list-of-nas config="false" node="list">
+          <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;]</xr-path>
+          <xr-task>aaa</xr-task>
+          <xr-bag-version>2 0</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+          <aaa-session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;].AAASessionId</xr-path>
+            <xr-xml-map>show_diameter:AAASessionId</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </aaa-session-id>
+          <diameter-session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;].DiameterSessionId</xr-path>
+            <xr-xml-map>show_diameter:DiameterSessionId</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </diameter-session-id>
+          <authentication-status config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;].AuthenticationStatus</xr-path>
+            <xr-xml-map>show_diameter:AuthenticationStatus</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </authentication-status>
+          <authorization-status config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;].AuthorizationStatus</xr-path>
+            <xr-xml-map>show_diameter:AuthorizationStatus</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </authorization-status>
+          <accounting-status config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;].AccountingStatus</xr-path>
+            <xr-xml-map>show_diameter:AccountingStatus</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </accounting-status>
+          <accounting-status-stop config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;].AccountingStatusStop</xr-path>
+            <xr-xml-map>show_diameter:AccountingStatusStop</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </accounting-status-stop>
+          <disconnect-status config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;].DisconnectStatus</xr-path>
+            <xr-xml-map>show_diameter:DisconnectStatus</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </disconnect-status>
+          <accounting-intrim-in-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;].AccountingIntrimInPackets</xr-path>
+            <xr-xml-map>show_diameter:AccountingIntrimInPackets</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </accounting-intrim-in-packets>
+          <accounting-intrim-out-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;].AccountingIntrimOutPackets</xr-path>
+            <xr-xml-map>show_diameter:AccountingIntrimOutPackets</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </accounting-intrim-out-packets>
+          <method-list config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;].MethodList</xr-path>
+            <xr-xml-map>show_diameter:MethodList</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </method-list>
+          <server-used-list config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;].ServerUsedList</xr-path>
+            <xr-xml-map>show_diameter:ServerUsedList</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </server-used-list>
+        </list-of-nas>
+      </nas>
+      <nas-summary config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/aaa/gl/diameter/nas_summary</xr-path>
+        <xr-xml-map>aaa_diameter_oper:NASSummary</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <xr-bag-grp-name>diameter_nas_summary</xr-bag-grp-name>
+        <xr-bag>show_diameter.bag</xr-bag>
+        <authen-response-in-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AuthenResponseInPackets</xr-path>
+          <xr-xml-map>show_diameter:AuthenResponseInPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </authen-response-in-packets>
+        <authen-request-out-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AuthenRequestOutPackets</xr-path>
+          <xr-xml-map>show_diameter:AuthenRequestOutPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </authen-request-out-packets>
+        <authen-request-in-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AuthenRequestInPackets</xr-path>
+          <xr-xml-map>show_diameter:AuthenRequestInPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </authen-request-in-packets>
+        <authen-response-out-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AuthenResponseOutPackets</xr-path>
+          <xr-xml-map>show_diameter:AuthenResponseOutPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </authen-response-out-packets>
+        <authen-success-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AuthenSuccessPackets</xr-path>
+          <xr-xml-map>show_diameter:AuthenSuccessPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </authen-success-packets>
+        <authen-response-fail-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AuthenResponseFailPackets</xr-path>
+          <xr-xml-map>show_diameter:AuthenResponseFailPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </authen-response-fail-packets>
+        <authorization-in-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AuthorizationInPackets</xr-path>
+          <xr-xml-map>show_diameter:AuthorizationInPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </authorization-in-packets>
+        <authorization-out-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AuthorizationOutPackets</xr-path>
+          <xr-xml-map>show_diameter:AuthorizationOutPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </authorization-out-packets>
+        <authorization-request-in-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AuthorizationRequestInPackets</xr-path>
+          <xr-xml-map>show_diameter:AuthorizationRequestInPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </authorization-request-in-packets>
+        <authorization-response-out-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AuthorizationResponseOutPackets</xr-path>
+          <xr-xml-map>show_diameter:AuthorizationResponseOutPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </authorization-response-out-packets>
+        <authorization-response-success-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AuthorizationResponseSuccessPackets</xr-path>
+          <xr-xml-map>show_diameter:AuthorizationResponseSuccessPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </authorization-response-success-packets>
+        <authorization-response-fail-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AuthorizationResponseFailPackets</xr-path>
+          <xr-xml-map>show_diameter:AuthorizationResponseFailPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </authorization-response-fail-packets>
+        <accounting-response-in-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AccountingResponseInPackets</xr-path>
+          <xr-xml-map>show_diameter:AccountingResponseInPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </accounting-response-in-packets>
+        <accounting-request-out-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AccountingRequestOutPackets</xr-path>
+          <xr-xml-map>show_diameter:AccountingRequestOutPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </accounting-request-out-packets>
+        <accounting-start-request-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AccountingStartRequestPackets</xr-path>
+          <xr-xml-map>show_diameter:AccountingStartRequestPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </accounting-start-request-packets>
+        <accounting-start-response-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AccountingStartResponsePackets</xr-path>
+          <xr-xml-map>show_diameter:AccountingStartResponsePackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </accounting-start-response-packets>
+        <accounting-start-success-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AccountingStartSuccessPackets</xr-path>
+          <xr-xml-map>show_diameter:AccountingStartSuccessPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </accounting-start-success-packets>
+        <accounting-start-failed-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AccountingStartFailedPackets</xr-path>
+          <xr-xml-map>show_diameter:AccountingStartFailedPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </accounting-start-failed-packets>
+        <accounting-stop-response-in-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AccountingStopResponseInPackets</xr-path>
+          <xr-xml-map>show_diameter:AccountingStopResponseInPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </accounting-stop-response-in-packets>
+        <accounting-stop-request-out-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AccountingStopRequestOutPackets</xr-path>
+          <xr-xml-map>show_diameter:AccountingStopRequestOutPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </accounting-stop-request-out-packets>
+        <accounting-stop-request-in-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AccountingStopRequestInPackets</xr-path>
+          <xr-xml-map>show_diameter:AccountingStopRequestInPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </accounting-stop-request-in-packets>
+        <accounting-stop-response-out-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AccountingStopResponseOutPackets</xr-path>
+          <xr-xml-map>show_diameter:AccountingStopResponseOutPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </accounting-stop-response-out-packets>
+        <accounting-stop-success-response-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AccountingStopSuccessResponsePackets</xr-path>
+          <xr-xml-map>show_diameter:AccountingStopSuccessResponsePackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </accounting-stop-success-response-packets>
+        <accounting-stop-failed-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AccountingStopFailedPackets</xr-path>
+          <xr-xml-map>show_diameter:AccountingStopFailedPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </accounting-stop-failed-packets>
+        <accounting-intrim-response-in-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AccountingIntrimResponseInPackets</xr-path>
+          <xr-xml-map>show_diameter:AccountingIntrimResponseInPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </accounting-intrim-response-in-packets>
+        <accounting-interim-request-out-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AccountingInterimRequestOutPackets</xr-path>
+          <xr-xml-map>show_diameter:AccountingInterimRequestOutPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </accounting-interim-request-out-packets>
+        <accounting-interim-request-in-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AccountingInterimRequestInPackets</xr-path>
+          <xr-xml-map>show_diameter:AccountingInterimRequestInPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </accounting-interim-request-in-packets>
+        <accounting-interim-response-out-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AccountingInterimResponseOutPackets</xr-path>
+          <xr-xml-map>show_diameter:AccountingInterimResponseOutPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </accounting-interim-response-out-packets>
+        <accounting-interim-success-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AccountingInterimSuccessPackets</xr-path>
+          <xr-xml-map>show_diameter:AccountingInterimSuccessPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </accounting-interim-success-packets>
+        <accounting-interim-failed-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.AccountingInterimFailedPackets</xr-path>
+          <xr-xml-map>show_diameter:AccountingInterimFailedPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </accounting-interim-failed-packets>
+        <disconnect-response-in-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.DisconnectResponseInPackets</xr-path>
+          <xr-xml-map>show_diameter:DisconnectResponseInPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </disconnect-response-in-packets>
+        <disconnect-request-out-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.DisconnectRequestOutPackets</xr-path>
+          <xr-xml-map>show_diameter:DisconnectRequestOutPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </disconnect-request-out-packets>
+        <disconnect-request-in-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.DisconnectRequestInPackets</xr-path>
+          <xr-xml-map>show_diameter:DisconnectRequestInPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </disconnect-request-in-packets>
+        <disconnect-response-out-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.DisconnectResponseOutPackets</xr-path>
+          <xr-xml-map>show_diameter:DisconnectResponseOutPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </disconnect-response-out-packets>
+        <disconnect-success-response-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.DisconnectSuccessResponsePackets</xr-path>
+          <xr-xml-map>show_diameter:DisconnectSuccessResponsePackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </disconnect-success-response-packets>
+        <disconnect-failed-response-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.DisconnectFailedResponsePackets</xr-path>
+          <xr-xml-map>show_diameter:DisconnectFailedResponsePackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </disconnect-failed-response-packets>
+        <coa-request-in-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.COARequestInPackets</xr-path>
+          <xr-xml-map>show_diameter:COARequestInPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </coa-request-in-packets>
+        <coa-response-out-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.COAResponseOutPackets</xr-path>
+          <xr-xml-map>show_diameter:COAResponseOutPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </coa-response-out-packets>
+        <coa-request-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.COARequestPackets</xr-path>
+          <xr-xml-map>show_diameter:COARequestPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </coa-request-packets>
+        <coa-response-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.COAResponsePackets</xr-path>
+          <xr-xml-map>show_diameter:COAResponsePackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </coa-response-packets>
+        <coa-success-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.COASuccessPackets</xr-path>
+          <xr-xml-map>show_diameter:COASuccessPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </coa-success-packets>
+        <coa-failed-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.COAFailedPackets</xr-path>
+          <xr-xml-map>show_diameter:COAFailedPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </coa-failed-packets>
+        <pod-in-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.PODInPackets</xr-path>
+          <xr-xml-map>show_diameter:PODInPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </pod-in-packets>
+        <pod-out-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.PODOutPackets</xr-path>
+          <xr-xml-map>show_diameter:PODOutPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </pod-out-packets>
+        <pod-request-in-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.PODRequestInPackets</xr-path>
+          <xr-xml-map>show_diameter:PODRequestInPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </pod-request-in-packets>
+        <pod-response-out-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.PODResponseOutPackets</xr-path>
+          <xr-xml-map>show_diameter:PODResponseOutPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </pod-response-out-packets>
+        <pod-success-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.PODSuccessPackets</xr-path>
+          <xr-xml-map>show_diameter:PODSuccessPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </pod-success-packets>
+        <pod-failed-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_summary~diameter_nas_summary.PODFailedPackets</xr-path>
+          <xr-xml-map>show_diameter:PODFailedPackets</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </pod-failed-packets>
+      </nas-summary>
+      <gy-session-ids config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/aaa/gl/diameter/gy_sess/</xr-path>
+        <xr-xml-map>aaa_diameter_oper:GySession</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <gy-session-id config="false" key="session-id" node="list">
+          <xr-path>/oper/aaa/gl/diameter/gy_sess/&lt;aaa_diameter_oper_GySessionId_session_id&gt;</xr-path>
+          <xr-xml-map>aaa_diameter_oper:GySessionId</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-grp-name>diameter_gy_sess</xr-bag-grp-name>
+          <xr-bag>show_diameter.bag</xr-bag>
+          <session-id config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/oper/aaa/gl/diameter/gy_sess/&lt;aaa_diameter_oper_GySessionId_session_id&gt;</xr-path>
+            <xr-xml-map>aaa_diameter_oper:SessionId</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Integer</xr-sch-type>
+            <xr-sch-arg-name>&lt;aaa_diameter_oper_GySessionId_session_id&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </session-id>
+          <aaa-session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/gy_sess/&lt;aaa_diameter_oper_GySessionId_session_id&gt;~diameter_gy_sess.AAASessionId</xr-path>
+            <xr-xml-map>show_diameter:AAASessionId</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </aaa-session-id>
+          <parent-aaa-session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/gy_sess/&lt;aaa_diameter_oper_GySessionId_session_id&gt;~diameter_gy_sess.ParentAAASessionId</xr-path>
+            <xr-xml-map>show_diameter:ParentAAASessionId</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </parent-aaa-session-id>
+          <diameter-session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/gy_sess/&lt;aaa_diameter_oper_GySessionId_session_id&gt;~diameter_gy_sess.DiameterSessionId</xr-path>
+            <xr-xml-map>show_diameter:DiameterSessionId</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </diameter-session-id>
+          <request-number config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/gy_sess/&lt;aaa_diameter_oper_GySessionId_session_id&gt;~diameter_gy_sess.RequestNumber</xr-path>
+            <xr-xml-map>show_diameter:RequestNumber</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </request-number>
+          <session-state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/gy_sess/&lt;aaa_diameter_oper_GySessionId_session_id&gt;~diameter_gy_sess.SessionState</xr-path>
+            <xr-xml-map>show_diameter:SessionState</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </session-state>
+          <request-type config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/gy_sess/&lt;aaa_diameter_oper_GySessionId_session_id&gt;~diameter_gy_sess.RequestType</xr-path>
+            <xr-xml-map>show_diameter:RequestType</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </request-type>
+          <retry-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/gy_sess/&lt;aaa_diameter_oper_GySessionId_session_id&gt;~diameter_gy_sess.RetryCount</xr-path>
+            <xr-xml-map>show_diameter:RetryCount</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </retry-count>
+        </gy-session-id>
+      </gy-session-ids>
+      <gy-statistics config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/aaa/gl/diameter/gy_stats</xr-path>
+        <xr-xml-map>aaa_diameter_oper:GyStatistics</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <xr-bag-grp-name>diameter_gy_stats</xr-bag-grp-name>
+        <xr-bag>show_diameter.bag</xr-bag>
+        <ccr-init-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.CCRInitMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRInitMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-init-messages>
+        <ccr-init-failed-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.CCRInitFailedMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRInitFailedMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-init-failed-messages>
+        <ccr-init-timed-out-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.CCRInitTimedOutMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRInitTimedOutMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-init-timed-out-messages>
+        <ccr-init-retry-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.CCRInitRetryMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRInitRetryMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-init-retry-messages>
+        <ccr-update-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.CCRUpdateMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRUpdateMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-update-messages>
+        <ccr-update-failed-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.CCRUpdateFailedMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRUpdateFailedMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-update-failed-messages>
+        <ccr-update-timed-out-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.CCRUpdateTimedOutMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRUpdateTimedOutMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-update-timed-out-messages>
+        <ccr-update-retry-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.CCRUpdateRetryMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRUpdateRetryMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-update-retry-messages>
+        <ccr-final-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.CCRFinalMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRFinalMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-final-messages>
+        <ccr-final-failed-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.CCRFinalFailedMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRFinalFailedMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-final-failed-messages>
+        <ccr-final-timed-out-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.CCRFinalTimedOutMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRFinalTimedOutMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-final-timed-out-messages>
+        <ccr-final-retry-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.CCRFinalRetryMessages</xr-path>
+          <xr-xml-map>show_diameter:CCRFinalRetryMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ccr-final-retry-messages>
+        <cca-init-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.CCAInitMessages</xr-path>
+          <xr-xml-map>show_diameter:CCAInitMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </cca-init-messages>
+        <cca-init-error-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.CCAInitErrorMessages</xr-path>
+          <xr-xml-map>show_diameter:CCAInitErrorMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </cca-init-error-messages>
+        <cca-update-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.CCAUpdateMessages</xr-path>
+          <xr-xml-map>show_diameter:CCAUpdateMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </cca-update-messages>
+        <cca-update-error-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.CCAUpdateErrorMessages</xr-path>
+          <xr-xml-map>show_diameter:CCAUpdateErrorMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </cca-update-error-messages>
+        <cca-final-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.CCAFinalMessages</xr-path>
+          <xr-xml-map>show_diameter:CCAFinalMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </cca-final-messages>
+        <cca-final-error-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.CCAFinalErrorMessages</xr-path>
+          <xr-xml-map>show_diameter:CCAFinalErrorMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </cca-final-error-messages>
+        <rar-received-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.RARReceivedMessages</xr-path>
+          <xr-xml-map>show_diameter:RARReceivedMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </rar-received-messages>
+        <rar-received-error-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.RARReceivedErrorMessages</xr-path>
+          <xr-xml-map>show_diameter:RARReceivedErrorMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </rar-received-error-messages>
+        <raa-sent-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.RAASentMessages</xr-path>
+          <xr-xml-map>show_diameter:RAASentMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </raa-sent-messages>
+        <raa-sent-error-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.RAASentErrorMessages</xr-path>
+          <xr-xml-map>show_diameter:RAASentErrorMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </raa-sent-error-messages>
+        <asr-received-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.ASRReceivedMessages</xr-path>
+          <xr-xml-map>show_diameter:ASRReceivedMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </asr-received-messages>
+        <asr-received-error-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.ASRReceivedErrorMessages</xr-path>
+          <xr-xml-map>show_diameter:ASRReceivedErrorMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </asr-received-error-messages>
+        <asa-sent-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.ASASentMessages</xr-path>
+          <xr-xml-map>show_diameter:ASASentMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </asa-sent-messages>
+        <asa-sent-error-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.ASASentErrorMessages</xr-path>
+          <xr-xml-map>show_diameter:ASASentErrorMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </asa-sent-error-messages>
+        <unknown-request-messages config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.UnknownRequestMessages</xr-path>
+          <xr-xml-map>show_diameter:UnknownRequestMessages</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </unknown-request-messages>
+        <restore-sessions config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.RestoreSessions</xr-path>
+          <xr-xml-map>show_diameter:RestoreSessions</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </restore-sessions>
+        <open-sessions config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.OpenSessions</xr-path>
+          <xr-xml-map>show_diameter:OpenSessions</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </open-sessions>
+        <close-sessions config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.CloseSessions</xr-path>
+          <xr-xml-map>show_diameter:CloseSessions</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </close-sessions>
+        <active-sessions config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/gy_stats~diameter_gy_stats.ActiveSessions</xr-path>
+          <xr-xml-map>show_diameter:ActiveSessions</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </active-sessions>
+      </gy-statistics>
+      <gx-session-ids config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/aaa/gl/diameter/gx_sess/</xr-path>
+        <xr-xml-map>aaa_diameter_oper:GxSession</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <gx-session-id config="false" key="session-id" node="list">
+          <xr-path>/oper/aaa/gl/diameter/gx_sess/&lt;aaa_diameter_oper_GxSessionId_session_id&gt;</xr-path>
+          <xr-xml-map>aaa_diameter_oper:GxSessionId</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-grp-name>diameter_gx_sess</xr-bag-grp-name>
+          <xr-bag>show_diameter.bag</xr-bag>
+          <session-id config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/oper/aaa/gl/diameter/gx_sess/&lt;aaa_diameter_oper_GxSessionId_session_id&gt;</xr-path>
+            <xr-xml-map>aaa_diameter_oper:SessionId</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Integer</xr-sch-type>
+            <xr-sch-arg-name>&lt;aaa_diameter_oper_GxSessionId_session_id&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </session-id>
+          <aaa-session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/gx_sess/&lt;aaa_diameter_oper_GxSessionId_session_id&gt;~diameter_gx_sess.AAASessionId</xr-path>
+            <xr-xml-map>show_diameter:AAASessionId</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </aaa-session-id>
+          <diameter-session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/gx_sess/&lt;aaa_diameter_oper_GxSessionId_session_id&gt;~diameter_gx_sess.DiameterSessionId</xr-path>
+            <xr-xml-map>show_diameter:DiameterSessionId</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </diameter-session-id>
+          <request-number config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/gx_sess/&lt;aaa_diameter_oper_GxSessionId_session_id&gt;~diameter_gx_sess.RequestNumber</xr-path>
+            <xr-xml-map>show_diameter:RequestNumber</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </request-number>
+          <session-state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/gx_sess/&lt;aaa_diameter_oper_GxSessionId_session_id&gt;~diameter_gx_sess.SessionState</xr-path>
+            <xr-xml-map>show_diameter:SessionState</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </session-state>
+          <request-type config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/gx_sess/&lt;aaa_diameter_oper_GxSessionId_session_id&gt;~diameter_gx_sess.RequestType</xr-path>
+            <xr-xml-map>show_diameter:RequestType</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </request-type>
+          <retry-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/gx_sess/&lt;aaa_diameter_oper_GxSessionId_session_id&gt;~diameter_gx_sess.RetryCount</xr-path>
+            <xr-xml-map>show_diameter:RetryCount</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </retry-count>
+          <service-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/gx_sess/&lt;aaa_diameter_oper_GxSessionId_session_id&gt;~diameter_gx_sess.ServiceCount</xr-path>
+            <xr-xml-map>show_diameter:ServiceCount</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </service-count>
+          <gx-plus-services config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/gx_sess/&lt;aaa_diameter_oper_GxSessionId_session_id&gt;~diameter_gx_sess.GxPlusServices</xr-path>
+            <xr-xml-map>show_diameter:GxPlusServices</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </gx-plus-services>
+          <reavalidation-time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/gx_sess/&lt;aaa_diameter_oper_GxSessionId_session_id&gt;~diameter_gx_sess.ReavalidationTime</xr-path>
+            <xr-xml-map>show_diameter:ReavalidationTime</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </reavalidation-time>
+        </gx-session-id>
+      </gx-session-ids>
+      <nas-session config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/aaa/gl/diameter/nas_session</xr-path>
+        <xr-xml-map>aaa_diameter_oper:NasSession</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <xr-bag-grp-name>diameter_nas_list</xr-bag-grp-name>
+        <xr-bag>show_diameter.bag</xr-bag>
+        <aaanas-id config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.AAANASId</xr-path>
+          <xr-xml-map>show_diameter:AAANASId</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>2 0</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </aaanas-id>
+        <list-of-nas config="false" node="list">
+          <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;]</xr-path>
+          <xr-task>aaa</xr-task>
+          <xr-bag-version>2 0</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+          <aaa-session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;].AAASessionId</xr-path>
+            <xr-xml-map>show_diameter:AAASessionId</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </aaa-session-id>
+          <diameter-session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;].DiameterSessionId</xr-path>
+            <xr-xml-map>show_diameter:DiameterSessionId</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </diameter-session-id>
+          <authentication-status config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;].AuthenticationStatus</xr-path>
+            <xr-xml-map>show_diameter:AuthenticationStatus</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </authentication-status>
+          <authorization-status config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;].AuthorizationStatus</xr-path>
+            <xr-xml-map>show_diameter:AuthorizationStatus</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </authorization-status>
+          <accounting-status config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;].AccountingStatus</xr-path>
+            <xr-xml-map>show_diameter:AccountingStatus</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </accounting-status>
+          <accounting-status-stop config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;].AccountingStatusStop</xr-path>
+            <xr-xml-map>show_diameter:AccountingStatusStop</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </accounting-status-stop>
+          <disconnect-status config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;].DisconnectStatus</xr-path>
+            <xr-xml-map>show_diameter:DisconnectStatus</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </disconnect-status>
+          <accounting-intrim-in-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;].AccountingIntrimInPackets</xr-path>
+            <xr-xml-map>show_diameter:AccountingIntrimInPackets</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </accounting-intrim-in-packets>
+          <accounting-intrim-out-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;].AccountingIntrimOutPackets</xr-path>
+            <xr-xml-map>show_diameter:AccountingIntrimOutPackets</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>unsigned int</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </accounting-intrim-out-packets>
+          <method-list config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;].MethodList</xr-path>
+            <xr-xml-map>show_diameter:MethodList</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </method-list>
+          <server-used-list config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/aaa/gl/diameter/nas_session~diameter_nas_list.ListOfNAS[&lt;bag_arg2&gt;].ServerUsedList</xr-path>
+            <xr-xml-map>show_diameter:ServerUsedList</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </server-used-list>
+        </list-of-nas>
+      </nas-session>
+    </diameter>
+  </augment>
+</Cisco-IOS-XR-aaa-diameter-oper>

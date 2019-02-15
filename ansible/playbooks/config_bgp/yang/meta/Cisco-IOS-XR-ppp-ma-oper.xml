@@ -1,0 +1,2664 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ppp-ma-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ppp-ma-oper" revision="2015-11-09">
+  <files>
+    <file revision="2015-11-09" submodule="false">Cisco-IOS-XR-ppp-ma-oper.yang</file>
+    <file revision="2015-11-09" submodule="true">Cisco-IOS-XR-ppp-ma-oper-sub3.yang</file>
+    <file revision="2015-11-09" submodule="true">Cisco-IOS-XR-ppp-ma-oper-sub2.yang</file>
+    <file revision="2015-11-09" submodule="true">Cisco-IOS-XR-ppp-ma-oper-sub1.yang</file>
+    <file revision="2015-11-09" submodule="true">Cisco-IOS-XR-ppp-ma-oper-sub4.yang</file>
+  </files>
+  <prefix>ppp-ma-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="inet">ietf-inet-types</import>
+  <typedef name="Ppp-iphc-compression">
+    <type node="enumeration">
+      <enum value="0">ppp-iphc-compression-fmt-none</enum>
+      <enum value="1">ppp-iphc-compression-fmt-vj</enum>
+      <enum value="2">ppp-iphc-compression-fmt-ietf</enum>
+      <enum value="3">ppp-iphc-compression-fmt-iphc</enum>
+      <enum value="4">ppp-iphc-compression-fmt-cisco</enum>
+    </type>
+  </typedef>
+  <typedef name="Ppp-lcp-mp-mbr-state">
+    <type node="enumeration">
+      <enum>ppp-lcp-mp-mbr-state-detached</enum>
+      <enum>ppp-lcp-mp-mbr-state-lcp-not-negotiated</enum>
+      <enum>ppp-lcp-mp-mbr-state-link-noise</enum>
+      <enum>ppp-lcp-mp-mbr-state-bundle-shutdown</enum>
+      <enum>ppp-lcp-mp-mbr-state-mrru-rejected</enum>
+      <enum>ppp-lcp-mp-mbr-state-mrru-mismatch</enum>
+      <enum>ppp-lcp-mp-mbr-state-ed-mismatch</enum>
+      <enum>ppp-lcp-mp-mbr-state-auth-name-mismatch</enum>
+      <enum>ppp-lcp-mp-mbr-state-mcmp-rejected</enum>
+      <enum>ppp-lcp-mp-mbr-state-mcmp-not-negotiated</enum>
+      <enum>ppp-lcp-mp-mbr-state-mcmp-local-mismatch</enum>
+      <enum>ppp-lcp-mp-mbr-state-mcmp-peer-mismatch</enum>
+      <enum>ppp-lcp-mp-mbr-state-standby-up</enum>
+      <enum>ppp-lcp-mp-mbr-state-active</enum>
+    </type>
+  </typedef>
+  <typedef name="Ppp-sso-fsm-state">
+    <type node="enumeration">
+      <enum value="0">ppp-sso-state-not-ready-0</enum>
+      <enum value="1">ppp-sso-state-standby-unnegd-1</enum>
+      <enum value="2">ppp-sso-state-active-down-2</enum>
+      <enum value="3">ppp-sso-state-deactivating-3</enum>
+      <enum value="4">ppp-sso-state-active-unnegd-4</enum>
+      <enum value="5">ppp-sso-state-standby-negd-5</enum>
+      <enum value="6">ppp-sso-state-activating-6</enum>
+      <enum value="7">ppp-sso-state-active-negd-7</enum>
+    </type>
+  </typedef>
+  <typedef name="Ppp-fsm-state">
+    <type node="enumeration">
+      <enum value="0">ppp-fsm-state-initial-0</enum>
+      <enum value="1">ppp-fsm-state-starting-1</enum>
+      <enum value="2">ppp-fsm-state-closed-2</enum>
+      <enum value="3">ppp-fsm-state-stopped-3</enum>
+      <enum value="4">ppp-fsm-state-closing-4</enum>
+      <enum value="5">ppp-fsm-state-stopping-5</enum>
+      <enum value="6">ppp-fsm-state-req-sent-6</enum>
+      <enum value="7">ppp-fsm-state-ack-rcvd-7</enum>
+      <enum value="8">ppp-fsm-state-ack-sent-8</enum>
+      <enum value="9">ppp-fsm-state-opened-9</enum>
+    </type>
+  </typedef>
+  <typedef name="Im-state">
+    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+    <type>
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Ncp-ident">
+    <type node="enumeration">
+      <enum value="1">cdpcp</enum>
+      <enum value="2">ipcp</enum>
+      <enum value="3">ipcpiw</enum>
+      <enum value="4">ipv6cp</enum>
+      <enum value="5">mplscp</enum>
+      <enum value="6">osicp</enum>
+    </type>
+  </typedef>
+  <ppp config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/ppp/</xr-path>
+    <xr-xml-map>ppp_oper:PPP</xr-xml-map>
+    <xr-task>ppp</xr-task>
+    <nodes config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ppp/node/</xr-path>
+      <xr-xml-map>ppp_oper:NodeTable</xr-xml-map>
+      <xr-task>ppp</xr-task>
+      <node config="false" key="node-name" node="list">
+        <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/</xr-path>
+        <xr-xml-map>ppp_oper:Node</xr-xml-map>
+        <xr-task>ppp</xr-task>
+        <statistics config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats</xr-path>
+          <xr-xml-map>ppp_oper:Statistics</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-bag-grp-name>ppp_oper_stats_global</xr-bag-grp-name>
+          <xr-bag>ppp_oper_stats.bag</xr-bag>
+          <lcp-statistics config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics</xr-path>
+            <xr-task>ppp</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <conf-req-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.ConfReqSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:ConfReqSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </conf-req-sent>
+            <conf-req-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.ConfReqRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:ConfReqRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </conf-req-rcvd>
+            <conf-ack-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.ConfAckSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:ConfAckSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </conf-ack-sent>
+            <conf-ack-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.ConfAckRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:ConfAckRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </conf-ack-rcvd>
+            <conf-nak-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.ConfNakSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:ConfNakSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </conf-nak-sent>
+            <conf-nak-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.ConfNakRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:ConfNakRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </conf-nak-rcvd>
+            <conf-rej-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.ConfRejSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:ConfRejSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </conf-rej-sent>
+            <conf-rej-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.ConfRejRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:ConfRejRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </conf-rej-rcvd>
+            <term-req-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.TermReqSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:TermReqSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </term-req-sent>
+            <term-req-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.TermReqRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:TermReqRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </term-req-rcvd>
+            <term-ack-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.TermAckSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:TermAckSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </term-ack-sent>
+            <term-ack-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.TermAckRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:TermAckRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </term-ack-rcvd>
+            <code-rej-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.CodeRejSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:CodeRejSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </code-rej-sent>
+            <code-rej-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.CodeRejRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:CodeRejRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </code-rej-rcvd>
+            <proto-rej-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.ProtoRejSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:ProtoRejSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </proto-rej-sent>
+            <proto-rej-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.ProtoRejRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:ProtoRejRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </proto-rej-rcvd>
+            <echo-req-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.EchoReqSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:EchoReqSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </echo-req-sent>
+            <echo-req-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.EchoReqRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:EchoReqRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </echo-req-rcvd>
+            <echo-rep-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.EchoRepSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:EchoRepSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </echo-rep-sent>
+            <echo-rep-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.EchoRepRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:EchoRepRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </echo-rep-rcvd>
+            <disc-req-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.DiscReqSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:DiscReqSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </disc-req-sent>
+            <disc-req-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.DiscReqRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:DiscReqRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </disc-req-rcvd>
+            <link-up config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.LinkUp</xr-path>
+              <xr-xml-map>ppp_oper_stats:LinkUp</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </link-up>
+            <link-error config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.LCPStatistics.LinkError</xr-path>
+              <xr-xml-map>ppp_oper_stats:LinkError</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </link-error>
+          </lcp-statistics>
+          <authentication-statistics config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.AuthenticationStatistics</xr-path>
+            <xr-task>ppp</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <pap-req-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.AuthenticationStatistics.PapReqSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:PapReqSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </pap-req-sent>
+            <pap-req-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.AuthenticationStatistics.PapReqRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:PapReqRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </pap-req-rcvd>
+            <pap-ack-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.AuthenticationStatistics.PapAckSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:PapAckSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </pap-ack-sent>
+            <pap-ack-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.AuthenticationStatistics.PapAckRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:PapAckRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </pap-ack-rcvd>
+            <pap-nak-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.AuthenticationStatistics.PapNakSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:PapNakSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </pap-nak-sent>
+            <pap-nak-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.AuthenticationStatistics.PapNakRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:PapNakRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </pap-nak-rcvd>
+            <chap-chall-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.AuthenticationStatistics.ChapChallSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:ChapChallSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </chap-chall-sent>
+            <chap-chall-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.AuthenticationStatistics.ChapChallRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:ChapChallRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </chap-chall-rcvd>
+            <chap-resp-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.AuthenticationStatistics.ChapRespSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:ChapRespSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </chap-resp-sent>
+            <chap-resp-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.AuthenticationStatistics.ChapRespRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:ChapRespRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </chap-resp-rcvd>
+            <chap-rep-succ-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.AuthenticationStatistics.ChapRepSuccSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:ChapRepSuccSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </chap-rep-succ-sent>
+            <chap-rep-succ-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.AuthenticationStatistics.ChapRepSuccRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:ChapRepSuccRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </chap-rep-succ-rcvd>
+            <chap-rep-fail-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.AuthenticationStatistics.ChapRepFailSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:ChapRepFailSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </chap-rep-fail-sent>
+            <chap-rep-fail-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.AuthenticationStatistics.ChapRepFailRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:ChapRepFailRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </chap-rep-fail-rcvd>
+            <auth-timeout-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.AuthenticationStatistics.AuthTimeoutCount</xr-path>
+              <xr-xml-map>ppp_oper_stats:AuthTimeoutCount</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </auth-timeout-count>
+          </authentication-statistics>
+          <ncp-statistics-array config="false" node="list">
+            <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.NCPStatisticsArray[&lt;bag_arg5&gt;]</xr-path>
+            <xr-task>ppp</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg5&gt;</xr-internal-key>
+            <ncp-identifier config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.NCPStatisticsArray[&lt;bag_arg5&gt;].NCPIdentifier</xr-path>
+              <xr-xml-map>ppp_oper_stats:NCPIdentifier</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>Ncp-ident</type-name>
+              </type>
+            </ncp-identifier>
+            <conf-req-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.NCPStatisticsArray[&lt;bag_arg5&gt;].ConfReqSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:ConfReqSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </conf-req-sent>
+            <conf-req-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.NCPStatisticsArray[&lt;bag_arg5&gt;].ConfReqRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:ConfReqRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </conf-req-rcvd>
+            <conf-ack-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.NCPStatisticsArray[&lt;bag_arg5&gt;].ConfAckSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:ConfAckSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </conf-ack-sent>
+            <conf-ack-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.NCPStatisticsArray[&lt;bag_arg5&gt;].ConfAckRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:ConfAckRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </conf-ack-rcvd>
+            <conf-nak-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.NCPStatisticsArray[&lt;bag_arg5&gt;].ConfNakSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:ConfNakSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </conf-nak-sent>
+            <conf-nak-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.NCPStatisticsArray[&lt;bag_arg5&gt;].ConfNakRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:ConfNakRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </conf-nak-rcvd>
+            <conf-rej-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.NCPStatisticsArray[&lt;bag_arg5&gt;].ConfRejSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:ConfRejSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </conf-rej-sent>
+            <conf-rej-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.NCPStatisticsArray[&lt;bag_arg5&gt;].ConfRejRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:ConfRejRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </conf-rej-rcvd>
+            <term-req-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.NCPStatisticsArray[&lt;bag_arg5&gt;].TermReqSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:TermReqSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </term-req-sent>
+            <term-req-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.NCPStatisticsArray[&lt;bag_arg5&gt;].TermReqRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:TermReqRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </term-req-rcvd>
+            <term-ack-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.NCPStatisticsArray[&lt;bag_arg5&gt;].TermAckSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:TermAckSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </term-ack-sent>
+            <term-ack-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.NCPStatisticsArray[&lt;bag_arg5&gt;].TermAckRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:TermAckRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </term-ack-rcvd>
+            <proto-rej-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.NCPStatisticsArray[&lt;bag_arg5&gt;].ProtoRejSent</xr-path>
+              <xr-xml-map>ppp_oper_stats:ProtoRejSent</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </proto-rej-sent>
+            <proto-rej-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats~ppp_oper_stats_global.NCPStatisticsArray[&lt;bag_arg5&gt;].ProtoRejRcvd</xr-path>
+              <xr-xml-map>ppp_oper_stats:ProtoRejRcvd</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </proto-rej-rcvd>
+          </ncp-statistics-array>
+        </statistics>
+        <node-interfaces config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/</xr-path>
+          <xr-xml-map>ppp_oper:NodeInterfaceTable</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-compatibility>4.0</xr-compatibility>
+          <node-interface config="false" key="interface" node="list">
+            <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;</xr-path>
+            <xr-xml-map>ppp_oper:NodeInterface</xr-xml-map>
+            <xr-task>ppp</xr-task>
+            <xr-bag-grp-name>ppp_protocol_info</xr-bag-grp-name>
+            <xr-bag>ppp_oper.bag</xr-bag>
+            <interface config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;</xr-path>
+              <xr-xml-map>ppp_oper:Interface</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-sch-type>InterfaceName</xr-sch-type>
+              <xr-sch-arg-name>&lt;ppp_oper_NodeInterface_interface&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface>
+            <mp-info config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.MPInfo</xr-path>
+              <xr-task>ppp</xr-task>
+              <xr-bag-version>1 0</xr-bag-version>
+              <is-mp-bundle config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.MPInfo.IsMPBundle</xr-path>
+                <xr-xml-map>ppp_oper:IsMPBundle</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-mp-bundle>
+              <mp-bundle-interface config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.MPInfo.MPBundleInterface</xr-path>
+                <xr-xml-map>ppp_oper:MPBundleInterface</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>xr:Interface-name</type-name>
+                </type>
+              </mp-bundle-interface>
+              <is-mp-bundle-member config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.MPInfo.IsMPBundleMember</xr-path>
+                <xr-xml-map>ppp_oper:IsMPBundleMember</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-mp-bundle-member>
+              <mp-group config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.MPInfo.MPGroup</xr-path>
+                <xr-xml-map>ppp_oper:MPGroup</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </mp-group>
+              <active-links config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.MPInfo.ActiveLinks</xr-path>
+                <xr-xml-map>ppp_oper:ActiveLinks</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </active-links>
+              <inactive-links config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.MPInfo.InactiveLinks</xr-path>
+                <xr-xml-map>ppp_oper:InactiveLinks</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </inactive-links>
+              <minimum-active-links config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.MPInfo.MinimumActiveLinks</xr-path>
+                <xr-xml-map>ppp_oper:MinimumActiveLinks</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </minimum-active-links>
+              <mp-state config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.MPInfo.MPState</xr-path>
+                <xr-xml-map>ppp_oper:MPState</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>Ppp-lcp-mp-mbr-state</type-name>
+                </type>
+              </mp-state>
+              <mp-member-info-array config="false" node="list">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.MPInfo.MPMemberInfoArray[&lt;bag_arg2&gt;]</xr-path>
+                <xr-task>ppp</xr-task>
+                <xr-bag-version>1 0</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+                <interface config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.MPInfo.MPMemberInfoArray[&lt;bag_arg2&gt;].Interface</xr-path>
+                  <xr-xml-map>ppp_oper:Interface</xr-xml-map>
+                  <xr-task>ppp</xr-task>
+                  <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+                  <xr-bag-version>1 0</xr-bag-version>
+                  <type>
+                    <type-name>xr:Interface-name</type-name>
+                  </type>
+                </interface>
+                <state config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.MPInfo.MPMemberInfoArray[&lt;bag_arg2&gt;].State</xr-path>
+                  <xr-xml-map>ppp_oper:State</xr-xml-map>
+                  <xr-task>ppp</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>1 0</xr-bag-version>
+                  <type>
+                    <type-name>Ppp-lcp-mp-mbr-state</type-name>
+                  </type>
+                </state>
+              </mp-member-info-array>
+            </mp-info>
+            <configured-timeout config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.ConfiguredTimeout</xr-path>
+              <xr-task>ppp</xr-task>
+              <xr-bag-version>1 0</xr-bag-version>
+              <minutes config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.ConfiguredTimeout.Minutes</xr-path>
+                <xr-xml-map>ppp_oper:Minutes</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </minutes>
+              <seconds config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.ConfiguredTimeout.Seconds</xr-path>
+                <xr-xml-map>ppp_oper:Seconds</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </seconds>
+            </configured-timeout>
+            <auth-info config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.AuthInfo</xr-path>
+              <xr-task>ppp</xr-task>
+              <xr-bag-version>1 0</xr-bag-version>
+              <is-authenticated config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.AuthInfo.IsAuthenticated</xr-path>
+                <xr-xml-map>ppp_oper:IsAuthenticated</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-authenticated>
+              <is-sso-authenticated config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.AuthInfo.IsSSOAuthenticated</xr-path>
+                <xr-xml-map>ppp_oper:IsSSOAuthenticated</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-sso-authenticated>
+              <of-us-auth config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.AuthInfo.OfUsAuth</xr-path>
+                <xr-xml-map>ppp_oper:OfUsAuth</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </of-us-auth>
+              <of-peer-auth config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.AuthInfo.OfPeerAuth</xr-path>
+                <xr-xml-map>ppp_oper:OfPeerAuth</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </of-peer-auth>
+              <of-us-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.AuthInfo.OfUsName</xr-path>
+                <xr-xml-map>ppp_oper:OfUsName</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </of-us-name>
+              <of-peer-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.AuthInfo.OfPeerName</xr-path>
+                <xr-xml-map>ppp_oper:OfPeerName</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </of-peer-name>
+              <of-us-sso-state config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.AuthInfo.OfUsSSOState</xr-path>
+                <xr-xml-map>ppp_oper:OfUsSSOState</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>Ppp-sso-fsm-state</type-name>
+                </type>
+              </of-us-sso-state>
+              <of-peer-sso-state config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.AuthInfo.OfPeerSSOState</xr-path>
+                <xr-xml-map>ppp_oper:OfPeerSSOState</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>Ppp-sso-fsm-state</type-name>
+                </type>
+              </of-peer-sso-state>
+            </auth-info>
+            <parent-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.ParentState</xr-path>
+              <xr-xml-map>ppp_oper:ParentState</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>Im-state</type-name>
+              </type>
+            </parent-state>
+            <line-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.LineState</xr-path>
+              <xr-xml-map>ppp_oper:LineState</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>Im-state</type-name>
+              </type>
+            </line-state>
+            <is-loopback-detected config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.IsLoopbackDetected</xr-path>
+              <xr-xml-map>ppp_oper:IsLoopbackDetected</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </is-loopback-detected>
+            <caps-idb-srg-role config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.CapsIdbSrgRole</xr-path>
+              <xr-xml-map>ppp_oper:CapsIdbSrgRole</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </caps-idb-srg-role>
+            <session-srg-role config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.SessionSrgRole</xr-path>
+              <xr-xml-map>ppp_oper:SessionSrgRole</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </session-srg-role>
+            <keepalive-period config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.KeepalivePeriod</xr-path>
+              <xr-xml-map>ppp_oper:KeepalivePeriod</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </keepalive-period>
+            <keepalive-retry-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.KeepaliveRetryCount</xr-path>
+              <xr-xml-map>ppp_oper:KeepaliveRetryCount</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </keepalive-retry-count>
+            <is-ssrp-configured config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.IsSSRPConfigured</xr-path>
+              <xr-xml-map>ppp_oper:IsSSRPConfigured</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </is-ssrp-configured>
+            <is-l2ac config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.IsL2AC</xr-path>
+              <xr-xml-map>ppp_oper:IsL2AC</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </is-l2ac>
+            <provisioned config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.Provisioned</xr-path>
+              <xr-xml-map>ppp_oper:Provisioned</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </provisioned>
+            <ip-interworking-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.IPInterworkingEnabled</xr-path>
+              <xr-xml-map>ppp_oper:IPInterworkingEnabled</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </ip-interworking-enabled>
+            <xconnect-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.XConnectID</xr-path>
+              <xr-xml-map>ppp_oper:XConnectID</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </xconnect-id>
+            <is-tunneled-session config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.is_tunneled_session</xr-path>
+              <xr-xml-map>ppp_oper:is_tunneled_session</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </is-tunneled-session>
+            <ssrp-peer-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.SSRPPeerID</xr-path>
+              <xr-xml-map>ppp_oper:SSRPPeerID</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </ssrp-peer-id>
+            <lcp-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.LCPState</xr-path>
+              <xr-xml-map>ppp_oper:LCPState</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>Ppp-fsm-state</type-name>
+              </type>
+            </lcp-state>
+            <lcpsso-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.LCPSSOState</xr-path>
+              <xr-xml-map>ppp_oper:LCPSSOState</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>Ppp-sso-fsm-state</type-name>
+              </type>
+            </lcpsso-state>
+            <is-lcp-delayed config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.IsLCPDelayed</xr-path>
+              <xr-xml-map>ppp_oper:IsLCPDelayed</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </is-lcp-delayed>
+            <local-mru config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.LocalMRU</xr-path>
+              <xr-xml-map>ppp_oper:LocalMRU</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </local-mru>
+            <peer-mru config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.PeerMRU</xr-path>
+              <xr-xml-map>ppp_oper:PeerMRU</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </peer-mru>
+            <local-mrru config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.LocalMRRU</xr-path>
+              <xr-xml-map>ppp_oper:LocalMRRU</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </local-mrru>
+            <peer-mrru config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.PeerMRRU</xr-path>
+              <xr-xml-map>ppp_oper:PeerMRRU</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </peer-mrru>
+            <local-ed config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.LocalED</xr-path>
+              <xr-xml-map>ppp_oper:LocalED</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type length="0..41">
+                <type-name>string</type-name>
+              </type>
+            </local-ed>
+            <peer-ed config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.PeerED</xr-path>
+              <xr-xml-map>ppp_oper:PeerED</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type length="0..41">
+                <type-name>string</type-name>
+              </type>
+            </peer-ed>
+            <is-mcmp-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.IsMCMPEnabled</xr-path>
+              <xr-xml-map>ppp_oper:IsMCMPEnabled</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </is-mcmp-enabled>
+            <local-mcmp-classes config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.LocalMCMPClasses</xr-path>
+              <xr-xml-map>ppp_oper:LocalMCMPClasses</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+            </local-mcmp-classes>
+            <peer-mcmp-classes config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.PeerMCMPClasses</xr-path>
+              <xr-xml-map>ppp_oper:PeerMCMPClasses</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+            </peer-mcmp-classes>
+            <session-expires config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.SessionExpires</xr-path>
+              <xr-xml-map>ppp_oper:SessionExpires</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </session-expires>
+            <ncp-info-array config="false" node="list">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;]</xr-path>
+              <xr-task>ppp</xr-task>
+              <xr-bag-version>1 0</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+              <ncp-info config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo</xr-path>
+                <xr-task>ppp</xr-task>
+                <xr-bag-version>1 0</xr-bag-version>
+                <ipcp-info config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo</xr-path>
+                  <xr-task>ppp</xr-task>
+                  <xr-bag-version>1 0</xr-bag-version>
+                  <when>../type = 'ipcp'</when>
+                  <local-iphc-options config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.LocalIPHCOptions</xr-path>
+                    <xr-task>ppp</xr-task>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <compression-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.LocalIPHCOptions.CompressionType</xr-path>
+                      <xr-xml-map>ppp_oper:CompressionType</xr-xml-map>
+                      <xr-task>ppp</xr-task>
+                      <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>Ppp-iphc-compression</type-name>
+                      </type>
+                    </compression-type>
+                    <tcp-space config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.LocalIPHCOptions.TCPSpace</xr-path>
+                      <xr-xml-map>ppp_oper:TCPSpace</xr-xml-map>
+                      <xr-task>ppp</xr-task>
+                      <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>uint16</type-name>
+                      </type>
+                    </tcp-space>
+                    <non-tcp-space config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.LocalIPHCOptions.NonTCPSpace</xr-path>
+                      <xr-xml-map>ppp_oper:NonTCPSpace</xr-xml-map>
+                      <xr-task>ppp</xr-task>
+                      <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>uint16</type-name>
+                      </type>
+                    </non-tcp-space>
+                    <max-period config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.LocalIPHCOptions.MaxPeriod</xr-path>
+                      <xr-xml-map>ppp_oper:MaxPeriod</xr-xml-map>
+                      <xr-task>ppp</xr-task>
+                      <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>uint16</type-name>
+                      </type>
+                    </max-period>
+                    <max-time config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.LocalIPHCOptions.MaxTime</xr-path>
+                      <xr-xml-map>ppp_oper:MaxTime</xr-xml-map>
+                      <xr-task>ppp</xr-task>
+                      <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>uint16</type-name>
+                      </type>
+                    </max-time>
+                    <max-header config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.LocalIPHCOptions.MaxHeader</xr-path>
+                      <xr-xml-map>ppp_oper:MaxHeader</xr-xml-map>
+                      <xr-task>ppp</xr-task>
+                      <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>uint16</type-name>
+                      </type>
+                    </max-header>
+                    <rtp-compression config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.LocalIPHCOptions.RTPCompression</xr-path>
+                      <xr-xml-map>ppp_oper:RTPCompression</xr-xml-map>
+                      <xr-task>ppp</xr-task>
+                      <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </rtp-compression>
+                    <ec-rtp-compression config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.LocalIPHCOptions.EcRTPCompression</xr-path>
+                      <xr-xml-map>ppp_oper:EcRTPCompression</xr-xml-map>
+                      <xr-task>ppp</xr-task>
+                      <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </ec-rtp-compression>
+                  </local-iphc-options>
+                  <peer-iphc-options config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.PeerIPHCOptions</xr-path>
+                    <xr-task>ppp</xr-task>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <compression-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.PeerIPHCOptions.CompressionType</xr-path>
+                      <xr-xml-map>ppp_oper:CompressionType</xr-xml-map>
+                      <xr-task>ppp</xr-task>
+                      <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>Ppp-iphc-compression</type-name>
+                      </type>
+                    </compression-type>
+                    <tcp-space config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.PeerIPHCOptions.TCPSpace</xr-path>
+                      <xr-xml-map>ppp_oper:TCPSpace</xr-xml-map>
+                      <xr-task>ppp</xr-task>
+                      <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>uint16</type-name>
+                      </type>
+                    </tcp-space>
+                    <non-tcp-space config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.PeerIPHCOptions.NonTCPSpace</xr-path>
+                      <xr-xml-map>ppp_oper:NonTCPSpace</xr-xml-map>
+                      <xr-task>ppp</xr-task>
+                      <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>uint16</type-name>
+                      </type>
+                    </non-tcp-space>
+                    <max-period config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.PeerIPHCOptions.MaxPeriod</xr-path>
+                      <xr-xml-map>ppp_oper:MaxPeriod</xr-xml-map>
+                      <xr-task>ppp</xr-task>
+                      <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>uint16</type-name>
+                      </type>
+                    </max-period>
+                    <max-time config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.PeerIPHCOptions.MaxTime</xr-path>
+                      <xr-xml-map>ppp_oper:MaxTime</xr-xml-map>
+                      <xr-task>ppp</xr-task>
+                      <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>uint16</type-name>
+                      </type>
+                    </max-time>
+                    <max-header config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.PeerIPHCOptions.MaxHeader</xr-path>
+                      <xr-xml-map>ppp_oper:MaxHeader</xr-xml-map>
+                      <xr-task>ppp</xr-task>
+                      <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>uint16</type-name>
+                      </type>
+                    </max-header>
+                    <rtp-compression config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.PeerIPHCOptions.RTPCompression</xr-path>
+                      <xr-xml-map>ppp_oper:RTPCompression</xr-xml-map>
+                      <xr-task>ppp</xr-task>
+                      <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </rtp-compression>
+                    <ec-rtp-compression config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.PeerIPHCOptions.EcRTPCompression</xr-path>
+                      <xr-xml-map>ppp_oper:EcRTPCompression</xr-xml-map>
+                      <xr-task>ppp</xr-task>
+                      <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                      <xr-bag-version>1 0</xr-bag-version>
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </ec-rtp-compression>
+                  </peer-iphc-options>
+                  <local-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.LocalAddress</xr-path>
+                    <xr-xml-map>ppp_oper:LocalAddress</xr-xml-map>
+                    <xr-task>ppp</xr-task>
+                    <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <type>
+                      <type-name>inet:ipv4-address</type-name>
+                    </type>
+                  </local-address>
+                  <peer-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.PeerAddress</xr-path>
+                    <xr-xml-map>ppp_oper:PeerAddress</xr-xml-map>
+                    <xr-task>ppp</xr-task>
+                    <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <type>
+                      <type-name>inet:ipv4-address</type-name>
+                    </type>
+                  </peer-address>
+                  <peer-netmask config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.PeerNetmask</xr-path>
+                    <xr-xml-map>ppp_oper:PeerNetmask</xr-xml-map>
+                    <xr-task>ppp</xr-task>
+                    <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <type>
+                      <type-name>inet:ipv4-address</type-name>
+                    </type>
+                  </peer-netmask>
+                  <dns-primary config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.DnsPrimary</xr-path>
+                    <xr-xml-map>ppp_oper:DnsPrimary</xr-xml-map>
+                    <xr-task>ppp</xr-task>
+                    <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <type>
+                      <type-name>inet:ipv4-address</type-name>
+                    </type>
+                  </dns-primary>
+                  <dns-secondary config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.DnsSecondary</xr-path>
+                    <xr-xml-map>ppp_oper:DnsSecondary</xr-xml-map>
+                    <xr-task>ppp</xr-task>
+                    <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <type>
+                      <type-name>inet:ipv4-address</type-name>
+                    </type>
+                  </dns-secondary>
+                  <wins-primary config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.WinsPrimary</xr-path>
+                    <xr-xml-map>ppp_oper:WinsPrimary</xr-xml-map>
+                    <xr-task>ppp</xr-task>
+                    <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <type>
+                      <type-name>inet:ipv4-address</type-name>
+                    </type>
+                  </wins-primary>
+                  <wins-secondary config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.WinsSecondary</xr-path>
+                    <xr-xml-map>ppp_oper:WinsSecondary</xr-xml-map>
+                    <xr-task>ppp</xr-task>
+                    <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <type>
+                      <type-name>inet:ipv4-address</type-name>
+                    </type>
+                  </wins-secondary>
+                  <is-iphc-configured config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPInfo.IsIPHCConfigured</xr-path>
+                    <xr-xml-map>ppp_oper:IsIPHCConfigured</xr-xml-map>
+                    <xr-task>ppp</xr-task>
+                    <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </is-iphc-configured>
+                </ipcp-info>
+                <ipcpiw-info config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPIWInfo</xr-path>
+                  <xr-task>ppp</xr-task>
+                  <xr-bag-version>1 0</xr-bag-version>
+                  <when>../type = 'ipcpiw'</when>
+                  <local-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPIWInfo.LocalAddress</xr-path>
+                    <xr-xml-map>ppp_oper:LocalAddress</xr-xml-map>
+                    <xr-task>ppp</xr-task>
+                    <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <type>
+                      <type-name>inet:ipv4-address</type-name>
+                    </type>
+                  </local-address>
+                  <peer-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPCPIWInfo.PeerAddress</xr-path>
+                    <xr-xml-map>ppp_oper:PeerAddress</xr-xml-map>
+                    <xr-task>ppp</xr-task>
+                    <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <type>
+                      <type-name>inet:ipv4-address</type-name>
+                    </type>
+                  </peer-address>
+                </ipcpiw-info>
+                <ipv6cp-info config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPv6CPInfo</xr-path>
+                  <xr-task>ppp</xr-task>
+                  <xr-bag-version>1 0</xr-bag-version>
+                  <when>../type = 'ipv6cp'</when>
+                  <local-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPv6CPInfo.LocalAddress</xr-path>
+                    <xr-xml-map>ppp_oper:LocalAddress</xr-xml-map>
+                    <xr-task>ppp</xr-task>
+                    <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <type>
+                      <type-name>inet:ipv6-address</type-name>
+                    </type>
+                  </local-address>
+                  <peer-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.IPv6CPInfo.PeerAddress</xr-path>
+                    <xr-xml-map>ppp_oper:PeerAddress</xr-xml-map>
+                    <xr-task>ppp</xr-task>
+                    <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <type>
+                      <type-name>inet:ipv6-address</type-name>
+                    </type>
+                  </peer-address>
+                </ipv6cp-info>
+                <type config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPInfo.Type</xr-path>
+                  <xr-xml-map>ppp_oper:Type</xr-xml-map>
+                  <xr-task>ppp</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>1 0</xr-bag-version>
+                  <type>
+                    <type-name>Ncp-ident</type-name>
+                  </type>
+                </type>
+              </ncp-info>
+              <ncp-state config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPState</xr-path>
+                <xr-xml-map>ppp_oper:NCPState</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>Ppp-fsm-state</type-name>
+                </type>
+              </ncp-state>
+              <ncpsso-state config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPSSOState</xr-path>
+                <xr-xml-map>ppp_oper:NCPSSOState</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>Ppp-sso-fsm-state</type-name>
+                </type>
+              </ncpsso-state>
+              <is-passive config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].IsPassive</xr-path>
+                <xr-xml-map>ppp_oper:IsPassive</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-passive>
+              <ncp-identifier config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/if/&lt;ppp_oper_NodeInterface_interface&gt;~ppp_protocol_info.NCPInfoArray[&lt;bag_arg3&gt;].NCPIdentifier</xr-path>
+                <xr-xml-map>ppp_oper:NCPIdentifier</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>Ncp-ident</type-name>
+                </type>
+              </ncp-identifier>
+            </ncp-info-array>
+          </node-interface>
+        </node-interfaces>
+        <sso-alerts config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/alerts/</xr-path>
+          <xr-xml-map>ppp_oper:SSOAlertTable</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <sso-alert config="false" key="interface" node="list">
+            <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/alerts/&lt;ppp_oper_SSOAlert_interface&gt;</xr-path>
+            <xr-xml-map>ppp_oper:SSOAlert</xr-xml-map>
+            <xr-task>ppp</xr-task>
+            <xr-bag-grp-name>ppp_oper_sso_alerts</xr-bag-grp-name>
+            <xr-bag>ppp_oper_sso.bag</xr-bag>
+            <interface config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/alerts/&lt;ppp_oper_SSOAlert_interface&gt;</xr-path>
+              <xr-xml-map>ppp_oper:Interface</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-sch-type>InterfaceName</xr-sch-type>
+              <xr-sch-arg-name>&lt;ppp_oper_SSOAlert_interface&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface>
+            <lcp-error config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/alerts/&lt;ppp_oper_SSOAlert_interface&gt;~ppp_oper_sso_alerts.LCPError</xr-path>
+              <xr-task>ppp</xr-task>
+              <xr-bag-version>1 0</xr-bag-version>
+              <is-error config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/alerts/&lt;ppp_oper_SSOAlert_interface&gt;~ppp_oper_sso_alerts.LCPError.IsError</xr-path>
+                <xr-xml-map>ppp_oper_sso:IsError</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-error>
+              <error config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/alerts/&lt;ppp_oper_SSOAlert_interface&gt;~ppp_oper_sso_alerts.LCPError.Error</xr-path>
+                <xr-xml-map>ppp_oper_sso:Error</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </error>
+              <context config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/alerts/&lt;ppp_oper_SSOAlert_interface&gt;~ppp_oper_sso_alerts.LCPError.Context</xr-path>
+                <xr-xml-map>ppp_oper_sso:Context</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </context>
+            </lcp-error>
+            <of-us-auth-error config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/alerts/&lt;ppp_oper_SSOAlert_interface&gt;~ppp_oper_sso_alerts.OfUsAuthError</xr-path>
+              <xr-task>ppp</xr-task>
+              <xr-bag-version>1 0</xr-bag-version>
+              <is-error config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/alerts/&lt;ppp_oper_SSOAlert_interface&gt;~ppp_oper_sso_alerts.OfUsAuthError.IsError</xr-path>
+                <xr-xml-map>ppp_oper_sso:IsError</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-error>
+              <error config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/alerts/&lt;ppp_oper_SSOAlert_interface&gt;~ppp_oper_sso_alerts.OfUsAuthError.Error</xr-path>
+                <xr-xml-map>ppp_oper_sso:Error</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </error>
+              <context config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/alerts/&lt;ppp_oper_SSOAlert_interface&gt;~ppp_oper_sso_alerts.OfUsAuthError.Context</xr-path>
+                <xr-xml-map>ppp_oper_sso:Context</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </context>
+            </of-us-auth-error>
+            <of-peer-auth-error config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/alerts/&lt;ppp_oper_SSOAlert_interface&gt;~ppp_oper_sso_alerts.OfPeerAuthError</xr-path>
+              <xr-task>ppp</xr-task>
+              <xr-bag-version>1 0</xr-bag-version>
+              <is-error config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/alerts/&lt;ppp_oper_SSOAlert_interface&gt;~ppp_oper_sso_alerts.OfPeerAuthError.IsError</xr-path>
+                <xr-xml-map>ppp_oper_sso:IsError</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-error>
+              <error config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/alerts/&lt;ppp_oper_SSOAlert_interface&gt;~ppp_oper_sso_alerts.OfPeerAuthError.Error</xr-path>
+                <xr-xml-map>ppp_oper_sso:Error</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </error>
+              <context config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/alerts/&lt;ppp_oper_SSOAlert_interface&gt;~ppp_oper_sso_alerts.OfPeerAuthError.Context</xr-path>
+                <xr-xml-map>ppp_oper_sso:Context</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </context>
+            </of-peer-auth-error>
+            <ipcp-error config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/alerts/&lt;ppp_oper_SSOAlert_interface&gt;~ppp_oper_sso_alerts.IPCPError</xr-path>
+              <xr-task>ppp</xr-task>
+              <xr-bag-version>1 0</xr-bag-version>
+              <is-error config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/alerts/&lt;ppp_oper_SSOAlert_interface&gt;~ppp_oper_sso_alerts.IPCPError.IsError</xr-path>
+                <xr-xml-map>ppp_oper_sso:IsError</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-error>
+              <error config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/alerts/&lt;ppp_oper_SSOAlert_interface&gt;~ppp_oper_sso_alerts.IPCPError.Error</xr-path>
+                <xr-xml-map>ppp_oper_sso:Error</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </error>
+              <context config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/alerts/&lt;ppp_oper_SSOAlert_interface&gt;~ppp_oper_sso_alerts.IPCPError.Context</xr-path>
+                <xr-xml-map>ppp_oper_sso:Context</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </context>
+            </ipcp-error>
+          </sso-alert>
+        </sso-alerts>
+        <node-interface-statistics config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/</xr-path>
+          <xr-xml-map>ppp_oper:NodeInterfaceStatisticsTable</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-compatibility>5.0</xr-compatibility>
+          <node-interface-statistic config="false" key="interface-name" node="list">
+            <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;</xr-path>
+            <xr-xml-map>ppp_oper:NodeInterfaceStatistics</xr-xml-map>
+            <xr-task>ppp</xr-task>
+            <xr-bag-grp-name>ppp_oper_stats_interface</xr-bag-grp-name>
+            <xr-bag>ppp_oper_stats.bag</xr-bag>
+            <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;</xr-path>
+              <xr-xml-map>ppp_oper:InterfaceName</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-sch-type>InterfaceName</xr-sch-type>
+              <xr-sch-arg-name>&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-name>
+            <lcp-statistics config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.LCPStatistics</xr-path>
+              <xr-task>ppp</xr-task>
+              <xr-bag-version>1 0</xr-bag-version>
+              <conf-req-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.LCPStatistics.ConfReqSent</xr-path>
+                <xr-xml-map>ppp_oper_stats:ConfReqSent</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </conf-req-sent>
+              <conf-req-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.LCPStatistics.ConfReqRcvd</xr-path>
+                <xr-xml-map>ppp_oper_stats:ConfReqRcvd</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </conf-req-rcvd>
+              <conf-ack-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.LCPStatistics.ConfAckSent</xr-path>
+                <xr-xml-map>ppp_oper_stats:ConfAckSent</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </conf-ack-sent>
+              <conf-ack-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.LCPStatistics.ConfAckRcvd</xr-path>
+                <xr-xml-map>ppp_oper_stats:ConfAckRcvd</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </conf-ack-rcvd>
+              <conf-nak-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.LCPStatistics.ConfNakSent</xr-path>
+                <xr-xml-map>ppp_oper_stats:ConfNakSent</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </conf-nak-sent>
+              <conf-nak-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.LCPStatistics.ConfNakRcvd</xr-path>
+                <xr-xml-map>ppp_oper_stats:ConfNakRcvd</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </conf-nak-rcvd>
+              <conf-rej-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.LCPStatistics.ConfRejSent</xr-path>
+                <xr-xml-map>ppp_oper_stats:ConfRejSent</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </conf-rej-sent>
+              <conf-rej-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.LCPStatistics.ConfRejRcvd</xr-path>
+                <xr-xml-map>ppp_oper_stats:ConfRejRcvd</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </conf-rej-rcvd>
+              <echo-req-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.LCPStatistics.EchoReqSent</xr-path>
+                <xr-xml-map>ppp_oper_stats:EchoReqSent</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </echo-req-sent>
+              <echo-req-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.LCPStatistics.EchoReqRcvd</xr-path>
+                <xr-xml-map>ppp_oper_stats:EchoReqRcvd</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </echo-req-rcvd>
+              <echo-rep-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.LCPStatistics.EchoRepSent</xr-path>
+                <xr-xml-map>ppp_oper_stats:EchoRepSent</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </echo-rep-sent>
+              <echo-rep-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.LCPStatistics.EchoRepRcvd</xr-path>
+                <xr-xml-map>ppp_oper_stats:EchoRepRcvd</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </echo-rep-rcvd>
+              <disc-req-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.LCPStatistics.DiscReqSent</xr-path>
+                <xr-xml-map>ppp_oper_stats:DiscReqSent</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </disc-req-sent>
+              <disc-req-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.LCPStatistics.DiscReqRcvd</xr-path>
+                <xr-xml-map>ppp_oper_stats:DiscReqRcvd</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </disc-req-rcvd>
+              <link-up config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.LCPStatistics.LinkUp</xr-path>
+                <xr-xml-map>ppp_oper_stats:LinkUp</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </link-up>
+              <link-error config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.LCPStatistics.LinkError</xr-path>
+                <xr-xml-map>ppp_oper_stats:LinkError</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </link-error>
+            </lcp-statistics>
+            <authentication-statistics config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.AuthenticationStatistics</xr-path>
+              <xr-task>ppp</xr-task>
+              <xr-bag-version>1 0</xr-bag-version>
+              <pap-req-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.AuthenticationStatistics.PapReqSent</xr-path>
+                <xr-xml-map>ppp_oper_stats:PapReqSent</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </pap-req-sent>
+              <pap-req-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.AuthenticationStatistics.PapReqRcvd</xr-path>
+                <xr-xml-map>ppp_oper_stats:PapReqRcvd</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </pap-req-rcvd>
+              <pap-ack-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.AuthenticationStatistics.PapAckSent</xr-path>
+                <xr-xml-map>ppp_oper_stats:PapAckSent</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </pap-ack-sent>
+              <pap-ack-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.AuthenticationStatistics.PapAckRcvd</xr-path>
+                <xr-xml-map>ppp_oper_stats:PapAckRcvd</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </pap-ack-rcvd>
+              <pap-nak-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.AuthenticationStatistics.PapNakSent</xr-path>
+                <xr-xml-map>ppp_oper_stats:PapNakSent</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </pap-nak-sent>
+              <pap-nak-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.AuthenticationStatistics.PapNakRcvd</xr-path>
+                <xr-xml-map>ppp_oper_stats:PapNakRcvd</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </pap-nak-rcvd>
+              <chap-chall-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.AuthenticationStatistics.ChapChallSent</xr-path>
+                <xr-xml-map>ppp_oper_stats:ChapChallSent</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </chap-chall-sent>
+              <chap-chall-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.AuthenticationStatistics.ChapChallRcvd</xr-path>
+                <xr-xml-map>ppp_oper_stats:ChapChallRcvd</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </chap-chall-rcvd>
+              <chap-resp-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.AuthenticationStatistics.ChapRespSent</xr-path>
+                <xr-xml-map>ppp_oper_stats:ChapRespSent</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </chap-resp-sent>
+              <chap-resp-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.AuthenticationStatistics.ChapRespRcvd</xr-path>
+                <xr-xml-map>ppp_oper_stats:ChapRespRcvd</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </chap-resp-rcvd>
+              <chap-rep-succ-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.AuthenticationStatistics.ChapRepSuccSent</xr-path>
+                <xr-xml-map>ppp_oper_stats:ChapRepSuccSent</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </chap-rep-succ-sent>
+              <chap-rep-succ-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.AuthenticationStatistics.ChapRepSuccRcvd</xr-path>
+                <xr-xml-map>ppp_oper_stats:ChapRepSuccRcvd</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </chap-rep-succ-rcvd>
+              <chap-rep-fail-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.AuthenticationStatistics.ChapRepFailSent</xr-path>
+                <xr-xml-map>ppp_oper_stats:ChapRepFailSent</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </chap-rep-fail-sent>
+              <chap-rep-fail-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.AuthenticationStatistics.ChapRepFailRcvd</xr-path>
+                <xr-xml-map>ppp_oper_stats:ChapRepFailRcvd</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </chap-rep-fail-rcvd>
+              <auth-timeout-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.AuthenticationStatistics.AuthTimeoutCount</xr-path>
+                <xr-xml-map>ppp_oper_stats:AuthTimeoutCount</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </auth-timeout-count>
+            </authentication-statistics>
+            <ncp-statistics-array config="false" node="list">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.NCPStatisticsArray[&lt;bag_arg4&gt;]</xr-path>
+              <xr-task>ppp</xr-task>
+              <xr-bag-version>1 0</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg4&gt;</xr-internal-key>
+              <ncp-identifier config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.NCPStatisticsArray[&lt;bag_arg4&gt;].NCPIdentifier</xr-path>
+                <xr-xml-map>ppp_oper_stats:NCPIdentifier</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>Ncp-ident</type-name>
+                </type>
+              </ncp-identifier>
+              <conf-req-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.NCPStatisticsArray[&lt;bag_arg4&gt;].ConfReqSent</xr-path>
+                <xr-xml-map>ppp_oper_stats:ConfReqSent</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </conf-req-sent>
+              <conf-req-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.NCPStatisticsArray[&lt;bag_arg4&gt;].ConfReqRcvd</xr-path>
+                <xr-xml-map>ppp_oper_stats:ConfReqRcvd</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </conf-req-rcvd>
+              <conf-ack-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.NCPStatisticsArray[&lt;bag_arg4&gt;].ConfAckSent</xr-path>
+                <xr-xml-map>ppp_oper_stats:ConfAckSent</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </conf-ack-sent>
+              <conf-ack-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.NCPStatisticsArray[&lt;bag_arg4&gt;].ConfAckRcvd</xr-path>
+                <xr-xml-map>ppp_oper_stats:ConfAckRcvd</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </conf-ack-rcvd>
+              <conf-nak-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.NCPStatisticsArray[&lt;bag_arg4&gt;].ConfNakSent</xr-path>
+                <xr-xml-map>ppp_oper_stats:ConfNakSent</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </conf-nak-sent>
+              <conf-nak-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.NCPStatisticsArray[&lt;bag_arg4&gt;].ConfNakRcvd</xr-path>
+                <xr-xml-map>ppp_oper_stats:ConfNakRcvd</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </conf-nak-rcvd>
+              <conf-rej-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.NCPStatisticsArray[&lt;bag_arg4&gt;].ConfRejSent</xr-path>
+                <xr-xml-map>ppp_oper_stats:ConfRejSent</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </conf-rej-sent>
+              <conf-rej-rcvd config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/stats/if/&lt;ppp_oper_NodeInterfaceStatistics_interface&gt;~ppp_oper_stats_interface.NCPStatisticsArray[&lt;bag_arg4&gt;].ConfRejRcvd</xr-path>
+                <xr-xml-map>ppp_oper_stats:ConfRejRcvd</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </conf-rej-rcvd>
+            </ncp-statistics-array>
+          </node-interface-statistic>
+        </node-interface-statistics>
+        <sso-summary config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/summary</xr-path>
+          <xr-xml-map>ppp_oper:SSOSummary</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-bag-grp-name>ppp_oper_sso_summary</xr-bag-grp-name>
+          <xr-bag>ppp_oper_sso.bag</xr-bag>
+          <lcp-states config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/summary~ppp_oper_sso_summary.LCPStates</xr-path>
+            <xr-task>ppp</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <total config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/summary~ppp_oper_sso_summary.LCPStates.Total</xr-path>
+              <xr-xml-map>ppp_oper_sso:Total</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </total>
+            <count config="false" is-key="false" is-yang-key="false" node="leaf-list">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/summary~ppp_oper_sso_summary.LCPStates.Count[&lt;bag_arg1&gt;]</xr-path>
+              <xr-xml-map>ppp_oper_sso:Count</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+              <max-elements>8</max-elements>
+            </count>
+          </lcp-states>
+          <of-us-auth-states config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/summary~ppp_oper_sso_summary.OfUsAuthStates</xr-path>
+            <xr-task>ppp</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <total config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/summary~ppp_oper_sso_summary.OfUsAuthStates.Total</xr-path>
+              <xr-xml-map>ppp_oper_sso:Total</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </total>
+            <count config="false" is-key="false" is-yang-key="false" node="leaf-list">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/summary~ppp_oper_sso_summary.OfUsAuthStates.Count[&lt;bag_arg1&gt;]</xr-path>
+              <xr-xml-map>ppp_oper_sso:Count</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+              <max-elements>8</max-elements>
+            </count>
+          </of-us-auth-states>
+          <of-peer-auth-states config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/summary~ppp_oper_sso_summary.OfPeerAuthStates</xr-path>
+            <xr-task>ppp</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <total config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/summary~ppp_oper_sso_summary.OfPeerAuthStates.Total</xr-path>
+              <xr-xml-map>ppp_oper_sso:Total</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </total>
+            <count config="false" is-key="false" is-yang-key="false" node="leaf-list">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/summary~ppp_oper_sso_summary.OfPeerAuthStates.Count[&lt;bag_arg1&gt;]</xr-path>
+              <xr-xml-map>ppp_oper_sso:Count</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+              <max-elements>8</max-elements>
+            </count>
+          </of-peer-auth-states>
+          <ipcp-states config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/summary~ppp_oper_sso_summary.IPCPStates</xr-path>
+            <xr-task>ppp</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <total config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/summary~ppp_oper_sso_summary.IPCPStates.Total</xr-path>
+              <xr-xml-map>ppp_oper_sso:Total</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </total>
+            <count config="false" is-key="false" is-yang-key="false" node="leaf-list">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/summary~ppp_oper_sso_summary.IPCPStates.Count[&lt;bag_arg1&gt;]</xr-path>
+              <xr-xml-map>ppp_oper_sso:Count</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+              <max-elements>8</max-elements>
+            </count>
+          </ipcp-states>
+        </sso-summary>
+        <sso-groups config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/group/</xr-path>
+          <xr-xml-map>ppp_oper:SSOGroupTable</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <sso-group config="false" key="group-id" node="list">
+            <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/group/&lt;ppp_oper_SSOGroup_group-id&gt;/</xr-path>
+            <xr-xml-map>ppp_oper:SSOGroup</xr-xml-map>
+            <xr-task>ppp</xr-task>
+            <sso-states config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/group/&lt;ppp_oper_SSOGroup_group-id&gt;/</xr-path>
+              <xr-xml-map>ppp_oper:SSOStateTable</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <sso-state config="false" key="session-id" node="list">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/group/&lt;ppp_oper_SSOGroup_group-id&gt;/&lt;ppp_oper_SSOState_session-id&gt;</xr-path>
+                <xr-xml-map>ppp_oper:SSOState</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-grp-name>ppp_oper_sso_state</xr-bag-grp-name>
+                <xr-bag>ppp_oper_sso.bag</xr-bag>
+                <session-id config="false" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-pathformat>decimal</xr-pathformat>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/group/&lt;ppp_oper_SSOGroup_group-id&gt;/&lt;ppp_oper_SSOState_session-id&gt;</xr-path>
+                  <xr-xml-map>ppp_oper:SessionID</xr-xml-map>
+                  <xr-task>ppp</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <xr-sch-arg-name>&lt;ppp_oper_SSOState_session-id&gt;</xr-sch-arg-name>
+                  <type range="1..4294967295">
+                    <type-name>uint32</type-name>
+                  </type>
+                </session-id>
+                <lcp-state config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/group/&lt;ppp_oper_SSOGroup_group-id&gt;/&lt;ppp_oper_SSOState_session-id&gt;~ppp_oper_sso_state.LCPState</xr-path>
+                  <xr-task>ppp</xr-task>
+                  <xr-bag-version>1 0</xr-bag-version>
+                  <is-running config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/group/&lt;ppp_oper_SSOGroup_group-id&gt;/&lt;ppp_oper_SSOState_session-id&gt;~ppp_oper_sso_state.LCPState.IsRunning</xr-path>
+                    <xr-xml-map>ppp_oper_sso:IsRunning</xr-xml-map>
+                    <xr-task>ppp</xr-task>
+                    <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </is-running>
+                  <state config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/group/&lt;ppp_oper_SSOGroup_group-id&gt;/&lt;ppp_oper_SSOState_session-id&gt;~ppp_oper_sso_state.LCPState.State</xr-path>
+                    <xr-xml-map>ppp_oper_sso:State</xr-xml-map>
+                    <xr-task>ppp</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <type>
+                      <type-name>Ppp-sso-fsm-state</type-name>
+                    </type>
+                  </state>
+                </lcp-state>
+                <of-us-auth-state config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/group/&lt;ppp_oper_SSOGroup_group-id&gt;/&lt;ppp_oper_SSOState_session-id&gt;~ppp_oper_sso_state.OfUsAuthState</xr-path>
+                  <xr-task>ppp</xr-task>
+                  <xr-bag-version>1 0</xr-bag-version>
+                  <is-running config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/group/&lt;ppp_oper_SSOGroup_group-id&gt;/&lt;ppp_oper_SSOState_session-id&gt;~ppp_oper_sso_state.OfUsAuthState.IsRunning</xr-path>
+                    <xr-xml-map>ppp_oper_sso:IsRunning</xr-xml-map>
+                    <xr-task>ppp</xr-task>
+                    <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </is-running>
+                  <state config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/group/&lt;ppp_oper_SSOGroup_group-id&gt;/&lt;ppp_oper_SSOState_session-id&gt;~ppp_oper_sso_state.OfUsAuthState.State</xr-path>
+                    <xr-xml-map>ppp_oper_sso:State</xr-xml-map>
+                    <xr-task>ppp</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <type>
+                      <type-name>Ppp-sso-fsm-state</type-name>
+                    </type>
+                  </state>
+                </of-us-auth-state>
+                <of-peer-auth-state config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/group/&lt;ppp_oper_SSOGroup_group-id&gt;/&lt;ppp_oper_SSOState_session-id&gt;~ppp_oper_sso_state.OfPeerAuthState</xr-path>
+                  <xr-task>ppp</xr-task>
+                  <xr-bag-version>1 0</xr-bag-version>
+                  <is-running config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/group/&lt;ppp_oper_SSOGroup_group-id&gt;/&lt;ppp_oper_SSOState_session-id&gt;~ppp_oper_sso_state.OfPeerAuthState.IsRunning</xr-path>
+                    <xr-xml-map>ppp_oper_sso:IsRunning</xr-xml-map>
+                    <xr-task>ppp</xr-task>
+                    <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </is-running>
+                  <state config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/group/&lt;ppp_oper_SSOGroup_group-id&gt;/&lt;ppp_oper_SSOState_session-id&gt;~ppp_oper_sso_state.OfPeerAuthState.State</xr-path>
+                    <xr-xml-map>ppp_oper_sso:State</xr-xml-map>
+                    <xr-task>ppp</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <type>
+                      <type-name>Ppp-sso-fsm-state</type-name>
+                    </type>
+                  </state>
+                </of-peer-auth-state>
+                <ipcp-state config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/group/&lt;ppp_oper_SSOGroup_group-id&gt;/&lt;ppp_oper_SSOState_session-id&gt;~ppp_oper_sso_state.IPCPState</xr-path>
+                  <xr-task>ppp</xr-task>
+                  <xr-bag-version>1 0</xr-bag-version>
+                  <is-running config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/group/&lt;ppp_oper_SSOGroup_group-id&gt;/&lt;ppp_oper_SSOState_session-id&gt;~ppp_oper_sso_state.IPCPState.IsRunning</xr-path>
+                    <xr-xml-map>ppp_oper_sso:IsRunning</xr-xml-map>
+                    <xr-task>ppp</xr-task>
+                    <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </is-running>
+                  <state config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/group/&lt;ppp_oper_SSOGroup_group-id&gt;/&lt;ppp_oper_SSOState_session-id&gt;~ppp_oper_sso_state.IPCPState.State</xr-path>
+                    <xr-xml-map>ppp_oper_sso:State</xr-xml-map>
+                    <xr-task>ppp</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>1 0</xr-bag-version>
+                    <type>
+                      <type-name>Ppp-sso-fsm-state</type-name>
+                    </type>
+                  </state>
+                </ipcp-state>
+                <session-id-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/group/&lt;ppp_oper_SSOGroup_group-id&gt;/&lt;ppp_oper_SSOState_session-id&gt;~ppp_oper_sso_state.SessionID</xr-path>
+                  <xr-xml-map>ppp_oper_sso:session-id-xr</xr-xml-map>
+                  <xr-task>ppp</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>1 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </session-id-xr>
+                <interface config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/group/&lt;ppp_oper_SSOGroup_group-id&gt;/&lt;ppp_oper_SSOState_session-id&gt;~ppp_oper_sso_state.Interface</xr-path>
+                  <xr-xml-map>ppp_oper_sso:Interface</xr-xml-map>
+                  <xr-task>ppp</xr-task>
+                  <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+                  <xr-bag-version>1 0</xr-bag-version>
+                  <type>
+                    <type-name>xr:Interface-name</type-name>
+                  </type>
+                </interface>
+              </sso-state>
+            </sso-states>
+            <group-id config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-pathformat>hex_nozerox</xr-pathformat>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/sso/group/&lt;ppp_oper_SSOGroup_group-id&gt;/</xr-path>
+              <xr-xml-map>ppp_oper:GroupID</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-sch-arg-name>&lt;ppp_oper_SSOGroup_group-id&gt;</xr-sch-arg-name>
+              <type range="1..65535">
+                <type-name>uint32</type-name>
+              </type>
+            </group-id>
+          </sso-group>
+        </sso-groups>
+        <summary config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary</xr-path>
+          <xr-xml-map>ppp_oper:Summary</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-bag-grp-name>ppp_oper_summary</xr-bag-grp-name>
+          <xr-bag>ppp_oper_summary.bag</xr-bag>
+          <intfs config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary~ppp_oper_summary.Intfs</xr-path>
+            <xr-task>ppp</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <pos-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary~ppp_oper_summary.Intfs.POSCount</xr-path>
+              <xr-xml-map>ppp_oper_summary:POSCount</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </pos-count>
+            <serial-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary~ppp_oper_summary.Intfs.SerialCount</xr-path>
+              <xr-xml-map>ppp_oper_summary:SerialCount</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </serial-count>
+            <pppoe-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary~ppp_oper_summary.Intfs.PPPoECount</xr-path>
+              <xr-xml-map>ppp_oper_summary:PPPoECount</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </pppoe-count>
+            <multilink-bundle-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary~ppp_oper_summary.Intfs.MultilinkBundleCount</xr-path>
+              <xr-xml-map>ppp_oper_summary:MultilinkBundleCount</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </multilink-bundle-count>
+            <gcc0-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary~ppp_oper_summary.Intfs.GCC0Count</xr-path>
+              <xr-xml-map>ppp_oper_summary:GCC0Count</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </gcc0-count>
+            <gcc1-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary~ppp_oper_summary.Intfs.GCC1Count</xr-path>
+              <xr-xml-map>ppp_oper_summary:GCC1Count</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </gcc1-count>
+            <total config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary~ppp_oper_summary.Intfs.Total</xr-path>
+              <xr-xml-map>ppp_oper_summary:Total</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </total>
+          </intfs>
+          <fsm-states config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary~ppp_oper_summary.FSMStates</xr-path>
+            <xr-task>ppp</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <lcpfsm-states config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary~ppp_oper_summary.FSMStates.LCPFSMStates</xr-path>
+              <xr-task>ppp</xr-task>
+              <xr-bag-version>1 0</xr-bag-version>
+              <total config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary~ppp_oper_summary.FSMStates.LCPFSMStates.Total</xr-path>
+                <xr-xml-map>ppp_oper_summary:Total</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </total>
+              <count config="false" is-key="false" is-yang-key="false" node="leaf-list">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary~ppp_oper_summary.FSMStates.LCPFSMStates.Count[&lt;bag_arg6&gt;]</xr-path>
+                <xr-xml-map>ppp_oper_summary:Count</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg6&gt;</xr-internal-key>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+                <max-elements>10</max-elements>
+              </count>
+            </lcpfsm-states>
+            <ncpfsm-states-array config="false" node="list">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary~ppp_oper_summary.FSMStates.NCPFSMStatesArray[&lt;bag_arg8&gt;]</xr-path>
+              <xr-task>ppp</xr-task>
+              <xr-bag-version>1 0</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg8&gt;</xr-internal-key>
+              <ncp-identifier config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary~ppp_oper_summary.FSMStates.NCPFSMStatesArray[&lt;bag_arg8&gt;].NCPIdentifier</xr-path>
+                <xr-xml-map>ppp_oper_summary:NCPIdentifier</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>Ncp-ident</type-name>
+                </type>
+              </ncp-identifier>
+              <total config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary~ppp_oper_summary.FSMStates.NCPFSMStatesArray[&lt;bag_arg8&gt;].Total</xr-path>
+                <xr-xml-map>ppp_oper_summary:Total</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </total>
+              <count config="false" is-key="false" is-yang-key="false" node="leaf-list">
+                <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary~ppp_oper_summary.FSMStates.NCPFSMStatesArray[&lt;bag_arg8&gt;].Count[&lt;bag_arg7&gt;]</xr-path>
+                <xr-xml-map>ppp_oper_summary:Count</xr-xml-map>
+                <xr-task>ppp</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg7&gt;</xr-internal-key>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+                <max-elements>10</max-elements>
+              </count>
+            </ncpfsm-states-array>
+          </fsm-states>
+          <lcp-auth-phases config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary~ppp_oper_summary.LCPAuthPhases</xr-path>
+            <xr-task>ppp</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <lcp-not-negotiated config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary~ppp_oper_summary.LCPAuthPhases.LCPNotNegotiated</xr-path>
+              <xr-xml-map>ppp_oper_summary:LCPNotNegotiated</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </lcp-not-negotiated>
+            <authenticating config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary~ppp_oper_summary.LCPAuthPhases.Authenticating</xr-path>
+              <xr-xml-map>ppp_oper_summary:Authenticating</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </authenticating>
+            <line-held-down config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary~ppp_oper_summary.LCPAuthPhases.LineHeldDown</xr-path>
+              <xr-xml-map>ppp_oper_summary:LineHeldDown</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </line-held-down>
+            <up-local-term config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary~ppp_oper_summary.LCPAuthPhases.UpLocalTerm</xr-path>
+              <xr-xml-map>ppp_oper_summary:UpLocalTerm</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </up-local-term>
+            <up-l2-fwded config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary~ppp_oper_summary.LCPAuthPhases.UpL2Fwded</xr-path>
+              <xr-xml-map>ppp_oper_summary:UpL2Fwded</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </up-l2-fwded>
+            <up-tunneled config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/summary~ppp_oper_summary.LCPAuthPhases.UpTunneled</xr-path>
+              <xr-xml-map>ppp_oper_summary:UpTunneled</xr-xml-map>
+              <xr-task>ppp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </up-tunneled>
+          </lcp-auth-phases>
+        </summary>
+        <node-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-pathformat>hex_nozerox</xr-pathformat>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/ppp/node/&lt;ppp_oper_Node_node-id&gt;/</xr-path>
+          <xr-xml-map>ppp_oper:NodeName</xr-xml-map>
+          <xr-task>ppp</xr-task>
+          <xr-sch-type>NodeID</xr-sch-type>
+          <xr-sch-arg-name>&lt;ppp_oper_Node_node-id&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Node-id</type-name>
+          </type>
+        </node-name>
+      </node>
+    </nodes>
+  </ppp>
+</Cisco-IOS-XR-ppp-ma-oper>

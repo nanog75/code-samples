@@ -1,0 +1,558 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ipv6-ma-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv6-ma-cfg" revision="2017-05-01">
+  <files>
+    <file revision="2017-05-01" submodule="false">Cisco-IOS-XR-ipv6-ma-cfg.yang</file>
+  </files>
+  <prefix>ipv6-ma-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="dt1">Cisco-IOS-XR-ip-iarm-datatypes</import>
+  <import prefix="a1">Cisco-IOS-XR-ifmgr-cfg</import>
+  <typedef name="Ipv6-self-ping">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">disabled</enum>
+      <enum value="1">enabled</enum>
+    </type>
+  </typedef>
+  <typedef name="Ipv6-reachable">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">any</enum>
+      <enum value="1">received</enum>
+    </type>
+  </typedef>
+  <typedef name="Ipv6-default-ping">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">disabled</enum>
+      <enum value="1">enabled</enum>
+    </type>
+  </typedef>
+  <typedef name="Ipv6-qppb">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">ip-precedence</enum>
+      <enum value="2">qos-group</enum>
+      <enum value="3">both</enum>
+    </type>
+  </typedef>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <ipv6-network config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/</xr-path>
+      <xr-xml-map>ipv6_ma_cfg:IPV6Network</xr-xml-map>
+      <xr-task>network</xr-task>
+      <bgp-qos-policy-propagation config="true" is-key="false" node="container" presence="true">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/qppb/input`</xr-path>
+        <xr-xml-map>ipv6_ma_cfg:BGP_QOSPolicyPropagation</xr-xml-map>
+        <xr-task>network</xr-task>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <source config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/qppb/input`0</xr-path>
+          <xr-xml-map>ipv6_ma_cfg:Source</xr-xml-map>
+          <xr-task>network</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Ipv6-qppb</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </source>
+        <destination config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/qppb/input`1</xr-path>
+          <xr-xml-map>ipv6_ma_cfg:Destination</xr-xml-map>
+          <xr-task>network</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Ipv6-qppb</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </destination>
+      </bgp-qos-policy-propagation>
+      <bgp-policy-accountings config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/bgp_pa/</xr-path>
+        <xr-xml-map>ipv6_ma_cfg:BGPPolicyAccountingTable</xr-xml-map>
+        <xr-task>network</xr-task>
+        <bgp-policy-accounting config="true" key="direction" node="list">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/bgp_pa/&lt;ipv6_ma_cfg_BGPPolicyAccounting_direction&gt;</xr-path>
+          <xr-xml-map>ipv6_ma_cfg:BGPPolicyAccounting</xr-xml-map>
+          <xr-task>network</xr-task>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <direction config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/bgp_pa/&lt;ipv6_ma_cfg_BGPPolicyAccounting_direction&gt;</xr-path>
+            <xr-xml-map>ipv6_ma_cfg:Direction</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;ipv6_ma_cfg_BGPPolicyAccounting_direction&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </direction>
+          <destination-accounting config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/bgp_pa/&lt;ipv6_ma_cfg_BGPPolicyAccounting_direction&gt;`0</xr-path>
+            <xr-xml-map>ipv6_ma_cfg:DestinationAccounting</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-sch-type>Boolean</xr-sch-type>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </destination-accounting>
+          <source-accounting config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/bgp_pa/&lt;ipv6_ma_cfg_BGPPolicyAccounting_direction&gt;`1</xr-path>
+            <xr-xml-map>ipv6_ma_cfg:SourceAccounting</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-sch-type>Boolean</xr-sch-type>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </source-accounting>
+        </bgp-policy-accounting>
+      </bgp-policy-accountings>
+      <verify config="true" is-key="false" node="container" presence="true">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/rpf`</xr-path>
+        <xr-xml-map>ipv6_ma_cfg:Verify</xr-xml-map>
+        <xr-task>network</xr-task>
+        <xr-pack-format>%d%d%d</xr-pack-format>
+        <reachable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/rpf`0</xr-path>
+          <xr-xml-map>ipv6_ma_cfg:Reachable</xr-xml-map>
+          <xr-task>network</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Ipv6-reachable</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </reachable>
+        <self-ping config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/rpf`1</xr-path>
+          <xr-xml-map>ipv6_ma_cfg:SelfPing</xr-xml-map>
+          <xr-task>network</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Ipv6-self-ping</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </self-ping>
+        <default-ping config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/rpf`2</xr-path>
+          <xr-xml-map>ipv6_ma_cfg:DefaultPing</xr-xml-map>
+          <xr-task>network</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Ipv6-default-ping</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </default-ping>
+      </verify>
+      <addresses config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/</xr-path>
+        <xr-xml-map>ipv6_ma_cfg:Addresses</xr-xml-map>
+        <xr-task>network</xr-task>
+        <segment-routings config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_d/segment-routing/</xr-path>
+          <xr-xml-map>ipv6_ma_cfg:SegmentRoutingTable</xr-xml-map>
+          <xr-task>ipv6</xr-task>
+          <segment-routing config="true" key="address" node="list">
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_d/segment-routing/&lt;ipv6_ma_cfg_SegmentRouting_ipv6-address&gt;/</xr-path>
+            <xr-xml-map>ipv6_ma_cfg:SegmentRouting</xr-xml-map>
+            <xr-task>ipv6</xr-task>
+            <ipv6-prefix-sid config="true" is-key="false" node="container" presence="true">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-is-packed/>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_d/segment-routing/&lt;ipv6_ma_cfg_SegmentRouting_ipv6-address&gt;/ipv6-sr/prefix-sid`</xr-path>
+              <xr-xml-map>ipv6_ma_cfg:IPv6PrefixSid</xr-xml-map>
+              <xr-task>ipv6</xr-task>
+              <xr-pack-format>%d%s%d</xr-pack-format>
+              <prefix-length config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%s%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_d/segment-routing/&lt;ipv6_ma_cfg_SegmentRouting_ipv6-address&gt;/ipv6-sr/prefix-sid`0</xr-path>
+                <xr-xml-map>ipv6_ma_cfg:PrefixLength</xr-xml-map>
+                <xr-task>ipv6</xr-task>
+                <xr-sch-type>ZeroRange</xr-sch-type>
+                <type>
+                  <type-name>dt1:Ipv6arm-prefix-length</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </prefix-length>
+              <zone config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%s%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_d/segment-routing/&lt;ipv6_ma_cfg_SegmentRouting_ipv6-address&gt;/ipv6-sr/prefix-sid`1</xr-path>
+                <xr-xml-map>ipv6_ma_cfg:Zone</xr-xml-map>
+                <xr-task>ipv6</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </zone>
+              <route-tag config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%s%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_d/segment-routing/&lt;ipv6_ma_cfg_SegmentRouting_ipv6-address&gt;/ipv6-sr/prefix-sid`2</xr-path>
+                <xr-xml-map>ipv6_ma_cfg:RouteTag</xr-xml-map>
+                <xr-task>ipv6</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="1..4294967295">
+                  <type-name>uint32</type-name>
+                </type>
+              </route-tag>
+            </ipv6-prefix-sid>
+            <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_d/segment-routing/&lt;ipv6_ma_cfg_SegmentRouting_ipv6-address&gt;/e</xr-path>
+              <xr-xml-map>ipv6_ma_cfg:Enable</xr-xml-map>
+              <xr-task>ipv6</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </enable>
+            <address config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-create-item-relative-path>aya</xr-create-item-relative-path>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_d/segment-routing/&lt;ipv6_ma_cfg_SegmentRouting_ipv6-address&gt;/</xr-path>
+              <xr-xml-map>ipv6_ma_cfg:Address</xr-xml-map>
+              <xr-task>ipv6</xr-task>
+              <xr-sch-type>IPAddress</xr-sch-type>
+              <xr-sch-arg-name>&lt;ipv6_ma_cfg_SegmentRouting_ipv6-address&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ip-address-no-zone</type-name>
+              </type>
+            </address>
+          </segment-routing>
+        </segment-routings>
+        <link-local-address config="true" is-key="false" node="container" presence="true">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-is-packed/>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_a/linklocal`</xr-path>
+          <xr-xml-map>ipv6_ma_cfg:LinkLocalAddress</xr-xml-map>
+          <xr-task>network</xr-task>
+          <xr-pack-format>%s%s%d</xr-pack-format>
+          <address config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%s%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_a/linklocal`0</xr-path>
+            <xr-xml-map>ipv6_ma_cfg:Address</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-sch-type>IPAddress</xr-sch-type>
+            <type>
+              <type-name>inet:ip-address-no-zone</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </address>
+          <zone config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%s%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_a/linklocal`1</xr-path>
+            <xr-xml-map>ipv6_ma_cfg:Zone</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-default-set/>
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <default>0</default>
+          </zone>
+          <route-tag config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%s%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_a/linklocal`2</xr-path>
+            <xr-xml-map>ipv6_ma_cfg:RouteTag</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <xr-default-set/>
+            <type range="1..4294967295">
+              <type-name>uint32</type-name>
+            </type>
+          </route-tag>
+        </link-local-address>
+        <eui64-addresses config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_c/eui-64/</xr-path>
+          <xr-xml-map>ipv6_ma_cfg:EUI64AddressTable</xr-xml-map>
+          <xr-task>network</xr-task>
+          <eui64-address config="true" key="address" node="list">
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_c/eui-64/&lt;ipv6_ma_cfg_EUI64Address_ipv6_addr&gt;</xr-path>
+            <xr-xml-map>ipv6_ma_cfg:EUI64Address</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-pack-format>%d%s%d</xr-pack-format>
+            <address config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d</xr-pack-format>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_c/eui-64/&lt;ipv6_ma_cfg_EUI64Address_ipv6_addr&gt;</xr-path>
+              <xr-xml-map>ipv6_ma_cfg:Address</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-sch-type>IPAddress</xr-sch-type>
+              <xr-sch-arg-name>&lt;ipv6_ma_cfg_EUI64Address_ipv6_addr&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ip-address-no-zone</type-name>
+              </type>
+            </address>
+            <prefix-length config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_c/eui-64/&lt;ipv6_ma_cfg_EUI64Address_ipv6_addr&gt;`0</xr-path>
+              <xr-xml-map>ipv6_ma_cfg:PrefixLength</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-sch-type>ZeroRange</xr-sch-type>
+              <type>
+                <type-name>dt1:Ipv6arm-prefix-length</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </prefix-length>
+            <zone config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_c/eui-64/&lt;ipv6_ma_cfg_EUI64Address_ipv6_addr&gt;`1</xr-path>
+              <xr-xml-map>ipv6_ma_cfg:Zone</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-default-set/>
+              <type>
+                <type-name>string</type-name>
+              </type>
+              <default>0</default>
+            </zone>
+            <route-tag config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_c/eui-64/&lt;ipv6_ma_cfg_EUI64Address_ipv6_addr&gt;`2</xr-path>
+              <xr-xml-map>ipv6_ma_cfg:RouteTag</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-default-set/>
+              <type range="1..4294967295">
+                <type-name>uint32</type-name>
+              </type>
+            </route-tag>
+          </eui64-address>
+        </eui64-addresses>
+        <regular-addresses config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_b/regular/</xr-path>
+          <xr-xml-map>ipv6_ma_cfg:RegularAddressTable</xr-xml-map>
+          <xr-task>network</xr-task>
+          <regular-address config="true" key="address" node="list">
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_b/regular/&lt;ipv6_ma_cfg_RegularAddress_ipv6_addr&gt;</xr-path>
+            <xr-xml-map>ipv6_ma_cfg:RegularAddress</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-pack-format>%d%s%d</xr-pack-format>
+            <address config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d</xr-pack-format>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_b/regular/&lt;ipv6_ma_cfg_RegularAddress_ipv6_addr&gt;</xr-path>
+              <xr-xml-map>ipv6_ma_cfg:Address</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-sch-type>IPAddress</xr-sch-type>
+              <xr-sch-arg-name>&lt;ipv6_ma_cfg_RegularAddress_ipv6_addr&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ip-address-no-zone</type-name>
+              </type>
+            </address>
+            <prefix-length config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_b/regular/&lt;ipv6_ma_cfg_RegularAddress_ipv6_addr&gt;`0</xr-path>
+              <xr-xml-map>ipv6_ma_cfg:PrefixLength</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-sch-type>ZeroRange</xr-sch-type>
+              <type>
+                <type-name>dt1:Ipv6arm-prefix-length</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </prefix-length>
+            <zone config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_b/regular/&lt;ipv6_ma_cfg_RegularAddress_ipv6_addr&gt;`1</xr-path>
+              <xr-xml-map>ipv6_ma_cfg:Zone</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-default-set/>
+              <type>
+                <type-name>string</type-name>
+              </type>
+              <default>0</default>
+            </zone>
+            <route-tag config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/cfg/ord_b/regular/&lt;ipv6_ma_cfg_RegularAddress_ipv6_addr&gt;`2</xr-path>
+              <xr-xml-map>ipv6_ma_cfg:RouteTag</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-default-set/>
+              <type range="1..4294967295">
+                <type-name>uint32</type-name>
+              </type>
+            </route-tag>
+          </regular-address>
+        </regular-addresses>
+        <auto-configuration config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/ord_d/auto/</xr-path>
+          <xr-xml-map>ipv6_ma_cfg:AutoConfiguration</xr-xml-map>
+          <xr-task>network</xr-task>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/ord_d/auto/enabled</xr-path>
+            <xr-xml-map>ipv6_ma_cfg:Enable</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-sch-type>TrueOnly</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </enable>
+          <auto-config-slaac config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/address/ord_d/auto/autoconfig</xr-path>
+            <xr-xml-map>ipv6_ma_cfg:AutoConfigSlaac</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-sch-type>TrueOnly</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </auto-config-slaac>
+        </auto-configuration>
+      </addresses>
+      <bgp-flow-tag-policy-table config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/flow-tag/</xr-path>
+        <xr-xml-map>ipv6_ma_cfg:BGP_FlowTagPolicyTable</xr-xml-map>
+        <xr-task>network</xr-task>
+        <bgp-flow-tag-policy config="true" is-key="false" node="container" presence="false">
+          <xr-is-packed/>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/flow-tag/input`</xr-path>
+          <xr-xml-map>ipv6_ma_cfg:BGP_FlowTagPolicy</xr-xml-map>
+          <xr-task>network</xr-task>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <source config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/flow-tag/input`0</xr-path>
+            <xr-xml-map>ipv6_ma_cfg:Source</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-sch-type>Boolean</xr-sch-type>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </source>
+          <destination config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/flow-tag/input`1</xr-path>
+            <xr-xml-map>ipv6_ma_cfg:Destination</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-sch-type>Boolean</xr-sch-type>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </destination>
+        </bgp-flow-tag-policy>
+      </bgp-flow-tag-policy-table>
+      <mtu config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/mtu</xr-path>
+        <xr-xml-map>ipv6_ma_cfg:MTU</xr-xml-map>
+        <xr-task>network</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1280..65535">
+          <type-name>uint32</type-name>
+        </type>
+      </mtu>
+      <unnumbered config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/unnumbered</xr-path>
+        <xr-xml-map>ipv6_ma_cfg:Unnumbered</xr-xml-map>
+        <xr-task>network</xr-task>
+        <xr-sch-type>InterfaceName</xr-sch-type>
+        <type>
+          <type-name>xr:Interface-name</type-name>
+        </type>
+      </unnumbered>
+      <ttl-propagate-disable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/ttl_prop</xr-path>
+        <xr-xml-map>ipv6_ma_cfg:TTLPropagateDisable</xr-xml-map>
+        <xr-task>network</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </ttl-propagate-disable>
+      <tcp-mss-adjust-enable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/mss_adjust</xr-path>
+        <xr-xml-map>ipv6_ma_cfg:TCP_MSSAdjustEnable</xr-xml-map>
+        <xr-task>network</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </tcp-mss-adjust-enable>
+      <unreachables config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/ipv6/mae/unreachables</xr-path>
+        <xr-xml-map>ipv6_ma_cfg:Unreachables</xr-xml-map>
+        <xr-task>network</xr-task>
+        <xr-sch-type>FalseOnly</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </unreachables>
+    </ipv6-network>
+  </augment>
+</Cisco-IOS-XR-ipv6-ma-cfg>

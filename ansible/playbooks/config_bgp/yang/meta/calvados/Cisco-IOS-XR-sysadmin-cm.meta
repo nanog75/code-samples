@@ -1,0 +1,437 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-sysadmin-cm ns="http://www.cisco.com/ns/yang/Cisco-IOS-XR-sysadmin-cm" revision="2017-04-12">
+  <files>
+    <file revision="2017-04-12" submodule="false">Cisco-IOS-XR-sysadmin-cm.yang</file>
+  </files>
+  <prefix>cmh</prefix>
+  <import prefix="tailf">tailf-common</import>
+  <import prefix="xs">tailf-xsd-types</import>
+  <import prefix="calvados">Cisco-IOS-XR-sysadmin-types</import>
+  <import prefix="yang">ietf-yang-types</import>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="cm">Cisco-IOS-XR-sysadmin-show-trace-cm</import>
+  <typedef name="area_type">
+    <type node="enumeration">
+      <enum>SYSTEM</enum>
+      <enum>RACK</enum>
+      <enum>UNKNOWN</enum>
+    </type>
+  </typedef>
+  <typedef name="hex8ValueType">
+    <type>
+      <type-name>xs:hexBinary</type-name>
+    </type>
+  </typedef>
+  <augment path="/cm:cm">
+    <lsp config="true" is-key="false" node="container" presence="false">
+      <lspdb_locations config="true" key="lspdb_location" node="list">
+        <xr-path/>
+        <lspdb_location config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>calvados:location-id</type-name>
+          </type>
+        </lspdb_location>
+        <lspdbi config="true" key="lsp_id lsp_area_type" node="list">
+          <xr-path/>
+          <lsp_id config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </lsp_id>
+          <lsp_area_type config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>area_type</type-name>
+            </type>
+          </lsp_area_type>
+          <lsp_sequence config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </lsp_sequence>
+          <lsp_core config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </lsp_core>
+          <lsp_tlvs config="true" is-key="false" node="leaf-list">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </lsp_tlvs>
+        </lspdbi>
+      </lspdb_locations>
+    </lsp>
+  </augment>
+  <node-inventory config="true" is-key="false" node="container" presence="false">
+    <summary config="true" is-key="false" node="container" presence="false">
+      <node_locations config="true" key="node_location" node="list">
+        <xr-path/>
+        <node_location config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>calvados:location-id</type-name>
+          </type>
+        </node_location>
+        <nodei config="true" key="ip_address" node="list">
+          <xr-path/>
+          <type config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </type>
+          <ip_address config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </ip_address>
+          <mac_address config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>yang:mac-address</type-name>
+            </type>
+          </mac_address>
+          <card_serial config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </card_serial>
+          <nti config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </nti>
+        </nodei>
+      </node_locations>
+    </summary>
+    <detail config="true" is-key="false" node="container" presence="false">
+      <node_locations config="true" key="node_location" node="list">
+        <xr-path/>
+        <node_location config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>calvados:location-id</type-name>
+          </type>
+        </node_location>
+        <nodei config="true" key="ip_address" node="list">
+          <xr-path/>
+          <type config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </type>
+          <ip_address config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </ip_address>
+          <mac_address config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>yang:mac-address</type-name>
+            </type>
+          </mac_address>
+          <card_serial config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </card_serial>
+          <nti config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </nti>
+          <restart config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </restart>
+          <data config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>hex8ValueType</type-name>
+            </type>
+          </data>
+          <sdr config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </sdr>
+        </nodei>
+      </node_locations>
+    </detail>
+  </node-inventory>
+  <card-inventory config="true" is-key="false" node="container" presence="false">
+    <card_locations config="true" key="card_location" node="list">
+      <xr-path/>
+      <card_location config="true" is-key="true" node="leaf">
+        <type>
+          <type-name>calvados:location-id</type-name>
+        </type>
+      </card_location>
+      <cardi config="true" key="card_serial" node="list">
+        <xr-path/>
+        <node_id config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </node_id>
+        <card_type config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </card_type>
+        <hw_state config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </hw_state>
+        <sw_state config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </sw_state>
+        <slot config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </slot>
+        <card_serial config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </card_serial>
+        <cti config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </cti>
+      </cardi>
+    </card_locations>
+  </card-inventory>
+  <rack-inventory config="true" is-key="false" node="container" presence="false">
+    <rack_locations config="true" key="rack_location" node="list">
+      <xr-path/>
+      <rack_location config="true" is-key="true" node="leaf">
+        <type>
+          <type-name>calvados:location-id</type-name>
+        </type>
+      </rack_location>
+      <racki config="true" key="rack_serial" node="list">
+        <xr-path/>
+        <rack_number config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>int32</type-name>
+          </type>
+        </rack_number>
+        <rack_serial config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </rack_serial>
+        <rack_state config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>int32</type-name>
+          </type>
+        </rack_state>
+      </racki>
+    </rack_locations>
+  </rack-inventory>
+  <system-service-inventory config="true" is-key="false" node="container" presence="false">
+    <ssvc_locations config="true" key="ssvc_location" node="list">
+      <xr-path/>
+      <ssvc_location config="true" is-key="true" node="leaf">
+        <type>
+          <type-name>calvados:location-id</type-name>
+        </type>
+      </ssvc_location>
+      <ssvci config="true" key="svc_name" node="list">
+        <xr-path/>
+        <svc_name config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </svc_name>
+        <placement_first config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </placement_first>
+        <nodeid_first config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </nodeid_first>
+        <placement_second config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </placement_second>
+        <nodeid_second config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </nodeid_second>
+        <svc_load config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint8</type-name>
+          </type>
+        </svc_load>
+      </ssvci>
+    </ssvc_locations>
+  </system-service-inventory>
+  <rack-service-inventory config="true" is-key="false" node="container" presence="false">
+    <rsvc_locations config="true" key="rsvc_location" node="list">
+      <xr-path/>
+      <rsvc_location config="true" is-key="true" node="leaf">
+        <type>
+          <type-name>calvados:location-id</type-name>
+        </type>
+      </rsvc_location>
+      <rsvci config="true" key="svc_name" node="list">
+        <xr-path/>
+        <svc_name config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </svc_name>
+        <placement_first config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </placement_first>
+        <nodeid_first config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </nodeid_first>
+        <placement_second config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </placement_second>
+        <nodeid_second config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </nodeid_second>
+        <svc_load config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint8</type-name>
+          </type>
+        </svc_load>
+      </rsvci>
+    </rsvc_locations>
+  </rack-service-inventory>
+  <sdr-inventory config="true" is-key="false" node="container" presence="false">
+    <sdr_locations config="true" key="sdr_location" node="list">
+      <xr-path/>
+      <sdr_location config="true" is-key="true" node="leaf">
+        <type>
+          <type-name>calvados:location-id</type-name>
+        </type>
+      </sdr_location>
+      <sdri config="true" key="sdr_name" node="list">
+        <xr-path/>
+        <sdr_id config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </sdr_id>
+        <sdr_name config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </sdr_name>
+        <sdr_vlan_baseid config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint8</type-name>
+          </type>
+        </sdr_vlan_baseid>
+        <sdr_version config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </sdr_version>
+      </sdri>
+    </sdr_locations>
+  </sdr-inventory>
+  <leader-statistics config="true" is-key="false" node="container" presence="false">
+    <ldr_locations config="true" key="ldr_location" node="list">
+      <xr-path/>
+      <ldr_location config="true" is-key="true" node="leaf">
+        <type>
+          <type-name>calvados:location-id</type-name>
+        </type>
+      </ldr_location>
+      <syslead config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </syslead>
+      <bkup_syslead config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </bkup_syslead>
+      <racklead config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </racklead>
+      <bkup_racklead config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </bkup_racklead>
+      <l1_dis config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </l1_dis>
+      <l2_dis config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </l2_dis>
+    </ldr_locations>
+  </leader-statistics>
+  <topology-neighbors config="true" is-key="false" node="container" presence="false">
+    <nbr_locations config="true" key="nbr_location" node="list">
+      <xr-path/>
+      <nbr_location config="true" is-key="true" node="leaf">
+        <type>
+          <type-name>calvados:location-id</type-name>
+        </type>
+      </nbr_location>
+      <nbri config="true" key="nbr_system_id nbr_area_type" node="list">
+        <xr-path/>
+        <nbr_system_id config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </nbr_system_id>
+        <nbr_area_type config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </nbr_area_type>
+        <nbr_interface config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </nbr_interface>
+        <nbr_state config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </nbr_state>
+        <nbr_holdtime config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </nbr_holdtime>
+        <nbr_uptime config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>xs:duration</type-name>
+          </type>
+        </nbr_uptime>
+      </nbri>
+    </nbr_locations>
+  </topology-neighbors>
+  <placement config="true" is-key="false" node="container" presence="false"/>
+</Cisco-IOS-XR-sysadmin-cm>

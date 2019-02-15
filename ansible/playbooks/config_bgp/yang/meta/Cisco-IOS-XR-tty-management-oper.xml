@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-tty-management-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-tty-management-oper" revision="2017-05-01">
+  <files>
+    <file revision="2017-05-01" submodule="false">Cisco-IOS-XR-tty-management-oper.yang</file>
+    <file revision="2017-05-01" submodule="true">Cisco-IOS-XR-tty-management-oper-sub1.yang</file>
+  </files>
+  <prefix>tty-management-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-tty-server-oper</import>
+  <import prefix="inet">ietf-inet-types</import>
+  <identity name="Host-af-id-base"/>
+  <identity name="ipv4">
+    <base>Host-af-id-base</base>
+    <xr-identity-str-value>ipv4</xr-identity-str-value>
+    <xr-identity-int-value>2</xr-identity-int-value>
+  </identity>
+  <identity name="ipv6">
+    <base>Host-af-id-base</base>
+    <xr-identity-str-value>ipv6</xr-identity-str-value>
+    <xr-identity-int-value>10</xr-identity-int-value>
+  </identity>
+  <typedef name="Transport-service">
+    <type node="enumeration">
+      <enum>unknown</enum>
+      <enum>telnet</enum>
+      <enum>rlogin</enum>
+      <enum>ssh</enum>
+    </type>
+  </typedef>
+  <typedef name="Ipv6-address">
+    <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+    <type>
+      <type-name>inet:ipv6-address</type-name>
+    </type>
+  </typedef>
+  <typedef name="Host-af-id">
+    <type node="identityref">
+      <base>Host-af-id-base</base>
+    </type>
+  </typedef>
+  <augment path="/a1:tty/a1:vty-lines/a1:vty-line">
+    <sessions config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/tty/gl/________/________/vty/&lt;tty_server_oper_VTYLine_vtyline&gt;/stats/conn-out/conns</xr-path>
+      <xr-xml-map>tty_management_oper:Sessions</xr-xml-map>
+      <xr-task>tty-access</xr-task>
+      <xr-bag-grp-name>conn_out_table_bag</xr-bag-grp-name>
+      <xr-bag>outgoing_conn.bag</xr-bag>
+      <outgoing-connection config="false" node="list">
+        <xr-path>/oper/tty/gl/________/________/vty/&lt;tty_server_oper_VTYLine_vtyline&gt;/stats/conn-out/conns~conn_out_table_bag.OutgoingConnections[&lt;bag_arg1&gt;]</xr-path>
+        <xr-task>tty-access</xr-task>
+        <xr-bag-version>0 2</xr-bag-version>
+        <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+        <host-address config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/tty/gl/________/________/vty/&lt;tty_server_oper_VTYLine_vtyline&gt;/stats/conn-out/conns~conn_out_table_bag.OutgoingConnections[&lt;bag_arg1&gt;].HostAddress</xr-path>
+          <xr-task>tty-access</xr-task>
+          <xr-bag-version>0 2</xr-bag-version>
+          <af-name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/tty/gl/________/________/vty/&lt;tty_server_oper_VTYLine_vtyline&gt;/stats/conn-out/conns~conn_out_table_bag.OutgoingConnections[&lt;bag_arg1&gt;].HostAddress.AFName</xr-path>
+            <xr-xml-map>outgoing_conn:AFName</xr-xml-map>
+            <xr-task>tty-access</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>Host-af-id</type-name>
+            </type>
+          </af-name>
+          <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/tty/gl/________/________/vty/&lt;tty_server_oper_VTYLine_vtyline&gt;/stats/conn-out/conns~conn_out_table_bag.OutgoingConnections[&lt;bag_arg1&gt;].HostAddress.IPv4Address</xr-path>
+            <xr-xml-map>outgoing_conn:IPv4Address</xr-xml-map>
+            <xr-task>tty-access</xr-task>
+            <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <when>../af-name = 'ipv4'</when>
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </ipv4-address>
+          <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/tty/gl/________/________/vty/&lt;tty_server_oper_VTYLine_vtyline&gt;/stats/conn-out/conns~conn_out_table_bag.OutgoingConnections[&lt;bag_arg1&gt;].HostAddress.IPv6Address</xr-path>
+            <xr-xml-map>outgoing_conn:IPv6Address</xr-xml-map>
+            <xr-task>tty-access</xr-task>
+            <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <when>../af-name = 'ipv6'</when>
+            <type>
+              <type-name>Ipv6-address</type-name>
+            </type>
+          </ipv6-address>
+        </host-address>
+        <connection-id config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/tty/gl/________/________/vty/&lt;tty_server_oper_VTYLine_vtyline&gt;/stats/conn-out/conns~conn_out_table_bag.OutgoingConnections[&lt;bag_arg1&gt;].ConnectionID</xr-path>
+          <xr-xml-map>outgoing_conn:ConnectionID</xr-xml-map>
+          <xr-task>tty-access</xr-task>
+          <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>uint8</type-name>
+          </type>
+        </connection-id>
+        <host-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/tty/gl/________/________/vty/&lt;tty_server_oper_VTYLine_vtyline&gt;/stats/conn-out/conns~conn_out_table_bag.OutgoingConnections[&lt;bag_arg1&gt;].HostName</xr-path>
+          <xr-xml-map>outgoing_conn:HostName</xr-xml-map>
+          <xr-task>tty-access</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </host-name>
+        <transport-protocol config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/tty/gl/________/________/vty/&lt;tty_server_oper_VTYLine_vtyline&gt;/stats/conn-out/conns~conn_out_table_bag.OutgoingConnections[&lt;bag_arg1&gt;].TransportProtocol</xr-path>
+          <xr-xml-map>outgoing_conn:TransportProtocol</xr-xml-map>
+          <xr-task>tty-access</xr-task>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>Transport-service</type-name>
+          </type>
+        </transport-protocol>
+        <is-last-active-session config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/tty/gl/________/________/vty/&lt;tty_server_oper_VTYLine_vtyline&gt;/stats/conn-out/conns~conn_out_table_bag.OutgoingConnections[&lt;bag_arg1&gt;].IsLastActiveSession</xr-path>
+          <xr-xml-map>outgoing_conn:IsLastActiveSession</xr-xml-map>
+          <xr-task>tty-access</xr-task>
+          <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </is-last-active-session>
+        <idle-time config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/tty/gl/________/________/vty/&lt;tty_server_oper_VTYLine_vtyline&gt;/stats/conn-out/conns~conn_out_table_bag.OutgoingConnections[&lt;bag_arg1&gt;].IdleTime</xr-path>
+          <xr-xml-map>outgoing_conn:IdleTime</xr-xml-map>
+          <xr-task>tty-access</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </idle-time>
+      </outgoing-connection>
+    </sessions>
+  </augment>
+</Cisco-IOS-XR-tty-management-oper>

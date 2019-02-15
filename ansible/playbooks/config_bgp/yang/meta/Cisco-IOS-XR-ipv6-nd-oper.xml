@@ -1,0 +1,1761 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ipv6-nd-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv6-nd-oper" revision="2015-11-09">
+  <files>
+    <file revision="2015-11-09" submodule="false">Cisco-IOS-XR-ipv6-nd-oper.yang</file>
+    <file revision="2015-11-09" submodule="true">Cisco-IOS-XR-ipv6-nd-oper-sub1.yang</file>
+  </files>
+  <prefix>ipv6-nd-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="yang">ietf-yang-types</import>
+  <typedef name="Ipv6-nd-sh-vr-flags">
+    <type node="enumeration">
+      <enum>no-flags</enum>
+      <enum>final-ra</enum>
+    </type>
+  </typedef>
+  <typedef name="Ipv6-nd-sh-vr-state">
+    <type node="enumeration">
+      <enum>deleted</enum>
+      <enum>standby</enum>
+      <enum>active</enum>
+    </type>
+  </typedef>
+  <typedef name="Ipv6-nd-bndl-state">
+    <type node="enumeration">
+      <enum>run</enum>
+      <enum>error</enum>
+      <enum>wait</enum>
+    </type>
+  </typedef>
+  <typedef name="Ipv6-nd-neighbor-origin">
+    <type node="enumeration">
+      <enum>other</enum>
+      <enum>static</enum>
+      <enum>dynamic</enum>
+    </type>
+  </typedef>
+  <typedef name="Ipv6-nd-media-encap">
+    <type node="enumeration">
+      <enum>none</enum>
+      <enum>arpa</enum>
+      <enum>snap</enum>
+      <enum>ieee802-1q</enum>
+      <enum>srp</enum>
+      <enum>srpa</enum>
+      <enum>srpb</enum>
+      <enum>ppp</enum>
+      <enum>hdlc</enum>
+      <enum>chdlc</enum>
+      <enum>dot1q</enum>
+      <enum>fr</enum>
+      <enum>gre</enum>
+    </type>
+  </typedef>
+  <typedef name="Ipv6-nd-sh-state">
+    <type node="enumeration">
+      <enum>incomplete</enum>
+      <enum>reachable</enum>
+      <enum>stale</enum>
+      <enum>glean</enum>
+      <enum>delay</enum>
+      <enum>probe</enum>
+      <enum>delete</enum>
+    </type>
+  </typedef>
+  <ipv6-node-discovery config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/ipv6-nd/</xr-path>
+    <xr-xml-map>ipv6_nd_oper:IPV6NodeDiscovery</xr-xml-map>
+    <xr-task>network</xr-task>
+    <nodes config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ipv6-nd/node/</xr-path>
+      <xr-xml-map>ipv6_nd_oper:NodeTable</xr-xml-map>
+      <xr-task>network</xr-task>
+      <node config="false" key="node-name" node="list">
+        <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/</xr-path>
+        <xr-xml-map>ipv6_nd_oper:Node</xr-xml-map>
+        <xr-task>network</xr-task>
+        <neighbor-interfaces config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/cache/interfaces/</xr-path>
+          <xr-xml-map>ipv6_nd_oper:NeighborInterfaceTable</xr-xml-map>
+          <xr-task>network</xr-task>
+          <neighbor-interface config="false" key="interface-name" node="list">
+            <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/cache/interfaces/&lt;ipv6_nd_oper_NeighborInterface_ifname&gt;/</xr-path>
+            <xr-xml-map>ipv6_nd_oper:NeighborInterface</xr-xml-map>
+            <xr-task>network</xr-task>
+            <host-addresses config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/cache/interfaces/&lt;ipv6_nd_oper_NeighborInterface_ifname&gt;/</xr-path>
+              <xr-xml-map>ipv6_nd_oper:HostAddressTable</xr-xml-map>
+              <xr-task>network</xr-task>
+              <host-address config="false" key="host-address" node="list">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/cache/interfaces/&lt;ipv6_nd_oper_NeighborInterface_ifname&gt;/&lt;ipv6_nd_oper_HostAddress_Addr1&gt;,&lt;ipv6_nd_oper_HostAddress_Addr2&gt;,&lt;ipv6_nd_oper_HostAddress_Addr3&gt;,&lt;ipv6_nd_oper_HostAddress_Addr4&gt;</xr-path>
+                <xr-xml-map>ipv6_nd_oper:HostAddress</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-grp-name>ipv6_nd_neighbor_entry</xr-bag-grp-name>
+                <xr-bag>ipv6_nd.bag</xr-bag>
+                <host-address config="false" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-pathformat>hex_padded_nozerox,hex_padded_nozerox,hex_padded_nozerox,hex_padded_nozerox</xr-pathformat>
+                  <xr-primitive-type>inaddr inaddr inaddr inaddr</xr-primitive-type>
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/cache/interfaces/&lt;ipv6_nd_oper_NeighborInterface_ifname&gt;/&lt;ipv6_nd_oper_HostAddress_Addr1&gt;,&lt;ipv6_nd_oper_HostAddress_Addr2&gt;,&lt;ipv6_nd_oper_HostAddress_Addr3&gt;,&lt;ipv6_nd_oper_HostAddress_Addr4&gt;</xr-path>
+                  <xr-xml-map>ipv6_nd_oper:HostAddress</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-sch-type>IPV6Address</xr-sch-type>
+                  <xr-sch-arg-name>&lt;ipv6_nd_oper_HostAddress_Addr1&gt;,&lt;ipv6_nd_oper_HostAddress_Addr2&gt;,&lt;ipv6_nd_oper_HostAddress_Addr3&gt;,&lt;ipv6_nd_oper_HostAddress_Addr4&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>inet:ipv6-address-no-zone</type-name>
+                  </type>
+                </host-address>
+                <last-reached-time config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/cache/interfaces/&lt;ipv6_nd_oper_NeighborInterface_ifname&gt;/&lt;ipv6_nd_oper_HostAddress_Addr1&gt;,&lt;ipv6_nd_oper_HostAddress_Addr2&gt;,&lt;ipv6_nd_oper_HostAddress_Addr3&gt;,&lt;ipv6_nd_oper_HostAddress_Addr4&gt;~ipv6_nd_neighbor_entry.LastReachedTime</xr-path>
+                  <xr-task>network</xr-task>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <seconds config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/cache/interfaces/&lt;ipv6_nd_oper_NeighborInterface_ifname&gt;/&lt;ipv6_nd_oper_HostAddress_Addr1&gt;,&lt;ipv6_nd_oper_HostAddress_Addr2&gt;,&lt;ipv6_nd_oper_HostAddress_Addr3&gt;,&lt;ipv6_nd_oper_HostAddress_Addr4&gt;~ipv6_nd_neighbor_entry.LastReachedTime.Seconds</xr-path>
+                    <xr-xml-map>ipv6_nd:Seconds</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>2 3</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </seconds>
+                </last-reached-time>
+                <reachability-state config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/cache/interfaces/&lt;ipv6_nd_oper_NeighborInterface_ifname&gt;/&lt;ipv6_nd_oper_HostAddress_Addr1&gt;,&lt;ipv6_nd_oper_HostAddress_Addr2&gt;,&lt;ipv6_nd_oper_HostAddress_Addr3&gt;,&lt;ipv6_nd_oper_HostAddress_Addr4&gt;~ipv6_nd_neighbor_entry.ReachabilityState</xr-path>
+                  <xr-xml-map>ipv6_nd:ReachabilityState</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <type>
+                    <type-name>Ipv6-nd-sh-state</type-name>
+                  </type>
+                </reachability-state>
+                <link-layer-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/cache/interfaces/&lt;ipv6_nd_oper_NeighborInterface_ifname&gt;/&lt;ipv6_nd_oper_HostAddress_Addr1&gt;,&lt;ipv6_nd_oper_HostAddress_Addr2&gt;,&lt;ipv6_nd_oper_HostAddress_Addr3&gt;,&lt;ipv6_nd_oper_HostAddress_Addr4&gt;~ipv6_nd_neighbor_entry.LinkLayerAddress</xr-path>
+                  <xr-xml-map>ipv6_nd:LinkLayerAddress</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <type>
+                    <type-name>yang:mac-address</type-name>
+                  </type>
+                </link-layer-address>
+                <encapsulation config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/cache/interfaces/&lt;ipv6_nd_oper_NeighborInterface_ifname&gt;/&lt;ipv6_nd_oper_HostAddress_Addr1&gt;,&lt;ipv6_nd_oper_HostAddress_Addr2&gt;,&lt;ipv6_nd_oper_HostAddress_Addr3&gt;,&lt;ipv6_nd_oper_HostAddress_Addr4&gt;~ipv6_nd_neighbor_entry.Encapsulation</xr-path>
+                  <xr-xml-map>ipv6_nd:Encapsulation</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <type>
+                    <type-name>Ipv6-nd-media-encap</type-name>
+                  </type>
+                </encapsulation>
+                <selected-encapsulation config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/cache/interfaces/&lt;ipv6_nd_oper_NeighborInterface_ifname&gt;/&lt;ipv6_nd_oper_HostAddress_Addr1&gt;,&lt;ipv6_nd_oper_HostAddress_Addr2&gt;,&lt;ipv6_nd_oper_HostAddress_Addr3&gt;,&lt;ipv6_nd_oper_HostAddress_Addr4&gt;~ipv6_nd_neighbor_entry.SelectedEncapsulation</xr-path>
+                  <xr-xml-map>ipv6_nd:SelectedEncapsulation</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <type>
+                    <type-name>Ipv6-nd-media-encap</type-name>
+                  </type>
+                </selected-encapsulation>
+                <origin-encapsulation config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/cache/interfaces/&lt;ipv6_nd_oper_NeighborInterface_ifname&gt;/&lt;ipv6_nd_oper_HostAddress_Addr1&gt;,&lt;ipv6_nd_oper_HostAddress_Addr2&gt;,&lt;ipv6_nd_oper_HostAddress_Addr3&gt;,&lt;ipv6_nd_oper_HostAddress_Addr4&gt;~ipv6_nd_neighbor_entry.OriginEncapsulation</xr-path>
+                  <xr-xml-map>ipv6_nd:OriginEncapsulation</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <type>
+                    <type-name>Ipv6-nd-neighbor-origin</type-name>
+                  </type>
+                </origin-encapsulation>
+                <interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/cache/interfaces/&lt;ipv6_nd_oper_NeighborInterface_ifname&gt;/&lt;ipv6_nd_oper_HostAddress_Addr1&gt;,&lt;ipv6_nd_oper_HostAddress_Addr2&gt;,&lt;ipv6_nd_oper_HostAddress_Addr3&gt;,&lt;ipv6_nd_oper_HostAddress_Addr4&gt;~ipv6_nd_neighbor_entry.InterfaceName</xr-path>
+                  <xr-xml-map>ipv6_nd:InterfaceName</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </interface-name>
+                <location config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/cache/interfaces/&lt;ipv6_nd_oper_NeighborInterface_ifname&gt;/&lt;ipv6_nd_oper_HostAddress_Addr1&gt;,&lt;ipv6_nd_oper_HostAddress_Addr2&gt;,&lt;ipv6_nd_oper_HostAddress_Addr3&gt;,&lt;ipv6_nd_oper_HostAddress_Addr4&gt;~ipv6_nd_neighbor_entry.Location</xr-path>
+                  <xr-xml-map>ipv6_nd:Location</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-bag-primitive-type>nodeid_td</xr-bag-primitive-type>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <type>
+                    <type-name>xr:Node-id</type-name>
+                  </type>
+                </location>
+                <is-router config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/cache/interfaces/&lt;ipv6_nd_oper_NeighborInterface_ifname&gt;/&lt;ipv6_nd_oper_HostAddress_Addr1&gt;,&lt;ipv6_nd_oper_HostAddress_Addr2&gt;,&lt;ipv6_nd_oper_HostAddress_Addr3&gt;,&lt;ipv6_nd_oper_HostAddress_Addr4&gt;~ipv6_nd_neighbor_entry.IsRouter</xr-path>
+                  <xr-xml-map>ipv6_nd:IsRouter</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </is-router>
+                <serg-flags config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/cache/interfaces/&lt;ipv6_nd_oper_NeighborInterface_ifname&gt;/&lt;ipv6_nd_oper_HostAddress_Addr1&gt;,&lt;ipv6_nd_oper_HostAddress_Addr2&gt;,&lt;ipv6_nd_oper_HostAddress_Addr3&gt;,&lt;ipv6_nd_oper_HostAddress_Addr4&gt;~ipv6_nd_neighbor_entry.SERGFlags</xr-path>
+                  <xr-xml-map>ipv6_nd:SERGFlags</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </serg-flags>
+                <vrfid config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/cache/interfaces/&lt;ipv6_nd_oper_NeighborInterface_ifname&gt;/&lt;ipv6_nd_oper_HostAddress_Addr1&gt;,&lt;ipv6_nd_oper_HostAddress_Addr2&gt;,&lt;ipv6_nd_oper_HostAddress_Addr3&gt;,&lt;ipv6_nd_oper_HostAddress_Addr4&gt;~ipv6_nd_neighbor_entry.VRFID</xr-path>
+                  <xr-xml-map>ipv6_nd:VRFID</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </vrfid>
+              </host-address>
+            </host-addresses>
+            <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/cache/interfaces/&lt;ipv6_nd_oper_NeighborInterface_ifname&gt;/</xr-path>
+              <xr-xml-map>ipv6_nd_oper:InterfaceName</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-sch-type>InterfaceName</xr-sch-type>
+              <xr-sch-arg-name>&lt;ipv6_nd_oper_NeighborInterface_ifname&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-name>
+          </neighbor-interface>
+        </neighbor-interfaces>
+        <neighbor-summary config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary</xr-path>
+          <xr-xml-map>ipv6_nd_oper:NeighborSummary</xr-xml-map>
+          <xr-task>network</xr-task>
+          <xr-bag-grp-name>ipv6_nd_neighbor_entry_summary</xr-bag-grp-name>
+          <xr-bag>ipv6_nd.bag</xr-bag>
+          <multicast config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Multicast</xr-path>
+            <xr-task>network</xr-task>
+            <xr-bag-version>2 3</xr-bag-version>
+            <incomplete-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Multicast.IncompleteEntries</xr-path>
+              <xr-xml-map>ipv6_nd:IncompleteEntries</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </incomplete-entries>
+            <reachable-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Multicast.ReachableEntries</xr-path>
+              <xr-xml-map>ipv6_nd:ReachableEntries</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </reachable-entries>
+            <stale-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Multicast.StaleEntries</xr-path>
+              <xr-xml-map>ipv6_nd:StaleEntries</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </stale-entries>
+            <delayed-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Multicast.DelayedEntries</xr-path>
+              <xr-xml-map>ipv6_nd:DelayedEntries</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </delayed-entries>
+            <probe-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Multicast.ProbeEntries</xr-path>
+              <xr-xml-map>ipv6_nd:ProbeEntries</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </probe-entries>
+            <deleted-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Multicast.DeletedEntries</xr-path>
+              <xr-xml-map>ipv6_nd:DeletedEntries</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </deleted-entries>
+            <subtotal-neighbor-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Multicast.SubtotalNeighborEntries</xr-path>
+              <xr-xml-map>ipv6_nd:SubtotalNeighborEntries</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </subtotal-neighbor-entries>
+          </multicast>
+          <static config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Static</xr-path>
+            <xr-task>network</xr-task>
+            <xr-bag-version>2 3</xr-bag-version>
+            <incomplete-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Static.IncompleteEntries</xr-path>
+              <xr-xml-map>ipv6_nd:IncompleteEntries</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </incomplete-entries>
+            <reachable-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Static.ReachableEntries</xr-path>
+              <xr-xml-map>ipv6_nd:ReachableEntries</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </reachable-entries>
+            <stale-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Static.StaleEntries</xr-path>
+              <xr-xml-map>ipv6_nd:StaleEntries</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </stale-entries>
+            <delayed-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Static.DelayedEntries</xr-path>
+              <xr-xml-map>ipv6_nd:DelayedEntries</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </delayed-entries>
+            <probe-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Static.ProbeEntries</xr-path>
+              <xr-xml-map>ipv6_nd:ProbeEntries</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </probe-entries>
+            <deleted-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Static.DeletedEntries</xr-path>
+              <xr-xml-map>ipv6_nd:DeletedEntries</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </deleted-entries>
+            <subtotal-neighbor-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Static.SubtotalNeighborEntries</xr-path>
+              <xr-xml-map>ipv6_nd:SubtotalNeighborEntries</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </subtotal-neighbor-entries>
+          </static>
+          <dynamic config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Dynamic</xr-path>
+            <xr-task>network</xr-task>
+            <xr-bag-version>2 3</xr-bag-version>
+            <incomplete-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Dynamic.IncompleteEntries</xr-path>
+              <xr-xml-map>ipv6_nd:IncompleteEntries</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </incomplete-entries>
+            <reachable-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Dynamic.ReachableEntries</xr-path>
+              <xr-xml-map>ipv6_nd:ReachableEntries</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </reachable-entries>
+            <stale-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Dynamic.StaleEntries</xr-path>
+              <xr-xml-map>ipv6_nd:StaleEntries</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </stale-entries>
+            <delayed-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Dynamic.DelayedEntries</xr-path>
+              <xr-xml-map>ipv6_nd:DelayedEntries</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </delayed-entries>
+            <probe-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Dynamic.ProbeEntries</xr-path>
+              <xr-xml-map>ipv6_nd:ProbeEntries</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </probe-entries>
+            <deleted-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Dynamic.DeletedEntries</xr-path>
+              <xr-xml-map>ipv6_nd:DeletedEntries</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </deleted-entries>
+            <subtotal-neighbor-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.Dynamic.SubtotalNeighborEntries</xr-path>
+              <xr-xml-map>ipv6_nd:SubtotalNeighborEntries</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </subtotal-neighbor-entries>
+          </dynamic>
+          <total-neighbor-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/summary~ipv6_nd_neighbor_entry_summary.TotalNeighborEntries</xr-path>
+            <xr-xml-map>ipv6_nd:TotalNeighborEntries</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>2 3</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </total-neighbor-entries>
+        </neighbor-summary>
+        <bundle-nodes config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blnode/</xr-path>
+          <xr-xml-map>ipv6_nd_oper:BundleNodeTable</xr-xml-map>
+          <xr-task>network</xr-task>
+          <bundle-node config="false" key="node-name" node="list">
+            <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blnode/&lt;ipv6_nd_oper_BundleNode_Node&gt;</xr-path>
+            <xr-xml-map>ipv6_nd_oper:BundleNode</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-bag-grp-name>ipv6_nd_bl_node_entry</xr-bag-grp-name>
+            <xr-bag>ipv6_nd.bag</xr-bag>
+            <node-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-pathformat>hex_nozerox</xr-pathformat>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blnode/&lt;ipv6_nd_oper_BundleNode_Node&gt;</xr-path>
+              <xr-xml-map>ipv6_nd_oper:NodeName</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-sch-type>NodeID</xr-sch-type>
+              <xr-sch-arg-name>&lt;ipv6_nd_oper_BundleNode_Node&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Node-id</type-name>
+              </type>
+            </node-name>
+            <age config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blnode/&lt;ipv6_nd_oper_BundleNode_Node&gt;~ipv6_nd_bl_node_entry.Age</xr-path>
+              <xr-task>network</xr-task>
+              <xr-bag-version>2 3</xr-bag-version>
+              <seconds config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blnode/&lt;ipv6_nd_oper_BundleNode_Node&gt;~ipv6_nd_bl_node_entry.Age.Seconds</xr-path>
+                <xr-xml-map>ipv6_nd:Seconds</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </seconds>
+            </age>
+            <group-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blnode/&lt;ipv6_nd_oper_BundleNode_Node&gt;~ipv6_nd_bl_node_entry.GroupID</xr-path>
+              <xr-xml-map>ipv6_nd:GroupID</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </group-id>
+            <process-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blnode/&lt;ipv6_nd_oper_BundleNode_Node&gt;~ipv6_nd_bl_node_entry.ProcessName</xr-path>
+              <xr-xml-map>ipv6_nd:ProcessName</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </process-name>
+            <sent-sequence-number config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blnode/&lt;ipv6_nd_oper_BundleNode_Node&gt;~ipv6_nd_bl_node_entry.SentSequenceNumber</xr-path>
+              <xr-xml-map>ipv6_nd:SentSequenceNumber</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </sent-sequence-number>
+            <received-sequence-number config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blnode/&lt;ipv6_nd_oper_BundleNode_Node&gt;~ipv6_nd_bl_node_entry.ReceivedSequenceNumber</xr-path>
+              <xr-xml-map>ipv6_nd:ReceivedSequenceNumber</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </received-sequence-number>
+            <state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blnode/&lt;ipv6_nd_oper_BundleNode_Node&gt;~ipv6_nd_bl_node_entry.State</xr-path>
+              <xr-xml-map>ipv6_nd:State</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>Ipv6-nd-bndl-state</type-name>
+              </type>
+            </state>
+            <state-changes config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blnode/&lt;ipv6_nd_oper_BundleNode_Node&gt;~ipv6_nd_bl_node_entry.StateChanges</xr-path>
+              <xr-xml-map>ipv6_nd:StateChanges</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </state-changes>
+            <sent-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blnode/&lt;ipv6_nd_oper_BundleNode_Node&gt;~ipv6_nd_bl_node_entry.SentPackets</xr-path>
+              <xr-xml-map>ipv6_nd:SentPackets</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </sent-packets>
+            <received-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blnode/&lt;ipv6_nd_oper_BundleNode_Node&gt;~ipv6_nd_bl_node_entry.ReceivedPackets</xr-path>
+              <xr-xml-map>ipv6_nd:ReceivedPackets</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </received-packets>
+          </bundle-node>
+        </bundle-nodes>
+        <bundle-interfaces config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/</xr-path>
+          <xr-xml-map>ipv6_nd_oper:BundleInterfaceTable</xr-xml-map>
+          <xr-task>network</xr-task>
+          <bundle-interface config="false" key="interface-name" node="list">
+            <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;</xr-path>
+            <xr-xml-map>ipv6_nd_oper:BundleInterface</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-bag-grp-name>ipv6_nd_if_entry</xr-bag-grp-name>
+            <xr-bag>ipv6_nd.bag</xr-bag>
+            <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;</xr-path>
+              <xr-xml-map>ipv6_nd_oper:InterfaceName</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-sch-type>InterfaceName</xr-sch-type>
+              <xr-sch-arg-name>&lt;ipv6_nd_oper_BundleInterface_ifname&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-name>
+            <nd-parameters config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.NDParameters</xr-path>
+              <xr-task>network</xr-task>
+              <xr-bag-version>2 3</xr-bag-version>
+              <is-dad-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.NDParameters.IsDADEnabled</xr-path>
+                <xr-xml-map>ipv6_nd:IsDADEnabled</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-dad-enabled>
+              <dad-attempts config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.NDParameters.DADAttempts</xr-path>
+                <xr-xml-map>ipv6_nd:DADAttempts</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </dad-attempts>
+              <is-icm-pv6-redirect config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.NDParameters.IsICMPv6Redirect</xr-path>
+                <xr-xml-map>ipv6_nd:IsICMPv6Redirect</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-icm-pv6-redirect>
+              <is-dhcp-managed config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.NDParameters.IsDHCPManaged</xr-path>
+                <xr-xml-map>ipv6_nd:IsDHCPManaged</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-dhcp-managed>
+              <is-route-address-managed config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.NDParameters.IsRouteAddressManaged</xr-path>
+                <xr-xml-map>ipv6_nd:IsRouteAddressManaged</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-route-address-managed>
+              <is-suppressed config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.NDParameters.IsSuppressed</xr-path>
+                <xr-xml-map>ipv6_nd:IsSuppressed</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-suppressed>
+              <send-unicast-ra config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.NDParameters.SendUnicastRA</xr-path>
+                <xr-xml-map>ipv6_nd:SendUnicastRA</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </send-unicast-ra>
+              <nd-retransmit-interval config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.NDParameters.NDRetransmitInterval</xr-path>
+                <xr-xml-map>ipv6_nd:NDRetransmitInterval</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </nd-retransmit-interval>
+              <nd-min-transmit-interval config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.NDParameters.NDMinTransmitInterval</xr-path>
+                <xr-xml-map>ipv6_nd:NDMinTransmitInterval</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </nd-min-transmit-interval>
+              <nd-max-transmit-interval config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.NDParameters.NDMaxTransmitInterval</xr-path>
+                <xr-xml-map>ipv6_nd:NDMaxTransmitInterval</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </nd-max-transmit-interval>
+              <nd-advertisement-lifetime config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.NDParameters.NDAdvertisementLifetime</xr-path>
+                <xr-xml-map>ipv6_nd:NDAdvertisementLifetime</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </nd-advertisement-lifetime>
+              <nd-reachable-time config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.NDParameters.NDReachableTime</xr-path>
+                <xr-xml-map>ipv6_nd:NDReachableTime</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </nd-reachable-time>
+              <nd-cache-limit config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.NDParameters.NDCacheLimit</xr-path>
+                <xr-xml-map>ipv6_nd:NDCacheLimit</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </nd-cache-limit>
+              <complete-protocol-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.NDParameters.CompleteProtocolCount</xr-path>
+                <xr-xml-map>ipv6_nd:CompleteProtocolCount</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </complete-protocol-count>
+              <complete-glean-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.NDParameters.CompleteGleanCount</xr-path>
+                <xr-xml-map>ipv6_nd:CompleteGleanCount</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </complete-glean-count>
+              <incomplete-protocol-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.NDParameters.IncompleteProtocolCount</xr-path>
+                <xr-xml-map>ipv6_nd:IncompleteProtocolCount</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </incomplete-protocol-count>
+              <incomplete-glean-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.NDParameters.IncompleteGleanCount</xr-path>
+                <xr-xml-map>ipv6_nd:IncompleteGleanCount</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </incomplete-glean-count>
+              <dropped-protocol-req-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.NDParameters.DroppedProtocolReqCount</xr-path>
+                <xr-xml-map>ipv6_nd:DroppedProtocolReqCount</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </dropped-protocol-req-count>
+              <dropped-glean-req-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.NDParameters.DroppedGleanReqCount</xr-path>
+                <xr-xml-map>ipv6_nd:DroppedGleanReqCount</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </dropped-glean-req-count>
+            </nd-parameters>
+            <local-address config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.LocalAddress</xr-path>
+              <xr-task>network</xr-task>
+              <xr-bag-version>2 3</xr-bag-version>
+              <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.LocalAddress.IPv6Address</xr-path>
+                <xr-xml-map>ipv6_nd:IPv6Address</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>inet:ipv6-address</type-name>
+                </type>
+              </ipv6-address>
+              <valid-lifetime config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.LocalAddress.ValidLifetime</xr-path>
+                <xr-xml-map>ipv6_nd:ValidLifetime</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </valid-lifetime>
+              <pref-lifetime config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.LocalAddress.PrefLifetime</xr-path>
+                <xr-xml-map>ipv6_nd:PrefLifetime</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </pref-lifetime>
+              <prefix-length config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.LocalAddress.PrefixLength</xr-path>
+                <xr-xml-map>ipv6_nd:PrefixLength</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </prefix-length>
+              <flags config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.LocalAddress.Flags</xr-path>
+                <xr-xml-map>ipv6_nd:Flags</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </flags>
+            </local-address>
+            <parent-interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.ParentInterfaceName</xr-path>
+              <xr-xml-map>ipv6_nd:ParentInterfaceName</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </parent-interface-name>
+            <iftype config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.Iftype</xr-path>
+              <xr-xml-map>ipv6_nd:Iftype</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </iftype>
+            <mtu config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.Mtu</xr-path>
+              <xr-xml-map>ipv6_nd:Mtu</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </mtu>
+            <etype config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.Etype</xr-path>
+              <xr-xml-map>ipv6_nd:Etype</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </etype>
+            <vlan-tag config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.vlanTag</xr-path>
+              <xr-xml-map>ipv6_nd:vlanTag</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </vlan-tag>
+            <mac-addr-size config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.macAddrSize</xr-path>
+              <xr-xml-map>ipv6_nd:macAddrSize</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </mac-addr-size>
+            <mac-addr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.macAddr</xr-path>
+              <xr-xml-map>ipv6_nd:macAddr</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>yang:mac-address</type-name>
+              </type>
+            </mac-addr>
+            <is-interface-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.IsInterfaceEnabled</xr-path>
+              <xr-xml-map>ipv6_nd:IsInterfaceEnabled</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </is-interface-enabled>
+            <is-ipv6-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.IsIPv6Enabled</xr-path>
+              <xr-xml-map>ipv6_nd:IsIPv6Enabled</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </is-ipv6-enabled>
+            <is-mpls-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.IsMplsEnabled</xr-path>
+              <xr-xml-map>ipv6_nd:IsMplsEnabled</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </is-mpls-enabled>
+            <member-link config="false" is-key="false" is-yang-key="false" node="leaf-list">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.MemberLinkList[&lt;bag_arg2&gt;]</xr-path>
+              <xr-xml-map>ipv6_nd:MemberLinkList</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </member-link>
+            <global-address config="false" node="list">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.GlobalAddressList[&lt;bag_arg1&gt;]</xr-path>
+              <xr-task>network</xr-task>
+              <xr-bag-version>2 3</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+              <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.GlobalAddressList[&lt;bag_arg1&gt;].IPv6Address</xr-path>
+                <xr-xml-map>ipv6_nd:IPv6Address</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>inet:ipv6-address</type-name>
+                </type>
+              </ipv6-address>
+              <valid-lifetime config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.GlobalAddressList[&lt;bag_arg1&gt;].ValidLifetime</xr-path>
+                <xr-xml-map>ipv6_nd:ValidLifetime</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </valid-lifetime>
+              <pref-lifetime config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.GlobalAddressList[&lt;bag_arg1&gt;].PrefLifetime</xr-path>
+                <xr-xml-map>ipv6_nd:PrefLifetime</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </pref-lifetime>
+              <prefix-length config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.GlobalAddressList[&lt;bag_arg1&gt;].PrefixLength</xr-path>
+                <xr-xml-map>ipv6_nd:PrefixLength</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </prefix-length>
+              <flags config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.GlobalAddressList[&lt;bag_arg1&gt;].Flags</xr-path>
+                <xr-xml-map>ipv6_nd:Flags</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </flags>
+            </global-address>
+            <member-node config="false" node="list">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.MemberNodeList[&lt;bag_arg3&gt;]</xr-path>
+              <xr-task>network</xr-task>
+              <xr-bag-version>2 3</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+              <node-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.MemberNodeList[&lt;bag_arg3&gt;].NodeName</xr-path>
+                <xr-xml-map>ipv6_nd:NodeName</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>nodeid_td</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>xr:Node-id</type-name>
+                </type>
+              </node-name>
+              <total-links config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/blint/&lt;ipv6_nd_oper_BundleInterface_ifname&gt;~ipv6_nd_if_entry.MemberNodeList[&lt;bag_arg3&gt;].TotalLinks</xr-path>
+                <xr-xml-map>ipv6_nd:TotalLinks</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </total-links>
+            </member-node>
+          </bundle-interface>
+        </bundle-interfaces>
+        <interfaces config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slotifparams/</xr-path>
+          <xr-xml-map>ipv6_nd_oper:InterfaceTable</xr-xml-map>
+          <xr-task>network</xr-task>
+          <interface config="false" key="interface-name" node="list">
+            <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slotifparams/&lt;ipv6_nd_oper_Interface_ifname&gt;</xr-path>
+            <xr-xml-map>ipv6_nd_oper:Interface</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-bag-grp-name>ipv6_nd_if_params</xr-bag-grp-name>
+            <xr-bag>ipv6_nd.bag</xr-bag>
+            <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slotifparams/&lt;ipv6_nd_oper_Interface_ifname&gt;</xr-path>
+              <xr-xml-map>ipv6_nd_oper:InterfaceName</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-sch-type>InterfaceName</xr-sch-type>
+              <xr-sch-arg-name>&lt;ipv6_nd_oper_Interface_ifname&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-name>
+            <is-dad-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slotifparams/&lt;ipv6_nd_oper_Interface_ifname&gt;~ipv6_nd_if_params.IsDADEnabled</xr-path>
+              <xr-xml-map>ipv6_nd:IsDADEnabled</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </is-dad-enabled>
+            <dad-attempts config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slotifparams/&lt;ipv6_nd_oper_Interface_ifname&gt;~ipv6_nd_if_params.DADAttempts</xr-path>
+              <xr-xml-map>ipv6_nd:DADAttempts</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </dad-attempts>
+            <is-icm-pv6-redirect config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slotifparams/&lt;ipv6_nd_oper_Interface_ifname&gt;~ipv6_nd_if_params.IsICMPv6Redirect</xr-path>
+              <xr-xml-map>ipv6_nd:IsICMPv6Redirect</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </is-icm-pv6-redirect>
+            <is-dhcp-managed config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slotifparams/&lt;ipv6_nd_oper_Interface_ifname&gt;~ipv6_nd_if_params.IsDHCPManaged</xr-path>
+              <xr-xml-map>ipv6_nd:IsDHCPManaged</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </is-dhcp-managed>
+            <is-route-address-managed config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slotifparams/&lt;ipv6_nd_oper_Interface_ifname&gt;~ipv6_nd_if_params.IsRouteAddressManaged</xr-path>
+              <xr-xml-map>ipv6_nd:IsRouteAddressManaged</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </is-route-address-managed>
+            <is-suppressed config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slotifparams/&lt;ipv6_nd_oper_Interface_ifname&gt;~ipv6_nd_if_params.IsSuppressed</xr-path>
+              <xr-xml-map>ipv6_nd:IsSuppressed</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </is-suppressed>
+            <send-unicast-ra config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slotifparams/&lt;ipv6_nd_oper_Interface_ifname&gt;~ipv6_nd_if_params.SendUnicastRA</xr-path>
+              <xr-xml-map>ipv6_nd:SendUnicastRA</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </send-unicast-ra>
+            <nd-retransmit-interval config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slotifparams/&lt;ipv6_nd_oper_Interface_ifname&gt;~ipv6_nd_if_params.NDRetransmitInterval</xr-path>
+              <xr-xml-map>ipv6_nd:NDRetransmitInterval</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </nd-retransmit-interval>
+            <nd-min-transmit-interval config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slotifparams/&lt;ipv6_nd_oper_Interface_ifname&gt;~ipv6_nd_if_params.NDMinTransmitInterval</xr-path>
+              <xr-xml-map>ipv6_nd:NDMinTransmitInterval</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </nd-min-transmit-interval>
+            <nd-max-transmit-interval config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slotifparams/&lt;ipv6_nd_oper_Interface_ifname&gt;~ipv6_nd_if_params.NDMaxTransmitInterval</xr-path>
+              <xr-xml-map>ipv6_nd:NDMaxTransmitInterval</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </nd-max-transmit-interval>
+            <nd-advertisement-lifetime config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slotifparams/&lt;ipv6_nd_oper_Interface_ifname&gt;~ipv6_nd_if_params.NDAdvertisementLifetime</xr-path>
+              <xr-xml-map>ipv6_nd:NDAdvertisementLifetime</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </nd-advertisement-lifetime>
+            <nd-reachable-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slotifparams/&lt;ipv6_nd_oper_Interface_ifname&gt;~ipv6_nd_if_params.NDReachableTime</xr-path>
+              <xr-xml-map>ipv6_nd:NDReachableTime</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </nd-reachable-time>
+            <nd-cache-limit config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slotifparams/&lt;ipv6_nd_oper_Interface_ifname&gt;~ipv6_nd_if_params.NDCacheLimit</xr-path>
+              <xr-xml-map>ipv6_nd:NDCacheLimit</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </nd-cache-limit>
+            <complete-protocol-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slotifparams/&lt;ipv6_nd_oper_Interface_ifname&gt;~ipv6_nd_if_params.CompleteProtocolCount</xr-path>
+              <xr-xml-map>ipv6_nd:CompleteProtocolCount</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </complete-protocol-count>
+            <complete-glean-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slotifparams/&lt;ipv6_nd_oper_Interface_ifname&gt;~ipv6_nd_if_params.CompleteGleanCount</xr-path>
+              <xr-xml-map>ipv6_nd:CompleteGleanCount</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </complete-glean-count>
+            <incomplete-protocol-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slotifparams/&lt;ipv6_nd_oper_Interface_ifname&gt;~ipv6_nd_if_params.IncompleteProtocolCount</xr-path>
+              <xr-xml-map>ipv6_nd:IncompleteProtocolCount</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </incomplete-protocol-count>
+            <incomplete-glean-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slotifparams/&lt;ipv6_nd_oper_Interface_ifname&gt;~ipv6_nd_if_params.IncompleteGleanCount</xr-path>
+              <xr-xml-map>ipv6_nd:IncompleteGleanCount</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </incomplete-glean-count>
+            <dropped-protocol-req-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slotifparams/&lt;ipv6_nd_oper_Interface_ifname&gt;~ipv6_nd_if_params.DroppedProtocolReqCount</xr-path>
+              <xr-xml-map>ipv6_nd:DroppedProtocolReqCount</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </dropped-protocol-req-count>
+            <dropped-glean-req-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slotifparams/&lt;ipv6_nd_oper_Interface_ifname&gt;~ipv6_nd_if_params.DroppedGleanReqCount</xr-path>
+              <xr-xml-map>ipv6_nd:DroppedGleanReqCount</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </dropped-glean-req-count>
+          </interface>
+        </interfaces>
+        <nd-virtual-routers config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/vrint/</xr-path>
+          <xr-xml-map>ipv6_nd_oper:NDVirtualRouterInterfaceTable</xr-xml-map>
+          <xr-task>network</xr-task>
+          <nd-virtual-router config="false" key="interface-name" node="list">
+            <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/vrint/&lt;ipv6_nd_oper_NDVirtualRouter_ifname&gt;</xr-path>
+            <xr-xml-map>ipv6_nd_oper:NDVirtualRouter</xr-xml-map>
+            <xr-task>network</xr-task>
+            <xr-bag-grp-name>ipv6_nd_vr_entry</xr-bag-grp-name>
+            <xr-bag>ipv6_nd.bag</xr-bag>
+            <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/vrint/&lt;ipv6_nd_oper_NDVirtualRouter_ifname&gt;</xr-path>
+              <xr-xml-map>ipv6_nd_oper:InterfaceName</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-sch-type>InterfaceName</xr-sch-type>
+              <xr-sch-arg-name>&lt;ipv6_nd_oper_NDVirtualRouter_ifname&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-name>
+            <local-address config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/vrint/&lt;ipv6_nd_oper_NDVirtualRouter_ifname&gt;~ipv6_nd_vr_entry.LocalAddress</xr-path>
+              <xr-task>network</xr-task>
+              <xr-bag-version>2 3</xr-bag-version>
+              <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/vrint/&lt;ipv6_nd_oper_NDVirtualRouter_ifname&gt;~ipv6_nd_vr_entry.LocalAddress.IPv6Address</xr-path>
+                <xr-xml-map>ipv6_nd:IPv6Address</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>inet:ipv6-address</type-name>
+                </type>
+              </ipv6-address>
+              <valid-lifetime config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/vrint/&lt;ipv6_nd_oper_NDVirtualRouter_ifname&gt;~ipv6_nd_vr_entry.LocalAddress.ValidLifetime</xr-path>
+                <xr-xml-map>ipv6_nd:ValidLifetime</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </valid-lifetime>
+              <pref-lifetime config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/vrint/&lt;ipv6_nd_oper_NDVirtualRouter_ifname&gt;~ipv6_nd_vr_entry.LocalAddress.PrefLifetime</xr-path>
+                <xr-xml-map>ipv6_nd:PrefLifetime</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </pref-lifetime>
+              <prefix-length config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/vrint/&lt;ipv6_nd_oper_NDVirtualRouter_ifname&gt;~ipv6_nd_vr_entry.LocalAddress.PrefixLength</xr-path>
+                <xr-xml-map>ipv6_nd:PrefixLength</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </prefix-length>
+              <flags config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/vrint/&lt;ipv6_nd_oper_NDVirtualRouter_ifname&gt;~ipv6_nd_vr_entry.LocalAddress.Flags</xr-path>
+                <xr-xml-map>ipv6_nd:Flags</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </flags>
+            </local-address>
+            <link-layer-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/vrint/&lt;ipv6_nd_oper_NDVirtualRouter_ifname&gt;~ipv6_nd_vr_entry.LinkLayerAddress</xr-path>
+              <xr-xml-map>ipv6_nd:LinkLayerAddress</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>yang:mac-address</type-name>
+              </type>
+            </link-layer-address>
+            <context config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/vrint/&lt;ipv6_nd_oper_NDVirtualRouter_ifname&gt;~ipv6_nd_vr_entry.Context</xr-path>
+              <xr-xml-map>ipv6_nd:Context</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </context>
+            <state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/vrint/&lt;ipv6_nd_oper_NDVirtualRouter_ifname&gt;~ipv6_nd_vr_entry.State</xr-path>
+              <xr-xml-map>ipv6_nd:State</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>Ipv6-nd-sh-vr-state</type-name>
+              </type>
+            </state>
+            <flags config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/vrint/&lt;ipv6_nd_oper_NDVirtualRouter_ifname&gt;~ipv6_nd_vr_entry.Flags</xr-path>
+              <xr-xml-map>ipv6_nd:Flags</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>Ipv6-nd-sh-vr-flags</type-name>
+              </type>
+            </flags>
+            <vr-gl-addr-ct config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/vrint/&lt;ipv6_nd_oper_NDVirtualRouter_ifname&gt;~ipv6_nd_vr_entry.VrGlAddrCt</xr-path>
+              <xr-xml-map>ipv6_nd:VrGlAddrCt</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 3</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </vr-gl-addr-ct>
+            <vr-global-address config="false" node="list">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/vrint/&lt;ipv6_nd_oper_NDVirtualRouter_ifname&gt;~ipv6_nd_vr_entry.VrGlobalAddressList[&lt;bag_arg4&gt;]</xr-path>
+              <xr-task>network</xr-task>
+              <xr-bag-version>2 3</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg4&gt;</xr-internal-key>
+              <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/vrint/&lt;ipv6_nd_oper_NDVirtualRouter_ifname&gt;~ipv6_nd_vr_entry.VrGlobalAddressList[&lt;bag_arg4&gt;].IPv6Address</xr-path>
+                <xr-xml-map>ipv6_nd:IPv6Address</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>inet:ipv6-address</type-name>
+                </type>
+              </ipv6-address>
+              <valid-lifetime config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/vrint/&lt;ipv6_nd_oper_NDVirtualRouter_ifname&gt;~ipv6_nd_vr_entry.VrGlobalAddressList[&lt;bag_arg4&gt;].ValidLifetime</xr-path>
+                <xr-xml-map>ipv6_nd:ValidLifetime</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </valid-lifetime>
+              <pref-lifetime config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/vrint/&lt;ipv6_nd_oper_NDVirtualRouter_ifname&gt;~ipv6_nd_vr_entry.VrGlobalAddressList[&lt;bag_arg4&gt;].PrefLifetime</xr-path>
+                <xr-xml-map>ipv6_nd:PrefLifetime</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </pref-lifetime>
+              <prefix-length config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/vrint/&lt;ipv6_nd_oper_NDVirtualRouter_ifname&gt;~ipv6_nd_vr_entry.VrGlobalAddressList[&lt;bag_arg4&gt;].PrefixLength</xr-path>
+                <xr-xml-map>ipv6_nd:PrefixLength</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </prefix-length>
+              <flags config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/vrint/&lt;ipv6_nd_oper_NDVirtualRouter_ifname&gt;~ipv6_nd_vr_entry.VrGlobalAddressList[&lt;bag_arg4&gt;].Flags</xr-path>
+                <xr-xml-map>ipv6_nd:Flags</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </flags>
+            </vr-global-address>
+          </nd-virtual-router>
+        </nd-virtual-routers>
+        <slaac-interfaces config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/</xr-path>
+          <xr-xml-map>ipv6_nd_oper:SlaacInterfaceTable</xr-xml-map>
+          <xr-task>network</xr-task>
+          <slaac-interface config="false" key="interface-name" node="list">
+            <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/</xr-path>
+            <xr-xml-map>ipv6_nd_oper:SlaacInterface</xr-xml-map>
+            <xr-task>network</xr-task>
+            <router-advert-detail config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail</xr-path>
+              <xr-xml-map>ipv6_nd_oper:RouterAdvertDetail</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-bag-grp-name>ipv6_nd_slaac_intfs_info</xr-bag-grp-name>
+              <xr-bag>ipv6_nd.bag</xr-bag>
+              <idb config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.Idb</xr-path>
+                <xr-xml-map>ipv6_nd:Idb</xr-xml-map>
+                <xr-task>network</xr-task>
+                <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+                <xr-bag-version>2 3</xr-bag-version>
+                <type>
+                  <type-name>xr:Interface-name</type-name>
+                </type>
+              </idb>
+              <ra config="false" node="list">
+                <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;]</xr-path>
+                <xr-task>network</xr-task>
+                <xr-bag-version>2 3</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg6&gt;</xr-internal-key>
+                <elapsed-ra-time config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].ElapsedRATime</xr-path>
+                  <xr-task>network</xr-task>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <seconds config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].ElapsedRATime.Seconds</xr-path>
+                    <xr-xml-map>ipv6_nd:Seconds</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>2 3</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </seconds>
+                </elapsed-ra-time>
+                <reachable-time config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].ReachableTime</xr-path>
+                  <xr-task>network</xr-task>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <seconds config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].ReachableTime.Seconds</xr-path>
+                    <xr-xml-map>ipv6_nd:Seconds</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>2 3</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </seconds>
+                </reachable-time>
+                <retrans-time config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].RetransTime</xr-path>
+                  <xr-task>network</xr-task>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <seconds config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].RetransTime.Seconds</xr-path>
+                    <xr-xml-map>ipv6_nd:Seconds</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>2 3</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </seconds>
+                </retrans-time>
+                <address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].Address</xr-path>
+                  <xr-xml-map>ipv6_nd:Address</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <type>
+                    <type-name>inet:ipv6-address</type-name>
+                  </type>
+                </address>
+                <hops config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].Hops</xr-path>
+                  <xr-xml-map>ipv6_nd:Hops</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </hops>
+                <flags config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].Flags</xr-path>
+                  <xr-xml-map>ipv6_nd:Flags</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </flags>
+                <life-time config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].LifeTime</xr-path>
+                  <xr-xml-map>ipv6_nd:LifeTime</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </life-time>
+                <mtu config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].Mtu</xr-path>
+                  <xr-xml-map>ipv6_nd:Mtu</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </mtu>
+                <err-msg config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].ErrMsg</xr-path>
+                  <xr-xml-map>ipv6_nd:ErrMsg</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </err-msg>
+                <vrf-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].VrfId</xr-path>
+                  <xr-xml-map>ipv6_nd:VrfId</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </vrf-id>
+                <u6-tbl-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].U6TblId</xr-path>
+                  <xr-xml-map>ipv6_nd:U6TblId</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </u6-tbl-id>
+                <rib-protoid config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].RibProtoid</xr-path>
+                  <xr-xml-map>ipv6_nd:RibProtoid</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <type>
+                    <type-name>uint16</type-name>
+                  </type>
+                </rib-protoid>
+                <default-router config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].DefaultRouter</xr-path>
+                  <xr-xml-map>ipv6_nd:DefaultRouter</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </default-router>
+                <reachability config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].Reachability</xr-path>
+                  <xr-xml-map>ipv6_nd:Reachability</xr-xml-map>
+                  <xr-task>network</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </reachability>
+                <prefix-q config="false" node="list">
+                  <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].PrefixQ[&lt;bag_arg5&gt;]</xr-path>
+                  <xr-task>network</xr-task>
+                  <xr-bag-version>2 3</xr-bag-version>
+                  <xr-internal-key>&lt;bag_arg5&gt;</xr-internal-key>
+                  <prefix-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].PrefixQ[&lt;bag_arg5&gt;].PrefixAddress</xr-path>
+                    <xr-xml-map>ipv6_nd:PrefixAddress</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                    <xr-bag-version>2 3</xr-bag-version>
+                    <type>
+                      <type-name>inet:ipv6-address</type-name>
+                    </type>
+                  </prefix-address>
+                  <eui64 config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].PrefixQ[&lt;bag_arg5&gt;].EUI64</xr-path>
+                    <xr-xml-map>ipv6_nd:EUI64</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                    <xr-bag-version>2 3</xr-bag-version>
+                    <type>
+                      <type-name>inet:ipv6-address</type-name>
+                    </type>
+                  </eui64>
+                  <valid-life-time config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].PrefixQ[&lt;bag_arg5&gt;].ValidLifeTime</xr-path>
+                    <xr-xml-map>ipv6_nd:ValidLifeTime</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>2 3</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </valid-life-time>
+                  <preferred-life-time config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].PrefixQ[&lt;bag_arg5&gt;].PreferredLifeTime</xr-path>
+                    <xr-xml-map>ipv6_nd:PreferredLifeTime</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>2 3</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </preferred-life-time>
+                  <prefix-len config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].PrefixQ[&lt;bag_arg5&gt;].PrefixLen</xr-path>
+                    <xr-xml-map>ipv6_nd:PrefixLen</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>2 3</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </prefix-len>
+                  <flags config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].PrefixQ[&lt;bag_arg5&gt;].Flags</xr-path>
+                    <xr-xml-map>ipv6_nd:Flags</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>2 3</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </flags>
+                  <pfx-flags config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/radetail~ipv6_nd_slaac_intfs_info.RAList[&lt;bag_arg6&gt;].PrefixQ[&lt;bag_arg5&gt;].PfxFlags</xr-path>
+                    <xr-xml-map>ipv6_nd:PfxFlags</xr-xml-map>
+                    <xr-task>network</xr-task>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>2 3</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </pfx-flags>
+                </prefix-q>
+              </ra>
+            </router-advert-detail>
+            <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/slaac/&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;/</xr-path>
+              <xr-xml-map>ipv6_nd_oper:InterfaceName</xr-xml-map>
+              <xr-task>network</xr-task>
+              <xr-sch-type>InterfaceName</xr-sch-type>
+              <xr-sch-arg-name>&lt;ipv6_nd_oper_SlaacInterface_ifname&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-name>
+          </slaac-interface>
+        </slaac-interfaces>
+        <node-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-pathformat>hex_nozerox</xr-pathformat>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/ipv6-nd/node/&lt;ipv6_nd_oper_Node_Node&gt;/</xr-path>
+          <xr-xml-map>ipv6_nd_oper:NodeName</xr-xml-map>
+          <xr-task>network</xr-task>
+          <xr-sch-type>NodeID</xr-sch-type>
+          <xr-sch-arg-name>&lt;ipv6_nd_oper_Node_Node&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Node-id</type-name>
+          </type>
+        </node-name>
+      </node>
+    </nodes>
+  </ipv6-node-discovery>
+</Cisco-IOS-XR-ipv6-nd-oper>

@@ -1,0 +1,343 @@
+<?xml version="1.0"?>
+<openconfig-vlan ns="http://openconfig.net/yang/vlan" oc-ver="1.0.2" revision="2016-05-26">
+  <files>
+    <file revision="2016-05-26" submodule="false">openconfig-vlan.yang</file>
+  </files>
+  <prefix>oc-vlan</prefix>
+  <organization>OpenConfig working group</organization>
+  <import prefix="oc-vlan-types">openconfig-vlan-types</import>
+  <import prefix="oc-if">openconfig-interfaces</import>
+  <import prefix="oc-eth">openconfig-if-ethernet</import>
+  <import prefix="oc-lag">openconfig-if-aggregate</import>
+  <import prefix="ift">iana-if-type</import>
+  <import prefix="oc-ext">openconfig-extensions</import>
+  <augment path="/oc-if:interfaces/oc-if:interface/oc-if:subinterfaces/oc-if:subinterface">
+    <vlan config="true" is-key="false" node="container" presence="false">
+      <config config="true" is-key="false" node="container" presence="false">
+        <vlan-id config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="union">
+            <type>
+              <type-name>oc-vlan-types:vlan-id</type-name>
+            </type>
+            <type>
+              <type-name>oc-vlan-types:qinq-id</type-name>
+            </type>
+          </type>
+        </vlan-id>
+      </config>
+      <state config="true" is-key="false" node="container" presence="false">
+        <vlan-id config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="union">
+            <type>
+              <type-name>oc-vlan-types:vlan-id</type-name>
+            </type>
+            <type>
+              <type-name>oc-vlan-types:qinq-id</type-name>
+            </type>
+          </type>
+        </vlan-id>
+      </state>
+    </vlan>
+  </augment>
+  <augment path="/oc-if:interfaces/oc-if:interface/oc-eth:ethernet">
+    <when>oc-if:type = 'ift:ethernetCsmacd'</when>
+    <switched-vlan config="true" is-key="false" node="container" presence="false">
+      <config config="true" is-key="false" node="container" presence="false">
+        <interface-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>oc-vlan-types:vlan-mode-type</type-name>
+          </type>
+        </interface-mode>
+        <native-vlan config="true" is-key="false" is-yang-key="false" node="leaf">
+          <when>interface-mode = 'TRUNK'</when>
+          <type node="union">
+            <type>
+              <type-name>oc-vlan-types:vlan-id</type-name>
+            </type>
+            <type>
+              <type-name>oc-vlan-types:qinq-id</type-name>
+            </type>
+          </type>
+        </native-vlan>
+        <access-vlan config="true" is-key="false" is-yang-key="false" node="leaf">
+          <when>interface-mode = 'ACCESS'</when>
+          <type node="union">
+            <type>
+              <type-name>oc-vlan-types:vlan-id</type-name>
+            </type>
+            <type>
+              <type-name>oc-vlan-types:qinq-id</type-name>
+            </type>
+          </type>
+        </access-vlan>
+        <trunk-vlans config="true" is-key="false" is-yang-key="false" node="leaf-list">
+          <when>interface-mode = 'TRUNK'</when>
+          <type node="union">
+            <type>
+              <type-name>oc-vlan-types:vlan-id</type-name>
+            </type>
+            <type>
+              <type-name>oc-vlan-types:vlan-range</type-name>
+            </type>
+            <type>
+              <type-name>oc-vlan-types:qinq-id</type-name>
+            </type>
+            <type>
+              <type-name>oc-vlan-types:qinq-id-range</type-name>
+            </type>
+          </type>
+        </trunk-vlans>
+      </config>
+      <state config="true" is-key="false" node="container" presence="false">
+        <interface-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>oc-vlan-types:vlan-mode-type</type-name>
+          </type>
+        </interface-mode>
+        <native-vlan config="true" is-key="false" is-yang-key="false" node="leaf">
+          <when>interface-mode = 'TRUNK'</when>
+          <type node="union">
+            <type>
+              <type-name>oc-vlan-types:vlan-id</type-name>
+            </type>
+            <type>
+              <type-name>oc-vlan-types:qinq-id</type-name>
+            </type>
+          </type>
+        </native-vlan>
+        <access-vlan config="true" is-key="false" is-yang-key="false" node="leaf">
+          <when>interface-mode = 'ACCESS'</when>
+          <type node="union">
+            <type>
+              <type-name>oc-vlan-types:vlan-id</type-name>
+            </type>
+            <type>
+              <type-name>oc-vlan-types:qinq-id</type-name>
+            </type>
+          </type>
+        </access-vlan>
+        <trunk-vlans config="true" is-key="false" is-yang-key="false" node="leaf-list">
+          <when>interface-mode = 'TRUNK'</when>
+          <type node="union">
+            <type>
+              <type-name>oc-vlan-types:vlan-id</type-name>
+            </type>
+            <type>
+              <type-name>oc-vlan-types:vlan-range</type-name>
+            </type>
+            <type>
+              <type-name>oc-vlan-types:qinq-id</type-name>
+            </type>
+            <type>
+              <type-name>oc-vlan-types:qinq-id-range</type-name>
+            </type>
+          </type>
+        </trunk-vlans>
+      </state>
+    </switched-vlan>
+  </augment>
+  <augment path="/oc-if:interfaces/oc-if:interface/oc-lag:aggregation">
+    <when>oc-if:type = 'ift:ieee8023adLag'</when>
+    <switched-vlan config="true" is-key="false" node="container" presence="false">
+      <config config="true" is-key="false" node="container" presence="false">
+        <interface-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>oc-vlan-types:vlan-mode-type</type-name>
+          </type>
+        </interface-mode>
+        <native-vlan config="true" is-key="false" is-yang-key="false" node="leaf">
+          <when>interface-mode = 'TRUNK'</when>
+          <type node="union">
+            <type>
+              <type-name>oc-vlan-types:vlan-id</type-name>
+            </type>
+            <type>
+              <type-name>oc-vlan-types:qinq-id</type-name>
+            </type>
+          </type>
+        </native-vlan>
+        <access-vlan config="true" is-key="false" is-yang-key="false" node="leaf">
+          <when>interface-mode = 'ACCESS'</when>
+          <type node="union">
+            <type>
+              <type-name>oc-vlan-types:vlan-id</type-name>
+            </type>
+            <type>
+              <type-name>oc-vlan-types:qinq-id</type-name>
+            </type>
+          </type>
+        </access-vlan>
+        <trunk-vlans config="true" is-key="false" is-yang-key="false" node="leaf-list">
+          <when>interface-mode = 'TRUNK'</when>
+          <type node="union">
+            <type>
+              <type-name>oc-vlan-types:vlan-id</type-name>
+            </type>
+            <type>
+              <type-name>oc-vlan-types:vlan-range</type-name>
+            </type>
+            <type>
+              <type-name>oc-vlan-types:qinq-id</type-name>
+            </type>
+            <type>
+              <type-name>oc-vlan-types:qinq-id-range</type-name>
+            </type>
+          </type>
+        </trunk-vlans>
+      </config>
+      <state config="true" is-key="false" node="container" presence="false">
+        <interface-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>oc-vlan-types:vlan-mode-type</type-name>
+          </type>
+        </interface-mode>
+        <native-vlan config="true" is-key="false" is-yang-key="false" node="leaf">
+          <when>interface-mode = 'TRUNK'</when>
+          <type node="union">
+            <type>
+              <type-name>oc-vlan-types:vlan-id</type-name>
+            </type>
+            <type>
+              <type-name>oc-vlan-types:qinq-id</type-name>
+            </type>
+          </type>
+        </native-vlan>
+        <access-vlan config="true" is-key="false" is-yang-key="false" node="leaf">
+          <when>interface-mode = 'ACCESS'</when>
+          <type node="union">
+            <type>
+              <type-name>oc-vlan-types:vlan-id</type-name>
+            </type>
+            <type>
+              <type-name>oc-vlan-types:qinq-id</type-name>
+            </type>
+          </type>
+        </access-vlan>
+        <trunk-vlans config="true" is-key="false" is-yang-key="false" node="leaf-list">
+          <when>interface-mode = 'TRUNK'</when>
+          <type node="union">
+            <type>
+              <type-name>oc-vlan-types:vlan-id</type-name>
+            </type>
+            <type>
+              <type-name>oc-vlan-types:vlan-range</type-name>
+            </type>
+            <type>
+              <type-name>oc-vlan-types:qinq-id</type-name>
+            </type>
+            <type>
+              <type-name>oc-vlan-types:qinq-id-range</type-name>
+            </type>
+          </type>
+        </trunk-vlans>
+      </state>
+    </switched-vlan>
+  </augment>
+  <augment path="/oc-if:interfaces/oc-if:interface">
+    <when>oc-if:type = 'ift:l3ipvlan'</when>
+    <routed-vlan config="true" is-key="false" node="container" presence="false">
+      <config config="true" is-key="false" node="container" presence="false">
+        <vlan config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="union">
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </type>
+        </vlan>
+      </config>
+      <state config="true" is-key="false" node="container" presence="false">
+        <vlan config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="union">
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </type>
+        </vlan>
+      </state>
+    </routed-vlan>
+  </augment>
+  <vlans config="true" is-key="false" node="container" presence="false">
+    <vlan config="true" key="vlan-id" node="list">
+      <vlan-id config="true" is-key="true" is-yang-key="true" node="leaf">
+        <xr-data-handler>ignore</xr-data-handler>
+        <type>
+          <type-name>leafref</type-name>
+        </type>
+      </vlan-id>
+      <config config="true" is-key="false" node="container" presence="false">
+        <vlan-id config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>oc-vlan-types:vlan-id</type-name>
+          </type>
+        </vlan-id>
+        <name config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </name>
+        <status config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="enumeration">
+            <enum>ACTIVE</enum>
+            <enum>SUSPENDED</enum>
+          </type>
+          <default>ACTIVE</default>
+        </status>
+        <tpid config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="identityref">
+            <base>oc-vlan-types:TPID_TYPES</base>
+          </type>
+          <default>oc-vlan-types:TPID_0x8100</default>
+        </tpid>
+      </config>
+      <state config="true" is-key="false" node="container" presence="false">
+        <vlan-id config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>oc-vlan-types:vlan-id</type-name>
+          </type>
+        </vlan-id>
+        <name config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </name>
+        <status config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="enumeration">
+            <enum>ACTIVE</enum>
+            <enum>SUSPENDED</enum>
+          </type>
+          <default>ACTIVE</default>
+        </status>
+        <tpid config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="identityref">
+            <base>oc-vlan-types:TPID_TYPES</base>
+          </type>
+          <default>oc-vlan-types:TPID_0x8100</default>
+        </tpid>
+      </state>
+      <members config="true" is-key="false" node="container" presence="false">
+        <member config="true" node="list">
+          <interface-ref config="true" is-key="false" node="container" presence="false">
+            <state config="true" is-key="false" node="container" presence="false">
+              <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>leafref</type-name>
+                </type>
+              </interface>
+              <subinterface config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>leafref</type-name>
+                </type>
+              </subinterface>
+            </state>
+          </interface-ref>
+        </member>
+      </members>
+    </vlan>
+  </vlans>
+</openconfig-vlan>

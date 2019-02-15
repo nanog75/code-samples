@@ -1,0 +1,2775 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-drivers-media-eth-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-drivers-media-eth-oper" revision="2017-05-01">
+  <files>
+    <file revision="2017-05-01" submodule="false">Cisco-IOS-XR-drivers-media-eth-oper.yang</file>
+    <file revision="2017-05-01" submodule="true">Cisco-IOS-XR-drivers-media-eth-oper-sub1.yang</file>
+  </files>
+  <prefix>drivers-media-eth-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="yang">ietf-yang-types</import>
+  <typedef name="Ethernet-dev-if">
+    <type node="enumeration">
+      <enum>no-interface</enum>
+      <enum>xgmii</enum>
+      <enum>xaui</enum>
+      <enum>ethernet-num-dev-if</enum>
+    </type>
+  </typedef>
+  <typedef name="Ethernet-dev">
+    <type node="enumeration">
+      <enum>no-device</enum>
+      <enum>pma-pmd</enum>
+      <enum>wis</enum>
+      <enum>pcs</enum>
+      <enum>phy-xs</enum>
+      <enum>dte-xs</enum>
+      <enum>ethernet-num-dev</enum>
+    </type>
+  </typedef>
+  <typedef name="Ethernet-bert-pattern">
+    <type node="enumeration">
+      <enum>no-test-pattern</enum>
+      <enum>high-frequency</enum>
+      <enum>low-frequency</enum>
+      <enum>mixed-frequency</enum>
+      <enum>continuous-random</enum>
+      <enum>continuous-jitter</enum>
+      <enum>long-continuous-random</enum>
+      <enum>short-continuous-random</enum>
+      <enum>pseudorandom-seed-a</enum>
+      <enum>pseudorandom-seed-b</enum>
+      <enum>prbs31</enum>
+      <enum>square-wave</enum>
+      <enum>pseudorandom</enum>
+      <enum>ethernet-bert-pattern-types</enum>
+    </type>
+  </typedef>
+  <typedef name="Ethernet-bert-err-cnt">
+    <type node="enumeration">
+      <enum>no-count-type</enum>
+      <enum>bit-error-count</enum>
+      <enum>frame-error-count</enum>
+      <enum>block-error-count</enum>
+      <enum>ethernet-bert-err-cnt-types</enum>
+    </type>
+  </typedef>
+  <typedef name="Ethernet-bert-mask">
+    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+    <type>
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Ether-ains-status">
+    <type node="enumeration">
+      <enum>ains-soak-status-none</enum>
+      <enum>ains-soak-status-pending</enum>
+      <enum>ains-soak-status-running</enum>
+    </type>
+  </typedef>
+  <typedef name="Mac-addr">
+    <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+    <type>
+      <type-name>yang:mac-address</type-name>
+    </type>
+  </typedef>
+  <typedef name="Ether-pfc">
+    <type node="enumeration">
+      <enum>no-pfc</enum>
+      <enum>on</enum>
+    </type>
+  </typedef>
+  <typedef name="Eth-ctrlr-alarm-state">
+    <type node="enumeration">
+      <enum value="0">alarm-not-supported</enum>
+      <enum value="1">alarm-set</enum>
+      <enum value="2">alarm-not-set</enum>
+    </type>
+  </typedef>
+  <typedef name="Ethernet-ipg">
+    <type node="enumeration">
+      <enum>standard</enum>
+      <enum>non-standard</enum>
+    </type>
+  </typedef>
+  <typedef name="Ether-flowcontrol">
+    <type node="enumeration">
+      <enum>no-flowcontrol</enum>
+      <enum>egress</enum>
+      <enum>ingress</enum>
+      <enum>bidirectional</enum>
+    </type>
+  </typedef>
+  <typedef name="Ethernet-duplex">
+    <type node="enumeration">
+      <enum>ethernet-duplex-invalid</enum>
+      <enum>half-duplex</enum>
+      <enum>full-duplex</enum>
+    </type>
+  </typedef>
+  <typedef name="Ethernet-speed">
+    <type node="enumeration">
+      <enum value="0">ethernet-speed-invalid</enum>
+      <enum value="1">ten-mbps</enum>
+      <enum value="2">hundred-mbps</enum>
+      <enum value="3">one-gbps</enum>
+      <enum value="4">ten-gbps</enum>
+      <enum value="5">twenty-five-gbps</enum>
+      <enum value="6">forty-gbps</enum>
+      <enum value="7">fifty-gbps</enum>
+      <enum value="8">hundred-gbps</enum>
+      <enum value="9">two-hundred-gbps</enum>
+      <enum value="10">four-hundred-gbps</enum>
+      <enum value="11">ethernet-speed-types-count</enum>
+    </type>
+  </typedef>
+  <typedef name="Ether-autoneg-mask">
+    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+    <type>
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Ether-led-state">
+    <type node="enumeration">
+      <enum>led-state-unknown</enum>
+      <enum>led-off</enum>
+      <enum>green-on</enum>
+      <enum>green-flashing</enum>
+      <enum>yellow-on</enum>
+      <enum>yellow-flashing</enum>
+      <enum>red-on</enum>
+      <enum>red-flashing</enum>
+    </type>
+  </typedef>
+  <typedef name="Ether-link-state">
+    <type node="enumeration">
+      <enum>state-undefined</enum>
+      <enum>unknown-state</enum>
+      <enum>available</enum>
+      <enum>not-available</enum>
+      <enum>remote-fault</enum>
+      <enum>invalid-signal</enum>
+      <enum>remote-jabber</enum>
+      <enum>link-loss</enum>
+      <enum>remote-test</enum>
+      <enum>offline</enum>
+      <enum>auto-neg-error</enum>
+      <enum>pmd-link-fault</enum>
+      <enum>frame-loss</enum>
+      <enum>signal-loss</enum>
+      <enum>link-fault</enum>
+      <enum>excessive-ber</enum>
+      <enum>dxs-link-fault</enum>
+      <enum>pxs-link-fault</enum>
+      <enum>security</enum>
+      <enum>phy-not-present</enum>
+      <enum>no-optic-license</enum>
+      <enum>unsupported-module</enum>
+      <enum>dwdm-laser-shut</enum>
+      <enum>wanphy-laser-shut</enum>
+      <enum>incompatible-config</enum>
+      <enum>system-error</enum>
+      <enum>wan-framing-error</enum>
+      <enum>otn-framing-error</enum>
+      <enum>shutdown</enum>
+    </type>
+  </typedef>
+  <typedef name="Ethernet-fec">
+    <type node="enumeration">
+      <enum>not-configured</enum>
+      <enum>standard</enum>
+      <enum>disabled</enum>
+      <enum>base-r</enum>
+    </type>
+  </typedef>
+  <typedef name="Ethernet-loopback">
+    <type node="enumeration">
+      <enum>no-loopback</enum>
+      <enum>internal</enum>
+      <enum>line</enum>
+      <enum>external</enum>
+    </type>
+  </typedef>
+  <typedef name="Ether-dom-alarm">
+    <type node="enumeration">
+      <enum>no-information</enum>
+      <enum>alarm-high</enum>
+      <enum>warning-high</enum>
+      <enum>normal</enum>
+      <enum>warning-low</enum>
+      <enum>alarm-low</enum>
+    </type>
+  </typedef>
+  <typedef name="Ether-phy-present">
+    <type node="enumeration">
+      <enum>phy-not-present</enum>
+      <enum>phy-present</enum>
+      <enum>no-information</enum>
+    </type>
+  </typedef>
+  <typedef name="Ethernet-media">
+    <type node="enumeration">
+      <enum>ethernet-other</enum>
+      <enum>ethernet-unknown</enum>
+      <enum>ethernet-aui</enum>
+      <enum>ethernet-10base5</enum>
+      <enum>ethernet-foirl</enum>
+      <enum>ethernet-10base2</enum>
+      <enum>ethernet-10broad36</enum>
+      <enum>ethernet-10base</enum>
+      <enum>ethernet-10base-thd</enum>
+      <enum>ethernet-10base-tfd</enum>
+      <enum>ethernet-10base-fp</enum>
+      <enum>ethernet-10base-fb</enum>
+      <enum>ethernet-10base-fl</enum>
+      <enum>ethernet-10base-flhd</enum>
+      <enum>ethernet-10base-flfd</enum>
+      <enum>ethernet-100base-t4</enum>
+      <enum>ethernet-100base-tx</enum>
+      <enum>ethernet-100base-txhd</enum>
+      <enum>ethernet-100base-txfd</enum>
+      <enum>ethernet-100base-fx</enum>
+      <enum>ethernet-100base-fxhd</enum>
+      <enum>ethernet-100base-fxfd</enum>
+      <enum>ethernet-100base-ex</enum>
+      <enum>ethernet-100base-exhd</enum>
+      <enum>ethernet-100base-exfd</enum>
+      <enum>ethernet-100base-t2</enum>
+      <enum>ethernet-100base-t2hd</enum>
+      <enum>ethernet-100base-t2fd</enum>
+      <enum>ethernet-1000base-x</enum>
+      <enum>ethernet-1000base-xhd</enum>
+      <enum>ethernet-1000base-xfd</enum>
+      <enum>ethernet-1000base-lx</enum>
+      <enum>ethernet-1000base-lxhd</enum>
+      <enum>ethernet-1000base-lxfd</enum>
+      <enum>ethernet-1000base-sx</enum>
+      <enum>ethernet-1000base-sxhd</enum>
+      <enum>ethernet-1000base-sxfd</enum>
+      <enum>ethernet-1000base-cx</enum>
+      <enum>ethernet-1000base-cxhd</enum>
+      <enum>ethernet-1000base-cxfd</enum>
+      <enum>ethernet-1000base</enum>
+      <enum>ethernet-1000base-thd</enum>
+      <enum>ethernet-1000base-tfd</enum>
+      <enum>ethernet-10gbase-x</enum>
+      <enum>ethernet-10gbase-lx4</enum>
+      <enum>ethernet-10gbase-r</enum>
+      <enum>ethernet-10gbase-er</enum>
+      <enum>ethernet-10gbase-lr</enum>
+      <enum>ethernet-10gbase-sr</enum>
+      <enum>ethernet-10gbase-w</enum>
+      <enum>ethernet-10gbase-ew</enum>
+      <enum>ethernet-10gbase-lw</enum>
+      <enum>ethernet-10gbase-sw</enum>
+      <enum>ethernet-1000base-zx</enum>
+      <enum>ethernet-1000base-cwdm</enum>
+      <enum>ethernet-1000base-cwdm-1470</enum>
+      <enum>ethernet-1000base-cwdm-1490</enum>
+      <enum>ethernet-1000base-cwdm-1510</enum>
+      <enum>ethernet-1000base-cwdm-1530</enum>
+      <enum>ethernet-1000base-cwdm-1550</enum>
+      <enum>ethernet-1000base-cwdm-1570</enum>
+      <enum>ethernet-1000base-cwdm-1590</enum>
+      <enum>ethernet-1000base-cwdm-1610</enum>
+      <enum>ethernet-10gbase-zr</enum>
+      <enum>ethernet-10gbase-dwdm</enum>
+      <enum>ethernet-100gbase-lr4</enum>
+      <enum>ethernet-1000base-dwdm</enum>
+      <enum>ethernet-1000base-dwdm-1533</enum>
+      <enum>ethernet-1000base-dwdm-1537</enum>
+      <enum>ethernet-1000base-dwdm-1541</enum>
+      <enum>ethernet-1000base-dwdm-1545</enum>
+      <enum>ethernet-1000base-dwdm-1549</enum>
+      <enum>ethernet-1000base-dwdm-1553</enum>
+      <enum>ethernet-1000base-dwdm-1557</enum>
+      <enum>ethernet-1000base-dwdm-1561</enum>
+      <enum>ethernet-40gbase-lr4</enum>
+      <enum>ethernet-40gbase-er4</enum>
+      <enum>ethernet-100gbase-er4</enum>
+      <enum>ethernet-1000base-ex</enum>
+      <enum>ethernet-1000base-bx10-d</enum>
+      <enum>ethernet-1000base-bx10-u</enum>
+      <enum>ethernet-1000base-dwdm-1561-42</enum>
+      <enum>ethernet-1000base-dwdm-1560-61</enum>
+      <enum>ethernet-1000base-dwdm-1559-79</enum>
+      <enum>ethernet-1000base-dwdm-1558-98</enum>
+      <enum>ethernet-1000base-dwdm-1558-17</enum>
+      <enum>ethernet-1000base-dwdm-1557-36</enum>
+      <enum>ethernet-1000base-dwdm-1556-55</enum>
+      <enum>ethernet-1000base-dwdm-1555-75</enum>
+      <enum>ethernet-1000base-dwdm-1554-94</enum>
+      <enum>ethernet-1000base-dwdm-1554-13</enum>
+      <enum>ethernet-1000base-dwdm-1553-33</enum>
+      <enum>ethernet-1000base-dwdm-1552-52</enum>
+      <enum>ethernet-1000base-dwdm-1551-72</enum>
+      <enum>ethernet-1000base-dwdm-1550-92</enum>
+      <enum>ethernet-1000base-dwdm-1550-12</enum>
+      <enum>ethernet-1000base-dwdm-1549-32</enum>
+      <enum>ethernet-1000base-dwdm-1548-51</enum>
+      <enum>ethernet-1000base-dwdm-1547-72</enum>
+      <enum>ethernet-1000base-dwdm-1546-92</enum>
+      <enum>ethernet-1000base-dwdm-1546-12</enum>
+      <enum>ethernet-1000base-dwdm-1545-32</enum>
+      <enum>ethernet-1000base-dwdm-1544-53</enum>
+      <enum>ethernet-1000base-dwdm-1543-73</enum>
+      <enum>ethernet-1000base-dwdm-1542-94</enum>
+      <enum>ethernet-1000base-dwdm-1542-14</enum>
+      <enum>ethernet-1000base-dwdm-1541-35</enum>
+      <enum>ethernet-1000base-dwdm-1540-56</enum>
+      <enum>ethernet-1000base-dwdm-1539-77</enum>
+      <enum>ethernet-1000base-dwdm-1538-98</enum>
+      <enum>ethernet-1000base-dwdm-1538-19</enum>
+      <enum>ethernet-1000base-dwdm-1537-40</enum>
+      <enum>ethernet-1000base-dwdm-1536-61</enum>
+      <enum>ethernet-1000base-dwdm-1535-82</enum>
+      <enum>ethernet-1000base-dwdm-1535-04</enum>
+      <enum>ethernet-1000base-dwdm-1534-25</enum>
+      <enum>ethernet-1000base-dwdm-1533-47</enum>
+      <enum>ethernet-1000base-dwdm-1532-68</enum>
+      <enum>ethernet-1000base-dwdm-1531-90</enum>
+      <enum>ethernet-1000base-dwdm-1531-12</enum>
+      <enum>ethernet-1000base-dwdm-1530-33</enum>
+      <enum>ethernet-1000base-dwdm-tunable</enum>
+      <enum>ethernet-10gbase-dwdm-1561-42</enum>
+      <enum>ethernet-10gbase-dwdm-1560-61</enum>
+      <enum>ethernet-10gbase-dwdm-1559-79</enum>
+      <enum>ethernet-10gbase-dwdm-1558-98</enum>
+      <enum>ethernet-10gbase-dwdm-1558-17</enum>
+      <enum>ethernet-10gbase-dwdm-1557-36</enum>
+      <enum>ethernet-10gbase-dwdm-1556-55</enum>
+      <enum>ethernet-10gbase-dwdm-1555-75</enum>
+      <enum>ethernet-10gbase-dwdm-1554-94</enum>
+      <enum>ethernet-10gbase-dwdm-1554-13</enum>
+      <enum>ethernet-10gbase-dwdm-1553-33</enum>
+      <enum>ethernet-10gbase-dwdm-1552-52</enum>
+      <enum>ethernet-10gbase-dwdm-1551-72</enum>
+      <enum>ethernet-10gbase-dwdm-1550-92</enum>
+      <enum>ethernet-10gbase-dwdm-1550-12</enum>
+      <enum>ethernet-10gbase-dwdm-1549-32</enum>
+      <enum>ethernet-10gbase-dwdm-1548-51</enum>
+      <enum>ethernet-10gbase-dwdm-1547-72</enum>
+      <enum>ethernet-10gbase-dwdm-1546-92</enum>
+      <enum>ethernet-10gbase-dwdm-1546-12</enum>
+      <enum>ethernet-10gbase-dwdm-1545-32</enum>
+      <enum>ethernet-10gbase-dwdm-1544-53</enum>
+      <enum>ethernet-10gbase-dwdm-1543-73</enum>
+      <enum>ethernet-10gbase-dwdm-1542-94</enum>
+      <enum>ethernet-10gbase-dwdm-1542-14</enum>
+      <enum>ethernet-10gbase-dwdm-1541-35</enum>
+      <enum>ethernet-10gbase-dwdm-1540-56</enum>
+      <enum>ethernet-10gbase-dwdm-1539-77</enum>
+      <enum>ethernet-10gbase-dwdm-1538-98</enum>
+      <enum>ethernet-10gbase-dwdm-1538-19</enum>
+      <enum>ethernet-10gbase-dwdm-1537-40</enum>
+      <enum>ethernet-10gbase-dwdm-1536-61</enum>
+      <enum>ethernet-10gbase-dwdm-1535-82</enum>
+      <enum>ethernet-10gbase-dwdm-1535-04</enum>
+      <enum>ethernet-10gbase-dwdm-1534-25</enum>
+      <enum>ethernet-10gbase-dwdm-1533-47</enum>
+      <enum>ethernet-10gbase-dwdm-1532-68</enum>
+      <enum>ethernet-10gbase-dwdm-1531-90</enum>
+      <enum>ethernet-10gbase-dwdm-1531-12</enum>
+      <enum>ethernet-10gbase-dwdm-1530-33</enum>
+      <enum>ethernet-10gbase-dwdm-tunable</enum>
+      <enum>ethernet-40gbase-dwdm-1561-42</enum>
+      <enum>ethernet-40gbase-dwdm-1560-61</enum>
+      <enum>ethernet-40gbase-dwdm-1559-79</enum>
+      <enum>ethernet-40gbase-dwdm-1558-98</enum>
+      <enum>ethernet-40gbase-dwdm-1558-17</enum>
+      <enum>ethernet-40gbase-dwdm-1557-36</enum>
+      <enum>ethernet-40gbase-dwdm-1556-55</enum>
+      <enum>ethernet-40gbase-dwdm-1555-75</enum>
+      <enum>ethernet-40gbase-dwdm-1554-94</enum>
+      <enum>ethernet-40gbase-dwdm-1554-13</enum>
+      <enum>ethernet-40gbase-dwdm-1553-33</enum>
+      <enum>ethernet-40gbase-dwdm-1552-52</enum>
+      <enum>ethernet-40gbase-dwdm-1551-72</enum>
+      <enum>ethernet-40gbase-dwdm-1550-92</enum>
+      <enum>ethernet-40gbase-dwdm-1550-12</enum>
+      <enum>ethernet-40gbase-dwdm-1549-32</enum>
+      <enum>ethernet-40gbase-dwdm-1548-51</enum>
+      <enum>ethernet-40gbase-dwdm-1547-72</enum>
+      <enum>ethernet-40gbase-dwdm-1546-92</enum>
+      <enum>ethernet-40gbase-dwdm-1546-12</enum>
+      <enum>ethernet-40gbase-dwdm-1545-32</enum>
+      <enum>ethernet-40gbase-dwdm-1544-53</enum>
+      <enum>ethernet-40gbase-dwdm-1543-73</enum>
+      <enum>ethernet-40gbase-dwdm-1542-94</enum>
+      <enum>ethernet-40gbase-dwdm-1542-14</enum>
+      <enum>ethernet-40gbase-dwdm-1541-35</enum>
+      <enum>ethernet-40gbase-dwdm-1540-56</enum>
+      <enum>ethernet-40gbase-dwdm-1539-77</enum>
+      <enum>ethernet-40gbase-dwdm-1538-98</enum>
+      <enum>ethernet-40gbase-dwdm-1538-19</enum>
+      <enum>ethernet-40gbase-dwdm-1537-40</enum>
+      <enum>ethernet-40gbase-dwdm-1536-61</enum>
+      <enum>ethernet-40gbase-dwdm-1535-82</enum>
+      <enum>ethernet-40gbase-dwdm-1535-04</enum>
+      <enum>ethernet-40gbase-dwdm-1534-25</enum>
+      <enum>ethernet-40gbase-dwdm-1533-47</enum>
+      <enum>ethernet-40gbase-dwdm-1532-68</enum>
+      <enum>ethernet-40gbase-dwdm-1531-90</enum>
+      <enum>ethernet-40gbase-dwdm-1531-12</enum>
+      <enum>ethernet-40gbase-dwdm-1530-33</enum>
+      <enum>ethernet-40gbase-dwdm-tunable</enum>
+      <enum>ethernet-100gbase-dwdm-1561-42</enum>
+      <enum>ethernet-100gbase-dwdm-1560-61</enum>
+      <enum>ethernet-100gbase-dwdm-1559-79</enum>
+      <enum>ethernet-100gbase-dwdm-1558-98</enum>
+      <enum>ethernet-100gbase-dwdm-1558-17</enum>
+      <enum>ethernet-100gbase-dwdm-1557-36</enum>
+      <enum>ethernet-100gbase-dwdm-1556-55</enum>
+      <enum>ethernet-100gbase-dwdm-1555-75</enum>
+      <enum>ethernet-100gbase-dwdm-1554-94</enum>
+      <enum>ethernet-100gbase-dwdm-1554-13</enum>
+      <enum>ethernet-100gbase-dwdm-1553-33</enum>
+      <enum>ethernet-100gbase-dwdm-1552-52</enum>
+      <enum>ethernet-100gbase-dwdm-1551-72</enum>
+      <enum>ethernet-100gbase-dwdm-1550-92</enum>
+      <enum>ethernet-100gbase-dwdm-1550-12</enum>
+      <enum>ethernet-100gbase-dwdm-1549-32</enum>
+      <enum>ethernet-100gbase-dwdm-1548-51</enum>
+      <enum>ethernet-100gbase-dwdm-1547-72</enum>
+      <enum>ethernet-100gbase-dwdm-1546-92</enum>
+      <enum>ethernet-100gbase-dwdm-1546-12</enum>
+      <enum>ethernet-100gbase-dwdm-1545-32</enum>
+      <enum>ethernet-100gbase-dwdm-1544-53</enum>
+      <enum>ethernet-100gbase-dwdm-1543-73</enum>
+      <enum>ethernet-100gbase-dwdm-1542-94</enum>
+      <enum>ethernet-100gbase-dwdm-1542-14</enum>
+      <enum>ethernet-100gbase-dwdm-1541-35</enum>
+      <enum>ethernet-100gbase-dwdm-1540-56</enum>
+      <enum>ethernet-100gbase-dwdm-1539-77</enum>
+      <enum>ethernet-100gbase-dwdm-1538-98</enum>
+      <enum>ethernet-100gbase-dwdm-1538-19</enum>
+      <enum>ethernet-100gbase-dwdm-1537-40</enum>
+      <enum>ethernet-100gbase-dwdm-1536-61</enum>
+      <enum>ethernet-100gbase-dwdm-1535-82</enum>
+      <enum>ethernet-100gbase-dwdm-1535-04</enum>
+      <enum>ethernet-100gbase-dwdm-1534-25</enum>
+      <enum>ethernet-100gbase-dwdm-1533-47</enum>
+      <enum>ethernet-100gbase-dwdm-1532-68</enum>
+      <enum>ethernet-100gbase-dwdm-1531-90</enum>
+      <enum>ethernet-100gbase-dwdm-1531-12</enum>
+      <enum>ethernet-100gbase-dwdm-1530-33</enum>
+      <enum>ethernet-100gbase-dwdm-tunable</enum>
+      <enum>ethernet-40gbase-kr4</enum>
+      <enum>ethernet-40gbase-cr4</enum>
+      <enum>ethernet-40gbase-sr4</enum>
+      <enum>ethernet-40gbase-fr</enum>
+      <enum>ethernet-100gbase-cr10</enum>
+      <enum>ethernet-100gbase-sr10</enum>
+      <enum>ethernet-40gbase-csr4</enum>
+      <enum>ethernet-10gbase-cwdm</enum>
+      <enum>ethernet-10gbase-cwdm-tunable</enum>
+      <enum>ethernet-10gbase-cwdm-1470</enum>
+      <enum>ethernet-10gbase-cwdm-1490</enum>
+      <enum>ethernet-10gbase-cwdm-1510</enum>
+      <enum>ethernet-10gbase-cwdm-1530</enum>
+      <enum>ethernet-10gbase-cwdm-1550</enum>
+      <enum>ethernet-10gbase-cwdm-1570</enum>
+      <enum>ethernet-10gbase-cwdm-1590</enum>
+      <enum>ethernet-10gbase-cwdm-1610</enum>
+      <enum>ethernet-40gbase-cwdm</enum>
+      <enum>ethernet-40gbase-cwdm-tunable</enum>
+      <enum>ethernet-40gbase-cwdm-1470</enum>
+      <enum>ethernet-40gbase-cwdm-1490</enum>
+      <enum>ethernet-40gbase-cwdm-1510</enum>
+      <enum>ethernet-40gbase-cwdm-1530</enum>
+      <enum>ethernet-40gbase-cwdm-1550</enum>
+      <enum>ethernet-40gbase-cwdm-1570</enum>
+      <enum>ethernet-40gbase-cwdm-1590</enum>
+      <enum>ethernet-40gbase-cwdm-1610</enum>
+      <enum>ethernet-100gbase-cwdm</enum>
+      <enum>ethernet-100gbase-cwdm-tunable</enum>
+      <enum>ethernet-100gbase-cwdm-1470</enum>
+      <enum>ethernet-100gbase-cwdm-1490</enum>
+      <enum>ethernet-100gbase-cwdm-1510</enum>
+      <enum>ethernet-100gbase-cwdm-1530</enum>
+      <enum>ethernet-100gbase-cwdm-1550</enum>
+      <enum>ethernet-100gbase-cwdm-1570</enum>
+      <enum>ethernet-100gbase-cwdm-1590</enum>
+      <enum>ethernet-100gbase-cwdm-1610</enum>
+      <enum>ethernet-40gbase-elpb</enum>
+      <enum>ethernet-100gbase-elpb</enum>
+      <enum>ethernet-100gbase-lr10</enum>
+      <enum>ethernet-40gbase</enum>
+      <enum>ethernet-100gbase-kp4</enum>
+      <enum>ethernet-100gbase-kr4</enum>
+      <enum>ethernet-10gbase-lrm</enum>
+      <enum>ethernet-10gbase-cx4</enum>
+      <enum>ethernet-10gbase</enum>
+      <enum>ethernet-10gbase-kx4</enum>
+      <enum>ethernet-10gbase-kr</enum>
+      <enum>ethernet-10gbase-pr</enum>
+      <enum>ethernet-100base-lx</enum>
+      <enum>ethernet-100base-zx</enum>
+      <enum>ethernet-1000base-bx-d</enum>
+      <enum>ethernet-1000base-bx-u</enum>
+      <enum>ethernet-1000base-bx20-d</enum>
+      <enum>ethernet-1000base-bx20-u</enum>
+      <enum>ethernet-1000base-bx40-d</enum>
+      <enum>ethernet-1000base-bx40-da</enum>
+      <enum>ethernet-1000base-bx40-u</enum>
+      <enum>ethernet-1000base-bx80-d</enum>
+      <enum>ethernet-1000base-bx80-u</enum>
+      <enum>ethernet-1000base-bx120-d</enum>
+      <enum>ethernet-1000base-bx120-u</enum>
+      <enum>ethernet-10gbase-bx-d</enum>
+      <enum>ethernet-10gbase-bx-u</enum>
+      <enum>ethernet-10gbase-bx10-d</enum>
+      <enum>ethernet-10gbase-bx10-u</enum>
+      <enum>ethernet-10gbase-bx20-d</enum>
+      <enum>ethernet-10gbase-bx20-u</enum>
+      <enum>ethernet-10gbase-bx40-d</enum>
+      <enum>ethernet-10gbase-bx40-u</enum>
+      <enum>ethernet-10gbase-bx80-d</enum>
+      <enum>ethernet-10gbase-bx80-u</enum>
+      <enum>ethernet-10gbase-bx120-d</enum>
+      <enum>ethernet-10gbase-bx120-u</enum>
+      <enum>ethernet-1000base-dr-lx</enum>
+      <enum>ethernet-100gbase-er4l</enum>
+      <enum>ethernet-100gbase-sr4</enum>
+      <enum>ethernet-40gbase-sr-bd</enum>
+      <enum>ethernet-25gbase-cr</enum>
+      <enum>ethernet-25gbase-cr-s</enum>
+      <enum>ethernet-25gbase-kr</enum>
+      <enum>ethernet-25gbase-kr-s</enum>
+      <enum>ethernet-25gbase-r</enum>
+      <enum>ethernet-25gbase-sr</enum>
+      <enum>ethernet-25gbase-dwdm</enum>
+      <enum>ethernet-25gbase-dwdm-tunable</enum>
+      <enum>ethernet-25gbase-cwdm</enum>
+      <enum>ethernet-25gbase-cwdm-tunable</enum>
+      <enum>ethernet-100gbase-psm4</enum>
+      <enum>ethernet-100gbase-er10</enum>
+      <enum>ethernet-100gbase-er10l</enum>
+      <enum>ethernet-100gbase-acc</enum>
+      <enum>ethernet-100gbase-aoc</enum>
+      <enum>ethernet-100gbase-cwdm4</enum>
+      <enum>ethernet-40gbase-psm4</enum>
+      <enum>ethernet-100gbase-cr4</enum>
+      <enum>ethernet-100gbase-act-loop</enum>
+      <enum>ethernet-100gbase-pas-loop</enum>
+      <enum>ethernet-50gbase-cr2</enum>
+      <enum>ethernet-50gbase-sr2</enum>
+      <enum>ethernet-50gbase-psm2</enum>
+      <enum>ethernet-200gbase-cr4</enum>
+      <enum>ethernet-400gbase-fr4</enum>
+      <enum>ethernet-400gbase-dr4</enum>
+      <enum>ethernet-400gbase-cr4</enum>
+      <enum>ethernet-10gbase-cu1m</enum>
+      <enum>ethernet-10gbase-cu1-5m</enum>
+      <enum>ethernet-10gbase-cu2m</enum>
+      <enum>ethernet-10gbase-cu2-5m</enum>
+      <enum>ethernet-10gbase-cu3m</enum>
+      <enum>ethernet-10gbase-cu5m</enum>
+      <enum>ethernet-10gbase-acu7m</enum>
+      <enum>ethernet-10gbase-acu10m</enum>
+      <enum>ethernet-10gbase-aoc1m</enum>
+      <enum>ethernet-10gbase-aoc2m</enum>
+      <enum>ethernet-10gbase-aoc3m</enum>
+      <enum>ethernet-10gbase-aoc5m</enum>
+      <enum>ethernet-10gbase-aoc7m</enum>
+      <enum>ethernet-10gbase-aoc10m</enum>
+      <enum>ethernet-40gbase-aoc</enum>
+      <enum>ethernet-4x10g-base-lr</enum>
+      <enum>ethernet-40gbase-acu1m</enum>
+      <enum>ethernet-40gbase-acu3m</enum>
+      <enum>ethernet-40gbase-acu5m</enum>
+      <enum>ethernet-40gbase-acu7m</enum>
+      <enum>ethernet-40gbase-acu10m</enum>
+      <enum>ethernet-25gbase-cu1m</enum>
+      <enum>ethernet-25gbase-cu2m</enum>
+      <enum>ethernet-25gbase-cu3m</enum>
+      <enum>ethernet-25gbase-cu5m</enum>
+      <enum>ethernet-100gbase-sm-sr</enum>
+      <enum>ethernet-100gbase-sr-bd</enum>
+      <enum>ethernet-base-max</enum>
+    </type>
+  </typedef>
+  <typedef name="Ethernet-port-enable">
+    <type node="enumeration">
+      <enum>disabled</enum>
+      <enum>rx-enabled</enum>
+      <enum>tx-enabled</enum>
+      <enum>enabled</enum>
+    </type>
+  </typedef>
+  <ethernet-interface config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/ethernet_drvr/</xr-path>
+    <xr-xml-map>drivers_media_eth_intf_oper:EthernetInterface</xr-xml-map>
+    <xr-task>interface</xr-task>
+    <statistics config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ethernet_drvr/stats/ifg/</xr-path>
+      <xr-xml-map>drivers_media_eth_intf_oper:StatisticsTable</xr-xml-map>
+      <xr-task>interface</xr-task>
+      <statistic config="false" key="interface-name" node="list">
+        <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;</xr-path>
+        <xr-xml-map>drivers_media_eth_intf_oper:Statistics</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-bag-grp-name>ethernet_port_stats_type</xr-bag-grp-name>
+        <xr-bag>ethernet_show_controller.bag</xr-bag>
+        <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;</xr-path>
+          <xr-xml-map>drivers_media_eth_intf_oper:InterfaceName</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-sch-type>InterfaceName</xr-sch-type>
+          <xr-sch-arg-name>&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </interface-name>
+        <received-total-bytes config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.ReceivedTotalBytes</xr-path>
+          <xr-xml-map>ethernet_show_controller:ReceivedTotalBytes</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </received-total-bytes>
+        <received-good-bytes config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.ReceivedGoodBytes</xr-path>
+          <xr-xml-map>ethernet_show_controller:ReceivedGoodBytes</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </received-good-bytes>
+        <received-total-frames config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.ReceivedTotalFrames</xr-path>
+          <xr-xml-map>ethernet_show_controller:ReceivedTotalFrames</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </received-total-frames>
+        <received8021q-frames config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.Received8021QFrames</xr-path>
+          <xr-xml-map>ethernet_show_controller:Received8021QFrames</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </received8021q-frames>
+        <received-pause-frames config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.ReceivedPauseFrames</xr-path>
+          <xr-xml-map>ethernet_show_controller:ReceivedPauseFrames</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </received-pause-frames>
+        <received-unknown-opcodes config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.ReceivedUnknownOpcodes</xr-path>
+          <xr-xml-map>ethernet_show_controller:ReceivedUnknownOpcodes</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </received-unknown-opcodes>
+        <received-total64-octet-frames config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.ReceivedTotal64OctetFrames</xr-path>
+          <xr-xml-map>ethernet_show_controller:ReceivedTotal64OctetFrames</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </received-total64-octet-frames>
+        <received-total-octet-frames-from65-to127 config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.ReceivedTotalOctetFramesFrom65To127</xr-path>
+          <xr-xml-map>ethernet_show_controller:ReceivedTotalOctetFramesFrom65To127</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </received-total-octet-frames-from65-to127>
+        <received-total-octet-frames-from128-to255 config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.ReceivedTotalOctetFramesFrom128To255</xr-path>
+          <xr-xml-map>ethernet_show_controller:ReceivedTotalOctetFramesFrom128To255</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </received-total-octet-frames-from128-to255>
+        <received-total-octet-frames-from256-to511 config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.ReceivedTotalOctetFramesFrom256To511</xr-path>
+          <xr-xml-map>ethernet_show_controller:ReceivedTotalOctetFramesFrom256To511</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </received-total-octet-frames-from256-to511>
+        <received-total-octet-frames-from512-to1023 config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.ReceivedTotalOctetFramesFrom512To1023</xr-path>
+          <xr-xml-map>ethernet_show_controller:ReceivedTotalOctetFramesFrom512To1023</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </received-total-octet-frames-from512-to1023>
+        <received-total-octet-frames-from1024-to1518 config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.ReceivedTotalOctetFramesFrom1024To1518</xr-path>
+          <xr-xml-map>ethernet_show_controller:ReceivedTotalOctetFramesFrom1024To1518</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </received-total-octet-frames-from1024-to1518>
+        <received-total-octet-frames-from1519-to-max config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.ReceivedTotalOctetFramesFrom1519ToMax</xr-path>
+          <xr-xml-map>ethernet_show_controller:ReceivedTotalOctetFramesFrom1519ToMax</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </received-total-octet-frames-from1519-to-max>
+        <received-good-frames config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.ReceivedGoodFrames</xr-path>
+          <xr-xml-map>ethernet_show_controller:ReceivedGoodFrames</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </received-good-frames>
+        <received-unicast-frames config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.ReceivedUnicastFrames</xr-path>
+          <xr-xml-map>ethernet_show_controller:ReceivedUnicastFrames</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </received-unicast-frames>
+        <received-multicast-frames config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.ReceivedMulticastFrames</xr-path>
+          <xr-xml-map>ethernet_show_controller:ReceivedMulticastFrames</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </received-multicast-frames>
+        <received-broadcast-frames config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.ReceivedBroadcastFrames</xr-path>
+          <xr-xml-map>ethernet_show_controller:ReceivedBroadcastFrames</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </received-broadcast-frames>
+        <number-of-buffer-overrun-packets-dropped config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.NumberOfBufferOverrunPacketsDropped</xr-path>
+          <xr-xml-map>ethernet_show_controller:NumberOfBufferOverrunPacketsDropped</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </number-of-buffer-overrun-packets-dropped>
+        <number-of-aborted-packets-dropped config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.NumberOfAbortedPacketsDropped</xr-path>
+          <xr-xml-map>ethernet_show_controller:NumberOfAbortedPacketsDropped</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </number-of-aborted-packets-dropped>
+        <numberof-invalid-vlan-id-packets-dropped config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.NumberofInvalidVLAN_IDPacketsDropped</xr-path>
+          <xr-xml-map>ethernet_show_controller:NumberofInvalidVLAN_IDPacketsDropped</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </numberof-invalid-vlan-id-packets-dropped>
+        <invalid-dest-mac-drop-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.InvalidDestMACDropPackets</xr-path>
+          <xr-xml-map>ethernet_show_controller:InvalidDestMACDropPackets</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </invalid-dest-mac-drop-packets>
+        <invalid-encap-drop-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.InvalidEncapDropPackets</xr-path>
+          <xr-xml-map>ethernet_show_controller:InvalidEncapDropPackets</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </invalid-encap-drop-packets>
+        <number-of-miscellaneous-packets-dropped config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.NumberOfMiscellaneousPacketsDropped</xr-path>
+          <xr-xml-map>ethernet_show_controller:NumberOfMiscellaneousPacketsDropped</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </number-of-miscellaneous-packets-dropped>
+        <dropped-giant-packets-greaterthan-mru config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.DroppedGiantPacketsGreaterthanMRU</xr-path>
+          <xr-xml-map>ethernet_show_controller:DroppedGiantPacketsGreaterthanMRU</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </dropped-giant-packets-greaterthan-mru>
+        <dropped-ether-stats-undersize-pkts config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.DroppedEtherStatsUndersizePkts</xr-path>
+          <xr-xml-map>ethernet_show_controller:DroppedEtherStatsUndersizePkts</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </dropped-ether-stats-undersize-pkts>
+        <dropped-jabbers-packets-greaterthan-mru config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.DroppedJabbersPacketsGreaterthanMRU</xr-path>
+          <xr-xml-map>ethernet_show_controller:DroppedJabbersPacketsGreaterthanMRU</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </dropped-jabbers-packets-greaterthan-mru>
+        <dropped-ether-stats-fragments config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.DroppedEtherStatsFragments</xr-path>
+          <xr-xml-map>ethernet_show_controller:DroppedEtherStatsFragments</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </dropped-ether-stats-fragments>
+        <dropped-packets-with-crc-align-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.DroppedPacketsWithCRCAlignErrors</xr-path>
+          <xr-xml-map>ethernet_show_controller:DroppedPacketsWithCRCAlignErrors</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </dropped-packets-with-crc-align-errors>
+        <ether-stats-collisions config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.EtherStatsCollisions</xr-path>
+          <xr-xml-map>ethernet_show_controller:EtherStatsCollisions</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </ether-stats-collisions>
+        <symbol-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.SymbolErrors</xr-path>
+          <xr-xml-map>ethernet_show_controller:SymbolErrors</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </symbol-errors>
+        <dropped-miscellaneous-error-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.DroppedMiscellaneousErrorPackets</xr-path>
+          <xr-xml-map>ethernet_show_controller:DroppedMiscellaneousErrorPackets</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </dropped-miscellaneous-error-packets>
+        <rfc2819-ether-stats-oversized-pkts config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.RFC2819EtherStatsOversizedPkts</xr-path>
+          <xr-xml-map>ethernet_show_controller:RFC2819EtherStatsOversizedPkts</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </rfc2819-ether-stats-oversized-pkts>
+        <rfc2819-ether-stats-jabbers config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.RFC2819EtherStatsJabbers</xr-path>
+          <xr-xml-map>ethernet_show_controller:RFC2819EtherStatsJabbers</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </rfc2819-ether-stats-jabbers>
+        <rfc2819-ether-stats-crc-align-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.RFC2819EtherStatsCRCAlignErrors</xr-path>
+          <xr-xml-map>ethernet_show_controller:RFC2819EtherStatsCRCAlignErrors</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </rfc2819-ether-stats-crc-align-errors>
+        <rfc3635dot3-stats-alignment-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.RFC3635dot3StatsAlignmentErrors</xr-path>
+          <xr-xml-map>ethernet_show_controller:RFC3635dot3StatsAlignmentErrors</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </rfc3635dot3-stats-alignment-errors>
+        <total-bytes-transmitted config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.TotalBytesTransmitted</xr-path>
+          <xr-xml-map>ethernet_show_controller:TotalBytesTransmitted</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </total-bytes-transmitted>
+        <total-good-bytes-transmitted config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.TotalGoodBytesTransmitted</xr-path>
+          <xr-xml-map>ethernet_show_controller:TotalGoodBytesTransmitted</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </total-good-bytes-transmitted>
+        <total-frames-transmitted config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.TotalFramesTransmitted</xr-path>
+          <xr-xml-map>ethernet_show_controller:TotalFramesTransmitted</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </total-frames-transmitted>
+        <transmitted8021q-frames config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.Transmitted8021QFrames</xr-path>
+          <xr-xml-map>ethernet_show_controller:Transmitted8021QFrames</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </transmitted8021q-frames>
+        <transmitted-total-pause-frames config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.TransmittedTotalPauseFrames</xr-path>
+          <xr-xml-map>ethernet_show_controller:TransmittedTotalPauseFrames</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </transmitted-total-pause-frames>
+        <transmitted-total64-octet-frames config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.TransmittedTotal64OctetFrames</xr-path>
+          <xr-xml-map>ethernet_show_controller:TransmittedTotal64OctetFrames</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </transmitted-total64-octet-frames>
+        <transmitted-total-octet-frames-from65-to127 config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.TransmittedTotalOctetFramesFrom65To127</xr-path>
+          <xr-xml-map>ethernet_show_controller:TransmittedTotalOctetFramesFrom65To127</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </transmitted-total-octet-frames-from65-to127>
+        <transmitted-total-octet-frames-from128-to255 config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.TransmittedTotalOctetFramesFrom128To255</xr-path>
+          <xr-xml-map>ethernet_show_controller:TransmittedTotalOctetFramesFrom128To255</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </transmitted-total-octet-frames-from128-to255>
+        <transmitted-total-octet-frames-from256-to511 config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.TransmittedTotalOctetFramesFrom256To511</xr-path>
+          <xr-xml-map>ethernet_show_controller:TransmittedTotalOctetFramesFrom256To511</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </transmitted-total-octet-frames-from256-to511>
+        <transmitted-total-octet-frames-from512-to1023 config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.TransmittedTotalOctetFramesFrom512To1023</xr-path>
+          <xr-xml-map>ethernet_show_controller:TransmittedTotalOctetFramesFrom512To1023</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </transmitted-total-octet-frames-from512-to1023>
+        <transmitted-total-octet-frames-from1024-to1518 config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.TransmittedTotalOctetFramesFrom1024To1518</xr-path>
+          <xr-xml-map>ethernet_show_controller:TransmittedTotalOctetFramesFrom1024To1518</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </transmitted-total-octet-frames-from1024-to1518>
+        <transmitted-total-octet-frames-from1518-to-max config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.TransmittedTotalOctetFramesFrom1518ToMax</xr-path>
+          <xr-xml-map>ethernet_show_controller:TransmittedTotalOctetFramesFrom1518ToMax</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </transmitted-total-octet-frames-from1518-to-max>
+        <transmitted-good-frames config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.TransmittedGoodFrames</xr-path>
+          <xr-xml-map>ethernet_show_controller:TransmittedGoodFrames</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </transmitted-good-frames>
+        <transmitted-unicast-frames config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.TransmittedUnicastFrames</xr-path>
+          <xr-xml-map>ethernet_show_controller:TransmittedUnicastFrames</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </transmitted-unicast-frames>
+        <transmitted-multicast-frames config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.TransmittedMulticastFrames</xr-path>
+          <xr-xml-map>ethernet_show_controller:TransmittedMulticastFrames</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </transmitted-multicast-frames>
+        <transmitted-broadcast-frames config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.TransmittedBroadcastFrames</xr-path>
+          <xr-xml-map>ethernet_show_controller:TransmittedBroadcastFrames</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </transmitted-broadcast-frames>
+        <buffer-underrun-packet-drops config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.BufferUnderrunPacketDrops</xr-path>
+          <xr-xml-map>ethernet_show_controller:BufferUnderrunPacketDrops</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </buffer-underrun-packet-drops>
+        <aborted-packet-drops config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.AbortedPacketDrops</xr-path>
+          <xr-xml-map>ethernet_show_controller:AbortedPacketDrops</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </aborted-packet-drops>
+        <uncounted-dropped-frames config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.UncountedDroppedFrames</xr-path>
+          <xr-xml-map>ethernet_show_controller:UncountedDroppedFrames</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </uncounted-dropped-frames>
+        <miscellaneous-output-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/stats/ifg/&lt;drivers_media_eth_intf_oper_Statistics_interface&gt;~ethernet_port_stats_type.MiscellaneousOutputErrors</xr-path>
+          <xr-xml-map>ethernet_show_controller:MiscellaneousOutputErrors</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </miscellaneous-output-errors>
+      </statistic>
+    </statistics>
+    <interfaces config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ethernet_drvr/oper/if/</xr-path>
+      <xr-xml-map>drivers_media_eth_intf_oper:InterfaceTable</xr-xml-map>
+      <xr-task>interface</xr-task>
+      <interface config="false" key="interface-name" node="list">
+        <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;</xr-path>
+        <xr-xml-map>drivers_media_eth_intf_oper:Interface</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-bag-grp-name>ethernet_controller_driver_bag_v2_type</xr-bag-grp-name>
+        <xr-bag>ethernet_show_controller.bag</xr-bag>
+        <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;</xr-path>
+          <xr-xml-map>drivers_media_eth_intf_oper:InterfaceName</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-sch-type>InterfaceName</xr-sch-type>
+          <xr-sch-arg-name>&lt;drivers_media_eth_intf_oper_Interface_interface&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </interface-name>
+        <phy-info config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo</xr-path>
+          <xr-task>interface</xr-task>
+          <xr-bag-version>0 4</xr-bag-version>
+          <phy-details config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails</xr-path>
+            <xr-task>interface</xr-task>
+            <xr-bag-version>0 4</xr-bag-version>
+            <lane-field-validity config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.LaneFieldValidity</xr-path>
+              <xr-task>interface</xr-task>
+              <xr-bag-version>0 4</xr-bag-version>
+              <wavelength-valid config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.LaneFieldValidity.WavelengthValid</xr-path>
+                <xr-xml-map>ethernet_show_controller:WavelengthValid</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>int32</type-name>
+                </type>
+              </wavelength-valid>
+              <transmit-power-valid config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.LaneFieldValidity.TransmitPowerValid</xr-path>
+                <xr-xml-map>ethernet_show_controller:TransmitPowerValid</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>int32</type-name>
+                </type>
+              </transmit-power-valid>
+              <receive-power-valid config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.LaneFieldValidity.ReceivePowerValid</xr-path>
+                <xr-xml-map>ethernet_show_controller:ReceivePowerValid</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>int32</type-name>
+                </type>
+              </receive-power-valid>
+              <laser-bias-valid config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.LaneFieldValidity.LaserBiasValid</xr-path>
+                <xr-xml-map>ethernet_show_controller:LaserBiasValid</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>int32</type-name>
+                </type>
+              </laser-bias-valid>
+            </lane-field-validity>
+            <dig-opt-mon-alarm-thresholds config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds</xr-path>
+              <xr-task>interface</xr-task>
+              <xr-bag-version>0 4</xr-bag-version>
+              <field-validity config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.field_validity</xr-path>
+                <xr-task>interface</xr-task>
+                <xr-bag-version>0 4</xr-bag-version>
+                <temperature-valid config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.field_validity.TemperatureValid</xr-path>
+                  <xr-xml-map>ethernet_show_controller:TemperatureValid</xr-xml-map>
+                  <xr-task>interface</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>0 4</xr-bag-version>
+                  <type>
+                    <type-name>int32</type-name>
+                  </type>
+                </temperature-valid>
+                <voltage-valid config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.field_validity.VoltageValid</xr-path>
+                  <xr-xml-map>ethernet_show_controller:VoltageValid</xr-xml-map>
+                  <xr-task>interface</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>0 4</xr-bag-version>
+                  <type>
+                    <type-name>int32</type-name>
+                  </type>
+                </voltage-valid>
+                <laser-bias-valid config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.field_validity.LaserBiasValid</xr-path>
+                  <xr-xml-map>ethernet_show_controller:LaserBiasValid</xr-xml-map>
+                  <xr-task>interface</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>0 4</xr-bag-version>
+                  <type>
+                    <type-name>int32</type-name>
+                  </type>
+                </laser-bias-valid>
+                <transmit-power-valid config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.field_validity.TransmitPowerValid</xr-path>
+                  <xr-xml-map>ethernet_show_controller:TransmitPowerValid</xr-xml-map>
+                  <xr-task>interface</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>0 4</xr-bag-version>
+                  <type>
+                    <type-name>int32</type-name>
+                  </type>
+                </transmit-power-valid>
+                <receive-power-valid config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.field_validity.ReceivePowerValid</xr-path>
+                  <xr-xml-map>ethernet_show_controller:ReceivePowerValid</xr-xml-map>
+                  <xr-task>interface</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>0 4</xr-bag-version>
+                  <type>
+                    <type-name>int32</type-name>
+                  </type>
+                </receive-power-valid>
+              </field-validity>
+              <transceiver-temperature-alarm-high config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.TransceiverTemperatureAlarmHigh</xr-path>
+                <xr-xml-map>ethernet_show_controller:TransceiverTemperatureAlarmHigh</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>int32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>int32</type-name>
+                </type>
+              </transceiver-temperature-alarm-high>
+              <transceiver-temperature-warning-high config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.TransceiverTemperatureWarningHigh</xr-path>
+                <xr-xml-map>ethernet_show_controller:TransceiverTemperatureWarningHigh</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>int32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>int32</type-name>
+                </type>
+              </transceiver-temperature-warning-high>
+              <transceiver-temperature-warning-low config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.TransceiverTemperatureWarningLow</xr-path>
+                <xr-xml-map>ethernet_show_controller:TransceiverTemperatureWarningLow</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>int32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>int32</type-name>
+                </type>
+              </transceiver-temperature-warning-low>
+              <transceiver-temperature-alarm-low config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.TransceiverTemperatureAlarmLow</xr-path>
+                <xr-xml-map>ethernet_show_controller:TransceiverTemperatureAlarmLow</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>int32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>int32</type-name>
+                </type>
+              </transceiver-temperature-alarm-low>
+              <transceiver-voltage-alarm-high config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.TransceiverVoltageAlarmHigh</xr-path>
+                <xr-xml-map>ethernet_show_controller:TransceiverVoltageAlarmHigh</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </transceiver-voltage-alarm-high>
+              <transceiver-voltage-warning-high config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.TransceiverVoltageWarningHigh</xr-path>
+                <xr-xml-map>ethernet_show_controller:TransceiverVoltageWarningHigh</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </transceiver-voltage-warning-high>
+              <transceiver-voltage-warning-low config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.TransceiverVoltageWarningLow</xr-path>
+                <xr-xml-map>ethernet_show_controller:TransceiverVoltageWarningLow</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </transceiver-voltage-warning-low>
+              <transceiver-voltage-alarm-low config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.TransceiverVoltageAlarmLow</xr-path>
+                <xr-xml-map>ethernet_show_controller:TransceiverVoltageAlarmLow</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </transceiver-voltage-alarm-low>
+              <laser-bias-alarm-high config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.LaserBiasAlarmHigh</xr-path>
+                <xr-xml-map>ethernet_show_controller:LaserBiasAlarmHigh</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </laser-bias-alarm-high>
+              <laser-bias-warning-high config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.LaserBiasWarningHigh</xr-path>
+                <xr-xml-map>ethernet_show_controller:LaserBiasWarningHigh</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </laser-bias-warning-high>
+              <laser-bias-warning-low config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.LaserBiasWarningLow</xr-path>
+                <xr-xml-map>ethernet_show_controller:LaserBiasWarningLow</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </laser-bias-warning-low>
+              <laser-bias-alarm-low config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.LaserBiasAlarmLow</xr-path>
+                <xr-xml-map>ethernet_show_controller:LaserBiasAlarmLow</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </laser-bias-alarm-low>
+              <optical-transmit-power-alarm-high config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.OpticalTransmitPowerAlarmHigh</xr-path>
+                <xr-xml-map>ethernet_show_controller:OpticalTransmitPowerAlarmHigh</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </optical-transmit-power-alarm-high>
+              <optical-transmit-power-warning-high config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.OpticalTransmitPowerWarningHigh</xr-path>
+                <xr-xml-map>ethernet_show_controller:OpticalTransmitPowerWarningHigh</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </optical-transmit-power-warning-high>
+              <optical-transmit-power-warning-low config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.OpticalTransmitPowerWarningLow</xr-path>
+                <xr-xml-map>ethernet_show_controller:OpticalTransmitPowerWarningLow</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </optical-transmit-power-warning-low>
+              <optical-transmit-power-alarm-low config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.OpticalTransmitPowerAlarmLow</xr-path>
+                <xr-xml-map>ethernet_show_controller:OpticalTransmitPowerAlarmLow</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </optical-transmit-power-alarm-low>
+              <optical-receive-power-alarm-high config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.OpticalReceivePowerAlarmHigh</xr-path>
+                <xr-xml-map>ethernet_show_controller:OpticalReceivePowerAlarmHigh</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </optical-receive-power-alarm-high>
+              <optical-receive-power-warning-high config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.OpticalReceivePowerWarningHigh</xr-path>
+                <xr-xml-map>ethernet_show_controller:OpticalReceivePowerWarningHigh</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </optical-receive-power-warning-high>
+              <optical-receive-power-warning-low config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.OpticalReceivePowerWarningLow</xr-path>
+                <xr-xml-map>ethernet_show_controller:OpticalReceivePowerWarningLow</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </optical-receive-power-warning-low>
+              <optical-receive-power-alarm-low config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarmThresholds.OpticalReceivePowerAlarmLow</xr-path>
+                <xr-xml-map>ethernet_show_controller:OpticalReceivePowerAlarmLow</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </optical-receive-power-alarm-low>
+            </dig-opt-mon-alarm-thresholds>
+            <dig-opt-mon-alarms config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarms</xr-path>
+              <xr-task>interface</xr-task>
+              <xr-bag-version>0 4</xr-bag-version>
+              <transceiver-temperature config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarms.TransceiverTemperature</xr-path>
+                <xr-xml-map>ethernet_show_controller:TransceiverTemperature</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>Ether-dom-alarm</type-name>
+                </type>
+              </transceiver-temperature>
+              <transceiver-voltage config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarms.TransceiverVoltage</xr-path>
+                <xr-xml-map>ethernet_show_controller:TransceiverVoltage</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>Ether-dom-alarm</type-name>
+                </type>
+              </transceiver-voltage>
+              <transmit-laser-power config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarms.TransmitLaserPower</xr-path>
+                <xr-xml-map>ethernet_show_controller:TransmitLaserPower</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>Ether-dom-alarm</type-name>
+                </type>
+              </transmit-laser-power>
+              <received-laser-power config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarms.ReceivedLaserPower</xr-path>
+                <xr-xml-map>ethernet_show_controller:ReceivedLaserPower</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>Ether-dom-alarm</type-name>
+                </type>
+              </received-laser-power>
+              <laser-bias-current config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.DigOptMonAlarms.LaserBiasCurrent</xr-path>
+                <xr-xml-map>ethernet_show_controller:LaserBiasCurrent</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>Ether-dom-alarm</type-name>
+                </type>
+              </laser-bias-current>
+            </dig-opt-mon-alarms>
+            <vendor config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.Vendor</xr-path>
+              <xr-xml-map>ethernet_show_controller:Vendor</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </vendor>
+            <vendor-part-number config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.VendorPartNumber</xr-path>
+              <xr-xml-map>ethernet_show_controller:VendorPartNumber</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </vendor-part-number>
+            <vendor-serial-number config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.VendorSerialNumber</xr-path>
+              <xr-xml-map>ethernet_show_controller:VendorSerialNumber</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </vendor-serial-number>
+            <transceiver-temperature config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.TransceiverTemperature</xr-path>
+              <xr-xml-map>ethernet_show_controller:TransceiverTemperature</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int32_t</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>int32</type-name>
+              </type>
+            </transceiver-temperature>
+            <transceiver-voltage config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.TransceiverVoltage</xr-path>
+              <xr-xml-map>ethernet_show_controller:TransceiverVoltage</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int32_t</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>int32</type-name>
+              </type>
+            </transceiver-voltage>
+            <transceiver-tx-power config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.TransceiverTxPower</xr-path>
+              <xr-xml-map>ethernet_show_controller:TransceiverTxPower</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int32_t</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>int32</type-name>
+              </type>
+            </transceiver-tx-power>
+            <transceiver-rx-power config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.TransceiverRxPower</xr-path>
+              <xr-xml-map>ethernet_show_controller:TransceiverRxPower</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int32_t</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>int32</type-name>
+              </type>
+            </transceiver-rx-power>
+            <transceiver-tx-bias config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.TransceiverTxBias</xr-path>
+              <xr-xml-map>ethernet_show_controller:TransceiverTxBias</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int32_t</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>int32</type-name>
+              </type>
+            </transceiver-tx-bias>
+            <optics-wavelength config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.OpticsWavelength</xr-path>
+              <xr-xml-map>ethernet_show_controller:OpticsWavelength</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </optics-wavelength>
+            <optics-type config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.OpticsType</xr-path>
+              <xr-xml-map>ethernet_show_controller:OpticsType</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </optics-type>
+            <revision-number config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.RevisionNumber</xr-path>
+              <xr-xml-map>ethernet_show_controller:RevisionNumber</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </revision-number>
+            <lane config="false" node="list">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.Lane[&lt;bag_arg5&gt;]</xr-path>
+              <xr-task>interface</xr-task>
+              <xr-bag-version>0 4</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg5&gt;</xr-internal-key>
+              <dig-opt-mon-alarm config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.Lane[&lt;bag_arg5&gt;].DigOptMonAlarm</xr-path>
+                <xr-task>interface</xr-task>
+                <xr-bag-version>0 4</xr-bag-version>
+                <transmit-laser-power config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.Lane[&lt;bag_arg5&gt;].DigOptMonAlarm.TransmitLaserPower</xr-path>
+                  <xr-xml-map>ethernet_show_controller:TransmitLaserPower</xr-xml-map>
+                  <xr-task>interface</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>0 4</xr-bag-version>
+                  <type>
+                    <type-name>Ether-dom-alarm</type-name>
+                  </type>
+                </transmit-laser-power>
+                <received-laser-power config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.Lane[&lt;bag_arg5&gt;].DigOptMonAlarm.ReceivedLaserPower</xr-path>
+                  <xr-xml-map>ethernet_show_controller:ReceivedLaserPower</xr-xml-map>
+                  <xr-task>interface</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>0 4</xr-bag-version>
+                  <type>
+                    <type-name>Ether-dom-alarm</type-name>
+                  </type>
+                </received-laser-power>
+                <laser-bias-current config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.Lane[&lt;bag_arg5&gt;].DigOptMonAlarm.LaserBiasCurrent</xr-path>
+                  <xr-xml-map>ethernet_show_controller:LaserBiasCurrent</xr-xml-map>
+                  <xr-task>interface</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>0 4</xr-bag-version>
+                  <type>
+                    <type-name>Ether-dom-alarm</type-name>
+                  </type>
+                </laser-bias-current>
+              </dig-opt-mon-alarm>
+              <center-wavelength config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.Lane[&lt;bag_arg5&gt;].CenterWavelength</xr-path>
+                <xr-xml-map>ethernet_show_controller:CenterWavelength</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </center-wavelength>
+              <transmit-laser-power config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.Lane[&lt;bag_arg5&gt;].TransmitLaserPower</xr-path>
+                <xr-xml-map>ethernet_show_controller:TransmitLaserPower</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>int32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>int32</type-name>
+                </type>
+              </transmit-laser-power>
+              <received-laser-power config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.Lane[&lt;bag_arg5&gt;].ReceivedLaserPower</xr-path>
+                <xr-xml-map>ethernet_show_controller:ReceivedLaserPower</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>int32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>int32</type-name>
+                </type>
+              </received-laser-power>
+              <laser-bias-current config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.Lane[&lt;bag_arg5&gt;].LaserBiasCurrent</xr-path>
+                <xr-xml-map>ethernet_show_controller:LaserBiasCurrent</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </laser-bias-current>
+              <lane-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyDetails.Lane[&lt;bag_arg5&gt;].LaneId</xr-path>
+                <xr-xml-map>ethernet_show_controller:LaneId</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </lane-id>
+            </lane>
+          </phy-details>
+          <fec-details config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.FECDetails</xr-path>
+            <xr-task>interface</xr-task>
+            <xr-bag-version>0 4</xr-bag-version>
+            <fec config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.FECDetails.FEC</xr-path>
+              <xr-xml-map>ethernet_show_controller:FEC</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Ethernet-fec</type-name>
+              </type>
+            </fec>
+            <corrected-codeword-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.FECDetails.CorrectedCodewordCount</xr-path>
+              <xr-xml-map>ethernet_show_controller:CorrectedCodewordCount</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </corrected-codeword-count>
+            <uncorrected-codeword-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.FECDetails.UncorrectedCodewordCount</xr-path>
+              <xr-xml-map>ethernet_show_controller:UncorrectedCodewordCount</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </uncorrected-codeword-count>
+          </fec-details>
+          <media-type config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.MediaType</xr-path>
+            <xr-xml-map>ethernet_show_controller:MediaType</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>Ethernet-media</type-name>
+            </type>
+          </media-type>
+          <phy-present config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.PhyPresent</xr-path>
+            <xr-xml-map>ethernet_show_controller:PhyPresent</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>Ether-phy-present</type-name>
+            </type>
+          </phy-present>
+          <loopback config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.Loopback</xr-path>
+            <xr-xml-map>ethernet_show_controller:Loopback</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>Ethernet-loopback</type-name>
+            </type>
+          </loopback>
+          <holdoff-time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.HoldoffTime</xr-path>
+            <xr-xml-map>ethernet_show_controller:HoldoffTime</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </holdoff-time>
+          <extended-loopback config="false" node="list">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.ExtendedLoopback[&lt;bag_arg10&gt;]</xr-path>
+            <xr-task>interface</xr-task>
+            <xr-bag-version>0 4</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg10&gt;</xr-internal-key>
+            <level config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.ExtendedLoopback[&lt;bag_arg10&gt;].Level</xr-path>
+              <xr-xml-map>ethernet_show_controller:Level</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </level>
+            <loopback config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.PhyInfo.ExtendedLoopback[&lt;bag_arg10&gt;].Loopback</xr-path>
+              <xr-xml-map>ethernet_show_controller:Loopback</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Ethernet-loopback</type-name>
+              </type>
+            </loopback>
+          </extended-loopback>
+        </phy-info>
+        <layer1-info config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info</xr-path>
+          <xr-task>interface</xr-task>
+          <xr-bag-version>0 4</xr-bag-version>
+          <autoneg config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.Autoneg</xr-path>
+            <xr-task>interface</xr-task>
+            <xr-bag-version>0 4</xr-bag-version>
+            <autoneg-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.Autoneg.AutonegEnabled</xr-path>
+              <xr-xml-map>ethernet_show_controller:AutonegEnabled</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>int32</type-name>
+              </type>
+            </autoneg-enabled>
+            <mask config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.Autoneg.Mask</xr-path>
+              <xr-xml-map>ethernet_show_controller:Mask</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Ether-autoneg-mask</type-name>
+              </type>
+            </mask>
+            <speed config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.Autoneg.Speed</xr-path>
+              <xr-xml-map>ethernet_show_controller:Speed</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Ethernet-speed</type-name>
+              </type>
+            </speed>
+            <duplex config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.Autoneg.Duplex</xr-path>
+              <xr-xml-map>ethernet_show_controller:Duplex</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Ethernet-duplex</type-name>
+              </type>
+            </duplex>
+            <flowcontrol config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.Autoneg.Flowcontrol</xr-path>
+              <xr-xml-map>ethernet_show_controller:Flowcontrol</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Ether-flowcontrol</type-name>
+              </type>
+            </flowcontrol>
+            <config-override config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.Autoneg.ConfigOverride</xr-path>
+              <xr-xml-map>ethernet_show_controller:ConfigOverride</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>int32</type-name>
+              </type>
+            </config-override>
+            <fec config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.Autoneg.Fec</xr-path>
+              <xr-xml-map>ethernet_show_controller:Fec</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Ethernet-fec</type-name>
+              </type>
+            </fec>
+          </autoneg>
+          <current-alarms config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.CurrentAlarms</xr-path>
+            <xr-task>interface</xr-task>
+            <xr-bag-version>0 4</xr-bag-version>
+            <received-loss-of-signal-alarm config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.CurrentAlarms.ReceivedLossOfSignalAlarm</xr-path>
+              <xr-xml-map>ethernet_show_controller:ReceivedLossOfSignalAlarm</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Eth-ctrlr-alarm-state</type-name>
+              </type>
+            </received-loss-of-signal-alarm>
+            <pcs-loss-of-block-lock-alarm config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.CurrentAlarms.PCSLossOfBlockLockAlarm</xr-path>
+              <xr-xml-map>ethernet_show_controller:PCSLossOfBlockLockAlarm</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Eth-ctrlr-alarm-state</type-name>
+              </type>
+            </pcs-loss-of-block-lock-alarm>
+            <local-fault-alarm config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.CurrentAlarms.LocalFaultAlarm</xr-path>
+              <xr-xml-map>ethernet_show_controller:LocalFaultAlarm</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Eth-ctrlr-alarm-state</type-name>
+              </type>
+            </local-fault-alarm>
+            <remote-fault-alarm config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.CurrentAlarms.RemoteFaultAlarm</xr-path>
+              <xr-xml-map>ethernet_show_controller:RemoteFaultAlarm</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Eth-ctrlr-alarm-state</type-name>
+              </type>
+            </remote-fault-alarm>
+            <sd-ber-alarm config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.CurrentAlarms.SD_BERAlarm</xr-path>
+              <xr-xml-map>ethernet_show_controller:SD_BERAlarm</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Eth-ctrlr-alarm-state</type-name>
+              </type>
+            </sd-ber-alarm>
+            <sf-ber-alarm config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.CurrentAlarms.SF_BERAlarm</xr-path>
+              <xr-xml-map>ethernet_show_controller:SF_BERAlarm</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Eth-ctrlr-alarm-state</type-name>
+              </type>
+            </sf-ber-alarm>
+            <loss-of-synchronization-data-alarm config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.CurrentAlarms.LossOfSynchronizationDataAlarm</xr-path>
+              <xr-xml-map>ethernet_show_controller:LossOfSynchronizationDataAlarm</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Eth-ctrlr-alarm-state</type-name>
+              </type>
+            </loss-of-synchronization-data-alarm>
+            <hi-ber-alarm config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.CurrentAlarms.Hi_BERAlarm</xr-path>
+              <xr-xml-map>ethernet_show_controller:Hi_BERAlarm</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Eth-ctrlr-alarm-state</type-name>
+              </type>
+            </hi-ber-alarm>
+            <squelch-alarm config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.CurrentAlarms.SquelchAlarm</xr-path>
+              <xr-xml-map>ethernet_show_controller:SquelchAlarm</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Eth-ctrlr-alarm-state</type-name>
+              </type>
+            </squelch-alarm>
+            <rx-opd-alarm config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.CurrentAlarms.RxOPDAlarm</xr-path>
+              <xr-xml-map>ethernet_show_controller:RxOPDAlarm</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Eth-ctrlr-alarm-state</type-name>
+              </type>
+            </rx-opd-alarm>
+          </current-alarms>
+          <previous-alarms config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.PreviousAlarms</xr-path>
+            <xr-task>interface</xr-task>
+            <xr-bag-version>0 4</xr-bag-version>
+            <received-loss-of-signal-alarm config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.PreviousAlarms.ReceivedLossOfSignalAlarm</xr-path>
+              <xr-xml-map>ethernet_show_controller:ReceivedLossOfSignalAlarm</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Eth-ctrlr-alarm-state</type-name>
+              </type>
+            </received-loss-of-signal-alarm>
+            <pcs-loss-of-block-lock-alarm config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.PreviousAlarms.PCSLossOfBlockLockAlarm</xr-path>
+              <xr-xml-map>ethernet_show_controller:PCSLossOfBlockLockAlarm</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Eth-ctrlr-alarm-state</type-name>
+              </type>
+            </pcs-loss-of-block-lock-alarm>
+            <local-fault-alarm config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.PreviousAlarms.LocalFaultAlarm</xr-path>
+              <xr-xml-map>ethernet_show_controller:LocalFaultAlarm</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Eth-ctrlr-alarm-state</type-name>
+              </type>
+            </local-fault-alarm>
+            <remote-fault-alarm config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.PreviousAlarms.RemoteFaultAlarm</xr-path>
+              <xr-xml-map>ethernet_show_controller:RemoteFaultAlarm</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Eth-ctrlr-alarm-state</type-name>
+              </type>
+            </remote-fault-alarm>
+            <sd-ber-alarm config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.PreviousAlarms.SD_BERAlarm</xr-path>
+              <xr-xml-map>ethernet_show_controller:SD_BERAlarm</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Eth-ctrlr-alarm-state</type-name>
+              </type>
+            </sd-ber-alarm>
+            <sf-ber-alarm config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.PreviousAlarms.SF_BERAlarm</xr-path>
+              <xr-xml-map>ethernet_show_controller:SF_BERAlarm</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Eth-ctrlr-alarm-state</type-name>
+              </type>
+            </sf-ber-alarm>
+            <loss-of-synchronization-data-alarm config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.PreviousAlarms.LossOfSynchronizationDataAlarm</xr-path>
+              <xr-xml-map>ethernet_show_controller:LossOfSynchronizationDataAlarm</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Eth-ctrlr-alarm-state</type-name>
+              </type>
+            </loss-of-synchronization-data-alarm>
+            <hi-ber-alarm config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.PreviousAlarms.Hi_BERAlarm</xr-path>
+              <xr-xml-map>ethernet_show_controller:Hi_BERAlarm</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Eth-ctrlr-alarm-state</type-name>
+              </type>
+            </hi-ber-alarm>
+            <squelch-alarm config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.PreviousAlarms.SquelchAlarm</xr-path>
+              <xr-xml-map>ethernet_show_controller:SquelchAlarm</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Eth-ctrlr-alarm-state</type-name>
+              </type>
+            </squelch-alarm>
+            <rx-opd-alarm config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.PreviousAlarms.RxOPDAlarm</xr-path>
+              <xr-xml-map>ethernet_show_controller:RxOPDAlarm</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Eth-ctrlr-alarm-state</type-name>
+              </type>
+            </rx-opd-alarm>
+          </previous-alarms>
+          <error-counts config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.ErrorCounts</xr-path>
+            <xr-task>interface</xr-task>
+            <xr-bag-version>0 4</xr-bag-version>
+            <sync-header-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.ErrorCounts.SyncHeaderErrors</xr-path>
+              <xr-xml-map>ethernet_show_controller:SyncHeaderErrors</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </sync-header-errors>
+            <pcsbip-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.ErrorCounts.PCSBIPErrors</xr-path>
+              <xr-xml-map>ethernet_show_controller:PCSBIPErrors</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </pcsbip-errors>
+          </error-counts>
+          <ber-monitoring config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.BERMonitoring</xr-path>
+            <xr-task>interface</xr-task>
+            <xr-bag-version>0 4</xr-bag-version>
+            <settings config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.BERMonitoring.Settings</xr-path>
+              <xr-task>interface</xr-task>
+              <xr-bag-version>0 4</xr-bag-version>
+              <signal-degrade-threshold config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.BERMonitoring.Settings.SignalDegradeThreshold</xr-path>
+                <xr-xml-map>ethernet_show_controller:SignalDegradeThreshold</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </signal-degrade-threshold>
+              <signal-degrade-alarm config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.BERMonitoring.Settings.SignalDegradeAlarm</xr-path>
+                <xr-xml-map>ethernet_show_controller:SignalDegradeAlarm</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>int32</type-name>
+                </type>
+              </signal-degrade-alarm>
+              <signal-fail-threshold config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.BERMonitoring.Settings.SignalFailThreshold</xr-path>
+                <xr-xml-map>ethernet_show_controller:SignalFailThreshold</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </signal-fail-threshold>
+              <signal-fail-alarm config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.BERMonitoring.Settings.SignalFailAlarm</xr-path>
+                <xr-xml-map>ethernet_show_controller:SignalFailAlarm</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>int32</type-name>
+                </type>
+              </signal-fail-alarm>
+              <signal-remote-fault config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.BERMonitoring.Settings.SignalRemoteFault</xr-path>
+                <xr-xml-map>ethernet_show_controller:SignalRemoteFault</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>int32</type-name>
+                </type>
+              </signal-remote-fault>
+            </settings>
+            <state config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.BERMonitoring.State</xr-path>
+              <xr-task>interface</xr-task>
+              <xr-bag-version>0 4</xr-bag-version>
+              <sd-current-ber config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.BERMonitoring.State.SD_CurrentBER</xr-path>
+                <xr-xml-map>ethernet_show_controller:SD_CurrentBER</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </sd-current-ber>
+              <sf-current-ber config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.BERMonitoring.State.SF_CurrentBER</xr-path>
+                <xr-xml-map>ethernet_show_controller:SF_CurrentBER</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </sf-current-ber>
+            </state>
+            <supported config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.BERMonitoring.Supported</xr-path>
+              <xr-xml-map>ethernet_show_controller:Supported</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>int32</type-name>
+              </type>
+            </supported>
+          </ber-monitoring>
+          <opd-monitoring config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.OPDMonitoring</xr-path>
+            <xr-task>interface</xr-task>
+            <xr-bag-version>0 4</xr-bag-version>
+            <settings config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.OPDMonitoring.Settings</xr-path>
+              <xr-task>interface</xr-task>
+              <xr-bag-version>0 4</xr-bag-version>
+              <received-optical-power-degrade-threshold-set config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.OPDMonitoring.Settings.ReceivedOpticalPowerDegradeThresholdSet</xr-path>
+                <xr-xml-map>ethernet_show_controller:ReceivedOpticalPowerDegradeThresholdSet</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>int32</type-name>
+                </type>
+              </received-optical-power-degrade-threshold-set>
+              <received-optical-power-degrade-threshold config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.OPDMonitoring.Settings.ReceivedOpticalPowerDegradeThreshold</xr-path>
+                <xr-xml-map>ethernet_show_controller:ReceivedOpticalPowerDegradeThreshold</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>int32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>int32</type-name>
+                </type>
+              </received-optical-power-degrade-threshold>
+            </settings>
+            <supported config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.OPDMonitoring.Supported</xr-path>
+              <xr-xml-map>ethernet_show_controller:Supported</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>int32</type-name>
+              </type>
+            </supported>
+          </opd-monitoring>
+          <pfc-info config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.PFCInfo</xr-path>
+            <xr-task>interface</xr-task>
+            <xr-bag-version>0 4</xr-bag-version>
+            <priority-flowcontrol config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.PFCInfo.PriorityFlowcontrol</xr-path>
+              <xr-xml-map>ethernet_show_controller:PriorityFlowcontrol</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>Ether-pfc</type-name>
+              </type>
+            </priority-flowcontrol>
+            <priority-enabled-bitmap config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.PFCInfo.PriorityEnabledBitmap</xr-path>
+              <xr-xml-map>ethernet_show_controller:PriorityEnabledBitmap</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+            </priority-enabled-bitmap>
+            <rx-frame config="false" is-key="false" is-yang-key="false" node="leaf-list">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.PFCInfo.RXFrames[&lt;bag_arg8&gt;]</xr-path>
+              <xr-xml-map>ethernet_show_controller:RXFrames</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg8&gt;</xr-internal-key>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+              <max-elements>8</max-elements>
+            </rx-frame>
+            <tx-frame config="false" is-key="false" is-yang-key="false" node="leaf-list">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.PFCInfo.TXFrames[&lt;bag_arg9&gt;]</xr-path>
+              <xr-xml-map>ethernet_show_controller:TXFrames</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg9&gt;</xr-internal-key>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+              <max-elements>8</max-elements>
+            </tx-frame>
+          </pfc-info>
+          <link-state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.LinkState</xr-path>
+            <xr-xml-map>ethernet_show_controller:LinkState</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>Ether-link-state</type-name>
+            </type>
+          </link-state>
+          <led-state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.LEDState</xr-path>
+            <xr-xml-map>ethernet_show_controller:LEDState</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>Ether-led-state</type-name>
+            </type>
+          </led-state>
+          <speed config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.Speed</xr-path>
+            <xr-xml-map>ethernet_show_controller:Speed</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>Ethernet-speed</type-name>
+            </type>
+          </speed>
+          <duplex config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.Duplex</xr-path>
+            <xr-xml-map>ethernet_show_controller:Duplex</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>Ethernet-duplex</type-name>
+            </type>
+          </duplex>
+          <flowcontrol config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.Flowcontrol</xr-path>
+            <xr-xml-map>ethernet_show_controller:Flowcontrol</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>Ether-flowcontrol</type-name>
+            </type>
+          </flowcontrol>
+          <ipg config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.IPG</xr-path>
+            <xr-xml-map>ethernet_show_controller:IPG</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>Ethernet-ipg</type-name>
+            </type>
+          </ipg>
+          <laser-squelch-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.LaserSquelchEnabled</xr-path>
+            <xr-xml-map>ethernet_show_controller:LaserSquelchEnabled</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-sch-type>Boolean</xr-sch-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </laser-squelch-enabled>
+          <bandwidth-utilization config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.BandwidthUtilization</xr-path>
+            <xr-xml-map>ethernet_show_controller:BandwidthUtilization</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </bandwidth-utilization>
+          <bandwidth config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.Layer1Info.Bandwidth</xr-path>
+            <xr-xml-map>ethernet_show_controller:Bandwidth</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </bandwidth>
+        </layer1-info>
+        <mac-info config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.MacInfo</xr-path>
+          <xr-task>interface</xr-task>
+          <xr-bag-version>0 4</xr-bag-version>
+          <unicast-mac-filters config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.MacInfo.UnicastMACFilters</xr-path>
+            <xr-task>interface</xr-task>
+            <xr-bag-version>0 4</xr-bag-version>
+            <unicast-mac-address config="false" is-key="false" is-yang-key="false" node="leaf-list">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.MacInfo.UnicastMACFilters.UnicastMACAddresses[&lt;bag_arg6&gt;]</xr-path>
+              <xr-xml-map>ethernet_show_controller:UnicastMACAddresses</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg6&gt;</xr-internal-key>
+              <type>
+                <type-name>Mac-addr</type-name>
+              </type>
+            </unicast-mac-address>
+          </unicast-mac-filters>
+          <multicast-mac-filters config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.MacInfo.MulticastMACFilters</xr-path>
+            <xr-task>interface</xr-task>
+            <xr-bag-version>0 4</xr-bag-version>
+            <multicast-promiscuous config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.MacInfo.MulticastMACFilters.MulticastPromiscuous</xr-path>
+              <xr-xml-map>ethernet_show_controller:MulticastPromiscuous</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+              <xr-sch-type>Boolean</xr-sch-type>
+              <xr-bag-version>0 4</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </multicast-promiscuous>
+            <multicast-mac-address config="false" node="list">
+              <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.MacInfo.MulticastMACFilters.MulticastMACAddresses[&lt;bag_arg7&gt;]</xr-path>
+              <xr-task>interface</xr-task>
+              <xr-bag-version>0 4</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg7&gt;</xr-internal-key>
+              <mac-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.MacInfo.MulticastMACFilters.MulticastMACAddresses[&lt;bag_arg7&gt;].MACAddress</xr-path>
+                <xr-xml-map>ethernet_show_controller:MACAddress</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>Mac-addr</type-name>
+                </type>
+              </mac-address>
+              <mask config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.MacInfo.MulticastMACFilters.MulticastMACAddresses[&lt;bag_arg7&gt;].Mask</xr-path>
+                <xr-xml-map>ethernet_show_controller:Mask</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>Mac-addr</type-name>
+                </type>
+              </mask>
+            </multicast-mac-address>
+          </multicast-mac-filters>
+          <mtu config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.MacInfo.MTU</xr-path>
+            <xr-xml-map>ethernet_show_controller:MTU</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </mtu>
+          <mru config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.MacInfo.MRU</xr-path>
+            <xr-xml-map>ethernet_show_controller:MRU</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </mru>
+          <burned-in-mac-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.MacInfo.BurnedInMACAddress</xr-path>
+            <xr-xml-map>ethernet_show_controller:BurnedInMACAddress</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>Mac-addr</type-name>
+            </type>
+          </burned-in-mac-address>
+          <operational-mac-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.MacInfo.OperationalMACAddress</xr-path>
+            <xr-xml-map>ethernet_show_controller:OperationalMACAddress</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>Mac-addr</type-name>
+            </type>
+          </operational-mac-address>
+        </mac-info>
+        <transport-info config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.TransportInfo</xr-path>
+          <xr-task>interface</xr-task>
+          <xr-bag-version>0 4</xr-bag-version>
+          <maintenance-mode-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.TransportInfo.MaintenanceModeEnabled</xr-path>
+            <xr-xml-map>ethernet_show_controller:MaintenanceModeEnabled</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-sch-type>Boolean</xr-sch-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </maintenance-mode-enabled>
+          <ains-status config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.TransportInfo.AINSStatus</xr-path>
+            <xr-xml-map>ethernet_show_controller:AINSStatus</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>Ether-ains-status</type-name>
+            </type>
+          </ains-status>
+          <total-duration config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.TransportInfo.TotalDuration</xr-path>
+            <xr-xml-map>ethernet_show_controller:TotalDuration</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </total-duration>
+          <remaining-duration config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.TransportInfo.RemainingDuration</xr-path>
+            <xr-xml-map>ethernet_show_controller:RemainingDuration</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </remaining-duration>
+        </transport-info>
+        <admin-state config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.AdminState</xr-path>
+          <xr-xml-map>ethernet_show_controller:AdminState</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>Ethernet-port-enable</type-name>
+          </type>
+        </admin-state>
+        <oper-state-up config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/oper/if/&lt;drivers_media_eth_intf_oper_Interface_interface&gt;~ethernet_controller_driver_bag_v2_type.OperStateUp</xr-path>
+          <xr-xml-map>ethernet_show_controller:OperStateUp</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+          <xr-sch-type>Boolean</xr-sch-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </oper-state-up>
+      </interface>
+    </interfaces>
+    <berts config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ethernet_drvr/bert/if/</xr-path>
+      <xr-xml-map>drivers_media_eth_intf_oper:BERTTable</xr-xml-map>
+      <xr-task>interface</xr-task>
+      <bert config="false" key="interface-name" node="list">
+        <xr-path>/oper/ethernet_drvr/bert/if/&lt;drivers_media_eth_intf_oper_BERT_interface&gt;</xr-path>
+        <xr-xml-map>drivers_media_eth_intf_oper:BERT</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-bag-grp-name>eth_showctrl_bert</xr-bag-grp-name>
+        <xr-bag>ethernet_show_controller.bag</xr-bag>
+        <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/ethernet_drvr/bert/if/&lt;drivers_media_eth_intf_oper_BERT_interface&gt;</xr-path>
+          <xr-xml-map>drivers_media_eth_intf_oper:InterfaceName</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-sch-type>InterfaceName</xr-sch-type>
+          <xr-sch-arg-name>&lt;drivers_media_eth_intf_oper_BERT_interface&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </interface-name>
+        <bert-status config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ethernet_drvr/bert/if/&lt;drivers_media_eth_intf_oper_BERT_interface&gt;~eth_showctrl_bert.BERTStatus</xr-path>
+          <xr-task>interface</xr-task>
+          <xr-bag-version>0 4</xr-bag-version>
+          <bert-state-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/bert/if/&lt;drivers_media_eth_intf_oper_BERT_interface&gt;~eth_showctrl_bert.BERTStatus.BERTStateEnabled</xr-path>
+            <xr-xml-map>ethernet_show_controller:BERTStateEnabled</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-sch-type>Boolean</xr-sch-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </bert-state-enabled>
+          <data-availability config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/bert/if/&lt;drivers_media_eth_intf_oper_BERT_interface&gt;~eth_showctrl_bert.BERTStatus.DataAvailability</xr-path>
+            <xr-xml-map>ethernet_show_controller:DataAvailability</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>Ethernet-bert-mask</type-name>
+            </type>
+          </data-availability>
+          <receive-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/bert/if/&lt;drivers_media_eth_intf_oper_BERT_interface&gt;~eth_showctrl_bert.BERTStatus.ReceiveCount</xr-path>
+            <xr-xml-map>ethernet_show_controller:ReceiveCount</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </receive-count>
+          <transmit-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/bert/if/&lt;drivers_media_eth_intf_oper_BERT_interface&gt;~eth_showctrl_bert.BERTStatus.TransmitCount</xr-path>
+            <xr-xml-map>ethernet_show_controller:TransmitCount</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </transmit-count>
+          <receive-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/bert/if/&lt;drivers_media_eth_intf_oper_BERT_interface&gt;~eth_showctrl_bert.BERTStatus.ReceiveErrors</xr-path>
+            <xr-xml-map>ethernet_show_controller:ReceiveErrors</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </receive-errors>
+          <error-type config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/bert/if/&lt;drivers_media_eth_intf_oper_BERT_interface&gt;~eth_showctrl_bert.BERTStatus.ErrorType</xr-path>
+            <xr-xml-map>ethernet_show_controller:ErrorType</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>Ethernet-bert-err-cnt</type-name>
+            </type>
+          </error-type>
+          <test-pattern config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/bert/if/&lt;drivers_media_eth_intf_oper_BERT_interface&gt;~eth_showctrl_bert.BERTStatus.TestPattern</xr-path>
+            <xr-xml-map>ethernet_show_controller:TestPattern</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>Ethernet-bert-pattern</type-name>
+            </type>
+          </test-pattern>
+          <device-under-test config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/bert/if/&lt;drivers_media_eth_intf_oper_BERT_interface&gt;~eth_showctrl_bert.BERTStatus.DeviceUnderTest</xr-path>
+            <xr-xml-map>ethernet_show_controller:DeviceUnderTest</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>Ethernet-dev</type-name>
+            </type>
+          </device-under-test>
+          <interface-device config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ethernet_drvr/bert/if/&lt;drivers_media_eth_intf_oper_BERT_interface&gt;~eth_showctrl_bert.BERTStatus.InterfaceDevice</xr-path>
+            <xr-xml-map>ethernet_show_controller:InterfaceDevice</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>Ethernet-dev-if</type-name>
+            </type>
+          </interface-device>
+        </bert-status>
+        <time-left config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/bert/if/&lt;drivers_media_eth_intf_oper_BERT_interface&gt;~eth_showctrl_bert.TimeLeft</xr-path>
+          <xr-xml-map>ethernet_show_controller:TimeLeft</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </time-left>
+        <port-bert-interval config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ethernet_drvr/bert/if/&lt;drivers_media_eth_intf_oper_BERT_interface&gt;~eth_showctrl_bert.PortBERTInterval</xr-path>
+          <xr-xml-map>ethernet_show_controller:PortBERTInterval</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </port-bert-interval>
+      </bert>
+    </berts>
+  </ethernet-interface>
+</Cisco-IOS-XR-drivers-media-eth-oper>

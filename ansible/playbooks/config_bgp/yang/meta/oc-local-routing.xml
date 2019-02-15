@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<openconfig-local-routing ns="http://openconfig.net/yang/local-routing" oc-ver="1.0.1" revision="2017-05-15">
+  <files>
+    <file revision="2017-05-15" submodule="false">openconfig-local-routing.yang</file>
+  </files>
+  <prefix>oc-loc-rt</prefix>
+  <organization>OpenConfig working group</organization>
+  <import prefix="inet">openconfig-inet-types</import>
+  <import prefix="oc-pt">openconfig-policy-types</import>
+  <import prefix="oc-ext">openconfig-extensions</import>
+  <import prefix="oc-if">openconfig-interfaces</import>
+  <identity name="LOCAL_DEFINED_NEXT_HOP"/>
+  <identity name="DROP">
+    <base>LOCAL_DEFINED_NEXT_HOP</base>
+  </identity>
+  <identity name="LOCAL_LINK">
+    <base>LOCAL_DEFINED_NEXT_HOP</base>
+  </identity>
+  <typedef name="local-defined-next-hop">
+    <type node="identityref">
+      <base>LOCAL_DEFINED_NEXT_HOP</base>
+    </type>
+  </typedef>
+  <local-routes config="true" is-key="false" node="container" presence="false">
+    <config config="true" is-key="false" node="container" presence="false"/>
+    <state config="true" is-key="false" node="container" presence="false"/>
+    <static-routes config="true" is-key="false" node="container" presence="false">
+      <static config="true" key="prefix" node="list">
+        <prefix config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <type>
+            <type-name>leafref</type-name>
+          </type>
+        </prefix>
+        <config config="true" is-key="false" node="container" presence="false">
+          <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ip-prefix</type-name>
+            </type>
+          </prefix>
+          <set-tag config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-pt:tag-type</type-name>
+            </type>
+          </set-tag>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ip-prefix</type-name>
+            </type>
+          </prefix>
+          <set-tag config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-pt:tag-type</type-name>
+            </type>
+          </set-tag>
+        </state>
+        <next-hops config="true" is-key="false" node="container" presence="false">
+          <next-hop config="true" key="index" node="list">
+            <index config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </index>
+            <config config="true" is-key="false" node="container" presence="false">
+              <index config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </index>
+              <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="union">
+                  <type>
+                    <type-name>inet:ip-address</type-name>
+                  </type>
+                  <type>
+                    <type-name>local-defined-next-hop</type-name>
+                  </type>
+                </type>
+              </next-hop>
+              <metric config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </metric>
+              <recurse config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </recurse>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <index config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </index>
+              <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="union">
+                  <type>
+                    <type-name>inet:ip-address</type-name>
+                  </type>
+                  <type>
+                    <type-name>local-defined-next-hop</type-name>
+                  </type>
+                </type>
+              </next-hop>
+              <metric config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </metric>
+              <recurse config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </recurse>
+            </state>
+            <interface-ref config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </interface>
+                <subinterface config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </subinterface>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </interface>
+                <subinterface config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </subinterface>
+              </state>
+            </interface-ref>
+          </next-hop>
+        </next-hops>
+      </static>
+    </static-routes>
+    <local-aggregates config="true" is-key="false" node="container" presence="false">
+      <aggregate config="true" key="prefix" node="list">
+        <prefix config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <type>
+            <type-name>leafref</type-name>
+          </type>
+        </prefix>
+        <config config="true" is-key="false" node="container" presence="false">
+          <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ip-prefix</type-name>
+            </type>
+          </prefix>
+          <discard config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </discard>
+          <set-tag config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-pt:tag-type</type-name>
+            </type>
+          </set-tag>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ip-prefix</type-name>
+            </type>
+          </prefix>
+          <discard config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </discard>
+          <set-tag config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-pt:tag-type</type-name>
+            </type>
+          </set-tag>
+        </state>
+      </aggregate>
+    </local-aggregates>
+  </local-routes>
+</openconfig-local-routing>

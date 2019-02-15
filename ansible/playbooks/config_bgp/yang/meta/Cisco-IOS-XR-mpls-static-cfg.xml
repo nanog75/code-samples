@@ -1,0 +1,2056 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-mpls-static-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-mpls-static-cfg" revision="2017-09-07">
+  <files>
+    <file revision="2017-09-07" submodule="false">Cisco-IOS-XR-mpls-static-cfg.yang</file>
+  </files>
+  <prefix>mpls-static-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="Mpls-static-path">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">pop-and-lookup</enum>
+      <enum value="2">cross-connect</enum>
+    </type>
+  </typedef>
+  <typedef name="Mpls-static-address-family">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">ipv4-unicast</enum>
+    </type>
+  </typedef>
+  <typedef name="Mpls-static-label-mode">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">per-vrf</enum>
+      <enum value="2">per-prefix</enum>
+      <enum value="3">lsp</enum>
+    </type>
+  </typedef>
+  <typedef name="Mpls-static-path-role">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">primary</enum>
+      <enum value="1">backup</enum>
+      <enum value="2">primary-backup</enum>
+    </type>
+  </typedef>
+  <typedef name="Mpls-static-nh-address-family">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">ipv4</enum>
+      <enum value="2">ipv6</enum>
+    </type>
+  </typedef>
+  <typedef name="Mpls-static-nh-mode">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">configured</enum>
+      <enum value="1">resolve</enum>
+    </type>
+  </typedef>
+  <typedef name="Mpls-static-out-label-types">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">out-label</enum>
+      <enum value="2">pop</enum>
+      <enum value="3">exp-null</enum>
+      <enum value="4">ipv6-explicit-null</enum>
+    </type>
+  </typedef>
+  <mpls-static config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/mpls_static/</xr-path>
+    <xr-xml-map>mpls_static_cfg:MPLSStatic</xr-xml-map>
+    <xr-task>mpls-static</xr-task>
+    <vrfs config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/mpls_static/vrf/ord_b/</xr-path>
+      <xr-xml-map>mpls_static_cfg:VRFTable</xr-xml-map>
+      <xr-task>mpls-static</xr-task>
+      <vrf config="true" key="vrf-name" node="list">
+        <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/</xr-path>
+        <xr-xml-map>mpls_static_cfg:VRF</xr-xml-map>
+        <xr-task>mpls-static</xr-task>
+        <vrf-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/</xr-path>
+          <xr-xml-map>mpls_static_cfg:VRFName</xr-xml-map>
+          <xr-task>mpls-static</xr-task>
+          <xr-sch-type>VRF_Name</xr-sch-type>
+          <xr-sch-arg-name>&lt;mpls_static_cfg_VRF_vrf_name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </vrf-name>
+        <label-switched-paths config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/</xr-path>
+          <xr-xml-map>mpls_static_cfg:LabelSwitchedPathTable</xr-xml-map>
+          <xr-task>mpls-static</xr-task>
+          <label-switched-path config="true" key="lsp-name" node="list">
+            <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/</xr-path>
+            <xr-xml-map>mpls_static_cfg:LabelSwitchedPath</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <backup-paths config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/</xr-path>
+              <xr-xml-map>mpls_static_cfg:BackupPathTable</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <path config="true" key="path-id" node="list">
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/</xr-path>
+                <xr-xml-map>mpls_static_cfg:Path</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <path-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh</xr-path>
+                  <xr-xml-map>mpls_static_cfg:PathID</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <xr-sch-arg-name>&lt;mpls_static_cfg_Path_path_id&gt;</xr-sch-arg-name>
+                  <type range="1..16">
+                    <type-name>uint32</type-name>
+                  </type>
+                </path-id>
+                <path-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`0</xr-path>
+                  <xr-xml-map>mpls_static_cfg:PathType</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>Mpls-static-path</type-name>
+                  </type>
+                  <default>cross-connect</default>
+                </path-type>
+                <label-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`1</xr-path>
+                  <xr-xml-map>mpls_static_cfg:LabelType</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>Mpls-static-out-label-types</type-name>
+                  </type>
+                  <default>none</default>
+                </label-type>
+                <next-hop-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`2</xr-path>
+                  <xr-xml-map>mpls_static_cfg:NextHopLabel</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <xr-default-set/>
+                  <type range="16..1048575">
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>16</default>
+                </next-hop-label>
+                <next-hop-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`3</xr-path>
+                  <xr-xml-map>mpls_static_cfg:NextHopAddress</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>IPAddress</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>inet:ip-address-no-zone</type-name>
+                  </type>
+                </next-hop-address>
+                <interface-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`4</xr-path>
+                  <xr-xml-map>mpls_static_cfg:InterfaceName</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>InterfaceForward</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>xr:Interface-name</type-name>
+                  </type>
+                </interface-name>
+                <afi config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`5</xr-path>
+                  <xr-xml-map>mpls_static_cfg:AFI</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>Mpls-static-nh-address-family</type-name>
+                  </type>
+                  <default>ipv4</default>
+                </afi>
+                <metric config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`6</xr-path>
+                  <xr-xml-map>mpls_static_cfg:Metric</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <xr-default-set/>
+                  <type range="0..254">
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>0</default>
+                </metric>
+                <nh-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`7</xr-path>
+                  <xr-xml-map>mpls_static_cfg:NHMode</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>Mpls-static-nh-mode</type-name>
+                  </type>
+                  <default>configured</default>
+                </nh-mode>
+                <path-role config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`8</xr-path>
+                  <xr-xml-map>mpls_static_cfg:PathRole</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>Mpls-static-path-role</type-name>
+                  </type>
+                  <default>primary</default>
+                </path-role>
+                <backup-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`9</xr-path>
+                  <xr-xml-map>mpls_static_cfg:BackupID</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <xr-default-set/>
+                  <type range="0..16">
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>0</default>
+                </backup-id>
+              </path>
+            </backup-paths>
+            <in-label config="true" is-key="false" node="container" presence="false">
+              <xr-is-packed/>
+              <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/aa/in_label`</xr-path>
+              <xr-xml-map>mpls_static_cfg:InLabel</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-pack-format>%d%d%s%d%d</xr-pack-format>
+              <in-label-value config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%s%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/aa/in_label`0</xr-path>
+                <xr-xml-map>mpls_static_cfg:InLabelValue</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="16..1048575">
+                  <type-name>uint32</type-name>
+                </type>
+              </in-label-value>
+              <label-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%s%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/aa/in_label`1</xr-path>
+                <xr-xml-map>mpls_static_cfg:LabelMode</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <type>
+                  <type-name>Mpls-static-label-mode</type-name>
+                </type>
+              </label-mode>
+              <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%s%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/aa/in_label`2</xr-path>
+                <xr-xml-map>mpls_static_cfg:Prefix</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>IPAddress</xr-sch-type>
+                <type>
+                  <type-name>inet:ip-address-no-zone</type-name>
+                </type>
+              </prefix>
+              <prefix-length config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%s%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/aa/in_label`3</xr-path>
+                <xr-xml-map>mpls_static_cfg:PrefixLength</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>Integer</xr-sch-type>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </prefix-length>
+              <tlh-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%s%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/aa/in_label`4</xr-path>
+                <xr-xml-map>mpls_static_cfg:TLHMode</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>Boolean</xr-sch-type>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </tlh-mode>
+            </in-label>
+            <lsp-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/</xr-path>
+              <xr-xml-map>mpls_static_cfg:LSPName</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </lsp-name>
+            <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/aa/enable</xr-path>
+              <xr-xml-map>mpls_static_cfg:Enable</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </enable>
+            <paths config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/</xr-path>
+              <xr-xml-map>mpls_static_cfg:PathTable</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <path config="true" key="path-id" node="list">
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/</xr-path>
+                <xr-xml-map>mpls_static_cfg:Path</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <path-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh</xr-path>
+                  <xr-xml-map>mpls_static_cfg:PathID</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <xr-sch-arg-name>&lt;mpls_static_cfg_Path_path_id&gt;</xr-sch-arg-name>
+                  <type range="1..16">
+                    <type-name>uint32</type-name>
+                  </type>
+                </path-id>
+                <path-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`0</xr-path>
+                  <xr-xml-map>mpls_static_cfg:PathType</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>Mpls-static-path</type-name>
+                  </type>
+                  <default>cross-connect</default>
+                </path-type>
+                <label-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`1</xr-path>
+                  <xr-xml-map>mpls_static_cfg:LabelType</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>Mpls-static-out-label-types</type-name>
+                  </type>
+                  <default>none</default>
+                </label-type>
+                <next-hop-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`2</xr-path>
+                  <xr-xml-map>mpls_static_cfg:NextHopLabel</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <xr-default-set/>
+                  <type range="16..1048575">
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>16</default>
+                </next-hop-label>
+                <next-hop-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`3</xr-path>
+                  <xr-xml-map>mpls_static_cfg:NextHopAddress</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>IPAddress</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>inet:ip-address-no-zone</type-name>
+                  </type>
+                </next-hop-address>
+                <interface-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`4</xr-path>
+                  <xr-xml-map>mpls_static_cfg:InterfaceName</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>InterfaceForward</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>xr:Interface-name</type-name>
+                  </type>
+                </interface-name>
+                <afi config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`5</xr-path>
+                  <xr-xml-map>mpls_static_cfg:AFI</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>Mpls-static-nh-address-family</type-name>
+                  </type>
+                  <default>ipv4</default>
+                </afi>
+                <metric config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`6</xr-path>
+                  <xr-xml-map>mpls_static_cfg:Metric</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <xr-default-set/>
+                  <type range="0..254">
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>0</default>
+                </metric>
+                <nh-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`7</xr-path>
+                  <xr-xml-map>mpls_static_cfg:NHMode</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>Mpls-static-nh-mode</type-name>
+                  </type>
+                  <default>configured</default>
+                </nh-mode>
+                <path-role config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`8</xr-path>
+                  <xr-xml-map>mpls_static_cfg:PathRole</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>Mpls-static-path-role</type-name>
+                  </type>
+                  <default>primary</default>
+                </path-role>
+                <backup-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`9</xr-path>
+                  <xr-xml-map>mpls_static_cfg:BackupID</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <xr-default-set/>
+                  <type range="0..16">
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>0</default>
+                </backup-id>
+              </path>
+            </paths>
+          </label-switched-path>
+        </label-switched-paths>
+        <afs config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/</xr-path>
+          <xr-xml-map>mpls_static_cfg:AFTable</xr-xml-map>
+          <xr-task>mpls-static</xr-task>
+          <af config="true" key="afi" node="list">
+            <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/</xr-path>
+            <xr-xml-map>mpls_static_cfg:AF</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <top-label-hash config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/</xr-path>
+              <xr-xml-map>mpls_static_cfg:TopLabelHash</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <local-labels config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/</xr-path>
+                <xr-xml-map>mpls_static_cfg:LocalLabelTable</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <local-label config="true" key="local-label-id" node="list">
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/</xr-path>
+                  <xr-xml-map>mpls_static_cfg:LocalLabel</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <label-type config="true" is-key="false" node="container" presence="false">
+                    <xr-is-packed/>
+                    <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/aa/enable`</xr-path>
+                    <xr-xml-map>mpls_static_cfg:LabelType</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-pack-format>%d%s%d</xr-pack-format>
+                    <label-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%s%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/aa/enable`0</xr-path>
+                      <xr-xml-map>mpls_static_cfg:LabelMode</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>Enum</xr-sch-type>
+                      <type>
+                        <type-name>Mpls-static-label-mode</type-name>
+                      </type>
+                    </label-mode>
+                    <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%s%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/aa/enable`1</xr-path>
+                      <xr-xml-map>mpls_static_cfg:Prefix</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>IPAddress</xr-sch-type>
+                      <type>
+                        <type-name>inet:ip-address-no-zone</type-name>
+                      </type>
+                    </prefix>
+                    <prefix-length config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%s%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/aa/enable`2</xr-path>
+                      <xr-xml-map>mpls_static_cfg:PrefixLength</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>Integer</xr-sch-type>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </prefix-length>
+                  </label-type>
+                  <local-label-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                    <xr-data-handler>ignore</xr-data-handler>
+                    <xr-primitive-type>uint32</xr-primitive-type>
+                    <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/</xr-path>
+                    <xr-xml-map>mpls_static_cfg:LocalLabelID</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <xr-sch-arg-name>&lt;mpls_static_cfg_LocalLabel_label&gt;</xr-sch-arg-name>
+                    <type range="16..1048575">
+                      <type-name>uint32</type-name>
+                    </type>
+                  </local-label-id>
+                  <paths config="true" is-key="false" node="container" presence="false">
+                    <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/</xr-path>
+                    <xr-xml-map>mpls_static_cfg:PathTable</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <path config="true" key="path-id" node="list">
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/</xr-path>
+                      <xr-xml-map>mpls_static_cfg:Path</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                      <path-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                        <xr-is-packed/>
+                        <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                        <xr-primitive-type>uint32</xr-primitive-type>
+                        <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh</xr-path>
+                        <xr-xml-map>mpls_static_cfg:PathID</xr-xml-map>
+                        <xr-task>mpls-static</xr-task>
+                        <xr-sch-type>Range</xr-sch-type>
+                        <xr-sch-arg-name>&lt;mpls_static_cfg_Path_path_id&gt;</xr-sch-arg-name>
+                        <type range="1..16">
+                          <type-name>uint32</type-name>
+                        </type>
+                      </path-id>
+                      <path-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-data-handler>preserve-pack</xr-data-handler>
+                        <xr-is-packed/>
+                        <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                        <xr-pack-elem-size>1</xr-pack-elem-size>
+                        <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`0</xr-path>
+                        <xr-xml-map>mpls_static_cfg:PathType</xr-xml-map>
+                        <xr-task>mpls-static</xr-task>
+                        <xr-sch-type>Enum</xr-sch-type>
+                        <xr-default-set/>
+                        <type>
+                          <type-name>Mpls-static-path</type-name>
+                        </type>
+                        <default>cross-connect</default>
+                      </path-type>
+                      <label-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-data-handler>preserve-pack</xr-data-handler>
+                        <xr-is-packed/>
+                        <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                        <xr-pack-elem-size>1</xr-pack-elem-size>
+                        <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`1</xr-path>
+                        <xr-xml-map>mpls_static_cfg:LabelType</xr-xml-map>
+                        <xr-task>mpls-static</xr-task>
+                        <xr-sch-type>Enum</xr-sch-type>
+                        <xr-default-set/>
+                        <type>
+                          <type-name>Mpls-static-out-label-types</type-name>
+                        </type>
+                        <default>none</default>
+                      </label-type>
+                      <next-hop-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-data-handler>preserve-pack</xr-data-handler>
+                        <xr-is-packed/>
+                        <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                        <xr-pack-elem-size>1</xr-pack-elem-size>
+                        <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`2</xr-path>
+                        <xr-xml-map>mpls_static_cfg:NextHopLabel</xr-xml-map>
+                        <xr-task>mpls-static</xr-task>
+                        <xr-sch-type>Range</xr-sch-type>
+                        <xr-default-set/>
+                        <type range="16..1048575">
+                          <type-name>uint32</type-name>
+                        </type>
+                        <default>16</default>
+                      </next-hop-label>
+                      <next-hop-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-data-handler>preserve-pack</xr-data-handler>
+                        <xr-is-packed/>
+                        <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                        <xr-pack-elem-size>1</xr-pack-elem-size>
+                        <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`3</xr-path>
+                        <xr-xml-map>mpls_static_cfg:NextHopAddress</xr-xml-map>
+                        <xr-task>mpls-static</xr-task>
+                        <xr-sch-type>IPAddress</xr-sch-type>
+                        <xr-default-set/>
+                        <type>
+                          <type-name>inet:ip-address-no-zone</type-name>
+                        </type>
+                      </next-hop-address>
+                      <interface-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-data-handler>preserve-pack</xr-data-handler>
+                        <xr-is-packed/>
+                        <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                        <xr-pack-elem-size>1</xr-pack-elem-size>
+                        <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`4</xr-path>
+                        <xr-xml-map>mpls_static_cfg:InterfaceName</xr-xml-map>
+                        <xr-task>mpls-static</xr-task>
+                        <xr-sch-type>InterfaceForward</xr-sch-type>
+                        <xr-default-set/>
+                        <type>
+                          <type-name>xr:Interface-name</type-name>
+                        </type>
+                      </interface-name>
+                      <afi config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-data-handler>preserve-pack</xr-data-handler>
+                        <xr-is-packed/>
+                        <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                        <xr-pack-elem-size>1</xr-pack-elem-size>
+                        <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`5</xr-path>
+                        <xr-xml-map>mpls_static_cfg:AFI</xr-xml-map>
+                        <xr-task>mpls-static</xr-task>
+                        <xr-sch-type>Enum</xr-sch-type>
+                        <xr-default-set/>
+                        <type>
+                          <type-name>Mpls-static-nh-address-family</type-name>
+                        </type>
+                        <default>ipv4</default>
+                      </afi>
+                      <metric config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-data-handler>preserve-pack</xr-data-handler>
+                        <xr-is-packed/>
+                        <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                        <xr-pack-elem-size>1</xr-pack-elem-size>
+                        <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`6</xr-path>
+                        <xr-xml-map>mpls_static_cfg:Metric</xr-xml-map>
+                        <xr-task>mpls-static</xr-task>
+                        <xr-sch-type>Range</xr-sch-type>
+                        <xr-default-set/>
+                        <type range="0..254">
+                          <type-name>uint32</type-name>
+                        </type>
+                        <default>0</default>
+                      </metric>
+                      <nh-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-data-handler>preserve-pack</xr-data-handler>
+                        <xr-is-packed/>
+                        <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                        <xr-pack-elem-size>1</xr-pack-elem-size>
+                        <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`7</xr-path>
+                        <xr-xml-map>mpls_static_cfg:NHMode</xr-xml-map>
+                        <xr-task>mpls-static</xr-task>
+                        <xr-sch-type>Enum</xr-sch-type>
+                        <xr-default-set/>
+                        <type>
+                          <type-name>Mpls-static-nh-mode</type-name>
+                        </type>
+                        <default>configured</default>
+                      </nh-mode>
+                      <path-role config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-data-handler>preserve-pack</xr-data-handler>
+                        <xr-is-packed/>
+                        <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                        <xr-pack-elem-size>1</xr-pack-elem-size>
+                        <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`8</xr-path>
+                        <xr-xml-map>mpls_static_cfg:PathRole</xr-xml-map>
+                        <xr-task>mpls-static</xr-task>
+                        <xr-sch-type>Enum</xr-sch-type>
+                        <xr-default-set/>
+                        <type>
+                          <type-name>Mpls-static-path-role</type-name>
+                        </type>
+                        <default>primary</default>
+                      </path-role>
+                      <backup-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <xr-data-handler>preserve-pack</xr-data-handler>
+                        <xr-is-packed/>
+                        <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                        <xr-pack-elem-size>1</xr-pack-elem-size>
+                        <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`9</xr-path>
+                        <xr-xml-map>mpls_static_cfg:BackupID</xr-xml-map>
+                        <xr-task>mpls-static</xr-task>
+                        <xr-sch-type>Range</xr-sch-type>
+                        <xr-default-set/>
+                        <type range="0..16">
+                          <type-name>uint32</type-name>
+                        </type>
+                        <default>0</default>
+                      </backup-id>
+                    </path>
+                  </paths>
+                </local-label>
+              </local-labels>
+            </top-label-hash>
+            <afi config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/</xr-path>
+              <xr-xml-map>mpls_static_cfg:AFI</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <xr-sch-arg-name>&lt;mpls_static_cfg_AF_address_family&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>Mpls-static-address-family</type-name>
+              </type>
+            </afi>
+            <local-labels config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/</xr-path>
+              <xr-xml-map>mpls_static_cfg:LocalLabelTable</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <local-label config="true" key="local-label-id" node="list">
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/</xr-path>
+                <xr-xml-map>mpls_static_cfg:LocalLabel</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <label-type config="true" is-key="false" node="container" presence="false">
+                  <xr-is-packed/>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/aa/enable`</xr-path>
+                  <xr-xml-map>mpls_static_cfg:LabelType</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-pack-format>%d%s%d</xr-pack-format>
+                  <label-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/aa/enable`0</xr-path>
+                    <xr-xml-map>mpls_static_cfg:LabelMode</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-sch-type>Enum</xr-sch-type>
+                    <type>
+                      <type-name>Mpls-static-label-mode</type-name>
+                    </type>
+                  </label-mode>
+                  <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/aa/enable`1</xr-path>
+                    <xr-xml-map>mpls_static_cfg:Prefix</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-sch-type>IPAddress</xr-sch-type>
+                    <type>
+                      <type-name>inet:ip-address-no-zone</type-name>
+                    </type>
+                  </prefix>
+                  <prefix-length config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/aa/enable`2</xr-path>
+                    <xr-xml-map>mpls_static_cfg:PrefixLength</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-sch-type>Integer</xr-sch-type>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </prefix-length>
+                </label-type>
+                <local-label-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/</xr-path>
+                  <xr-xml-map>mpls_static_cfg:LocalLabelID</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <xr-sch-arg-name>&lt;mpls_static_cfg_LocalLabel_label&gt;</xr-sch-arg-name>
+                  <type range="16..1048575">
+                    <type-name>uint32</type-name>
+                  </type>
+                </local-label-id>
+                <paths config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/</xr-path>
+                  <xr-xml-map>mpls_static_cfg:PathTable</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <path config="true" key="path-id" node="list">
+                    <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/</xr-path>
+                    <xr-xml-map>mpls_static_cfg:Path</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                    <path-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                      <xr-primitive-type>uint32</xr-primitive-type>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh</xr-path>
+                      <xr-xml-map>mpls_static_cfg:PathID</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <xr-sch-arg-name>&lt;mpls_static_cfg_Path_path_id&gt;</xr-sch-arg-name>
+                      <type range="1..16">
+                        <type-name>uint32</type-name>
+                      </type>
+                    </path-id>
+                    <path-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-data-handler>preserve-pack</xr-data-handler>
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`0</xr-path>
+                      <xr-xml-map>mpls_static_cfg:PathType</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>Enum</xr-sch-type>
+                      <xr-default-set/>
+                      <type>
+                        <type-name>Mpls-static-path</type-name>
+                      </type>
+                      <default>cross-connect</default>
+                    </path-type>
+                    <label-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-data-handler>preserve-pack</xr-data-handler>
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`1</xr-path>
+                      <xr-xml-map>mpls_static_cfg:LabelType</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>Enum</xr-sch-type>
+                      <xr-default-set/>
+                      <type>
+                        <type-name>Mpls-static-out-label-types</type-name>
+                      </type>
+                      <default>none</default>
+                    </label-type>
+                    <next-hop-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-data-handler>preserve-pack</xr-data-handler>
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`2</xr-path>
+                      <xr-xml-map>mpls_static_cfg:NextHopLabel</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <xr-default-set/>
+                      <type range="16..1048575">
+                        <type-name>uint32</type-name>
+                      </type>
+                      <default>16</default>
+                    </next-hop-label>
+                    <next-hop-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-data-handler>preserve-pack</xr-data-handler>
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`3</xr-path>
+                      <xr-xml-map>mpls_static_cfg:NextHopAddress</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>IPAddress</xr-sch-type>
+                      <xr-default-set/>
+                      <type>
+                        <type-name>inet:ip-address-no-zone</type-name>
+                      </type>
+                    </next-hop-address>
+                    <interface-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-data-handler>preserve-pack</xr-data-handler>
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`4</xr-path>
+                      <xr-xml-map>mpls_static_cfg:InterfaceName</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>InterfaceForward</xr-sch-type>
+                      <xr-default-set/>
+                      <type>
+                        <type-name>xr:Interface-name</type-name>
+                      </type>
+                    </interface-name>
+                    <afi config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-data-handler>preserve-pack</xr-data-handler>
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`5</xr-path>
+                      <xr-xml-map>mpls_static_cfg:AFI</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>Enum</xr-sch-type>
+                      <xr-default-set/>
+                      <type>
+                        <type-name>Mpls-static-nh-address-family</type-name>
+                      </type>
+                      <default>ipv4</default>
+                    </afi>
+                    <metric config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-data-handler>preserve-pack</xr-data-handler>
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`6</xr-path>
+                      <xr-xml-map>mpls_static_cfg:Metric</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <xr-default-set/>
+                      <type range="0..254">
+                        <type-name>uint32</type-name>
+                      </type>
+                      <default>0</default>
+                    </metric>
+                    <nh-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-data-handler>preserve-pack</xr-data-handler>
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`7</xr-path>
+                      <xr-xml-map>mpls_static_cfg:NHMode</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>Enum</xr-sch-type>
+                      <xr-default-set/>
+                      <type>
+                        <type-name>Mpls-static-nh-mode</type-name>
+                      </type>
+                      <default>configured</default>
+                    </nh-mode>
+                    <path-role config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-data-handler>preserve-pack</xr-data-handler>
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`8</xr-path>
+                      <xr-xml-map>mpls_static_cfg:PathRole</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>Enum</xr-sch-type>
+                      <xr-default-set/>
+                      <type>
+                        <type-name>Mpls-static-path-role</type-name>
+                      </type>
+                      <default>primary</default>
+                    </path-role>
+                    <backup-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-data-handler>preserve-pack</xr-data-handler>
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`9</xr-path>
+                      <xr-xml-map>mpls_static_cfg:BackupID</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <xr-default-set/>
+                      <type range="0..16">
+                        <type-name>uint32</type-name>
+                      </type>
+                      <default>0</default>
+                    </backup-id>
+                  </path>
+                </paths>
+              </local-label>
+            </local-labels>
+            <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/af/&lt;mpls_static_cfg_AF_address_family&gt;/aa/enable</xr-path>
+              <xr-xml-map>mpls_static_cfg:Enable</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </enable>
+          </af>
+        </afs>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/mpls_static/vrf/ord_b/&lt;mpls_static_cfg_VRF_vrf_name&gt;/aa/enable</xr-path>
+          <xr-xml-map>mpls_static_cfg:Enable</xr-xml-map>
+          <xr-task>mpls-static</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </enable>
+      </vrf>
+    </vrfs>
+    <interfaces config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/mpls_static/cc/if/</xr-path>
+      <xr-xml-map>mpls_static_cfg:InterfaceTable</xr-xml-map>
+      <xr-task>mpls-static</xr-task>
+      <interface config="true" key="interface-name" node="list">
+        <xr-path>/cfg/gl/mpls_static/cc/if/&lt;mpls_static_cfg_Interface_interface&gt;/</xr-path>
+        <xr-xml-map>mpls_static_cfg:Interface</xr-xml-map>
+        <xr-task>mpls-static</xr-task>
+        <interface-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-create-item-relative-path/>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/mpls_static/cc/if/&lt;mpls_static_cfg_Interface_interface&gt;/enable</xr-path>
+          <xr-xml-map>mpls_static_cfg:InterfaceName</xr-xml-map>
+          <xr-task>mpls-static</xr-task>
+          <xr-sch-type>InterfaceForward</xr-sch-type>
+          <xr-sch-arg-name>&lt;mpls_static_cfg_Interface_interface&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </interface-name>
+      </interface>
+    </interfaces>
+    <default-vrf config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/</xr-path>
+      <xr-xml-map>mpls_static_cfg:DefaultVRF</xr-xml-map>
+      <xr-task>mpls-static</xr-task>
+      <label-switched-paths config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/</xr-path>
+        <xr-xml-map>mpls_static_cfg:LabelSwitchedPathTable</xr-xml-map>
+        <xr-task>mpls-static</xr-task>
+        <label-switched-path config="true" key="lsp-name" node="list">
+          <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/</xr-path>
+          <xr-xml-map>mpls_static_cfg:LabelSwitchedPath</xr-xml-map>
+          <xr-task>mpls-static</xr-task>
+          <backup-paths config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/</xr-path>
+            <xr-xml-map>mpls_static_cfg:BackupPathTable</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <path config="true" key="path-id" node="list">
+              <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/</xr-path>
+              <xr-xml-map>mpls_static_cfg:Path</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+              <path-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh</xr-path>
+                <xr-xml-map>mpls_static_cfg:PathID</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-sch-arg-name>&lt;mpls_static_cfg_Path_path_id&gt;</xr-sch-arg-name>
+                <type range="1..16">
+                  <type-name>uint32</type-name>
+                </type>
+              </path-id>
+              <path-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`0</xr-path>
+                <xr-xml-map>mpls_static_cfg:PathType</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>Mpls-static-path</type-name>
+                </type>
+                <default>cross-connect</default>
+              </path-type>
+              <label-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`1</xr-path>
+                <xr-xml-map>mpls_static_cfg:LabelType</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>Mpls-static-out-label-types</type-name>
+                </type>
+                <default>none</default>
+              </label-type>
+              <next-hop-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`2</xr-path>
+                <xr-xml-map>mpls_static_cfg:NextHopLabel</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-default-set/>
+                <type range="16..1048575">
+                  <type-name>uint32</type-name>
+                </type>
+                <default>16</default>
+              </next-hop-label>
+              <next-hop-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`3</xr-path>
+                <xr-xml-map>mpls_static_cfg:NextHopAddress</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>IPAddress</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>inet:ip-address-no-zone</type-name>
+                </type>
+              </next-hop-address>
+              <interface-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`4</xr-path>
+                <xr-xml-map>mpls_static_cfg:InterfaceName</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>InterfaceForward</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>xr:Interface-name</type-name>
+                </type>
+              </interface-name>
+              <afi config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`5</xr-path>
+                <xr-xml-map>mpls_static_cfg:AFI</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>Mpls-static-nh-address-family</type-name>
+                </type>
+                <default>ipv4</default>
+              </afi>
+              <metric config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`6</xr-path>
+                <xr-xml-map>mpls_static_cfg:Metric</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-default-set/>
+                <type range="0..254">
+                  <type-name>uint32</type-name>
+                </type>
+                <default>0</default>
+              </metric>
+              <nh-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`7</xr-path>
+                <xr-xml-map>mpls_static_cfg:NHMode</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>Mpls-static-nh-mode</type-name>
+                </type>
+                <default>configured</default>
+              </nh-mode>
+              <path-role config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`8</xr-path>
+                <xr-xml-map>mpls_static_cfg:PathRole</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>Mpls-static-path-role</type-name>
+                </type>
+                <default>primary</default>
+              </path-role>
+              <backup-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/bckp/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`9</xr-path>
+                <xr-xml-map>mpls_static_cfg:BackupID</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-default-set/>
+                <type range="0..16">
+                  <type-name>uint32</type-name>
+                </type>
+                <default>0</default>
+              </backup-id>
+            </path>
+          </backup-paths>
+          <in-label config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/aa/in_label`</xr-path>
+            <xr-xml-map>mpls_static_cfg:InLabel</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-pack-format>%d%d%s%d%d</xr-pack-format>
+            <in-label-value config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%s%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/aa/in_label`0</xr-path>
+              <xr-xml-map>mpls_static_cfg:InLabelValue</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="16..1048575">
+                <type-name>uint32</type-name>
+              </type>
+            </in-label-value>
+            <label-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%s%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/aa/in_label`1</xr-path>
+              <xr-xml-map>mpls_static_cfg:LabelMode</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Mpls-static-label-mode</type-name>
+              </type>
+            </label-mode>
+            <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%s%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/aa/in_label`2</xr-path>
+              <xr-xml-map>mpls_static_cfg:Prefix</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-sch-type>IPAddress</xr-sch-type>
+              <type>
+                <type-name>inet:ip-address-no-zone</type-name>
+              </type>
+            </prefix>
+            <prefix-length config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%s%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/aa/in_label`3</xr-path>
+              <xr-xml-map>mpls_static_cfg:PrefixLength</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-sch-type>Integer</xr-sch-type>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </prefix-length>
+            <tlh-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%s%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/aa/in_label`4</xr-path>
+              <xr-xml-map>mpls_static_cfg:TLHMode</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-sch-type>Boolean</xr-sch-type>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </tlh-mode>
+          </in-label>
+          <lsp-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/</xr-path>
+            <xr-xml-map>mpls_static_cfg:LSPName</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </lsp-name>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/aa/enable</xr-path>
+            <xr-xml-map>mpls_static_cfg:Enable</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </enable>
+          <paths config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/</xr-path>
+            <xr-xml-map>mpls_static_cfg:PathTable</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <path config="true" key="path-id" node="list">
+              <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/</xr-path>
+              <xr-xml-map>mpls_static_cfg:Path</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+              <path-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh</xr-path>
+                <xr-xml-map>mpls_static_cfg:PathID</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-sch-arg-name>&lt;mpls_static_cfg_Path_path_id&gt;</xr-sch-arg-name>
+                <type range="1..16">
+                  <type-name>uint32</type-name>
+                </type>
+              </path-id>
+              <path-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`0</xr-path>
+                <xr-xml-map>mpls_static_cfg:PathType</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>Mpls-static-path</type-name>
+                </type>
+                <default>cross-connect</default>
+              </path-type>
+              <label-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`1</xr-path>
+                <xr-xml-map>mpls_static_cfg:LabelType</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>Mpls-static-out-label-types</type-name>
+                </type>
+                <default>none</default>
+              </label-type>
+              <next-hop-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`2</xr-path>
+                <xr-xml-map>mpls_static_cfg:NextHopLabel</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-default-set/>
+                <type range="16..1048575">
+                  <type-name>uint32</type-name>
+                </type>
+                <default>16</default>
+              </next-hop-label>
+              <next-hop-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`3</xr-path>
+                <xr-xml-map>mpls_static_cfg:NextHopAddress</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>IPAddress</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>inet:ip-address-no-zone</type-name>
+                </type>
+              </next-hop-address>
+              <interface-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`4</xr-path>
+                <xr-xml-map>mpls_static_cfg:InterfaceName</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>InterfaceForward</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>xr:Interface-name</type-name>
+                </type>
+              </interface-name>
+              <afi config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`5</xr-path>
+                <xr-xml-map>mpls_static_cfg:AFI</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>Mpls-static-nh-address-family</type-name>
+                </type>
+                <default>ipv4</default>
+              </afi>
+              <metric config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`6</xr-path>
+                <xr-xml-map>mpls_static_cfg:Metric</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-default-set/>
+                <type range="0..254">
+                  <type-name>uint32</type-name>
+                </type>
+                <default>0</default>
+              </metric>
+              <nh-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`7</xr-path>
+                <xr-xml-map>mpls_static_cfg:NHMode</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>Mpls-static-nh-mode</type-name>
+                </type>
+                <default>configured</default>
+              </nh-mode>
+              <path-role config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`8</xr-path>
+                <xr-xml-map>mpls_static_cfg:PathRole</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>Mpls-static-path-role</type-name>
+                </type>
+                <default>primary</default>
+              </path-role>
+              <backup-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/lsp/&lt;mpls_static_cfg_LabelSwitchedPath_name&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`9</xr-path>
+                <xr-xml-map>mpls_static_cfg:BackupID</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-default-set/>
+                <type range="0..16">
+                  <type-name>uint32</type-name>
+                </type>
+                <default>0</default>
+              </backup-id>
+            </path>
+          </paths>
+        </label-switched-path>
+      </label-switched-paths>
+      <afs config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/</xr-path>
+        <xr-xml-map>mpls_static_cfg:AFTable</xr-xml-map>
+        <xr-task>mpls-static</xr-task>
+        <af config="true" key="afi" node="list">
+          <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/</xr-path>
+          <xr-xml-map>mpls_static_cfg:AF</xr-xml-map>
+          <xr-task>mpls-static</xr-task>
+          <top-label-hash config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/</xr-path>
+            <xr-xml-map>mpls_static_cfg:TopLabelHash</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <local-labels config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/</xr-path>
+              <xr-xml-map>mpls_static_cfg:LocalLabelTable</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <local-label config="true" key="local-label-id" node="list">
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/</xr-path>
+                <xr-xml-map>mpls_static_cfg:LocalLabel</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <label-type config="true" is-key="false" node="container" presence="false">
+                  <xr-is-packed/>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/aa/enable`</xr-path>
+                  <xr-xml-map>mpls_static_cfg:LabelType</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-pack-format>%d%s%d</xr-pack-format>
+                  <label-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/aa/enable`0</xr-path>
+                    <xr-xml-map>mpls_static_cfg:LabelMode</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-sch-type>Enum</xr-sch-type>
+                    <type>
+                      <type-name>Mpls-static-label-mode</type-name>
+                    </type>
+                  </label-mode>
+                  <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/aa/enable`1</xr-path>
+                    <xr-xml-map>mpls_static_cfg:Prefix</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-sch-type>IPAddress</xr-sch-type>
+                    <type>
+                      <type-name>inet:ip-address-no-zone</type-name>
+                    </type>
+                  </prefix>
+                  <prefix-length config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/aa/enable`2</xr-path>
+                    <xr-xml-map>mpls_static_cfg:PrefixLength</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-sch-type>Integer</xr-sch-type>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </prefix-length>
+                </label-type>
+                <local-label-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/</xr-path>
+                  <xr-xml-map>mpls_static_cfg:LocalLabelID</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <xr-sch-arg-name>&lt;mpls_static_cfg_LocalLabel_label&gt;</xr-sch-arg-name>
+                  <type range="16..1048575">
+                    <type-name>uint32</type-name>
+                  </type>
+                </local-label-id>
+                <paths config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/</xr-path>
+                  <xr-xml-map>mpls_static_cfg:PathTable</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <path config="true" key="path-id" node="list">
+                    <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/</xr-path>
+                    <xr-xml-map>mpls_static_cfg:Path</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                    <path-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                      <xr-primitive-type>uint32</xr-primitive-type>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh</xr-path>
+                      <xr-xml-map>mpls_static_cfg:PathID</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <xr-sch-arg-name>&lt;mpls_static_cfg_Path_path_id&gt;</xr-sch-arg-name>
+                      <type range="1..16">
+                        <type-name>uint32</type-name>
+                      </type>
+                    </path-id>
+                    <path-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-data-handler>preserve-pack</xr-data-handler>
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`0</xr-path>
+                      <xr-xml-map>mpls_static_cfg:PathType</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>Enum</xr-sch-type>
+                      <xr-default-set/>
+                      <type>
+                        <type-name>Mpls-static-path</type-name>
+                      </type>
+                      <default>cross-connect</default>
+                    </path-type>
+                    <label-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-data-handler>preserve-pack</xr-data-handler>
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`1</xr-path>
+                      <xr-xml-map>mpls_static_cfg:LabelType</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>Enum</xr-sch-type>
+                      <xr-default-set/>
+                      <type>
+                        <type-name>Mpls-static-out-label-types</type-name>
+                      </type>
+                      <default>none</default>
+                    </label-type>
+                    <next-hop-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-data-handler>preserve-pack</xr-data-handler>
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`2</xr-path>
+                      <xr-xml-map>mpls_static_cfg:NextHopLabel</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <xr-default-set/>
+                      <type range="16..1048575">
+                        <type-name>uint32</type-name>
+                      </type>
+                      <default>16</default>
+                    </next-hop-label>
+                    <next-hop-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-data-handler>preserve-pack</xr-data-handler>
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`3</xr-path>
+                      <xr-xml-map>mpls_static_cfg:NextHopAddress</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>IPAddress</xr-sch-type>
+                      <xr-default-set/>
+                      <type>
+                        <type-name>inet:ip-address-no-zone</type-name>
+                      </type>
+                    </next-hop-address>
+                    <interface-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-data-handler>preserve-pack</xr-data-handler>
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`4</xr-path>
+                      <xr-xml-map>mpls_static_cfg:InterfaceName</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>InterfaceForward</xr-sch-type>
+                      <xr-default-set/>
+                      <type>
+                        <type-name>xr:Interface-name</type-name>
+                      </type>
+                    </interface-name>
+                    <afi config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-data-handler>preserve-pack</xr-data-handler>
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`5</xr-path>
+                      <xr-xml-map>mpls_static_cfg:AFI</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>Enum</xr-sch-type>
+                      <xr-default-set/>
+                      <type>
+                        <type-name>Mpls-static-nh-address-family</type-name>
+                      </type>
+                      <default>ipv4</default>
+                    </afi>
+                    <metric config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-data-handler>preserve-pack</xr-data-handler>
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`6</xr-path>
+                      <xr-xml-map>mpls_static_cfg:Metric</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <xr-default-set/>
+                      <type range="0..254">
+                        <type-name>uint32</type-name>
+                      </type>
+                      <default>0</default>
+                    </metric>
+                    <nh-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-data-handler>preserve-pack</xr-data-handler>
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`7</xr-path>
+                      <xr-xml-map>mpls_static_cfg:NHMode</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>Enum</xr-sch-type>
+                      <xr-default-set/>
+                      <type>
+                        <type-name>Mpls-static-nh-mode</type-name>
+                      </type>
+                      <default>configured</default>
+                    </nh-mode>
+                    <path-role config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-data-handler>preserve-pack</xr-data-handler>
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`8</xr-path>
+                      <xr-xml-map>mpls_static_cfg:PathRole</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>Enum</xr-sch-type>
+                      <xr-default-set/>
+                      <type>
+                        <type-name>Mpls-static-path-role</type-name>
+                      </type>
+                      <default>primary</default>
+                    </path-role>
+                    <backup-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-data-handler>preserve-pack</xr-data-handler>
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/tlhash/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`9</xr-path>
+                      <xr-xml-map>mpls_static_cfg:BackupID</xr-xml-map>
+                      <xr-task>mpls-static</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <xr-default-set/>
+                      <type range="0..16">
+                        <type-name>uint32</type-name>
+                      </type>
+                      <default>0</default>
+                    </backup-id>
+                  </path>
+                </paths>
+              </local-label>
+            </local-labels>
+          </top-label-hash>
+          <afi config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/</xr-path>
+            <xr-xml-map>mpls_static_cfg:AFI</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <xr-sch-arg-name>&lt;mpls_static_cfg_AF_address_family&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>Mpls-static-address-family</type-name>
+            </type>
+          </afi>
+          <local-labels config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/</xr-path>
+            <xr-xml-map>mpls_static_cfg:LocalLabelTable</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <local-label config="true" key="local-label-id" node="list">
+              <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/</xr-path>
+              <xr-xml-map>mpls_static_cfg:LocalLabel</xr-xml-map>
+              <xr-task>mpls-static</xr-task>
+              <label-type config="true" is-key="false" node="container" presence="false">
+                <xr-is-packed/>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/aa/enable`</xr-path>
+                <xr-xml-map>mpls_static_cfg:LabelType</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-pack-format>%d%s%d</xr-pack-format>
+                <label-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/aa/enable`0</xr-path>
+                  <xr-xml-map>mpls_static_cfg:LabelMode</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <type>
+                    <type-name>Mpls-static-label-mode</type-name>
+                  </type>
+                </label-mode>
+                <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/aa/enable`1</xr-path>
+                  <xr-xml-map>mpls_static_cfg:Prefix</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>IPAddress</xr-sch-type>
+                  <type>
+                    <type-name>inet:ip-address-no-zone</type-name>
+                  </type>
+                </prefix>
+                <prefix-length config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/aa/enable`2</xr-path>
+                  <xr-xml-map>mpls_static_cfg:PrefixLength</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-sch-type>Integer</xr-sch-type>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </prefix-length>
+              </label-type>
+              <local-label-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/</xr-path>
+                <xr-xml-map>mpls_static_cfg:LocalLabelID</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-sch-arg-name>&lt;mpls_static_cfg_LocalLabel_label&gt;</xr-sch-arg-name>
+                <type range="16..1048575">
+                  <type-name>uint32</type-name>
+                </type>
+              </local-label-id>
+              <paths config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/</xr-path>
+                <xr-xml-map>mpls_static_cfg:PathTable</xr-xml-map>
+                <xr-task>mpls-static</xr-task>
+                <path config="true" key="path-id" node="list">
+                  <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/</xr-path>
+                  <xr-xml-map>mpls_static_cfg:Path</xr-xml-map>
+                  <xr-task>mpls-static</xr-task>
+                  <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                  <path-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                    <xr-primitive-type>uint32</xr-primitive-type>
+                    <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh</xr-path>
+                    <xr-xml-map>mpls_static_cfg:PathID</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <xr-sch-arg-name>&lt;mpls_static_cfg_Path_path_id&gt;</xr-sch-arg-name>
+                    <type range="1..16">
+                      <type-name>uint32</type-name>
+                    </type>
+                  </path-id>
+                  <path-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-data-handler>preserve-pack</xr-data-handler>
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`0</xr-path>
+                    <xr-xml-map>mpls_static_cfg:PathType</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-sch-type>Enum</xr-sch-type>
+                    <xr-default-set/>
+                    <type>
+                      <type-name>Mpls-static-path</type-name>
+                    </type>
+                    <default>cross-connect</default>
+                  </path-type>
+                  <label-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-data-handler>preserve-pack</xr-data-handler>
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`1</xr-path>
+                    <xr-xml-map>mpls_static_cfg:LabelType</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-sch-type>Enum</xr-sch-type>
+                    <xr-default-set/>
+                    <type>
+                      <type-name>Mpls-static-out-label-types</type-name>
+                    </type>
+                    <default>none</default>
+                  </label-type>
+                  <next-hop-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-data-handler>preserve-pack</xr-data-handler>
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`2</xr-path>
+                    <xr-xml-map>mpls_static_cfg:NextHopLabel</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <xr-default-set/>
+                    <type range="16..1048575">
+                      <type-name>uint32</type-name>
+                    </type>
+                    <default>16</default>
+                  </next-hop-label>
+                  <next-hop-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-data-handler>preserve-pack</xr-data-handler>
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`3</xr-path>
+                    <xr-xml-map>mpls_static_cfg:NextHopAddress</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-sch-type>IPAddress</xr-sch-type>
+                    <xr-default-set/>
+                    <type>
+                      <type-name>inet:ip-address-no-zone</type-name>
+                    </type>
+                  </next-hop-address>
+                  <interface-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-data-handler>preserve-pack</xr-data-handler>
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`4</xr-path>
+                    <xr-xml-map>mpls_static_cfg:InterfaceName</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-sch-type>InterfaceForward</xr-sch-type>
+                    <xr-default-set/>
+                    <type>
+                      <type-name>xr:Interface-name</type-name>
+                    </type>
+                  </interface-name>
+                  <afi config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-data-handler>preserve-pack</xr-data-handler>
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`5</xr-path>
+                    <xr-xml-map>mpls_static_cfg:AFI</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-sch-type>Enum</xr-sch-type>
+                    <xr-default-set/>
+                    <type>
+                      <type-name>Mpls-static-nh-address-family</type-name>
+                    </type>
+                    <default>ipv4</default>
+                  </afi>
+                  <metric config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-data-handler>preserve-pack</xr-data-handler>
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`6</xr-path>
+                    <xr-xml-map>mpls_static_cfg:Metric</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <xr-default-set/>
+                    <type range="0..254">
+                      <type-name>uint32</type-name>
+                    </type>
+                    <default>0</default>
+                  </metric>
+                  <nh-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-data-handler>preserve-pack</xr-data-handler>
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`7</xr-path>
+                    <xr-xml-map>mpls_static_cfg:NHMode</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-sch-type>Enum</xr-sch-type>
+                    <xr-default-set/>
+                    <type>
+                      <type-name>Mpls-static-nh-mode</type-name>
+                    </type>
+                    <default>configured</default>
+                  </nh-mode>
+                  <path-role config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-data-handler>preserve-pack</xr-data-handler>
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`8</xr-path>
+                    <xr-xml-map>mpls_static_cfg:PathRole</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-sch-type>Enum</xr-sch-type>
+                    <xr-default-set/>
+                    <type>
+                      <type-name>Mpls-static-path-role</type-name>
+                    </type>
+                    <default>primary</default>
+                  </path-role>
+                  <backup-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-data-handler>preserve-pack</xr-data-handler>
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%s%s%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/local_label/&lt;mpls_static_cfg_LocalLabel_label&gt;/fwd/path/&lt;mpls_static_cfg_Path_path_id&gt;/nh`9</xr-path>
+                    <xr-xml-map>mpls_static_cfg:BackupID</xr-xml-map>
+                    <xr-task>mpls-static</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <xr-default-set/>
+                    <type range="0..16">
+                      <type-name>uint32</type-name>
+                    </type>
+                    <default>0</default>
+                  </backup-id>
+                </path>
+              </paths>
+            </local-label>
+          </local-labels>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/af/&lt;mpls_static_cfg_AF_address_family&gt;/aa/enable</xr-path>
+            <xr-xml-map>mpls_static_cfg:Enable</xr-xml-map>
+            <xr-task>mpls-static</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </enable>
+        </af>
+      </afs>
+      <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/mpls_static/vrf/ord_a/default/aa/enable</xr-path>
+        <xr-xml-map>mpls_static_cfg:Enable</xr-xml-map>
+        <xr-task>mpls-static</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </enable>
+    </default-vrf>
+    <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/mpls_static/aa/enable</xr-path>
+      <xr-xml-map>mpls_static_cfg:Enable</xr-xml-map>
+      <xr-task>mpls-static</xr-task>
+      <xr-sch-type>Configured</xr-sch-type>
+      <type>
+        <type-name>empty</type-name>
+      </type>
+    </enable>
+  </mpls-static>
+</Cisco-IOS-XR-mpls-static-cfg>

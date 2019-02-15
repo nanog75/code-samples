@@ -18,7 +18,7 @@ from genpy import gribi_aft_pb2
 from genpy import enums_pb2
 from genpy import ywrapper_pb2
 
-from grpc.beta import implementations
+import grpc
 
 def byte_to_mac_str(mac):
     num = 2
@@ -56,12 +56,13 @@ class GrpcClient(AbstractClient):
     def __init__(self, host, port, channel_credentials=None):
         if channel_credentials is None:
             # Instantiate insecure channel object.
-            channel = implementations.insecure_channel(host, port)
+            channel = grpc.insecure_channel(str(host)+":"+str(port))
         else:
             # Instantiate secure channel object.
-            channel = implementations.secure_channel(host, port,
+            channel = grpc.secure_channel(str(host)+":"+str(port),
                                                      channel_credentials)
-        self._stub = gribi_pb2.beta_create_gRIBI_stub(channel)
+        #self._stub = gribi_pb2.beta_create_gRIBI_stub(channel)
+        self._stub = gribi_pb2.gRIBIStub(channel)
 
 
     def gribi_op_routes(self, routes, op, show = False):

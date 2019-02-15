@@ -1,0 +1,32 @@
+---
+
+- name: Configure iBGP on routers using OC NetworkInstance Model with YDK
+  hosts: routers_bgp_gnmi_ydk
+  connection: local
+  gather_facts: no
+
+  vars:
+      bgp_parameters: {
+                       'vrf': 'default', 
+                       'as': "{{ local_as }}",
+                       'router_id': "{{ loopback0_ip }}",
+                       'peer-group-name': "{{ peer_group_name }}",
+                       'peer-as': "{{ peer_as }}",
+                       'peer-group-local-address': "{{ loopback0_ip }}",
+                       'neighbor': "{{ neighbor_ip }}"
+                      }
+  tasks:
+    - name: configure BGP using YDK with GNMI
+      config_bgp_oc_ydk:
+        yang_repo_location: '{{ yang_repo_location }}'
+        host: "{{ ansible_host }}"
+        grpc_port: "{{ grpc_port }}"
+        username: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        crud_op: "add"
+        bgp_params: "{{ bgp_parameters }}"
+        # End of playbook
+      register: shell_result
+
+    - debug:
+        var: shell_result.stdout_lines

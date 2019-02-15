@@ -1,0 +1,2905 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ipv4-vrrp-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-vrrp-oper" revision="2017-09-07">
+  <files>
+    <file revision="2017-09-07" submodule="false">Cisco-IOS-XR-ipv4-vrrp-oper.yang</file>
+    <file revision="2017-09-07" submodule="true">Cisco-IOS-XR-ipv4-vrrp-oper-sub1.yang</file>
+  </files>
+  <prefix>ipv4-vrrp-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="yang">ietf-yang-types</import>
+  <typedef name="Vrrp-vmac-state">
+    <type node="enumeration">
+      <enum value="0">stored</enum>
+      <enum value="1">reserved</enum>
+      <enum value="2">active</enum>
+      <enum value="3">reserving</enum>
+    </type>
+  </typedef>
+  <typedef name="Vrrp-state-change-reason">
+    <type node="enumeration">
+      <enum value="0">state-change-bfd-down</enum>
+      <enum value="1">state-change-virtual-ip-configured</enum>
+      <enum value="2">state-change-interface-ip</enum>
+      <enum value="3">state-change-delay-timer</enum>
+      <enum value="4">state-change-startup</enum>
+      <enum value="5">state-change-interface-up</enum>
+      <enum value="6">state-change-interface-down</enum>
+      <enum value="7">state-change-master-down-timer</enum>
+      <enum value="8">state-change-higher-priority-master</enum>
+      <enum value="9">state-change-fhrp-admin</enum>
+      <enum value="10">state-change-mgo-parent</enum>
+      <enum value="11">state-change-chkpt-update</enum>
+      <enum value="12">state-change-issu-resync</enum>
+    </type>
+  </typedef>
+  <typedef name="Vrrp-bfd-session-state">
+    <type node="enumeration">
+      <enum value="0">bfd-state-none</enum>
+      <enum value="1">bfd-state-inactive</enum>
+      <enum value="2">bfd-state-up</enum>
+      <enum value="3">bfd-state-down</enum>
+    </type>
+  </typedef>
+  <typedef name="Vrrp-prot-auth">
+    <type node="enumeration">
+      <enum value="0">authentication-none</enum>
+      <enum value="1">authentication-text</enum>
+      <enum value="2">authentication-ip</enum>
+    </type>
+  </typedef>
+  <typedef name="Vrrp-bag-protocol-state">
+    <type node="enumeration">
+      <enum value="1">state-initial</enum>
+      <enum value="2">state-backup</enum>
+      <enum value="3">state-master</enum>
+    </type>
+  </typedef>
+  <typedef name="Vrrp-vip-state">
+    <type node="enumeration">
+      <enum value="0">virtual-ip-state-down</enum>
+      <enum value="1">virtual-ip-state-up</enum>
+    </type>
+  </typedef>
+  <typedef name="Vrrp-b-af">
+    <type node="enumeration">
+      <enum>address-family-ipv4</enum>
+      <enum>address-family-ipv6</enum>
+      <enum>vrrp-baf-count</enum>
+    </type>
+  </typedef>
+  <typedef name="Vrrp-version">
+    <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+    <type>
+      <type-name>uint8</type-name>
+    </type>
+  </typedef>
+  <vrrp config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/ip-vrrp/gl/</xr-path>
+    <xr-xml-map>vrrp_oper:VRRP</xr-xml-map>
+    <xr-task>vrrp</xr-task>
+    <xr-scope>exported</xr-scope>
+    <summary config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ip-vrrp/gl/summary</xr-path>
+      <xr-xml-map>vrrp_oper:Summary</xr-xml-map>
+      <xr-task>vrrp</xr-task>
+      <xr-bag-grp-name>vrrp_summary_info</xr-bag-grp-name>
+      <xr-bag>vrrp.bag</xr-bag>
+      <ipv4-sessions-master-owner config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv4SessionsMasterOwner</xr-path>
+        <xr-xml-map>vrrp:IPv4SessionsMasterOwner</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv4-sessions-master-owner>
+      <ipv4-sessions-master config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv4SessionsMaster</xr-path>
+        <xr-xml-map>vrrp:IPv4SessionsMaster</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv4-sessions-master>
+      <ipv4-sessions-backup config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv4SessionsBackup</xr-path>
+        <xr-xml-map>vrrp:IPv4SessionsBackup</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv4-sessions-backup>
+      <ipv4-sessions-init config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv4SessionsInit</xr-path>
+        <xr-xml-map>vrrp:IPv4SessionsInit</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv4-sessions-init>
+      <ipv4-slaves-master config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv4SlavesMaster</xr-path>
+        <xr-xml-map>vrrp:IPv4SlavesMaster</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv4-slaves-master>
+      <ipv4-slaves-backup config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv4SlavesBackup</xr-path>
+        <xr-xml-map>vrrp:IPv4SlavesBackup</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv4-slaves-backup>
+      <ipv4-slaves-init config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv4SlavesInit</xr-path>
+        <xr-xml-map>vrrp:IPv4SlavesInit</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv4-slaves-init>
+      <ipv4-virtual-ip-addresses-master-owner-up config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv4VirtualIPAddressesMasterOwnerUp</xr-path>
+        <xr-xml-map>vrrp:IPv4VirtualIPAddressesMasterOwnerUp</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv4-virtual-ip-addresses-master-owner-up>
+      <ipv4-virtual-ip-addresses-master-owner-down config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv4VirtualIPAddressesMasterOwnerDown</xr-path>
+        <xr-xml-map>vrrp:IPv4VirtualIPAddressesMasterOwnerDown</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv4-virtual-ip-addresses-master-owner-down>
+      <ipv4-virtual-ip-addresses-master-up config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv4VirtualIPAddressesMasterUp</xr-path>
+        <xr-xml-map>vrrp:IPv4VirtualIPAddressesMasterUp</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv4-virtual-ip-addresses-master-up>
+      <ipv4-virtual-ip-addresses-master-down config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv4VirtualIPAddressesMasterDown</xr-path>
+        <xr-xml-map>vrrp:IPv4VirtualIPAddressesMasterDown</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv4-virtual-ip-addresses-master-down>
+      <ipv4-virtual-ip-addresses-backup-up config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv4VirtualIPAddressesBackupUp</xr-path>
+        <xr-xml-map>vrrp:IPv4VirtualIPAddressesBackupUp</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv4-virtual-ip-addresses-backup-up>
+      <ipv4-virtual-ip-addresses-backup-down config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv4VirtualIPAddressesBackupDown</xr-path>
+        <xr-xml-map>vrrp:IPv4VirtualIPAddressesBackupDown</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv4-virtual-ip-addresses-backup-down>
+      <ipv4-virtual-ip-addresses-init-up config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv4VirtualIPAddressesInitUp</xr-path>
+        <xr-xml-map>vrrp:IPv4VirtualIPAddressesInitUp</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv4-virtual-ip-addresses-init-up>
+      <ipv4-virtual-ip-addresses-init-down config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv4VirtualIPAddressesInitDown</xr-path>
+        <xr-xml-map>vrrp:IPv4VirtualIPAddressesInitDown</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv4-virtual-ip-addresses-init-down>
+      <ipv6-sessions-master-owner config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv6SessionsMasterOwner</xr-path>
+        <xr-xml-map>vrrp:IPv6SessionsMasterOwner</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv6-sessions-master-owner>
+      <ipv6-sessions-master config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv6SessionsMaster</xr-path>
+        <xr-xml-map>vrrp:IPv6SessionsMaster</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv6-sessions-master>
+      <ipv6-sessions-backup config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv6SessionsBackup</xr-path>
+        <xr-xml-map>vrrp:IPv6SessionsBackup</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv6-sessions-backup>
+      <ipv6-sessions-init config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv6SessionsInit</xr-path>
+        <xr-xml-map>vrrp:IPv6SessionsInit</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv6-sessions-init>
+      <ipv6-slaves-master config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv6SlavesMaster</xr-path>
+        <xr-xml-map>vrrp:IPv6SlavesMaster</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv6-slaves-master>
+      <ipv6-slaves-backup config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv6SlavesBackup</xr-path>
+        <xr-xml-map>vrrp:IPv6SlavesBackup</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv6-slaves-backup>
+      <ipv6-slaves-init config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv6SlavesInit</xr-path>
+        <xr-xml-map>vrrp:IPv6SlavesInit</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv6-slaves-init>
+      <ipv6-virtual-ip-addresses-master-owner-up config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv6VirtualIPAddressesMasterOwnerUp</xr-path>
+        <xr-xml-map>vrrp:IPv6VirtualIPAddressesMasterOwnerUp</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv6-virtual-ip-addresses-master-owner-up>
+      <ipv6-virtual-ip-addresses-master-owner-down config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv6VirtualIPAddressesMasterOwnerDown</xr-path>
+        <xr-xml-map>vrrp:IPv6VirtualIPAddressesMasterOwnerDown</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv6-virtual-ip-addresses-master-owner-down>
+      <ipv6-virtual-ip-addresses-master-up config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv6VirtualIPAddressesMasterUp</xr-path>
+        <xr-xml-map>vrrp:IPv6VirtualIPAddressesMasterUp</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv6-virtual-ip-addresses-master-up>
+      <ipv6-virtual-ip-addresses-master-down config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv6VirtualIPAddressesMasterDown</xr-path>
+        <xr-xml-map>vrrp:IPv6VirtualIPAddressesMasterDown</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv6-virtual-ip-addresses-master-down>
+      <ipv6-virtual-ip-addresses-backup-up config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv6VirtualIPAddressesBackupUp</xr-path>
+        <xr-xml-map>vrrp:IPv6VirtualIPAddressesBackupUp</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv6-virtual-ip-addresses-backup-up>
+      <ipv6-virtual-ip-addresses-backup-down config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv6VirtualIPAddressesBackupDown</xr-path>
+        <xr-xml-map>vrrp:IPv6VirtualIPAddressesBackupDown</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv6-virtual-ip-addresses-backup-down>
+      <ipv6-virtual-ip-addresses-init-up config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv6VirtualIPAddressesInitUp</xr-path>
+        <xr-xml-map>vrrp:IPv6VirtualIPAddressesInitUp</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv6-virtual-ip-addresses-init-up>
+      <ipv6-virtual-ip-addresses-init-down config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv6VirtualIPAddressesInitDown</xr-path>
+        <xr-xml-map>vrrp:IPv6VirtualIPAddressesInitDown</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv6-virtual-ip-addresses-init-down>
+      <interfaces-ipv4-state-up config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.InterfacesIPv4StateUp</xr-path>
+        <xr-xml-map>vrrp:InterfacesIPv4StateUp</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </interfaces-ipv4-state-up>
+      <interfaces-ipv4-state-down config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.InterfacesIPv4StateDown</xr-path>
+        <xr-xml-map>vrrp:InterfacesIPv4StateDown</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </interfaces-ipv4-state-down>
+      <tracked-interfaces-ipv4-state-up config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.TrackedInterfacesIPv4StateUp</xr-path>
+        <xr-xml-map>vrrp:TrackedInterfacesIPv4StateUp</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </tracked-interfaces-ipv4-state-up>
+      <tracked-interfaces-ipv4-state-down config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.TrackedInterfacesIPv4StateDown</xr-path>
+        <xr-xml-map>vrrp:TrackedInterfacesIPv4StateDown</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </tracked-interfaces-ipv4-state-down>
+      <interfaces-ipv6-state-up config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.InterfacesIPv6StateUp</xr-path>
+        <xr-xml-map>vrrp:InterfacesIPv6StateUp</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </interfaces-ipv6-state-up>
+      <interfaces-ipv6-state-down config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.InterfacesIPv6StateDown</xr-path>
+        <xr-xml-map>vrrp:InterfacesIPv6StateDown</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </interfaces-ipv6-state-down>
+      <tracked-interfaces-ipv6-state-up config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.TrackedInterfacesIPv6StateUp</xr-path>
+        <xr-xml-map>vrrp:TrackedInterfacesIPv6StateUp</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </tracked-interfaces-ipv6-state-up>
+      <tracked-interfaces-ipv6-state-down config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.TrackedInterfacesIPv6StateDown</xr-path>
+        <xr-xml-map>vrrp:TrackedInterfacesIPv6StateDown</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </tracked-interfaces-ipv6-state-down>
+      <tracked-objects-state-up config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.TrackedObjectsStateUp</xr-path>
+        <xr-xml-map>vrrp:TrackedObjectsStateUp</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </tracked-objects-state-up>
+      <tracked-objects-state-down config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.TrackedObjectsStateDown</xr-path>
+        <xr-xml-map>vrrp:TrackedObjectsStateDown</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </tracked-objects-state-down>
+      <bfd-sessions-up config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.BFDSessionsUp</xr-path>
+        <xr-xml-map>vrrp:BFDSessionsUp</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </bfd-sessions-up>
+      <bfd-sessions-down config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.BFDSessionsDown</xr-path>
+        <xr-xml-map>vrrp:BFDSessionsDown</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </bfd-sessions-down>
+      <bfd-session-inactive config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.BFDSessionInactive</xr-path>
+        <xr-xml-map>vrrp:BFDSessionInactive</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </bfd-session-inactive>
+      <ipv6bfd-sessions-up config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv6BFDSessionsUp</xr-path>
+        <xr-xml-map>vrrp:IPv6BFDSessionsUp</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv6bfd-sessions-up>
+      <ipv6bfd-sessions-down config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv6BFDSessionsDown</xr-path>
+        <xr-xml-map>vrrp:IPv6BFDSessionsDown</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv6bfd-sessions-down>
+      <ipv6bfd-session-inactive config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/ip-vrrp/gl/summary~vrrp_summary_info.IPv6BFDSessionInactive</xr-path>
+        <xr-xml-map>vrrp:IPv6BFDSessionInactive</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 0</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </ipv6bfd-session-inactive>
+    </summary>
+    <ipv6 config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ip-vrrp/gl/ipv6/</xr-path>
+      <xr-xml-map>vrrp_ipv6_oper:IPv6</xr-xml-map>
+      <xr-task>vrrp</xr-task>
+      <xr-compatibility>4.0</xr-compatibility>
+      <track-items config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ip-vrrp/gl/ipv6/trackitem/</xr-path>
+        <xr-xml-map>vrrp_ipv6_oper:TrackItemTable</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <track-item config="false" key="interface-name virtual-router-id tracked-interface-name" node="list">
+          <xr-path>/oper/ip-vrrp/gl/ipv6/trackitem/&lt;vrrp_ipv6_oper_TrackItem_intf-name&gt;,&lt;vrrp_ipv6_oper_TrackItem_vrid&gt;,&lt;vrrp_ipv6_oper_TrackItem_track_value&gt;</xr-path>
+          <xr-xml-map>vrrp_ipv6_oper:TrackItem</xr-xml-map>
+          <xr-task>vrrp</xr-task>
+          <xr-bag-grp-name>vrrp_trackitem_info</xr-bag-grp-name>
+          <xr-bag>vrrp.bag</xr-bag>
+          <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/ip-vrrp/gl/ipv6/trackitem/&lt;vrrp_ipv6_oper_TrackItem_intf-name&gt;,&lt;vrrp_ipv6_oper_TrackItem_vrid&gt;,&lt;vrrp_ipv6_oper_TrackItem_track_value&gt;</xr-path>
+            <xr-xml-map>vrrp_ipv6_oper:InterfaceName</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-sch-type>InterfaceName</xr-sch-type>
+            <xr-sch-arg-name>&lt;vrrp_ipv6_oper_TrackItem_intf-name&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+          </interface-name>
+          <virtual-router-id config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-pathformat>decimal</xr-pathformat>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/oper/ip-vrrp/gl/ipv6/trackitem/&lt;vrrp_ipv6_oper_TrackItem_intf-name&gt;,&lt;vrrp_ipv6_oper_TrackItem_vrid&gt;,&lt;vrrp_ipv6_oper_TrackItem_track_value&gt;</xr-path>
+            <xr-xml-map>vrrp_ipv6_oper:VirtualRouterID</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-sch-type>Integer</xr-sch-type>
+            <xr-sch-arg-name>&lt;vrrp_ipv6_oper_TrackItem_vrid&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </virtual-router-id>
+          <tracked-interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/ip-vrrp/gl/ipv6/trackitem/&lt;vrrp_ipv6_oper_TrackItem_intf-name&gt;,&lt;vrrp_ipv6_oper_TrackItem_vrid&gt;,&lt;vrrp_ipv6_oper_TrackItem_track_value&gt;</xr-path>
+            <xr-xml-map>vrrp_ipv6_oper:TrackedInterfaceName</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-sch-type>InterfaceName</xr-sch-type>
+            <xr-sch-arg-name>&lt;vrrp_ipv6_oper_TrackItem_track_value&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+          </tracked-interface-name>
+          <interface config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/trackitem/&lt;vrrp_ipv6_oper_TrackItem_intf-name&gt;,&lt;vrrp_ipv6_oper_TrackItem_vrid&gt;,&lt;vrrp_ipv6_oper_TrackItem_track_value&gt;~vrrp_trackitem_info.Interface</xr-path>
+            <xr-xml-map>vrrp:Interface</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+          </interface>
+          <virtual-router-id-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/trackitem/&lt;vrrp_ipv6_oper_TrackItem_intf-name&gt;,&lt;vrrp_ipv6_oper_TrackItem_vrid&gt;,&lt;vrrp_ipv6_oper_TrackItem_track_value&gt;~vrrp_trackitem_info.VirtualRouterID</xr-path>
+            <xr-xml-map>vrrp:virtual-router-id-xr</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </virtual-router-id-xr>
+          <tracked-item-type config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/trackitem/&lt;vrrp_ipv6_oper_TrackItem_intf-name&gt;,&lt;vrrp_ipv6_oper_TrackItem_vrid&gt;,&lt;vrrp_ipv6_oper_TrackItem_track_value&gt;~vrrp_trackitem_info.TrackedItemType</xr-path>
+            <xr-xml-map>vrrp:TrackedItemType</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </tracked-item-type>
+          <tracked-item-index config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/trackitem/&lt;vrrp_ipv6_oper_TrackItem_intf-name&gt;,&lt;vrrp_ipv6_oper_TrackItem_vrid&gt;,&lt;vrrp_ipv6_oper_TrackItem_track_value&gt;~vrrp_trackitem_info.TrackedItemIndex</xr-path>
+            <xr-xml-map>vrrp:TrackedItemIndex</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type length="0..32">
+              <type-name>string</type-name>
+            </type>
+          </tracked-item-index>
+          <state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/trackitem/&lt;vrrp_ipv6_oper_TrackItem_intf-name&gt;,&lt;vrrp_ipv6_oper_TrackItem_vrid&gt;,&lt;vrrp_ipv6_oper_TrackItem_track_value&gt;~vrrp_trackitem_info.State</xr-path>
+            <xr-xml-map>vrrp:State</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </state>
+          <priority config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/trackitem/&lt;vrrp_ipv6_oper_TrackItem_intf-name&gt;,&lt;vrrp_ipv6_oper_TrackItem_vrid&gt;,&lt;vrrp_ipv6_oper_TrackItem_track_value&gt;~vrrp_trackitem_info.Priority</xr-path>
+            <xr-xml-map>vrrp:Priority</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </priority>
+        </track-item>
+      </track-items>
+      <virtual-routers config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/</xr-path>
+        <xr-xml-map>vrrp_ipv6_oper:VirtualRouterTable</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <virtual-router config="false" key="interface-name virtual-router-id" node="list">
+          <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;</xr-path>
+          <xr-xml-map>vrrp_ipv6_oper:VirtualRouter</xr-xml-map>
+          <xr-task>vrrp</xr-task>
+          <xr-bag-grp-name>vrrp_vrouter_info</xr-bag-grp-name>
+          <xr-bag>vrrp.bag</xr-bag>
+          <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;</xr-path>
+            <xr-xml-map>vrrp_ipv6_oper:InterfaceName</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-sch-type>InterfaceName</xr-sch-type>
+            <xr-sch-arg-name>&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+          </interface-name>
+          <virtual-router-id config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-pathformat>decimal</xr-pathformat>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;</xr-path>
+            <xr-xml-map>vrrp_ipv6_oper:VirtualRouterID</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-sch-type>Integer</xr-sch-type>
+            <xr-sch-arg-name>&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </virtual-router-id>
+          <resign-sent-time config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.ResignSentTime</xr-path>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <seconds config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.ResignSentTime.Seconds</xr-path>
+              <xr-xml-map>vrrp:Seconds</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </seconds>
+            <nanoseconds config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.ResignSentTime.Nanoseconds</xr-path>
+              <xr-xml-map>vrrp:Nanoseconds</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </nanoseconds>
+          </resign-sent-time>
+          <resign-received-time config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.ResignReceivedTime</xr-path>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <seconds config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.ResignReceivedTime.Seconds</xr-path>
+              <xr-xml-map>vrrp:Seconds</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </seconds>
+            <nanoseconds config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.ResignReceivedTime.Nanoseconds</xr-path>
+              <xr-xml-map>vrrp:Nanoseconds</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </nanoseconds>
+          </resign-received-time>
+          <interface-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.InterfaceName</xr-path>
+            <xr-xml-map>vrrp:interface-name-xr</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type length="0..64">
+              <type-name>string</type-name>
+            </type>
+          </interface-name-xr>
+          <virtual-router-id-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.VirtualRouterID</xr-path>
+            <xr-xml-map>vrrp:virtual-router-id-xr</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </virtual-router-id-xr>
+          <version config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.Version</xr-path>
+            <xr-xml-map>vrrp:Version</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>Vrrp-version</type-name>
+            </type>
+          </version>
+          <address-family config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.AddressFamily</xr-path>
+            <xr-xml-map>vrrp:AddressFamily</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>Vrrp-b-af</type-name>
+            </type>
+          </address-family>
+          <session-name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.SessionName</xr-path>
+            <xr-xml-map>vrrp:SessionName</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type length="0..16">
+              <type-name>string</type-name>
+            </type>
+          </session-name>
+          <slaves config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.Slaves</xr-path>
+            <xr-xml-map>vrrp:Slaves</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </slaves>
+          <is-slave config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.IsSlave</xr-path>
+            <xr-xml-map>vrrp:IsSlave</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </is-slave>
+          <followed-session-name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.FollowedSessionName</xr-path>
+            <xr-xml-map>vrrp:FollowedSessionName</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type length="0..16">
+              <type-name>string</type-name>
+            </type>
+          </followed-session-name>
+          <secondary-address-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.SecondaryAddressCount</xr-path>
+            <xr-xml-map>vrrp:SecondaryAddressCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </secondary-address-count>
+          <operational-address-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.OperationalAddressCount</xr-path>
+            <xr-xml-map>vrrp:OperationalAddressCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </operational-address-count>
+          <primary-virtual-ip config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.PrimaryVirtualIP</xr-path>
+            <xr-xml-map>vrrp:PrimaryVirtualIP</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </primary-virtual-ip>
+          <configured-down-address-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.ConfiguredDownAddressCount</xr-path>
+            <xr-xml-map>vrrp:ConfiguredDownAddressCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </configured-down-address-count>
+          <virtual-linklocal-ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.VirtualLinklocalIPv6Address</xr-path>
+            <xr-xml-map>vrrp:VirtualLinklocalIPv6Address</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>inet:ipv6-address</type-name>
+            </type>
+          </virtual-linklocal-ipv6-address>
+          <primary-state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.PrimaryState</xr-path>
+            <xr-xml-map>vrrp:PrimaryState</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>Vrrp-vip-state</type-name>
+            </type>
+          </primary-state>
+          <master-ip-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.MasterIPAddress</xr-path>
+            <xr-xml-map>vrrp:MasterIPAddress</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </master-ip-address>
+          <master-ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.MasterIPv6Address</xr-path>
+            <xr-xml-map>vrrp:MasterIPv6Address</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>inet:ipv6-address</type-name>
+            </type>
+          </master-ipv6-address>
+          <master-priority config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.MasterPriority</xr-path>
+            <xr-xml-map>vrrp:MasterPriority</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </master-priority>
+          <vrrp-state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.VRRPState</xr-path>
+            <xr-xml-map>vrrp:VRRPState</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>Vrrp-bag-protocol-state</type-name>
+            </type>
+          </vrrp-state>
+          <authentication-type config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.AuthenticationType</xr-path>
+            <xr-xml-map>vrrp:AuthenticationType</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>Vrrp-prot-auth</type-name>
+            </type>
+          </authentication-type>
+          <authentication-string config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.AuthenticationString</xr-path>
+            <xr-xml-map>vrrp:AuthenticationString</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </authentication-string>
+          <configured-advertize-time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.ConfiguredAdvertizeTime</xr-path>
+            <xr-xml-map>vrrp:ConfiguredAdvertizeTime</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </configured-advertize-time>
+          <oper-advertize-time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.OperAdvertizeTime</xr-path>
+            <xr-xml-map>vrrp:OperAdvertizeTime</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </oper-advertize-time>
+          <min-delay-time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.MinDelayTime</xr-path>
+            <xr-xml-map>vrrp:MinDelayTime</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </min-delay-time>
+          <reload-delay-time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.ReloadDelayTime</xr-path>
+            <xr-xml-map>vrrp:ReloadDelayTime</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </reload-delay-time>
+          <delay-timer-flag config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.DelayTimerFlag</xr-path>
+            <xr-xml-map>vrrp:DelayTimerFlag</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </delay-timer-flag>
+          <delay-timer-secs config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.DelayTimerSecs</xr-path>
+            <xr-xml-map>vrrp:DelayTimerSecs</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </delay-timer-secs>
+          <delay-timer-msecs config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.DelayTimerMsecs</xr-path>
+            <xr-xml-map>vrrp:DelayTimerMsecs</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </delay-timer-msecs>
+          <authentication-flag config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.AuthenticationFlag</xr-path>
+            <xr-xml-map>vrrp:AuthenticationFlag</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </authentication-flag>
+          <force-timer-flag config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.ForceTimerFlag</xr-path>
+            <xr-xml-map>vrrp:ForceTimerFlag</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </force-timer-flag>
+          <preempt-flag config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.PreemptFlag</xr-path>
+            <xr-xml-map>vrrp:PreemptFlag</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </preempt-flag>
+          <ip-address-owner-flag config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.IPAddressOwnerFlag</xr-path>
+            <xr-xml-map>vrrp:IPAddressOwnerFlag</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </ip-address-owner-flag>
+          <is-accept-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.IsAcceptMode</xr-path>
+            <xr-xml-map>vrrp:IsAcceptMode</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </is-accept-mode>
+          <preempt-delay-time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.PreemptDelayTime</xr-path>
+            <xr-xml-map>vrrp:PreemptDelayTime</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </preempt-delay-time>
+          <configured-priority config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.ConfiguredPriority</xr-path>
+            <xr-xml-map>vrrp:ConfiguredPriority</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </configured-priority>
+          <operational-priority config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.OperationalPriority</xr-path>
+            <xr-xml-map>vrrp:OperationalPriority</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </operational-priority>
+          <priority-decrement config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.PriorityDecrement</xr-path>
+            <xr-xml-map>vrrp:PriorityDecrement</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </priority-decrement>
+          <tracked-interface-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TrackedInterfaceCount</xr-path>
+            <xr-xml-map>vrrp:TrackedInterfaceCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tracked-interface-count>
+          <tracked-interface-up-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TrackedInterfaceUpCount</xr-path>
+            <xr-xml-map>vrrp:TrackedInterfaceUpCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tracked-interface-up-count>
+          <tracked-item-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TrackedItemCount</xr-path>
+            <xr-xml-map>vrrp:TrackedItemCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tracked-item-count>
+          <tracked-item-up-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TrackedItemUpCount</xr-path>
+            <xr-xml-map>vrrp:TrackedItemUpCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tracked-item-up-count>
+          <time-in-current-state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TimeInCurrentState</xr-path>
+            <xr-xml-map>vrrp:TimeInCurrentState</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </time-in-current-state>
+          <state-change-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.StateChangeCount</xr-path>
+            <xr-xml-map>vrrp:StateChangeCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </state-change-count>
+          <time-vrouter-up config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TimeVrouterUp</xr-path>
+            <xr-xml-map>vrrp:TimeVrouterUp</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </time-vrouter-up>
+          <master-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.MasterCount</xr-path>
+            <xr-xml-map>vrrp:MasterCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </master-count>
+          <adverts-received-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.AdvertsReceivedCount</xr-path>
+            <xr-xml-map>vrrp:AdvertsReceivedCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </adverts-received-count>
+          <advert-interval-error-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.AdvertIntervalErrorCount</xr-path>
+            <xr-xml-map>vrrp:AdvertIntervalErrorCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </advert-interval-error-count>
+          <adverts-sent-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.AdvertsSentCount</xr-path>
+            <xr-xml-map>vrrp:AdvertsSentCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </adverts-sent-count>
+          <authentication-fail-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.AuthenticationFailCount</xr-path>
+            <xr-xml-map>vrrp:AuthenticationFailCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </authentication-fail-count>
+          <ttl-error-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TTLErrorCount</xr-path>
+            <xr-xml-map>vrrp:TTLErrorCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </ttl-error-count>
+          <priority-zero-received-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.PriorityZeroReceivedCount</xr-path>
+            <xr-xml-map>vrrp:PriorityZeroReceivedCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </priority-zero-received-count>
+          <priority-zero-sent-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.PriorityZeroSentCount</xr-path>
+            <xr-xml-map>vrrp:PriorityZeroSentCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </priority-zero-sent-count>
+          <invalid-packet-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.InvalidPacketCount</xr-path>
+            <xr-xml-map>vrrp:InvalidPacketCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </invalid-packet-count>
+          <address-list-error-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.AddressListErrorCount</xr-path>
+            <xr-xml-map>vrrp:AddressListErrorCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </address-list-error-count>
+          <invalid-auth-type-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.InvalidAuthTypeCount</xr-path>
+            <xr-xml-map>vrrp:InvalidAuthTypeCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </invalid-auth-type-count>
+          <auth-type-mismatch-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.AuthTypeMismatchCount</xr-path>
+            <xr-xml-map>vrrp:AuthTypeMismatchCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </auth-type-mismatch-count>
+          <pkt-length-errors-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.PktLengthErrorsCount</xr-path>
+            <xr-xml-map>vrrp:PktLengthErrorsCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </pkt-length-errors-count>
+          <time-stats-discontinuity config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TimeStatsDiscontinuity</xr-path>
+            <xr-xml-map>vrrp:TimeStatsDiscontinuity</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </time-stats-discontinuity>
+          <bfd-session-state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.BFDSessionState</xr-path>
+            <xr-xml-map>vrrp:BFDSessionState</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>Vrrp-bfd-session-state</type-name>
+            </type>
+          </bfd-session-state>
+          <bfd-interval config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.BFDInterval</xr-path>
+            <xr-xml-map>vrrp:BFDInterval</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </bfd-interval>
+          <bfd-multiplier config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.BFDMultiplier</xr-path>
+            <xr-xml-map>vrrp:BFDMultiplier</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </bfd-multiplier>
+          <bfd-cfg-remote-ip config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.BFDCfgRemoteIP</xr-path>
+            <xr-xml-map>vrrp:BFDCfgRemoteIP</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </bfd-cfg-remote-ip>
+          <bfd-configured-remote-ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.BFDConfiguredRemoteIPv6Address</xr-path>
+            <xr-xml-map>vrrp:BFDConfiguredRemoteIPv6Address</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>inet:ipv6-address</type-name>
+            </type>
+          </bfd-configured-remote-ipv6-address>
+          <state-from-checkpoint config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.StateFromCheckpoint</xr-path>
+            <xr-xml-map>vrrp:StateFromCheckpoint</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </state-from-checkpoint>
+          <interface-ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.InterfaceIPv4Address</xr-path>
+            <xr-xml-map>vrrp:InterfaceIPv4Address</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </interface-ipv4-address>
+          <interface-ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.InterfaceIPv6Address</xr-path>
+            <xr-xml-map>vrrp:InterfaceIPv6Address</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>inet:ipv6-address</type-name>
+            </type>
+          </interface-ipv6-address>
+          <virtual-mac-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.VirtualMACAddress</xr-path>
+            <xr-xml-map>vrrp:VirtualMACAddress</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>yang:mac-address</type-name>
+            </type>
+          </virtual-mac-address>
+          <virtual-mac-address-state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.VirtualMACAddressState</xr-path>
+            <xr-xml-map>vrrp:VirtualMACAddressState</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>Vrrp-vmac-state</type-name>
+            </type>
+          </virtual-mac-address-state>
+          <operational-address config="false" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.OperationalAddressList[&lt;bag_arg1&gt;]</xr-path>
+            <xr-xml-map>vrrp:OperationalAddressList</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </operational-address>
+          <ipv4-configured-down-address config="false" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.IPv4ConfiguredDownAddressList[&lt;bag_arg3&gt;]</xr-path>
+            <xr-xml-map>vrrp:IPv4ConfiguredDownAddressList</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </ipv4-configured-down-address>
+          <ipv6-operational-address config="false" node="list">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.IPv6OperationalAddressList[&lt;bag_arg2&gt;]</xr-path>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+            <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.IPv6OperationalAddressList[&lt;bag_arg2&gt;].IPV6Address</xr-path>
+              <xr-xml-map>vrrp:IPV6Address</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>inet:ipv6-address</type-name>
+              </type>
+            </ipv6-address>
+          </ipv6-operational-address>
+          <ipv6-configured-down-address config="false" node="list">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.IPv6ConfiguredDownAddressList[&lt;bag_arg4&gt;]</xr-path>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg4&gt;</xr-internal-key>
+            <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.IPv6ConfiguredDownAddressList[&lt;bag_arg4&gt;].IPV6Address</xr-path>
+              <xr-xml-map>vrrp:IPV6Address</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>inet:ipv6-address</type-name>
+              </type>
+            </ipv6-address>
+          </ipv6-configured-down-address>
+          <track-item-info config="false" node="list">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TrackItemInfo[&lt;bag_arg5&gt;]</xr-path>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg5&gt;</xr-internal-key>
+            <interface config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TrackItemInfo[&lt;bag_arg5&gt;].Interface</xr-path>
+              <xr-xml-map>vrrp:Interface</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface>
+            <virtual-router-id-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TrackItemInfo[&lt;bag_arg5&gt;].VirtualRouterID</xr-path>
+              <xr-xml-map>vrrp:virtual-router-id-xr</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </virtual-router-id-xr>
+            <tracked-item-type config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TrackItemInfo[&lt;bag_arg5&gt;].TrackedItemType</xr-path>
+              <xr-xml-map>vrrp:TrackedItemType</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </tracked-item-type>
+            <tracked-item-index config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TrackItemInfo[&lt;bag_arg5&gt;].TrackedItemIndex</xr-path>
+              <xr-xml-map>vrrp:TrackedItemIndex</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type length="0..32">
+                <type-name>string</type-name>
+              </type>
+            </tracked-item-index>
+            <state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TrackItemInfo[&lt;bag_arg5&gt;].State</xr-path>
+              <xr-xml-map>vrrp:State</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+            </state>
+            <priority config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TrackItemInfo[&lt;bag_arg5&gt;].Priority</xr-path>
+              <xr-xml-map>vrrp:Priority</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+            </priority>
+          </track-item-info>
+          <state-change-history config="false" node="list">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.StateChangeHistory[&lt;bag_arg6&gt;]</xr-path>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg6&gt;</xr-internal-key>
+            <time config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.StateChangeHistory[&lt;bag_arg6&gt;].Time</xr-path>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-version>1 0</xr-bag-version>
+              <seconds config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.StateChangeHistory[&lt;bag_arg6&gt;].Time.Seconds</xr-path>
+                <xr-xml-map>vrrp:Seconds</xr-xml-map>
+                <xr-task>vrrp</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </seconds>
+              <nanoseconds config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.StateChangeHistory[&lt;bag_arg6&gt;].Time.Nanoseconds</xr-path>
+                <xr-xml-map>vrrp:Nanoseconds</xr-xml-map>
+                <xr-task>vrrp</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </nanoseconds>
+            </time>
+            <old-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.StateChangeHistory[&lt;bag_arg6&gt;].OldState</xr-path>
+              <xr-xml-map>vrrp:OldState</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>Vrrp-bag-protocol-state</type-name>
+              </type>
+            </old-state>
+            <new-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.StateChangeHistory[&lt;bag_arg6&gt;].NewState</xr-path>
+              <xr-xml-map>vrrp:NewState</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>Vrrp-bag-protocol-state</type-name>
+              </type>
+            </new-state>
+            <reason config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv6/vrouter/&lt;vrrp_ipv6_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_ipv6_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.StateChangeHistory[&lt;bag_arg6&gt;].Reason</xr-path>
+              <xr-xml-map>vrrp:Reason</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>Vrrp-state-change-reason</type-name>
+              </type>
+            </reason>
+          </state-change-history>
+        </virtual-router>
+      </virtual-routers>
+      <interfaces config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ip-vrrp/gl/ipv6/interface/</xr-path>
+        <xr-xml-map>vrrp_ipv6_oper:InterfaceTable</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <interface config="false" key="interface-name" node="list">
+          <xr-path>/oper/ip-vrrp/gl/ipv6/interface/&lt;vrrp_ipv6_oper_Interface_intf-name&gt;</xr-path>
+          <xr-xml-map>vrrp_ipv6_oper:Interface</xr-xml-map>
+          <xr-task>vrrp</xr-task>
+          <xr-bag-grp-name>vrrp_interface_info</xr-bag-grp-name>
+          <xr-bag>vrrp.bag</xr-bag>
+          <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/ip-vrrp/gl/ipv6/interface/&lt;vrrp_ipv6_oper_Interface_intf-name&gt;</xr-path>
+            <xr-xml-map>vrrp_ipv6_oper:InterfaceName</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-sch-type>InterfaceName</xr-sch-type>
+            <xr-sch-arg-name>&lt;vrrp_ipv6_oper_Interface_intf-name&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+          </interface-name>
+          <interface config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/interface/&lt;vrrp_ipv6_oper_Interface_intf-name&gt;~vrrp_interface_info.Interface</xr-path>
+            <xr-xml-map>vrrp:Interface</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+          </interface>
+          <invalid-checksum-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/interface/&lt;vrrp_ipv6_oper_Interface_intf-name&gt;~vrrp_interface_info.InvalidChecksumCount</xr-path>
+            <xr-xml-map>vrrp:InvalidChecksumCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </invalid-checksum-count>
+          <invalid-version-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/interface/&lt;vrrp_ipv6_oper_Interface_intf-name&gt;~vrrp_interface_info.InvalidVersionCount</xr-path>
+            <xr-xml-map>vrrp:InvalidVersionCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </invalid-version-count>
+          <invalid-vrid-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/interface/&lt;vrrp_ipv6_oper_Interface_intf-name&gt;~vrrp_interface_info.InvalidVRIDCount</xr-path>
+            <xr-xml-map>vrrp:InvalidVRIDCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </invalid-vrid-count>
+          <invalid-packet-length-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv6/interface/&lt;vrrp_ipv6_oper_Interface_intf-name&gt;~vrrp_interface_info.InvalidPacketLengthCount</xr-path>
+            <xr-xml-map>vrrp:InvalidPacketLengthCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </invalid-packet-length-count>
+        </interface>
+      </interfaces>
+    </ipv6>
+    <ipv4 config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ip-vrrp/gl/ipv4/</xr-path>
+      <xr-xml-map>vrrp_oper:IPv4</xr-xml-map>
+      <xr-task>vrrp</xr-task>
+      <xr-compatibility>4.0</xr-compatibility>
+      <interfaces config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ip-vrrp/gl/ipv4/interface/</xr-path>
+        <xr-xml-map>vrrp_oper:InterfaceTable</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <interface config="false" key="interface-name" node="list">
+          <xr-path>/oper/ip-vrrp/gl/ipv4/interface/&lt;vrrp_oper_Interface_intf-name&gt;</xr-path>
+          <xr-xml-map>vrrp_oper:Interface</xr-xml-map>
+          <xr-task>vrrp</xr-task>
+          <xr-bag-grp-name>vrrp_interface_info</xr-bag-grp-name>
+          <xr-bag>vrrp.bag</xr-bag>
+          <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/ip-vrrp/gl/ipv4/interface/&lt;vrrp_oper_Interface_intf-name&gt;</xr-path>
+            <xr-xml-map>vrrp_oper:InterfaceName</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-sch-type>InterfaceName</xr-sch-type>
+            <xr-sch-arg-name>&lt;vrrp_oper_Interface_intf-name&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+          </interface-name>
+          <interface config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/interface/&lt;vrrp_oper_Interface_intf-name&gt;~vrrp_interface_info.Interface</xr-path>
+            <xr-xml-map>vrrp:Interface</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+          </interface>
+          <invalid-checksum-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/interface/&lt;vrrp_oper_Interface_intf-name&gt;~vrrp_interface_info.InvalidChecksumCount</xr-path>
+            <xr-xml-map>vrrp:InvalidChecksumCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </invalid-checksum-count>
+          <invalid-version-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/interface/&lt;vrrp_oper_Interface_intf-name&gt;~vrrp_interface_info.InvalidVersionCount</xr-path>
+            <xr-xml-map>vrrp:InvalidVersionCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </invalid-version-count>
+          <invalid-vrid-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/interface/&lt;vrrp_oper_Interface_intf-name&gt;~vrrp_interface_info.InvalidVRIDCount</xr-path>
+            <xr-xml-map>vrrp:InvalidVRIDCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </invalid-vrid-count>
+          <invalid-packet-length-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/interface/&lt;vrrp_oper_Interface_intf-name&gt;~vrrp_interface_info.InvalidPacketLengthCount</xr-path>
+            <xr-xml-map>vrrp:InvalidPacketLengthCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </invalid-packet-length-count>
+        </interface>
+      </interfaces>
+      <track-items config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ip-vrrp/gl/ipv4/trackitem/</xr-path>
+        <xr-xml-map>vrrp_oper:TrackItemTable</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <track-item config="false" key="interface-name virtual-router-id tracked-interface-name" node="list">
+          <xr-path>/oper/ip-vrrp/gl/ipv4/trackitem/&lt;vrrp_oper_TrackItem_intf-name&gt;,&lt;vrrp_oper_TrackItem_vrid&gt;,&lt;vrrp_oper_TrackItem_track_value&gt;</xr-path>
+          <xr-xml-map>vrrp_oper:TrackItem</xr-xml-map>
+          <xr-task>vrrp</xr-task>
+          <xr-bag-grp-name>vrrp_trackitem_info</xr-bag-grp-name>
+          <xr-bag>vrrp.bag</xr-bag>
+          <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/ip-vrrp/gl/ipv4/trackitem/&lt;vrrp_oper_TrackItem_intf-name&gt;,&lt;vrrp_oper_TrackItem_vrid&gt;,&lt;vrrp_oper_TrackItem_track_value&gt;</xr-path>
+            <xr-xml-map>vrrp_oper:InterfaceName</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-sch-type>InterfaceName</xr-sch-type>
+            <xr-sch-arg-name>&lt;vrrp_oper_TrackItem_intf-name&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+          </interface-name>
+          <virtual-router-id config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-pathformat>decimal</xr-pathformat>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/oper/ip-vrrp/gl/ipv4/trackitem/&lt;vrrp_oper_TrackItem_intf-name&gt;,&lt;vrrp_oper_TrackItem_vrid&gt;,&lt;vrrp_oper_TrackItem_track_value&gt;</xr-path>
+            <xr-xml-map>vrrp_oper:VirtualRouterID</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-sch-type>Integer</xr-sch-type>
+            <xr-sch-arg-name>&lt;vrrp_oper_TrackItem_vrid&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </virtual-router-id>
+          <tracked-interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/ip-vrrp/gl/ipv4/trackitem/&lt;vrrp_oper_TrackItem_intf-name&gt;,&lt;vrrp_oper_TrackItem_vrid&gt;,&lt;vrrp_oper_TrackItem_track_value&gt;</xr-path>
+            <xr-xml-map>vrrp_oper:TrackedInterfaceName</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-sch-type>InterfaceName</xr-sch-type>
+            <xr-sch-arg-name>&lt;vrrp_oper_TrackItem_track_value&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+          </tracked-interface-name>
+          <interface config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/trackitem/&lt;vrrp_oper_TrackItem_intf-name&gt;,&lt;vrrp_oper_TrackItem_vrid&gt;,&lt;vrrp_oper_TrackItem_track_value&gt;~vrrp_trackitem_info.Interface</xr-path>
+            <xr-xml-map>vrrp:Interface</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+          </interface>
+          <virtual-router-id-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/trackitem/&lt;vrrp_oper_TrackItem_intf-name&gt;,&lt;vrrp_oper_TrackItem_vrid&gt;,&lt;vrrp_oper_TrackItem_track_value&gt;~vrrp_trackitem_info.VirtualRouterID</xr-path>
+            <xr-xml-map>vrrp:virtual-router-id-xr</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </virtual-router-id-xr>
+          <tracked-item-type config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/trackitem/&lt;vrrp_oper_TrackItem_intf-name&gt;,&lt;vrrp_oper_TrackItem_vrid&gt;,&lt;vrrp_oper_TrackItem_track_value&gt;~vrrp_trackitem_info.TrackedItemType</xr-path>
+            <xr-xml-map>vrrp:TrackedItemType</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </tracked-item-type>
+          <tracked-item-index config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/trackitem/&lt;vrrp_oper_TrackItem_intf-name&gt;,&lt;vrrp_oper_TrackItem_vrid&gt;,&lt;vrrp_oper_TrackItem_track_value&gt;~vrrp_trackitem_info.TrackedItemIndex</xr-path>
+            <xr-xml-map>vrrp:TrackedItemIndex</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type length="0..32">
+              <type-name>string</type-name>
+            </type>
+          </tracked-item-index>
+          <state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/trackitem/&lt;vrrp_oper_TrackItem_intf-name&gt;,&lt;vrrp_oper_TrackItem_vrid&gt;,&lt;vrrp_oper_TrackItem_track_value&gt;~vrrp_trackitem_info.State</xr-path>
+            <xr-xml-map>vrrp:State</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </state>
+          <priority config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/trackitem/&lt;vrrp_oper_TrackItem_intf-name&gt;,&lt;vrrp_oper_TrackItem_vrid&gt;,&lt;vrrp_oper_TrackItem_track_value&gt;~vrrp_trackitem_info.Priority</xr-path>
+            <xr-xml-map>vrrp:Priority</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </priority>
+        </track-item>
+      </track-items>
+      <virtual-routers config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/</xr-path>
+        <xr-xml-map>vrrp_oper:VirtualRouterTable</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <virtual-router config="false" key="interface-name virtual-router-id" node="list">
+          <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;</xr-path>
+          <xr-xml-map>vrrp_oper:VirtualRouter</xr-xml-map>
+          <xr-task>vrrp</xr-task>
+          <xr-bag-grp-name>vrrp_vrouter_info</xr-bag-grp-name>
+          <xr-bag>vrrp.bag</xr-bag>
+          <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;</xr-path>
+            <xr-xml-map>vrrp_oper:InterfaceName</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-sch-type>InterfaceName</xr-sch-type>
+            <xr-sch-arg-name>&lt;vrrp_oper_VirtualRouter_intf-name&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+          </interface-name>
+          <virtual-router-id config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-pathformat>decimal</xr-pathformat>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;</xr-path>
+            <xr-xml-map>vrrp_oper:VirtualRouterID</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-sch-type>Integer</xr-sch-type>
+            <xr-sch-arg-name>&lt;vrrp_oper_VirtualRouter_vrid&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </virtual-router-id>
+          <resign-sent-time config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.ResignSentTime</xr-path>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <seconds config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.ResignSentTime.Seconds</xr-path>
+              <xr-xml-map>vrrp:Seconds</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </seconds>
+            <nanoseconds config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.ResignSentTime.Nanoseconds</xr-path>
+              <xr-xml-map>vrrp:Nanoseconds</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </nanoseconds>
+          </resign-sent-time>
+          <resign-received-time config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.ResignReceivedTime</xr-path>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <seconds config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.ResignReceivedTime.Seconds</xr-path>
+              <xr-xml-map>vrrp:Seconds</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </seconds>
+            <nanoseconds config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.ResignReceivedTime.Nanoseconds</xr-path>
+              <xr-xml-map>vrrp:Nanoseconds</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </nanoseconds>
+          </resign-received-time>
+          <interface-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.InterfaceName</xr-path>
+            <xr-xml-map>vrrp:interface-name-xr</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type length="0..64">
+              <type-name>string</type-name>
+            </type>
+          </interface-name-xr>
+          <virtual-router-id-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.VirtualRouterID</xr-path>
+            <xr-xml-map>vrrp:virtual-router-id-xr</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </virtual-router-id-xr>
+          <version config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.Version</xr-path>
+            <xr-xml-map>vrrp:Version</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>Vrrp-version</type-name>
+            </type>
+          </version>
+          <address-family config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.AddressFamily</xr-path>
+            <xr-xml-map>vrrp:AddressFamily</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>Vrrp-b-af</type-name>
+            </type>
+          </address-family>
+          <session-name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.SessionName</xr-path>
+            <xr-xml-map>vrrp:SessionName</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type length="0..16">
+              <type-name>string</type-name>
+            </type>
+          </session-name>
+          <slaves config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.Slaves</xr-path>
+            <xr-xml-map>vrrp:Slaves</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </slaves>
+          <is-slave config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.IsSlave</xr-path>
+            <xr-xml-map>vrrp:IsSlave</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </is-slave>
+          <followed-session-name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.FollowedSessionName</xr-path>
+            <xr-xml-map>vrrp:FollowedSessionName</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type length="0..16">
+              <type-name>string</type-name>
+            </type>
+          </followed-session-name>
+          <secondary-address-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.SecondaryAddressCount</xr-path>
+            <xr-xml-map>vrrp:SecondaryAddressCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </secondary-address-count>
+          <operational-address-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.OperationalAddressCount</xr-path>
+            <xr-xml-map>vrrp:OperationalAddressCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </operational-address-count>
+          <primary-virtual-ip config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.PrimaryVirtualIP</xr-path>
+            <xr-xml-map>vrrp:PrimaryVirtualIP</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </primary-virtual-ip>
+          <configured-down-address-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.ConfiguredDownAddressCount</xr-path>
+            <xr-xml-map>vrrp:ConfiguredDownAddressCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </configured-down-address-count>
+          <virtual-linklocal-ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.VirtualLinklocalIPv6Address</xr-path>
+            <xr-xml-map>vrrp:VirtualLinklocalIPv6Address</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>inet:ipv6-address</type-name>
+            </type>
+          </virtual-linklocal-ipv6-address>
+          <primary-state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.PrimaryState</xr-path>
+            <xr-xml-map>vrrp:PrimaryState</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>Vrrp-vip-state</type-name>
+            </type>
+          </primary-state>
+          <master-ip-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.MasterIPAddress</xr-path>
+            <xr-xml-map>vrrp:MasterIPAddress</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </master-ip-address>
+          <master-ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.MasterIPv6Address</xr-path>
+            <xr-xml-map>vrrp:MasterIPv6Address</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>inet:ipv6-address</type-name>
+            </type>
+          </master-ipv6-address>
+          <master-priority config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.MasterPriority</xr-path>
+            <xr-xml-map>vrrp:MasterPriority</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </master-priority>
+          <vrrp-state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.VRRPState</xr-path>
+            <xr-xml-map>vrrp:VRRPState</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>Vrrp-bag-protocol-state</type-name>
+            </type>
+          </vrrp-state>
+          <authentication-type config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.AuthenticationType</xr-path>
+            <xr-xml-map>vrrp:AuthenticationType</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>Vrrp-prot-auth</type-name>
+            </type>
+          </authentication-type>
+          <authentication-string config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.AuthenticationString</xr-path>
+            <xr-xml-map>vrrp:AuthenticationString</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </authentication-string>
+          <configured-advertize-time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.ConfiguredAdvertizeTime</xr-path>
+            <xr-xml-map>vrrp:ConfiguredAdvertizeTime</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </configured-advertize-time>
+          <oper-advertize-time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.OperAdvertizeTime</xr-path>
+            <xr-xml-map>vrrp:OperAdvertizeTime</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </oper-advertize-time>
+          <min-delay-time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.MinDelayTime</xr-path>
+            <xr-xml-map>vrrp:MinDelayTime</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </min-delay-time>
+          <reload-delay-time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.ReloadDelayTime</xr-path>
+            <xr-xml-map>vrrp:ReloadDelayTime</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </reload-delay-time>
+          <delay-timer-flag config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.DelayTimerFlag</xr-path>
+            <xr-xml-map>vrrp:DelayTimerFlag</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </delay-timer-flag>
+          <delay-timer-secs config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.DelayTimerSecs</xr-path>
+            <xr-xml-map>vrrp:DelayTimerSecs</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </delay-timer-secs>
+          <delay-timer-msecs config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.DelayTimerMsecs</xr-path>
+            <xr-xml-map>vrrp:DelayTimerMsecs</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </delay-timer-msecs>
+          <authentication-flag config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.AuthenticationFlag</xr-path>
+            <xr-xml-map>vrrp:AuthenticationFlag</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </authentication-flag>
+          <force-timer-flag config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.ForceTimerFlag</xr-path>
+            <xr-xml-map>vrrp:ForceTimerFlag</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </force-timer-flag>
+          <preempt-flag config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.PreemptFlag</xr-path>
+            <xr-xml-map>vrrp:PreemptFlag</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </preempt-flag>
+          <ip-address-owner-flag config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.IPAddressOwnerFlag</xr-path>
+            <xr-xml-map>vrrp:IPAddressOwnerFlag</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </ip-address-owner-flag>
+          <is-accept-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.IsAcceptMode</xr-path>
+            <xr-xml-map>vrrp:IsAcceptMode</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </is-accept-mode>
+          <preempt-delay-time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.PreemptDelayTime</xr-path>
+            <xr-xml-map>vrrp:PreemptDelayTime</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </preempt-delay-time>
+          <configured-priority config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.ConfiguredPriority</xr-path>
+            <xr-xml-map>vrrp:ConfiguredPriority</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </configured-priority>
+          <operational-priority config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.OperationalPriority</xr-path>
+            <xr-xml-map>vrrp:OperationalPriority</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </operational-priority>
+          <priority-decrement config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.PriorityDecrement</xr-path>
+            <xr-xml-map>vrrp:PriorityDecrement</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </priority-decrement>
+          <tracked-interface-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TrackedInterfaceCount</xr-path>
+            <xr-xml-map>vrrp:TrackedInterfaceCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tracked-interface-count>
+          <tracked-interface-up-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TrackedInterfaceUpCount</xr-path>
+            <xr-xml-map>vrrp:TrackedInterfaceUpCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tracked-interface-up-count>
+          <tracked-item-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TrackedItemCount</xr-path>
+            <xr-xml-map>vrrp:TrackedItemCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tracked-item-count>
+          <tracked-item-up-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TrackedItemUpCount</xr-path>
+            <xr-xml-map>vrrp:TrackedItemUpCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tracked-item-up-count>
+          <time-in-current-state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TimeInCurrentState</xr-path>
+            <xr-xml-map>vrrp:TimeInCurrentState</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </time-in-current-state>
+          <state-change-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.StateChangeCount</xr-path>
+            <xr-xml-map>vrrp:StateChangeCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </state-change-count>
+          <time-vrouter-up config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TimeVrouterUp</xr-path>
+            <xr-xml-map>vrrp:TimeVrouterUp</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </time-vrouter-up>
+          <master-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.MasterCount</xr-path>
+            <xr-xml-map>vrrp:MasterCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </master-count>
+          <adverts-received-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.AdvertsReceivedCount</xr-path>
+            <xr-xml-map>vrrp:AdvertsReceivedCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </adverts-received-count>
+          <advert-interval-error-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.AdvertIntervalErrorCount</xr-path>
+            <xr-xml-map>vrrp:AdvertIntervalErrorCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </advert-interval-error-count>
+          <adverts-sent-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.AdvertsSentCount</xr-path>
+            <xr-xml-map>vrrp:AdvertsSentCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </adverts-sent-count>
+          <authentication-fail-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.AuthenticationFailCount</xr-path>
+            <xr-xml-map>vrrp:AuthenticationFailCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </authentication-fail-count>
+          <ttl-error-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TTLErrorCount</xr-path>
+            <xr-xml-map>vrrp:TTLErrorCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </ttl-error-count>
+          <priority-zero-received-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.PriorityZeroReceivedCount</xr-path>
+            <xr-xml-map>vrrp:PriorityZeroReceivedCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </priority-zero-received-count>
+          <priority-zero-sent-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.PriorityZeroSentCount</xr-path>
+            <xr-xml-map>vrrp:PriorityZeroSentCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </priority-zero-sent-count>
+          <invalid-packet-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.InvalidPacketCount</xr-path>
+            <xr-xml-map>vrrp:InvalidPacketCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </invalid-packet-count>
+          <address-list-error-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.AddressListErrorCount</xr-path>
+            <xr-xml-map>vrrp:AddressListErrorCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </address-list-error-count>
+          <invalid-auth-type-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.InvalidAuthTypeCount</xr-path>
+            <xr-xml-map>vrrp:InvalidAuthTypeCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </invalid-auth-type-count>
+          <auth-type-mismatch-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.AuthTypeMismatchCount</xr-path>
+            <xr-xml-map>vrrp:AuthTypeMismatchCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </auth-type-mismatch-count>
+          <pkt-length-errors-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.PktLengthErrorsCount</xr-path>
+            <xr-xml-map>vrrp:PktLengthErrorsCount</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </pkt-length-errors-count>
+          <time-stats-discontinuity config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TimeStatsDiscontinuity</xr-path>
+            <xr-xml-map>vrrp:TimeStatsDiscontinuity</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </time-stats-discontinuity>
+          <bfd-session-state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.BFDSessionState</xr-path>
+            <xr-xml-map>vrrp:BFDSessionState</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>Vrrp-bfd-session-state</type-name>
+            </type>
+          </bfd-session-state>
+          <bfd-interval config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.BFDInterval</xr-path>
+            <xr-xml-map>vrrp:BFDInterval</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </bfd-interval>
+          <bfd-multiplier config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.BFDMultiplier</xr-path>
+            <xr-xml-map>vrrp:BFDMultiplier</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </bfd-multiplier>
+          <bfd-cfg-remote-ip config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.BFDCfgRemoteIP</xr-path>
+            <xr-xml-map>vrrp:BFDCfgRemoteIP</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </bfd-cfg-remote-ip>
+          <bfd-configured-remote-ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.BFDConfiguredRemoteIPv6Address</xr-path>
+            <xr-xml-map>vrrp:BFDConfiguredRemoteIPv6Address</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>inet:ipv6-address</type-name>
+            </type>
+          </bfd-configured-remote-ipv6-address>
+          <state-from-checkpoint config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.StateFromCheckpoint</xr-path>
+            <xr-xml-map>vrrp:StateFromCheckpoint</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </state-from-checkpoint>
+          <interface-ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.InterfaceIPv4Address</xr-path>
+            <xr-xml-map>vrrp:InterfaceIPv4Address</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </interface-ipv4-address>
+          <interface-ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.InterfaceIPv6Address</xr-path>
+            <xr-xml-map>vrrp:InterfaceIPv6Address</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>inet:ipv6-address</type-name>
+            </type>
+          </interface-ipv6-address>
+          <virtual-mac-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.VirtualMACAddress</xr-path>
+            <xr-xml-map>vrrp:VirtualMACAddress</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>yang:mac-address</type-name>
+            </type>
+          </virtual-mac-address>
+          <virtual-mac-address-state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.VirtualMACAddressState</xr-path>
+            <xr-xml-map>vrrp:VirtualMACAddressState</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>Vrrp-vmac-state</type-name>
+            </type>
+          </virtual-mac-address-state>
+          <operational-address config="false" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.OperationalAddressList[&lt;bag_arg1&gt;]</xr-path>
+            <xr-xml-map>vrrp:OperationalAddressList</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </operational-address>
+          <ipv4-configured-down-address config="false" is-key="false" is-yang-key="false" node="leaf-list">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.IPv4ConfiguredDownAddressList[&lt;bag_arg3&gt;]</xr-path>
+            <xr-xml-map>vrrp:IPv4ConfiguredDownAddressList</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </ipv4-configured-down-address>
+          <ipv6-operational-address config="false" node="list">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.IPv6OperationalAddressList[&lt;bag_arg2&gt;]</xr-path>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+            <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.IPv6OperationalAddressList[&lt;bag_arg2&gt;].IPV6Address</xr-path>
+              <xr-xml-map>vrrp:IPV6Address</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>inet:ipv6-address</type-name>
+              </type>
+            </ipv6-address>
+          </ipv6-operational-address>
+          <ipv6-configured-down-address config="false" node="list">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.IPv6ConfiguredDownAddressList[&lt;bag_arg4&gt;]</xr-path>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg4&gt;</xr-internal-key>
+            <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.IPv6ConfiguredDownAddressList[&lt;bag_arg4&gt;].IPV6Address</xr-path>
+              <xr-xml-map>vrrp:IPV6Address</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>inet:ipv6-address</type-name>
+              </type>
+            </ipv6-address>
+          </ipv6-configured-down-address>
+          <track-item-info config="false" node="list">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TrackItemInfo[&lt;bag_arg5&gt;]</xr-path>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg5&gt;</xr-internal-key>
+            <interface config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TrackItemInfo[&lt;bag_arg5&gt;].Interface</xr-path>
+              <xr-xml-map>vrrp:Interface</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface>
+            <virtual-router-id-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TrackItemInfo[&lt;bag_arg5&gt;].VirtualRouterID</xr-path>
+              <xr-xml-map>vrrp:virtual-router-id-xr</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </virtual-router-id-xr>
+            <tracked-item-type config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TrackItemInfo[&lt;bag_arg5&gt;].TrackedItemType</xr-path>
+              <xr-xml-map>vrrp:TrackedItemType</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </tracked-item-type>
+            <tracked-item-index config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TrackItemInfo[&lt;bag_arg5&gt;].TrackedItemIndex</xr-path>
+              <xr-xml-map>vrrp:TrackedItemIndex</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type length="0..32">
+                <type-name>string</type-name>
+              </type>
+            </tracked-item-index>
+            <state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TrackItemInfo[&lt;bag_arg5&gt;].State</xr-path>
+              <xr-xml-map>vrrp:State</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+            </state>
+            <priority config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.TrackItemInfo[&lt;bag_arg5&gt;].Priority</xr-path>
+              <xr-xml-map>vrrp:Priority</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+            </priority>
+          </track-item-info>
+          <state-change-history config="false" node="list">
+            <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.StateChangeHistory[&lt;bag_arg6&gt;]</xr-path>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-version>1 0</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg6&gt;</xr-internal-key>
+            <time config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.StateChangeHistory[&lt;bag_arg6&gt;].Time</xr-path>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-version>1 0</xr-bag-version>
+              <seconds config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.StateChangeHistory[&lt;bag_arg6&gt;].Time.Seconds</xr-path>
+                <xr-xml-map>vrrp:Seconds</xr-xml-map>
+                <xr-task>vrrp</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </seconds>
+              <nanoseconds config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.StateChangeHistory[&lt;bag_arg6&gt;].Time.Nanoseconds</xr-path>
+                <xr-xml-map>vrrp:Nanoseconds</xr-xml-map>
+                <xr-task>vrrp</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </nanoseconds>
+            </time>
+            <old-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.StateChangeHistory[&lt;bag_arg6&gt;].OldState</xr-path>
+              <xr-xml-map>vrrp:OldState</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>Vrrp-bag-protocol-state</type-name>
+              </type>
+            </old-state>
+            <new-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.StateChangeHistory[&lt;bag_arg6&gt;].NewState</xr-path>
+              <xr-xml-map>vrrp:NewState</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>Vrrp-bag-protocol-state</type-name>
+              </type>
+            </new-state>
+            <reason config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ip-vrrp/gl/ipv4/vrouter/&lt;vrrp_oper_VirtualRouter_intf-name&gt;,&lt;vrrp_oper_VirtualRouter_vrid&gt;~vrrp_vrouter_info.StateChangeHistory[&lt;bag_arg6&gt;].Reason</xr-path>
+              <xr-xml-map>vrrp:Reason</xr-xml-map>
+              <xr-task>vrrp</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 0</xr-bag-version>
+              <type>
+                <type-name>Vrrp-state-change-reason</type-name>
+              </type>
+            </reason>
+          </state-change-history>
+        </virtual-router>
+      </virtual-routers>
+    </ipv4>
+    <mgo-sessions config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ip-vrrp/gl/mgo/</xr-path>
+      <xr-xml-map>vrrp_oper:MGOSessionTable</xr-xml-map>
+      <xr-task>vrrp</xr-task>
+      <mgo-session config="false" key="session-name" node="list">
+        <xr-path>/oper/ip-vrrp/gl/mgo/&lt;vrrp_oper_MGOSession_session&gt;</xr-path>
+        <xr-xml-map>vrrp_oper:MGOSession</xr-xml-map>
+        <xr-task>vrrp</xr-task>
+        <xr-bag-grp-name>vrrp_mgo_info</xr-bag-grp-name>
+        <xr-bag>vrrp.bag</xr-bag>
+        <session-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/ip-vrrp/gl/mgo/&lt;vrrp_oper_MGOSession_session&gt;</xr-path>
+          <xr-xml-map>vrrp_oper:SessionName</xr-xml-map>
+          <xr-task>vrrp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;vrrp_oper_MGOSession_session&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </session-name>
+        <primary-session-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ip-vrrp/gl/mgo/&lt;vrrp_oper_MGOSession_session&gt;~vrrp_mgo_info.PrimarySessionName</xr-path>
+          <xr-xml-map>vrrp:PrimarySessionName</xr-xml-map>
+          <xr-task>vrrp</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 0</xr-bag-version>
+          <type length="0..16">
+            <type-name>string</type-name>
+          </type>
+        </primary-session-name>
+        <primary-session-interface config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ip-vrrp/gl/mgo/&lt;vrrp_oper_MGOSession_session&gt;~vrrp_mgo_info.PrimarySessionInterface</xr-path>
+          <xr-xml-map>vrrp:PrimarySessionInterface</xr-xml-map>
+          <xr-task>vrrp</xr-task>
+          <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+          <xr-bag-version>1 0</xr-bag-version>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </primary-session-interface>
+        <primary-af-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ip-vrrp/gl/mgo/&lt;vrrp_oper_MGOSession_session&gt;~vrrp_mgo_info.PrimaryAFName</xr-path>
+          <xr-xml-map>vrrp:PrimaryAFName</xr-xml-map>
+          <xr-task>vrrp</xr-task>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>1 0</xr-bag-version>
+          <type>
+            <type-name>Vrrp-b-af</type-name>
+          </type>
+        </primary-af-name>
+        <primary-session-number config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ip-vrrp/gl/mgo/&lt;vrrp_oper_MGOSession_session&gt;~vrrp_mgo_info.PrimarySessionNumber</xr-path>
+          <xr-xml-map>vrrp:PrimarySessionNumber</xr-xml-map>
+          <xr-task>vrrp</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 0</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </primary-session-number>
+        <primary-session-state config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ip-vrrp/gl/mgo/&lt;vrrp_oper_MGOSession_session&gt;~vrrp_mgo_info.PrimarySessionState</xr-path>
+          <xr-xml-map>vrrp:PrimarySessionState</xr-xml-map>
+          <xr-task>vrrp</xr-task>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>1 0</xr-bag-version>
+          <type>
+            <type-name>Vrrp-bag-protocol-state</type-name>
+          </type>
+        </primary-session-state>
+        <slave config="false" node="list">
+          <xr-path>/oper/ip-vrrp/gl/mgo/&lt;vrrp_oper_MGOSession_session&gt;~vrrp_mgo_info.SlaveList[&lt;bag_arg7&gt;]</xr-path>
+          <xr-task>vrrp</xr-task>
+          <xr-bag-version>1 0</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg7&gt;</xr-internal-key>
+          <slave-interface config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/mgo/&lt;vrrp_oper_MGOSession_session&gt;~vrrp_mgo_info.SlaveList[&lt;bag_arg7&gt;].SlaveInterface</xr-path>
+            <xr-xml-map>vrrp:SlaveInterface</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type length="0..64">
+              <type-name>string</type-name>
+            </type>
+          </slave-interface>
+          <slave-virtual-router-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ip-vrrp/gl/mgo/&lt;vrrp_oper_MGOSession_session&gt;~vrrp_mgo_info.SlaveList[&lt;bag_arg7&gt;].SlaveVirtualRouterID</xr-path>
+            <xr-xml-map>vrrp:SlaveVirtualRouterID</xr-xml-map>
+            <xr-task>vrrp</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 0</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </slave-virtual-router-id>
+        </slave>
+      </mgo-session>
+    </mgo-sessions>
+  </vrrp>
+</Cisco-IOS-XR-ipv4-vrrp-oper>

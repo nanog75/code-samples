@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<SNMP-NOTIFICATION-MIB ns="http://tail-f.com/ns/mibs/SNMP-NOTIFICATION-MIB/200210140000Z" revision="2002-10-14">
+  <files>
+    <file revision="2002-10-14" submodule="false">SNMP-NOTIFICATION-MIB.yang</file>
+  </files>
+  <prefix>SNMP_NOTIFICATION_MIB</prefix>
+  <import prefix="yang">ietf-yang-types</import>
+  <import prefix="tailf">tailf-common</import>
+  <import prefix="SNMPv2_TC">SNMPv2-TC</import>
+  <import prefix="SNMP_TARGET_MIB">SNMP-TARGET-MIB</import>
+  <typedef name="snmpNotifyNameType">
+    <type length="1 .. 32">
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="snmpNotifyTypeType">
+    <type node="enumeration">
+      <enum value="1">trap</enum>
+      <enum value="2">inform</enum>
+    </type>
+  </typedef>
+  <typedef name="snmpTargetParamsNameType">
+    <type length="1 .. 32">
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="snmpNotifyFilterProfileNameType">
+    <type length="1 .. 32">
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="snmpNotifyFilterMaskType">
+    <type>
+      <pattern>(((([0-9A-Fa-f]{2}):){0,15}([0-9A-Fa-f]{2}))){0,1}</pattern>
+      <type-name>tailf:hex-list</type-name>
+    </type>
+  </typedef>
+  <typedef name="snmpNotifyFilterTypeType">
+    <type node="enumeration">
+      <enum value="1">included</enum>
+      <enum value="2">excluded</enum>
+    </type>
+  </typedef>
+  <SNMP-NOTIFICATION-MIB config="true" is-key="false" node="container" presence="false">
+    <snmpNotifyTable config="true" is-key="false" node="container" presence="false">
+      <snmpNotifyEntry config="true" key="snmpNotifyName" node="list">
+        <xr-path/>
+        <snmpNotifyName config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>snmpNotifyNameType</type-name>
+          </type>
+        </snmpNotifyName>
+        <snmpNotifyTag config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SNMP_TARGET_MIB:SnmpTagValue</type-name>
+          </type>
+        </snmpNotifyTag>
+        <snmpNotifyType config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>snmpNotifyTypeType</type-name>
+          </type>
+          <default>trap</default>
+        </snmpNotifyType>
+        <snmpNotifyStorageType config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SNMPv2_TC:StorageType</type-name>
+          </type>
+          <default>nonVolatile</default>
+        </snmpNotifyStorageType>
+      </snmpNotifyEntry>
+    </snmpNotifyTable>
+    <snmpNotifyFilterProfileTable config="true" is-key="false" node="container" presence="true">
+      <snmpNotifyFilterProfileEntry config="true" key="snmpTargetParamsName" node="list">
+        <xr-path/>
+        <snmpTargetParamsName config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>snmpTargetParamsNameType</type-name>
+          </type>
+        </snmpTargetParamsName>
+        <snmpNotifyFilterProfileName config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>snmpNotifyFilterProfileNameType</type-name>
+          </type>
+        </snmpNotifyFilterProfileName>
+        <snmpNotifyFilterProfileStorType config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SNMPv2_TC:StorageType</type-name>
+          </type>
+          <default>nonVolatile</default>
+        </snmpNotifyFilterProfileStorType>
+      </snmpNotifyFilterProfileEntry>
+    </snmpNotifyFilterProfileTable>
+    <snmpNotifyFilterTable config="true" is-key="false" node="container" presence="true">
+      <snmpNotifyFilterEntry config="true" key="snmpNotifyFilterProfileName snmpNotifyFilterSubtree" node="list">
+        <xr-path/>
+        <snmpNotifyFilterProfileName config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>snmpNotifyFilterProfileNameType</type-name>
+          </type>
+        </snmpNotifyFilterProfileName>
+        <snmpNotifyFilterSubtree config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>yang:object-identifier</type-name>
+          </type>
+        </snmpNotifyFilterSubtree>
+        <snmpNotifyFilterMask config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>snmpNotifyFilterMaskType</type-name>
+          </type>
+        </snmpNotifyFilterMask>
+        <snmpNotifyFilterType config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>snmpNotifyFilterTypeType</type-name>
+          </type>
+          <default>included</default>
+        </snmpNotifyFilterType>
+        <snmpNotifyFilterStorageType config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SNMPv2_TC:StorageType</type-name>
+          </type>
+          <default>nonVolatile</default>
+        </snmpNotifyFilterStorageType>
+      </snmpNotifyFilterEntry>
+    </snmpNotifyFilterTable>
+  </SNMP-NOTIFICATION-MIB>
+</SNMP-NOTIFICATION-MIB>

@@ -1,0 +1,893 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-call-home-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-call-home-cfg" revision="2018-07-24">
+  <files>
+    <file revision="2018-07-24" submodule="false">Cisco-IOS-XR-call-home-cfg.yang</file>
+  </files>
+  <prefix>call-home-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="Call-home-mail-send-interval">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">daily</enum>
+      <enum value="1">weekly</enum>
+      <enum value="2">monthly</enum>
+    </type>
+  </typedef>
+  <typedef name="Call-home-day-of-week">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">sunday</enum>
+      <enum value="1">monday</enum>
+      <enum value="2">tuesday</enum>
+      <enum value="3">wednesday</enum>
+      <enum value="4">thursday</enum>
+      <enum value="5">friday</enum>
+      <enum value="6">saturday</enum>
+    </type>
+  </typedef>
+  <typedef name="Call-home-event-severity">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">debugging</enum>
+      <enum value="1">normal</enum>
+      <enum value="2">notification</enum>
+      <enum value="3">warning</enum>
+      <enum value="4">minor</enum>
+      <enum value="5">major</enum>
+      <enum value="6">critical</enum>
+      <enum value="7">fatal</enum>
+      <enum value="8">disaster</enum>
+      <enum value="9">catastrophic</enum>
+    </type>
+  </typedef>
+  <typedef name="Snapshot-interval">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">daily</enum>
+      <enum value="1">weekly</enum>
+      <enum value="2">monthly</enum>
+    </type>
+  </typedef>
+  <typedef name="Call-home-trans-method">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">email</enum>
+      <enum value="2">http</enum>
+    </type>
+  </typedef>
+  <typedef name="Data-privacy-level">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">normal</enum>
+      <enum value="1">high</enum>
+      <enum value="2">host-name</enum>
+    </type>
+  </typedef>
+  <call-home config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/call-home/</xr-path>
+    <xr-xml-map>call_home_cfg:CallHome</xr-xml-map>
+    <xr-task>call-home</xr-task>
+    <mail-servers config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/call-home/mail-server/</xr-path>
+      <xr-xml-map>call_home_cfg:MailServerTable</xr-xml-map>
+      <xr-task>call-home</xr-task>
+      <mail-server config="true" key="mail-serv-address" node="list">
+        <xr-path>/cfg/gl/call-home/mail-server/&lt;call_home_cfg_MailServer_arg1&gt;/</xr-path>
+        <xr-xml-map>call_home_cfg:MailServer</xr-xml-map>
+        <xr-task>call-home</xr-task>
+        <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/call-home/mail-server/&lt;call_home_cfg_MailServer_arg1&gt;/prio</xr-path>
+          <xr-xml-map>call_home_cfg:Priority</xr-xml-map>
+          <xr-task>call-home</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..100">
+            <type-name>uint32</type-name>
+          </type>
+        </priority>
+        <mail-serv-address config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/call-home/mail-server/&lt;call_home_cfg_MailServer_arg1&gt;/</xr-path>
+          <xr-xml-map>call_home_cfg:MailServAddress</xr-xml-map>
+          <xr-task>call-home</xr-task>
+          <xr-sch-type>EncodedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;call_home_cfg_MailServer_arg1&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </mail-serv-address>
+      </mail-server>
+    </mail-servers>
+    <syslog-throttling config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/call-home/syslog-throttling/</xr-path>
+      <xr-xml-map>call_home_cfg:SyslogThrottling</xr-xml-map>
+      <xr-task>call-home</xr-task>
+      <active config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/call-home/syslog-throttling/active</xr-path>
+        <xr-xml-map>call_home_cfg:Active</xr-xml-map>
+        <xr-task>call-home</xr-task>
+        <xr-sch-type>Boolean</xr-sch-type>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </active>
+    </syslog-throttling>
+    <http-proxy config="true" is-key="false" node="container" presence="false">
+      <xr-is-packed/>
+      <xr-path>/cfg/gl/call-home/http-proxy`</xr-path>
+      <xr-xml-map>call_home_cfg:HTTPProxy</xr-xml-map>
+      <xr-task>call-home</xr-task>
+      <xr-pack-format>%s%d</xr-pack-format>
+      <server-address config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%s%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/gl/call-home/http-proxy`0</xr-path>
+        <xr-xml-map>call_home_cfg:ServerAddress</xr-xml-map>
+        <xr-task>call-home</xr-task>
+        <xr-sch-type>String</xr-sch-type>
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </server-address>
+      <port config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%s%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/gl/call-home/http-proxy`1</xr-path>
+        <xr-xml-map>call_home_cfg:Port</xr-xml-map>
+        <xr-task>call-home</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type>
+          <type-name>xr:Cisco-ios-xr-port-number</type-name>
+        </type>
+      </port>
+    </http-proxy>
+    <profiles config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/call-home/configuration_profile/</xr-path>
+      <xr-xml-map>call_home_cfg:ProfileTable</xr-xml-map>
+      <xr-task>call-home</xr-task>
+      <profile config="true" key="profile-name" node="list">
+        <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/</xr-path>
+        <xr-xml-map>call_home_cfg:Profile</xr-xml-map>
+        <xr-task>call-home</xr-task>
+        <report-type config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/report_type/</xr-path>
+          <xr-xml-map>call_home_cfg:ReportType</xr-xml-map>
+          <xr-task>call-home</xr-task>
+          <reporting-callhome-data config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/report_type/callhome/</xr-path>
+            <xr-xml-map>call_home_cfg:ReportingCallhomeData</xr-xml-map>
+            <xr-task>call-home</xr-task>
+            <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/report_type/callhome/enable</xr-path>
+              <xr-xml-map>call_home_cfg:Enable</xr-xml-map>
+              <xr-task>call-home</xr-task>
+              <xr-sch-type>Boolean</xr-sch-type>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </enable>
+          </reporting-callhome-data>
+          <reporting-licensing-data config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/report_type/licensing/</xr-path>
+            <xr-xml-map>call_home_cfg:ReportingLicensingData</xr-xml-map>
+            <xr-task>call-home</xr-task>
+            <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/report_type/licensing/enable</xr-path>
+              <xr-xml-map>call_home_cfg:Enable</xr-xml-map>
+              <xr-task>call-home</xr-task>
+              <xr-sch-type>Boolean</xr-sch-type>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </enable>
+          </reporting-licensing-data>
+        </report-type>
+        <methods config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/transport-method/</xr-path>
+          <xr-xml-map>call_home_cfg:TransportMethod</xr-xml-map>
+          <xr-task>call-home</xr-task>
+          <method config="true" key="method" node="list">
+            <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/transport-method/&lt;call_home_cfg_Method_arg1&gt;/</xr-path>
+            <xr-xml-map>call_home_cfg:Method</xr-xml-map>
+            <xr-task>call-home</xr-task>
+            <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/transport-method/&lt;call_home_cfg_Method_arg1&gt;/enable</xr-path>
+              <xr-xml-map>call_home_cfg:Enable</xr-xml-map>
+              <xr-task>call-home</xr-task>
+              <xr-sch-type>Boolean</xr-sch-type>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </enable>
+            <method config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/transport-method/&lt;call_home_cfg_Method_arg1&gt;/</xr-path>
+              <xr-xml-map>call_home_cfg:Method</xr-xml-map>
+              <xr-task>call-home</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <xr-sch-arg-name>&lt;call_home_cfg_Method_arg1&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>Call-home-trans-method</type-name>
+              </type>
+            </method>
+          </method>
+        </methods>
+        <addresses config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/dest_addr/</xr-path>
+          <xr-xml-map>call_home_cfg:AddressTable</xr-xml-map>
+          <xr-task>call-home</xr-task>
+          <address config="true" key="method destination-addr" node="list">
+            <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/dest_addr/&lt;call_home_cfg_Address_arg1&gt;/&lt;call_home_cfg_Address_arg2&gt;/</xr-path>
+            <xr-xml-map>call_home_cfg:Address</xr-xml-map>
+            <xr-task>call-home</xr-task>
+            <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/dest_addr/&lt;call_home_cfg_Address_arg1&gt;/&lt;call_home_cfg_Address_arg2&gt;/enable</xr-path>
+              <xr-xml-map>call_home_cfg:Enable</xr-xml-map>
+              <xr-task>call-home</xr-task>
+              <xr-sch-type>Boolean</xr-sch-type>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </enable>
+            <method config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/dest_addr/&lt;call_home_cfg_Address_arg1&gt;/&lt;call_home_cfg_Address_arg2&gt;/</xr-path>
+              <xr-xml-map>call_home_cfg:Method</xr-xml-map>
+              <xr-task>call-home</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <xr-sch-arg-name>&lt;call_home_cfg_Address_arg1&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>Call-home-trans-method</type-name>
+              </type>
+            </method>
+            <destination-addr config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/dest_addr/&lt;call_home_cfg_Address_arg1&gt;/&lt;call_home_cfg_Address_arg2&gt;/</xr-path>
+              <xr-xml-map>call_home_cfg:DestinationAddr</xr-xml-map>
+              <xr-task>call-home</xr-task>
+              <xr-sch-type>EncodedBoundedString</xr-sch-type>
+              <xr-sch-arg-name>&lt;call_home_cfg_Address_arg2&gt;</xr-sch-arg-name>
+              <type length="1..200">
+                <type-name>string</type-name>
+              </type>
+            </destination-addr>
+          </address>
+        </addresses>
+        <subscribe-alert-group config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/</xr-path>
+          <xr-xml-map>call_home_cfg:SubscribeAlertGroup</xr-xml-map>
+          <xr-task>call-home</xr-task>
+          <environment config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/environment/</xr-path>
+            <xr-xml-map>call_home_cfg:Environment</xr-xml-map>
+            <xr-task>call-home</xr-task>
+            <severity config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/environment/severity</xr-path>
+              <xr-xml-map>call_home_cfg:Severity</xr-xml-map>
+              <xr-task>call-home</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Call-home-event-severity</type-name>
+              </type>
+            </severity>
+          </environment>
+          <configuration config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/configuration/</xr-path>
+            <xr-xml-map>call_home_cfg:Configuration</xr-xml-map>
+            <xr-task>call-home</xr-task>
+            <periodic config="true" is-key="false" node="container" presence="false">
+              <xr-is-packed/>
+              <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/configuration/perodic_subscribe`</xr-path>
+              <xr-xml-map>call_home_cfg:Periodic</xr-xml-map>
+              <xr-task>call-home</xr-task>
+              <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+              <interval config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/configuration/perodic_subscribe`0</xr-path>
+                <xr-xml-map>call_home_cfg:Interval</xr-xml-map>
+                <xr-task>call-home</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <type>
+                  <type-name>Call-home-mail-send-interval</type-name>
+                </type>
+              </interval>
+              <day config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/configuration/perodic_subscribe`1</xr-path>
+                <xr-xml-map>call_home_cfg:Day</xr-xml-map>
+                <xr-task>call-home</xr-task>
+                <xr-sch-type>ZeroRange</xr-sch-type>
+                <type range="0..31">
+                  <type-name>uint32</type-name>
+                </type>
+              </day>
+              <weekday config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/configuration/perodic_subscribe`2</xr-path>
+                <xr-xml-map>call_home_cfg:Weekday</xr-xml-map>
+                <xr-task>call-home</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <type>
+                  <type-name>Call-home-day-of-week</type-name>
+                </type>
+              </weekday>
+              <hour config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/configuration/perodic_subscribe`3</xr-path>
+                <xr-xml-map>call_home_cfg:Hour</xr-xml-map>
+                <xr-task>call-home</xr-task>
+                <xr-sch-type>ZeroRange</xr-sch-type>
+                <type range="0..23">
+                  <type-name>uint32</type-name>
+                </type>
+              </hour>
+              <minute config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/configuration/perodic_subscribe`4</xr-path>
+                <xr-xml-map>call_home_cfg:Minute</xr-xml-map>
+                <xr-task>call-home</xr-task>
+                <xr-sch-type>ZeroRange</xr-sch-type>
+                <type range="0..59">
+                  <type-name>uint32</type-name>
+                </type>
+              </minute>
+            </periodic>
+            <subscribe config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/configuration/subscribe</xr-path>
+              <xr-xml-map>call_home_cfg:Subscribe</xr-xml-map>
+              <xr-task>call-home</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </subscribe>
+          </configuration>
+          <snapshot config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/snapshot/</xr-path>
+            <xr-xml-map>call_home_cfg:Snapshot</xr-xml-map>
+            <xr-task>call-home</xr-task>
+            <periodic config="true" is-key="false" node="container" presence="false">
+              <xr-is-packed/>
+              <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/snapshot/perodic_subscribe`</xr-path>
+              <xr-xml-map>call_home_cfg:Periodic</xr-xml-map>
+              <xr-task>call-home</xr-task>
+              <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+              <interval config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/snapshot/perodic_subscribe`0</xr-path>
+                <xr-xml-map>call_home_cfg:Interval</xr-xml-map>
+                <xr-task>call-home</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <type>
+                  <type-name>Snapshot-interval</type-name>
+                </type>
+              </interval>
+              <day config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/snapshot/perodic_subscribe`1</xr-path>
+                <xr-xml-map>call_home_cfg:Day</xr-xml-map>
+                <xr-task>call-home</xr-task>
+                <xr-sch-type>ZeroRange</xr-sch-type>
+                <type range="0..31">
+                  <type-name>uint32</type-name>
+                </type>
+              </day>
+              <weekday config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/snapshot/perodic_subscribe`2</xr-path>
+                <xr-xml-map>call_home_cfg:Weekday</xr-xml-map>
+                <xr-task>call-home</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <type>
+                  <type-name>Call-home-day-of-week</type-name>
+                </type>
+              </weekday>
+              <hour config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/snapshot/perodic_subscribe`3</xr-path>
+                <xr-xml-map>call_home_cfg:Hour</xr-xml-map>
+                <xr-task>call-home</xr-task>
+                <xr-sch-type>ZeroRange</xr-sch-type>
+                <type range="0..23">
+                  <type-name>uint32</type-name>
+                </type>
+              </hour>
+              <minute config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/snapshot/perodic_subscribe`4</xr-path>
+                <xr-xml-map>call_home_cfg:Minute</xr-xml-map>
+                <xr-task>call-home</xr-task>
+                <xr-sch-type>ZeroRange</xr-sch-type>
+                <type range="0..59">
+                  <type-name>uint32</type-name>
+                </type>
+              </minute>
+            </periodic>
+          </snapshot>
+          <inventory config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/inventory/</xr-path>
+            <xr-xml-map>call_home_cfg:Inventory</xr-xml-map>
+            <xr-task>call-home</xr-task>
+            <periodic config="true" is-key="false" node="container" presence="false">
+              <xr-is-packed/>
+              <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/inventory/perodic_subscribe`</xr-path>
+              <xr-xml-map>call_home_cfg:Periodic</xr-xml-map>
+              <xr-task>call-home</xr-task>
+              <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+              <interval config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/inventory/perodic_subscribe`0</xr-path>
+                <xr-xml-map>call_home_cfg:Interval</xr-xml-map>
+                <xr-task>call-home</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <type>
+                  <type-name>Call-home-mail-send-interval</type-name>
+                </type>
+              </interval>
+              <day config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/inventory/perodic_subscribe`1</xr-path>
+                <xr-xml-map>call_home_cfg:Day</xr-xml-map>
+                <xr-task>call-home</xr-task>
+                <xr-sch-type>ZeroRange</xr-sch-type>
+                <type range="0..31">
+                  <type-name>uint32</type-name>
+                </type>
+              </day>
+              <weekday config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/inventory/perodic_subscribe`2</xr-path>
+                <xr-xml-map>call_home_cfg:Weekday</xr-xml-map>
+                <xr-task>call-home</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <type>
+                  <type-name>Call-home-day-of-week</type-name>
+                </type>
+              </weekday>
+              <hour config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/inventory/perodic_subscribe`3</xr-path>
+                <xr-xml-map>call_home_cfg:Hour</xr-xml-map>
+                <xr-task>call-home</xr-task>
+                <xr-sch-type>ZeroRange</xr-sch-type>
+                <type range="0..23">
+                  <type-name>uint32</type-name>
+                </type>
+              </hour>
+              <minute config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/inventory/perodic_subscribe`4</xr-path>
+                <xr-xml-map>call_home_cfg:Minute</xr-xml-map>
+                <xr-task>call-home</xr-task>
+                <xr-sch-type>ZeroRange</xr-sch-type>
+                <type range="0..59">
+                  <type-name>uint32</type-name>
+                </type>
+              </minute>
+            </periodic>
+            <subscribe config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/inventory/subscribe</xr-path>
+              <xr-xml-map>call_home_cfg:Subscribe</xr-xml-map>
+              <xr-task>call-home</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </subscribe>
+          </inventory>
+          <crash config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/crash/</xr-path>
+            <xr-xml-map>call_home_cfg:Crash</xr-xml-map>
+            <xr-task>call-home</xr-task>
+            <subscribe config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/crash/subscribe</xr-path>
+              <xr-xml-map>call_home_cfg:Subscribe</xr-xml-map>
+              <xr-task>call-home</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </subscribe>
+          </crash>
+          <syslogs config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/syslog/</xr-path>
+            <xr-xml-map>call_home_cfg:SyslogTable</xr-xml-map>
+            <xr-task>call-home</xr-task>
+            <syslog config="true" key="syslog-pattern" node="list">
+              <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/syslog/&lt;call_home_cfg_Syslog_arg8&gt;/</xr-path>
+              <xr-xml-map>call_home_cfg:Syslog</xr-xml-map>
+              <xr-task>call-home</xr-task>
+              <severity config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/syslog/&lt;call_home_cfg_Syslog_arg8&gt;/severity</xr-path>
+                <xr-xml-map>call_home_cfg:Severity</xr-xml-map>
+                <xr-task>call-home</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <type>
+                  <type-name>Call-home-event-severity</type-name>
+                </type>
+              </severity>
+              <syslog-pattern config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/subscribe_alert_group/syslog/&lt;call_home_cfg_Syslog_arg8&gt;/</xr-path>
+                <xr-xml-map>call_home_cfg:SyslogPattern</xr-xml-map>
+                <xr-task>call-home</xr-task>
+                <xr-sch-type>EncodedBoundedString</xr-sch-type>
+                <xr-sch-arg-name>&lt;call_home_cfg_Syslog_arg8&gt;</xr-sch-arg-name>
+                <type length="1..80">
+                  <type-name>string</type-name>
+                </type>
+              </syslog-pattern>
+            </syslog>
+          </syslogs>
+        </subscribe-alert-group>
+        <message-format config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/message-format</xr-path>
+          <xr-xml-map>call_home_cfg:MessageFormat</xr-xml-map>
+          <xr-task>call-home</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </message-format>
+        <anonymous config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/anonymous</xr-path>
+          <xr-xml-map>call_home_cfg:Anonymous</xr-xml-map>
+          <xr-task>call-home</xr-task>
+          <xr-sch-type>Boolean</xr-sch-type>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </anonymous>
+        <message-size-limit config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/message-size-limit</xr-path>
+          <xr-xml-map>call_home_cfg:MessageSizeLimit</xr-xml-map>
+          <xr-task>call-home</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="50..3145728">
+            <type-name>uint32</type-name>
+          </type>
+        </message-size-limit>
+        <active config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/active</xr-path>
+          <xr-xml-map>call_home_cfg:Active</xr-xml-map>
+          <xr-task>call-home</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </active>
+        <profile-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-create-item-relative-path>a</xr-create-item-relative-path>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/call-home/configuration_profile/&lt;call_home_cfg_Profile_arg50&gt;/</xr-path>
+          <xr-xml-map>call_home_cfg:ProfileName</xr-xml-map>
+          <xr-task>call-home</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;call_home_cfg_Profile_arg50&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </profile-name>
+      </profile>
+    </profiles>
+    <alert-groups config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/call-home/alert-group/</xr-path>
+      <xr-xml-map>call_home_cfg:AlertGroupTable</xr-xml-map>
+      <xr-task>call-home</xr-task>
+      <alert-group config="true" key="alert-group-name" node="list">
+        <xr-path>/cfg/gl/call-home/alert-group/&lt;call_home_cfg_AlertGroup_arg1&gt;/</xr-path>
+        <xr-xml-map>call_home_cfg:AlertGroup</xr-xml-map>
+        <xr-task>call-home</xr-task>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/call-home/alert-group/&lt;call_home_cfg_AlertGroup_arg1&gt;/active</xr-path>
+          <xr-xml-map>call_home_cfg:Enable</xr-xml-map>
+          <xr-task>call-home</xr-task>
+          <xr-sch-type>Boolean</xr-sch-type>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </enable>
+        <disable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/call-home/alert-group/&lt;call_home_cfg_AlertGroup_arg1&gt;/inactive</xr-path>
+          <xr-xml-map>call_home_cfg:Disable</xr-xml-map>
+          <xr-task>call-home</xr-task>
+          <xr-sch-type>Boolean</xr-sch-type>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </disable>
+        <alert-group-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/call-home/alert-group/&lt;call_home_cfg_AlertGroup_arg1&gt;/</xr-path>
+          <xr-xml-map>call_home_cfg:AlertGroupName</xr-xml-map>
+          <xr-task>call-home</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;call_home_cfg_AlertGroup_arg1&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </alert-group-name>
+      </alert-group>
+    </alert-groups>
+    <data-privacies config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/call-home/data-privacy/</xr-path>
+      <xr-xml-map>call_home_cfg:DataPrivacyTable</xr-xml-map>
+      <xr-task>call-home</xr-task>
+      <data-privacy config="true" key="host-name" node="list">
+        <xr-path>/cfg/gl/call-home/data-privacy/&lt;call_home_cfg_DataPrivacy_arg1&gt;/</xr-path>
+        <xr-xml-map>call_home_cfg:DataPrivacy</xr-xml-map>
+        <xr-task>call-home</xr-task>
+        <level config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/call-home/data-privacy/&lt;call_home_cfg_DataPrivacy_arg1&gt;/level</xr-path>
+          <xr-xml-map>call_home_cfg:Level</xr-xml-map>
+          <xr-task>call-home</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Data-privacy-level</type-name>
+          </type>
+        </level>
+        <host-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/call-home/data-privacy/&lt;call_home_cfg_DataPrivacy_arg1&gt;/</xr-path>
+          <xr-xml-map>call_home_cfg:HostName</xr-xml-map>
+          <xr-task>call-home</xr-task>
+          <xr-sch-type>EncodedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;call_home_cfg_DataPrivacy_arg1&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </host-name>
+      </data-privacy>
+    </data-privacies>
+    <alert-group-config config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/call-home/alertgroup-config/</xr-path>
+      <xr-xml-map>call_home_cfg:AlertGroupConfig</xr-xml-map>
+      <xr-task>call-home</xr-task>
+      <snapshot-commands config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/call-home/alertgroup-config/snapshot/</xr-path>
+        <xr-xml-map>call_home_cfg:SnapshotCommandTable</xr-xml-map>
+        <xr-task>call-home</xr-task>
+        <snapshot-command config="true" key="command" node="list">
+          <xr-path>/cfg/gl/call-home/alertgroup-config/snapshot/&lt;call_home_cfg_SnapshotCommand_arg1&gt;/</xr-path>
+          <xr-xml-map>call_home_cfg:SnapshotCommand</xr-xml-map>
+          <xr-task>call-home</xr-task>
+          <active config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/call-home/alertgroup-config/snapshot/&lt;call_home_cfg_SnapshotCommand_arg1&gt;/active</xr-path>
+            <xr-xml-map>call_home_cfg:Active</xr-xml-map>
+            <xr-task>call-home</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </active>
+          <command config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/call-home/alertgroup-config/snapshot/&lt;call_home_cfg_SnapshotCommand_arg1&gt;/</xr-path>
+            <xr-xml-map>call_home_cfg:Command</xr-xml-map>
+            <xr-task>call-home</xr-task>
+            <xr-sch-type>EncodedBoundedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;call_home_cfg_SnapshotCommand_arg1&gt;</xr-sch-arg-name>
+            <type length="1..127">
+              <type-name>string</type-name>
+            </type>
+          </command>
+        </snapshot-command>
+      </snapshot-commands>
+    </alert-group-config>
+    <authorization config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/call-home/aaa/</xr-path>
+      <xr-xml-map>call_home_cfg:Authorization</xr-xml-map>
+      <xr-task>call-home</xr-task>
+      <username config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/gl/call-home/aaa/username</xr-path>
+        <xr-xml-map>call_home_cfg:Username</xr-xml-map>
+        <xr-task>call-home</xr-task>
+        <xr-sch-type>BoundedString</xr-sch-type>
+        <type length="1..64">
+          <type-name>xr:Cisco-ios-xr-string</type-name>
+        </type>
+      </username>
+      <active config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/call-home/aaa/active</xr-path>
+        <xr-xml-map>call_home_cfg:Active</xr-xml-map>
+        <xr-task>call-home</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </active>
+    </authorization>
+    <customer-id config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>string</xr-primitive-type>
+      <xr-path>/cfg/gl/call-home/customer_id</xr-path>
+      <xr-xml-map>call_home_cfg:CustomerID</xr-xml-map>
+      <xr-task>call-home</xr-task>
+      <xr-sch-type>BoundedString</xr-sch-type>
+      <type length="1..64">
+        <type-name>string</type-name>
+      </type>
+    </customer-id>
+    <phone-number config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>string</xr-primitive-type>
+      <xr-path>/cfg/gl/call-home/phone_number</xr-path>
+      <xr-xml-map>call_home_cfg:PhoneNumber</xr-xml-map>
+      <xr-task>call-home</xr-task>
+      <xr-sch-type>BoundedString</xr-sch-type>
+      <type length="1..17">
+        <type-name>string</type-name>
+      </type>
+    </phone-number>
+    <contact-smart-licensing config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/call-home/contact_sl</xr-path>
+      <xr-xml-map>call_home_cfg:ContactSmartLicensing</xr-xml-map>
+      <xr-task>call-home</xr-task>
+      <xr-sch-type>Boolean</xr-sch-type>
+      <type>
+        <type-name>boolean</type-name>
+      </type>
+    </contact-smart-licensing>
+    <contact-email-address config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>string</xr-primitive-type>
+      <xr-path>/cfg/gl/call-home/contact_email</xr-path>
+      <xr-xml-map>call_home_cfg:ContactEmailAddress</xr-xml-map>
+      <xr-task>call-home</xr-task>
+      <xr-sch-type>BoundedString</xr-sch-type>
+      <type length="1..194">
+        <type-name>string</type-name>
+      </type>
+    </contact-email-address>
+    <rate-limit config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/call-home/rate_limit</xr-path>
+      <xr-xml-map>call_home_cfg:RateLimit</xr-xml-map>
+      <xr-task>call-home</xr-task>
+      <xr-sch-type>Range</xr-sch-type>
+      <type range="1..5">
+        <type-name>uint32</type-name>
+      </type>
+    </rate-limit>
+    <site-id config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>string</xr-primitive-type>
+      <xr-path>/cfg/gl/call-home/site_id</xr-path>
+      <xr-xml-map>call_home_cfg:SiteID</xr-xml-map>
+      <xr-task>call-home</xr-task>
+      <xr-sch-type>BoundedString</xr-sch-type>
+      <type length="1..200">
+        <type-name>string</type-name>
+      </type>
+    </site-id>
+    <vrf config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>string</xr-primitive-type>
+      <xr-path>/cfg/gl/call-home/vrf</xr-path>
+      <xr-xml-map>call_home_cfg:VRF</xr-xml-map>
+      <xr-task>call-home</xr-task>
+      <xr-sch-type>BoundedString</xr-sch-type>
+      <type length="1..32">
+        <type-name>xr:Cisco-ios-xr-string</type-name>
+      </type>
+    </vrf>
+    <street-address config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>string</xr-primitive-type>
+      <xr-path>/cfg/gl/call-home/street_address</xr-path>
+      <xr-xml-map>call_home_cfg:StreetAddress</xr-xml-map>
+      <xr-task>call-home</xr-task>
+      <xr-sch-type>BoundedString</xr-sch-type>
+      <type length="1..200">
+        <type-name>string</type-name>
+      </type>
+    </street-address>
+    <source-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>string</xr-primitive-type>
+      <xr-path>/cfg/gl/call-home/source-interface</xr-path>
+      <xr-xml-map>call_home_cfg:SourceInterface</xr-xml-map>
+      <xr-task>call-home</xr-task>
+      <xr-sch-type>InterfaceName</xr-sch-type>
+      <type>
+        <type-name>xr:Interface-name</type-name>
+      </type>
+    </source-interface>
+    <contract-id config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>string</xr-primitive-type>
+      <xr-path>/cfg/gl/call-home/contract_id</xr-path>
+      <xr-xml-map>call_home_cfg:ContractID</xr-xml-map>
+      <xr-task>call-home</xr-task>
+      <xr-sch-type>BoundedString</xr-sch-type>
+      <type length="1..64">
+        <type-name>string</type-name>
+      </type>
+    </contract-id>
+    <reply-to config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>string</xr-primitive-type>
+      <xr-path>/cfg/gl/call-home/reply-to</xr-path>
+      <xr-xml-map>call_home_cfg:ReplyTo</xr-xml-map>
+      <xr-task>call-home</xr-task>
+      <xr-sch-type>String</xr-sch-type>
+      <type>
+        <type-name>string</type-name>
+      </type>
+    </reply-to>
+    <from config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>string</xr-primitive-type>
+      <xr-path>/cfg/gl/call-home/sender_from</xr-path>
+      <xr-xml-map>call_home_cfg:From</xr-xml-map>
+      <xr-task>call-home</xr-task>
+      <xr-sch-type>String</xr-sch-type>
+      <type>
+        <type-name>string</type-name>
+      </type>
+    </from>
+    <active config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/call-home/enable</xr-path>
+      <xr-xml-map>call_home_cfg:Active</xr-xml-map>
+      <xr-task>call-home</xr-task>
+      <xr-sch-type>Configured</xr-sch-type>
+      <type>
+        <type-name>empty</type-name>
+      </type>
+    </active>
+  </call-home>
+</Cisco-IOS-XR-call-home-cfg>
