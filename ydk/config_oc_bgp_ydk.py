@@ -3,11 +3,9 @@
 import logging,os
 from argparse import ArgumentParser
 from ydk.gnmi.providers import gNMIServiceProvider
-from ydk.gnmi.services import gNMIService
 from ydk.path import Repository
 from ydk.models.openconfig import openconfig_network_instance as oc_ni
 from ydk.services import CRUDService
-from ydk.providers import NetconfServiceProvider
 from ydk.models.openconfig import openconfig_policy_types as oc_policy_types
 from ydk.models.openconfig import openconfig_bgp_types as oc_bgp_types
 
@@ -70,7 +68,6 @@ if __name__ == "__main__":
                                    port=int(args.grpc_port), 
                                    username=args.username, 
                                    password=args.password)
-    gnmi_service = gNMIService()
 
     crud = CRUDService()
 

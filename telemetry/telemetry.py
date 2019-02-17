@@ -13,8 +13,6 @@ import time
 
 from ydk.models.openconfig import openconfig_interfaces
 from ydk.models.openconfig import openconfig_network_instance
-from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ipv4_bgp_oper \
-  as bgp_oper
 from ydk.path import Repository
 from ydk.gnmi.providers import gNMIServiceProvider
 from ydk.gnmi.services import gNMIService
@@ -50,7 +48,6 @@ def subscribe(func):
         except:
             #Running in a docker container started off image akshshar/nanog75-telemetry
             repository = Repository('/root/yang/')
-            raise
     except Exception as e:
         print("Failed to import yang models, check repository path,  aborting....")
         sys.exit(1)
