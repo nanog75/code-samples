@@ -1,0 +1,23 @@
+---
+- name: Build and Deploy a Telemetry client to push GNMI telemetry data to kafka
+  hosts: local
+  connection: local
+  become: yes
+
+  tasks:
+
+    - name: Install the docker module for Ansible
+      pip:
+          name: docker
+          state: present
+
+    - name: Deploy the build Telemetry docker image
+      docker_container:
+          name: telemetry
+          image: akshshar/nanog75-telemetry:latest
+          volumes: ./telemetry.py:/root/telemetry.py
+          command: python3 /root/telemetry.py
+          state: started
+          force_kill: yes
+          interactive: yes
+          restart: yes
