@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<openconfig-vlan-types ns="http://openconfig.net/yang/vlan-types" oc-ver="1.0.2" revision="2016-05-26">
+  <files>
+    <file revision="2016-05-26" submodule="false">openconfig-vlan-types.yang</file>
+  </files>
+  <prefix>oc-vlan-types</prefix>
+  <organization>OpenConfig working group</organization>
+  <import prefix="oc-ext">openconfig-extensions</import>
+  <identity name="TPID_TYPES"/>
+  <identity name="TPID_0x8100">
+    <base>TPID_TYPES</base>
+  </identity>
+  <identity name="TPID_0x8A88">
+    <base>TPID_TYPES</base>
+  </identity>
+  <identity name="TPID_0x9100">
+    <base>TPID_TYPES</base>
+  </identity>
+  <identity name="TPID_0X9200">
+    <base>TPID_TYPES</base>
+  </identity>
+  <typedef name="vlan-id">
+    <type range="1..4094">
+      <type-name>uint16</type-name>
+    </type>
+  </typedef>
+  <typedef name="vlan-range">
+    <type>
+      <pattern>^(409[0-4]|40[0-8][0-9]|[1-3][0-9]{3}|[1-9][0-9]{1,2}|[1-9])\.\.(409[0-4]|40[0-8][0-9]|[1-3][0-9]{3}|[1-9][0-9]{1,2}|[1-9])$</pattern>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="qinq-id">
+    <type>
+      <pattern>^(409[0-4]|40[0-8][0-9]|[1-3][0-9]{3}|[1-9][0-9]{1,2}|[1-9])\.((409[0-4]|40[0-8][0-9]|[1-3][0-9]{3}|[1-9][0-9]{1,2}|[1-9])|\*)$</pattern>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="qinq-id-range">
+    <type node="union">
+      <type>
+        <pattern>^(409[0-4]|40[0-8][0-9]|[1-3][0-9]{3}|[1-9][0-9]{1,2}|[1-9])\.\.(409[0-4]|40[0-8][0-9]|[1-3][0-9]{3}|[1-9][0-9]{1,2}|[1-9])\.((409[0-4]|40[0-8][0-9]|[1-3][0-9]{3}|[1-9][0-9]{1,2}|[1-9])|\*)$</pattern>
+        <type-name>string</type-name>
+      </type>
+      <type>
+        <pattern>^(\*|(409[0-4]|40[0-8][0-9]|[1-3][0-9]{3}|[1-9][0-9]{1,2}|[1-9]))\.(409[0-4]|40[0-8][0-9]|[1-3][0-9]{3}|[1-9][0-9]{1,2}|[1-9])\.\.(409[0-4]|40[0-8][0-9]|[1-3][0-9]{3}|[1-9][0-9]{1,2}|[1-9])$</pattern>
+        <type-name>string</type-name>
+      </type>
+    </type>
+  </typedef>
+  <typedef name="vlan-mode-type">
+    <type node="enumeration">
+      <enum>ACCESS</enum>
+      <enum>TRUNK</enum>
+    </type>
+  </typedef>
+  <typedef name="vlan-ref">
+    <type node="union">
+      <type>
+        <type-name>vlan-id</type-name>
+      </type>
+      <type>
+        <type-name>string</type-name>
+      </type>
+    </type>
+  </typedef>
+</openconfig-vlan-types>

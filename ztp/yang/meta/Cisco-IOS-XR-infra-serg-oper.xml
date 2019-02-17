@@ -1,0 +1,2860 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-infra-serg-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-infra-serg-oper" revision="2017-09-07">
+  <files>
+    <file revision="2017-09-07" submodule="false">Cisco-IOS-XR-infra-serg-oper.yang</file>
+    <file revision="2017-09-07" submodule="true">Cisco-IOS-XR-infra-serg-oper-sub2.yang</file>
+    <file revision="2017-09-07" submodule="true">Cisco-IOS-XR-infra-serg-oper-sub1.yang</file>
+  </files>
+  <prefix>infra-serg-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="inet">ietf-inet-types</import>
+  <typedef name="Serg-show-mem">
+    <type node="enumeration">
+      <enum value="0">standard</enum>
+      <enum value="1">chunk</enum>
+      <enum value="2">edm</enum>
+      <enum value="3">string</enum>
+      <enum value="4">static</enum>
+      <enum value="5">unknown</enum>
+    </type>
+  </typedef>
+  <typedef name="Serg-show-so-reason">
+    <type node="enumeration">
+      <enum value="0">internal</enum>
+      <enum value="1">admin</enum>
+      <enum value="2">peer-up</enum>
+      <enum value="3">peer-down</enum>
+      <enum value="4">object-tracking-status-change</enum>
+      <enum value="5">serg-show-so-reason-max</enum>
+    </type>
+  </typedef>
+  <typedef name="Serg-peer-status">
+    <type node="enumeration">
+      <enum value="0">not-configured</enum>
+      <enum value="1">initialize</enum>
+      <enum value="2">retry</enum>
+      <enum value="3">connect</enum>
+      <enum value="4">listen</enum>
+      <enum value="5">registration</enum>
+      <enum value="6">cleanup</enum>
+      <enum value="7">connected</enum>
+      <enum value="8">established</enum>
+    </type>
+  </typedef>
+  <typedef name="Serg-show-session-error">
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">hard</enum>
+      <enum value="2">soft</enum>
+    </type>
+  </typedef>
+  <typedef name="Serg-show-session-operation">
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">update</enum>
+      <enum value="2">delete</enum>
+      <enum value="3">in-sync</enum>
+    </type>
+  </typedef>
+  <typedef name="Serg-show-comp">
+    <type node="enumeration">
+      <enum value="0">serga</enum>
+      <enum value="1">ipv6nd</enum>
+      <enum value="2">dhcpv6</enum>
+      <enum value="3">daps</enum>
+    </type>
+  </typedef>
+  <typedef name="Serg-show-slave-mode">
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">warm</enum>
+      <enum value="2">hot</enum>
+    </type>
+  </typedef>
+  <typedef name="Serg-show-role">
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">master</enum>
+      <enum value="2">slave</enum>
+    </type>
+  </typedef>
+  <typedef name="Serg-show-im-role">
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">master</enum>
+      <enum value="2">slave</enum>
+    </type>
+  </typedef>
+  <session-redundancy-manager config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/serg/gl/sergm/</xr-path>
+    <xr-xml-map>serg_show:SessionRedundancyManager</xr-xml-map>
+    <interfaces config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/serg/gl/sergm/interface/</xr-path>
+      <xr-xml-map>serg_show:Interfaces</xr-xml-map>
+      <interface config="false" key="interface" node="list">
+        <xr-path>/oper/serg/gl/sergm/interface/&lt;serg_show_Interface_interface&gt;</xr-path>
+        <xr-xml-map>serg_show:Interface</xr-xml-map>
+        <xr-bag-grp-name>serg_show_mgr_intf_entry</xr-bag-grp-name>
+        <xr-bag>serg_show.bag</xr-bag>
+        <interface config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/serg/gl/sergm/interface/&lt;serg_show_Interface_interface&gt;</xr-path>
+          <xr-xml-map>serg_show:Interface</xr-xml-map>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;serg_show_Interface_interface&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </interface>
+        <interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/serg/gl/sergm/interface/&lt;serg_show_Interface_interface&gt;~serg_show_mgr_intf_entry.InterfaceName</xr-path>
+          <xr-xml-map>serg_show:InterfaceName</xr-xml-map>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </interface-name>
+        <interface-mapping-id config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/serg/gl/sergm/interface/&lt;serg_show_Interface_interface&gt;~serg_show_mgr_intf_entry.InterfaceMappingID</xr-path>
+          <xr-xml-map>serg_show:InterfaceMappingID</xr-xml-map>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </interface-mapping-id>
+        <forward-referenced config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/serg/gl/sergm/interface/&lt;serg_show_Interface_interface&gt;~serg_show_mgr_intf_entry.ForwardReferenced</xr-path>
+          <xr-xml-map>serg_show:ForwardReferenced</xr-xml-map>
+          <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </forward-referenced>
+        <group-id config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/serg/gl/sergm/interface/&lt;serg_show_Interface_interface&gt;~serg_show_mgr_intf_entry.GroupID</xr-path>
+          <xr-xml-map>serg_show:GroupID</xr-xml-map>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </group-id>
+        <role config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/serg/gl/sergm/interface/&lt;serg_show_Interface_interface&gt;~serg_show_mgr_intf_entry.Role</xr-path>
+          <xr-xml-map>serg_show:Role</xr-xml-map>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>Serg-show-im-role</type-name>
+          </type>
+        </role>
+      </interface>
+    </interfaces>
+    <groups config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/serg/gl/sergm/group/</xr-path>
+      <xr-xml-map>serg_show:GroupTable</xr-xml-map>
+      <group config="false" key="group" node="list">
+        <xr-path>/oper/serg/gl/sergm/group/&lt;serg_show_Group_group&gt;</xr-path>
+        <xr-xml-map>serg_show:Group</xr-xml-map>
+        <xr-bag-grp-name>serg_show_mgr_group_entry</xr-bag-grp-name>
+        <xr-bag>serg_show.bag</xr-bag>
+        <group config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/serg/gl/sergm/group/&lt;serg_show_Group_group&gt;</xr-path>
+          <xr-xml-map>serg_show:group</xr-xml-map>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;serg_show_Group_group&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </group>
+        <group-id config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/serg/gl/sergm/group/&lt;serg_show_Group_group&gt;~serg_show_mgr_group_entry.GroupID</xr-path>
+          <xr-xml-map>serg_show:GroupID</xr-xml-map>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </group-id>
+        <description config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/serg/gl/sergm/group/&lt;serg_show_Group_group&gt;~serg_show_mgr_group_entry.Description</xr-path>
+          <xr-xml-map>serg_show:Description</xr-xml-map>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </description>
+        <disabled config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/serg/gl/sergm/group/&lt;serg_show_Group_group&gt;~serg_show_mgr_group_entry.Disabled</xr-path>
+          <xr-xml-map>serg_show:Disabled</xr-xml-map>
+          <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </disabled>
+        <role config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/serg/gl/sergm/group/&lt;serg_show_Group_group&gt;~serg_show_mgr_group_entry.Role</xr-path>
+          <xr-xml-map>serg_show:Role</xr-xml-map>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>Serg-show-im-role</type-name>
+          </type>
+        </role>
+        <peer-ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/serg/gl/sergm/group/&lt;serg_show_Group_group&gt;~serg_show_mgr_group_entry.PeerIPv4Address</xr-path>
+          <xr-xml-map>serg_show:PeerIPv4Address</xr-xml-map>
+          <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>inet:ipv4-address</type-name>
+          </type>
+        </peer-ipv4-address>
+        <peer-ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/serg/gl/sergm/group/&lt;serg_show_Group_group&gt;~serg_show_mgr_group_entry.PeerIPv6Address</xr-path>
+          <xr-xml-map>serg_show:PeerIPv6Address</xr-xml-map>
+          <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>inet:ipv6-address</type-name>
+          </type>
+        </peer-ipv6-address>
+        <interface-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/serg/gl/sergm/group/&lt;serg_show_Group_group&gt;~serg_show_mgr_group_entry.InterfaceCount</xr-path>
+          <xr-xml-map>serg_show:InterfaceCount</xr-xml-map>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </interface-count>
+        <preferred-role config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/serg/gl/sergm/group/&lt;serg_show_Group_group&gt;~serg_show_mgr_group_entry.PreferredRole</xr-path>
+          <xr-xml-map>serg_show:PreferredRole</xr-xml-map>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>Serg-show-role</type-name>
+          </type>
+        </preferred-role>
+        <slave-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/serg/gl/sergm/group/&lt;serg_show_Group_group&gt;~serg_show_mgr_group_entry.SlaveMode</xr-path>
+          <xr-xml-map>serg_show:SlaveMode</xr-xml-map>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>Serg-show-slave-mode</type-name>
+          </type>
+        </slave-mode>
+        <object-tracking-status config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/serg/gl/sergm/group/&lt;serg_show_Group_group&gt;~serg_show_mgr_group_entry.ObjectTrackingStatus</xr-path>
+          <xr-xml-map>serg_show:ObjectTrackingStatus</xr-xml-map>
+          <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </object-tracking-status>
+        <node-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/serg/gl/sergm/group/&lt;serg_show_Group_group&gt;~serg_show_mgr_group_entry.NodeName</xr-path>
+          <xr-xml-map>serg_show:NodeName</xr-xml-map>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </node-name>
+      </group>
+    </groups>
+    <summary config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/serg/gl/sergm/summary</xr-path>
+      <xr-xml-map>serg_show:Summary</xr-xml-map>
+      <xr-bag-grp-name>serg_show_mgr_summary</xr-bag-grp-name>
+      <xr-bag>serg_show.bag</xr-bag>
+      <disabled config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/serg/gl/sergm/summary~serg_show_mgr_summary.Disabled</xr-path>
+        <xr-xml-map>serg_show:Disabled</xr-xml-map>
+        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </disabled>
+      <active-state config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/serg/gl/sergm/summary~serg_show_mgr_summary.ActiveState</xr-path>
+        <xr-xml-map>serg_show:ActiveState</xr-xml-map>
+        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </active-state>
+      <preferred-role config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/serg/gl/sergm/summary~serg_show_mgr_summary.PreferredRole</xr-path>
+        <xr-xml-map>serg_show:PreferredRole</xr-xml-map>
+        <xr-bag-primitive-type>int</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>Serg-show-role</type-name>
+        </type>
+      </preferred-role>
+      <slave-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/serg/gl/sergm/summary~serg_show_mgr_summary.SlaveMode</xr-path>
+        <xr-xml-map>serg_show:SlaveMode</xr-xml-map>
+        <xr-bag-primitive-type>int</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>Serg-show-slave-mode</type-name>
+        </type>
+      </slave-mode>
+      <hold-timer config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/serg/gl/sergm/summary~serg_show_mgr_summary.HoldTimer</xr-path>
+        <xr-xml-map>serg_show:HoldTimer</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </hold-timer>
+      <source-interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/serg/gl/sergm/summary~serg_show_mgr_summary.SourceInterfaceName</xr-path>
+        <xr-xml-map>serg_show:SourceInterfaceName</xr-xml-map>
+        <xr-bag-primitive-type>string</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </source-interface-name>
+      <vrf-name config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/serg/gl/sergm/summary~serg_show_mgr_summary.VRFName</xr-path>
+        <xr-xml-map>serg_show:VRFName</xr-xml-map>
+        <xr-bag-primitive-type>string</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </vrf-name>
+      <source-interface-ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/serg/gl/sergm/summary~serg_show_mgr_summary.SourceInterfaceIPv4Address</xr-path>
+        <xr-xml-map>serg_show:SourceInterfaceIPv4Address</xr-xml-map>
+        <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>inet:ipv4-address</type-name>
+        </type>
+      </source-interface-ipv4-address>
+      <source-interface-ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/serg/gl/sergm/summary~serg_show_mgr_summary.SourceInterfaceIPv6Address</xr-path>
+        <xr-xml-map>serg_show:SourceInterfaceIPv6Address</xr-xml-map>
+        <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>inet:ipv6-address</type-name>
+        </type>
+      </source-interface-ipv6-address>
+      <group-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/serg/gl/sergm/summary~serg_show_mgr_summary.GroupCount</xr-path>
+        <xr-xml-map>serg_show:GroupCount</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </group-count>
+      <disabled-group-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/serg/gl/sergm/summary~serg_show_mgr_summary.DisabledGroupCount</xr-path>
+        <xr-xml-map>serg_show:DisabledGroupCount</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </disabled-group-count>
+      <master-group-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/serg/gl/sergm/summary~serg_show_mgr_summary.MasterGroupCount</xr-path>
+        <xr-xml-map>serg_show:MasterGroupCount</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </master-group-count>
+      <slave-group-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/serg/gl/sergm/summary~serg_show_mgr_summary.SlaveGroupCount</xr-path>
+        <xr-xml-map>serg_show:SlaveGroupCount</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </slave-group-count>
+      <interface-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/serg/gl/sergm/summary~serg_show_mgr_summary.InterfaceCount</xr-path>
+        <xr-xml-map>serg_show:InterfaceCount</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </interface-count>
+      <master-interface-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/serg/gl/sergm/summary~serg_show_mgr_summary.MasterInterfaceCount</xr-path>
+        <xr-xml-map>serg_show:MasterInterfaceCount</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </master-interface-count>
+      <slave-interface-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/serg/gl/sergm/summary~serg_show_mgr_summary.SlaveInterfaceCount</xr-path>
+        <xr-xml-map>serg_show:SlaveInterfaceCount</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </slave-interface-count>
+      <pool-count config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/serg/gl/sergm/summary~serg_show_mgr_summary.PoolCount</xr-path>
+        <xr-xml-map>serg_show:PoolCount</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </pool-count>
+    </summary>
+  </session-redundancy-manager>
+  <session-redundancy-agent config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/serg/serga/</xr-path>
+    <xr-xml-map>serg_show:SessionRedundancyAgent</xr-xml-map>
+    <nodes config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/serg/serga/node/</xr-path>
+      <xr-xml-map>serg_show:NodeTable</xr-xml-map>
+      <node config="false" key="node-name" node="list">
+        <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/</xr-path>
+        <xr-xml-map>serg_show:Node</xr-xml-map>
+        <group-id-xr config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsession-xml/</xr-path>
+          <xr-xml-map>serg_show:GroupSession</xr-xml-map>
+          <group-id config="false" key="group-id" node="list">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsession-xml/&lt;serg_show_GroupId_group-id&gt;</xr-path>
+            <xr-xml-map>serg_show:GroupId</xr-xml-map>
+            <xr-bag-grp-name>serg_show_session_entry</xr-bag-grp-name>
+            <xr-bag>serg_show.bag</xr-bag>
+            <group-id config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsession-xml/&lt;serg_show_GroupId_group-id&gt;</xr-path>
+              <xr-xml-map>serg_show:GroupId</xr-xml-map>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;serg_show_GroupId_group-id&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </group-id>
+            <group-id-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsession-xml/&lt;serg_show_GroupId_group-id&gt;~serg_show_session_entry.GroupID</xr-path>
+              <xr-xml-map>serg_show:group-id-xr</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </group-id-xr>
+            <interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsession-xml/&lt;serg_show_GroupId_group-id&gt;~serg_show_session_entry.InterfaceName</xr-path>
+              <xr-xml-map>serg_show:InterfaceName</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </interface-name>
+            <key-index config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsession-xml/&lt;serg_show_GroupId_group-id&gt;~serg_show_session_entry.KeyIndex</xr-path>
+              <xr-xml-map>serg_show:KeyIndex</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </key-index>
+            <role-master config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsession-xml/&lt;serg_show_GroupId_group-id&gt;~serg_show_session_entry.RoleMaster</xr-path>
+              <xr-xml-map>serg_show:RoleMaster</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </role-master>
+            <negative-acknowledgement-update-all config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsession-xml/&lt;serg_show_GroupId_group-id&gt;~serg_show_session_entry.NegativeAcknowledgementUpdateAll</xr-path>
+              <xr-xml-map>serg_show:NegativeAcknowledgementUpdateAll</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </negative-acknowledgement-update-all>
+            <session-detailed-information config="false" node="list">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsession-xml/&lt;serg_show_GroupId_group-id&gt;~serg_show_session_entry.SessionDetailedInformation[&lt;bag_arg5&gt;]</xr-path>
+              <xr-bag-version>1 1</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg5&gt;</xr-internal-key>
+              <component config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsession-xml/&lt;serg_show_GroupId_group-id&gt;~serg_show_session_entry.SessionDetailedInformation[&lt;bag_arg5&gt;].Component</xr-path>
+                <xr-xml-map>serg_show:Component</xr-xml-map>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>Serg-show-comp</type-name>
+                </type>
+              </component>
+              <operation config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsession-xml/&lt;serg_show_GroupId_group-id&gt;~serg_show_session_entry.SessionDetailedInformation[&lt;bag_arg5&gt;].Operation</xr-path>
+                <xr-xml-map>serg_show:Operation</xr-xml-map>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>Serg-show-session-operation</type-name>
+                </type>
+              </operation>
+              <tx-list-queue-fail config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsession-xml/&lt;serg_show_GroupId_group-id&gt;~serg_show_session_entry.SessionDetailedInformation[&lt;bag_arg5&gt;].TxListQueueFail</xr-path>
+                <xr-xml-map>serg_show:TxListQueueFail</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </tx-list-queue-fail>
+              <marked-for-sweeping config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsession-xml/&lt;serg_show_GroupId_group-id&gt;~serg_show_session_entry.SessionDetailedInformation[&lt;bag_arg5&gt;].MarkedForSweeping</xr-path>
+                <xr-xml-map>serg_show:MarkedForSweeping</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </marked-for-sweeping>
+              <marked-for-cleanup config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsession-xml/&lt;serg_show_GroupId_group-id&gt;~serg_show_session_entry.SessionDetailedInformation[&lt;bag_arg5&gt;].MarkedForCleanup</xr-path>
+                <xr-xml-map>serg_show:MarkedForCleanup</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </marked-for-cleanup>
+            </session-detailed-information>
+            <session-sync-error-information config="false" node="list">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsession-xml/&lt;serg_show_GroupId_group-id&gt;~serg_show_session_entry.SessionSyncErrorInformation[&lt;bag_arg6&gt;]</xr-path>
+              <xr-bag-version>1 1</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg6&gt;</xr-internal-key>
+              <sync-error-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsession-xml/&lt;serg_show_GroupId_group-id&gt;~serg_show_session_entry.SessionSyncErrorInformation[&lt;bag_arg6&gt;].SyncErrorCount</xr-path>
+                <xr-xml-map>serg_show:SyncErrorCount</xr-xml-map>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </sync-error-count>
+              <last-error-code config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsession-xml/&lt;serg_show_GroupId_group-id&gt;~serg_show_session_entry.SessionSyncErrorInformation[&lt;bag_arg6&gt;].LastErrorCode</xr-path>
+                <xr-xml-map>serg_show:LastErrorCode</xr-xml-map>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </last-error-code>
+              <last-error-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsession-xml/&lt;serg_show_GroupId_group-id&gt;~serg_show_session_entry.SessionSyncErrorInformation[&lt;bag_arg6&gt;].LastErrorType</xr-path>
+                <xr-xml-map>serg_show:LastErrorType</xr-xml-map>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>Serg-show-session-error</type-name>
+                </type>
+              </last-error-type>
+            </session-sync-error-information>
+          </group-id>
+        </group-id-xr>
+        <client-ids config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/</xr-path>
+          <xr-xml-map>serg_show:Stats-Client</xr-xml-map>
+          <client-id config="false" key="stats-client-id" node="list">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;</xr-path>
+            <xr-xml-map>serg_show:Client-Id</xr-xml-map>
+            <xr-bag-grp-name>serg_show_agt_client_statistics</xr-bag-grp-name>
+            <xr-bag>serg_show.bag</xr-bag>
+            <stats-client-id config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;</xr-path>
+              <xr-xml-map>serg_show:StatsClientID</xr-xml-map>
+              <xr-sch-type>Integer</xr-sch-type>
+              <xr-sch-arg-name>&lt;serg_show_Client-Id_clientid&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </stats-client-id>
+            <tx-list-start-of-download-add-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListStartOfDownloadAddOk</xr-path>
+              <xr-xml-map>serg_show:TxListStartOfDownloadAddOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-start-of-download-add-ok>
+            <tx-list-start-of-download-add-not-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListStartOfDownloadAddNotOk</xr-path>
+              <xr-xml-map>serg_show:TxListStartOfDownloadAddNotOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-start-of-download-add-not-ok>
+            <tx-list-end-of-download-add-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListEndOfDownloadAddOk</xr-path>
+              <xr-xml-map>serg_show:TxListEndOfDownloadAddOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-end-of-download-add-ok>
+            <tx-list-end-of-download-add-not-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListEndOfDownloadAddNotOk</xr-path>
+              <xr-xml-map>serg_show:TxListEndOfDownloadAddNotOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-end-of-download-add-not-ok>
+            <tx-list-end-of-message-add-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListEndOfMessageAddOk</xr-path>
+              <xr-xml-map>serg_show:TxListEndOfMessageAddOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-end-of-message-add-ok>
+            <tx-list-end-of-message-add-not-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListEndOfMessageAddNotOk</xr-path>
+              <xr-xml-map>serg_show:TxListEndOfMessageAddNotOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-end-of-message-add-not-ok>
+            <tx-list-clear-all-add-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListClearAllAddOk</xr-path>
+              <xr-xml-map>serg_show:TxListClearAllAddOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-clear-all-add-ok>
+            <tx-list-clear-all-add-not-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListClearAllAddNotOk</xr-path>
+              <xr-xml-map>serg_show:TxListClearAllAddNotOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-clear-all-add-not-ok>
+            <tx-list-clear-selected-add-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListClearSelectedAddOk</xr-path>
+              <xr-xml-map>serg_show:TxListClearSelectedAddOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-clear-selected-add-ok>
+            <tx-list-clear-selected-add-not-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListClearSelectedAddNotOk</xr-path>
+              <xr-xml-map>serg_show:TxListClearSelectedAddNotOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-clear-selected-add-not-ok>
+            <tx-list-replay-all-add-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListReplayAllAddOk</xr-path>
+              <xr-xml-map>serg_show:TxListReplayAllAddOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-replay-all-add-ok>
+            <tx-list-replay-all-add-not-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListReplayAllAddNotOk</xr-path>
+              <xr-xml-map>serg_show:TxListReplayAllAddNotOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-replay-all-add-not-ok>
+            <tx-list-replay-selected-add-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListReplaySelectedAddOk</xr-path>
+              <xr-xml-map>serg_show:TxListReplaySelectedAddOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-replay-selected-add-ok>
+            <tx-list-replay-selected-add-not-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListReplaySelectedAddNotOk</xr-path>
+              <xr-xml-map>serg_show:TxListReplaySelectedAddNotOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-replay-selected-add-not-ok>
+            <tx-list-session-session-add-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListSessionSessionAddOk</xr-path>
+              <xr-xml-map>serg_show:TxListSessionSessionAddOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-session-session-add-ok>
+            <tx-list-session-session-add-not-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListSessionSessionAddNotOk</xr-path>
+              <xr-xml-map>serg_show:TxListSessionSessionAddNotOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-session-session-add-not-ok>
+            <tx-list-session-session-update-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListSessionSessionUpdateOk</xr-path>
+              <xr-xml-map>serg_show:TxListSessionSessionUpdateOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-session-session-update-ok>
+            <tx-list-session-session-update-not-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListSessionSessionUpdateNotOk</xr-path>
+              <xr-xml-map>serg_show:TxListSessionSessionUpdateNotOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-session-session-update-not-ok>
+            <tx-list-session-session-delete config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListSessionSessionDelete</xr-path>
+              <xr-xml-map>serg_show:TxListSessionSessionDelete</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-session-session-delete>
+            <clean-call-back config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.CleanCallBack</xr-path>
+              <xr-xml-map>serg_show:CleanCallBack</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </clean-call-back>
+            <tx-list-encode-session-session-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListEncodeSessionSessionOk</xr-path>
+              <xr-xml-map>serg_show:TxListEncodeSessionSessionOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-encode-session-session-ok>
+            <tx-list-encode-session-session-partial-write config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListEncodeSessionSessionPartialWrite</xr-path>
+              <xr-xml-map>serg_show:TxListEncodeSessionSessionPartialWrite</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-encode-session-session-partial-write>
+            <last-replay-all-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.LastReplayAllCount</xr-path>
+              <xr-xml-map>serg_show:LastReplayAllCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </last-replay-all-count>
+            <tx-list-receive-command-replay-all config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListReceiveCommandReplayAll</xr-path>
+              <xr-xml-map>serg_show:TxListReceiveCommandReplayAll</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-receive-command-replay-all>
+            <tx-list-receive-command-replay-selected config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListReceiveCommandReplaySelected</xr-path>
+              <xr-xml-map>serg_show:TxListReceiveCommandReplaySelected</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-receive-command-replay-selected>
+            <tx-list-receive-session-session-delete-valid config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListReceiveSessionSessionDeleteValid</xr-path>
+              <xr-xml-map>serg_show:TxListReceiveSessionSessionDeleteValid</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-receive-session-session-delete-valid>
+            <tx-list-receive-session-session-delete-invalid config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListReceiveSessionSessionDeleteInValid</xr-path>
+              <xr-xml-map>serg_show:TxListReceiveSessionSessionDeleteInValid</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-receive-session-session-delete-invalid>
+            <tx-list-receive-session-session-update-valid config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListReceiveSessionSessionUpdateValid</xr-path>
+              <xr-xml-map>serg_show:TxListReceiveSessionSessionUpdateValid</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-receive-session-session-update-valid>
+            <tx-list-receive-session-session-update-invalid config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListReceiveSessionSessionUpdateInValid</xr-path>
+              <xr-xml-map>serg_show:TxListReceiveSessionSessionUpdateInValid</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-receive-session-session-update-invalid>
+            <tx-list-receive-session-session-sod-all config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListReceiveSessionSessionSODAll</xr-path>
+              <xr-xml-map>serg_show:TxListReceiveSessionSessionSODAll</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-receive-session-session-sod-all>
+            <tx-list-receive-session-session-sod-selected config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListReceiveSessionSessionSODSelected</xr-path>
+              <xr-xml-map>serg_show:TxListReceiveSessionSessionSODSelected</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-receive-session-session-sod-selected>
+            <tx-list-receive-session-session-eod-all config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListReceiveSessionSessionEODAll</xr-path>
+              <xr-xml-map>serg_show:TxListReceiveSessionSessionEODAll</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-receive-session-session-eod-all>
+            <tx-list-receive-session-session-eod-selected config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListReceiveSessionSessionEODSelected</xr-path>
+              <xr-xml-map>serg_show:TxListReceiveSessionSessionEODSelected</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-receive-session-session-eod-selected>
+            <tx-list-receive-session-session-eoms config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListReceiveSessionSessionEOMS</xr-path>
+              <xr-xml-map>serg_show:TxListReceiveSessionSessionEOMS</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-receive-session-session-eoms>
+            <tx-list-receive-session-session-clear-all config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListReceiveSessionSessionClearAll</xr-path>
+              <xr-xml-map>serg_show:TxListReceiveSessionSessionClearAll</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-receive-session-session-clear-all>
+            <tx-list-receive-session-session-clear-selected config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListReceiveSessionSessionClearSelected</xr-path>
+              <xr-xml-map>serg_show:TxListReceiveSessionSessionClearSelected</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-receive-session-session-clear-selected>
+            <tx-list-receive-session-session-neg-ack config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListReceiveSessionSessionNegAck</xr-path>
+              <xr-xml-map>serg_show:TxListReceiveSessionSessionNegAck</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-receive-session-session-neg-ack>
+            <tx-list-receive-session-session-neg-ack-not-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListReceiveSessionSessionNegAckNotOk</xr-path>
+              <xr-xml-map>serg_show:TxListReceiveSessionSessionNegAckNotOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-receive-session-session-neg-ack-not-ok>
+            <tx-list-client-registration-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListClientRegistrationOk</xr-path>
+              <xr-xml-map>serg_show:TxListClientRegistrationOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-client-registration-ok>
+            <tx-list-client-registration-not-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListClientRegistrationNotOk</xr-path>
+              <xr-xml-map>serg_show:TxListClientRegistrationNotOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-client-registration-not-ok>
+            <tx-list-client-de-registration config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListClientDeRegistration</xr-path>
+              <xr-xml-map>serg_show:TxListClientDeRegistration</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-client-de-registration>
+            <tx-list-client-connection-down config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListClientConnectionDown</xr-path>
+              <xr-xml-map>serg_show:TxListClientConnectionDown</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-client-connection-down>
+            <tx-list-client-cleanup config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListClientCleanup</xr-path>
+              <xr-xml-map>serg_show:TxListClientCleanup</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-client-cleanup>
+            <tx-list-active-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListActiveOk</xr-path>
+              <xr-xml-map>serg_show:TxListActiveOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-active-ok>
+            <tx-list-active-not-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListActiveNotOk</xr-path>
+              <xr-xml-map>serg_show:TxListActiveNotOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-active-not-ok>
+            <tx-list-de-active-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListDeActiveOk</xr-path>
+              <xr-xml-map>serg_show:TxListDeActiveOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-de-active-ok>
+            <tx-list-de-active-not-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListDeActiveNotOk</xr-path>
+              <xr-xml-map>serg_show:TxListDeActiveNotOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-de-active-not-ok>
+            <tx-list-send-pool-role-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListSendPoolRoleOk</xr-path>
+              <xr-xml-map>serg_show:TxListSendPoolRoleOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-send-pool-role-ok>
+            <tx-list-send-pool-role-not-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListSendPoolRoleNotOk</xr-path>
+              <xr-xml-map>serg_show:TxListSendPoolRoleNotOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-send-pool-role-not-ok>
+            <tx-list-send-pool-update-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListSendPoolUpdateOk</xr-path>
+              <xr-xml-map>serg_show:TxListSendPoolUpdateOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-send-pool-update-ok>
+            <tx-list-send-pool-update-not-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListSendPoolUpdateNotOk</xr-path>
+              <xr-xml-map>serg_show:TxListSendPoolUpdateNotOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-send-pool-update-not-ok>
+            <tx-list-recv-pool-update-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsclient/&lt;serg_show_Client-Id_clientid&gt;~serg_show_agt_client_statistics.TxListRecvPoolUpdateOk</xr-path>
+              <xr-xml-map>serg_show:TxListRecvPoolUpdateOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-recv-pool-update-ok>
+          </client-id>
+        </client-ids>
+        <memory config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/memmgrstats</xr-path>
+          <xr-xml-map>serg_show:Memory</xr-xml-map>
+          <xr-bag-grp-name>serg_show_memory</xr-bag-grp-name>
+          <xr-bag>serg_memory.bag</xr-bag>
+          <memory-info config="false" node="list">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/memmgrstats~serg_show_memory.MemoryInfo[&lt;bag_arg16&gt;]</xr-path>
+            <xr-bag-version>1 1</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg16&gt;</xr-internal-key>
+            <structure-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/memmgrstats~serg_show_memory.MemoryInfo[&lt;bag_arg16&gt;].StructureName</xr-path>
+              <xr-xml-map>serg_memory:StructureName</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </structure-name>
+            <size config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/memmgrstats~serg_show_memory.MemoryInfo[&lt;bag_arg16&gt;].Size</xr-path>
+              <xr-xml-map>serg_memory:Size</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </size>
+            <current-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/memmgrstats~serg_show_memory.MemoryInfo[&lt;bag_arg16&gt;].CurrentCount</xr-path>
+              <xr-xml-map>serg_memory:CurrentCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </current-count>
+            <alloc-fails config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/memmgrstats~serg_show_memory.MemoryInfo[&lt;bag_arg16&gt;].AllocFails</xr-path>
+              <xr-xml-map>serg_memory:AllocFails</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </alloc-fails>
+            <alloc-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/memmgrstats~serg_show_memory.MemoryInfo[&lt;bag_arg16&gt;].AllocCount</xr-path>
+              <xr-xml-map>serg_memory:AllocCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </alloc-count>
+            <freed-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/memmgrstats~serg_show_memory.MemoryInfo[&lt;bag_arg16&gt;].FreedCount</xr-path>
+              <xr-xml-map>serg_memory:FreedCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </freed-count>
+            <memory-type config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/memmgrstats~serg_show_memory.MemoryInfo[&lt;bag_arg16&gt;].MemoryType</xr-path>
+              <xr-xml-map>serg_memory:MemoryType</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>Serg-show-mem</type-name>
+              </type>
+            </memory-type>
+          </memory-info>
+          <edm-memory-info config="false" node="list">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/memmgrstats~serg_show_memory.EdmMemoryInfo[&lt;bag_arg17&gt;]</xr-path>
+            <xr-bag-version>1 1</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg17&gt;</xr-internal-key>
+            <size config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/memmgrstats~serg_show_memory.EdmMemoryInfo[&lt;bag_arg17&gt;].Size</xr-path>
+              <xr-xml-map>serg_memory:Size</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </size>
+            <total config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/memmgrstats~serg_show_memory.EdmMemoryInfo[&lt;bag_arg17&gt;].Total</xr-path>
+              <xr-xml-map>serg_memory:Total</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </total>
+            <success config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/memmgrstats~serg_show_memory.EdmMemoryInfo[&lt;bag_arg17&gt;].Success</xr-path>
+              <xr-xml-map>serg_memory:Success</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </success>
+            <failure config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/memmgrstats~serg_show_memory.EdmMemoryInfo[&lt;bag_arg17&gt;].Failure</xr-path>
+              <xr-xml-map>serg_memory:Failure</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </failure>
+          </edm-memory-info>
+          <string-memory-info config="false" node="list">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/memmgrstats~serg_show_memory.StringMemoryInfo[&lt;bag_arg18&gt;]</xr-path>
+            <xr-bag-version>1 1</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg18&gt;</xr-internal-key>
+            <size config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/memmgrstats~serg_show_memory.StringMemoryInfo[&lt;bag_arg18&gt;].Size</xr-path>
+              <xr-xml-map>serg_memory:Size</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </size>
+            <total config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/memmgrstats~serg_show_memory.StringMemoryInfo[&lt;bag_arg18&gt;].Total</xr-path>
+              <xr-xml-map>serg_memory:Total</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </total>
+            <success config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/memmgrstats~serg_show_memory.StringMemoryInfo[&lt;bag_arg18&gt;].Success</xr-path>
+              <xr-xml-map>serg_memory:Success</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </success>
+            <failure config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/memmgrstats~serg_show_memory.StringMemoryInfo[&lt;bag_arg18&gt;].Failure</xr-path>
+              <xr-xml-map>serg_memory:Failure</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </failure>
+          </string-memory-info>
+        </memory>
+        <group-ids config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/</xr-path>
+          <xr-xml-map>serg_show:Group</xr-xml-map>
+          <group-id config="false" key="group-id" node="list">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;</xr-path>
+            <xr-xml-map>serg_show:GroupId</xr-xml-map>
+            <xr-bag-grp-name>serg_show_group_entry</xr-bag-grp-name>
+            <xr-bag>serg_show.bag</xr-bag>
+            <group-id config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;</xr-path>
+              <xr-xml-map>serg_show:GroupId</xr-xml-map>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;serg_show_GroupId_group-id&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </group-id>
+            <group-id-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.GroupID</xr-path>
+              <xr-xml-map>serg_show:group-id-xr</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </group-id-xr>
+            <description config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.Description</xr-path>
+              <xr-xml-map>serg_show:Description</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </description>
+            <disabled config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.Disabled</xr-path>
+              <xr-xml-map>serg_show:Disabled</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </disabled>
+            <init-role config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.InitRole</xr-path>
+              <xr-xml-map>serg_show:InitRole</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>Serg-show-role</type-name>
+              </type>
+            </init-role>
+            <negotiating-role config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.NegotiatingRole</xr-path>
+              <xr-xml-map>serg_show:NegotiatingRole</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>Serg-show-role</type-name>
+              </type>
+            </negotiating-role>
+            <current-role config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.CurrentRole</xr-path>
+              <xr-xml-map>serg_show:CurrentRole</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>Serg-show-role</type-name>
+              </type>
+            </current-role>
+            <slave-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.SlaveMode</xr-path>
+              <xr-xml-map>serg_show:SlaveMode</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>Serg-show-slave-mode</type-name>
+              </type>
+            </slave-mode>
+            <hold-timer config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.HoldTimer</xr-path>
+              <xr-xml-map>serg_show:HoldTimer</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </hold-timer>
+            <core-tracking-object-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.CoreTrackingObjectName</xr-path>
+              <xr-xml-map>serg_show:CoreTrackingObjectName</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </core-tracking-object-name>
+            <core-tracking-object-status config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.CoreTrackingObjectStatus</xr-path>
+              <xr-xml-map>serg_show:CoreTrackingObjectStatus</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </core-tracking-object-status>
+            <access-tracking-object-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.AccessTrackingObjectName</xr-path>
+              <xr-xml-map>serg_show:AccessTrackingObjectName</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </access-tracking-object-name>
+            <access-tracking-object-status config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.AccessTrackingObjectStatus</xr-path>
+              <xr-xml-map>serg_show:AccessTrackingObjectStatus</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </access-tracking-object-status>
+            <object-tracking-status config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.ObjectTrackingStatus</xr-path>
+              <xr-xml-map>serg_show:ObjectTrackingStatus</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </object-tracking-status>
+            <peer-ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.PeerIPv4Address</xr-path>
+              <xr-xml-map>serg_show:PeerIPv4Address</xr-xml-map>
+              <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </peer-ipv4-address>
+            <peer-ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.PeerIPv6Address</xr-path>
+              <xr-xml-map>serg_show:PeerIPv6Address</xr-xml-map>
+              <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>inet:ipv6-address</type-name>
+              </type>
+            </peer-ipv6-address>
+            <peer-status config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.PeerStatus</xr-path>
+              <xr-xml-map>serg_show:PeerStatus</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>Serg-peer-status</type-name>
+              </type>
+            </peer-status>
+            <peer-last-negotiation-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.PeerLastNegotiationTime</xr-path>
+              <xr-xml-map>serg_show:PeerLastNegotiationTime</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </peer-last-negotiation-time>
+            <peer-last-up-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.PeerLastUpTime</xr-path>
+              <xr-xml-map>serg_show:PeerLastUpTime</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </peer-last-up-time>
+            <peer-last-down-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.PeerLastDownTime</xr-path>
+              <xr-xml-map>serg_show:PeerLastDownTime</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </peer-last-down-time>
+            <peer-init-role config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.PeerInitRole</xr-path>
+              <xr-xml-map>serg_show:PeerInitRole</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>Serg-show-role</type-name>
+              </type>
+            </peer-init-role>
+            <peer-negotiating-role config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.PeerNegotiatingRole</xr-path>
+              <xr-xml-map>serg_show:PeerNegotiatingRole</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>Serg-show-role</type-name>
+              </type>
+            </peer-negotiating-role>
+            <peer-current-role config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.PeerCurrentRole</xr-path>
+              <xr-xml-map>serg_show:PeerCurrentRole</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>Serg-show-role</type-name>
+              </type>
+            </peer-current-role>
+            <peer-object-tracking-status config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.PeerObjectTrackingStatus</xr-path>
+              <xr-xml-map>serg_show:PeerObjectTrackingStatus</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </peer-object-tracking-status>
+            <last-switchover-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.LastSwitchoverTime</xr-path>
+              <xr-xml-map>serg_show:LastSwitchoverTime</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </last-switchover-time>
+            <switchover-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.SwitchoverCount</xr-path>
+              <xr-xml-map>serg_show:SwitchoverCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </switchover-count>
+            <last-switchover-reason config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.LastSwitchoverReason</xr-path>
+              <xr-xml-map>serg_show:LastSwitchoverReason</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>Serg-show-so-reason</type-name>
+              </type>
+            </last-switchover-reason>
+            <switchover-hold-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.SwitchoverHoldTime</xr-path>
+              <xr-xml-map>serg_show:SwitchoverHoldTime</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </switchover-hold-time>
+            <session-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.SessionCount</xr-path>
+              <xr-xml-map>serg_show:SessionCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </session-count>
+            <slave-update-failure-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.SlaveUpdateFailureCount</xr-path>
+              <xr-xml-map>serg_show:SlaveUpdateFailureCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </slave-update-failure-count>
+            <pending-session-update-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.PendingSessionUpdateCount</xr-path>
+              <xr-xml-map>serg_show:PendingSessionUpdateCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </pending-session-update-count>
+            <pending-session-delete-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.PendingSessionDeleteCount</xr-path>
+              <xr-xml-map>serg_show:PendingSessionDeleteCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </pending-session-delete-count>
+            <interface-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.InterfaceCount</xr-path>
+              <xr-xml-map>serg_show:InterfaceCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </interface-count>
+            <revertive-timer config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.RevertiveTimer</xr-path>
+              <xr-xml-map>serg_show:RevertiveTimer</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </revertive-timer>
+            <switchover-revert-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.SwitchoverRevertTime</xr-path>
+              <xr-xml-map>serg_show:SwitchoverRevertTime</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </switchover-revert-time>
+            <pool-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.PoolCount</xr-path>
+              <xr-xml-map>serg_show:PoolCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </pool-count>
+            <client-session-count config="false" node="list">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.ClientSessionCount[&lt;bag_arg1&gt;]</xr-path>
+              <xr-bag-version>1 1</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+              <component config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.ClientSessionCount[&lt;bag_arg1&gt;].Component</xr-path>
+                <xr-xml-map>serg_show:Component</xr-xml-map>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>Serg-show-comp</type-name>
+                </type>
+              </component>
+              <session-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.ClientSessionCount[&lt;bag_arg1&gt;].SessionCount</xr-path>
+                <xr-xml-map>serg_show:SessionCount</xr-xml-map>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </session-count>
+            </client-session-count>
+            <interface config="false" node="list">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.InterfaceList[&lt;bag_arg2&gt;]</xr-path>
+              <xr-bag-version>1 1</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+              <interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.InterfaceList[&lt;bag_arg2&gt;].InterfaceName</xr-path>
+                <xr-xml-map>serg_show:InterfaceName</xr-xml-map>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </interface-name>
+              <interface-synchronization-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.InterfaceList[&lt;bag_arg2&gt;].InterfaceSynchronizationID</xr-path>
+                <xr-xml-map>serg_show:InterfaceSynchronizationID</xr-xml-map>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </interface-synchronization-id>
+              <forward-referenced config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.InterfaceList[&lt;bag_arg2&gt;].ForwardReferenced</xr-path>
+                <xr-xml-map>serg_show:ForwardReferenced</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </forward-referenced>
+              <session-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.InterfaceList[&lt;bag_arg2&gt;].SessionCount</xr-path>
+                <xr-xml-map>serg_show:SessionCount</xr-xml-map>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </session-count>
+            </interface>
+            <pool config="false" node="list">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.PoolList[&lt;bag_arg3&gt;]</xr-path>
+              <xr-bag-version>1 1</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+              <pool-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/group/&lt;serg_show_GroupId_group-id&gt;~serg_show_group_entry.PoolList[&lt;bag_arg3&gt;].PoolName</xr-path>
+                <xr-xml-map>serg_show:PoolName</xr-xml-map>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </pool-name>
+            </pool>
+          </group-id>
+        </group-ids>
+        <interfaces config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/</xr-path>
+          <xr-xml-map>serg_show:InterfaceTable</xr-xml-map>
+          <interface config="false" key="interface" node="list">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;</xr-path>
+            <xr-xml-map>serg_show:Interface</xr-xml-map>
+            <xr-bag-grp-name>serg_show_agt_intf_entry</xr-bag-grp-name>
+            <xr-bag>serg_show.bag</xr-bag>
+            <interface config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;</xr-path>
+              <xr-xml-map>serg_show:Interface</xr-xml-map>
+              <xr-sch-type>InterfaceName</xr-sch-type>
+              <xr-sch-arg-name>&lt;serg_show_Interface_interface&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface>
+            <interface-oper config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.InterfaceOper</xr-path>
+              <xr-bag-version>1 1</xr-bag-version>
+              <idb-oper-reg-enable config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.InterfaceOper.IDB_OPER_REG_ENABLE</xr-path>
+                <xr-xml-map>serg_show:IDB_OPER_REG_ENABLE</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-oper-reg-enable>
+              <idb-oper-reg-disable config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.InterfaceOper.IDB_OPER_REG_DISABLE</xr-path>
+                <xr-xml-map>serg_show:IDB_OPER_REG_DISABLE</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-oper-reg-disable>
+              <idb-oper-caps-add config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.InterfaceOper.IDB_OPER_CAPS_ADD</xr-path>
+                <xr-xml-map>serg_show:IDB_OPER_CAPS_ADD</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-oper-caps-add>
+              <idb-oper-caps-remove config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.InterfaceOper.IDB_OPER_CAPS_REMOVE</xr-path>
+                <xr-xml-map>serg_show:IDB_OPER_CAPS_REMOVE</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-oper-caps-remove>
+              <idb-oper-attr-update config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.InterfaceOper.IDB_OPER_ATTR_UPDATE</xr-path>
+                <xr-xml-map>serg_show:IDB_OPER_ATTR_UPDATE</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-oper-attr-update>
+            </interface-oper>
+            <interface-status config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.InterfaceStatus</xr-path>
+              <xr-bag-version>1 1</xr-bag-version>
+              <idb-state-fwd-ref config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.InterfaceStatus.IDB_STATE_FWD_REF</xr-path>
+                <xr-xml-map>serg_show:IDB_STATE_FWD_REF</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-state-fwd-ref>
+              <idb-state-stale config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.InterfaceStatus.IDB_STATE_STALE</xr-path>
+                <xr-xml-map>serg_show:IDB_STATE_STALE</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-state-stale>
+              <idb-state-registered config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.InterfaceStatus.IDB_STATE_REGISTERED</xr-path>
+                <xr-xml-map>serg_show:IDB_STATE_REGISTERED</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-state-registered>
+              <idb-state-caps-added config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.InterfaceStatus.IDB_STATE_CAPS_ADDED</xr-path>
+                <xr-xml-map>serg_show:IDB_STATE_CAPS_ADDED</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-state-caps-added>
+              <idb-state-owned-re-source config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.InterfaceStatus.IDB_STATE_OWNED_RESOURCE</xr-path>
+                <xr-xml-map>serg_show:IDB_STATE_OWNED_RESOURCE</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-state-owned-re-source>
+              <idb-client-eoms-pending config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.InterfaceStatus.IDB_CLIENT_EOMS_PENDING</xr-path>
+                <xr-xml-map>serg_show:IDB_CLIENT_EOMS_PENDING</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-client-eoms-pending>
+              <idb-state-p-end-caps-rem config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.InterfaceStatus.IDB_STATE_PEND_CAPS_REM</xr-path>
+                <xr-xml-map>serg_show:IDB_STATE_PEND_CAPS_REM</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-state-p-end-caps-rem>
+              <idb-state-p-end-reg-disable config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.InterfaceStatus.IDB_STATE_PEND_REG_DISABLE</xr-path>
+                <xr-xml-map>serg_show:IDB_STATE_PEND_REG_DISABLE</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </idb-state-p-end-reg-disable>
+            </interface-status>
+            <interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.InterfaceName</xr-path>
+              <xr-xml-map>serg_show:InterfaceName</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </interface-name>
+            <interface-synchronization-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.InterfaceSynchronizationID</xr-path>
+              <xr-xml-map>serg_show:InterfaceSynchronizationID</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </interface-synchronization-id>
+            <group-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.GroupID</xr-path>
+              <xr-xml-map>serg_show:GroupID</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </group-id>
+            <role config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.Role</xr-path>
+              <xr-xml-map>serg_show:Role</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>Serg-show-im-role</type-name>
+              </type>
+            </role>
+            <forward-referenced config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.ForwardReferenced</xr-path>
+              <xr-xml-map>serg_show:ForwardReferenced</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </forward-referenced>
+            <session-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.SessionCount</xr-path>
+              <xr-xml-map>serg_show:SessionCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </session-count>
+            <interface-enable-error-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.InterfaceEnableErrorCount</xr-path>
+              <xr-xml-map>serg_show:InterfaceEnableErrorCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </interface-enable-error-count>
+            <interface-disable-error-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.InterfaceDisableErrorCount</xr-path>
+              <xr-xml-map>serg_show:InterfaceDisableErrorCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </interface-disable-error-count>
+            <interface-caps-add-error-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.InterfaceCapsAddErrorCount</xr-path>
+              <xr-xml-map>serg_show:InterfaceCapsAddErrorCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </interface-caps-add-error-count>
+            <interface-caps-remove-error-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.InterfaceCapsRemoveErrorCount</xr-path>
+              <xr-xml-map>serg_show:InterfaceCapsRemoveErrorCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </interface-caps-remove-error-count>
+            <interface-attribute-update-error-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.InterfaceAttributeUpdateErrorCount</xr-path>
+              <xr-xml-map>serg_show:InterfaceAttributeUpdateErrorCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </interface-attribute-update-error-count>
+            <client-status config="false" node="list">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.client_status[&lt;bag_arg4&gt;]</xr-path>
+              <xr-bag-version>1 1</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg4&gt;</xr-internal-key>
+              <component config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.client_status[&lt;bag_arg4&gt;].Component</xr-path>
+                <xr-xml-map>serg_show:Component</xr-xml-map>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>Serg-show-comp</type-name>
+                </type>
+              </component>
+              <serg-show-idb-client-eoms-pending config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.client_status[&lt;bag_arg4&gt;].SERG_SHOW_IDB_CLIENT_EOMS_PENDING</xr-path>
+                <xr-xml-map>serg_show:SERG_SHOW_IDB_CLIENT_EOMS_PENDING</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </serg-show-idb-client-eoms-pending>
+              <serg-show-idb-client-sync-eod-pending config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.client_status[&lt;bag_arg4&gt;].SERG_SHOW_IDB_CLIENT_SYNC_EOD_PENDING</xr-path>
+                <xr-xml-map>serg_show:SERG_SHOW_IDB_CLIENT_SYNC_EOD_PENDING</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </serg-show-idb-client-sync-eod-pending>
+              <session-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/interface-xml/&lt;serg_show_Interface_interface&gt;~serg_show_agt_intf_entry.client_status[&lt;bag_arg4&gt;].session_count</xr-path>
+                <xr-xml-map>serg_show:session_count</xr-xml-map>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </session-count>
+            </client-status>
+          </interface>
+        </interfaces>
+        <stats-global config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal</xr-path>
+          <xr-xml-map>serg_show:Stats-Global</xr-xml-map>
+          <xr-bag-grp-name>serg_show_agt_statistics</xr-bag-grp-name>
+          <xr-bag>serg_show.bag</xr-bag>
+          <intf-status-statistics config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.IntfStatusStatistics</xr-path>
+            <xr-bag-version>1 1</xr-bag-version>
+            <pend-caps-rem-cnt config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.IntfStatusStatistics.pend_caps_rem_cnt</xr-path>
+              <xr-xml-map>serg_show:pend_caps_rem_cnt</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </pend-caps-rem-cnt>
+            <pend-reg-disable-cnt config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.IntfStatusStatistics.pend_reg_disable_cnt</xr-path>
+              <xr-xml-map>serg_show:pend_reg_disable_cnt</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </pend-reg-disable-cnt>
+            <pend-other-batch-oper-cnt config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.IntfStatusStatistics.pend_other_batch_oper_cnt</xr-path>
+              <xr-xml-map>serg_show:pend_other_batch_oper_cnt</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </pend-other-batch-oper-cnt>
+            <non-stale-cnt config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.IntfStatusStatistics.non_stale_cnt</xr-path>
+              <xr-xml-map>serg_show:non_stale_cnt</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </non-stale-cnt>
+            <grp-bound-cnt config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.IntfStatusStatistics.grp_bound_cnt</xr-path>
+              <xr-xml-map>serg_show:grp_bound_cnt</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </grp-bound-cnt>
+          </intf-status-statistics>
+          <tx-list-statistics config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListStatistics</xr-path>
+            <xr-bag-version>1 1</xr-bag-version>
+            <tx-list-encode-marker-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListStatistics.TxListEncodeMarkerOk</xr-path>
+              <xr-xml-map>serg_show:TxListEncodeMarkerOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-encode-marker-ok>
+            <tx-list-encode-marker-partial-write config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListStatistics.TxListEncodeMarkerPartialWrite</xr-path>
+              <xr-xml-map>serg_show:TxListEncodeMarkerPartialWrite</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-encode-marker-partial-write>
+            <tx-list-clean-marker config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListStatistics.TxListCleanMarker</xr-path>
+              <xr-xml-map>serg_show:TxListCleanMarker</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-clean-marker>
+            <tx-list-encode-command-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListStatistics.TxListEncodeCommandOk</xr-path>
+              <xr-xml-map>serg_show:TxListEncodeCommandOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-encode-command-ok>
+            <tx-list-encode-command-partial-write config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListStatistics.TxListEncodeCommandPartialWrite</xr-path>
+              <xr-xml-map>serg_show:TxListEncodeCommandPartialWrite</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-encode-command-partial-write>
+            <tx-list-clean-command config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListStatistics.TxListCleanCommand</xr-path>
+              <xr-xml-map>serg_show:TxListCleanCommand</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-clean-command>
+            <tx-list-encode-negotiation-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListStatistics.TxListEncodeNegotiationOk</xr-path>
+              <xr-xml-map>serg_show:TxListEncodeNegotiationOk</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-encode-negotiation-ok>
+            <tx-list-encode-negotiation-partial-write config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListStatistics.TxListEncodeNegotiationPartialWrite</xr-path>
+              <xr-xml-map>serg_show:TxListEncodeNegotiationPartialWrite</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-encode-negotiation-partial-write>
+            <tx-list-clean-negotiation config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListStatistics.TxListCleanNegotiation</xr-path>
+              <xr-xml-map>serg_show:TxListCleanNegotiation</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tx-list-clean-negotiation>
+          </tx-list-statistics>
+          <source-interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.SourceInterfaceName</xr-path>
+            <xr-xml-map>serg_show:SourceInterfaceName</xr-xml-map>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </source-interface-name>
+          <vrf-name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.VRFName</xr-path>
+            <xr-xml-map>serg_show:VRFName</xr-xml-map>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </vrf-name>
+          <source-interface-ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.SourceInterfaceIPv4Address</xr-path>
+            <xr-xml-map>serg_show:SourceInterfaceIPv4Address</xr-xml-map>
+            <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </source-interface-ipv4-address>
+          <source-interface-ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.SourceInterfaceIPv6Address</xr-path>
+            <xr-xml-map>serg_show:SourceInterfaceIPv6Address</xr-xml-map>
+            <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>inet:ipv6-address</type-name>
+            </type>
+          </source-interface-ipv6-address>
+          <redundancy-role config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.RedundancyRole</xr-path>
+            <xr-xml-map>serg_show:RedundancyRole</xr-xml-map>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </redundancy-role>
+          <restart-client-sync-in-progress config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.RestartClientSyncInProgress</xr-path>
+            <xr-xml-map>serg_show:RestartClientSyncInProgress</xr-xml-map>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </restart-client-sync-in-progress>
+          <client-init-sync-time-stamp config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.ClientInitSyncTimeStamp</xr-path>
+            <xr-xml-map>serg_show:ClientInitSyncTimeStamp</xr-xml-map>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </client-init-sync-time-stamp>
+          <restart-peer-sync-in-progress config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.RestartPeerSyncInProgress</xr-path>
+            <xr-xml-map>serg_show:RestartPeerSyncInProgress</xr-xml-map>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </restart-peer-sync-in-progress>
+          <peer-init-sync-time-stamp config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.PeerInitSyncTimeStamp</xr-path>
+            <xr-xml-map>serg_show:PeerInitSyncTimeStamp</xr-xml-map>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </peer-init-sync-time-stamp>
+          <sync-in-progress config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.SyncInProgress</xr-path>
+            <xr-xml-map>serg_show:SyncInProgress</xr-xml-map>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </sync-in-progress>
+          <peer-action-timer config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.PeerActionTimer</xr-path>
+            <xr-xml-map>serg_show:PeerActionTimer</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </peer-action-timer>
+          <retry-timer-remaining config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.RetryTimerRemaining</xr-path>
+            <xr-xml-map>serg_show:RetryTimerRemaining</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </retry-timer-remaining>
+          <tx-list-client-registration-invalid config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListClientRegistrationInvalid</xr-path>
+            <xr-xml-map>serg_show:TxListClientRegistrationInvalid</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tx-list-client-registration-invalid>
+          <tx-list-client-de-registration-invalid config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListClientDeRegistrationInvalid</xr-path>
+            <xr-xml-map>serg_show:TxListClientDeRegistrationInvalid</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tx-list-client-de-registration-invalid>
+          <tx-list-client-connection-up config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListClientConnectionUp</xr-path>
+            <xr-xml-map>serg_show:TxListClientConnectionUp</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tx-list-client-connection-up>
+          <tx-list-client-connection-down config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListClientConnectionDown</xr-path>
+            <xr-xml-map>serg_show:TxListClientConnectionDown</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tx-list-client-connection-down>
+          <tx-list-client-peer-done config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListClientPeerDone</xr-path>
+            <xr-xml-map>serg_show:TxListClientPeerDone</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tx-list-client-peer-done>
+          <tx-list-client-message-call-back config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListClientMessageCallBack</xr-path>
+            <xr-xml-map>serg_show:TxListClientMessageCallBack</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tx-list-client-message-call-back>
+          <tx-list-client-receive-valid config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListClientReceiveValid</xr-path>
+            <xr-xml-map>serg_show:TxListClientReceiveValid</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tx-list-client-receive-valid>
+          <tx-list-client-receive-invalid config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListClientReceiveInValid</xr-path>
+            <xr-xml-map>serg_show:TxListClientReceiveInValid</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tx-list-client-receive-invalid>
+          <tx-list-client-receive-command-valid config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListClientReceiveCommandValid</xr-path>
+            <xr-xml-map>serg_show:TxListClientReceiveCommandValid</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tx-list-client-receive-command-valid>
+          <tx-list-client-receive-command-invalid config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListClientReceiveCommandInValid</xr-path>
+            <xr-xml-map>serg_show:TxListClientReceiveCommandInValid</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tx-list-client-receive-command-invalid>
+          <tx-list-client-receive-session-sessionvalid config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListClientReceiveSessionSessionValid</xr-path>
+            <xr-xml-map>serg_show:TxListClientReceiveSessionSessionValid</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tx-list-client-receive-session-sessionvalid>
+          <tx-list-client-receive-session-session-invalid config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListClientReceiveSessionSessionInValid</xr-path>
+            <xr-xml-map>serg_show:TxListClientReceiveSessionSessionInValid</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tx-list-client-receive-session-session-invalid>
+          <tx-list-peer-timer-handler config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListPeerTimerHandler</xr-path>
+            <xr-xml-map>serg_show:TxListPeerTimerHandler</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tx-list-peer-timer-handler>
+          <tx-list-peer-registration-invalid config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListPeerRegistrationInValid</xr-path>
+            <xr-xml-map>serg_show:TxListPeerRegistrationInValid</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tx-list-peer-registration-invalid>
+          <tx-list-peer-de-registration-invalid config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListPeerDeRegistrationInValid</xr-path>
+            <xr-xml-map>serg_show:TxListPeerDeRegistrationInValid</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tx-list-peer-de-registration-invalid>
+          <tx-list-peer-message-call-back-valid config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListPeerMessageCallBackValid</xr-path>
+            <xr-xml-map>serg_show:TxListPeerMessageCallBackValid</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tx-list-peer-message-call-back-valid>
+          <tx-list-peer-message-call-back-invalid config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListPeerMessageCallBackInValid</xr-path>
+            <xr-xml-map>serg_show:TxListPeerMessageCallBackInValid</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tx-list-peer-message-call-back-invalid>
+          <tx-list-peer-done config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListPeerDone</xr-path>
+            <xr-xml-map>serg_show:TxListPeerDone</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tx-list-peer-done>
+          <tx-list-peer-cmd-connection-up-not-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListPeerCmdConnectionUpNotOk</xr-path>
+            <xr-xml-map>serg_show:TxListPeerCmdConnectionUpNotOk</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tx-list-peer-cmd-connection-up-not-ok>
+          <tx-list-peer-cmd-connection-down-not-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListPeerCmdConnectionDownNotOk</xr-path>
+            <xr-xml-map>serg_show:TxListPeerCmdConnectionDownNotOk</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tx-list-peer-cmd-connection-down-not-ok>
+          <tx-list-peer-session-connection-up-not-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListPeerSessionConnectionUpNotOk</xr-path>
+            <xr-xml-map>serg_show:TxListPeerSessionConnectionUpNotOk</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tx-list-peer-session-connection-up-not-ok>
+          <tx-list-peer-session-connection-down-not-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListPeerSessionConnectionDownNotOk</xr-path>
+            <xr-xml-map>serg_show:TxListPeerSessionConnectionDownNotOk</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tx-list-peer-session-connection-down-not-ok>
+          <tx-list-send-pool-update-not-ok config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListSendPoolUpdateNotOk</xr-path>
+            <xr-xml-map>serg_show:TxListSendPoolUpdateNotOk</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </tx-list-send-pool-update-not-ok>
+          <client-status config="false" node="list">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.ClientStatus[&lt;bag_arg8&gt;]</xr-path>
+            <xr-bag-version>1 1</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg8&gt;</xr-internal-key>
+            <component config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.ClientStatus[&lt;bag_arg8&gt;].Component</xr-path>
+              <xr-xml-map>serg_show:Component</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>Serg-show-comp</type-name>
+              </type>
+            </component>
+            <client-connection-status config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.ClientStatus[&lt;bag_arg8&gt;].ClientConnectionStatus</xr-path>
+              <xr-xml-map>serg_show:ClientConnectionStatus</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </client-connection-status>
+            <client-initialization-synchronization-pending config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.ClientStatus[&lt;bag_arg8&gt;].ClientInitializationSynchronizationPending</xr-path>
+              <xr-xml-map>serg_show:ClientInitializationSynchronizationPending</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </client-initialization-synchronization-pending>
+            <client-synchronization-end-of-download-pending config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.ClientStatus[&lt;bag_arg8&gt;].ClientSynchronizationEndOfDownloadPending</xr-path>
+              <xr-xml-map>serg_show:ClientSynchronizationEndOfDownloadPending</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </client-synchronization-end-of-download-pending>
+            <up-time-stamp config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.ClientStatus[&lt;bag_arg8&gt;].UpTimeStamp</xr-path>
+              <xr-xml-map>serg_show:UpTimeStamp</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </up-time-stamp>
+            <down-time-stamp config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.ClientStatus[&lt;bag_arg8&gt;].DownTimeStamp</xr-path>
+              <xr-xml-map>serg_show:DownTimeStamp</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </down-time-stamp>
+            <clean-up-timer-remaining config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.ClientStatus[&lt;bag_arg8&gt;].CleanUpTimerRemaining</xr-path>
+              <xr-xml-map>serg_show:CleanUpTimerRemaining</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </clean-up-timer-remaining>
+          </client-status>
+          <opaque-memory-status config="false" node="list">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.OpaqueMemoryStatus[&lt;bag_arg9&gt;]</xr-path>
+            <xr-bag-version>1 1</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg9&gt;</xr-internal-key>
+            <component config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.OpaqueMemoryStatus[&lt;bag_arg9&gt;].Component</xr-path>
+              <xr-xml-map>serg_show:Component</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>Serg-show-comp</type-name>
+              </type>
+            </component>
+            <session-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.OpaqueMemoryStatus[&lt;bag_arg9&gt;].SessionCount</xr-path>
+              <xr-xml-map>serg_show:SessionCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </session-count>
+            <opaque-size config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.OpaqueMemoryStatus[&lt;bag_arg9&gt;].OpaqueSize</xr-path>
+              <xr-xml-map>serg_show:OpaqueSize</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </opaque-size>
+            <opaque-high-size config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.OpaqueMemoryStatus[&lt;bag_arg9&gt;].OpaqueHighSize</xr-path>
+              <xr-xml-map>serg_show:OpaqueHighSize</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </opaque-high-size>
+            <opaque-data-size config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.OpaqueMemoryStatus[&lt;bag_arg9&gt;].OpaqueDataSize</xr-path>
+              <xr-xml-map>serg_show:OpaqueDataSize</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </opaque-data-size>
+          </opaque-memory-status>
+          <tx-list-over-tcp-status config="false" node="list">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListOverTCPStatus[&lt;bag_arg10&gt;]</xr-path>
+            <xr-bag-version>1 1</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg10&gt;</xr-internal-key>
+            <messages-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListOverTCPStatus[&lt;bag_arg10&gt;].MessagesSent</xr-path>
+              <xr-xml-map>serg_show:MessagesSent</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </messages-sent>
+            <bytes-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListOverTCPStatus[&lt;bag_arg10&gt;].BytesSent</xr-path>
+              <xr-xml-map>serg_show:BytesSent</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </bytes-sent>
+            <messages-received config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListOverTCPStatus[&lt;bag_arg10&gt;].MessagesReceived</xr-path>
+              <xr-xml-map>serg_show:MessagesReceived</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </messages-received>
+            <bytes-received config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListOverTCPStatus[&lt;bag_arg10&gt;].BytesReceived</xr-path>
+              <xr-xml-map>serg_show:BytesReceived</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </bytes-received>
+            <connect-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListOverTCPStatus[&lt;bag_arg10&gt;].ConnectCount</xr-path>
+              <xr-xml-map>serg_show:ConnectCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </connect-count>
+            <blocked-connect-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListOverTCPStatus[&lt;bag_arg10&gt;].BlockedConnectCount</xr-path>
+              <xr-xml-map>serg_show:BlockedConnectCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </blocked-connect-count>
+            <connect-retry-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListOverTCPStatus[&lt;bag_arg10&gt;].ConnectRetryCount</xr-path>
+              <xr-xml-map>serg_show:ConnectRetryCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </connect-retry-count>
+            <remote-node-down-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListOverTCPStatus[&lt;bag_arg10&gt;].RemoteNodeDownCount</xr-path>
+              <xr-xml-map>serg_show:RemoteNodeDownCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </remote-node-down-count>
+            <accept-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListOverTCPStatus[&lt;bag_arg10&gt;].AcceptCount</xr-path>
+              <xr-xml-map>serg_show:AcceptCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </accept-count>
+            <maximum-sent-message-size config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListOverTCPStatus[&lt;bag_arg10&gt;].MaximumSentMessageSize</xr-path>
+              <xr-xml-map>serg_show:MaximumSentMessageSize</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </maximum-sent-message-size>
+            <maximum-received-message-size config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListOverTCPStatus[&lt;bag_arg10&gt;].MaximumReceivedMessageSize</xr-path>
+              <xr-xml-map>serg_show:MaximumReceivedMessageSize</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </maximum-received-message-size>
+            <peer-pause-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListOverTCPStatus[&lt;bag_arg10&gt;].PeerPauseCount</xr-path>
+              <xr-xml-map>serg_show:PeerPauseCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </peer-pause-count>
+            <buffer-full-occurence-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListOverTCPStatus[&lt;bag_arg10&gt;].BufferFullOccurenceCount</xr-path>
+              <xr-xml-map>serg_show:BufferFullOccurenceCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </buffer-full-occurence-count>
+            <mem-move-message-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListOverTCPStatus[&lt;bag_arg10&gt;].MemMoveMessageCount</xr-path>
+              <xr-xml-map>serg_show:MemMoveMessageCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </mem-move-message-count>
+            <mem-move-bytes-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListOverTCPStatus[&lt;bag_arg10&gt;].MemMoveBytesCount</xr-path>
+              <xr-xml-map>serg_show:MemMoveBytesCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </mem-move-bytes-count>
+            <socket-read-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListOverTCPStatus[&lt;bag_arg10&gt;].SocketReadCount</xr-path>
+              <xr-xml-map>serg_show:SocketReadCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </socket-read-count>
+            <socket-write-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListOverTCPStatus[&lt;bag_arg10&gt;].SocketWriteCount</xr-path>
+              <xr-xml-map>serg_show:SocketWriteCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </socket-write-count>
+            <active-socket-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListOverTCPStatus[&lt;bag_arg10&gt;].ActiveSocketCount</xr-path>
+              <xr-xml-map>serg_show:ActiveSocketCount</xr-xml-map>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </active-socket-count>
+            <maximum-requested-buffer-size config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListOverTCPStatus[&lt;bag_arg10&gt;].MaximumRequestedBufferSize</xr-path>
+              <xr-xml-map>serg_show:MaximumRequestedBufferSize</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </maximum-requested-buffer-size>
+            <buffer-freed-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListOverTCPStatus[&lt;bag_arg10&gt;].BufferFreedCount</xr-path>
+              <xr-xml-map>serg_show:BufferFreedCount</xr-xml-map>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </buffer-freed-count>
+            <buffer-cache-hit config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListOverTCPStatus[&lt;bag_arg10&gt;].BufferCacheHit</xr-path>
+              <xr-xml-map>serg_show:BufferCacheHit</xr-xml-map>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </buffer-cache-hit>
+            <buffer-cache-miss config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/statsglobal~serg_show_agt_statistics.TxListOverTCPStatus[&lt;bag_arg10&gt;].BufferCacheMiss</xr-path>
+              <xr-xml-map>serg_show:BufferCacheMiss</xr-xml-map>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </buffer-cache-miss>
+          </tx-list-over-tcp-status>
+        </stats-global>
+        <group-summaries config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsummary/</xr-path>
+          <xr-xml-map>serg_show:GroupSummaryTable</xr-xml-map>
+          <group-summary config="false" key="group-id" node="list">
+            <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsummary/&lt;serg_show_GroupSummary_group-id&gt;</xr-path>
+            <xr-xml-map>serg_show:GroupSummary</xr-xml-map>
+            <xr-bag-grp-name>serg_agt_show_group_list_entry</xr-bag-grp-name>
+            <xr-bag>serg_show.bag</xr-bag>
+            <group-id config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsummary/&lt;serg_show_GroupSummary_group-id&gt;</xr-path>
+              <xr-xml-map>serg_show:GroupId</xr-xml-map>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;serg_show_GroupSummary_group-id&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </group-id>
+            <group-id-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsummary/&lt;serg_show_GroupSummary_group-id&gt;~serg_agt_show_group_list_entry.GroupID</xr-path>
+              <xr-xml-map>serg_show:group-id-xr</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </group-id-xr>
+            <role config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsummary/&lt;serg_show_GroupSummary_group-id&gt;~serg_agt_show_group_list_entry.Role</xr-path>
+              <xr-xml-map>serg_show:Role</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>Serg-show-im-role</type-name>
+              </type>
+            </role>
+            <disabled config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsummary/&lt;serg_show_GroupSummary_group-id&gt;~serg_agt_show_group_list_entry.Disabled</xr-path>
+              <xr-xml-map>serg_show:Disabled</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </disabled>
+            <peer-ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsummary/&lt;serg_show_GroupSummary_group-id&gt;~serg_agt_show_group_list_entry.PeerIPv4Address</xr-path>
+              <xr-xml-map>serg_show:PeerIPv4Address</xr-xml-map>
+              <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </peer-ipv4-address>
+            <peer-ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsummary/&lt;serg_show_GroupSummary_group-id&gt;~serg_agt_show_group_list_entry.PeerIPv6Address</xr-path>
+              <xr-xml-map>serg_show:PeerIPv6Address</xr-xml-map>
+              <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>inet:ipv6-address</type-name>
+              </type>
+            </peer-ipv6-address>
+            <peer-status config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsummary/&lt;serg_show_GroupSummary_group-id&gt;~serg_agt_show_group_list_entry.PeerStatus</xr-path>
+              <xr-xml-map>serg_show:PeerStatus</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>Serg-peer-status</type-name>
+              </type>
+            </peer-status>
+            <preferred-role config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsummary/&lt;serg_show_GroupSummary_group-id&gt;~serg_agt_show_group_list_entry.PreferredRole</xr-path>
+              <xr-xml-map>serg_show:PreferredRole</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>Serg-show-role</type-name>
+              </type>
+            </preferred-role>
+            <slave-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsummary/&lt;serg_show_GroupSummary_group-id&gt;~serg_agt_show_group_list_entry.SlaveMode</xr-path>
+              <xr-xml-map>serg_show:SlaveMode</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>Serg-show-slave-mode</type-name>
+              </type>
+            </slave-mode>
+            <object-tracking-status config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsummary/&lt;serg_show_GroupSummary_group-id&gt;~serg_agt_show_group_list_entry.ObjectTrackingStatus</xr-path>
+              <xr-xml-map>serg_show:ObjectTrackingStatus</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </object-tracking-status>
+            <interface-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsummary/&lt;serg_show_GroupSummary_group-id&gt;~serg_agt_show_group_list_entry.InterfaceCount</xr-path>
+              <xr-xml-map>serg_show:InterfaceCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </interface-count>
+            <session-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsummary/&lt;serg_show_GroupSummary_group-id&gt;~serg_agt_show_group_list_entry.SessionCount</xr-path>
+              <xr-xml-map>serg_show:SessionCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </session-count>
+            <pending-add-session-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/groupsummary/&lt;serg_show_GroupSummary_group-id&gt;~serg_agt_show_group_list_entry.PendingAddSessionCount</xr-path>
+              <xr-xml-map>serg_show:PendingAddSessionCount</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </pending-add-session-count>
+          </group-summary>
+        </group-summaries>
+        <node-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-pathformat>hex_nozerox</xr-pathformat>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/serg/serga/node/&lt;serg_show_Node_nodeid&gt;/</xr-path>
+          <xr-xml-map>serg_show:NodeName</xr-xml-map>
+          <xr-sch-type>NodeID</xr-sch-type>
+          <xr-sch-arg-name>&lt;serg_show_Node_nodeid&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Node-id</type-name>
+          </type>
+        </node-name>
+      </node>
+    </nodes>
+  </session-redundancy-agent>
+</Cisco-IOS-XR-infra-serg-oper>

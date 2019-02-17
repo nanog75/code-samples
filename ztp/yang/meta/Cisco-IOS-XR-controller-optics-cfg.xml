@@ -1,0 +1,590 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-controller-optics-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-controller-optics-cfg" revision="2017-09-07">
+  <files>
+    <file revision="2017-09-07" submodule="false">Cisco-IOS-XR-controller-optics-cfg.yang</file>
+  </files>
+  <prefix>controller-optics-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-ifmgr-cfg</import>
+  <typedef name="Optics-fec">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">fec-none</enum>
+      <enum value="1">fec-h15</enum>
+      <enum value="2">fec-h25</enum>
+      <enum value="4">fec-h15-de</enum>
+      <enum value="8">fec-h25-de</enum>
+    </type>
+  </typedef>
+  <typedef name="Optics-ots-ampli-control-mode">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">automatic</enum>
+      <enum value="2">manual</enum>
+    </type>
+  </typedef>
+  <typedef name="Threshold">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">low</enum>
+      <enum value="2">high</enum>
+    </type>
+  </typedef>
+  <typedef name="Optics-dwdm-carrier-param">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">itu-ch</enum>
+      <enum value="1">wavelength</enum>
+      <enum value="2">frequency</enum>
+    </type>
+  </typedef>
+  <typedef name="Optics-ots-safety-control-mode">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">auto</enum>
+      <enum value="2">disabled</enum>
+    </type>
+  </typedef>
+  <typedef name="Optics-ots-ampli-gain-range">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">normal</enum>
+      <enum value="2">extended</enum>
+    </type>
+  </typedef>
+  <typedef name="Optics-dwdm-carrier-grid">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">50g-hz-grid</enum>
+      <enum value="1">100mhz-grid</enum>
+    </type>
+  </typedef>
+  <typedef name="Optics-loopback">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">internal</enum>
+      <enum value="2">line</enum>
+    </type>
+  </typedef>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <optics config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/</xr-path>
+      <xr-xml-map>optics_controller_cfg:Optics</xr-xml-map>
+      <xr-task>dwdm</xr-task>
+      <xr-scope>exported</xr-scope>
+      <rx-thresholds config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/rx_threshold/</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsRxThreshold</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <rx-threshold config="true" key="rx-threshold-type" node="list">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/rx_threshold/&lt;optics_controller_cfg_RxThreshold_threshold&gt;</xr-path>
+          <xr-xml-map>optics_controller_cfg:RxThreshold</xr-xml-map>
+          <xr-task>dwdm</xr-task>
+          <rx-threshold-type config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/rx_threshold/&lt;optics_controller_cfg_RxThreshold_threshold&gt;</xr-path>
+            <xr-xml-map>optics_controller_cfg:RxThresholdType</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <xr-sch-arg-name>&lt;optics_controller_cfg_RxThreshold_threshold&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>Threshold</type-name>
+            </type>
+          </rx-threshold-type>
+          <rx-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/rx_threshold/&lt;optics_controller_cfg_RxThreshold_threshold&gt;</xr-path>
+            <xr-xml-map>optics_controller_cfg:RxThreshold</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>SignedRange</xr-sch-type>
+            <type range="-400..300">
+              <type-name>int32</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </rx-threshold>
+        </rx-threshold>
+      </rx-thresholds>
+      <optics-network-srlgs config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/network_srlg/set/</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsNetworkSrlgTable</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <optics-network-srlg config="true" key="set-id" node="list">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/network_srlg/set/&lt;optics_controller_cfg_OpticsNetworkSrlg_arg10&gt;</xr-path>
+          <xr-xml-map>optics_controller_cfg:OpticsNetworkSrlg</xr-xml-map>
+          <xr-task>dwdm</xr-task>
+          <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+          <set-id config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/network_srlg/set/&lt;optics_controller_cfg_OpticsNetworkSrlg_arg10&gt;</xr-path>
+            <xr-xml-map>optics_controller_cfg:SetId</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <xr-sch-arg-name>&lt;optics_controller_cfg_OpticsNetworkSrlg_arg10&gt;</xr-sch-arg-name>
+            <type range="1..17">
+              <type-name>uint32</type-name>
+            </type>
+          </set-id>
+          <srlg1 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/network_srlg/set/&lt;optics_controller_cfg_OpticsNetworkSrlg_arg10&gt;`0</xr-path>
+            <xr-xml-map>optics_controller_cfg:Srlg1</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..4294967294">
+              <type-name>uint32</type-name>
+            </type>
+          </srlg1>
+          <srlg2 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/network_srlg/set/&lt;optics_controller_cfg_OpticsNetworkSrlg_arg10&gt;`1</xr-path>
+            <xr-xml-map>optics_controller_cfg:Srlg2</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..4294967294">
+              <type-name>uint32</type-name>
+            </type>
+          </srlg2>
+          <srlg3 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/network_srlg/set/&lt;optics_controller_cfg_OpticsNetworkSrlg_arg10&gt;`2</xr-path>
+            <xr-xml-map>optics_controller_cfg:Srlg3</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..4294967294">
+              <type-name>uint32</type-name>
+            </type>
+          </srlg3>
+          <srlg4 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/network_srlg/set/&lt;optics_controller_cfg_OpticsNetworkSrlg_arg10&gt;`3</xr-path>
+            <xr-xml-map>optics_controller_cfg:Srlg4</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..4294967294">
+              <type-name>uint32</type-name>
+            </type>
+          </srlg4>
+          <srlg5 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/network_srlg/set/&lt;optics_controller_cfg_OpticsNetworkSrlg_arg10&gt;`4</xr-path>
+            <xr-xml-map>optics_controller_cfg:Srlg5</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..4294967294">
+              <type-name>uint32</type-name>
+            </type>
+          </srlg5>
+          <srlg6 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/network_srlg/set/&lt;optics_controller_cfg_OpticsNetworkSrlg_arg10&gt;`5</xr-path>
+            <xr-xml-map>optics_controller_cfg:Srlg6</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..4294967294">
+              <type-name>uint32</type-name>
+            </type>
+          </srlg6>
+        </optics-network-srlg>
+      </optics-network-srlgs>
+      <optics-dwdm-carrier config="true" is-key="false" node="container" presence="true">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-is-packed/>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/wavelength`</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsDWDMCarrier</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-pack-format>%d%d%d</xr-pack-format>
+        <grid-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/wavelength`0</xr-path>
+          <xr-xml-map>optics_controller_cfg:GridType</xr-xml-map>
+          <xr-task>dwdm</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Optics-dwdm-carrier-grid</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </grid-type>
+        <param-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/wavelength`1</xr-path>
+          <xr-xml-map>optics_controller_cfg:ParamType</xr-xml-map>
+          <xr-task>dwdm</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Optics-dwdm-carrier-param</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </param-type>
+        <param-value config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/wavelength`2</xr-path>
+          <xr-xml-map>optics_controller_cfg:ParamValue</xr-xml-map>
+          <xr-task>dwdm</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..1961000">
+            <type-name>uint32</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </param-value>
+      </optics-dwdm-carrier>
+      <optics-lanes config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/lane/</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsLanes</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <optics-lane config="true" key="index" node="list">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/lane/&lt;optics_controller_cfg_OpticsLane_arg2&gt;/</xr-path>
+          <xr-xml-map>optics_controller_cfg:OpticsLane</xr-xml-map>
+          <xr-task>dwdm</xr-task>
+          <description config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/lane/&lt;optics_controller_cfg_OpticsLane_arg2&gt;/description</xr-path>
+            <xr-xml-map>optics_controller_cfg:Description</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>BoundedString</xr-sch-type>
+            <type length="1..255">
+              <type-name>string</type-name>
+            </type>
+          </description>
+          <index config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-pathformat>decimal</xr-pathformat>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/lane/&lt;optics_controller_cfg_OpticsLane_arg2&gt;/</xr-path>
+            <xr-xml-map>optics_controller_cfg:Index</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>Integer</xr-sch-type>
+            <xr-sch-arg-name>&lt;optics_controller_cfg_OpticsLane_arg2&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </index>
+        </optics-lane>
+      </optics-lanes>
+      <tx-thresholds config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/tx_threshold/</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsTxThreshold</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <tx-threshold config="true" key="tx-threshold-type" node="list">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/tx_threshold/&lt;optics_controller_cfg_TxThreshold_threshold&gt;</xr-path>
+          <xr-xml-map>optics_controller_cfg:TxThreshold</xr-xml-map>
+          <xr-task>dwdm</xr-task>
+          <tx-threshold-type config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/tx_threshold/&lt;optics_controller_cfg_TxThreshold_threshold&gt;</xr-path>
+            <xr-xml-map>optics_controller_cfg:TxThresholdType</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <xr-sch-arg-name>&lt;optics_controller_cfg_TxThreshold_threshold&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>Threshold</type-name>
+            </type>
+          </tx-threshold-type>
+          <tx-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/tx_threshold/&lt;optics_controller_cfg_TxThreshold_threshold&gt;</xr-path>
+            <xr-xml-map>optics_controller_cfg:TxThreshold</xr-xml-map>
+            <xr-task>dwdm</xr-task>
+            <xr-sch-type>SignedRange</xr-sch-type>
+            <type range="-400..300">
+              <type-name>int32</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </tx-threshold>
+        </tx-threshold>
+      </tx-thresholds>
+      <optics-transmit-power config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/tx_power</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsTransmitPower</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>SignedRange</xr-sch-type>
+        <type range="-190..20">
+          <type-name>int32</type-name>
+        </type>
+      </optics-transmit-power>
+      <optics-ots-channel-power-max-delta config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/channel_power_max_delta</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsOtsChannelPowerMaxDelta</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>SignedRange</xr-sch-type>
+        <type range="-500..300">
+          <type-name>int32</type-name>
+        </type>
+      </optics-ots-channel-power-max-delta>
+      <optics-loopback config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/optics_loopback</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsLoopback</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Optics-loopback</type-name>
+        </type>
+        <default>none</default>
+      </optics-loopback>
+      <optics-ots-osri config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/ampli_osri</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsOtsOsri</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>Boolean</xr-sch-type>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </optics-ots-osri>
+      <optics-ots-amplifier-gain-degrade-high-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/ampli_gain_thr_deg_high</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsOtsAmplifierGainDegradeHighThreshold</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..500">
+          <type-name>uint32</type-name>
+        </type>
+      </optics-ots-amplifier-gain-degrade-high-threshold>
+      <optics-ots-rx-voa-attenuation config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/rx_attenuation</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsOtsRxVoaAttenuation</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..200">
+          <type-name>uint32</type-name>
+        </type>
+      </optics-ots-rx-voa-attenuation>
+      <optics-fec config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/optics_fec</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsFEC</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Optics-fec</type-name>
+        </type>
+        <default>fec-none</default>
+      </optics-fec>
+      <optics-dgd-high-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/dgd_high_threshold</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsDGDHighThreshold</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..18000">
+          <type-name>uint32</type-name>
+        </type>
+      </optics-dgd-high-threshold>
+      <optics-ots-amplifier-channel-power config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/ampli_channel_power</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsOtsAmplifierChannelPower</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>SignedRange</xr-sch-type>
+        <type range="-500..300">
+          <type-name>int32</type-name>
+        </type>
+      </optics-ots-amplifier-channel-power>
+      <optics-ots-amplifier-control-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/ampli_control_mode</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsOtsAmplifierControlMode</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Optics-ots-ampli-control-mode</type-name>
+        </type>
+      </optics-ots-amplifier-control-mode>
+      <optics-ots-amplifier-gain config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/ots_ampli_gain/0x4</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsOtsAmplifierGain</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..500">
+          <type-name>uint32</type-name>
+        </type>
+      </optics-ots-amplifier-gain>
+      <optics-ots-amplifier-gain-range config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/ots_ampli_gain/0x3</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsOtsAmplifierGainRange</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Optics-ots-ampli-gain-range</type-name>
+        </type>
+      </optics-ots-amplifier-gain-range>
+      <optics-ots-safety-control-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/ampli_safety_control_mode</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsOtsSafetyControlMode</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Optics-ots-safety-control-mode</type-name>
+        </type>
+      </optics-ots-safety-control-mode>
+      <optics-cd-min config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/cd_min</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsCDMin</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>SignedRange</xr-sch-type>
+        <type range="-280000..280000">
+          <type-name>int32</type-name>
+        </type>
+      </optics-cd-min>
+      <optics-ots-tx-voa-attenuation config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/tx_attenuation</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsOtsTxVoaAttenuation</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..200">
+          <type-name>uint32</type-name>
+        </type>
+      </optics-ots-tx-voa-attenuation>
+      <optics-ots-amplifier-tilt config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/ampli_tilt</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsOtsAmplifierTilt</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>SignedRange</xr-sch-type>
+        <type range="-50..50">
+          <type-name>int32</type-name>
+        </type>
+      </optics-ots-amplifier-tilt>
+      <optics-transmit-shutdown config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/tx_laser_off</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsTransmitShutdown</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>Boolean</xr-sch-type>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </optics-transmit-shutdown>
+      <optics-baud-rate config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/modulation/0x3</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsBaudRate</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>BoundedString</xr-sch-type>
+        <type length="1..20">
+          <type-name>string</type-name>
+        </type>
+      </optics-baud-rate>
+      <optics-performance-monitoring config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/pm_enable</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsPerformanceMonitoring</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>Boolean</xr-sch-type>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+        <default>true</default>
+      </optics-performance-monitoring>
+      <optics-cd-max config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/cd_max</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsCDMax</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>SignedRange</xr-sch-type>
+        <type range="-280000..280000">
+          <type-name>int32</type-name>
+        </type>
+      </optics-cd-max>
+      <optics-bits-per-symbol config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/modulation/0x2</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsBitsPerSymbol</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>BoundedString</xr-sch-type>
+        <type length="1..20">
+          <type-name>string</type-name>
+        </type>
+      </optics-bits-per-symbol>
+      <optics-lbc-high-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/lbc_high_threshold</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsLbcHighThreshold</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..100">
+          <type-name>uint32</type-name>
+        </type>
+      </optics-lbc-high-threshold>
+      <optics-cd-high-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/cd_threshold/0x2</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsCDHighThreshold</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>SignedRange</xr-sch-type>
+        <type range="-280000..280000">
+          <type-name>int32</type-name>
+        </type>
+      </optics-cd-high-threshold>
+      <optics-osnr-low-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/osnr_low_threshold</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsOSNRLowThreshold</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..4000">
+          <type-name>uint32</type-name>
+        </type>
+      </optics-osnr-low-threshold>
+      <optics-ots-amplifier-gain-degrade-low-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/ampli_gain_thr_deg_low</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsOtsAmplifierGainDegradeLowThreshold</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..500">
+          <type-name>uint32</type-name>
+        </type>
+      </optics-ots-amplifier-gain-degrade-low-threshold>
+      <optics-cd-low-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/Optics/cd_threshold/0x1</xr-path>
+        <xr-xml-map>optics_controller_cfg:OpticsCDLowThreshold</xr-xml-map>
+        <xr-task>dwdm</xr-task>
+        <xr-sch-type>SignedRange</xr-sch-type>
+        <type range="-280000..280000">
+          <type-name>int32</type-name>
+        </type>
+      </optics-cd-low-threshold>
+    </optics>
+  </augment>
+</Cisco-IOS-XR-controller-optics-cfg>

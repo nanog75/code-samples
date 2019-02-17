@@ -1,0 +1,488 @@
+<?xml version="1.0"?>
+<tailf-aaa ns="http://tail-f.com/ns/aaa/1.1" revision="2011-09-22">
+  <files>
+    <file revision="2011-09-22" submodule="false">tailf-aaa.yang</file>
+  </files>
+  <prefix>aaa</prefix>
+  <import prefix="tailf">tailf-common</import>
+  <typedef name="history">
+    <type range="0 .. 8192">
+      <type-name>uint64</type-name>
+    </type>
+  </typedef>
+  <typedef name="idle-timeout">
+    <type range="0 .. 8192">
+      <type-name>uint64</type-name>
+    </type>
+  </typedef>
+  <typedef name="display-level">
+    <type range="1 .. 64">
+      <type-name>uint64</type-name>
+    </type>
+  </typedef>
+  <typedef name="dataOperationType">
+    <type node="enumeration">
+      <enum>r</enum>
+      <enum>rx</enum>
+      <enum>x</enum>
+      <enum>rw</enum>
+      <enum>rwx</enum>
+      <enum>wx</enum>
+      <enum>w</enum>
+      <enum>c</enum>
+      <enum>cr</enum>
+      <enum>cu</enum>
+      <enum>cd</enum>
+      <enum>cx</enum>
+      <enum>cru</enum>
+      <enum>crd</enum>
+      <enum>crx</enum>
+      <enum>cud</enum>
+      <enum>cux</enum>
+      <enum>cdx</enum>
+      <enum>crud</enum>
+      <enum>crux</enum>
+      <enum>crdx</enum>
+      <enum>cudx</enum>
+      <enum>crudx</enum>
+      <enum>ru</enum>
+      <enum>rd</enum>
+      <enum>rud</enum>
+      <enum>rux</enum>
+      <enum>rdx</enum>
+      <enum>u</enum>
+      <enum>ud</enum>
+      <enum>ux</enum>
+      <enum>d</enum>
+      <enum>dx</enum>
+    </type>
+  </typedef>
+  <typedef name="cmdOperationType">
+    <type node="enumeration">
+      <enum>r</enum>
+      <enum>rx</enum>
+      <enum>x</enum>
+    </type>
+  </typedef>
+  <typedef name="Action">
+    <type node="enumeration">
+      <enum>accept</enum>
+      <enum>reject</enum>
+      <enum>accept_log</enum>
+    </type>
+  </typedef>
+  <typedef name="passwdStr">
+    <type>
+      <type-name>tailf:md5-digest-string</type-name>
+    </type>
+  </typedef>
+  <typedef name="levelInt">
+    <type range="0 .. 15">
+      <type-name>int32</type-name>
+    </type>
+  </typedef>
+  <typedef name="modeStr">
+    <type node="union">
+      <type>
+        <type-name>string</type-name>
+      </type>
+      <type>
+        <type-name>builtinModes</type-name>
+      </type>
+    </type>
+  </typedef>
+  <typedef name="builtinModes">
+    <type node="enumeration">
+      <enum>exec</enum>
+      <enum>configure</enum>
+    </type>
+  </typedef>
+  <aaa config="true" is-key="false" node="container" presence="false">
+    <authentication config="true" is-key="false" node="container" presence="false">
+      <users config="true" is-key="false" node="container" presence="false">
+        <user config="true" key="name" node="list">
+          <xr-path/>
+          <max-elements>1024</max-elements>
+          <name config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </name>
+          <uid config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+            <default>9000</default>
+          </uid>
+          <gid config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+            <default>100</default>
+          </gid>
+          <password config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>passwdStr</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </password>
+          <ssh_keydir config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <default>/home/sshdir</default>
+          </ssh_keydir>
+          <homedir config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <default>/home/homedir</default>
+          </homedir>
+        </user>
+      </users>
+      <groups config="true" is-key="false" node="container" presence="false">
+        <group config="true" key="name" node="list">
+          <xr-path/>
+          <max-elements>32</max-elements>
+          <name config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </name>
+          <gid config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+            <default>100</default>
+          </gid>
+          <users config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <default>%%__system_user__%%</default>
+          </users>
+        </group>
+      </groups>
+      <login config="true" is-key="false" node="container" presence="false">
+        <group config="true" is-key="false" node="container" presence="false">
+          <tacacs config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </tacacs>
+        </group>
+      </login>
+    </authentication>
+    <authorization config="true" is-key="false" node="container" presence="false">
+      <cmdrules config="true" is-key="false" node="container" presence="false">
+        <cmdrule config="true" key="index" node="list">
+          <xr-path/>
+          <index config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </index>
+          <context config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </context>
+          <command config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </command>
+          <group config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </group>
+          <ops config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>cmdOperationType</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </ops>
+          <action config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>Action</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </action>
+        </cmdrule>
+      </cmdrules>
+      <datarules config="true" is-key="false" node="container" presence="false">
+        <datarule config="true" key="index" node="list">
+          <xr-path/>
+          <index config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </index>
+          <namespace config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </namespace>
+          <context config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <default>*</default>
+          </context>
+          <keypath config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </keypath>
+          <group config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </group>
+          <ops config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>dataOperationType</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </ops>
+          <action config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>Action</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </action>
+        </datarule>
+      </datarules>
+      <commands config="true" is-key="false" node="container" presence="false">
+        <group config="true" is-key="false" node="container" presence="false">
+          <tacacs config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </tacacs>
+          <none config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </none>
+        </group>
+      </commands>
+    </authorization>
+    <accounting config="true" is-key="false" node="container" presence="false">
+      <commands config="true" is-key="false" node="container" presence="false">
+        <group config="true" is-key="false" node="container" presence="false">
+          <tacacs config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </tacacs>
+        </group>
+      </commands>
+    </accounting>
+    <ios config="true" is-key="false" node="container" presence="true">
+      <level config="true" key="nr" node="list">
+        <xr-path/>
+        <min-elements>2</min-elements>
+        <nr config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>levelInt</type-name>
+          </type>
+        </nr>
+        <secret config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>passwdStr</type-name>
+          </type>
+        </secret>
+        <password config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>passwdStr</type-name>
+          </type>
+        </password>
+        <prompt config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+          <default>\h# </default>
+        </prompt>
+      </level>
+      <privilege config="true" key="mode" node="list">
+        <xr-path/>
+        <mode config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>modeStr</type-name>
+          </type>
+        </mode>
+        <level config="true" key="nr" node="list">
+          <xr-path/>
+          <min-elements>1</min-elements>
+          <max-elements>15</max-elements>
+          <nr config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>levelInt</type-name>
+            </type>
+          </nr>
+          <command config="true" key="name" node="list">
+            <xr-path/>
+            <name config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </name>
+          </command>
+        </level>
+      </privilege>
+    </ios>
+  </aaa>
+  <session config="true" is-key="false" node="container" presence="true">
+    <complete-on-space config="true" is-key="false" node="leaf">
+      <type>
+        <type-name>boolean</type-name>
+      </type>
+    </complete-on-space>
+    <ignore-leading-space config="true" is-key="false" node="leaf">
+      <type>
+        <type-name>boolean</type-name>
+      </type>
+    </ignore-leading-space>
+    <idle-timeout config="true" is-key="false" node="leaf">
+      <type>
+        <type-name>idle-timeout</type-name>
+      </type>
+    </idle-timeout>
+    <paginate config="true" is-key="false" node="leaf">
+      <type>
+        <type-name>boolean</type-name>
+      </type>
+    </paginate>
+    <history config="true" is-key="false" node="leaf">
+      <type>
+        <type-name>history</type-name>
+      </type>
+    </history>
+    <autowizard config="true" is-key="false" node="leaf">
+      <type>
+        <type-name>boolean</type-name>
+      </type>
+    </autowizard>
+    <show-defaults config="true" is-key="false" node="leaf">
+      <type>
+        <type-name>boolean</type-name>
+      </type>
+    </show-defaults>
+    <display-level config="true" is-key="false" node="leaf">
+      <type>
+        <type-name>display-level</type-name>
+      </type>
+    </display-level>
+    <prompt1 config="true" is-key="false" node="leaf">
+      <type>
+        <type-name>string</type-name>
+      </type>
+    </prompt1>
+    <prompt2 config="true" is-key="false" node="leaf">
+      <type>
+        <type-name>string</type-name>
+      </type>
+    </prompt2>
+  </session>
+  <alias config="true" key="name" node="list">
+    <xr-path/>
+    <name config="true" is-key="true" node="leaf">
+      <type>
+        <type-name>string</type-name>
+      </type>
+    </name>
+    <expansion config="true" is-key="false" node="leaf">
+      <type>
+        <type-name>string</type-name>
+      </type>
+      <mandatory>true</mandatory>
+    </expansion>
+  </alias>
+  <user config="true" key="name" node="list">
+    <xr-path/>
+    <name config="true" is-key="true" node="leaf">
+      <type>
+        <type-name>string</type-name>
+      </type>
+    </name>
+    <description config="true" is-key="false" node="leaf">
+      <type>
+        <type-name>string</type-name>
+      </type>
+    </description>
+    <alias config="true" key="name" node="list">
+      <xr-path/>
+      <name config="true" is-key="true" node="leaf">
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </name>
+      <expansion config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>string</type-name>
+        </type>
+        <mandatory>true</mandatory>
+      </expansion>
+    </alias>
+    <session config="true" is-key="false" node="container" presence="false">
+      <complete-on-space config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </complete-on-space>
+      <ignore-leading-space config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </ignore-leading-space>
+      <idle-timeout config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>idle-timeout</type-name>
+        </type>
+      </idle-timeout>
+      <paginate config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </paginate>
+      <history config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>history</type-name>
+        </type>
+      </history>
+      <autowizard config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </autowizard>
+      <show-defaults config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </show-defaults>
+      <display-level config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>display-level</type-name>
+        </type>
+      </display-level>
+      <prompt1 config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </prompt1>
+      <prompt2 config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </prompt2>
+    </session>
+  </user>
+</tailf-aaa>

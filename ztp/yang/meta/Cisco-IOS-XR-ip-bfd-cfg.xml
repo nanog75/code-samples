@@ -1,0 +1,410 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ip-bfd-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ip-bfd-cfg" revision="2015-11-09">
+  <files>
+    <file revision="2015-11-09" submodule="false">Cisco-IOS-XR-ip-bfd-cfg.yang</file>
+  </files>
+  <prefix>ip-bfd-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-snmp-agent-cfg</import>
+  <typedef name="Bfd-echo-startup-validate">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">off</enum>
+      <enum value="1">on</enum>
+      <enum value="2">force</enum>
+    </type>
+  </typedef>
+  <typedef name="Bfd-bundle-coexistence-bob-blb">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">inherited</enum>
+      <enum value="2">logical</enum>
+    </type>
+  </typedef>
+  <typedef name="Bfd-if-echo-usage">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">enable</enum>
+      <enum value="1">disable</enum>
+    </type>
+  </typedef>
+  <typedef name="Bfd-if-ipv6-checksum-usage">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">disable</enum>
+      <enum value="1">enable</enum>
+    </type>
+  </typedef>
+  <augment path="/a1:snmp/a1:notification">
+    <bfd config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/enable/traps/bfd/</xr-path>
+      <xr-xml-map>bfdmib_cfg:BFD</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/enable/traps/bfd/enable</xr-path>
+        <xr-xml-map>bfdmib_cfg:Enable</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </enable>
+    </bfd>
+  </augment>
+  <bfd config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/ip_bfd/gl/</xr-path>
+    <xr-xml-map>ip_bfd_cfg:BFD</xr-xml-map>
+    <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+    <xr-scope>exported</xr-scope>
+    <flap-damp config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip_bfd/gl/flap_damp/</xr-path>
+      <xr-xml-map>ip_bfd_cfg:FlapDamp</xr-xml-map>
+      <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+      <bundle-member config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/ip_bfd/gl/flap_damp/bob/</xr-path>
+        <xr-xml-map>ip_bfd_cfg:BundleMember</xr-xml-map>
+        <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+        <initial-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ip_bfd/gl/flap_damp/bob/initial</xr-path>
+          <xr-xml-map>ip_bfd_cfg:InitialDelay</xr-xml-map>
+          <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..518400000">
+            <type-name>uint32</type-name>
+          </type>
+          <default>16000</default>
+        </initial-delay>
+        <maximum-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ip_bfd/gl/flap_damp/bob/maximum</xr-path>
+          <xr-xml-map>ip_bfd_cfg:MaximumDelay</xr-xml-map>
+          <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..518400000">
+            <type-name>uint32</type-name>
+          </type>
+          <default>600000</default>
+        </maximum-delay>
+        <secondary-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ip_bfd/gl/flap_damp/bob/second</xr-path>
+          <xr-xml-map>ip_bfd_cfg:SecondaryDelay</xr-xml-map>
+          <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..518400000">
+            <type-name>uint32</type-name>
+          </type>
+          <default>20000</default>
+        </secondary-delay>
+        <l3-only-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ip_bfd/gl/flap_damp/bob/l3only</xr-path>
+          <xr-xml-map>ip_bfd_cfg:L3OnlyMode</xr-xml-map>
+          <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </l3-only-mode>
+      </bundle-member>
+      <extensions config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/ip_bfd/gl/flap_damp/extensions/</xr-path>
+        <xr-xml-map>ip_bfd_cfg:Extensions</xr-xml-map>
+        <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+        <down-monitor config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ip_bfd/gl/flap_damp/extensions/down_monitor</xr-path>
+          <xr-xml-map>ip_bfd_cfg:DownMonitor</xr-xml-map>
+          <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </down-monitor>
+      </extensions>
+      <threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/ip_bfd/gl/flap_damp/threshold</xr-path>
+        <xr-xml-map>ip_bfd_cfg:Threshold</xr-xml-map>
+        <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="60000..3600000">
+          <type-name>uint32</type-name>
+        </type>
+        <default>120000</default>
+      </threshold>
+      <initial-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/ip_bfd/gl/flap_damp/initial</xr-path>
+        <xr-xml-map>ip_bfd_cfg:InitialDelay</xr-xml-map>
+        <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..3600000">
+          <type-name>uint32</type-name>
+        </type>
+        <default>2000</default>
+      </initial-delay>
+      <maximum-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/ip_bfd/gl/flap_damp/maximum</xr-path>
+        <xr-xml-map>ip_bfd_cfg:MaximumDelay</xr-xml-map>
+        <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..3600000">
+          <type-name>uint32</type-name>
+        </type>
+        <default>120000</default>
+      </maximum-delay>
+      <dampen-disable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/ip_bfd/gl/flap_damp/disable</xr-path>
+        <xr-xml-map>ip_bfd_cfg:DampenDisable</xr-xml-map>
+        <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </dampen-disable>
+      <secondary-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/ip_bfd/gl/flap_damp/second</xr-path>
+        <xr-xml-map>ip_bfd_cfg:SecondaryDelay</xr-xml-map>
+        <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..3600000">
+          <type-name>uint32</type-name>
+        </type>
+        <default>5000</default>
+      </secondary-delay>
+    </flap-damp>
+    <echo-latency config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip_bfd/gl/echo/latency/</xr-path>
+      <xr-xml-map>ip_bfd_cfg:EchoLatency</xr-xml-map>
+      <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+      <detect config="true" is-key="false" node="container" presence="false">
+        <xr-is-packed/>
+        <xr-path>/cfg/gl/ip_bfd/gl/echo/latency/detect`</xr-path>
+        <xr-xml-map>ip_bfd_cfg:Detect</xr-xml-map>
+        <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+        <xr-pack-format>%d%d%d</xr-pack-format>
+        <latency-detect-enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/ip_bfd/gl/echo/latency/detect`0</xr-path>
+          <xr-xml-map>ip_bfd_cfg:LatencyDetectEnabled</xr-xml-map>
+          <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+          <xr-sch-type>Boolean</xr-sch-type>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </latency-detect-enabled>
+        <latency-detect-percentage config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/ip_bfd/gl/echo/latency/detect`1</xr-path>
+          <xr-xml-map>ip_bfd_cfg:LatencyDetectPercentage</xr-xml-map>
+          <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="100..250">
+            <type-name>uint32</type-name>
+          </type>
+        </latency-detect-percentage>
+        <latency-detect-count config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/ip_bfd/gl/echo/latency/detect`2</xr-path>
+          <xr-xml-map>ip_bfd_cfg:LatencyDetectCount</xr-xml-map>
+          <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..10">
+            <type-name>uint32</type-name>
+          </type>
+        </latency-detect-count>
+      </detect>
+    </echo-latency>
+    <echo-startup config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip_bfd/gl/echo/startup/</xr-path>
+      <xr-xml-map>ip_bfd_cfg:EchoStartup</xr-xml-map>
+      <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+      <validate config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/ip_bfd/gl/echo/startup/validate</xr-path>
+        <xr-xml-map>ip_bfd_cfg:Validate</xr-xml-map>
+        <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <xr-default-set/>
+        <type>
+          <type-name>Bfd-echo-startup-validate</type-name>
+        </type>
+        <default>off</default>
+      </validate>
+    </echo-startup>
+    <interfaces config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip_bfd/gl/if/</xr-path>
+      <xr-xml-map>ip_bfd_cfg:InterfaceTable</xr-xml-map>
+      <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+      <interface config="true" key="interface-name" node="list">
+        <xr-path>/cfg/gl/ip_bfd/gl/if/&lt;ip_bfd_cfg_Interface_arg177&gt;/</xr-path>
+        <xr-xml-map>ip_bfd_cfg:Interface</xr-xml-map>
+        <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+        <interface-echo-usage config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ip_bfd/gl/if/&lt;ip_bfd_cfg_Interface_arg177&gt;/echo</xr-path>
+          <xr-xml-map>ip_bfd_cfg:InterfaceEchoUsage</xr-xml-map>
+          <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Bfd-if-echo-usage</type-name>
+          </type>
+          <default>enable</default>
+        </interface-echo-usage>
+        <ipv6-checksum config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ip_bfd/gl/if/&lt;ip_bfd_cfg_Interface_arg177&gt;/ipv6/checksum</xr-path>
+          <xr-xml-map>ip_bfd_cfg:IPv6Checksum</xr-xml-map>
+          <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Bfd-if-ipv6-checksum-usage</type-name>
+          </type>
+          <default>enable</default>
+        </ipv6-checksum>
+        <interface-ipv4-echo-source config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/ip_bfd/gl/if/&lt;ip_bfd_cfg_Interface_arg177&gt;/ipv4/echo_source</xr-path>
+          <xr-xml-map>ip_bfd_cfg:InterfaceIPv4EchoSource</xr-xml-map>
+          <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+          <xr-sch-type>IPAddress</xr-sch-type>
+          <type>
+            <type-name>inet:ip-address-no-zone</type-name>
+          </type>
+        </interface-ipv4-echo-source>
+        <interface-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-create-item-relative-path>aza</xr-create-item-relative-path>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/ip_bfd/gl/if/&lt;ip_bfd_cfg_Interface_arg177&gt;/</xr-path>
+          <xr-xml-map>ip_bfd_cfg:InterfaceName</xr-xml-map>
+          <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+          <xr-sch-type>InterfaceName</xr-sch-type>
+          <xr-sch-arg-name>&lt;ip_bfd_cfg_Interface_arg177&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </interface-name>
+      </interface>
+    </interfaces>
+    <multi-path-includes config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip_bfd/gl/mh/include/location/</xr-path>
+      <xr-xml-map>ip_bfd_cfg:MultiPathIncludeTable</xr-xml-map>
+      <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+      <multi-path-include config="true" key="location" node="list">
+        <xr-path>/cfg/gl/ip_bfd/gl/mh/include/location/&lt;ip_bfd_cfg_MultiPathInclude_nodeid&gt;</xr-path>
+        <xr-xml-map>ip_bfd_cfg:MultiPathInclude</xr-xml-map>
+        <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+        <location config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-pathformat>decimal</xr-pathformat>
+          <xr-create-item-relative-path/>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/ip_bfd/gl/mh/include/location/&lt;ip_bfd_cfg_MultiPathInclude_nodeid&gt;</xr-path>
+          <xr-xml-map>ip_bfd_cfg:Location</xr-xml-map>
+          <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+          <xr-sch-type>StringNodeID</xr-sch-type>
+          <xr-sch-arg-name>&lt;ip_bfd_cfg_MultiPathInclude_nodeid&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Node-id</type-name>
+          </type>
+        </location>
+      </multi-path-include>
+    </multi-path-includes>
+    <bundle config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip_bfd/gl/bundle/</xr-path>
+      <xr-xml-map>ip_bfd_cfg:Bundle</xr-xml-map>
+      <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+      <coexistence config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/ip_bfd/gl/bundle/coexist/</xr-path>
+        <xr-xml-map>ip_bfd_cfg:Coexistence</xr-xml-map>
+        <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+        <bob-blb config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ip_bfd/gl/bundle/coexist/bob_blb</xr-path>
+          <xr-xml-map>ip_bfd_cfg:BobBLB</xr-xml-map>
+          <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Bfd-bundle-coexistence-bob-blb</type-name>
+          </type>
+        </bob-blb>
+      </coexistence>
+    </bundle>
+    <global-echo-usage config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/ip_bfd/gl/echo/disable</xr-path>
+      <xr-xml-map>ip_bfd_cfg:GlobalEchoUsage</xr-xml-map>
+      <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+      <xr-sch-type>Configured</xr-sch-type>
+      <type>
+        <type-name>empty</type-name>
+      </type>
+    </global-echo-usage>
+    <ipv6-checksum-disable config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/ip_bfd/gl/ipv6/checksum/disable</xr-path>
+      <xr-xml-map>ip_bfd_cfg:IPv6ChecksumDisable</xr-xml-map>
+      <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+      <xr-sch-type>Configured</xr-sch-type>
+      <type>
+        <type-name>empty</type-name>
+      </type>
+    </ipv6-checksum-disable>
+    <global-echo-min-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/ip_bfd/gl/ipv4/echo_bundle_per_member/minimum-interval</xr-path>
+      <xr-xml-map>ip_bfd_cfg:GlobalEchoMinInterval</xr-xml-map>
+      <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+      <xr-sch-type>Range</xr-sch-type>
+      <type range="15..2000">
+        <type-name>uint32</type-name>
+      </type>
+      <default>15</default>
+    </global-echo-min-interval>
+    <ttl-drop-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/ip_bfd/gl/mh/ttldrop</xr-path>
+      <xr-xml-map>ip_bfd_cfg:TTLDropThreshold</xr-xml-map>
+      <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+      <xr-sch-type>ZeroRange</xr-sch-type>
+      <type range="0..254">
+        <type-name>uint32</type-name>
+      </type>
+    </ttl-drop-threshold>
+    <single-hop-trap config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/ip_bfd/gl/trap/bfd_trap_pre_mapped</xr-path>
+      <xr-xml-map>ip_bfd_cfg:SingleHopTrap</xr-xml-map>
+      <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+      <xr-sch-type>Configured</xr-sch-type>
+      <type>
+        <type-name>empty</type-name>
+      </type>
+    </single-hop-trap>
+    <global-ipv4-echo-source config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>string</xr-primitive-type>
+      <xr-path>/cfg/gl/ip_bfd/gl/ipv4/echo_source</xr-path>
+      <xr-xml-map>ip_bfd_cfg:GlobalIPV4EchoSource</xr-xml-map>
+      <xr-task>bgp | isis | mpls-te | ospf</xr-task>
+      <xr-sch-type>IPAddress</xr-sch-type>
+      <type>
+        <type-name>inet:ip-address-no-zone</type-name>
+      </type>
+    </global-ipv4-echo-source>
+  </bfd>
+</Cisco-IOS-XR-ip-bfd-cfg>

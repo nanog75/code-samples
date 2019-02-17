@@ -1,0 +1,719 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-aaa-diameter-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-aaa-diameter-cfg" revision="2018-09-16">
+  <files>
+    <file revision="2018-09-16" submodule="false">Cisco-IOS-XR-aaa-diameter-cfg.yang</file>
+  </files>
+  <prefix>aaa-diameter-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-aaa-lib-cfg</import>
+  <import prefix="a2">Cisco-IOS-XR-aaa-locald-cfg</import>
+  <typedef name="Aaa-diameter-tls">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="0..1">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Aaa-diameter-timeout">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="6..1000">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Aaa-diameter-port">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="1..65535">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Aaa-diameter-attr">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="0..23">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <augment path="/a1:aaa">
+    <diameter config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/aaa/diameter/</xr-path>
+      <xr-xml-map>aaa_diameter_cfg:Diameter</xr-xml-map>
+      <xr-task>aaa</xr-task>
+      <xr-scope>exported</xr-scope>
+      <gy config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/diameter/app_gy/</xr-path>
+        <xr-xml-map>aaa_diameter_cfg:Gy</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <retransmit config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/diameter/app_gy/retransmit</xr-path>
+          <xr-xml-map>aaa_diameter_cfg:Retransmit</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..10">
+            <type-name>uint32</type-name>
+          </type>
+        </retransmit>
+        <dest-host config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/diameter/app_gy/dest_host</xr-path>
+          <xr-xml-map>aaa_diameter_cfg:dest-host</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </dest-host>
+        <tx-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/diameter/app_gy/tx_timer</xr-path>
+          <xr-xml-map>aaa_diameter_cfg:tx-timer</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>Aaa-diameter-timeout</type-name>
+          </type>
+        </tx-timer>
+      </gy>
+      <origin config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/diameter/orig/</xr-path>
+        <xr-xml-map>aaa_diameter_cfg:Origin</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <realm config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/diameter/orig/realm</xr-path>
+          <xr-xml-map>aaa_diameter_cfg:Realm</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </realm>
+        <host config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/diameter/orig/host</xr-path>
+          <xr-xml-map>aaa_diameter_cfg:Host</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </host>
+      </origin>
+      <nas config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/diameter/app_nas/</xr-path>
+        <xr-xml-map>aaa_diameter_cfg:Nas</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <dest-host config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/diameter/app_nas/dest_host</xr-path>
+          <xr-xml-map>aaa_diameter_cfg:dest-host</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </dest-host>
+      </nas>
+      <diameter-tls config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/diameter/tls/</xr-path>
+        <xr-xml-map>aaa_diameter_cfg:DiameterTls</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <trustpoint config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/diameter/tls/trustpoint</xr-path>
+          <xr-xml-map>aaa_diameter_cfg:Trustpoint</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </trustpoint>
+      </diameter-tls>
+      <peers config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/diameter/dia_peer/</xr-path>
+        <xr-xml-map>aaa_diameter_cfg:PeerTable</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <peer config="true" key="peer-name" node="list">
+          <xr-path>/cfg/gl/aaa/diameter/dia_peer/&lt;aaa_diameter_cfg_Peer_arg40&gt;/</xr-path>
+          <xr-xml-map>aaa_diameter_cfg:Peer</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <peer-timer config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/aaa/diameter/dia_peer/&lt;aaa_diameter_cfg_Peer_arg40&gt;/timer/</xr-path>
+            <xr-xml-map>aaa_diameter_cfg:PeerTimer</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <transaction config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/diameter/dia_peer/&lt;aaa_diameter_cfg_Peer_arg40&gt;/timer/transaction</xr-path>
+              <xr-xml-map>aaa_diameter_cfg:Transaction</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type>
+                <type-name>Aaa-diameter-timeout</type-name>
+              </type>
+            </transaction>
+            <connection config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/diameter/dia_peer/&lt;aaa_diameter_cfg_Peer_arg40&gt;/timer/connection</xr-path>
+              <xr-xml-map>aaa_diameter_cfg:Connection</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type>
+                <type-name>Aaa-diameter-timeout</type-name>
+              </type>
+            </connection>
+            <watchdog config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/diameter/dia_peer/&lt;aaa_diameter_cfg_Peer_arg40&gt;/timer/watchdog</xr-path>
+              <xr-xml-map>aaa_diameter_cfg:Watchdog</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type>
+                <type-name>Aaa-diameter-timeout</type-name>
+              </type>
+            </watchdog>
+          </peer-timer>
+          <peer-type config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/aaa/diameter/dia_peer/&lt;aaa_diameter_cfg_Peer_arg40&gt;/peer_type/</xr-path>
+            <xr-xml-map>aaa_diameter_cfg:PeerType</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <server config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/diameter/dia_peer/&lt;aaa_diameter_cfg_Peer_arg40&gt;/peer_type/server</xr-path>
+              <xr-xml-map>aaa_diameter_cfg:Server</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Boolean</xr-sch-type>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </server>
+          </peer-type>
+          <host-destination config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/diameter/dia_peer/&lt;aaa_diameter_cfg_Peer_arg40&gt;/dest_host</xr-path>
+            <xr-xml-map>aaa_diameter_cfg:HostDestination</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </host-destination>
+          <ipv4-address config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/diameter/dia_peer/&lt;aaa_diameter_cfg_Peer_arg40&gt;/address_ipv4</xr-path>
+            <xr-xml-map>aaa_diameter_cfg:Ipv4Address</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>IPV4AddressString</xr-sch-type>
+            <type>
+              <type-name>inet:ipv4-address-no-zone</type-name>
+            </type>
+          </ipv4-address>
+          <realm-destination config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/diameter/dia_peer/&lt;aaa_diameter_cfg_Peer_arg40&gt;/dest_realm</xr-path>
+            <xr-xml-map>aaa_diameter_cfg:RealmDestination</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </realm-destination>
+          <tcp-transport config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/diameter/dia_peer/&lt;aaa_diameter_cfg_Peer_arg40&gt;/trans_tcp</xr-path>
+            <xr-xml-map>aaa_diameter_cfg:TcpTransport</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type>
+              <type-name>Aaa-diameter-port</type-name>
+            </type>
+          </tcp-transport>
+          <source-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/diameter/dia_peer/&lt;aaa_diameter_cfg_Peer_arg40&gt;/src_int</xr-path>
+            <xr-xml-map>aaa_diameter_cfg:SourceInterface</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>InterfaceName</xr-sch-type>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+          </source-interface>
+          <ipv6-address config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/diameter/dia_peer/&lt;aaa_diameter_cfg_Peer_arg40&gt;/address_ipv6</xr-path>
+            <xr-xml-map>aaa_diameter_cfg:Ipv6Address</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>IPV6AddressString</xr-sch-type>
+            <type>
+              <type-name>inet:ipv6-address-no-zone</type-name>
+            </type>
+          </ipv6-address>
+          <tls-transport config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/diameter/dia_peer/&lt;aaa_diameter_cfg_Peer_arg40&gt;/trans_sec</xr-path>
+            <xr-xml-map>aaa_diameter_cfg:TlsTransport</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type>
+              <type-name>Aaa-diameter-tls</type-name>
+            </type>
+          </tls-transport>
+          <vrf-ip config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/diameter/dia_peer/&lt;aaa_diameter_cfg_Peer_arg40&gt;/ip_vrf</xr-path>
+            <xr-xml-map>aaa_diameter_cfg:VrfIp</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </vrf-ip>
+          <peer-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-create-item-relative-path>enter</xr-create-item-relative-path>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/diameter/dia_peer/&lt;aaa_diameter_cfg_Peer_arg40&gt;/</xr-path>
+            <xr-xml-map>aaa_diameter_cfg:PeerName</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;aaa_diameter_cfg_Peer_arg40&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </peer-name>
+        </peer>
+      </peers>
+      <diams config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/diameter/attribute/</xr-path>
+        <xr-xml-map>aaa_diameter_cfg:AttribList</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <diam config="true" key="list-id" node="list">
+          <xr-path>/cfg/gl/aaa/diameter/attribute/&lt;aaa_diameter_cfg_DiamList_diamlist&gt;/</xr-path>
+          <xr-xml-map>aaa_diameter_cfg:DiamList</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <diam-attr-defs config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/aaa/diameter/attribute/&lt;aaa_diameter_cfg_DiamList_diamlist&gt;/attrs/</xr-path>
+            <xr-xml-map>aaa_diameter_cfg:DiamAttribute</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <diam-attr-def config="true" key="vendor-id attribute-id" node="list">
+              <xr-path>/cfg/gl/aaa/diameter/attribute/&lt;aaa_diameter_cfg_DiamList_diamlist&gt;/attrs/&lt;aaa_diameter_cfg_DiamAttrDef_arg2&gt;,&lt;aaa_diameter_cfg_DiamAttrDef_arg1&gt;/</xr-path>
+              <xr-xml-map>aaa_diameter_cfg:DiamAttrDef</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <diam-attr-value config="true" is-key="false" node="container" presence="false">
+                <xr-is-packed/>
+                <xr-path>/cfg/gl/aaa/diameter/attribute/&lt;aaa_diameter_cfg_DiamList_diamlist&gt;/attrs/&lt;aaa_diameter_cfg_DiamAttrDef_arg2&gt;,&lt;aaa_diameter_cfg_DiamAttrDef_arg1&gt;/attr`</xr-path>
+                <xr-xml-map>aaa_diameter_cfg:DiamAttrValue</xr-xml-map>
+                <xr-task>aaa</xr-task>
+                <xr-pack-format>%s%N%s%d%d%d%d%s%d%d%d%d</xr-pack-format>
+                <type-string config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%s%N%s%d%d%d%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/aaa/diameter/attribute/&lt;aaa_diameter_cfg_DiamList_diamlist&gt;/attrs/&lt;aaa_diameter_cfg_DiamAttrDef_arg2&gt;,&lt;aaa_diameter_cfg_DiamAttrDef_arg1&gt;/attr`0</xr-path>
+                  <xr-xml-map>aaa_diameter_cfg:TypeString</xr-xml-map>
+                  <xr-task>aaa</xr-task>
+                  <xr-sch-type>String</xr-sch-type>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </type-string>
+                <type-ipv4-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%s%N%s%d%d%d%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/aaa/diameter/attribute/&lt;aaa_diameter_cfg_DiamList_diamlist&gt;/attrs/&lt;aaa_diameter_cfg_DiamAttrDef_arg2&gt;,&lt;aaa_diameter_cfg_DiamAttrDef_arg1&gt;/attr`1</xr-path>
+                  <xr-xml-map>aaa_diameter_cfg:TypeIPv4Address</xr-xml-map>
+                  <xr-task>aaa</xr-task>
+                  <xr-sch-type>IPV4Address</xr-sch-type>
+                  <type>
+                    <type-name>inet:ipv4-address-no-zone</type-name>
+                  </type>
+                </type-ipv4-address>
+                <type-binary config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%s%N%s%d%d%d%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/aaa/diameter/attribute/&lt;aaa_diameter_cfg_DiamList_diamlist&gt;/attrs/&lt;aaa_diameter_cfg_DiamAttrDef_arg2&gt;,&lt;aaa_diameter_cfg_DiamAttrDef_arg1&gt;/attr`2</xr-path>
+                  <xr-xml-map>aaa_diameter_cfg:TypeBinary</xr-xml-map>
+                  <xr-task>aaa</xr-task>
+                  <xr-sch-type>String</xr-sch-type>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </type-binary>
+                <type-boolean config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%s%N%s%d%d%d%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/aaa/diameter/attribute/&lt;aaa_diameter_cfg_DiamList_diamlist&gt;/attrs/&lt;aaa_diameter_cfg_DiamAttrDef_arg2&gt;,&lt;aaa_diameter_cfg_DiamAttrDef_arg1&gt;/attr`3</xr-path>
+                  <xr-xml-map>aaa_diameter_cfg:TypeBoolean</xr-xml-map>
+                  <xr-task>aaa</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <type range="0..4294967295">
+                    <type-name>uint32</type-name>
+                  </type>
+                </type-boolean>
+                <type-enum config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%s%N%s%d%d%d%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/aaa/diameter/attribute/&lt;aaa_diameter_cfg_DiamList_diamlist&gt;/attrs/&lt;aaa_diameter_cfg_DiamAttrDef_arg2&gt;,&lt;aaa_diameter_cfg_DiamAttrDef_arg1&gt;/attr`4</xr-path>
+                  <xr-xml-map>aaa_diameter_cfg:TypeEnum</xr-xml-map>
+                  <xr-task>aaa</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <type range="0..4294967295">
+                    <type-name>uint32</type-name>
+                  </type>
+                </type-enum>
+                <type-grouped config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%s%N%s%d%d%d%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/aaa/diameter/attribute/&lt;aaa_diameter_cfg_DiamList_diamlist&gt;/attrs/&lt;aaa_diameter_cfg_DiamAttrDef_arg2&gt;,&lt;aaa_diameter_cfg_DiamAttrDef_arg1&gt;/attr`5</xr-path>
+                  <xr-xml-map>aaa_diameter_cfg:TypeGrouped</xr-xml-map>
+                  <xr-task>aaa</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <type range="0..99">
+                    <type-name>uint32</type-name>
+                  </type>
+                </type-grouped>
+                <type-ulong config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%s%N%s%d%d%d%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/aaa/diameter/attribute/&lt;aaa_diameter_cfg_DiamList_diamlist&gt;/attrs/&lt;aaa_diameter_cfg_DiamAttrDef_arg2&gt;,&lt;aaa_diameter_cfg_DiamAttrDef_arg1&gt;/attr`6</xr-path>
+                  <xr-xml-map>aaa_diameter_cfg:TypeUlong</xr-xml-map>
+                  <xr-task>aaa</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <type range="0..4294967295">
+                    <type-name>uint32</type-name>
+                  </type>
+                </type-ulong>
+                <type-identity config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%s%N%s%d%d%d%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/aaa/diameter/attribute/&lt;aaa_diameter_cfg_DiamList_diamlist&gt;/attrs/&lt;aaa_diameter_cfg_DiamAttrDef_arg2&gt;,&lt;aaa_diameter_cfg_DiamAttrDef_arg1&gt;/attr`7</xr-path>
+                  <xr-xml-map>aaa_diameter_cfg:TypeIdentity</xr-xml-map>
+                  <xr-task>aaa</xr-task>
+                  <xr-sch-type>String</xr-sch-type>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </type-identity>
+                <data-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%s%N%s%d%d%d%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/aaa/diameter/attribute/&lt;aaa_diameter_cfg_DiamList_diamlist&gt;/attrs/&lt;aaa_diameter_cfg_DiamAttrDef_arg2&gt;,&lt;aaa_diameter_cfg_DiamAttrDef_arg1&gt;/attr`8</xr-path>
+                  <xr-xml-map>aaa_diameter_cfg:DataType</xr-xml-map>
+                  <xr-task>aaa</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <type>
+                    <type-name>Aaa-diameter-attr</type-name>
+                  </type>
+                </data-type>
+                <type-ulonglong config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%s%N%s%d%d%d%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/aaa/diameter/attribute/&lt;aaa_diameter_cfg_DiamList_diamlist&gt;/attrs/&lt;aaa_diameter_cfg_DiamAttrDef_arg2&gt;,&lt;aaa_diameter_cfg_DiamAttrDef_arg1&gt;/attr`9</xr-path>
+                  <xr-xml-map>aaa_diameter_cfg:TypeUlonglong</xr-xml-map>
+                  <xr-task>aaa</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <type range="0..4294967295">
+                    <type-name>uint32</type-name>
+                  </type>
+                </type-ulonglong>
+                <type-utc config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%s%N%s%d%d%d%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/aaa/diameter/attribute/&lt;aaa_diameter_cfg_DiamList_diamlist&gt;/attrs/&lt;aaa_diameter_cfg_DiamAttrDef_arg2&gt;,&lt;aaa_diameter_cfg_DiamAttrDef_arg1&gt;/attr`10</xr-path>
+                  <xr-xml-map>aaa_diameter_cfg:TypeUtc</xr-xml-map>
+                  <xr-task>aaa</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <type range="0..4294967295">
+                    <type-name>uint32</type-name>
+                  </type>
+                </type-utc>
+                <mandatory config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%s%N%s%d%d%d%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/aaa/diameter/attribute/&lt;aaa_diameter_cfg_DiamList_diamlist&gt;/attrs/&lt;aaa_diameter_cfg_DiamAttrDef_arg2&gt;,&lt;aaa_diameter_cfg_DiamAttrDef_arg1&gt;/attr`11</xr-path>
+                  <xr-xml-map>aaa_diameter_cfg:Mandatory</xr-xml-map>
+                  <xr-task>aaa</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <type range="0..1">
+                    <type-name>uint32</type-name>
+                  </type>
+                </mandatory>
+              </diam-attr-value>
+              <vendor-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/aaa/diameter/attribute/&lt;aaa_diameter_cfg_DiamList_diamlist&gt;/attrs/&lt;aaa_diameter_cfg_DiamAttrDef_arg2&gt;,&lt;aaa_diameter_cfg_DiamAttrDef_arg1&gt;/</xr-path>
+                <xr-xml-map>aaa_diameter_cfg:VendorId</xr-xml-map>
+                <xr-task>aaa</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-sch-arg-name>&lt;aaa_diameter_cfg_DiamAttrDef_arg1&gt;</xr-sch-arg-name>
+                <type range="0..4294967295">
+                  <type-name>uint32</type-name>
+                </type>
+              </vendor-id>
+              <attribute-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/aaa/diameter/attribute/&lt;aaa_diameter_cfg_DiamList_diamlist&gt;/attrs/&lt;aaa_diameter_cfg_DiamAttrDef_arg2&gt;,&lt;aaa_diameter_cfg_DiamAttrDef_arg1&gt;/</xr-path>
+                <xr-xml-map>aaa_diameter_cfg:AttributeId</xr-xml-map>
+                <xr-task>aaa</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-sch-arg-name>&lt;aaa_diameter_cfg_DiamAttrDef_arg2&gt;</xr-sch-arg-name>
+                <type range="1..65535">
+                  <type-name>uint32</type-name>
+                </type>
+              </attribute-id>
+            </diam-attr-def>
+          </diam-attr-defs>
+          <list-id config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-pathformat>decimal</xr-pathformat>
+            <xr-create-item-relative-path>enter</xr-create-item-relative-path>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/diameter/attribute/&lt;aaa_diameter_cfg_DiamList_diamlist&gt;/</xr-path>
+            <xr-xml-map>aaa_diameter_cfg:ListId</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <xr-sch-arg-name>&lt;aaa_diameter_cfg_DiamList_diamlist&gt;</xr-sch-arg-name>
+            <type range="0..99">
+              <type-name>uint32</type-name>
+            </type>
+          </list-id>
+        </diam>
+      </diams>
+      <gx config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/diameter/app_gx/</xr-path>
+        <xr-xml-map>aaa_diameter_cfg:Gx</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <retransmit config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/diameter/app_gx/retransmit</xr-path>
+          <xr-xml-map>aaa_diameter_cfg:Retransmit</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..10">
+            <type-name>uint32</type-name>
+          </type>
+        </retransmit>
+        <dest-host config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/diameter/app_gx/dest_host</xr-path>
+          <xr-xml-map>aaa_diameter_cfg:dest-host</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </dest-host>
+        <tx-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/diameter/app_gx/tx_timer</xr-path>
+          <xr-xml-map>aaa_diameter_cfg:tx-timer</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>Aaa-diameter-timeout</type-name>
+          </type>
+        </tx-timer>
+      </gx>
+      <services config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/diameter/service/</xr-path>
+        <xr-xml-map>aaa_diameter_cfg:ServiceTable</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <service config="true" key="service-name" node="list">
+          <xr-path>/cfg/gl/aaa/diameter/service/&lt;aaa_diameter_cfg_Service_arg41&gt;/</xr-path>
+          <xr-xml-map>aaa_diameter_cfg:Service</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <monitoring-key config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/diameter/service/&lt;aaa_diameter_cfg_Service_arg41&gt;/mk</xr-path>
+            <xr-xml-map>aaa_diameter_cfg:MonitoringKey</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </monitoring-key>
+          <service-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/diameter/service/&lt;aaa_diameter_cfg_Service_arg41&gt;/</xr-path>
+            <xr-xml-map>aaa_diameter_cfg:ServiceName</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;aaa_diameter_cfg_Service_arg41&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </service-name>
+        </service>
+      </services>
+      <diameter-timer config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/diameter/timer/</xr-path>
+        <xr-xml-map>aaa_diameter_cfg:DiameterTimer</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <transaction config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/diameter/timer/transaction</xr-path>
+          <xr-xml-map>aaa_diameter_cfg:Transaction</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>Aaa-diameter-timeout</type-name>
+          </type>
+        </transaction>
+        <connection config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/diameter/timer/connection</xr-path>
+          <xr-xml-map>aaa_diameter_cfg:Connection</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>Aaa-diameter-timeout</type-name>
+          </type>
+        </connection>
+        <watchdog config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/diameter/timer/watchdog</xr-path>
+          <xr-xml-map>aaa_diameter_cfg:Watchdog</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>Aaa-diameter-timeout</type-name>
+          </type>
+        </watchdog>
+      </diameter-timer>
+      <vendor config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/diameter/vendor/</xr-path>
+        <xr-xml-map>aaa_diameter_cfg:Vendor</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <supported config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/aaa/diameter/vendor/supported/</xr-path>
+          <xr-xml-map>aaa_diameter_cfg:Supported</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <cisco config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/diameter/vendor/supported/cisco</xr-path>
+            <xr-xml-map>aaa_diameter_cfg:Cisco</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Boolean</xr-sch-type>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </cisco>
+          <threegpp config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/diameter/vendor/supported/3gpp</xr-path>
+            <xr-xml-map>aaa_diameter_cfg:Threegpp</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Boolean</xr-sch-type>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </threegpp>
+          <etsi config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/diameter/vendor/supported/etsi</xr-path>
+            <xr-xml-map>aaa_diameter_cfg:Etsi</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Boolean</xr-sch-type>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </etsi>
+          <vodafone config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/diameter/vendor/supported/vodafone</xr-path>
+            <xr-xml-map>aaa_diameter_cfg:Vodafone</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Boolean</xr-sch-type>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </vodafone>
+        </supported>
+      </vendor>
+      <source-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/gl/aaa/diameter/srcint</xr-path>
+        <xr-xml-map>aaa_diameter_cfg:SourceInterface</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <xr-sch-type>InterfaceName</xr-sch-type>
+        <type>
+          <type-name>xr:Interface-name</type-name>
+        </type>
+      </source-interface>
+    </diameter>
+  </augment>
+  <augment path="/a1:aaa/a2:server-groups">
+    <diameter-server-groups config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/aaa/group-server/diameter/</xr-path>
+      <xr-xml-map>aaa_diameter_cfg:DIAMETERServerGroupTable</xr-xml-map>
+      <xr-task>aaa</xr-task>
+      <diameter-server-group config="true" key="server-group-name" node="list">
+        <xr-path>/cfg/gl/aaa/group-server/diameter/&lt;aaa_diameter_cfg_DIAMETERServerGroup_arg20&gt;/</xr-path>
+        <xr-xml-map>aaa_diameter_cfg:DIAMETERServerGroup</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <xr-scope>exported</xr-scope>
+        <servers config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/aaa/group-server/diameter/&lt;aaa_diameter_cfg_DIAMETERServerGroup_arg20&gt;/server/</xr-path>
+          <xr-xml-map>aaa_diameter_cfg:ServerTable</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <server config="true" key="ordering-index peer-name" node="list">
+            <xr-path>/cfg/gl/aaa/group-server/diameter/&lt;aaa_diameter_cfg_DIAMETERServerGroup_arg20&gt;/server/&lt;aaa_diameter_cfg_Server_arg993&gt;/&lt;aaa_diameter_cfg_Server_arg13&gt;</xr-path>
+            <xr-xml-map>aaa_diameter_cfg:Server</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <ordering-index config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/group-server/diameter/&lt;aaa_diameter_cfg_DIAMETERServerGroup_arg20&gt;/server/&lt;aaa_diameter_cfg_Server_arg993&gt;/&lt;aaa_diameter_cfg_Server_arg13&gt;</xr-path>
+              <xr-xml-map>aaa_diameter_cfg:OrderingIndex</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Integer</xr-sch-type>
+              <xr-sch-arg-name>&lt;aaa_diameter_cfg_Server_arg993&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </ordering-index>
+            <peer-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-create-item-relative-path/>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/group-server/diameter/&lt;aaa_diameter_cfg_DIAMETERServerGroup_arg20&gt;/server/&lt;aaa_diameter_cfg_Server_arg993&gt;/&lt;aaa_diameter_cfg_Server_arg13&gt;</xr-path>
+              <xr-xml-map>aaa_diameter_cfg:PeerName</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;aaa_diameter_cfg_Server_arg13&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </peer-name>
+          </server>
+        </servers>
+        <server-group-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-create-item-relative-path>enter</xr-create-item-relative-path>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/group-server/diameter/&lt;aaa_diameter_cfg_DIAMETERServerGroup_arg20&gt;/</xr-path>
+          <xr-xml-map>aaa_diameter_cfg:ServerGroupName</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;aaa_diameter_cfg_DIAMETERServerGroup_arg20&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </server-group-name>
+      </diameter-server-group>
+    </diameter-server-groups>
+  </augment>
+</Cisco-IOS-XR-aaa-diameter-cfg>

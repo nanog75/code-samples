@@ -1,0 +1,1285 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-infra-syslog-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-infra-syslog-cfg" revision="2017-10-31">
+  <files>
+    <file revision="2017-10-31" submodule="false">Cisco-IOS-XR-infra-syslog-cfg.yang</file>
+  </files>
+  <prefix>infra-syslog-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="Logging-tos">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">precedence</enum>
+      <enum value="1">dscp</enum>
+    </type>
+  </typedef>
+  <typedef name="Logging-dscp-value">
+    <xr-sch-type>RangeEnum</xr-sch-type>
+    <type node="union">
+      <type node="enumeration">
+        <enum value="0">default</enum>
+        <enum value="10">af11</enum>
+        <enum value="12">af12</enum>
+        <enum value="14">af13</enum>
+        <enum value="18">af21</enum>
+        <enum value="20">af22</enum>
+        <enum value="22">af23</enum>
+        <enum value="26">af31</enum>
+        <enum value="28">af32</enum>
+        <enum value="30">af33</enum>
+        <enum value="34">af41</enum>
+        <enum value="36">af42</enum>
+        <enum value="38">af43</enum>
+        <enum value="46">ef</enum>
+        <enum value="8">cs1</enum>
+        <enum value="16">cs2</enum>
+        <enum value="24">cs3</enum>
+        <enum value="32">cs4</enum>
+        <enum value="40">cs5</enum>
+        <enum value="48">cs6</enum>
+        <enum value="56">cs7</enum>
+      </type>
+      <type range="0..63">
+        <type-name>uint32</type-name>
+      </type>
+    </type>
+  </typedef>
+  <typedef name="Logging-precedence-value">
+    <xr-sch-type>RangeEnum</xr-sch-type>
+    <type node="union">
+      <type node="enumeration">
+        <enum value="0">routine</enum>
+        <enum value="1">priority</enum>
+        <enum value="2">immediate</enum>
+        <enum value="3">flash</enum>
+        <enum value="4">flash-override</enum>
+        <enum value="5">critical</enum>
+        <enum value="6">internet</enum>
+        <enum value="7">network</enum>
+      </type>
+      <type range="0..7">
+        <type-name>uint32</type-name>
+      </type>
+    </type>
+  </typedef>
+  <typedef name="Facility">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">kern</enum>
+      <enum value="8">user</enum>
+      <enum value="16">mail</enum>
+      <enum value="24">daemon</enum>
+      <enum value="32">auth</enum>
+      <enum value="40">syslog</enum>
+      <enum value="48">lpr</enum>
+      <enum value="56">news</enum>
+      <enum value="64">uucp</enum>
+      <enum value="72">cron</enum>
+      <enum value="80">authpriv</enum>
+      <enum value="88">ftp</enum>
+      <enum value="128">local0</enum>
+      <enum value="136">local1</enum>
+      <enum value="144">local2</enum>
+      <enum value="152">local3</enum>
+      <enum value="160">local4</enum>
+      <enum value="168">local5</enum>
+      <enum value="176">local6</enum>
+      <enum value="184">local7</enum>
+      <enum value="192">sys9</enum>
+      <enum value="200">sys10</enum>
+      <enum value="208">sys11</enum>
+      <enum value="216">sys12</enum>
+      <enum value="224">sys13</enum>
+      <enum value="232">sys14</enum>
+    </type>
+  </typedef>
+  <typedef name="Logging-dscp">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">dscp</enum>
+    </type>
+  </typedef>
+  <typedef name="Logging-levels">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">emergency</enum>
+      <enum value="1">alert</enum>
+      <enum value="2">critical</enum>
+      <enum value="3">error</enum>
+      <enum value="4">warning</enum>
+      <enum value="5">notice</enum>
+      <enum value="6">info</enum>
+      <enum value="7">debug</enum>
+      <enum value="15">disable</enum>
+    </type>
+  </typedef>
+  <typedef name="Logging-precedence">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">precedence</enum>
+    </type>
+  </typedef>
+  <typedef name="Time-info">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">disable</enum>
+      <enum value="1">enable</enum>
+    </type>
+  </typedef>
+  <typedef name="Log-message-severity">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">emergency</enum>
+      <enum value="1">alert</enum>
+      <enum value="2">critical</enum>
+      <enum value="3">error</enum>
+      <enum value="4">warning</enum>
+      <enum value="5">notice</enum>
+      <enum value="6">informational</enum>
+      <enum value="7">debug</enum>
+    </type>
+  </typedef>
+  <typedef name="Log-collect-frequency">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">weekly</enum>
+      <enum value="2">daily</enum>
+    </type>
+  </typedef>
+  <typedef name="Log-severity">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">emergency</enum>
+      <enum value="1">alert</enum>
+      <enum value="2">critical</enum>
+      <enum value="3">error</enum>
+      <enum value="4">warning</enum>
+      <enum value="5">notice</enum>
+      <enum value="6">informational</enum>
+      <enum value="7">debug</enum>
+    </type>
+  </typedef>
+  <syslog-service config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/service/</xr-path>
+    <xr-xml-map>infra_syslog_cfg:SyslogService</xr-xml-map>
+    <xr-task>logging</xr-task>
+    <xr-scope>exported</xr-scope>
+    <timestamps config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/service/timestamps/</xr-path>
+      <xr-xml-map>infra_syslog_cfg:Timestamps</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <log config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/service/timestamps/log/</xr-path>
+        <xr-xml-map>infra_syslog_cfg:Log</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <log-datetime config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/service/timestamps/log/datetime/</xr-path>
+          <xr-xml-map>infra_syslog_cfg:LogDatetime</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <log-datetime-value config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/service/timestamps/log/datetime/value`</xr-path>
+            <xr-xml-map>infra_syslog_cfg:LogDatetimeValue</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-pack-format>%d%d%d%d</xr-pack-format>
+            <time-stamp-value config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/service/timestamps/log/datetime/value`0</xr-path>
+              <xr-xml-map>infra_syslog_cfg:TimeStampValue</xr-xml-map>
+              <xr-task>logging</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Time-info</type-name>
+              </type>
+              <default>enable</default>
+            </time-stamp-value>
+            <msec config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/service/timestamps/log/datetime/value`1</xr-path>
+              <xr-xml-map>infra_syslog_cfg:Msec</xr-xml-map>
+              <xr-task>logging</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Time-info</type-name>
+              </type>
+              <default>enable</default>
+            </msec>
+            <time-zone config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/service/timestamps/log/datetime/value`2</xr-path>
+              <xr-xml-map>infra_syslog_cfg:TimeZone</xr-xml-map>
+              <xr-task>logging</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Time-info</type-name>
+              </type>
+              <default>disable</default>
+            </time-zone>
+            <year config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/service/timestamps/log/datetime/value`3</xr-path>
+              <xr-xml-map>infra_syslog_cfg:Year</xr-xml-map>
+              <xr-task>logging</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Time-info</type-name>
+              </type>
+              <default>disable</default>
+            </year>
+          </log-datetime-value>
+        </log-datetime>
+        <log-uptime config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/service/timestamps/log/uptime</xr-path>
+          <xr-xml-map>infra_syslog_cfg:LogUptime</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </log-uptime>
+        <log-timestamp-disable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/service/timestamps/log/disable</xr-path>
+          <xr-xml-map>infra_syslog_cfg:LogTimestampDisable</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </log-timestamp-disable>
+      </log>
+      <debug config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/service/timestamps/debug/</xr-path>
+        <xr-xml-map>infra_syslog_cfg:Debug</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <debug-datetime config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/service/timestamps/debug/datetime/</xr-path>
+          <xr-xml-map>infra_syslog_cfg:DebugDatetime</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <datetime-value config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/service/timestamps/debug/datetime/value`</xr-path>
+            <xr-xml-map>infra_syslog_cfg:DatetimeValue</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-pack-format>%d%d%d%d</xr-pack-format>
+            <time-stamp-value config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/service/timestamps/debug/datetime/value`0</xr-path>
+              <xr-xml-map>infra_syslog_cfg:TimeStampValue</xr-xml-map>
+              <xr-task>logging</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Time-info</type-name>
+              </type>
+              <default>enable</default>
+            </time-stamp-value>
+            <msec config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/service/timestamps/debug/datetime/value`1</xr-path>
+              <xr-xml-map>infra_syslog_cfg:Msec</xr-xml-map>
+              <xr-task>logging</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Time-info</type-name>
+              </type>
+              <default>enable</default>
+            </msec>
+            <time-zone config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/service/timestamps/debug/datetime/value`2</xr-path>
+              <xr-xml-map>infra_syslog_cfg:TimeZone</xr-xml-map>
+              <xr-task>logging</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Time-info</type-name>
+              </type>
+              <default>disable</default>
+            </time-zone>
+            <year config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/service/timestamps/debug/datetime/value`3</xr-path>
+              <xr-xml-map>infra_syslog_cfg:Year</xr-xml-map>
+              <xr-task>logging</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Time-info</type-name>
+              </type>
+              <default>disable</default>
+            </year>
+          </datetime-value>
+        </debug-datetime>
+        <debug-timestamp-disable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/service/timestamps/debug/disable</xr-path>
+          <xr-xml-map>infra_syslog_cfg:DebugTimestampDisable</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </debug-timestamp-disable>
+        <debug-uptime config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/service/timestamps/debug/uptime</xr-path>
+          <xr-xml-map>infra_syslog_cfg:DebugUptime</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </debug-uptime>
+      </debug>
+      <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/service/timestamps/default</xr-path>
+        <xr-xml-map>infra_syslog_cfg:Enable</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </enable>
+    </timestamps>
+  </syslog-service>
+  <syslog config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/logging/</xr-path>
+    <xr-xml-map>infra_syslog_cfg:Syslog</xr-xml-map>
+    <xr-task>logging</xr-task>
+    <xr-scope>exported</xr-scope>
+    <monitor-logging config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/logging/monitor/</xr-path>
+      <xr-xml-map>infra_syslog_cfg:MonitorLogging</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <monitor-discriminator config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/logging/monitor/discriminator/</xr-path>
+        <xr-xml-map>infra_syslog_cfg:MonitorDiscriminator</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <match2 config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/logging/monitor/discriminator/match2</xr-path>
+          <xr-xml-map>infra_syslog_cfg:Match2</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </match2>
+        <nomatch1 config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/logging/monitor/discriminator/nomatch1</xr-path>
+          <xr-xml-map>infra_syslog_cfg:Nomatch1</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </nomatch1>
+        <match1 config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/logging/monitor/discriminator/match1</xr-path>
+          <xr-xml-map>infra_syslog_cfg:Match1</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </match1>
+        <nomatch3 config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/logging/monitor/discriminator/nomatch3</xr-path>
+          <xr-xml-map>infra_syslog_cfg:Nomatch3</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </nomatch3>
+        <match3 config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/logging/monitor/discriminator/match3</xr-path>
+          <xr-xml-map>infra_syslog_cfg:Match3</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </match3>
+        <nomatch2 config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/logging/monitor/discriminator/nomatch2</xr-path>
+          <xr-xml-map>infra_syslog_cfg:Nomatch2</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </nomatch2>
+      </monitor-discriminator>
+      <logging-level config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/logging/monitor/level</xr-path>
+        <xr-xml-map>infra_syslog_cfg:LoggingLevel</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Logging-levels</type-name>
+        </type>
+        <default>debug</default>
+      </logging-level>
+    </monitor-logging>
+    <history-logging config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/logging/history/</xr-path>
+      <xr-xml-map>infra_syslog_cfg:HistoryLogging</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <history-size config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/logging/history/size</xr-path>
+        <xr-xml-map>infra_syslog_cfg:HistorySize</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..500">
+          <type-name>uint32</type-name>
+        </type>
+        <default>1</default>
+      </history-size>
+      <logging-level config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/logging/history/level</xr-path>
+        <xr-xml-map>infra_syslog_cfg:LoggingLevel</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Logging-levels</type-name>
+        </type>
+        <default>warning</default>
+      </logging-level>
+    </history-logging>
+    <logging-facilities config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/logging/facility/</xr-path>
+      <xr-xml-map>infra_syslog_cfg:LoggingFacilities</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <facility-level config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/logging/facility/level</xr-path>
+        <xr-xml-map>infra_syslog_cfg:FacilityLevel</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Facility</type-name>
+        </type>
+        <default>local7</default>
+      </facility-level>
+    </logging-facilities>
+    <trap-logging config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/logging/trap/</xr-path>
+      <xr-xml-map>infra_syslog_cfg:TrapLogging</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <logging-level config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/logging/trap/level</xr-path>
+        <xr-xml-map>infra_syslog_cfg:LoggingLevel</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Logging-levels</type-name>
+        </type>
+        <default>info</default>
+      </logging-level>
+    </trap-logging>
+    <buffered-logging config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/logging/buffered/</xr-path>
+      <xr-xml-map>infra_syslog_cfg:BufferedLogging</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <buffered-discriminator config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/logging/buffered/discriminator/</xr-path>
+        <xr-xml-map>infra_syslog_cfg:BufferedDiscriminator</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <match2 config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/logging/buffered/discriminator/match2</xr-path>
+          <xr-xml-map>infra_syslog_cfg:Match2</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </match2>
+        <nomatch1 config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/logging/buffered/discriminator/nomatch1</xr-path>
+          <xr-xml-map>infra_syslog_cfg:Nomatch1</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </nomatch1>
+        <match1 config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/logging/buffered/discriminator/match1</xr-path>
+          <xr-xml-map>infra_syslog_cfg:Match1</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </match1>
+        <nomatch3 config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/logging/buffered/discriminator/nomatch3</xr-path>
+          <xr-xml-map>infra_syslog_cfg:Nomatch3</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </nomatch3>
+        <match3 config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/logging/buffered/discriminator/match3</xr-path>
+          <xr-xml-map>infra_syslog_cfg:Match3</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </match3>
+        <nomatch2 config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/logging/buffered/discriminator/nomatch2</xr-path>
+          <xr-xml-map>infra_syslog_cfg:Nomatch2</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </nomatch2>
+      </buffered-discriminator>
+      <logging-level config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/logging/buffered/level</xr-path>
+        <xr-xml-map>infra_syslog_cfg:LoggingLevel</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Logging-levels</type-name>
+        </type>
+        <default>debug</default>
+      </logging-level>
+      <buffer-size config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/logging/buffered/size</xr-path>
+        <xr-xml-map>infra_syslog_cfg:BufferSize</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="2097152..125000000">
+          <type-name>uint32</type-name>
+        </type>
+        <default>2097152</default>
+      </buffer-size>
+    </buffered-logging>
+    <host-server config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/logging/hostname/</xr-path>
+      <xr-xml-map>infra_syslog_cfg_ext:HostServer</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <xr-compatibility>3.0</xr-compatibility>
+      <vrfs config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/logging/hostname/vrf/</xr-path>
+        <xr-xml-map>infra_syslog_cfg_ext:VRFTable</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <vrf config="true" key="vrf-name" node="list">
+          <xr-path>/cfg/gl/logging/hostname/vrf/&lt;infra_syslog_cfg_ext_VRF_vrf&gt;/</xr-path>
+          <xr-xml-map>infra_syslog_cfg_ext:VRF</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <ipv6s config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/logging/hostname/vrf/&lt;infra_syslog_cfg_ext_VRF_vrf&gt;/ip46address/0xa/</xr-path>
+            <xr-xml-map>infra_syslog_cfg_ext:IPv6Table</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <ipv6 config="true" key="address" node="list">
+              <xr-path>/cfg/gl/logging/hostname/vrf/&lt;infra_syslog_cfg_ext_VRF_vrf&gt;/ip46address/0xa/&lt;infra_syslog_cfg_ext_IPv6_arg3&gt;/</xr-path>
+              <xr-xml-map>infra_syslog_cfg_ext:IPv6</xr-xml-map>
+              <xr-task>logging</xr-task>
+              <must>ipv6-severity-port</must>
+              <ipv6-severity-port config="true" is-key="false" node="container" presence="true">
+                <xr-presence-packed/>
+                <xr-is-packed/>
+                <xr-path>/cfg/gl/logging/hostname/vrf/&lt;infra_syslog_cfg_ext_VRF_vrf&gt;/ip46address/0xa/&lt;infra_syslog_cfg_ext_IPv6_arg3&gt;/value`</xr-path>
+                <xr-xml-map>infra_syslog_cfg_ext:IPv6_SeverityPort</xr-xml-map>
+                <xr-task>logging</xr-task>
+                <xr-pack-format>%d%d</xr-pack-format>
+                <severity config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/logging/hostname/vrf/&lt;infra_syslog_cfg_ext_VRF_vrf&gt;/ip46address/0xa/&lt;infra_syslog_cfg_ext_IPv6_arg3&gt;/value`0</xr-path>
+                  <xr-xml-map>infra_syslog_cfg_ext:Severity</xr-xml-map>
+                  <xr-task>logging</xr-task>
+                  <xr-sch-type>Integer</xr-sch-type>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>6</default>
+                </severity>
+                <port config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/logging/hostname/vrf/&lt;infra_syslog_cfg_ext_VRF_vrf&gt;/ip46address/0xa/&lt;infra_syslog_cfg_ext_IPv6_arg3&gt;/value`1</xr-path>
+                  <xr-xml-map>infra_syslog_cfg_ext:Port</xr-xml-map>
+                  <xr-task>logging</xr-task>
+                  <xr-sch-type>Integer</xr-sch-type>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>514</default>
+                </port>
+              </ipv6-severity-port>
+              <address config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/logging/hostname/vrf/&lt;infra_syslog_cfg_ext_VRF_vrf&gt;/ip46address/0xa/&lt;infra_syslog_cfg_ext_IPv6_arg3&gt;/</xr-path>
+                <xr-xml-map>infra_syslog_cfg_ext:Address</xr-xml-map>
+                <xr-task>logging</xr-task>
+                <xr-sch-type>IPV6AddressString</xr-sch-type>
+                <xr-sch-arg-name>&lt;infra_syslog_cfg_ext_IPv6_arg3&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>inet:ipv6-address-no-zone</type-name>
+                </type>
+              </address>
+            </ipv6>
+          </ipv6s>
+          <hosts config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/logging/hostname/vrf/&lt;infra_syslog_cfg_ext_VRF_vrf&gt;/name/</xr-path>
+            <xr-xml-map>infra_syslog_cfg_ext:HostTable</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <host config="true" key="host-name" node="list">
+              <xr-path>/cfg/gl/logging/hostname/vrf/&lt;infra_syslog_cfg_ext_VRF_vrf&gt;/name/&lt;infra_syslog_cfg_ext_Host_arg3&gt;/</xr-path>
+              <xr-xml-map>infra_syslog_cfg_ext:Host</xr-xml-map>
+              <xr-task>logging</xr-task>
+              <must>host-severity-port</must>
+              <host-severity-port config="true" is-key="false" node="container" presence="true">
+                <xr-presence-packed/>
+                <xr-is-packed/>
+                <xr-path>/cfg/gl/logging/hostname/vrf/&lt;infra_syslog_cfg_ext_VRF_vrf&gt;/name/&lt;infra_syslog_cfg_ext_Host_arg3&gt;/value`</xr-path>
+                <xr-xml-map>infra_syslog_cfg_ext:HOST_SeverityPort</xr-xml-map>
+                <xr-task>logging</xr-task>
+                <xr-pack-format>%d%d</xr-pack-format>
+                <severity config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/logging/hostname/vrf/&lt;infra_syslog_cfg_ext_VRF_vrf&gt;/name/&lt;infra_syslog_cfg_ext_Host_arg3&gt;/value`0</xr-path>
+                  <xr-xml-map>infra_syslog_cfg_ext:Severity</xr-xml-map>
+                  <xr-task>logging</xr-task>
+                  <xr-sch-type>Integer</xr-sch-type>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>6</default>
+                </severity>
+                <port config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/logging/hostname/vrf/&lt;infra_syslog_cfg_ext_VRF_vrf&gt;/name/&lt;infra_syslog_cfg_ext_Host_arg3&gt;/value`1</xr-path>
+                  <xr-xml-map>infra_syslog_cfg_ext:Port</xr-xml-map>
+                  <xr-task>logging</xr-task>
+                  <xr-sch-type>Integer</xr-sch-type>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>514</default>
+                </port>
+              </host-severity-port>
+              <host-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/logging/hostname/vrf/&lt;infra_syslog_cfg_ext_VRF_vrf&gt;/name/&lt;infra_syslog_cfg_ext_Host_arg3&gt;/</xr-path>
+                <xr-xml-map>infra_syslog_cfg_ext:HostName</xr-xml-map>
+                <xr-task>logging</xr-task>
+                <xr-sch-type>EncodedString</xr-sch-type>
+                <xr-sch-arg-name>&lt;infra_syslog_cfg_ext_Host_arg3&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </host-name>
+            </host>
+          </hosts>
+          <ipv4s config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/logging/hostname/vrf/&lt;infra_syslog_cfg_ext_VRF_vrf&gt;/ip46address/0x2/</xr-path>
+            <xr-xml-map>infra_syslog_cfg_ext:IPv4Table</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <ipv4 config="true" key="address" node="list">
+              <xr-path>/cfg/gl/logging/hostname/vrf/&lt;infra_syslog_cfg_ext_VRF_vrf&gt;/ip46address/0x2/&lt;infra_syslog_cfg_ext_IPv4_arg3&gt;/</xr-path>
+              <xr-xml-map>infra_syslog_cfg_ext:IPv4</xr-xml-map>
+              <xr-task>logging</xr-task>
+              <must>ipv4-severity-port</must>
+              <ipv4-severity-port config="true" is-key="false" node="container" presence="true">
+                <xr-presence-packed/>
+                <xr-is-packed/>
+                <xr-path>/cfg/gl/logging/hostname/vrf/&lt;infra_syslog_cfg_ext_VRF_vrf&gt;/ip46address/0x2/&lt;infra_syslog_cfg_ext_IPv4_arg3&gt;/value`</xr-path>
+                <xr-xml-map>infra_syslog_cfg_ext:IPv4_SeverityPort</xr-xml-map>
+                <xr-task>logging</xr-task>
+                <xr-pack-format>%d%d</xr-pack-format>
+                <severity config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/logging/hostname/vrf/&lt;infra_syslog_cfg_ext_VRF_vrf&gt;/ip46address/0x2/&lt;infra_syslog_cfg_ext_IPv4_arg3&gt;/value`0</xr-path>
+                  <xr-xml-map>infra_syslog_cfg_ext:Severity</xr-xml-map>
+                  <xr-task>logging</xr-task>
+                  <xr-sch-type>Integer</xr-sch-type>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>6</default>
+                </severity>
+                <port config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/logging/hostname/vrf/&lt;infra_syslog_cfg_ext_VRF_vrf&gt;/ip46address/0x2/&lt;infra_syslog_cfg_ext_IPv4_arg3&gt;/value`1</xr-path>
+                  <xr-xml-map>infra_syslog_cfg_ext:Port</xr-xml-map>
+                  <xr-task>logging</xr-task>
+                  <xr-sch-type>Integer</xr-sch-type>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>514</default>
+                </port>
+              </ipv4-severity-port>
+              <address config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/logging/hostname/vrf/&lt;infra_syslog_cfg_ext_VRF_vrf&gt;/ip46address/0x2/&lt;infra_syslog_cfg_ext_IPv4_arg3&gt;/</xr-path>
+                <xr-xml-map>infra_syslog_cfg_ext:Address</xr-xml-map>
+                <xr-task>logging</xr-task>
+                <xr-sch-type>IPV4AddressString</xr-sch-type>
+                <xr-sch-arg-name>&lt;infra_syslog_cfg_ext_IPv4_arg3&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>inet:ipv4-address-no-zone</type-name>
+                </type>
+              </address>
+            </ipv4>
+          </ipv4s>
+          <vrf-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/logging/hostname/vrf/&lt;infra_syslog_cfg_ext_VRF_vrf&gt;/</xr-path>
+            <xr-xml-map>infra_syslog_cfg_ext:VRFName</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-sch-type>VRF_Name</xr-sch-type>
+            <xr-sch-arg-name>&lt;infra_syslog_cfg_ext_VRF_vrf&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </vrf-name>
+        </vrf>
+      </vrfs>
+    </host-server>
+    <console-logging config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/logging/console/</xr-path>
+      <xr-xml-map>infra_syslog_cfg:ConsoleLogging</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <console-discriminator config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/logging/console/discriminator/</xr-path>
+        <xr-xml-map>infra_syslog_cfg:ConsoleDiscriminator</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <match2 config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/logging/console/discriminator/match2</xr-path>
+          <xr-xml-map>infra_syslog_cfg:Match2</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </match2>
+        <nomatch1 config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/logging/console/discriminator/nomatch1</xr-path>
+          <xr-xml-map>infra_syslog_cfg:Nomatch1</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </nomatch1>
+        <match1 config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/logging/console/discriminator/match1</xr-path>
+          <xr-xml-map>infra_syslog_cfg:Match1</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </match1>
+        <nomatch3 config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/logging/console/discriminator/nomatch3</xr-path>
+          <xr-xml-map>infra_syslog_cfg:Nomatch3</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </nomatch3>
+        <match3 config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/logging/console/discriminator/match3</xr-path>
+          <xr-xml-map>infra_syslog_cfg:Match3</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </match3>
+        <nomatch2 config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/logging/console/discriminator/nomatch2</xr-path>
+          <xr-xml-map>infra_syslog_cfg:Nomatch2</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </nomatch2>
+      </console-discriminator>
+      <logging-level config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/logging/console/level</xr-path>
+        <xr-xml-map>infra_syslog_cfg:LoggingLevel</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Logging-levels</type-name>
+        </type>
+        <default>warning</default>
+      </logging-level>
+    </console-logging>
+    <files config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/logging/file/</xr-path>
+      <xr-xml-map>infra_syslog_cfg_ext:FileDestinationTable</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <xr-compatibility>3.0</xr-compatibility>
+      <file config="true" key="file-name" node="list">
+        <xr-path>/cfg/gl/logging/file/&lt;infra_syslog_cfg_ext_File_filename&gt;/</xr-path>
+        <xr-xml-map>infra_syslog_cfg_ext:File</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <file-specification config="true" is-key="false" node="container" presence="false">
+          <xr-is-packed/>
+          <xr-path>/cfg/gl/logging/file/&lt;infra_syslog_cfg_ext_File_filename&gt;/value`</xr-path>
+          <xr-xml-map>infra_syslog_cfg_ext:FileSpecification</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-pack-format>%s%d%d</xr-pack-format>
+          <path config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%s%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/logging/file/&lt;infra_syslog_cfg_ext_File_filename&gt;/value`0</xr-path>
+            <xr-xml-map>infra_syslog_cfg_ext:Path</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </path>
+          <max-file-size config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%s%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/logging/file/&lt;infra_syslog_cfg_ext_File_filename&gt;/value`1</xr-path>
+            <xr-xml-map>infra_syslog_cfg_ext:MaxFileSize</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-sch-type>Integer</xr-sch-type>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+            <default>1024</default>
+          </max-file-size>
+          <severity config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%s%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/logging/file/&lt;infra_syslog_cfg_ext_File_filename&gt;/value`2</xr-path>
+            <xr-xml-map>infra_syslog_cfg_ext:Severity</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-sch-type>Integer</xr-sch-type>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+            <default>6</default>
+          </severity>
+        </file-specification>
+        <file-log-discriminator config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/logging/file/&lt;infra_syslog_cfg_ext_File_filename&gt;/discriminator/</xr-path>
+          <xr-xml-map>infra_syslog_cfg_ext:FileLogDiscriminator</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <nomatch2 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/logging/file/&lt;infra_syslog_cfg_ext_File_filename&gt;/discriminator/nomatch2</xr-path>
+            <xr-xml-map>infra_syslog_cfg_ext:Nomatch2</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </nomatch2>
+          <match3 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/logging/file/&lt;infra_syslog_cfg_ext_File_filename&gt;/discriminator/match3</xr-path>
+            <xr-xml-map>infra_syslog_cfg_ext:Match3</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </match3>
+          <nomatch3 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/logging/file/&lt;infra_syslog_cfg_ext_File_filename&gt;/discriminator/nomatch3</xr-path>
+            <xr-xml-map>infra_syslog_cfg_ext:Nomatch3</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </nomatch3>
+          <match1 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/logging/file/&lt;infra_syslog_cfg_ext_File_filename&gt;/discriminator/match1</xr-path>
+            <xr-xml-map>infra_syslog_cfg_ext:Match1</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </match1>
+          <nomatch1 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/logging/file/&lt;infra_syslog_cfg_ext_File_filename&gt;/discriminator/nomatch1</xr-path>
+            <xr-xml-map>infra_syslog_cfg_ext:Nomatch1</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </nomatch1>
+          <match2 config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/logging/file/&lt;infra_syslog_cfg_ext_File_filename&gt;/discriminator/match2</xr-path>
+            <xr-xml-map>infra_syslog_cfg_ext:Match2</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </match2>
+        </file-log-discriminator>
+        <file-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/logging/file/&lt;infra_syslog_cfg_ext_File_filename&gt;/</xr-path>
+          <xr-xml-map>infra_syslog_cfg_ext:FileName</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;infra_syslog_cfg_ext_File_filename&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </file-name>
+      </file>
+    </files>
+    <ipv4 config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/logging/ipv4/</xr-path>
+      <xr-xml-map>infra_syslog_cfg:IPv4</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <tos config="true" is-key="false" node="container" presence="false">
+        <xr-is-packed/>
+        <xr-path>/cfg/gl/logging/ipv4/tos`</xr-path>
+        <xr-xml-map>infra_syslog_cfg:TOS</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-pack-format>%d%d%d</xr-pack-format>
+        <type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/logging/ipv4/tos`0</xr-path>
+          <xr-xml-map>infra_syslog_cfg:Type</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Logging-tos</type-name>
+          </type>
+        </type>
+        <precedence config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/logging/ipv4/tos`1</xr-path>
+          <xr-xml-map>infra_syslog_cfg:Precedence</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <when>../type = 'precedence'</when>
+          <type>
+            <type-name>Logging-precedence-value</type-name>
+          </type>
+        </precedence>
+        <dscp config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/logging/ipv4/tos`2</xr-path>
+          <xr-xml-map>infra_syslog_cfg:DSCP</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <when>../type = 'dscp'</when>
+          <type>
+            <type-name>Logging-dscp-value</type-name>
+          </type>
+        </dscp>
+      </tos>
+    </ipv4>
+    <archive config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/logging/archive/</xr-path>
+      <xr-xml-map>infra_syslog_cfg:Archive</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <size config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/logging/archive/archive-size</xr-path>
+        <xr-xml-map>infra_syslog_cfg:Size</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..2047">
+          <type-name>uint32</type-name>
+        </type>
+      </size>
+      <file-size config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/logging/archive/file-size</xr-path>
+        <xr-xml-map>infra_syslog_cfg:FileSize</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..2047">
+          <type-name>uint32</type-name>
+        </type>
+      </file-size>
+      <device config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/gl/logging/archive/device</xr-path>
+        <xr-xml-map>infra_syslog_cfg:Device</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-sch-type>String</xr-sch-type>
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </device>
+      <threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/logging/archive/threshold</xr-path>
+        <xr-xml-map>infra_syslog_cfg:Threshold</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..99">
+          <type-name>uint32</type-name>
+        </type>
+      </threshold>
+      <frequency config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/logging/archive/frequency</xr-path>
+        <xr-xml-map>infra_syslog_cfg:Frequency</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Log-collect-frequency</type-name>
+        </type>
+      </frequency>
+      <severity config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/logging/archive/severity</xr-path>
+        <xr-xml-map>infra_syslog_cfg:Severity</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-sch-type>Enum</xr-sch-type>
+        <type>
+          <type-name>Log-message-severity</type-name>
+        </type>
+      </severity>
+      <length config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/logging/archive/archive-length</xr-path>
+        <xr-xml-map>infra_syslog_cfg:Length</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..256">
+          <type-name>uint32</type-name>
+        </type>
+      </length>
+    </archive>
+    <ipv6 config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/logging/ipv6/</xr-path>
+      <xr-xml-map>infra_syslog_cfg:IPv6</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <traffic-class config="true" is-key="false" node="container" presence="false">
+        <xr-is-packed/>
+        <xr-path>/cfg/gl/logging/ipv6/tclass`</xr-path>
+        <xr-xml-map>infra_syslog_cfg:TrafficClass</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-pack-format>%d%d%d</xr-pack-format>
+        <type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/logging/ipv6/tclass`0</xr-path>
+          <xr-xml-map>infra_syslog_cfg:Type</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Logging-tos</type-name>
+          </type>
+        </type>
+        <precedence config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/logging/ipv6/tclass`1</xr-path>
+          <xr-xml-map>infra_syslog_cfg:Precedence</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <when>../type = 'precedence'</when>
+          <type>
+            <type-name>Logging-precedence-value</type-name>
+          </type>
+        </precedence>
+        <dscp config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/logging/ipv6/tclass`2</xr-path>
+          <xr-xml-map>infra_syslog_cfg:DSCP</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <when>../type = 'dscp'</when>
+          <type>
+            <type-name>Logging-dscp-value</type-name>
+          </type>
+        </dscp>
+      </traffic-class>
+    </ipv6>
+    <source-interface-table config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/logging/src_interface/</xr-path>
+      <xr-xml-map>infra_syslog_cfg:SourceInterfaceTable</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <source-interface-values config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/logging/src_interface/interface/</xr-path>
+        <xr-xml-map>infra_syslog_cfg:SourceInterface</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <source-interface-value config="true" key="src-interface-name-value" node="list">
+          <xr-path>/cfg/gl/logging/src_interface/interface/&lt;infra_syslog_cfg_SourceInterfaceValue_arg3&gt;/</xr-path>
+          <xr-xml-map>infra_syslog_cfg:SourceInterfaceValue</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <source-interface-vrfs config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/logging/src_interface/interface/&lt;infra_syslog_cfg_SourceInterfaceValue_arg3&gt;/vrf/</xr-path>
+            <xr-xml-map>infra_syslog_cfg:SourceInterfaceVRFTable</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <source-interface-vrf config="true" key="vrf-name" node="list">
+              <xr-path>/cfg/gl/logging/src_interface/interface/&lt;infra_syslog_cfg_SourceInterfaceValue_arg3&gt;/vrf/&lt;infra_syslog_cfg_SourceInterfaceVRF_arg5&gt;</xr-path>
+              <xr-xml-map>infra_syslog_cfg:SourceInterfaceVRF</xr-xml-map>
+              <xr-task>logging</xr-task>
+              <vrf-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-create-item-relative-path/>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/logging/src_interface/interface/&lt;infra_syslog_cfg_SourceInterfaceValue_arg3&gt;/vrf/&lt;infra_syslog_cfg_SourceInterfaceVRF_arg5&gt;</xr-path>
+                <xr-xml-map>infra_syslog_cfg:VRFName</xr-xml-map>
+                <xr-task>logging</xr-task>
+                <xr-sch-type>VRF_Name</xr-sch-type>
+                <xr-sch-arg-name>&lt;infra_syslog_cfg_SourceInterfaceVRF_arg5&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>xr:Cisco-ios-xr-string</type-name>
+                </type>
+              </vrf-name>
+            </source-interface-vrf>
+          </source-interface-vrfs>
+          <src-interface-name-value config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/logging/src_interface/interface/&lt;infra_syslog_cfg_SourceInterfaceValue_arg3&gt;/</xr-path>
+            <xr-xml-map>infra_syslog_cfg:SrcInterfaceNameValue</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-sch-type>InterfaceName</xr-sch-type>
+            <xr-sch-arg-name>&lt;infra_syslog_cfg_SourceInterfaceValue_arg3&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+          </src-interface-name-value>
+        </source-interface-value>
+      </source-interface-values>
+    </source-interface-table>
+    <host-name-prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>string</xr-primitive-type>
+      <xr-path>/cfg/gl/logging/hostname_prefix</xr-path>
+      <xr-xml-map>infra_syslog_cfg:HostnamePrefix</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <xr-sch-type>String</xr-sch-type>
+      <type>
+        <type-name>string</type-name>
+      </type>
+    </host-name-prefix>
+    <local-log-file-size config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/logging/localfilesize</xr-path>
+      <xr-xml-map>infra_syslog_cfg:LocalLogFileSize</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <xr-sch-type>Range</xr-sch-type>
+      <type range="0..4294967295">
+        <type-name>uint32</type-name>
+      </type>
+      <default>32768</default>
+    </local-log-file-size>
+    <enable-console-logging config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/logging/on</xr-path>
+      <xr-xml-map>infra_syslog_cfg:EnableConsoleLogging</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <xr-sch-type>Boolean</xr-sch-type>
+      <type>
+        <type-name>boolean</type-name>
+      </type>
+    </enable-console-logging>
+    <suppress-duplicates config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/logging/suppress_duplicates</xr-path>
+      <xr-xml-map>infra_syslog_cfg:SuppressDuplicates</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <xr-sch-type>Configured</xr-sch-type>
+      <type>
+        <type-name>empty</type-name>
+      </type>
+    </suppress-duplicates>
+  </syslog>
+</Cisco-IOS-XR-infra-syslog-cfg>

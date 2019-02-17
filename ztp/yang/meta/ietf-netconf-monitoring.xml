@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+<ietf-netconf-monitoring ns="urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring" revision="2010-10-04">
+  <files>
+    <file revision="2010-10-04" submodule="false">ietf-netconf-monitoring.yang</file>
+  </files>
+  <prefix>ncm</prefix>
+  <organization>IETF NETCONF (Network Configuration) Working Group</organization>
+  <import prefix="yang">ietf-yang-types</import>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <identity name="transport"/>
+  <identity name="netconf-ssh">
+    <base>transport</base>
+  </identity>
+  <identity name="netconf-soap-over-beep">
+    <base>transport</base>
+  </identity>
+  <identity name="netconf-soap-over-https">
+    <base>transport</base>
+  </identity>
+  <identity name="netconf-beep">
+    <base>transport</base>
+  </identity>
+  <identity name="netconf-tls">
+    <base>transport</base>
+  </identity>
+  <identity name="schema-format"/>
+  <identity name="xsd">
+    <base>schema-format</base>
+  </identity>
+  <identity name="yang">
+    <base>schema-format</base>
+  </identity>
+  <identity name="yin">
+    <base>schema-format</base>
+  </identity>
+  <identity name="rng">
+    <base>schema-format</base>
+  </identity>
+  <identity name="rnc">
+    <base>schema-format</base>
+  </identity>
+  <typedef name="netconf-datastore-type">
+    <type node="enumeration">
+      <enum>running</enum>
+      <enum>candidate</enum>
+      <enum>startup</enum>
+    </type>
+  </typedef>
+  <netconf-state config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/netconf11/gl/state/</xr-path>
+    <xr-task>config-services</xr-task>
+    <schemas config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/netconf11/gl/state/schemas/</xr-path>
+      <xr-task>config-services</xr-task>
+      <schema config="false" key="identifier version format" node="list">
+        <xr-path>/oper/netconf11/gl/state/schemas/&lt;netconf_state_schema_identifier&gt;,&lt;netconf_state_schema_version&gt;,&lt;netconf_state_schema_format&gt;</xr-path>
+        <xr-task>config-services</xr-task>
+        <xr-bag-grp-name>nc_state_schema_b</xr-bag-grp-name>
+        <xr-bag>nc_show.bag</xr-bag>
+        <identifier config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/netconf11/gl/state/schemas/&lt;netconf_state_schema_identifier&gt;,&lt;netconf_state_schema_version&gt;,&lt;netconf_state_schema_format&gt;</xr-path>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;netconf_state_schema_identifier&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </identifier>
+        <version config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/netconf11/gl/state/schemas/&lt;netconf_state_schema_identifier&gt;,&lt;netconf_state_schema_version&gt;,&lt;netconf_state_schema_format&gt;</xr-path>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;netconf_state_schema_version&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </version>
+        <format config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/netconf11/gl/state/schemas/&lt;netconf_state_schema_identifier&gt;,&lt;netconf_state_schema_version&gt;,&lt;netconf_state_schema_format&gt;</xr-path>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;netconf_state_schema_format&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </format>
+        <namespace config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/netconf11/gl/state/schemas/&lt;netconf_state_schema_identifier&gt;,&lt;netconf_state_schema_version&gt;,&lt;netconf_state_schema_format&gt;~nc_state_schema_b.namespace</xr-path>
+          <xr-task>config-services</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>inet:uri</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </namespace>
+        <location config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/netconf11/gl/state/schemas/&lt;netconf_state_schema_identifier&gt;,&lt;netconf_state_schema_version&gt;,&lt;netconf_state_schema_format&gt;~nc_state_schema_b.location</xr-path>
+          <xr-task>config-services</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </location>
+      </schema>
+    </schemas>
+    <sessions config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/netconf11/gl/state/sessions/</xr-path>
+      <xr-task>config-services</xr-task>
+      <session config="false" key="session-id" node="list">
+        <xr-path>/oper/netconf11/gl/state/sessions/&lt;netconf_state_session_sessionid&gt;</xr-path>
+        <xr-task>config-services</xr-task>
+        <xr-bag-grp-name>nc_state_session_b</xr-bag-grp-name>
+        <xr-bag>nc_show.bag</xr-bag>
+        <session-id config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/netconf11/gl/state/sessions/&lt;netconf_state_session_sessionid&gt;</xr-path>
+          <xr-task>config-services</xr-task>
+          <xr-sch-type>Integer</xr-sch-type>
+          <xr-sch-arg-name>&lt;netconf_state_session_sessionid&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </session-id>
+        <transport config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/netconf11/gl/state/sessions/&lt;netconf_state_session_sessionid&gt;~nc_state_session_b.transport</xr-path>
+          <xr-task>config-services</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </transport>
+        <username config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/netconf11/gl/state/sessions/&lt;netconf_state_session_sessionid&gt;~nc_state_session_b.username</xr-path>
+          <xr-task>config-services</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </username>
+        <source-host config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/netconf11/gl/state/sessions/&lt;netconf_state_session_sessionid&gt;~nc_state_session_b.source_host</xr-path>
+          <xr-task>config-services</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>inet:host</type-name>
+          </type>
+        </source-host>
+        <login-time config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/netconf11/gl/state/sessions/&lt;netconf_state_session_sessionid&gt;~nc_state_session_b.login_time</xr-path>
+          <xr-task>config-services</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </login-time>
+        <in-rpcs config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/netconf11/gl/state/sessions/&lt;netconf_state_session_sessionid&gt;~nc_state_session_b.in_rpcs</xr-path>
+          <xr-task>config-services</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>yang:zero-based-counter32</type-name>
+          </type>
+        </in-rpcs>
+        <in-bad-rpcs config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/netconf11/gl/state/sessions/&lt;netconf_state_session_sessionid&gt;~nc_state_session_b.in_bad_rpcs</xr-path>
+          <xr-task>config-services</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>yang:zero-based-counter32</type-name>
+          </type>
+        </in-bad-rpcs>
+        <out-rpc-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/netconf11/gl/state/sessions/&lt;netconf_state_session_sessionid&gt;~nc_state_session_b.out_rpc_errors</xr-path>
+          <xr-task>config-services</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>yang:zero-based-counter32</type-name>
+          </type>
+        </out-rpc-errors>
+        <out-notifications config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/netconf11/gl/state/sessions/&lt;netconf_state_session_sessionid&gt;~nc_state_session_b.out_notifications</xr-path>
+          <xr-task>config-services</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 1</xr-bag-version>
+          <type>
+            <type-name>yang:zero-based-counter32</type-name>
+          </type>
+        </out-notifications>
+      </session>
+    </sessions>
+    <statistics config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/netconf11/gl/state/statistics</xr-path>
+      <xr-task>config-services</xr-task>
+      <xr-bag-grp-name>nc_state_global_stats_b</xr-bag-grp-name>
+      <xr-bag>nc_show.bag</xr-bag>
+      <xr-bag-dll>libnc_bag.dll</xr-bag-dll>
+      <netconf-start-time config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/netconf11/gl/state/statistics~nc_state_global_stats_b.netconf_start_time</xr-path>
+        <xr-task>config-services</xr-task>
+        <xr-bag-primitive-type>string</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>yang:date-and-time</type-name>
+        </type>
+      </netconf-start-time>
+      <in-bad-hellos config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/netconf11/gl/state/statistics~nc_state_global_stats_b.in_bad_hellos</xr-path>
+        <xr-task>config-services</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>yang:zero-based-counter32</type-name>
+        </type>
+      </in-bad-hellos>
+      <in-sessions config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/netconf11/gl/state/statistics~nc_state_global_stats_b.in_sessions</xr-path>
+        <xr-task>config-services</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>yang:zero-based-counter32</type-name>
+        </type>
+      </in-sessions>
+      <dropped-sessions config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/netconf11/gl/state/statistics~nc_state_global_stats_b.dropped_sessions</xr-path>
+        <xr-task>config-services</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>yang:zero-based-counter32</type-name>
+        </type>
+      </dropped-sessions>
+      <in-rpcs config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/netconf11/gl/state/statistics~nc_state_global_stats_b.in_rpcs</xr-path>
+        <xr-task>config-services</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>yang:zero-based-counter32</type-name>
+        </type>
+      </in-rpcs>
+      <in-bad-rpcs config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/netconf11/gl/state/statistics~nc_state_global_stats_b.in_bad_rpcs</xr-path>
+        <xr-task>config-services</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>yang:zero-based-counter32</type-name>
+        </type>
+      </in-bad-rpcs>
+      <out-rpc-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/netconf11/gl/state/statistics~nc_state_global_stats_b.out_rpc_errors</xr-path>
+        <xr-task>config-services</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>yang:zero-based-counter32</type-name>
+        </type>
+      </out-rpc-errors>
+      <out-notifications config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/netconf11/gl/state/statistics~nc_state_global_stats_b.out_notifications</xr-path>
+        <xr-task>config-services</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>yang:zero-based-counter32</type-name>
+        </type>
+      </out-notifications>
+    </statistics>
+  </netconf-state>
+</ietf-netconf-monitoring>

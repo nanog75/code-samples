@@ -1,0 +1,618 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-lpts-pre-ifib-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-lpts-pre-ifib-cfg" revision="2017-09-07">
+  <files>
+    <file revision="2017-09-07" submodule="false">Cisco-IOS-XR-lpts-pre-ifib-cfg.yang</file>
+  </files>
+  <prefix>lpts-pre-ifib-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="node">Cisco-IOS-XR-config-mda-cfg</import>
+  <import prefix="a1">Cisco-IOS-XR-lpts-lib-cfg</import>
+  <typedef name="Lpts-dynamic-flow-config">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">flows-config</enum>
+      <enum value="1">platform-config</enum>
+    </type>
+  </typedef>
+  <typedef name="Lpts-pre-i-fib-precedence-number">
+    <xr-sch-type>RangeEnum</xr-sch-type>
+    <type node="union">
+      <type node="enumeration">
+        <enum value="5">critical</enum>
+        <enum value="3">flash</enum>
+        <enum value="4">flash-override</enum>
+        <enum value="2">immediate</enum>
+        <enum value="6">internet</enum>
+        <enum value="7">network</enum>
+        <enum value="1">priority</enum>
+        <enum value="0">routine</enum>
+      </type>
+      <type range="0..7">
+        <type-name>uint32</type-name>
+      </type>
+    </type>
+  </typedef>
+  <typedef name="Lpts-flow">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">config-default</enum>
+      <enum value="1">l2tpv2-fragment</enum>
+      <enum value="2">fragment</enum>
+      <enum value="3">ospf-multicast-known</enum>
+      <enum value="4">ospf-multicast-default</enum>
+      <enum value="5">ospf-unicast-known</enum>
+      <enum value="6">ospf-unicast-default</enum>
+      <enum value="7">isis-known</enum>
+      <enum value="8">isis-default</enum>
+      <enum value="9">bfd-known</enum>
+      <enum value="10">bfd-default</enum>
+      <enum value="11">bfd-multipath-known</enum>
+      <enum value="12">bfd-multipath0</enum>
+      <enum value="13">bfd-blb-known</enum>
+      <enum value="14">bfd-blb0</enum>
+      <enum value="15">bfd-sp0</enum>
+      <enum value="16">bgp-known</enum>
+      <enum value="17">bgp-config-peer</enum>
+      <enum value="18">bgp-default</enum>
+      <enum value="19">pim-multicast-default</enum>
+      <enum value="20">pim-multicast-known</enum>
+      <enum value="21">pim-unicast</enum>
+      <enum value="22">igmp</enum>
+      <enum value="23">icmp-local</enum>
+      <enum value="24">icmp-app</enum>
+      <enum value="25">icmp-control</enum>
+      <enum value="26">icmp-default</enum>
+      <enum value="27">icmp-app-default</enum>
+      <enum value="28">ldp-tcp-known</enum>
+      <enum value="29">ldp-tcp-config-peer</enum>
+      <enum value="30">ldp-tcp-default</enum>
+      <enum value="31">ldp-udp</enum>
+      <enum value="32">all-routers</enum>
+      <enum value="33">lmp-tcp-known</enum>
+      <enum value="34">lmp-tcp-config-peer</enum>
+      <enum value="35">lmp-tcp-default</enum>
+      <enum value="36">lmp-udp</enum>
+      <enum value="37">rsvp-udp</enum>
+      <enum value="38">rsvp-default</enum>
+      <enum value="39">rsvp-known</enum>
+      <enum value="40">ike</enum>
+      <enum value="41">ipsec-known</enum>
+      <enum value="42">ipsec-default</enum>
+      <enum value="43">ipsec-fragment</enum>
+      <enum value="44">msdp-known</enum>
+      <enum value="45">msdp-config-peer</enum>
+      <enum value="46">msdp-default</enum>
+      <enum value="47">snmp</enum>
+      <enum value="48">ssh-known</enum>
+      <enum value="49">ssh-default</enum>
+      <enum value="50">http-known</enum>
+      <enum value="51">http-default</enum>
+      <enum value="52">shttp-known</enum>
+      <enum value="53">shttp-default</enum>
+      <enum value="54">telnet-known</enum>
+      <enum value="55">telnet-default</enum>
+      <enum value="56">css-known</enum>
+      <enum value="57">css-default</enum>
+      <enum value="58">rsh-known</enum>
+      <enum value="59">rsh-default</enum>
+      <enum value="60">udp-known</enum>
+      <enum value="61">udp-listen</enum>
+      <enum value="62">udp-config-peer</enum>
+      <enum value="63">udp-default</enum>
+      <enum value="64">tcp-known</enum>
+      <enum value="65">tcp-listen</enum>
+      <enum value="66">tcp-config-peer</enum>
+      <enum value="67">tcp-default</enum>
+      <enum value="68">multicast-known</enum>
+      <enum value="69">multicast-default</enum>
+      <enum value="70">raw-listen</enum>
+      <enum value="71">raw-default</enum>
+      <enum value="72">ipsla</enum>
+      <enum value="73">eigrp</enum>
+      <enum value="74">rip</enum>
+      <enum value="75">l2tpv3</enum>
+      <enum value="76">pcep-tcp-default</enum>
+      <enum value="77">gre</enum>
+      <enum value="78">vrrp</enum>
+      <enum value="79">hsrp</enum>
+      <enum value="80">mpls-ping</enum>
+      <enum value="81">l2tpv2-default</enum>
+      <enum value="82">l2tpv2-known</enum>
+      <enum value="83">dns</enum>
+      <enum value="84">radius</enum>
+      <enum value="85">tacacs</enum>
+      <enum value="86">ntp-default</enum>
+      <enum value="87">ntp-known</enum>
+      <enum value="88">mobile-ipv6</enum>
+      <enum value="89">amt</enum>
+      <enum value="90">sdac-tcp</enum>
+      <enum value="91">radius-coa</enum>
+      <enum value="92">rel-udp</enum>
+      <enum value="93">dhcp4</enum>
+      <enum value="94">dhcp6</enum>
+      <enum value="95">onepk</enum>
+      <enum value="96">exr</enum>
+      <enum value="97">bob-ietf</enum>
+      <enum value="98">xipc-throt</enum>
+      <enum value="99">platform-limit</enum>
+    </type>
+  </typedef>
+  <typedef name="Lptsafi">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">ipv4</enum>
+      <enum value="2">ipv6</enum>
+    </type>
+  </typedef>
+  <augment path="/a1:lpts">
+    <ipolicer config="true" is-key="false" node="container" presence="true">
+      <xr-data-handler>ignore</xr-data-handler>
+      <xr-path>/cfg/gl/lpts/ipolicer/</xr-path>
+      <xr-xml-map>lpts_pre-ifib_cfg:IPolicer</xr-xml-map>
+      <xr-task>config-services</xr-task>
+      <acls config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/lpts/ipolicer/acl/</xr-path>
+        <xr-xml-map>lpts_pre-ifib_cfg:ACLTable</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <acl config="true" key="acl-name" node="list">
+          <xr-path>/cfg/gl/lpts/ipolicer/acl/&lt;lpts_pre-ifib_cfg_ACL_arg4&gt;/</xr-path>
+          <xr-xml-map>lpts_pre-ifib_cfg:ACL</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <afi-types config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/lpts/ipolicer/acl/&lt;lpts_pre-ifib_cfg_ACL_arg4&gt;/afi/</xr-path>
+            <xr-xml-map>lpts_pre-ifib_cfg:AFI</xr-xml-map>
+            <xr-task>config-services</xr-task>
+            <afi-type config="true" key="afi-family-type" node="list">
+              <xr-path>/cfg/gl/lpts/ipolicer/acl/&lt;lpts_pre-ifib_cfg_ACL_arg4&gt;/afi/&lt;lpts_pre-ifib_cfg_AFIType_arg7&gt;/</xr-path>
+              <xr-xml-map>lpts_pre-ifib_cfg:AFIType</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <vrf-names config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/lpts/ipolicer/acl/&lt;lpts_pre-ifib_cfg_ACL_arg4&gt;/afi/&lt;lpts_pre-ifib_cfg_AFIType_arg7&gt;/vrf/</xr-path>
+                <xr-xml-map>lpts_pre-ifib_cfg:VRF</xr-xml-map>
+                <xr-task>config-services</xr-task>
+                <vrf-name config="true" key="vrf-name" node="list">
+                  <xr-path>/cfg/gl/lpts/ipolicer/acl/&lt;lpts_pre-ifib_cfg_ACL_arg4&gt;/afi/&lt;lpts_pre-ifib_cfg_AFIType_arg7&gt;/vrf/&lt;lpts_pre-ifib_cfg_VRFName_arg6&gt;/</xr-path>
+                  <xr-xml-map>lpts_pre-ifib_cfg:VRFName</xr-xml-map>
+                  <xr-task>config-services</xr-task>
+                  <acl-rate config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-primitive-type>uint32</xr-primitive-type>
+                    <xr-path>/cfg/gl/lpts/ipolicer/acl/&lt;lpts_pre-ifib_cfg_ACL_arg4&gt;/afi/&lt;lpts_pre-ifib_cfg_AFIType_arg7&gt;/vrf/&lt;lpts_pre-ifib_cfg_VRFName_arg6&gt;/acl_rate</xr-path>
+                    <xr-xml-map>lpts_pre-ifib_cfg:ACLRate</xr-xml-map>
+                    <xr-task>config-services</xr-task>
+                    <xr-sch-type>ZeroRange</xr-sch-type>
+                    <type range="0..100000">
+                      <type-name>uint32</type-name>
+                    </type>
+                  </acl-rate>
+                  <vrf-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                    <xr-data-handler>ignore</xr-data-handler>
+                    <xr-primitive-type>string</xr-primitive-type>
+                    <xr-path>/cfg/gl/lpts/ipolicer/acl/&lt;lpts_pre-ifib_cfg_ACL_arg4&gt;/afi/&lt;lpts_pre-ifib_cfg_AFIType_arg7&gt;/vrf/&lt;lpts_pre-ifib_cfg_VRFName_arg6&gt;/</xr-path>
+                    <xr-xml-map>lpts_pre-ifib_cfg:VRFName</xr-xml-map>
+                    <xr-task>config-services</xr-task>
+                    <xr-sch-type>VRF_Name</xr-sch-type>
+                    <xr-sch-arg-name>&lt;lpts_pre-ifib_cfg_VRFName_arg6&gt;</xr-sch-arg-name>
+                    <type>
+                      <type-name>xr:Cisco-ios-xr-string</type-name>
+                    </type>
+                  </vrf-name>
+                </vrf-name>
+              </vrf-names>
+              <afi-family-type config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/lpts/ipolicer/acl/&lt;lpts_pre-ifib_cfg_ACL_arg4&gt;/afi/&lt;lpts_pre-ifib_cfg_AFIType_arg7&gt;/</xr-path>
+                <xr-xml-map>lpts_pre-ifib_cfg:AFIFamilyType</xr-xml-map>
+                <xr-task>config-services</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-sch-arg-name>&lt;lpts_pre-ifib_cfg_AFIType_arg7&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>Lptsafi</type-name>
+                </type>
+              </afi-family-type>
+            </afi-type>
+          </afi-types>
+          <acl-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/lpts/ipolicer/acl/&lt;lpts_pre-ifib_cfg_ACL_arg4&gt;/</xr-path>
+            <xr-xml-map>lpts_pre-ifib_cfg:ACLName</xr-xml-map>
+            <xr-task>config-services</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;lpts_pre-ifib_cfg_ACL_arg4&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </acl-name>
+        </acl>
+      </acls>
+      <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/lpts/ipolicer/enter</xr-path>
+        <xr-xml-map>lpts_pre-ifib_cfg:Enable</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+        <mandatory>true</mandatory>
+      </enable>
+      <flows config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/lpts/ipolicer/flow/</xr-path>
+        <xr-xml-map>lpts_pre-ifib_cfg:FlowTable</xr-xml-map>
+        <xr-task>config-services</xr-task>
+        <flow config="true" key="flow-type" node="list">
+          <xr-path>/cfg/gl/lpts/ipolicer/flow/&lt;lpts_pre-ifib_cfg_Flow_arg52&gt;/</xr-path>
+          <xr-xml-map>lpts_pre-ifib_cfg:Flow</xr-xml-map>
+          <xr-task>config-services</xr-task>
+          <precedences config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/lpts/ipolicer/flow/&lt;lpts_pre-ifib_cfg_Flow_arg52&gt;/precedence`</xr-path>
+            <xr-xml-map>lpts_pre-ifib_cfg:Precedence</xr-xml-map>
+            <xr-task>config-services</xr-task>
+            <xr-pack-format>%d%d%d%d%d%d%d%d</xr-pack-format>
+            <precedence config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-pack-list-start>0</xr-pack-list-start>
+              <xr-pack-list-end>8</xr-pack-list-end>
+              <xr-internal-key>&lt;pack_arg1&gt;</xr-internal-key>
+              <xr-path>/cfg/gl/lpts/ipolicer/flow/&lt;lpts_pre-ifib_cfg_Flow_arg52&gt;/precedence`&lt;pack_arg1&gt;</xr-path>
+              <xr-xml-map>lpts_pre-ifib_cfg:Precedence</xr-xml-map>
+              <xr-task>config-services</xr-task>
+              <xr-sch-type>RangeEnum</xr-sch-type>
+              <type>
+                <type-name>Lpts-pre-i-fib-precedence-number</type-name>
+              </type>
+              <max-elements>8</max-elements>
+            </precedence>
+          </precedences>
+          <rate config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/lpts/ipolicer/flow/&lt;lpts_pre-ifib_cfg_Flow_arg52&gt;/rate</xr-path>
+            <xr-xml-map>lpts_pre-ifib_cfg:Rate</xr-xml-map>
+            <xr-task>config-services</xr-task>
+            <xr-sch-type>ZeroRange</xr-sch-type>
+            <type range="0..4294967295">
+              <type-name>uint32</type-name>
+            </type>
+          </rate>
+          <flow-type config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/lpts/ipolicer/flow/&lt;lpts_pre-ifib_cfg_Flow_arg52&gt;/</xr-path>
+            <xr-xml-map>lpts_pre-ifib_cfg:FlowType</xr-xml-map>
+            <xr-task>config-services</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <xr-sch-arg-name>&lt;lpts_pre-ifib_cfg_Flow_arg52&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>Lpts-flow</type-name>
+            </type>
+          </flow-type>
+        </flow>
+      </flows>
+    </ipolicer>
+  </augment>
+  <augment path="/node:active-nodes/node:active-node">
+    <lpts-local config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/lpts/</xr-path>
+      <xr-xml-map>lpts_pre-ifib_cfg:LPTSLocal</xr-xml-map>
+      <ipolicer-local-tables config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/lpts/ipolicer/</xr-path>
+        <xr-xml-map>lpts_pre-ifib_cfg:IPolicerLocalNP</xr-xml-map>
+        <ipolicer-local-table config="true" key="id1" node="list">
+          <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/lpts/ipolicer/&lt;lpts_pre-ifib_cfg_IPolicerLocalTable_arg35&gt;/</xr-path>
+          <xr-xml-map>lpts_pre-ifib_cfg:IPolicerLocalTable</xr-xml-map>
+          <np-flows config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/lpts/ipolicer/&lt;lpts_pre-ifib_cfg_IPolicerLocalTable_arg35&gt;/np/</xr-path>
+            <xr-xml-map>lpts_pre-ifib_cfg:NPTable</xr-xml-map>
+            <np-flow config="true" key="flow-type" node="list">
+              <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/lpts/ipolicer/&lt;lpts_pre-ifib_cfg_IPolicerLocalTable_arg35&gt;/np/&lt;lpts_pre-ifib_cfg_NPFlows_arg52&gt;/</xr-path>
+              <xr-xml-map>lpts_pre-ifib_cfg:NPFlows</xr-xml-map>
+              <np-rate config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/lpts/ipolicer/&lt;lpts_pre-ifib_cfg_IPolicerLocalTable_arg35&gt;/np/&lt;lpts_pre-ifib_cfg_NPFlows_arg52&gt;/np_rate</xr-path>
+                <xr-xml-map>lpts_pre-ifib_cfg:NPRate</xr-xml-map>
+                <xr-sch-type>ZeroRange</xr-sch-type>
+                <type range="0..4294967295">
+                  <type-name>uint32</type-name>
+                </type>
+              </np-rate>
+              <flow-type config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/lpts/ipolicer/&lt;lpts_pre-ifib_cfg_IPolicerLocalTable_arg35&gt;/np/&lt;lpts_pre-ifib_cfg_NPFlows_arg52&gt;/</xr-path>
+                <xr-xml-map>lpts_pre-ifib_cfg:FlowType</xr-xml-map>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-sch-arg-name>&lt;lpts_pre-ifib_cfg_NPFlows_arg52&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>Lpts-flow</type-name>
+                </type>
+              </flow-type>
+            </np-flow>
+          </np-flows>
+          <id1 config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/lpts/ipolicer/&lt;lpts_pre-ifib_cfg_IPolicerLocalTable_arg35&gt;/</xr-path>
+            <xr-xml-map>lpts_pre-ifib_cfg:ID1</xr-xml-map>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;lpts_pre-ifib_cfg_IPolicerLocalTable_arg35&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </id1>
+        </ipolicer-local-table>
+      </ipolicer-local-tables>
+      <dynamic-flows-tables config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/lpts/iflows/</xr-path>
+        <xr-xml-map>lpts_pre-ifib_cfg:IFlowsLocal</xr-xml-map>
+        <dynamic-flows-table config="true" key="table-type" node="list">
+          <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/lpts/iflows/&lt;lpts_pre-ifib_cfg_DynamicFlowsTable_arg54&gt;/</xr-path>
+          <xr-xml-map>lpts_pre-ifib_cfg:DynamicFlowsTable</xr-xml-map>
+          <table-type config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/lpts/iflows/&lt;lpts_pre-ifib_cfg_DynamicFlowsTable_arg54&gt;/</xr-path>
+            <xr-xml-map>lpts_pre-ifib_cfg:TableType</xr-xml-map>
+            <xr-sch-type>Enum</xr-sch-type>
+            <xr-sch-arg-name>&lt;lpts_pre-ifib_cfg_DynamicFlowsTable_arg54&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>Lpts-dynamic-flow-config</type-name>
+            </type>
+          </table-type>
+          <flow-type config="true" key="flow-type" node="list">
+            <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/lpts/iflows/&lt;lpts_pre-ifib_cfg_DynamicFlowsTable_arg54&gt;/&lt;lpts_pre-ifib_cfg_FlowType_arg52&gt;/</xr-path>
+            <xr-xml-map>lpts_pre-ifib_cfg:FlowType</xr-xml-map>
+            <max config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/lpts/iflows/&lt;lpts_pre-ifib_cfg_DynamicFlowsTable_arg54&gt;/&lt;lpts_pre-ifib_cfg_FlowType_arg52&gt;/max</xr-path>
+              <xr-xml-map>lpts_pre-ifib_cfg:Max</xr-xml-map>
+              <xr-sch-type>Integer</xr-sch-type>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </max>
+            <flow-type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/lpts/iflows/&lt;lpts_pre-ifib_cfg_DynamicFlowsTable_arg54&gt;/&lt;lpts_pre-ifib_cfg_FlowType_arg52&gt;/</xr-path>
+              <xr-xml-map>lpts_pre-ifib_cfg:FlowType</xr-xml-map>
+              <xr-sch-type>Enum</xr-sch-type>
+              <xr-sch-arg-name>&lt;lpts_pre-ifib_cfg_FlowType_arg52&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>Lpts-flow</type-name>
+              </type>
+            </flow-type>
+          </flow-type>
+        </dynamic-flows-table>
+      </dynamic-flows-tables>
+      <ipolicer-local config="true" is-key="false" node="container" presence="true">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/lpts/ipolicer/</xr-path>
+        <xr-xml-map>lpts_pre-ifib_cfg:IPolicerLocal</xr-xml-map>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/lpts/ipolicer/enter</xr-path>
+          <xr-xml-map>lpts_pre-ifib_cfg:Enable</xr-xml-map>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </enable>
+        <flows config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/lpts/ipolicer/flow/</xr-path>
+          <xr-xml-map>lpts_pre-ifib_cfg:FlowTable</xr-xml-map>
+          <flow config="true" key="flow-type" node="list">
+            <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/lpts/ipolicer/flow/&lt;lpts_pre-ifib_cfg_Flow_arg52&gt;/</xr-path>
+            <xr-xml-map>lpts_pre-ifib_cfg:Flow</xr-xml-map>
+            <precedences config="true" is-key="false" node="container" presence="false">
+              <xr-is-packed/>
+              <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/lpts/ipolicer/flow/&lt;lpts_pre-ifib_cfg_Flow_arg52&gt;/precedence`</xr-path>
+              <xr-xml-map>lpts_pre-ifib_cfg:Precedence</xr-xml-map>
+              <xr-pack-format>%d%d%d%d%d%d%d%d</xr-pack-format>
+              <precedence config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-pack-list-start>0</xr-pack-list-start>
+                <xr-pack-list-end>8</xr-pack-list-end>
+                <xr-internal-key>&lt;pack_arg2&gt;</xr-internal-key>
+                <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/lpts/ipolicer/flow/&lt;lpts_pre-ifib_cfg_Flow_arg52&gt;/precedence`&lt;pack_arg2&gt;</xr-path>
+                <xr-xml-map>lpts_pre-ifib_cfg:Precedence</xr-xml-map>
+                <xr-sch-type>RangeEnum</xr-sch-type>
+                <type>
+                  <type-name>Lpts-pre-i-fib-precedence-number</type-name>
+                </type>
+                <max-elements>8</max-elements>
+              </precedence>
+            </precedences>
+            <rate config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/lpts/ipolicer/flow/&lt;lpts_pre-ifib_cfg_Flow_arg52&gt;/rate</xr-path>
+              <xr-xml-map>lpts_pre-ifib_cfg:Rate</xr-xml-map>
+              <xr-sch-type>ZeroRange</xr-sch-type>
+              <type range="0..4294967295">
+                <type-name>uint32</type-name>
+              </type>
+            </rate>
+            <flow-type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/node/act/&lt;mda_common_cfg_ActiveNode_nodeid&gt;/lpts/ipolicer/flow/&lt;lpts_pre-ifib_cfg_Flow_arg52&gt;/</xr-path>
+              <xr-xml-map>lpts_pre-ifib_cfg:FlowType</xr-xml-map>
+              <xr-sch-type>Enum</xr-sch-type>
+              <xr-sch-arg-name>&lt;lpts_pre-ifib_cfg_Flow_arg52&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>Lpts-flow</type-name>
+              </type>
+            </flow-type>
+          </flow>
+        </flows>
+      </ipolicer-local>
+    </lpts-local>
+  </augment>
+  <augment path="/node:preconfigured-nodes/node:preconfigured-node">
+    <lpts-local config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/node/pre/&lt;mda_common_cfg_PreconfiguredNode_nodeid&gt;/lpts/</xr-path>
+      <xr-xml-map>lpts_pre-ifib_cfg:LPTSLocal</xr-xml-map>
+      <ipolicer-local-tables config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/node/pre/&lt;mda_common_cfg_PreconfiguredNode_nodeid&gt;/lpts/ipolicer/</xr-path>
+        <xr-xml-map>lpts_pre-ifib_cfg:IPolicerLocalNP</xr-xml-map>
+        <ipolicer-local-table config="true" key="id1" node="list">
+          <xr-path>/cfg/node/pre/&lt;mda_common_cfg_PreconfiguredNode_nodeid&gt;/lpts/ipolicer/&lt;lpts_pre-ifib_cfg_IPolicerLocalTable_arg35&gt;/</xr-path>
+          <xr-xml-map>lpts_pre-ifib_cfg:IPolicerLocalTable</xr-xml-map>
+          <np-flows config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/node/pre/&lt;mda_common_cfg_PreconfiguredNode_nodeid&gt;/lpts/ipolicer/&lt;lpts_pre-ifib_cfg_IPolicerLocalTable_arg35&gt;/np/</xr-path>
+            <xr-xml-map>lpts_pre-ifib_cfg:NPTable</xr-xml-map>
+            <np-flow config="true" key="flow-type" node="list">
+              <xr-path>/cfg/node/pre/&lt;mda_common_cfg_PreconfiguredNode_nodeid&gt;/lpts/ipolicer/&lt;lpts_pre-ifib_cfg_IPolicerLocalTable_arg35&gt;/np/&lt;lpts_pre-ifib_cfg_NPFlows_arg52&gt;/</xr-path>
+              <xr-xml-map>lpts_pre-ifib_cfg:NPFlows</xr-xml-map>
+              <np-rate config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/node/pre/&lt;mda_common_cfg_PreconfiguredNode_nodeid&gt;/lpts/ipolicer/&lt;lpts_pre-ifib_cfg_IPolicerLocalTable_arg35&gt;/np/&lt;lpts_pre-ifib_cfg_NPFlows_arg52&gt;/np_rate</xr-path>
+                <xr-xml-map>lpts_pre-ifib_cfg:NPRate</xr-xml-map>
+                <xr-sch-type>ZeroRange</xr-sch-type>
+                <type range="0..4294967295">
+                  <type-name>uint32</type-name>
+                </type>
+              </np-rate>
+              <flow-type config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/node/pre/&lt;mda_common_cfg_PreconfiguredNode_nodeid&gt;/lpts/ipolicer/&lt;lpts_pre-ifib_cfg_IPolicerLocalTable_arg35&gt;/np/&lt;lpts_pre-ifib_cfg_NPFlows_arg52&gt;/</xr-path>
+                <xr-xml-map>lpts_pre-ifib_cfg:FlowType</xr-xml-map>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-sch-arg-name>&lt;lpts_pre-ifib_cfg_NPFlows_arg52&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>Lpts-flow</type-name>
+                </type>
+              </flow-type>
+            </np-flow>
+          </np-flows>
+          <id1 config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/node/pre/&lt;mda_common_cfg_PreconfiguredNode_nodeid&gt;/lpts/ipolicer/&lt;lpts_pre-ifib_cfg_IPolicerLocalTable_arg35&gt;/</xr-path>
+            <xr-xml-map>lpts_pre-ifib_cfg:ID1</xr-xml-map>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;lpts_pre-ifib_cfg_IPolicerLocalTable_arg35&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </id1>
+        </ipolicer-local-table>
+      </ipolicer-local-tables>
+      <dynamic-flows-tables config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/node/pre/&lt;mda_common_cfg_PreconfiguredNode_nodeid&gt;/lpts/iflows/</xr-path>
+        <xr-xml-map>lpts_pre-ifib_cfg:IFlowsLocal</xr-xml-map>
+        <dynamic-flows-table config="true" key="table-type" node="list">
+          <xr-path>/cfg/node/pre/&lt;mda_common_cfg_PreconfiguredNode_nodeid&gt;/lpts/iflows/&lt;lpts_pre-ifib_cfg_DynamicFlowsTable_arg54&gt;/</xr-path>
+          <xr-xml-map>lpts_pre-ifib_cfg:DynamicFlowsTable</xr-xml-map>
+          <table-type config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/node/pre/&lt;mda_common_cfg_PreconfiguredNode_nodeid&gt;/lpts/iflows/&lt;lpts_pre-ifib_cfg_DynamicFlowsTable_arg54&gt;/</xr-path>
+            <xr-xml-map>lpts_pre-ifib_cfg:TableType</xr-xml-map>
+            <xr-sch-type>Enum</xr-sch-type>
+            <xr-sch-arg-name>&lt;lpts_pre-ifib_cfg_DynamicFlowsTable_arg54&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>Lpts-dynamic-flow-config</type-name>
+            </type>
+          </table-type>
+          <flow-type config="true" key="flow-type" node="list">
+            <xr-path>/cfg/node/pre/&lt;mda_common_cfg_PreconfiguredNode_nodeid&gt;/lpts/iflows/&lt;lpts_pre-ifib_cfg_DynamicFlowsTable_arg54&gt;/&lt;lpts_pre-ifib_cfg_FlowType_arg52&gt;/</xr-path>
+            <xr-xml-map>lpts_pre-ifib_cfg:FlowType</xr-xml-map>
+            <max config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/node/pre/&lt;mda_common_cfg_PreconfiguredNode_nodeid&gt;/lpts/iflows/&lt;lpts_pre-ifib_cfg_DynamicFlowsTable_arg54&gt;/&lt;lpts_pre-ifib_cfg_FlowType_arg52&gt;/max</xr-path>
+              <xr-xml-map>lpts_pre-ifib_cfg:Max</xr-xml-map>
+              <xr-sch-type>Integer</xr-sch-type>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </max>
+            <flow-type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/node/pre/&lt;mda_common_cfg_PreconfiguredNode_nodeid&gt;/lpts/iflows/&lt;lpts_pre-ifib_cfg_DynamicFlowsTable_arg54&gt;/&lt;lpts_pre-ifib_cfg_FlowType_arg52&gt;/</xr-path>
+              <xr-xml-map>lpts_pre-ifib_cfg:FlowType</xr-xml-map>
+              <xr-sch-type>Enum</xr-sch-type>
+              <xr-sch-arg-name>&lt;lpts_pre-ifib_cfg_FlowType_arg52&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>Lpts-flow</type-name>
+              </type>
+            </flow-type>
+          </flow-type>
+        </dynamic-flows-table>
+      </dynamic-flows-tables>
+      <ipolicer-local config="true" is-key="false" node="container" presence="true">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-path>/cfg/node/pre/&lt;mda_common_cfg_PreconfiguredNode_nodeid&gt;/lpts/ipolicer/</xr-path>
+        <xr-xml-map>lpts_pre-ifib_cfg:IPolicerLocal</xr-xml-map>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/node/pre/&lt;mda_common_cfg_PreconfiguredNode_nodeid&gt;/lpts/ipolicer/enter</xr-path>
+          <xr-xml-map>lpts_pre-ifib_cfg:Enable</xr-xml-map>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </enable>
+        <flows config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/node/pre/&lt;mda_common_cfg_PreconfiguredNode_nodeid&gt;/lpts/ipolicer/flow/</xr-path>
+          <xr-xml-map>lpts_pre-ifib_cfg:FlowTable</xr-xml-map>
+          <flow config="true" key="flow-type" node="list">
+            <xr-path>/cfg/node/pre/&lt;mda_common_cfg_PreconfiguredNode_nodeid&gt;/lpts/ipolicer/flow/&lt;lpts_pre-ifib_cfg_Flow_arg52&gt;/</xr-path>
+            <xr-xml-map>lpts_pre-ifib_cfg:Flow</xr-xml-map>
+            <precedences config="true" is-key="false" node="container" presence="false">
+              <xr-is-packed/>
+              <xr-path>/cfg/node/pre/&lt;mda_common_cfg_PreconfiguredNode_nodeid&gt;/lpts/ipolicer/flow/&lt;lpts_pre-ifib_cfg_Flow_arg52&gt;/precedence`</xr-path>
+              <xr-xml-map>lpts_pre-ifib_cfg:Precedence</xr-xml-map>
+              <xr-pack-format>%d%d%d%d%d%d%d%d</xr-pack-format>
+              <precedence config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d%d%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-pack-list-start>0</xr-pack-list-start>
+                <xr-pack-list-end>8</xr-pack-list-end>
+                <xr-internal-key>&lt;pack_arg3&gt;</xr-internal-key>
+                <xr-path>/cfg/node/pre/&lt;mda_common_cfg_PreconfiguredNode_nodeid&gt;/lpts/ipolicer/flow/&lt;lpts_pre-ifib_cfg_Flow_arg52&gt;/precedence`&lt;pack_arg3&gt;</xr-path>
+                <xr-xml-map>lpts_pre-ifib_cfg:Precedence</xr-xml-map>
+                <xr-sch-type>RangeEnum</xr-sch-type>
+                <type>
+                  <type-name>Lpts-pre-i-fib-precedence-number</type-name>
+                </type>
+                <max-elements>8</max-elements>
+              </precedence>
+            </precedences>
+            <rate config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/node/pre/&lt;mda_common_cfg_PreconfiguredNode_nodeid&gt;/lpts/ipolicer/flow/&lt;lpts_pre-ifib_cfg_Flow_arg52&gt;/rate</xr-path>
+              <xr-xml-map>lpts_pre-ifib_cfg:Rate</xr-xml-map>
+              <xr-sch-type>ZeroRange</xr-sch-type>
+              <type range="0..4294967295">
+                <type-name>uint32</type-name>
+              </type>
+            </rate>
+            <flow-type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/node/pre/&lt;mda_common_cfg_PreconfiguredNode_nodeid&gt;/lpts/ipolicer/flow/&lt;lpts_pre-ifib_cfg_Flow_arg52&gt;/</xr-path>
+              <xr-xml-map>lpts_pre-ifib_cfg:FlowType</xr-xml-map>
+              <xr-sch-type>Enum</xr-sch-type>
+              <xr-sch-arg-name>&lt;lpts_pre-ifib_cfg_Flow_arg52&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>Lpts-flow</type-name>
+              </type>
+            </flow-type>
+          </flow>
+        </flows>
+      </ipolicer-local>
+    </lpts-local>
+  </augment>
+</Cisco-IOS-XR-lpts-pre-ifib-cfg>

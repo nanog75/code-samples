@@ -1,0 +1,1315 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ipv4-hsrp-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-hsrp-cfg" revision="2017-11-05">
+  <files>
+    <file revision="2017-11-05" submodule="false">Cisco-IOS-XR-ipv4-hsrp-cfg.yang</file>
+  </files>
+  <prefix>ipv4-hsrp-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="yang">ietf-yang-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-snmp-agent-cfg</import>
+  <typedef name="Hsrp-linklocal">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">manual</enum>
+      <enum value="1">auto</enum>
+      <enum value="2">legacy</enum>
+    </type>
+  </typedef>
+  <augment path="/a1:snmp/a1:notification">
+    <hsrp config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/enable/traps/hsrp/</xr-path>
+      <xr-xml-map>hsrpmib_cfg:HSRP</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/enable/traps/hsrp/enable</xr-path>
+        <xr-xml-map>hsrpmib_cfg:Enable</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </enable>
+    </hsrp>
+  </augment>
+  <hsrp config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/ip-hsrp/</xr-path>
+    <xr-xml-map>hsrp_cfg:HSRP</xr-xml-map>
+    <xr-task>hsrp</xr-task>
+    <xr-compatibility>3.0</xr-compatibility>
+    <interfaces config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip-hsrp/if/</xr-path>
+      <xr-xml-map>hsrp_cfg:InterfaceTable</xr-xml-map>
+      <xr-task>hsrp</xr-task>
+      <interface config="true" key="interface-name" node="list">
+        <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/</xr-path>
+        <xr-xml-map>hsrp_cfg:Interface</xr-xml-map>
+        <xr-task>hsrp</xr-task>
+        <xr-scope>exported</xr-scope>
+        <ipv6 config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/</xr-path>
+          <xr-xml-map>hsrp_ipv6_cfg:IPv6</xr-xml-map>
+          <xr-task>hsrp</xr-task>
+          <xr-scope>exported</xr-scope>
+          <version2 config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/</xr-path>
+            <xr-xml-map>hsrp_ipv6_cfg:Version2</xr-xml-map>
+            <xr-task>hsrp</xr-task>
+            <groups config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/</xr-path>
+              <xr-xml-map>hsrp_ipv6_cfg:GroupTable</xr-xml-map>
+              <xr-task>hsrp</xr-task>
+              <group config="true" key="group-number" node="list">
+                <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/</xr-path>
+                <xr-xml-map>hsrp_ipv6_cfg:Group</xr-xml-map>
+                <xr-task>hsrp</xr-task>
+                <bfd config="true" is-key="false" node="container" presence="false">
+                  <xr-is-packed/>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/bfd-enable`</xr-path>
+                  <xr-xml-map>hsrp_ipv6_cfg:BFD</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-pack-format>%s%s</xr-pack-format>
+                  <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%s%s</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/bfd-enable`0</xr-path>
+                    <xr-xml-map>hsrp_ipv6_cfg:Address</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>IPV6AddressHexString</xr-sch-type>
+                    <type>
+                      <type-name>inet:ipv6-address-no-zone</type-name>
+                    </type>
+                  </address>
+                  <interface-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%s%s</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/bfd-enable`1</xr-path>
+                    <xr-xml-map>hsrp_ipv6_cfg:InterfaceName</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>InterfaceForward</xr-sch-type>
+                    <type>
+                      <type-name>xr:Interface-name</type-name>
+                    </type>
+                  </interface-name>
+                </bfd>
+                <tracked-interfaces config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/track-if/</xr-path>
+                  <xr-xml-map>hsrp_ipv6_cfg:TrackedInterfaceTable</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <tracked-interface config="true" key="interface-name" node="list">
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/track-if/&lt;hsrp_ipv6_cfg_TrackedInterface_intf&gt;</xr-path>
+                    <xr-xml-map>hsrp_ipv6_cfg:TrackedInterface</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <interface-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-data-handler>ignore</xr-data-handler>
+                      <xr-primitive-type>string</xr-primitive-type>
+                      <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/track-if/&lt;hsrp_ipv6_cfg_TrackedInterface_intf&gt;</xr-path>
+                      <xr-xml-map>hsrp_ipv6_cfg:InterfaceName</xr-xml-map>
+                      <xr-task>hsrp</xr-task>
+                      <xr-sch-type>InterfaceForward</xr-sch-type>
+                      <xr-sch-arg-name>&lt;hsrp_ipv6_cfg_TrackedInterface_intf&gt;</xr-sch-arg-name>
+                      <type>
+                        <type-name>xr:Interface-name</type-name>
+                      </type>
+                    </interface-name>
+                    <priority-decrement config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-primitive-type>uint32</xr-primitive-type>
+                      <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/track-if/&lt;hsrp_ipv6_cfg_TrackedInterface_intf&gt;</xr-path>
+                      <xr-xml-map>hsrp_ipv6_cfg:PriorityDecrement</xr-xml-map>
+                      <xr-task>hsrp</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <xr-default-set/>
+                      <type range="1..255">
+                        <type-name>uint32</type-name>
+                      </type>
+                      <mandatory>true</mandatory>
+                    </priority-decrement>
+                  </tracked-interface>
+                </tracked-interfaces>
+                <tracked-objects config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/track-obj/</xr-path>
+                  <xr-xml-map>hsrp_ipv6_cfg:TrackedObjectTable</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <tracked-object config="true" key="object-name" node="list">
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/track-obj/&lt;hsrp_ipv6_cfg_TrackedObject_obj_name&gt;</xr-path>
+                    <xr-xml-map>hsrp_ipv6_cfg:TrackedObject</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <object-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-data-handler>ignore</xr-data-handler>
+                      <xr-primitive-type>string</xr-primitive-type>
+                      <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/track-obj/&lt;hsrp_ipv6_cfg_TrackedObject_obj_name&gt;</xr-path>
+                      <xr-xml-map>hsrp_ipv6_cfg:ObjectName</xr-xml-map>
+                      <xr-task>hsrp</xr-task>
+                      <xr-sch-type>String</xr-sch-type>
+                      <xr-sch-arg-name>&lt;hsrp_ipv6_cfg_TrackedObject_obj_name&gt;</xr-sch-arg-name>
+                      <type>
+                        <type-name>xr:Cisco-ios-xr-string</type-name>
+                      </type>
+                    </object-name>
+                    <priority-decrement config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-primitive-type>uint32</xr-primitive-type>
+                      <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/track-obj/&lt;hsrp_ipv6_cfg_TrackedObject_obj_name&gt;</xr-path>
+                      <xr-xml-map>hsrp_ipv6_cfg:PriorityDecrement</xr-xml-map>
+                      <xr-task>hsrp</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <xr-default-set/>
+                      <type range="1..255">
+                        <type-name>uint32</type-name>
+                      </type>
+                      <mandatory>true</mandatory>
+                    </priority-decrement>
+                  </tracked-object>
+                </tracked-objects>
+                <timers config="true" is-key="false" node="container" presence="false">
+                  <xr-is-packed/>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/timers`</xr-path>
+                  <xr-xml-map>hsrp_ipv6_cfg:Timers</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+                  <hello-msec-flag config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/timers`0</xr-path>
+                    <xr-xml-map>hsrp_ipv6_cfg:HelloMsecFlag</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>Boolean</xr-sch-type>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </hello-msec-flag>
+                  <hello-msec config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/timers`1</xr-path>
+                    <xr-xml-map>hsrp_ipv6_cfg:HelloMsec</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <type range="100..3000">
+                      <type-name>uint32</type-name>
+                    </type>
+                  </hello-msec>
+                  <hello-sec config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/timers`2</xr-path>
+                    <xr-xml-map>hsrp_ipv6_cfg:HelloSec</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <type range="1..255">
+                      <type-name>uint32</type-name>
+                    </type>
+                    <default>3</default>
+                  </hello-sec>
+                  <hold-msec-flag config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/timers`3</xr-path>
+                    <xr-xml-map>hsrp_ipv6_cfg:HoldMsecFlag</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>Boolean</xr-sch-type>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </hold-msec-flag>
+                  <hold-msec config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/timers`4</xr-path>
+                    <xr-xml-map>hsrp_ipv6_cfg:HoldMsec</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <type range="100..3000">
+                      <type-name>uint32</type-name>
+                    </type>
+                  </hold-msec>
+                  <hold-sec config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/timers`5</xr-path>
+                    <xr-xml-map>hsrp_ipv6_cfg:HoldSec</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <type range="1..255">
+                      <type-name>uint32</type-name>
+                    </type>
+                    <default>10</default>
+                  </hold-sec>
+                </timers>
+                <link-local-ipv6-address config="true" is-key="false" node="container" presence="false">
+                  <xr-is-packed/>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/addr_linklocal`</xr-path>
+                  <xr-xml-map>hsrp_ipv6_cfg:LinkLocalIPv6Address</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-pack-format>%s%d</xr-pack-format>
+                  <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%s%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/addr_linklocal`0</xr-path>
+                    <xr-xml-map>hsrp_ipv6_cfg:Address</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>IPV6AddressHexString</xr-sch-type>
+                    <xr-default-set/>
+                    <when>../auto-configure = 'manual'</when>
+                    <type>
+                      <type-name>inet:ipv6-address-no-zone</type-name>
+                    </type>
+                  </address>
+                  <auto-configure config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%s%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/addr_linklocal`1</xr-path>
+                    <xr-xml-map>hsrp_ipv6_cfg:AutoConfigure</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>Enum</xr-sch-type>
+                    <xr-default-set/>
+                    <type>
+                      <type-name>Hsrp-linklocal</type-name>
+                    </type>
+                    <default>manual</default>
+                  </auto-configure>
+                </link-local-ipv6-address>
+                <global-ipv6-addresses config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/addr_global/</xr-path>
+                  <xr-xml-map>hsrp_ipv6_cfg:GlobalIPv6AddressTable</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <global-ipv6-address config="true" key="address" node="list">
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/addr_global/&lt;hsrp_ipv6_cfg_GlobalIPv6Address_addr_hex_string&gt;</xr-path>
+                    <xr-xml-map>hsrp_ipv6_cfg:GlobalIPv6Address</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <address config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-data-handler>ignore</xr-data-handler>
+                      <xr-create-item-relative-path/>
+                      <xr-primitive-type>string</xr-primitive-type>
+                      <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/addr_global/&lt;hsrp_ipv6_cfg_GlobalIPv6Address_addr_hex_string&gt;</xr-path>
+                      <xr-xml-map>hsrp_ipv6_cfg:Address</xr-xml-map>
+                      <xr-task>hsrp</xr-task>
+                      <xr-sch-type>IPV6AddressHexString</xr-sch-type>
+                      <xr-sch-arg-name>&lt;hsrp_ipv6_cfg_GlobalIPv6Address_addr_hex_string&gt;</xr-sch-arg-name>
+                      <type>
+                        <type-name>inet:ipv6-address-no-zone</type-name>
+                      </type>
+                    </address>
+                  </global-ipv6-address>
+                </global-ipv6-addresses>
+                <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/priority</xr-path>
+                  <xr-xml-map>hsrp_ipv6_cfg:Priority</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <type range="0..255">
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>100</default>
+                </priority>
+                <preempt config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/preempt</xr-path>
+                  <xr-xml-map>hsrp_ipv6_cfg:Preempt</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-sch-type>Integer</xr-sch-type>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>0</default>
+                </preempt>
+                <session-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/name</xr-path>
+                  <xr-xml-map>hsrp_ipv6_cfg:SessionName</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-sch-type>BoundedString</xr-sch-type>
+                  <type length="1..16">
+                    <type-name>xr:Cisco-ios-xr-string</type-name>
+                  </type>
+                </session-name>
+                <virtual-mac-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-elem-size>3</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/macaddr`0</xr-path>
+                  <xr-xml-map>hsrp_ipv6_cfg:VirtualMACAddress</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-pack-format>%d%d%d</xr-pack-format>
+                  <xr-sch-type>MACAddress</xr-sch-type>
+                  <type>
+                    <type-name>yang:mac-address</type-name>
+                  </type>
+                </virtual-mac-address>
+                <group-number config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-pathformat>decimal</xr-pathformat>
+                  <xr-create-item-relative-path>aza</xr-create-item-relative-path>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/v2/group/&lt;hsrp_ipv6_cfg_Group_group&gt;/</xr-path>
+                  <xr-xml-map>hsrp_ipv6_cfg:GroupNumber</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <xr-sch-arg-name>&lt;hsrp_ipv6_cfg_Group_group&gt;</xr-sch-arg-name>
+                  <type range="0..4095">
+                    <type-name>uint32</type-name>
+                  </type>
+                </group-number>
+              </group>
+            </groups>
+          </version2>
+          <slave-groups config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/slave/</xr-path>
+            <xr-xml-map>hsrp_ipv6_slave_cfg:SlaveGroupTable</xr-xml-map>
+            <xr-task>hsrp</xr-task>
+            <slave-group config="true" key="slave-group-number" node="list">
+              <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/slave/&lt;hsrp_ipv6_slave_cfg_SlaveGroup_group&gt;/</xr-path>
+              <xr-xml-map>hsrp_ipv6_slave_cfg:SlaveGroup</xr-xml-map>
+              <xr-task>hsrp</xr-task>
+              <link-local-ipv6-address config="true" is-key="false" node="container" presence="false">
+                <xr-is-packed/>
+                <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/slave/&lt;hsrp_ipv6_slave_cfg_SlaveGroup_group&gt;/addr_linklocal`</xr-path>
+                <xr-xml-map>hsrp_ipv6_slave_cfg:LinkLocalIPv6Address</xr-xml-map>
+                <xr-task>hsrp</xr-task>
+                <xr-pack-format>%s%d</xr-pack-format>
+                <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%s%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/slave/&lt;hsrp_ipv6_slave_cfg_SlaveGroup_group&gt;/addr_linklocal`0</xr-path>
+                  <xr-xml-map>hsrp_ipv6_slave_cfg:Address</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-sch-type>IPV6AddressHexString</xr-sch-type>
+                  <xr-default-set/>
+                  <when>../auto-configure = 'manual'</when>
+                  <type>
+                    <type-name>inet:ipv6-address-no-zone</type-name>
+                  </type>
+                </address>
+                <auto-configure config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%s%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/slave/&lt;hsrp_ipv6_slave_cfg_SlaveGroup_group&gt;/addr_linklocal`1</xr-path>
+                  <xr-xml-map>hsrp_ipv6_slave_cfg:AutoConfigure</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>Hsrp-linklocal</type-name>
+                  </type>
+                  <default>manual</default>
+                </auto-configure>
+              </link-local-ipv6-address>
+              <global-ipv6-addresses config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/slave/&lt;hsrp_ipv6_slave_cfg_SlaveGroup_group&gt;/addr_global/</xr-path>
+                <xr-xml-map>hsrp_ipv6_slave_cfg:GlobalIPv6AddressTable</xr-xml-map>
+                <xr-task>hsrp</xr-task>
+                <global-ipv6-address config="true" key="address" node="list">
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/slave/&lt;hsrp_ipv6_slave_cfg_SlaveGroup_group&gt;/addr_global/&lt;hsrp_ipv6_slave_cfg_GlobalIPv6Address_addr_hex_string&gt;</xr-path>
+                  <xr-xml-map>hsrp_ipv6_slave_cfg:GlobalIPv6Address</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <address config="true" is-key="true" is-yang-key="true" node="leaf">
+                    <xr-data-handler>ignore</xr-data-handler>
+                    <xr-create-item-relative-path/>
+                    <xr-primitive-type>string</xr-primitive-type>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/slave/&lt;hsrp_ipv6_slave_cfg_SlaveGroup_group&gt;/addr_global/&lt;hsrp_ipv6_slave_cfg_GlobalIPv6Address_addr_hex_string&gt;</xr-path>
+                    <xr-xml-map>hsrp_ipv6_slave_cfg:Address</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>IPV6AddressHexString</xr-sch-type>
+                    <xr-sch-arg-name>&lt;hsrp_ipv6_slave_cfg_GlobalIPv6Address_addr_hex_string&gt;</xr-sch-arg-name>
+                    <type>
+                      <type-name>inet:ipv6-address-no-zone</type-name>
+                    </type>
+                  </address>
+                </global-ipv6-address>
+              </global-ipv6-addresses>
+              <follow config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/slave/&lt;hsrp_ipv6_slave_cfg_SlaveGroup_group&gt;/follow</xr-path>
+                <xr-xml-map>hsrp_ipv6_slave_cfg:Follow</xr-xml-map>
+                <xr-task>hsrp</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </follow>
+              <virtual-mac-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-elem-size>3</xr-pack-elem-size>
+                <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/slave/&lt;hsrp_ipv6_slave_cfg_SlaveGroup_group&gt;/macaddr`0</xr-path>
+                <xr-xml-map>hsrp_ipv6_slave_cfg:VirtualMACAddress</xr-xml-map>
+                <xr-task>hsrp</xr-task>
+                <xr-pack-format>%d%d%d</xr-pack-format>
+                <xr-sch-type>MACAddress</xr-sch-type>
+                <type>
+                  <type-name>yang:mac-address</type-name>
+                </type>
+              </virtual-mac-address>
+              <slave-group-number config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-pathformat>decimal</xr-pathformat>
+                <xr-create-item-relative-path>aza</xr-create-item-relative-path>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv6/slave/&lt;hsrp_ipv6_slave_cfg_SlaveGroup_group&gt;/</xr-path>
+                <xr-xml-map>hsrp_ipv6_slave_cfg:SlaveGroupNumber</xr-xml-map>
+                <xr-task>hsrp</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-sch-arg-name>&lt;hsrp_ipv6_slave_cfg_SlaveGroup_group&gt;</xr-sch-arg-name>
+                <type range="0..4095">
+                  <type-name>uint32</type-name>
+                </type>
+              </slave-group-number>
+            </slave-group>
+          </slave-groups>
+        </ipv6>
+        <bfd config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/bfd/</xr-path>
+          <xr-xml-map>hsrp_cfg:BFD</xr-xml-map>
+          <xr-task>hsrp</xr-task>
+          <detection-multiplier config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/bfd/multiplier</xr-path>
+            <xr-xml-map>hsrp_cfg:DetectionMultiplier</xr-xml-map>
+            <xr-task>hsrp</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="2..50">
+              <type-name>uint32</type-name>
+            </type>
+          </detection-multiplier>
+          <interval config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/bfd/interval</xr-path>
+            <xr-xml-map>hsrp_cfg:Interval</xr-xml-map>
+            <xr-task>hsrp</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="3..30000">
+              <type-name>uint32</type-name>
+            </type>
+          </interval>
+        </bfd>
+        <delay config="true" is-key="false" node="container" presence="true">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-is-packed/>
+          <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/delay`</xr-path>
+          <xr-xml-map>hsrp_cfg:Delay</xr-xml-map>
+          <xr-task>hsrp</xr-task>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <minimum-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/delay`0</xr-path>
+            <xr-xml-map>hsrp_cfg:MinimumDelay</xr-xml-map>
+            <xr-task>hsrp</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..10000">
+              <type-name>uint32</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </minimum-delay>
+          <reload-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/delay`1</xr-path>
+            <xr-xml-map>hsrp_cfg:ReloadDelay</xr-xml-map>
+            <xr-task>hsrp</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..10000">
+              <type-name>uint32</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </reload-delay>
+        </delay>
+        <ipv4 config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/</xr-path>
+          <xr-xml-map>hsrp_cfg:IPv4</xr-xml-map>
+          <xr-task>hsrp</xr-task>
+          <xr-scope>exported</xr-scope>
+          <slave-groups config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/slave/</xr-path>
+            <xr-xml-map>hsrp_slave_cfg:SlaveGroupTable</xr-xml-map>
+            <xr-task>hsrp</xr-task>
+            <slave-group config="true" key="slave-group-number" node="list">
+              <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/slave/&lt;hsrp_slave_cfg_SlaveGroup_group&gt;/</xr-path>
+              <xr-xml-map>hsrp_slave_cfg:SlaveGroup</xr-xml-map>
+              <xr-task>hsrp</xr-task>
+              <secondary-ipv4-addresses config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/slave/&lt;hsrp_slave_cfg_SlaveGroup_group&gt;/addr_sec/</xr-path>
+                <xr-xml-map>hsrp_slave_cfg:SecondaryIPv4AddressTable</xr-xml-map>
+                <xr-task>hsrp</xr-task>
+                <secondary-ipv4-address config="true" key="address" node="list">
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/slave/&lt;hsrp_slave_cfg_SlaveGroup_group&gt;/addr_sec/&lt;hsrp_slave_cfg_SecondaryIPv4Address_ip-addr&gt;</xr-path>
+                  <xr-xml-map>hsrp_slave_cfg:SecondaryIPv4Address</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <address config="true" is-key="true" is-yang-key="true" node="leaf">
+                    <xr-data-handler>ignore</xr-data-handler>
+                    <xr-pathformat>hex_padded_nozerox</xr-pathformat>
+                    <xr-create-item-relative-path/>
+                    <xr-primitive-type>inaddr</xr-primitive-type>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/slave/&lt;hsrp_slave_cfg_SlaveGroup_group&gt;/addr_sec/&lt;hsrp_slave_cfg_SecondaryIPv4Address_ip-addr&gt;</xr-path>
+                    <xr-xml-map>hsrp_slave_cfg:Address</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>IPV4Address</xr-sch-type>
+                    <xr-sch-arg-name>&lt;hsrp_slave_cfg_SecondaryIPv4Address_ip-addr&gt;</xr-sch-arg-name>
+                    <type>
+                      <type-name>inet:ipv4-address-no-zone</type-name>
+                    </type>
+                  </address>
+                </secondary-ipv4-address>
+              </secondary-ipv4-addresses>
+              <follow config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/slave/&lt;hsrp_slave_cfg_SlaveGroup_group&gt;/follow</xr-path>
+                <xr-xml-map>hsrp_slave_cfg:Follow</xr-xml-map>
+                <xr-task>hsrp</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </follow>
+              <virtual-mac-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-elem-size>3</xr-pack-elem-size>
+                <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/slave/&lt;hsrp_slave_cfg_SlaveGroup_group&gt;/macaddr`0</xr-path>
+                <xr-xml-map>hsrp_slave_cfg:VirtualMACAddress</xr-xml-map>
+                <xr-task>hsrp</xr-task>
+                <xr-pack-format>%d%d%d</xr-pack-format>
+                <xr-sch-type>MACAddress</xr-sch-type>
+                <type>
+                  <type-name>yang:mac-address</type-name>
+                </type>
+              </virtual-mac-address>
+              <primary-ipv4-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>inaddr</xr-primitive-type>
+                <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/slave/&lt;hsrp_slave_cfg_SlaveGroup_group&gt;/addr_ipv4</xr-path>
+                <xr-xml-map>hsrp_slave_cfg:PrimaryIPv4Address</xr-xml-map>
+                <xr-task>hsrp</xr-task>
+                <xr-sch-type>IPV4Address</xr-sch-type>
+                <type>
+                  <type-name>inet:ipv4-address-no-zone</type-name>
+                </type>
+              </primary-ipv4-address>
+              <slave-group-number config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-pathformat>decimal</xr-pathformat>
+                <xr-create-item-relative-path>aza</xr-create-item-relative-path>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/slave/&lt;hsrp_slave_cfg_SlaveGroup_group&gt;/</xr-path>
+                <xr-xml-map>hsrp_slave_cfg:SlaveGroupNumber</xr-xml-map>
+                <xr-task>hsrp</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-sch-arg-name>&lt;hsrp_slave_cfg_SlaveGroup_group&gt;</xr-sch-arg-name>
+                <type range="0..4095">
+                  <type-name>uint32</type-name>
+                </type>
+              </slave-group-number>
+            </slave-group>
+          </slave-groups>
+          <version1 config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/</xr-path>
+            <xr-xml-map>hsrp_cfg:Version1</xr-xml-map>
+            <xr-task>hsrp</xr-task>
+            <xr-scope>exported</xr-scope>
+            <groups config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/</xr-path>
+              <xr-xml-map>hsrp_cfg:GroupTable</xr-xml-map>
+              <xr-task>hsrp</xr-task>
+              <group config="true" key="group-number" node="list">
+                <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/</xr-path>
+                <xr-xml-map>hsrp_cfg:Group</xr-xml-map>
+                <xr-task>hsrp</xr-task>
+                <tracked-interfaces config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/track-if/</xr-path>
+                  <xr-xml-map>hsrp_cfg:TrackedInterfaceTable</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <tracked-interface config="true" key="interface-name" node="list">
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/track-if/&lt;hsrp_cfg_TrackedInterface_intf&gt;</xr-path>
+                    <xr-xml-map>hsrp_cfg:TrackedInterface</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <interface-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-data-handler>ignore</xr-data-handler>
+                      <xr-primitive-type>string</xr-primitive-type>
+                      <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/track-if/&lt;hsrp_cfg_TrackedInterface_intf&gt;</xr-path>
+                      <xr-xml-map>hsrp_cfg:InterfaceName</xr-xml-map>
+                      <xr-task>hsrp</xr-task>
+                      <xr-sch-type>InterfaceForward</xr-sch-type>
+                      <xr-sch-arg-name>&lt;hsrp_cfg_TrackedInterface_intf&gt;</xr-sch-arg-name>
+                      <type>
+                        <type-name>xr:Interface-name</type-name>
+                      </type>
+                    </interface-name>
+                    <priority-decrement config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-primitive-type>uint32</xr-primitive-type>
+                      <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/track-if/&lt;hsrp_cfg_TrackedInterface_intf&gt;</xr-path>
+                      <xr-xml-map>hsrp_cfg:PriorityDecrement</xr-xml-map>
+                      <xr-task>hsrp</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <xr-default-set/>
+                      <type range="1..255">
+                        <type-name>uint32</type-name>
+                      </type>
+                      <mandatory>true</mandatory>
+                    </priority-decrement>
+                  </tracked-interface>
+                </tracked-interfaces>
+                <bfd config="true" is-key="false" node="container" presence="false">
+                  <xr-is-packed/>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/bfd-enable`</xr-path>
+                  <xr-xml-map>hsrp_cfg:BFD</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-pack-format>%N%s</xr-pack-format>
+                  <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%N%s</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/bfd-enable`0</xr-path>
+                    <xr-xml-map>hsrp_cfg:Address</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>IPV4Address</xr-sch-type>
+                    <type>
+                      <type-name>inet:ipv4-address-no-zone</type-name>
+                    </type>
+                  </address>
+                  <interface-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%N%s</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/bfd-enable`1</xr-path>
+                    <xr-xml-map>hsrp_cfg:InterfaceName</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>InterfaceForward</xr-sch-type>
+                    <type>
+                      <type-name>xr:Interface-name</type-name>
+                    </type>
+                  </interface-name>
+                </bfd>
+                <tracked-objects config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/track-obj/</xr-path>
+                  <xr-xml-map>hsrp_cfg:TrackedObjectTable</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <tracked-object config="true" key="object-name" node="list">
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/track-obj/&lt;hsrp_cfg_TrackedObject_obj_name&gt;</xr-path>
+                    <xr-xml-map>hsrp_cfg:TrackedObject</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <object-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-data-handler>ignore</xr-data-handler>
+                      <xr-primitive-type>string</xr-primitive-type>
+                      <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/track-obj/&lt;hsrp_cfg_TrackedObject_obj_name&gt;</xr-path>
+                      <xr-xml-map>hsrp_cfg:ObjectName</xr-xml-map>
+                      <xr-task>hsrp</xr-task>
+                      <xr-sch-type>String</xr-sch-type>
+                      <xr-sch-arg-name>&lt;hsrp_cfg_TrackedObject_obj_name&gt;</xr-sch-arg-name>
+                      <type>
+                        <type-name>xr:Cisco-ios-xr-string</type-name>
+                      </type>
+                    </object-name>
+                    <priority-decrement config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-primitive-type>uint32</xr-primitive-type>
+                      <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/track-obj/&lt;hsrp_cfg_TrackedObject_obj_name&gt;</xr-path>
+                      <xr-xml-map>hsrp_cfg:PriorityDecrement</xr-xml-map>
+                      <xr-task>hsrp</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <xr-default-set/>
+                      <type range="1..255">
+                        <type-name>uint32</type-name>
+                      </type>
+                      <mandatory>true</mandatory>
+                    </priority-decrement>
+                  </tracked-object>
+                </tracked-objects>
+                <timers config="true" is-key="false" node="container" presence="false">
+                  <xr-is-packed/>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/timers`</xr-path>
+                  <xr-xml-map>hsrp_cfg:Timers</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+                  <hello-msec-flag config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/timers`0</xr-path>
+                    <xr-xml-map>hsrp_cfg:HelloMsecFlag</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>Boolean</xr-sch-type>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </hello-msec-flag>
+                  <hello-msec config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/timers`1</xr-path>
+                    <xr-xml-map>hsrp_cfg:HelloMsec</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <type range="100..3000">
+                      <type-name>uint32</type-name>
+                    </type>
+                  </hello-msec>
+                  <hello-sec config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/timers`2</xr-path>
+                    <xr-xml-map>hsrp_cfg:HelloSec</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <type range="1..255">
+                      <type-name>uint32</type-name>
+                    </type>
+                    <default>3</default>
+                  </hello-sec>
+                  <hold-msec-flag config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/timers`3</xr-path>
+                    <xr-xml-map>hsrp_cfg:HoldMsecFlag</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>Boolean</xr-sch-type>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </hold-msec-flag>
+                  <hold-msec config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/timers`4</xr-path>
+                    <xr-xml-map>hsrp_cfg:HoldMsec</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <type range="100..3000">
+                      <type-name>uint32</type-name>
+                    </type>
+                  </hold-msec>
+                  <hold-sec config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/timers`5</xr-path>
+                    <xr-xml-map>hsrp_cfg:HoldSec</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <type range="1..255">
+                      <type-name>uint32</type-name>
+                    </type>
+                    <default>10</default>
+                  </hold-sec>
+                </timers>
+                <primary-ipv4-address config="true" is-key="false" node="container" presence="false">
+                  <xr-is-packed/>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/addr_ipv4`</xr-path>
+                  <xr-xml-map>hsrp_cfg:PrimaryIPv4Address</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-pack-format>%d%N</xr-pack-format>
+                  <virtual-ip-learn config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%N</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/addr_ipv4`0</xr-path>
+                    <xr-xml-map>hsrp_cfg:VirtualIPLearn</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>Boolean</xr-sch-type>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </virtual-ip-learn>
+                  <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%N</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/addr_ipv4`1</xr-path>
+                    <xr-xml-map>hsrp_cfg:Address</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>IPV4Address</xr-sch-type>
+                    <when>../virtual-ip-learn = 'false'</when>
+                    <type>
+                      <type-name>inet:ipv4-address-no-zone</type-name>
+                    </type>
+                  </address>
+                </primary-ipv4-address>
+                <secondary-ipv4-addresses config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/addr_sec/</xr-path>
+                  <xr-xml-map>hsrp_cfg:SecondaryIPv4AddressTable</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <secondary-ipv4-address config="true" key="address" node="list">
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/addr_sec/&lt;hsrp_cfg_SecondaryIPv4Address_ip-addr&gt;</xr-path>
+                    <xr-xml-map>hsrp_cfg:SecondaryIPv4Address</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <address config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-data-handler>ignore</xr-data-handler>
+                      <xr-pathformat>hex_padded_nozerox</xr-pathformat>
+                      <xr-create-item-relative-path/>
+                      <xr-primitive-type>inaddr</xr-primitive-type>
+                      <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/addr_sec/&lt;hsrp_cfg_SecondaryIPv4Address_ip-addr&gt;</xr-path>
+                      <xr-xml-map>hsrp_cfg:Address</xr-xml-map>
+                      <xr-task>hsrp</xr-task>
+                      <xr-sch-type>IPV4Address</xr-sch-type>
+                      <xr-sch-arg-name>&lt;hsrp_cfg_SecondaryIPv4Address_ip-addr&gt;</xr-sch-arg-name>
+                      <type>
+                        <type-name>inet:ipv4-address-no-zone</type-name>
+                      </type>
+                    </address>
+                  </secondary-ipv4-address>
+                </secondary-ipv4-addresses>
+                <authentication config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/authen</xr-path>
+                  <xr-xml-map>hsrp_cfg:Authentication</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-sch-type>BoundedString</xr-sch-type>
+                  <type length="1..8">
+                    <type-name>string</type-name>
+                  </type>
+                  <default>cisco</default>
+                </authentication>
+                <session-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/name</xr-path>
+                  <xr-xml-map>hsrp_cfg:SessionName</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-sch-type>BoundedString</xr-sch-type>
+                  <type length="1..16">
+                    <type-name>xr:Cisco-ios-xr-string</type-name>
+                  </type>
+                </session-name>
+                <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/priority</xr-path>
+                  <xr-xml-map>hsrp_cfg:Priority</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <type range="0..255">
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>100</default>
+                </priority>
+                <preempt config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/preempt</xr-path>
+                  <xr-xml-map>hsrp_cfg:Preempt</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-sch-type>Integer</xr-sch-type>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>0</default>
+                </preempt>
+                <virtual-mac-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-elem-size>3</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/macaddr`0</xr-path>
+                  <xr-xml-map>hsrp_cfg:VirtualMACAddress</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-pack-format>%d%d%d</xr-pack-format>
+                  <xr-sch-type>MACAddress</xr-sch-type>
+                  <type>
+                    <type-name>yang:mac-address</type-name>
+                  </type>
+                </virtual-mac-address>
+                <group-number config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-pathformat>decimal</xr-pathformat>
+                  <xr-create-item-relative-path>aza</xr-create-item-relative-path>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v1/group/&lt;hsrp_cfg_Group_group&gt;/</xr-path>
+                  <xr-xml-map>hsrp_cfg:GroupNumber</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <xr-sch-arg-name>&lt;hsrp_cfg_Group_group&gt;</xr-sch-arg-name>
+                  <type range="0..255">
+                    <type-name>uint32</type-name>
+                  </type>
+                </group-number>
+              </group>
+            </groups>
+          </version1>
+          <version2 config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/</xr-path>
+            <xr-xml-map>hsrp_ipv4_v2_cfg:Version2</xr-xml-map>
+            <xr-task>hsrp</xr-task>
+            <groups config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/</xr-path>
+              <xr-xml-map>hsrp_ipv4_v2_cfg:GroupTable</xr-xml-map>
+              <xr-task>hsrp</xr-task>
+              <group config="true" key="group-number" node="list">
+                <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/</xr-path>
+                <xr-xml-map>hsrp_ipv4_v2_cfg:Group</xr-xml-map>
+                <xr-task>hsrp</xr-task>
+                <secondary-ipv4-addresses config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/addr_sec/</xr-path>
+                  <xr-xml-map>hsrp_ipv4_v2_cfg:SecondaryIPv4AddressTable</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <secondary-ipv4-address config="true" key="address" node="list">
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/addr_sec/&lt;hsrp_ipv4_v2_cfg_SecondaryIPv4Address_ip-addr&gt;</xr-path>
+                    <xr-xml-map>hsrp_ipv4_v2_cfg:SecondaryIPv4Address</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <address config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-data-handler>ignore</xr-data-handler>
+                      <xr-pathformat>hex_padded_nozerox</xr-pathformat>
+                      <xr-create-item-relative-path/>
+                      <xr-primitive-type>inaddr</xr-primitive-type>
+                      <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/addr_sec/&lt;hsrp_ipv4_v2_cfg_SecondaryIPv4Address_ip-addr&gt;</xr-path>
+                      <xr-xml-map>hsrp_ipv4_v2_cfg:Address</xr-xml-map>
+                      <xr-task>hsrp</xr-task>
+                      <xr-sch-type>IPV4Address</xr-sch-type>
+                      <xr-sch-arg-name>&lt;hsrp_ipv4_v2_cfg_SecondaryIPv4Address_ip-addr&gt;</xr-sch-arg-name>
+                      <type>
+                        <type-name>inet:ipv4-address-no-zone</type-name>
+                      </type>
+                    </address>
+                  </secondary-ipv4-address>
+                </secondary-ipv4-addresses>
+                <bfd config="true" is-key="false" node="container" presence="false">
+                  <xr-is-packed/>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/bfd-enable`</xr-path>
+                  <xr-xml-map>hsrp_ipv4_v2_cfg:BFD</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-pack-format>%N%s</xr-pack-format>
+                  <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%N%s</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/bfd-enable`0</xr-path>
+                    <xr-xml-map>hsrp_ipv4_v2_cfg:Address</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>IPV4Address</xr-sch-type>
+                    <type>
+                      <type-name>inet:ipv4-address-no-zone</type-name>
+                    </type>
+                  </address>
+                  <interface-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%N%s</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/bfd-enable`1</xr-path>
+                    <xr-xml-map>hsrp_ipv4_v2_cfg:InterfaceName</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>InterfaceForward</xr-sch-type>
+                    <type>
+                      <type-name>xr:Interface-name</type-name>
+                    </type>
+                  </interface-name>
+                </bfd>
+                <primary-ipv4-address config="true" is-key="false" node="container" presence="false">
+                  <xr-is-packed/>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/addr_ipv4`</xr-path>
+                  <xr-xml-map>hsrp_ipv4_v2_cfg:PrimaryIPv4Address</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-pack-format>%d%N</xr-pack-format>
+                  <virtual-ip-learn config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%N</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/addr_ipv4`0</xr-path>
+                    <xr-xml-map>hsrp_ipv4_v2_cfg:VirtualIPLearn</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>Boolean</xr-sch-type>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </virtual-ip-learn>
+                  <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%N</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/addr_ipv4`1</xr-path>
+                    <xr-xml-map>hsrp_ipv4_v2_cfg:Address</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>IPV4Address</xr-sch-type>
+                    <when>../virtual-ip-learn = 'false'</when>
+                    <type>
+                      <type-name>inet:ipv4-address-no-zone</type-name>
+                    </type>
+                  </address>
+                </primary-ipv4-address>
+                <tracked-objects config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/track-obj/</xr-path>
+                  <xr-xml-map>hsrp_ipv4_v2_cfg:TrackedObjectTable</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <tracked-object config="true" key="object-name" node="list">
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/track-obj/&lt;hsrp_ipv4_v2_cfg_TrackedObject_obj_name&gt;</xr-path>
+                    <xr-xml-map>hsrp_ipv4_v2_cfg:TrackedObject</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <object-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-data-handler>ignore</xr-data-handler>
+                      <xr-primitive-type>string</xr-primitive-type>
+                      <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/track-obj/&lt;hsrp_ipv4_v2_cfg_TrackedObject_obj_name&gt;</xr-path>
+                      <xr-xml-map>hsrp_ipv4_v2_cfg:ObjectName</xr-xml-map>
+                      <xr-task>hsrp</xr-task>
+                      <xr-sch-type>String</xr-sch-type>
+                      <xr-sch-arg-name>&lt;hsrp_ipv4_v2_cfg_TrackedObject_obj_name&gt;</xr-sch-arg-name>
+                      <type>
+                        <type-name>xr:Cisco-ios-xr-string</type-name>
+                      </type>
+                    </object-name>
+                    <priority-decrement config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-primitive-type>uint32</xr-primitive-type>
+                      <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/track-obj/&lt;hsrp_ipv4_v2_cfg_TrackedObject_obj_name&gt;</xr-path>
+                      <xr-xml-map>hsrp_ipv4_v2_cfg:PriorityDecrement</xr-xml-map>
+                      <xr-task>hsrp</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <xr-default-set/>
+                      <type range="1..255">
+                        <type-name>uint32</type-name>
+                      </type>
+                      <mandatory>true</mandatory>
+                    </priority-decrement>
+                  </tracked-object>
+                </tracked-objects>
+                <tracked-interfaces config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/track-if/</xr-path>
+                  <xr-xml-map>hsrp_ipv4_v2_cfg:TrackedInterfaceTable</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <tracked-interface config="true" key="interface-name" node="list">
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/track-if/&lt;hsrp_ipv4_v2_cfg_TrackedInterface_intf&gt;</xr-path>
+                    <xr-xml-map>hsrp_ipv4_v2_cfg:TrackedInterface</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <interface-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-data-handler>ignore</xr-data-handler>
+                      <xr-primitive-type>string</xr-primitive-type>
+                      <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/track-if/&lt;hsrp_ipv4_v2_cfg_TrackedInterface_intf&gt;</xr-path>
+                      <xr-xml-map>hsrp_ipv4_v2_cfg:InterfaceName</xr-xml-map>
+                      <xr-task>hsrp</xr-task>
+                      <xr-sch-type>InterfaceForward</xr-sch-type>
+                      <xr-sch-arg-name>&lt;hsrp_ipv4_v2_cfg_TrackedInterface_intf&gt;</xr-sch-arg-name>
+                      <type>
+                        <type-name>xr:Interface-name</type-name>
+                      </type>
+                    </interface-name>
+                    <priority-decrement config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-primitive-type>uint32</xr-primitive-type>
+                      <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/track-if/&lt;hsrp_ipv4_v2_cfg_TrackedInterface_intf&gt;</xr-path>
+                      <xr-xml-map>hsrp_ipv4_v2_cfg:PriorityDecrement</xr-xml-map>
+                      <xr-task>hsrp</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <xr-default-set/>
+                      <type range="1..255">
+                        <type-name>uint32</type-name>
+                      </type>
+                      <mandatory>true</mandatory>
+                    </priority-decrement>
+                  </tracked-interface>
+                </tracked-interfaces>
+                <timers config="true" is-key="false" node="container" presence="false">
+                  <xr-is-packed/>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/timers`</xr-path>
+                  <xr-xml-map>hsrp_ipv4_v2_cfg:Timers</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+                  <hello-msec-flag config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/timers`0</xr-path>
+                    <xr-xml-map>hsrp_ipv4_v2_cfg:HelloMsecFlag</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>Boolean</xr-sch-type>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </hello-msec-flag>
+                  <hello-msec config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/timers`1</xr-path>
+                    <xr-xml-map>hsrp_ipv4_v2_cfg:HelloMsec</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <type range="100..3000">
+                      <type-name>uint32</type-name>
+                    </type>
+                  </hello-msec>
+                  <hello-sec config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/timers`2</xr-path>
+                    <xr-xml-map>hsrp_ipv4_v2_cfg:HelloSec</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <type range="1..255">
+                      <type-name>uint32</type-name>
+                    </type>
+                    <default>3</default>
+                  </hello-sec>
+                  <hold-msec-flag config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/timers`3</xr-path>
+                    <xr-xml-map>hsrp_ipv4_v2_cfg:HoldMsecFlag</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>Boolean</xr-sch-type>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </hold-msec-flag>
+                  <hold-msec config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/timers`4</xr-path>
+                    <xr-xml-map>hsrp_ipv4_v2_cfg:HoldMsec</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <type range="100..3000">
+                      <type-name>uint32</type-name>
+                    </type>
+                  </hold-msec>
+                  <hold-sec config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/timers`5</xr-path>
+                    <xr-xml-map>hsrp_ipv4_v2_cfg:HoldSec</xr-xml-map>
+                    <xr-task>hsrp</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <type range="1..255">
+                      <type-name>uint32</type-name>
+                    </type>
+                    <default>10</default>
+                  </hold-sec>
+                </timers>
+                <preempt config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/preempt</xr-path>
+                  <xr-xml-map>hsrp_ipv4_v2_cfg:Preempt</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-sch-type>Integer</xr-sch-type>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>0</default>
+                </preempt>
+                <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/priority</xr-path>
+                  <xr-xml-map>hsrp_ipv4_v2_cfg:Priority</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <type range="0..255">
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>100</default>
+                </priority>
+                <virtual-mac-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-elem-size>3</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/macaddr`0</xr-path>
+                  <xr-xml-map>hsrp_ipv4_v2_cfg:VirtualMACAddress</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-pack-format>%d%d%d</xr-pack-format>
+                  <xr-sch-type>MACAddress</xr-sch-type>
+                  <type>
+                    <type-name>yang:mac-address</type-name>
+                  </type>
+                </virtual-mac-address>
+                <session-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/name</xr-path>
+                  <xr-xml-map>hsrp_ipv4_v2_cfg:SessionName</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-sch-type>BoundedString</xr-sch-type>
+                  <type length="1..16">
+                    <type-name>xr:Cisco-ios-xr-string</type-name>
+                  </type>
+                </session-name>
+                <group-number config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-pathformat>decimal</xr-pathformat>
+                  <xr-create-item-relative-path>aza</xr-create-item-relative-path>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/ipv4/v2/group/&lt;hsrp_ipv4_v2_cfg_Group_group&gt;/</xr-path>
+                  <xr-xml-map>hsrp_ipv4_v2_cfg:GroupNumber</xr-xml-map>
+                  <xr-task>hsrp</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <xr-sch-arg-name>&lt;hsrp_ipv4_v2_cfg_Group_group&gt;</xr-sch-arg-name>
+                  <type range="0..4095">
+                    <type-name>uint32</type-name>
+                  </type>
+                </group-number>
+              </group>
+            </groups>
+          </version2>
+        </ipv4>
+        <mac-refresh config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/mac-refresh</xr-path>
+          <xr-xml-map>hsrp_cfg:MACRefresh</xr-xml-map>
+          <xr-task>hsrp</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="0..10000">
+            <type-name>uint32</type-name>
+          </type>
+          <default>60</default>
+        </mac-refresh>
+        <use-bia config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/usebia</xr-path>
+          <xr-xml-map>hsrp_cfg:UseBIA</xr-xml-map>
+          <xr-task>hsrp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </use-bia>
+        <redirects-disable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/redirects</xr-path>
+          <xr-xml-map>hsrp_cfg:RedirectsDisable</xr-xml-map>
+          <xr-task>hsrp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </redirects-disable>
+        <interface-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-create-item-relative-path>aza</xr-create-item-relative-path>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/ip-hsrp/if/&lt;hsrp_cfg_Interface_intf-name&gt;/</xr-path>
+          <xr-xml-map>hsrp_cfg:InterfaceName</xr-xml-map>
+          <xr-task>hsrp</xr-task>
+          <xr-sch-type>InterfaceForward</xr-sch-type>
+          <xr-sch-arg-name>&lt;hsrp_cfg_Interface_intf-name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </interface-name>
+      </interface>
+    </interfaces>
+    <logging config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip-hsrp/logging/</xr-path>
+      <xr-xml-map>hsrp_cfg:Logging</xr-xml-map>
+      <xr-task>hsrp</xr-task>
+      <state-change-disable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/ip-hsrp/logging/state-change-disable</xr-path>
+        <xr-xml-map>hsrp_cfg:StateChangeDisable</xr-xml-map>
+        <xr-task>hsrp</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </state-change-disable>
+    </logging>
+  </hsrp>
+</Cisco-IOS-XR-ipv4-hsrp-cfg>

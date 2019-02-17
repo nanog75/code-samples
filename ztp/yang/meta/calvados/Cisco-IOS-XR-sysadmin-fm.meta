@@ -1,0 +1,822 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-sysadmin-fm ns="http://www.cisco.com/ns/yang/Cisco-IOS-XR-sysadmin-fm" revision="2016-04-12">
+  <files>
+    <file revision="2016-04-12" submodule="false">Cisco-IOS-XR-sysadmin-fm.yang</file>
+  </files>
+  <prefix>fm</prefix>
+  <import prefix="tailf">tailf-common</import>
+  <import prefix="yang">ietf-yang-types</import>
+  <import prefix="calvados">Cisco-IOS-XR-sysadmin-types</import>
+  <typedef name="fm_fault_state_t">
+    <type node="enumeration">
+      <enum>SET</enum>
+      <enum>CLEAR</enum>
+      <enum>INFO</enum>
+      <enum>INVALID</enum>
+      <enum>PARTIALLY_QUALIFIED</enum>
+      <enum>SOAKING_BEFORE_SET</enum>
+      <enum>SOAKING_BEFORE_CLEAR</enum>
+      <enum>SUPPRESSED</enum>
+      <enum>UPDATE</enum>
+    </type>
+  </typedef>
+  <typedef name="fm_fault_severity_t">
+    <type node="enumeration">
+      <enum>CRITICAL</enum>
+      <enum>MAJOR</enum>
+      <enum>MINOR</enum>
+      <enum>NR</enum>
+    </type>
+  </typedef>
+  <typedef name="fm_action_t">
+    <type node="enumeration">
+      <enum>ISOLATION</enum>
+      <enum>MITIGATION</enum>
+      <enum>RECOVERY</enum>
+      <enum>CORRELATION</enum>
+      <enum>ALARM</enum>
+      <enum>REPORT</enum>
+    </type>
+  </typedef>
+  <typedef name="fm_action_result_t">
+    <type node="enumeration">
+      <enum>SUCCESS</enum>
+      <enum>FAILURE</enum>
+      <enum>NO-OP</enum>
+    </type>
+  </typedef>
+  <typedef name="fm_rule_eval_result_t">
+    <type node="enumeration">
+      <enum>SUCCESS</enum>
+      <enum>FAILURE</enum>
+    </type>
+  </typedef>
+  <typedef name="fm_ha_role_t">
+    <type>
+      <type-name>calvados:generic-ha-role</type-name>
+    </type>
+  </typedef>
+  <typedef name="fm_location_t">
+    <type>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="fm_object_id_t">
+    <type>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="fm_agent_id_t">
+    <type>
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="fm_correlation_obj_qualifier_t">
+    <type node="enumeration">
+      <enum>QUALIFIER_IGNORED</enum>
+      <enum>QUALIFIER_RACK</enum>
+      <enum>QUALIFIER_SLOT</enum>
+      <enum>QUALIFIER_OBJECT</enum>
+    </type>
+  </typedef>
+  <typedef name="fm_history_state_t">
+    <type node="enumeration">
+      <enum>FM_HISTORY_STATE_ACTIVE</enum>
+      <enum>FM_HISTORY_STATE_CLEARED</enum>
+      <enum>FM_HISTORY_STATE_INVALID</enum>
+    </type>
+  </typedef>
+  <typedef name="fm_timestamp_t">
+    <type>
+      <type-name>yang:date-and-time</type-name>
+    </type>
+  </typedef>
+  <typedef name="fm_service_scope_t">
+    <type node="enumeration">
+      <enum>FM_SERVICE_NODE_SCOPE</enum>
+      <enum>FM_SERVICE_RACK_SCOPE</enum>
+      <enum>FM_SERVICE_SYSTEM_SCOPE</enum>
+    </type>
+  </typedef>
+  <fm config="true" is-key="false" node="container" presence="false">
+    <agents config="true" key="location process subsystem agent" node="list">
+      <xr-path/>
+      <location config="true" is-key="true" node="leaf">
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </location>
+      <process config="true" is-key="true" node="leaf">
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </process>
+      <subsystem config="true" is-key="true" node="leaf">
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </subsystem>
+      <agent config="true" is-key="true" node="leaf">
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </agent>
+      <fm_initials config="true" is-key="false" node="container" presence="false">
+        <levm config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </levm>
+        <comp_id config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </comp_id>
+        <process config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </process>
+        <default_rule_cb config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </default_rule_cb>
+        <default_action_cb config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </default_action_cb>
+        <default_notif_cb config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </default_notif_cb>
+        <default_error_cb config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </default_error_cb>
+        <replica_cb config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </replica_cb>
+      </fm_initials>
+      <fm_table config="true" is-key="false" node="container" presence="false">
+        <brief config="true" key="fm_subsystem_id fm_fault_type fm_fault_tag" node="list">
+          <xr-path/>
+          <fm_subsystem_id config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </fm_subsystem_id>
+          <fm_fault_type config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </fm_fault_type>
+          <fm_fault_tag config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </fm_fault_tag>
+          <name config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </name>
+        </brief>
+        <entry config="true" key="fm_subsystem_id fm_fault_type fm_fault_tag" node="list">
+          <xr-path/>
+          <detail config="true" is-key="false" node="container" presence="false">
+            <fm_subsystem_id config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </fm_subsystem_id>
+            <fm_fault_type config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </fm_fault_type>
+            <fm_fault_tag config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </fm_fault_tag>
+            <name config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </name>
+            <description config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </description>
+            <detection_logic config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </detection_logic>
+            <corr_obj_qualifier config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>fm_correlation_obj_qualifier_t</type-name>
+              </type>
+            </corr_obj_qualifier>
+          </detail>
+          <causal_list config="true" key="fm_subsystem_id fm_fault_type fm_fault_tag" node="list">
+            <xr-path/>
+            <fm_subsystem_id config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </fm_subsystem_id>
+            <fm_fault_type config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </fm_fault_type>
+            <fm_fault_tag config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </fm_fault_tag>
+          </causal_list>
+          <dependency_list config="true" key="fm_subsystem_id fm_fault_type fm_fault_tag" node="list">
+            <xr-path/>
+            <fm_subsystem_id config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </fm_subsystem_id>
+            <fm_fault_type config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </fm_fault_type>
+            <fm_fault_tag config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </fm_fault_tag>
+          </dependency_list>
+          <propagation_list config="true" key="fm_subsystem_id fm_fault_type fm_fault_tag" node="list">
+            <xr-path/>
+            <fm_subsystem_id config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </fm_subsystem_id>
+            <fm_fault_type config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </fm_fault_type>
+            <fm_fault_tag config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </fm_fault_tag>
+            <remote_agent_id config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>fm_agent_id_t</type-name>
+              </type>
+            </remote_agent_id>
+          </propagation_list>
+          <notification_list config="true" key="fm_subsystem_id fm_fault_type fm_fault_tag" node="list">
+            <xr-path/>
+            <fm_subsystem_id config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </fm_subsystem_id>
+            <fm_fault_type config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </fm_fault_type>
+            <fm_fault_tag config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </fm_fault_tag>
+            <remote_agent_id config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>fm_agent_id_t</type-name>
+              </type>
+            </remote_agent_id>
+          </notification_list>
+          <escalation_list config="true" key="fm_subsystem_id fm_fault_type fm_fault_tag" node="list">
+            <xr-path/>
+            <fm_subsystem_id config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </fm_subsystem_id>
+            <fm_fault_type config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </fm_fault_type>
+            <fm_fault_tag config="true" is-key="true" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </fm_fault_tag>
+            <remote_agent_id config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>fm_agent_id_t</type-name>
+              </type>
+            </remote_agent_id>
+          </escalation_list>
+          <faults config="true" is-key="false" node="container" presence="false">
+            <active config="true" is-key="false" node="container" presence="false">
+              <brief config="true" key="object_id" node="list">
+                <xr-path/>
+                <fault_timestamp config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>fm_timestamp_t</type-name>
+                  </type>
+                </fault_timestamp>
+                <object_id config="true" is-key="true" node="leaf">
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </object_id>
+              </brief>
+              <detail config="true" key="object_id" node="list">
+                <xr-path/>
+                <fm_subsystem_id config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </fm_subsystem_id>
+                <fm_fault_type config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </fm_fault_type>
+                <fm_fault_tag config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </fm_fault_tag>
+                <object_id config="true" is-key="true" node="leaf">
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </object_id>
+                <fault_severity config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>uint16</type-name>
+                  </type>
+                </fault_severity>
+                <fault_state config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>fm_fault_state_t</type-name>
+                  </type>
+                </fault_state>
+                <fault_agent_id config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>fm_agent_id_t</type-name>
+                  </type>
+                </fault_agent_id>
+                <fault_timestamp config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>fm_timestamp_t</type-name>
+                  </type>
+                </fault_timestamp>
+                <fault_timer_state config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </fault_timer_state>
+                <fault_processed config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </fault_processed>
+                <mitigation_result config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>fm_action_result_t</type-name>
+                  </type>
+                </mitigation_result>
+                <recovery_result config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>fm_action_result_t</type-name>
+                  </type>
+                </recovery_result>
+                <correlation_result config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>fm_action_result_t</type-name>
+                  </type>
+                </correlation_result>
+                <alarm_result config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>fm_action_result_t</type-name>
+                  </type>
+                </alarm_result>
+                <default_result config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>fm_action_result_t</type-name>
+                  </type>
+                </default_result>
+                <opaque_data_len config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>uint16</type-name>
+                  </type>
+                </opaque_data_len>
+                <occurrence_count config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>uint64</type-name>
+                  </type>
+                </occurrence_count>
+                <history_state config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>fm_history_state_t</type-name>
+                  </type>
+                </history_state>
+              </detail>
+            </active>
+            <history config="true" is-key="false" node="container" presence="false">
+              <brief config="true" key="object_id" node="list">
+                <xr-path/>
+                <fault_timestamp config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>fm_timestamp_t</type-name>
+                  </type>
+                </fault_timestamp>
+                <object_id config="true" is-key="true" node="leaf">
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </object_id>
+              </brief>
+              <detail config="true" key="object_id" node="list">
+                <xr-path/>
+                <fm_subsystem_id config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </fm_subsystem_id>
+                <fm_fault_type config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </fm_fault_type>
+                <fm_fault_tag config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </fm_fault_tag>
+                <object_id config="true" is-key="true" node="leaf">
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </object_id>
+                <fault_severity config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>uint16</type-name>
+                  </type>
+                </fault_severity>
+                <fault_state config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>fm_fault_state_t</type-name>
+                  </type>
+                </fault_state>
+                <fault_agent_id config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>fm_agent_id_t</type-name>
+                  </type>
+                </fault_agent_id>
+                <fault_timestamp config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>fm_timestamp_t</type-name>
+                  </type>
+                </fault_timestamp>
+                <fault_timer_state config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </fault_timer_state>
+                <fault_processed config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </fault_processed>
+                <mitigation_result config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>fm_action_result_t</type-name>
+                  </type>
+                </mitigation_result>
+                <recovery_result config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>fm_action_result_t</type-name>
+                  </type>
+                </recovery_result>
+                <correlation_result config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>fm_action_result_t</type-name>
+                  </type>
+                </correlation_result>
+                <alarm_result config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>fm_action_result_t</type-name>
+                  </type>
+                </alarm_result>
+                <default_result config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>fm_action_result_t</type-name>
+                  </type>
+                </default_result>
+                <opaque_data_len config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>uint16</type-name>
+                  </type>
+                </opaque_data_len>
+                <occurrence_count config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>uint64</type-name>
+                  </type>
+                </occurrence_count>
+                <history_state config="true" is-key="false" node="leaf">
+                  <type>
+                    <type-name>fm_history_state_t</type-name>
+                  </type>
+                </history_state>
+              </detail>
+            </history>
+          </faults>
+          <waiting_list config="true" is-key="false" node="container" presence="false">
+            <brief config="true" key="fm_subsystem_id fm_fault_type fm_fault_tag" node="list">
+              <xr-path/>
+              <fm_subsystem_id config="true" is-key="true" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </fm_subsystem_id>
+              <fm_fault_type config="true" is-key="true" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </fm_fault_type>
+              <fm_fault_tag config="true" is-key="true" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </fm_fault_tag>
+              <object_id config="true" is-key="false" node="leaf">
+                <type>
+                  <type-name>fm_object_id_t</type-name>
+                </type>
+              </object_id>
+              <fault_timestamp config="true" is-key="false" node="leaf">
+                <type>
+                  <type-name>fm_timestamp_t</type-name>
+                </type>
+              </fault_timestamp>
+              <fault_state config="true" is-key="false" node="leaf">
+                <type>
+                  <type-name>fm_fault_state_t</type-name>
+                </type>
+              </fault_state>
+              <fault_count config="true" is-key="false" node="leaf">
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </fault_count>
+              <fault_flag config="true" is-key="false" node="leaf">
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </fault_flag>
+            </brief>
+            <entry config="true" key="fm_subsystem_id fm_fault_type fm_fault_tag" node="list">
+              <xr-path/>
+              <fm_subsystem_id config="true" is-key="true" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </fm_subsystem_id>
+              <fm_fault_type config="true" is-key="true" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </fm_fault_type>
+              <fm_fault_tag config="true" is-key="true" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </fm_fault_tag>
+              <object_id config="true" is-key="false" node="leaf">
+                <type>
+                  <type-name>fm_object_id_t</type-name>
+                </type>
+              </object_id>
+              <fault_timestamp config="true" is-key="false" node="leaf">
+                <type>
+                  <type-name>fm_timestamp_t</type-name>
+                </type>
+              </fault_timestamp>
+              <fault_state config="true" is-key="false" node="leaf">
+                <type>
+                  <type-name>fm_fault_state_t</type-name>
+                </type>
+              </fault_state>
+              <fault_count config="true" is-key="false" node="leaf">
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </fault_count>
+              <fault_flag config="true" is-key="false" node="leaf">
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </fault_flag>
+            </entry>
+          </waiting_list>
+          <fm_subsystem_id config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </fm_subsystem_id>
+          <fm_fault_type config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </fm_fault_type>
+          <fm_fault_tag config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </fm_fault_tag>
+        </entry>
+      </fm_table>
+      <fm_internals config="true" is-key="false" node="container" presence="false">
+        <detail config="true" key="fm_subsystem_id fm_fault_type fm_fault_tag" node="list">
+          <xr-path/>
+          <fm_subsystem_id config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </fm_subsystem_id>
+          <fm_fault_type config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </fm_fault_type>
+          <fm_fault_tag config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </fm_fault_tag>
+          <rules config="true" node="list">
+            <xr-path/>
+            <fault_location config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>fm_location_t</type-name>
+              </type>
+            </fault_location>
+            <rule_cb config="true" is-key="false" node="leaf">
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </rule_cb>
+          </rules>
+          <common_action config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </common_action>
+          <opaque_action config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </opaque_action>
+          <mitigation_cb config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </mitigation_cb>
+          <recovery_cb config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </recovery_cb>
+          <alarm_severity_dirty config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </alarm_severity_dirty>
+          <disable_action config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </disable_action>
+          <repeat_action config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </repeat_action>
+          <has_causal_list config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </has_causal_list>
+          <parser_tag config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </parser_tag>
+          <parser_tag_string config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </parser_tag_string>
+        </detail>
+      </fm_internals>
+      <fm_alarm_mapping config="true" is-key="false" node="container" presence="false">
+        <detail config="true" key="fm_subsystem_id fm_fault_type fm_fault_tag" node="list">
+          <xr-path/>
+          <fm_subsystem_id config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </fm_subsystem_id>
+          <fm_fault_type config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </fm_fault_type>
+          <fm_fault_tag config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </fm_fault_tag>
+          <alarm_group config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </alarm_group>
+          <alarm_severity config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </alarm_severity>
+        </detail>
+      </fm_alarm_mapping>
+      <fm_statistics config="true" is-key="false" node="container" presence="false">
+        <detail config="true" key="fm_subsystem_id fm_fault_type fm_fault_tag" node="list">
+          <xr-path/>
+          <fm_subsystem_id config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </fm_subsystem_id>
+          <fm_fault_type config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </fm_fault_type>
+          <fm_fault_tag config="true" is-key="true" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </fm_fault_tag>
+          <threshold_count config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </threshold_count>
+          <all_object_occur_count config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </all_object_occur_count>
+          <declared_count config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </declared_count>
+          <cleared_count config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </cleared_count>
+          <info_count config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </info_count>
+          <hold_time config="true" is-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </hold_time>
+        </detail>
+      </fm_statistics>
+    </agents>
+  </fm>
+</Cisco-IOS-XR-sysadmin-fm>

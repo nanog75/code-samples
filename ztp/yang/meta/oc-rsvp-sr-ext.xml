@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<openconfig-rsvp-sr-ext ns="http://openconfig.net/yang/rsvp-sr-ext" oc-ver="0.1.0" revision="2017-03-06">
+  <files>
+    <file revision="2017-03-06" submodule="false">openconfig-rsvp-sr-ext.yang</file>
+  </files>
+  <prefix>oc-sr-rsvp-ext</prefix>
+  <organization>OpenConfig working group</organization>
+  <import prefix="oc-ext">openconfig-extensions</import>
+  <import prefix="oc-types">openconfig-types</import>
+  <import prefix="oc-ni">openconfig-network-instance</import>
+  <augment path="/oc-ni:network-instances/oc-ni:network-instance/oc-ni:mpls/oc-ni:te-global-attributes">
+    <bandwidth-measurement config="true" is-key="false" node="container" presence="false">
+      <config config="true" is-key="false" node="container" presence="false">
+        <measure-sr-traffic config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </measure-sr-traffic>
+        <collection-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </collection-interval>
+        <adjustment-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </adjustment-interval>
+        <bandwidth-multiplier config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>decimal64</type-name>
+          </type>
+          <default>1.0000</default>
+        </bandwidth-multiplier>
+      </config>
+      <state config="true" is-key="false" node="container" presence="false">
+        <measure-sr-traffic config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </measure-sr-traffic>
+        <collection-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </collection-interval>
+        <adjustment-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </adjustment-interval>
+        <bandwidth-multiplier config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>decimal64</type-name>
+          </type>
+          <default>1.0000</default>
+        </bandwidth-multiplier>
+        <effective-adjustment-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </effective-adjustment-interval>
+      </state>
+      <update-trigger config="true" is-key="false" node="container" presence="false">
+        <config config="true" is-key="false" node="container" presence="false">
+          <update-trigger config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type node="enumeration">
+              <enum>ADJUSTED_MAX_RESERVABLE_PCT</enum>
+              <enum>SR_TRAFFIC_PCT</enum>
+            </type>
+          </update-trigger>
+          <adjusted-max-reservable-bw-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+            <when>../update-trigger = 'ADJUSTED_MAX_RESERVABLE_PCT'</when>
+            <type>
+              <type-name>oc-types:percentage</type-name>
+            </type>
+          </adjusted-max-reservable-bw-pct>
+          <sr-traffic-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+            <when>../update-trigger = 'SR_TRAFFIC_PCT'</when>
+            <type>
+              <type-name>oc-types:percentage</type-name>
+            </type>
+          </sr-traffic-pct>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <update-trigger config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type node="enumeration">
+              <enum>ADJUSTED_MAX_RESERVABLE_PCT</enum>
+              <enum>SR_TRAFFIC_PCT</enum>
+            </type>
+          </update-trigger>
+          <adjusted-max-reservable-bw-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+            <when>../update-trigger = 'ADJUSTED_MAX_RESERVABLE_PCT'</when>
+            <type>
+              <type-name>oc-types:percentage</type-name>
+            </type>
+          </adjusted-max-reservable-bw-pct>
+          <sr-traffic-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+            <when>../update-trigger = 'SR_TRAFFIC_PCT'</when>
+            <type>
+              <type-name>oc-types:percentage</type-name>
+            </type>
+          </sr-traffic-pct>
+        </state>
+      </update-trigger>
+    </bandwidth-measurement>
+  </augment>
+  <augment path="/oc-ni:network-instances/oc-ni:network-instance/oc-ni:mpls/oc-ni:signaling-protocols/oc-ni:rsvp-te/oc-ni:interface-attributes/oc-ni:interface/oc-ni:subscription/oc-ni:state">
+    <adjusted-absolute-subscription-bw config="true" is-key="false" is-yang-key="false" node="leaf">
+      <type>
+        <type-name>uint64</type-name>
+      </type>
+    </adjusted-absolute-subscription-bw>
+  </augment>
+  <augment path="/oc-ni:network-instances/oc-ni:network-instance/oc-ni:mpls/oc-ni:te-interface-attributes/oc-ni:interface">
+    <bandwidth-measurement config="true" is-key="false" node="container" presence="false">
+      <state config="true" is-key="false" node="container" presence="false">
+        <last-sample-time config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>oc-types:timeticks64</type-name>
+          </type>
+        </last-sample-time>
+        <last-sample-measured-rsvp-util config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </last-sample-measured-rsvp-util>
+        <last-sample-measured-sr-util config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </last-sample-measured-sr-util>
+        <last-calculated-time config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>oc-types:timeticks64</type-name>
+          </type>
+        </last-calculated-time>
+        <last-calculated-sr-utilisation config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint64</type-name>
+          </type>
+        </last-calculated-sr-utilisation>
+        <last-flooded-time config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>oc-types:timeticks64</type-name>
+          </type>
+        </last-flooded-time>
+      </state>
+    </bandwidth-measurement>
+  </augment>
+</openconfig-rsvp-sr-ext>

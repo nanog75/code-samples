@@ -1,0 +1,187 @@
+<?xml version="1.0"?>
+<SNMP-VIEW-BASED-ACM-MIB ns="http://tail-f.com/ns/mibs/SNMP-VIEW-BASED-ACM-MIB/200210160000Z" revision="2002-10-16">
+  <files>
+    <file revision="2002-10-16" submodule="false">SNMP-VIEW-BASED-ACM-MIB.yang</file>
+  </files>
+  <prefix>SNMP_VIEW_BASED_ACM_MIB</prefix>
+  <import prefix="yang">ietf-yang-types</import>
+  <import prefix="tailf">tailf-common</import>
+  <import prefix="SNMPv2_TC">SNMPv2-TC</import>
+  <import prefix="SNMP_FRAMEWORK_MIB">SNMP-FRAMEWORK-MIB</import>
+  <typedef name="vacmContextNameType">
+    <type length="min .. 32">
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="vacmSecurityModelType">
+    <type range="1 .. 2147483647">
+      <type-name>int32</type-name>
+    </type>
+  </typedef>
+  <typedef name="vacmSecurityNameType">
+    <type length="1 .. 32">
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="vacmGroupNameType">
+    <type length="1 .. 32">
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="vacmAccessContextPrefixType">
+    <type length="min .. 32">
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="vacmAccessContextMatchType">
+    <type node="enumeration">
+      <enum value="1">exact</enum>
+      <enum value="2">prefix</enum>
+    </type>
+  </typedef>
+  <typedef name="vacmAccessReadViewNameType">
+    <type length="min .. 32">
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="vacmAccessWriteViewNameType">
+    <type length="min .. 32">
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="vacmAccessNotifyViewNameType">
+    <type length="min .. 32">
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="vacmViewTreeFamilyViewNameType">
+    <type length="1 .. 32">
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="vacmViewTreeFamilyMaskType">
+    <type>
+      <pattern>(((([0-9A-Fa-f]{2}):){0,15}([0-9A-Fa-f]{2}))){0,1}</pattern>
+      <type-name>tailf:hex-list</type-name>
+    </type>
+  </typedef>
+  <typedef name="vacmViewTreeFamilyTypeType">
+    <type node="enumeration">
+      <enum value="1">included</enum>
+      <enum value="2">excluded</enum>
+    </type>
+  </typedef>
+  <SNMP-VIEW-BASED-ACM-MIB config="true" is-key="false" node="container" presence="false">
+    <vacmSecurityToGroupTable config="true" is-key="false" node="container" presence="false">
+      <vacmSecurityToGroupEntry config="true" key="vacmSecurityModel vacmSecurityName" node="list">
+        <xr-path/>
+        <vacmSecurityModel config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>vacmSecurityModelType</type-name>
+          </type>
+        </vacmSecurityModel>
+        <vacmSecurityName config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>vacmSecurityNameType</type-name>
+          </type>
+        </vacmSecurityName>
+        <vacmGroupName config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>vacmGroupNameType</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </vacmGroupName>
+        <vacmSecurityToGroupStorageType config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SNMPv2_TC:StorageType</type-name>
+          </type>
+          <default>nonVolatile</default>
+        </vacmSecurityToGroupStorageType>
+      </vacmSecurityToGroupEntry>
+    </vacmSecurityToGroupTable>
+    <vacmAccessTable config="true" is-key="false" node="container" presence="false">
+      <vacmAccessEntry config="true" key="vacmGroupName vacmAccessContextPrefix vacmAccessSecurityModel vacmAccessSecurityLevel" node="list">
+        <xr-path/>
+        <vacmGroupName config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>vacmGroupNameType</type-name>
+          </type>
+        </vacmGroupName>
+        <vacmAccessContextPrefix config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>vacmAccessContextPrefixType</type-name>
+          </type>
+        </vacmAccessContextPrefix>
+        <vacmAccessSecurityModel config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>SNMP_FRAMEWORK_MIB:SnmpSecurityModel</type-name>
+          </type>
+        </vacmAccessSecurityModel>
+        <vacmAccessSecurityLevel config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>SNMP_FRAMEWORK_MIB:SnmpSecurityLevel</type-name>
+          </type>
+        </vacmAccessSecurityLevel>
+        <vacmAccessContextMatch config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>vacmAccessContextMatchType</type-name>
+          </type>
+          <default>exact</default>
+        </vacmAccessContextMatch>
+        <vacmAccessReadViewName config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>vacmAccessReadViewNameType</type-name>
+          </type>
+        </vacmAccessReadViewName>
+        <vacmAccessWriteViewName config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>vacmAccessWriteViewNameType</type-name>
+          </type>
+        </vacmAccessWriteViewName>
+        <vacmAccessNotifyViewName config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>vacmAccessNotifyViewNameType</type-name>
+          </type>
+        </vacmAccessNotifyViewName>
+        <vacmAccessStorageType config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SNMPv2_TC:StorageType</type-name>
+          </type>
+          <default>nonVolatile</default>
+        </vacmAccessStorageType>
+      </vacmAccessEntry>
+    </vacmAccessTable>
+    <vacmViewTreeFamilyTable config="true" is-key="false" node="container" presence="false">
+      <vacmViewTreeFamilyEntry config="true" key="vacmViewTreeFamilyViewName vacmViewTreeFamilySubtree" node="list">
+        <xr-path/>
+        <vacmViewTreeFamilyViewName config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>vacmViewTreeFamilyViewNameType</type-name>
+          </type>
+        </vacmViewTreeFamilyViewName>
+        <vacmViewTreeFamilySubtree config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>yang:object-identifier</type-name>
+          </type>
+        </vacmViewTreeFamilySubtree>
+        <vacmViewTreeFamilyMask config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>vacmViewTreeFamilyMaskType</type-name>
+          </type>
+        </vacmViewTreeFamilyMask>
+        <vacmViewTreeFamilyType config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>vacmViewTreeFamilyTypeType</type-name>
+          </type>
+          <default>included</default>
+        </vacmViewTreeFamilyType>
+        <vacmViewTreeFamilyStorageType config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SNMPv2_TC:StorageType</type-name>
+          </type>
+          <default>nonVolatile</default>
+        </vacmViewTreeFamilyStorageType>
+      </vacmViewTreeFamilyEntry>
+    </vacmViewTreeFamilyTable>
+  </SNMP-VIEW-BASED-ACM-MIB>
+</SNMP-VIEW-BASED-ACM-MIB>

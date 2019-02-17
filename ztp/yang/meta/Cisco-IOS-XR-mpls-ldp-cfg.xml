@@ -1,0 +1,2729 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-mpls-ldp-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-mpls-ldp-cfg" revision="2017-09-30">
+  <files>
+    <file revision="2017-09-30" submodule="false">Cisco-IOS-XR-mpls-ldp-cfg.yang</file>
+  </files>
+  <prefix>mpls-ldp-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-snmp-agent-cfg</import>
+  <typedef name="Mpls-ldp-nbr-password">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">disable</enum>
+      <enum value="2">specified</enum>
+    </type>
+  </typedef>
+  <typedef name="Mpls-ldp-label-allocation">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">acl</enum>
+      <enum value="2">host</enum>
+    </type>
+  </typedef>
+  <typedef name="Mpls-ldp-downstream-on-demand">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">peer-acl</enum>
+    </type>
+  </typedef>
+  <typedef name="Mldp-policy-mode">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">inbound</enum>
+      <enum value="2">outbound</enum>
+    </type>
+  </typedef>
+  <typedef name="Mpls-ldp-targeted-accept">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">all</enum>
+      <enum value="2">from</enum>
+    </type>
+  </typedef>
+  <typedef name="Mpls-ldp-interval-time">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="1..65535">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Mpls-ldp-mesh-group-id">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="0..4294967295">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Mpls-ldp-exp-null">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">all</enum>
+      <enum value="2">for</enum>
+      <enum value="3">to</enum>
+      <enum value="4">for-to</enum>
+    </type>
+  </typedef>
+  <typedef name="Mpls-ldp-hold-time">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="1..65535">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Mpls-ldp-dscp">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="0..63">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Mpls-ldpaf-name">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="4">ipv4</enum>
+      <enum value="6">ipv6</enum>
+    </type>
+  </typedef>
+  <typedef name="Mpls-ldp-transport-address">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">interface</enum>
+      <enum value="2">address</enum>
+    </type>
+  </typedef>
+  <typedef name="Mpls-ldp-session-protection">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">all</enum>
+      <enum value="2">for</enum>
+      <enum value="3">all-with-duration</enum>
+      <enum value="4">for-with-duration</enum>
+      <enum value="5">all-with-forever</enum>
+      <enum value="6">for-with-forever</enum>
+    </type>
+  </typedef>
+  <typedef name="Mpls-ldp-label-advertise">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">for</enum>
+      <enum value="2">for-to</enum>
+    </type>
+  </typedef>
+  <typedef name="Mpls-ldp-advertise-bgp-acl">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">peer-acl</enum>
+    </type>
+  </typedef>
+  <augment path="/a1:snmp/a1:notification">
+    <mpls-ldp config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/enable/traps/ldpmib/</xr-path>
+      <xr-xml-map>mpls_ldpmib_cfg:MPLS_LDP</xr-xml-map>
+      <xr-task>mpls-ldp</xr-task>
+      <session-up config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/enable/traps/ldpmib/up</xr-path>
+        <xr-xml-map>mpls_ldpmib_cfg:SessionUp</xr-xml-map>
+        <xr-task>mpls-ldp</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </session-up>
+      <init-session-threshold-exceeded config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/enable/traps/ldpmib/threshold</xr-path>
+        <xr-xml-map>mpls_ldpmib_cfg:InitSessionThresholdExceeded</xr-xml-map>
+        <xr-task>mpls-ldp</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </init-session-threshold-exceeded>
+      <session-down config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/enable/traps/ldpmib/down</xr-path>
+        <xr-xml-map>mpls_ldpmib_cfg:SessionDown</xr-xml-map>
+        <xr-task>mpls-ldp</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </session-down>
+    </mpls-ldp>
+  </augment>
+  <mpls-ldp config="true" is-key="false" node="container" presence="true">
+    <xr-data-handler>ignore</xr-data-handler>
+    <xr-path>/cfg/gl/mpls_ldp/</xr-path>
+    <xr-xml-map>mpls_ldp_common_cfg:MPLS_LDP</xr-xml-map>
+    <xr-task>mpls-ldp</xr-task>
+    <xr-scope>exported</xr-scope>
+    <default-vrf config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/</xr-path>
+      <xr-xml-map>mpls_ldp_common_cfg:DefaultVRF</xr-xml-map>
+      <xr-task>mpls-ldp</xr-task>
+      <xr-scope>exported</xr-scope>
+      <afs config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/</xr-path>
+        <xr-xml-map>mpls_ldp_gl_af_cfg:AFTable</xr-xml-map>
+        <xr-task>mpls-ldp</xr-task>
+        <af config="true" key="af-name" node="list">
+          <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/</xr-path>
+          <xr-xml-map>mpls_ldp_gl_af_cfg:AF</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-scope>exported</xr-scope>
+          <label config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/</xr-path>
+            <xr-xml-map>mpls_ldp_gl_af_cfg:Label</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <remote config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/remote/</xr-path>
+              <xr-xml-map>mpls_ldp_gl_af_cfg:Remote</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <accept config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/remote/dd/acpt/</xr-path>
+                <xr-xml-map>mpls_ldp_gl_af_cfg:Accept</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <peer-accept-policies config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/remote/dd/acpt/nbr/</xr-path>
+                  <xr-xml-map>mpls_ldp_gl_af_cfg:PeerAcceptPolicyTable</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <peer-accept-policy config="true" key="lsr-id label-space-id" node="list">
+                    <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/remote/dd/acpt/nbr/&lt;mpls_ldp_gl_af_cfg_PeerAcceptPolicy_lsrid&gt;,&lt;mpls_ldp_gl_af_cfg_PeerAcceptPolicy_spcid&gt;</xr-path>
+                    <xr-xml-map>mpls_ldp_gl_af_cfg:PeerAcceptPolicy</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <lsr-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-data-handler>ignore</xr-data-handler>
+                      <xr-pathformat>hex_padded_nozerox</xr-pathformat>
+                      <xr-primitive-type>inaddr</xr-primitive-type>
+                      <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/remote/dd/acpt/nbr/&lt;mpls_ldp_gl_af_cfg_PeerAcceptPolicy_lsrid&gt;,&lt;mpls_ldp_gl_af_cfg_PeerAcceptPolicy_spcid&gt;</xr-path>
+                      <xr-xml-map>mpls_ldp_gl_af_cfg:LSR_ID</xr-xml-map>
+                      <xr-task>mpls-ldp</xr-task>
+                      <xr-sch-type>IPV4Address</xr-sch-type>
+                      <xr-sch-arg-name>&lt;mpls_ldp_gl_af_cfg_PeerAcceptPolicy_lsrid&gt;</xr-sch-arg-name>
+                      <type>
+                        <type-name>inet:ipv4-address-no-zone</type-name>
+                      </type>
+                    </lsr-id>
+                    <label-space-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-data-handler>ignore</xr-data-handler>
+                      <xr-pathformat>hex_nozerox</xr-pathformat>
+                      <xr-primitive-type>uint32</xr-primitive-type>
+                      <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/remote/dd/acpt/nbr/&lt;mpls_ldp_gl_af_cfg_PeerAcceptPolicy_lsrid&gt;,&lt;mpls_ldp_gl_af_cfg_PeerAcceptPolicy_spcid&gt;</xr-path>
+                      <xr-xml-map>mpls_ldp_gl_af_cfg:LabelSpaceID</xr-xml-map>
+                      <xr-task>mpls-ldp</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <xr-sch-arg-name>&lt;mpls_ldp_gl_af_cfg_PeerAcceptPolicy_spcid&gt;</xr-sch-arg-name>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </label-space-id>
+                    <prefix-acl-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-primitive-type>string</xr-primitive-type>
+                      <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/remote/dd/acpt/nbr/&lt;mpls_ldp_gl_af_cfg_PeerAcceptPolicy_lsrid&gt;,&lt;mpls_ldp_gl_af_cfg_PeerAcceptPolicy_spcid&gt;</xr-path>
+                      <xr-xml-map>mpls_ldp_gl_af_cfg:PrefixACLName</xr-xml-map>
+                      <xr-task>mpls-ldp</xr-task>
+                      <xr-sch-type>String</xr-sch-type>
+                      <type>
+                        <type-name>string</type-name>
+                      </type>
+                      <mandatory>true</mandatory>
+                    </prefix-acl-name>
+                  </peer-accept-policy>
+                </peer-accept-policies>
+              </accept>
+            </remote>
+            <local config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/</xr-path>
+              <xr-xml-map>mpls_ldp_gl_af_cfg:Local</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <advertise config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/</xr-path>
+                <xr-xml-map>mpls_ldp_gl_af_cfg:Advertise</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <peer-advertise-policies config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/cc/nbr/</xr-path>
+                  <xr-xml-map>mpls_ldp_gl_af_cfg:PeerAdvertisePolicyTable</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <peer-advertise-policy config="true" key="lsr-id label-space-id" node="list">
+                    <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/cc/nbr/&lt;mpls_ldp_gl_af_cfg_PeerAdvertisePolicy_lsrid&gt;,&lt;mpls_ldp_gl_af_cfg_PeerAdvertisePolicy_spcid&gt;</xr-path>
+                    <xr-xml-map>mpls_ldp_gl_af_cfg:PeerAdvertisePolicy</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <lsr-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-data-handler>ignore</xr-data-handler>
+                      <xr-pathformat>hex_padded_nozerox</xr-pathformat>
+                      <xr-primitive-type>inaddr</xr-primitive-type>
+                      <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/cc/nbr/&lt;mpls_ldp_gl_af_cfg_PeerAdvertisePolicy_lsrid&gt;,&lt;mpls_ldp_gl_af_cfg_PeerAdvertisePolicy_spcid&gt;</xr-path>
+                      <xr-xml-map>mpls_ldp_gl_af_cfg:LSR_ID</xr-xml-map>
+                      <xr-task>mpls-ldp</xr-task>
+                      <xr-sch-type>IPV4Address</xr-sch-type>
+                      <xr-sch-arg-name>&lt;mpls_ldp_gl_af_cfg_PeerAdvertisePolicy_lsrid&gt;</xr-sch-arg-name>
+                      <type>
+                        <type-name>inet:ipv4-address-no-zone</type-name>
+                      </type>
+                    </lsr-id>
+                    <label-space-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-data-handler>ignore</xr-data-handler>
+                      <xr-pathformat>hex_nozerox</xr-pathformat>
+                      <xr-primitive-type>uint32</xr-primitive-type>
+                      <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/cc/nbr/&lt;mpls_ldp_gl_af_cfg_PeerAdvertisePolicy_lsrid&gt;,&lt;mpls_ldp_gl_af_cfg_PeerAdvertisePolicy_spcid&gt;</xr-path>
+                      <xr-xml-map>mpls_ldp_gl_af_cfg:LabelSpaceID</xr-xml-map>
+                      <xr-task>mpls-ldp</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <xr-sch-arg-name>&lt;mpls_ldp_gl_af_cfg_PeerAdvertisePolicy_spcid&gt;</xr-sch-arg-name>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </label-space-id>
+                    <prefix-acl-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-primitive-type>string</xr-primitive-type>
+                      <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/cc/nbr/&lt;mpls_ldp_gl_af_cfg_PeerAdvertisePolicy_lsrid&gt;,&lt;mpls_ldp_gl_af_cfg_PeerAdvertisePolicy_spcid&gt;</xr-path>
+                      <xr-xml-map>mpls_ldp_gl_af_cfg:PrefixACLName</xr-xml-map>
+                      <xr-task>mpls-ldp</xr-task>
+                      <xr-sch-type>String</xr-sch-type>
+                      <type>
+                        <type-name>string</type-name>
+                      </type>
+                      <mandatory>true</mandatory>
+                    </prefix-acl-name>
+                  </peer-advertise-policy>
+                </peer-advertise-policies>
+                <prefix-advertise-policies config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/bb/pfx/</xr-path>
+                  <xr-xml-map>mpls_ldp_gl_af_cfg:PrefixAdvertisePolicyTable</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <prefix-advertise-policy config="true" key="prefix-acl-name" node="list">
+                    <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/bb/pfx/&lt;mpls_ldp_gl_af_cfg_PrefixAdvertisePolicy_pfx_acl_name&gt;</xr-path>
+                    <xr-xml-map>mpls_ldp_gl_af_cfg:PrefixAdvertisePolicy</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-pack-format>%d%s</xr-pack-format>
+                    <prefix-acl-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%s</xr-pack-format>
+                      <xr-primitive-type>string</xr-primitive-type>
+                      <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/bb/pfx/&lt;mpls_ldp_gl_af_cfg_PrefixAdvertisePolicy_pfx_acl_name&gt;</xr-path>
+                      <xr-xml-map>mpls_ldp_gl_af_cfg:PrefixACLName</xr-xml-map>
+                      <xr-task>mpls-ldp</xr-task>
+                      <xr-sch-type>String</xr-sch-type>
+                      <xr-sch-arg-name>&lt;mpls_ldp_gl_af_cfg_PrefixAdvertisePolicy_pfx_acl_name&gt;</xr-sch-arg-name>
+                      <type>
+                        <type-name>xr:Cisco-ios-xr-string</type-name>
+                      </type>
+                    </prefix-acl-name>
+                    <advertise-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-data-handler>preserve-pack</xr-data-handler>
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%s</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/bb/pfx/&lt;mpls_ldp_gl_af_cfg_PrefixAdvertisePolicy_pfx_acl_name&gt;`0</xr-path>
+                      <xr-xml-map>mpls_ldp_gl_af_cfg:AdvertiseType</xr-xml-map>
+                      <xr-task>mpls-ldp</xr-task>
+                      <xr-sch-type>Enum</xr-sch-type>
+                      <type>
+                        <type-name>Mpls-ldp-label-advertise</type-name>
+                      </type>
+                    </advertise-type>
+                    <peer-acl-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-data-handler>preserve-pack</xr-data-handler>
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%s</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/bb/pfx/&lt;mpls_ldp_gl_af_cfg_PrefixAdvertisePolicy_pfx_acl_name&gt;`1</xr-path>
+                      <xr-xml-map>mpls_ldp_gl_af_cfg:PeerACLName</xr-xml-map>
+                      <xr-task>mpls-ldp</xr-task>
+                      <xr-sch-type>String</xr-sch-type>
+                      <when>../advertise-type = 'for-to'</when>
+                      <type>
+                        <type-name>string</type-name>
+                      </type>
+                    </peer-acl-name>
+                  </prefix-advertise-policy>
+                </prefix-advertise-policies>
+                <explicit-null config="true" is-key="false" node="container" presence="false">
+                  <xr-is-packed/>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/zz/exp_null`</xr-path>
+                  <xr-xml-map>mpls_ldp_gl_af_cfg:ExplicitNull</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-pack-format>%d%s%s</xr-pack-format>
+                  <explicit-null-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s%s</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/zz/exp_null`0</xr-path>
+                    <xr-xml-map>mpls_ldp_gl_af_cfg:ExplicitNullType</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-sch-type>Enum</xr-sch-type>
+                    <type>
+                      <type-name>Mpls-ldp-exp-null</type-name>
+                    </type>
+                  </explicit-null-type>
+                  <prefix-acl-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s%s</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/zz/exp_null`1</xr-path>
+                    <xr-xml-map>mpls_ldp_gl_af_cfg:PrefixACLName</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-sch-type>String</xr-sch-type>
+                    <when>../explicit-null-type = 'for' or ../explicit-null-type = 'for-to'</when>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </prefix-acl-name>
+                  <peer-acl-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s%s</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/zz/exp_null`2</xr-path>
+                    <xr-xml-map>mpls_ldp_gl_af_cfg:PeerACLName</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-sch-type>String</xr-sch-type>
+                    <when>../explicit-null-type = 'to' or ../explicit-null-type = 'for-to'</when>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </peer-acl-name>
+                </explicit-null>
+                <interfaces config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/yy/intf/</xr-path>
+                  <xr-xml-map>mpls_ldp_gl_af_cfg:InterfaceTable</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <interface config="true" key="interface-name" node="list">
+                    <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/yy/intf/&lt;mpls_ldp_gl_af_cfg_Interface_interface_name&gt;</xr-path>
+                    <xr-xml-map>mpls_ldp_gl_af_cfg:Interface</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <interface-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-data-handler>ignore</xr-data-handler>
+                      <xr-create-item-relative-path/>
+                      <xr-primitive-type>string</xr-primitive-type>
+                      <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/yy/intf/&lt;mpls_ldp_gl_af_cfg_Interface_interface_name&gt;</xr-path>
+                      <xr-xml-map>mpls_ldp_gl_af_cfg:InterfaceName</xr-xml-map>
+                      <xr-task>mpls-ldp</xr-task>
+                      <xr-sch-type>InterfaceForward</xr-sch-type>
+                      <xr-sch-arg-name>&lt;mpls_ldp_gl_af_cfg_Interface_interface_name&gt;</xr-sch-arg-name>
+                      <type>
+                        <type-name>xr:Interface-name</type-name>
+                      </type>
+                    </interface-name>
+                  </interface>
+                </interfaces>
+                <disable config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/aa/disable</xr-path>
+                  <xr-xml-map>mpls_ldp_gl_af_cfg:Disable</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>Configured</xr-sch-type>
+                  <type>
+                    <type-name>empty</type-name>
+                  </type>
+                </disable>
+              </advertise>
+              <allocate config="true" is-key="false" node="container" presence="false">
+                <xr-is-packed/>
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/bb/alloc`</xr-path>
+                <xr-xml-map>mpls_ldp_gl_af_cfg:Allocate</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-pack-format>%d%s</xr-pack-format>
+                <allocation-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/bb/alloc`0</xr-path>
+                  <xr-xml-map>mpls_ldp_gl_af_cfg:AllocationType</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <type>
+                    <type-name>Mpls-ldp-label-allocation</type-name>
+                  </type>
+                </allocation-type>
+                <prefix-acl-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/bb/alloc`1</xr-path>
+                  <xr-xml-map>mpls_ldp_gl_af_cfg:PrefixACLName</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>String</xr-sch-type>
+                  <when>../allocation-type = 'acl'</when>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </prefix-acl-name>
+              </allocate>
+              <implicit-null-override config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/aa/impnull_override</xr-path>
+                <xr-xml-map>mpls_ldp_gl_af_cfg:ImplicitNullOverride</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </implicit-null-override>
+              <default-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/vv/lbl/local/aa/default_route</xr-path>
+                <xr-xml-map>mpls_ldp_gl_af_cfg:DefaultRoute</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-sch-type>Configured</xr-sch-type>
+                <type>
+                  <type-name>empty</type-name>
+                </type>
+              </default-route>
+            </local>
+          </label>
+          <discovery config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/gg/discovery/</xr-path>
+            <xr-xml-map>mpls_ldp_gl_af_cfg:Discovery</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <targeted-hello-accept config="true" is-key="false" node="container" presence="false">
+              <xr-is-packed/>
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/gg/discovery/tgtd_acpt`</xr-path>
+              <xr-xml-map>mpls_ldp_gl_af_cfg:TargetedHelloAccept</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <xr-pack-format>%d%s</xr-pack-format>
+              <accept-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%s</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/gg/discovery/tgtd_acpt`0</xr-path>
+                <xr-xml-map>mpls_ldp_gl_af_cfg:AcceptType</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <type>
+                  <type-name>Mpls-ldp-targeted-accept</type-name>
+                </type>
+              </accept-type>
+              <peer-acl-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%s</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/gg/discovery/tgtd_acpt`1</xr-path>
+                <xr-xml-map>mpls_ldp_gl_af_cfg:PeerACLName</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <when>../accept-type = 'from'</when>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </peer-acl-name>
+            </targeted-hello-accept>
+            <transport-address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/gg/discovery/xport_addr</xr-path>
+              <xr-xml-map>mpls_ldp_gl_af_cfg:TransportAddress</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <xr-sch-type>IPAddress</xr-sch-type>
+              <type>
+                <type-name>inet:ip-address-no-zone</type-name>
+              </type>
+            </transport-address>
+          </discovery>
+          <traffic-engineering config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/tt/te/</xr-path>
+            <xr-xml-map>mpls_ldp_gl_af_cfg:TrafficEngineering</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <auto-tunnel-mesh config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/tt/te/auto_tun/mesh/</xr-path>
+              <xr-xml-map>mpls_ldp_gl_af_cfg:AutoTunnelMesh</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <group-ids config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/tt/te/auto_tun/mesh/bb/grp/</xr-path>
+                <xr-xml-map>mpls_ldp_gl_af_cfg:GroupIDTable</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <group-id config="true" key="mesh-group-id" node="list">
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/tt/te/auto_tun/mesh/bb/grp/&lt;mpls_ldp_gl_af_cfg_GroupID_mesh_grp_id&gt;</xr-path>
+                  <xr-xml-map>mpls_ldp_gl_af_cfg:GroupID</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <mesh-group-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                    <xr-data-handler>ignore</xr-data-handler>
+                    <xr-create-item-relative-path/>
+                    <xr-primitive-type>uint32</xr-primitive-type>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/tt/te/auto_tun/mesh/bb/grp/&lt;mpls_ldp_gl_af_cfg_GroupID_mesh_grp_id&gt;</xr-path>
+                    <xr-xml-map>mpls_ldp_gl_af_cfg:MeshGroupID</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <xr-sch-arg-name>&lt;mpls_ldp_gl_af_cfg_GroupID_mesh_grp_id&gt;</xr-sch-arg-name>
+                    <type>
+                      <type-name>Mpls-ldp-mesh-group-id</type-name>
+                    </type>
+                  </mesh-group-id>
+                </group-id>
+              </group-ids>
+              <group-all config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/tt/te/auto_tun/mesh/aa/grp_all</xr-path>
+                <xr-xml-map>mpls_ldp_gl_af_cfg:GroupAll</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-sch-type>Configured</xr-sch-type>
+                <type>
+                  <type-name>empty</type-name>
+                </type>
+              </group-all>
+            </auto-tunnel-mesh>
+          </traffic-engineering>
+          <neighbor config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/hh/nbr/</xr-path>
+            <xr-xml-map>mpls_ldp_gl_af_cfg:Neighbor</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <addresses config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/hh/nbr/addr/</xr-path>
+              <xr-xml-map>mpls_ldp_gl_af_cfg:AddressTable</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <address config="true" key="ip-address" node="list">
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/hh/nbr/addr/&lt;mpls_ldp_gl_af_cfg_Address_ip_addr_str&gt;/</xr-path>
+                <xr-xml-map>mpls_ldp_gl_af_cfg:Address</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <targeted config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/hh/nbr/addr/&lt;mpls_ldp_gl_af_cfg_Address_ip_addr_str&gt;/tgtd</xr-path>
+                  <xr-xml-map>mpls_ldp_gl_af_cfg:Targeted</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>Configured</xr-sch-type>
+                  <type>
+                    <type-name>empty</type-name>
+                  </type>
+                </targeted>
+                <ip-address config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/hh/nbr/addr/&lt;mpls_ldp_gl_af_cfg_Address_ip_addr_str&gt;/</xr-path>
+                  <xr-xml-map>mpls_ldp_gl_af_cfg:IPAddress</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>IPAddress</xr-sch-type>
+                  <xr-sch-arg-name>&lt;mpls_ldp_gl_af_cfg_Address_ip_addr_str&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>inet:ip-address-no-zone</type-name>
+                  </type>
+                </ip-address>
+              </address>
+            </addresses>
+          </neighbor>
+          <redistribution-protocol config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/uu/redist/</xr-path>
+            <xr-xml-map>mpls_ldp_gl_af_cfg:RedistributionProtocol</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <bgp config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/uu/redist/bgp/</xr-path>
+              <xr-xml-map>mpls_ldp_gl_af_cfg:BGP</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <as config="true" is-key="false" node="container" presence="false">
+                <xr-is-packed/>
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/uu/redist/bgp/aa/as`</xr-path>
+                <xr-xml-map>mpls_ldp_gl_af_cfg:AS</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-pack-format>%d%d</xr-pack-format>
+                <as-xx config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/uu/redist/bgp/aa/as`0</xr-path>
+                  <xr-xml-map>mpls_ldp_gl_af_cfg:AS_XX</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <type range="0..65535">
+                    <type-name>uint32</type-name>
+                  </type>
+                </as-xx>
+                <as-yy config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/uu/redist/bgp/aa/as`1</xr-path>
+                  <xr-xml-map>mpls_ldp_gl_af_cfg:AS_YY</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <type range="0..4294967295">
+                    <type-name>uint32</type-name>
+                  </type>
+                </as-yy>
+              </as>
+              <advertise-to config="true" is-key="false" node="container" presence="false">
+                <xr-is-packed/>
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/uu/redist/bgp/bb/advt`</xr-path>
+                <xr-xml-map>mpls_ldp_gl_af_cfg:AdvertiseTo</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-pack-format>%d%s</xr-pack-format>
+                <type config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/uu/redist/bgp/bb/advt`0</xr-path>
+                  <xr-xml-map>mpls_ldp_gl_af_cfg:Type</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <type>
+                    <type-name>Mpls-ldp-advertise-bgp-acl</type-name>
+                  </type>
+                </type>
+                <peer-acl-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/uu/redist/bgp/bb/advt`1</xr-path>
+                  <xr-xml-map>mpls_ldp_gl_af_cfg:PeerACLName</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>String</xr-sch-type>
+                  <when>../type = 'peer-acl'</when>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </peer-acl-name>
+              </advertise-to>
+            </bgp>
+          </redistribution-protocol>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/a/submode</xr-path>
+            <xr-xml-map>mpls_ldp_gl_af_cfg:Enable</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </enable>
+          <af-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-pathformat>hex_zerox</xr-pathformat>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;/</xr-path>
+            <xr-xml-map>mpls_ldp_gl_af_cfg:AFName</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <xr-sch-arg-name>&lt;mpls_ldp_gl_af_cfg_AF_af_name&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>Mpls-ldpaf-name</type-name>
+            </type>
+          </af-name>
+        </af>
+      </afs>
+      <global config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/</xr-path>
+        <xr-xml-map>mpls_ldp_vrf_gl_cfg:Global</xr-xml-map>
+        <xr-task>mpls-ldp</xr-task>
+        <xr-scope>exported</xr-scope>
+        <session config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/ii/session/</xr-path>
+          <xr-xml-map>mpls_ldp_vrf_gl_cfg:Session</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <protection config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/ii/session/protection`</xr-path>
+            <xr-xml-map>mpls_ldp_vrf_gl_cfg:Protection</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <xr-pack-format>%d%s%d</xr-pack-format>
+            <protection-type config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/ii/session/protection`0</xr-path>
+              <xr-xml-map>mpls_ldp_vrf_gl_cfg:ProtectionType</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Mpls-ldp-session-protection</type-name>
+              </type>
+            </protection-type>
+            <peer-acl-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/ii/session/protection`1</xr-path>
+              <xr-xml-map>mpls_ldp_vrf_gl_cfg:PeerACLName</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <when>../protection-type = 'for' or ../protection-type = 'for-with-duration' or ../protection-type = 'for-with-forever'</when>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </peer-acl-name>
+            <duration config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/ii/session/protection`2</xr-path>
+              <xr-xml-map>mpls_ldp_vrf_gl_cfg:Duration</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <when>../protection-type = 'all-with-duration' or ../protection-type = 'for-with-duration'</when>
+              <type range="30..2147483">
+                <type-name>uint32</type-name>
+              </type>
+            </duration>
+          </protection>
+          <downstream-on-demand config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/ii/session/dod`</xr-path>
+            <xr-xml-map>mpls_ldp_vrf_gl_cfg:DownstreamOnDemand</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <xr-pack-format>%d%s</xr-pack-format>
+            <type config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/ii/session/dod`0</xr-path>
+              <xr-xml-map>mpls_ldp_vrf_gl_cfg:Type</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Mpls-ldp-downstream-on-demand</type-name>
+              </type>
+            </type>
+            <peer-acl-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/ii/session/dod`1</xr-path>
+              <xr-xml-map>mpls_ldp_vrf_gl_cfg:PeerACLName</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <when>../type = 'peer-acl'</when>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </peer-acl-name>
+          </downstream-on-demand>
+        </session>
+        <neighbor config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/hh/nbr/</xr-path>
+          <xr-xml-map>mpls_ldp_vrf_gl_cfg:Neighbor</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <ldp-ids config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/hh/nbr/id/</xr-path>
+            <xr-xml-map>mpls_ldp_vrf_gl_cfg:LDPIDTable</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <ldp-id config="true" key="lsr-id label-space-id" node="list">
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/hh/nbr/id/&lt;mpls_ldp_vrf_gl_cfg_LDP_ID_lsrid&gt;,&lt;mpls_ldp_vrf_gl_cfg_LDP_ID_spcid&gt;/</xr-path>
+              <xr-xml-map>mpls_ldp_vrf_gl_cfg:LDP_ID</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <password config="true" is-key="false" node="container" presence="false">
+                <xr-is-packed/>
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/hh/nbr/id/&lt;mpls_ldp_vrf_gl_cfg_LDP_ID_lsrid&gt;,&lt;mpls_ldp_vrf_gl_cfg_LDP_ID_spcid&gt;/bb/passwd`</xr-path>
+                <xr-xml-map>mpls_ldp_vrf_gl_cfg:Password</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-pack-format>%d%s</xr-pack-format>
+                <command-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/hh/nbr/id/&lt;mpls_ldp_vrf_gl_cfg_LDP_ID_lsrid&gt;,&lt;mpls_ldp_vrf_gl_cfg_LDP_ID_spcid&gt;/bb/passwd`0</xr-path>
+                  <xr-xml-map>mpls_ldp_vrf_gl_cfg:CommandType</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <type>
+                    <type-name>Mpls-ldp-nbr-password</type-name>
+                  </type>
+                </command-type>
+                <password config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/hh/nbr/id/&lt;mpls_ldp_vrf_gl_cfg_LDP_ID_lsrid&gt;,&lt;mpls_ldp_vrf_gl_cfg_LDP_ID_spcid&gt;/bb/passwd`1</xr-path>
+                  <xr-xml-map>mpls_ldp_vrf_gl_cfg:Password</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>ProprietaryPassword</xr-sch-type>
+                  <when>../command-type = 'specified'</when>
+                  <type>
+                    <type-name>xr:Proprietary-password</type-name>
+                  </type>
+                </password>
+              </password>
+              <lsr-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-pathformat>hex_padded_nozerox</xr-pathformat>
+                <xr-primitive-type>inaddr</xr-primitive-type>
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/hh/nbr/id/&lt;mpls_ldp_vrf_gl_cfg_LDP_ID_lsrid&gt;,&lt;mpls_ldp_vrf_gl_cfg_LDP_ID_spcid&gt;/</xr-path>
+                <xr-xml-map>mpls_ldp_vrf_gl_cfg:LSR_ID</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-sch-type>IPV4Address</xr-sch-type>
+                <xr-sch-arg-name>&lt;mpls_ldp_vrf_gl_cfg_LDP_ID_lsrid&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>inet:ipv4-address-no-zone</type-name>
+                </type>
+              </lsr-id>
+              <label-space-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-pathformat>hex_nozerox</xr-pathformat>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/hh/nbr/id/&lt;mpls_ldp_vrf_gl_cfg_LDP_ID_lsrid&gt;,&lt;mpls_ldp_vrf_gl_cfg_LDP_ID_spcid&gt;/</xr-path>
+                <xr-xml-map>mpls_ldp_vrf_gl_cfg:LabelSpaceID</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-sch-arg-name>&lt;mpls_ldp_vrf_gl_cfg_LDP_ID_spcid&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </label-space-id>
+            </ldp-id>
+          </ldp-ids>
+          <dual-stack config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/hh/nbr/aa/dual_stack/</xr-path>
+            <xr-xml-map>mpls_ldp_vrf_gl_cfg:DualStack</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <transport-connection config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/hh/nbr/aa/dual_stack/xport_conn/</xr-path>
+              <xr-xml-map>mpls_ldp_vrf_gl_cfg:TransportConnection</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <prefer config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/hh/nbr/aa/dual_stack/xport_conn/pref/</xr-path>
+                <xr-xml-map>mpls_ldp_vrf_gl_cfg:Prefer</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <ipv4 config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/hh/nbr/aa/dual_stack/xport_conn/pref/ipv4</xr-path>
+                  <xr-xml-map>mpls_ldp_vrf_gl_cfg:IPv4</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>Configured</xr-sch-type>
+                  <type>
+                    <type-name>empty</type-name>
+                  </type>
+                </ipv4>
+              </prefer>
+              <max-wait config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/hh/nbr/aa/dual_stack/xport_conn/wait</xr-path>
+                <xr-xml-map>mpls_ldp_vrf_gl_cfg:MaxWait</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="0..60">
+                  <type-name>uint32</type-name>
+                </type>
+              </max-wait>
+            </transport-connection>
+            <tlv-compliance config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/hh/nbr/aa/dual_stack/tlv_compliance</xr-path>
+              <xr-xml-map>mpls_ldp_vrf_gl_cfg:TLVCompliance</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </tlv-compliance>
+          </dual-stack>
+          <password config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/hh/nbr/bb/passwd</xr-path>
+            <xr-xml-map>mpls_ldp_vrf_gl_cfg:Password</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <xr-sch-type>ProprietaryPassword</xr-sch-type>
+            <type>
+              <type-name>xr:Proprietary-password</type-name>
+            </type>
+          </password>
+        </neighbor>
+        <graceful-restart config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/ee/gr/</xr-path>
+          <xr-xml-map>mpls_ldp_vrf_gl_cfg:GracefulRestart</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <helper-peer config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/ee/gr/helper_peer/</xr-path>
+            <xr-xml-map>mpls_ldp_vrf_gl_cfg:HelperPeer</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <maintain-on-local-reset config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/ee/gr/helper_peer/maintain</xr-path>
+              <xr-xml-map>mpls_ldp_vrf_gl_cfg:MaintainOnLocalReset</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </maintain-on-local-reset>
+          </helper-peer>
+        </graceful-restart>
+        <router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_1_gl/aa/router_id</xr-path>
+          <xr-xml-map>mpls_ldp_vrf_gl_cfg:RouterID</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-sch-type>IPV4AddressString</xr-sch-type>
+          <type>
+            <type-name>inet:ipv4-address-no-zone</type-name>
+          </type>
+        </router-id>
+      </global>
+      <interfaces config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/</xr-path>
+        <xr-xml-map>mpls_ldp_common_cfg:InterfaceTable</xr-xml-map>
+        <xr-task>mpls-ldp</xr-task>
+        <interface config="true" key="interface-name" node="list">
+          <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/</xr-path>
+          <xr-xml-map>mpls_ldp_common_cfg:Interface</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-scope>exported</xr-scope>
+          <afs config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_2_af/</xr-path>
+            <xr-xml-map>mpls_ldp_gl_if_af_cfg:AFTable</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <af config="true" key="af-name" node="list">
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_2_af/&lt;mpls_ldp_gl_if_af_cfg_AF_af_name&gt;/</xr-path>
+              <xr-xml-map>mpls_ldp_gl_if_af_cfg:AF</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <xr-scope>exported</xr-scope>
+              <discovery config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_2_af/&lt;mpls_ldp_gl_if_af_cfg_AF_af_name&gt;/gg/discovery/</xr-path>
+                <xr-xml-map>mpls_ldp_gl_if_af_cfg:Discovery</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <transport-address config="true" is-key="false" node="container" presence="false">
+                  <xr-is-packed/>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_2_af/&lt;mpls_ldp_gl_if_af_cfg_AF_af_name&gt;/gg/discovery/xport_addr`</xr-path>
+                  <xr-xml-map>mpls_ldp_gl_if_af_cfg:TransportAddress</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-pack-format>%d%s</xr-pack-format>
+                  <address-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_2_af/&lt;mpls_ldp_gl_if_af_cfg_AF_af_name&gt;/gg/discovery/xport_addr`0</xr-path>
+                    <xr-xml-map>mpls_ldp_gl_if_af_cfg:AddressType</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-sch-type>Enum</xr-sch-type>
+                    <type>
+                      <type-name>Mpls-ldp-transport-address</type-name>
+                    </type>
+                  </address-type>
+                  <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_2_af/&lt;mpls_ldp_gl_if_af_cfg_AF_af_name&gt;/gg/discovery/xport_addr`1</xr-path>
+                    <xr-xml-map>mpls_ldp_gl_if_af_cfg:Address</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-sch-type>IPAddress</xr-sch-type>
+                    <when>../address-type = 'address'</when>
+                    <type>
+                      <type-name>inet:ip-address-no-zone</type-name>
+                    </type>
+                  </address>
+                </transport-address>
+              </discovery>
+              <igp config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_2_af/&lt;mpls_ldp_gl_if_af_cfg_AF_af_name&gt;/ff/igp/</xr-path>
+                <xr-xml-map>mpls_ldp_gl_if_af_cfg:IGP</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <disable-auto-config config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_2_af/&lt;mpls_ldp_gl_if_af_cfg_AF_af_name&gt;/ff/igp/autocfg/disable</xr-path>
+                  <xr-xml-map>mpls_ldp_gl_if_af_cfg:DisableAutoConfig</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>Configured</xr-sch-type>
+                  <type>
+                    <type-name>empty</type-name>
+                  </type>
+                </disable-auto-config>
+              </igp>
+              <mldp config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_2_af/&lt;mpls_ldp_gl_if_af_cfg_AF_af_name&gt;/yy/mldp/</xr-path>
+                <xr-xml-map>mldp_if_cfg:MLDP</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <disable config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_2_af/&lt;mpls_ldp_gl_if_af_cfg_AF_af_name&gt;/yy/mldp/disable</xr-path>
+                  <xr-xml-map>mldp_if_cfg:Disable</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>Configured</xr-sch-type>
+                  <type>
+                    <type-name>empty</type-name>
+                  </type>
+                </disable>
+              </mldp>
+              <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_2_af/&lt;mpls_ldp_gl_if_af_cfg_AF_af_name&gt;/a/submode</xr-path>
+                <xr-xml-map>mpls_ldp_gl_if_af_cfg:Enable</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-sch-type>Configured</xr-sch-type>
+                <type>
+                  <type-name>empty</type-name>
+                </type>
+              </enable>
+              <af-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-pathformat>hex_zerox</xr-pathformat>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_2_af/&lt;mpls_ldp_gl_if_af_cfg_AF_af_name&gt;/</xr-path>
+                <xr-xml-map>mpls_ldp_gl_if_af_cfg:AFName</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-sch-arg-name>&lt;mpls_ldp_gl_if_af_cfg_AF_af_name&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>Mpls-ldpaf-name</type-name>
+                </type>
+              </af-name>
+            </af>
+          </afs>
+          <global config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_1_gl/</xr-path>
+            <xr-xml-map>mpls_ldp_gl_if_cfg:Global</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <xr-scope>exported</xr-scope>
+            <discovery config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_1_gl/gg/discovery/</xr-path>
+              <xr-xml-map>mpls_ldp_gl_if_cfg:Discovery</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <link-hello config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_1_gl/gg/discovery/hello/link/</xr-path>
+                <xr-xml-map>mpls_ldp_gl_if_cfg:LinkHello</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <interval config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_1_gl/gg/discovery/hello/link/interval</xr-path>
+                  <xr-xml-map>mpls_ldp_gl_if_cfg:Interval</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <type>
+                    <type-name>Mpls-ldp-interval-time</type-name>
+                  </type>
+                  <default>5</default>
+                </interval>
+                <dual-stack config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_1_gl/gg/discovery/hello/link/dual_stack</xr-path>
+                  <xr-xml-map>mpls_ldp_gl_if_cfg:DualStack</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <type>
+                    <type-name>Mpls-ldpaf-name</type-name>
+                  </type>
+                  <default>ipv4</default>
+                </dual-stack>
+                <hold-time config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_1_gl/gg/discovery/hello/link/holdtime</xr-path>
+                  <xr-xml-map>mpls_ldp_gl_if_cfg:HoldTime</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <type>
+                    <type-name>Mpls-ldp-hold-time</type-name>
+                  </type>
+                  <default>15</default>
+                </hold-time>
+              </link-hello>
+              <disable-quick-start config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_1_gl/gg/discovery/aa/quick/disable</xr-path>
+                <xr-xml-map>mpls_ldp_gl_if_cfg:DisableQuickStart</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-sch-type>Configured</xr-sch-type>
+                <type>
+                  <type-name>empty</type-name>
+                </type>
+              </disable-quick-start>
+            </discovery>
+            <igp config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_1_gl/ff/igp/</xr-path>
+              <xr-xml-map>mpls_ldp_gl_if_cfg:IGP</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <sync config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_1_gl/ff/igp/sync/</xr-path>
+                <xr-xml-map>mpls_ldp_gl_if_cfg:Sync</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <delay config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_1_gl/ff/igp/sync/delay/</xr-path>
+                  <xr-xml-map>mpls_ldp_gl_if_cfg:Delay</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <on-session-up config="true" is-key="false" node="container" presence="false">
+                    <xr-is-packed/>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_1_gl/ff/igp/sync/delay/ab/sess/up`</xr-path>
+                    <xr-xml-map>mpls_ldp_gl_if_cfg:OnSessionUp</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-pack-format>%d%d</xr-pack-format>
+                    <disable config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_1_gl/ff/igp/sync/delay/ab/sess/up`0</xr-path>
+                      <xr-xml-map>mpls_ldp_gl_if_cfg:Disable</xr-xml-map>
+                      <xr-task>mpls-ldp</xr-task>
+                      <xr-sch-type>Configured</xr-sch-type>
+                      <type>
+                        <type-name>empty</type-name>
+                      </type>
+                    </disable>
+                    <timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/ord_1_gl/ff/igp/sync/delay/ab/sess/up`1</xr-path>
+                      <xr-xml-map>mpls_ldp_gl_if_cfg:Timeout</xr-xml-map>
+                      <xr-task>mpls-ldp</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <type range="5..300">
+                        <type-name>uint32</type-name>
+                      </type>
+                    </timeout>
+                  </on-session-up>
+                </delay>
+              </sync>
+            </igp>
+          </global>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/a/submode</xr-path>
+            <xr-xml-map>mpls_ldp_common_cfg:Enable</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </enable>
+          <interface-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_1/default/ord_3_if/&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;/</xr-path>
+            <xr-xml-map>mpls_ldp_common_cfg:InterfaceName</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <xr-sch-type>InterfaceForward</xr-sch-type>
+            <xr-sch-arg-name>&lt;mpls_ldp_common_cfg_Interface_interface_name&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+          </interface-name>
+        </interface>
+      </interfaces>
+    </default-vrf>
+    <vrfs config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/</xr-path>
+      <xr-xml-map>mpls_ldp_common_cfg:VRFTable</xr-xml-map>
+      <xr-task>mpls-ldp</xr-task>
+      <xr-scope>exported</xr-scope>
+      <vrf config="true" key="vrf-name" node="list">
+        <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/</xr-path>
+        <xr-xml-map>mpls_ldp_common_cfg:VRF</xr-xml-map>
+        <xr-task>mpls-ldp</xr-task>
+        <xr-scope>exported</xr-scope>
+        <global config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_1_gl/</xr-path>
+          <xr-xml-map>mpls_ldp_vrf_cfg:Global</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-scope>exported</xr-scope>
+          <session config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_1_gl/ii/session/</xr-path>
+            <xr-xml-map>mpls_ldp_vrf_cfg:Session</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <downstream-on-demand config="true" is-key="false" node="container" presence="false">
+              <xr-is-packed/>
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_1_gl/ii/session/dod`</xr-path>
+              <xr-xml-map>mpls_ldp_vrf_cfg:DownstreamOnDemand</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <xr-pack-format>%d%s</xr-pack-format>
+              <type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%s</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_1_gl/ii/session/dod`0</xr-path>
+                <xr-xml-map>mpls_ldp_vrf_cfg:Type</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <type>
+                  <type-name>Mpls-ldp-downstream-on-demand</type-name>
+                </type>
+              </type>
+              <peer-acl-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%s</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_1_gl/ii/session/dod`1</xr-path>
+                <xr-xml-map>mpls_ldp_vrf_cfg:PeerACLName</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <when>../type = 'peer-acl'</when>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </peer-acl-name>
+            </downstream-on-demand>
+          </session>
+          <neighbor config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_1_gl/hh/nbr/</xr-path>
+            <xr-xml-map>mpls_ldp_vrf_cfg:Neighbor</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <dual-stack config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_1_gl/hh/nbr/aa/dual_stack/</xr-path>
+              <xr-xml-map>mpls_ldp_vrf_cfg:DualStack</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <transport-connection config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_1_gl/hh/nbr/aa/dual_stack/xport_conn/</xr-path>
+                <xr-xml-map>mpls_ldp_vrf_cfg:TransportConnection</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <prefer config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_1_gl/hh/nbr/aa/dual_stack/xport_conn/pref/</xr-path>
+                  <xr-xml-map>mpls_ldp_vrf_cfg:Prefer</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <ipv4 config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-primitive-type>uint32</xr-primitive-type>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_1_gl/hh/nbr/aa/dual_stack/xport_conn/pref/ipv4</xr-path>
+                    <xr-xml-map>mpls_ldp_vrf_cfg:IPv4</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-sch-type>Configured</xr-sch-type>
+                    <type>
+                      <type-name>empty</type-name>
+                    </type>
+                  </ipv4>
+                </prefer>
+                <max-wait config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_1_gl/hh/nbr/aa/dual_stack/xport_conn/wait</xr-path>
+                  <xr-xml-map>mpls_ldp_vrf_cfg:MaxWait</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <type range="0..60">
+                    <type-name>uint32</type-name>
+                  </type>
+                </max-wait>
+              </transport-connection>
+            </dual-stack>
+            <ldp-ids config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_1_gl/hh/nbr/id/</xr-path>
+              <xr-xml-map>mpls_ldp_vrf_cfg:LDPIDTable</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <ldp-id config="true" key="lsr-id label-space-id" node="list">
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_1_gl/hh/nbr/id/&lt;mpls_ldp_vrf_cfg_LDP_ID_lsrid&gt;,&lt;mpls_ldp_vrf_cfg_LDP_ID_spcid&gt;/</xr-path>
+                <xr-xml-map>mpls_ldp_vrf_cfg:LDP_ID</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <password config="true" is-key="false" node="container" presence="false">
+                  <xr-is-packed/>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_1_gl/hh/nbr/id/&lt;mpls_ldp_vrf_cfg_LDP_ID_lsrid&gt;,&lt;mpls_ldp_vrf_cfg_LDP_ID_spcid&gt;/bb/passwd`</xr-path>
+                  <xr-xml-map>mpls_ldp_vrf_cfg:Password</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-pack-format>%d%s</xr-pack-format>
+                  <command-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_1_gl/hh/nbr/id/&lt;mpls_ldp_vrf_cfg_LDP_ID_lsrid&gt;,&lt;mpls_ldp_vrf_cfg_LDP_ID_spcid&gt;/bb/passwd`0</xr-path>
+                    <xr-xml-map>mpls_ldp_vrf_cfg:CommandType</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-sch-type>Enum</xr-sch-type>
+                    <type>
+                      <type-name>Mpls-ldp-nbr-password</type-name>
+                    </type>
+                  </command-type>
+                  <password config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_1_gl/hh/nbr/id/&lt;mpls_ldp_vrf_cfg_LDP_ID_lsrid&gt;,&lt;mpls_ldp_vrf_cfg_LDP_ID_spcid&gt;/bb/passwd`1</xr-path>
+                    <xr-xml-map>mpls_ldp_vrf_cfg:Password</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-sch-type>ProprietaryPassword</xr-sch-type>
+                    <when>../command-type = 'specified'</when>
+                    <type>
+                      <type-name>xr:Proprietary-password</type-name>
+                    </type>
+                  </password>
+                </password>
+                <lsr-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-pathformat>hex_padded_nozerox</xr-pathformat>
+                  <xr-primitive-type>inaddr</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_1_gl/hh/nbr/id/&lt;mpls_ldp_vrf_cfg_LDP_ID_lsrid&gt;,&lt;mpls_ldp_vrf_cfg_LDP_ID_spcid&gt;/</xr-path>
+                  <xr-xml-map>mpls_ldp_vrf_cfg:LSR_ID</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>IPV4Address</xr-sch-type>
+                  <xr-sch-arg-name>&lt;mpls_ldp_vrf_cfg_LDP_ID_lsrid&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>inet:ipv4-address-no-zone</type-name>
+                  </type>
+                </lsr-id>
+                <label-space-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-pathformat>hex_nozerox</xr-pathformat>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_1_gl/hh/nbr/id/&lt;mpls_ldp_vrf_cfg_LDP_ID_lsrid&gt;,&lt;mpls_ldp_vrf_cfg_LDP_ID_spcid&gt;/</xr-path>
+                  <xr-xml-map>mpls_ldp_vrf_cfg:LabelSpaceID</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <xr-sch-arg-name>&lt;mpls_ldp_vrf_cfg_LDP_ID_spcid&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </label-space-id>
+              </ldp-id>
+            </ldp-ids>
+            <password config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_1_gl/hh/nbr/bb/passwd</xr-path>
+              <xr-xml-map>mpls_ldp_vrf_cfg:Password</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <xr-sch-type>ProprietaryPassword</xr-sch-type>
+              <type>
+                <type-name>xr:Proprietary-password</type-name>
+              </type>
+            </password>
+          </neighbor>
+          <graceful-restart config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_1_gl/ee/gr/</xr-path>
+            <xr-xml-map>mpls_ldp_vrf_cfg:GracefulRestart</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <helper-peer config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_1_gl/ee/gr/helper_peer/</xr-path>
+              <xr-xml-map>mpls_ldp_vrf_cfg:HelperPeer</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <maintain-on-local-reset config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_1_gl/ee/gr/helper_peer/maintain</xr-path>
+                <xr-xml-map>mpls_ldp_vrf_cfg:MaintainOnLocalReset</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </maintain-on-local-reset>
+            </helper-peer>
+          </graceful-restart>
+          <router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_1_gl/aa/router_id</xr-path>
+            <xr-xml-map>mpls_ldp_vrf_cfg:RouterID</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <xr-sch-type>IPV4AddressString</xr-sch-type>
+            <type>
+              <type-name>inet:ipv4-address-no-zone</type-name>
+            </type>
+          </router-id>
+        </global>
+        <afs config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/</xr-path>
+          <xr-xml-map>mpls_ldp_vrf_af_cfg:AFTable</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <af config="true" key="af-name" node="list">
+            <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/</xr-path>
+            <xr-xml-map>mpls_ldp_vrf_af_cfg:AF</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <xr-scope>exported</xr-scope>
+            <discovery config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/gg/discovery/</xr-path>
+              <xr-xml-map>mpls_ldp_vrf_af_cfg:Discovery</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <transport-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/gg/discovery/xport_addr</xr-path>
+                <xr-xml-map>mpls_ldp_vrf_af_cfg:TransportAddress</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-sch-type>IPAddress</xr-sch-type>
+                <type>
+                  <type-name>inet:ip-address-no-zone</type-name>
+                </type>
+              </transport-address>
+            </discovery>
+            <label config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/</xr-path>
+              <xr-xml-map>mpls_ldp_vrf_af_cfg:Label</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <remote config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/remote/</xr-path>
+                <xr-xml-map>mpls_ldp_vrf_af_cfg:Remote</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <accept config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/remote/dd/acpt/</xr-path>
+                  <xr-xml-map>mpls_ldp_vrf_af_cfg:Accept</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <peer-accept-policies config="true" is-key="false" node="container" presence="false">
+                    <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/remote/dd/acpt/nbr/</xr-path>
+                    <xr-xml-map>mpls_ldp_vrf_af_cfg:PeerAcceptPolicyTable</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <peer-accept-policy config="true" key="label-space-id" node="list">
+                      <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/remote/dd/acpt/nbr/________,&lt;mpls_ldp_vrf_af_cfg_PeerAcceptPolicy_spcid&gt;</xr-path>
+                      <xr-task>mpls-ldp</xr-task>
+                      <must>peer-accept-policy-data or lsr-id</must>
+                      <peer-accept-policy-data config="true" is-key="false" node="container" presence="false">
+                        <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/remote/dd/acpt/nbr/________,&lt;mpls_ldp_vrf_af_cfg_PeerAcceptPolicy_spcid&gt;</xr-path>
+                        <xr-xml-map>mpls_ldp_vrf_af_cfg:PeerAcceptPolicy</xr-xml-map>
+                        <xr-task>mpls-ldp</xr-task>
+                        <prefix-acl-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-primitive-type>string</xr-primitive-type>
+                          <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/remote/dd/acpt/nbr/________,&lt;mpls_ldp_vrf_af_cfg_PeerAcceptPolicy_spcid&gt;</xr-path>
+                          <xr-xml-map>mpls_ldp_vrf_af_cfg:PrefixACLName</xr-xml-map>
+                          <xr-task>mpls-ldp</xr-task>
+                          <xr-sch-type>String</xr-sch-type>
+                          <type>
+                            <type-name>string</type-name>
+                          </type>
+                          <mandatory>true</mandatory>
+                        </prefix-acl-name>
+                      </peer-accept-policy-data>
+                      <label-space-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                        <xr-data-handler>ignore</xr-data-handler>
+                        <xr-pathformat>hex_nozerox</xr-pathformat>
+                        <xr-primitive-type>uint32</xr-primitive-type>
+                        <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/remote/dd/acpt/nbr/&lt;mpls_ldp_vrf_af_cfg_PeerAcceptPolicy_lsrid&gt;,&lt;mpls_ldp_vrf_af_cfg_PeerAcceptPolicy_spcid&gt;</xr-path>
+                        <xr-xml-map>mpls_ldp_vrf_af_cfg:LabelSpaceID</xr-xml-map>
+                        <xr-task>mpls-ldp</xr-task>
+                        <xr-sch-type>Range</xr-sch-type>
+                        <xr-sch-arg-name>&lt;mpls_ldp_vrf_af_cfg_PeerAcceptPolicy_spcid&gt;</xr-sch-arg-name>
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </label-space-id>
+                      <lsr-id config="true" key="lsr-id" node="list">
+                        <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/remote/dd/acpt/nbr/&lt;mpls_ldp_vrf_af_cfg_PeerAcceptPolicy_lsrid&gt;,&lt;mpls_ldp_vrf_af_cfg_PeerAcceptPolicy_spcid&gt;</xr-path>
+                        <xr-xml-map>mpls_ldp_vrf_af_cfg:PeerAcceptPolicy</xr-xml-map>
+                        <xr-task>mpls-ldp</xr-task>
+                        <lsr-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                          <xr-data-handler>ignore</xr-data-handler>
+                          <xr-pathformat>hex_padded_nozerox</xr-pathformat>
+                          <xr-primitive-type>inaddr</xr-primitive-type>
+                          <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/remote/dd/acpt/nbr/&lt;mpls_ldp_vrf_af_cfg_PeerAcceptPolicy_lsrid&gt;,&lt;mpls_ldp_vrf_af_cfg_PeerAcceptPolicy_spcid&gt;</xr-path>
+                          <xr-xml-map>mpls_ldp_vrf_af_cfg:LSR_ID</xr-xml-map>
+                          <xr-task>mpls-ldp</xr-task>
+                          <xr-sch-type>IPV4Address</xr-sch-type>
+                          <xr-sch-arg-name>&lt;mpls_ldp_vrf_af_cfg_PeerAcceptPolicy_lsrid&gt;</xr-sch-arg-name>
+                          <type>
+                            <type-name>inet:ipv4-address-no-zone</type-name>
+                          </type>
+                        </lsr-id>
+                        <prefix-acl-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-primitive-type>string</xr-primitive-type>
+                          <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/remote/dd/acpt/nbr/&lt;mpls_ldp_vrf_af_cfg_PeerAcceptPolicy_lsrid&gt;,&lt;mpls_ldp_vrf_af_cfg_PeerAcceptPolicy_spcid&gt;</xr-path>
+                          <xr-xml-map>mpls_ldp_vrf_af_cfg:PrefixACLName</xr-xml-map>
+                          <xr-task>mpls-ldp</xr-task>
+                          <xr-sch-type>String</xr-sch-type>
+                          <type>
+                            <type-name>string</type-name>
+                          </type>
+                          <mandatory>true</mandatory>
+                        </prefix-acl-name>
+                      </lsr-id>
+                    </peer-accept-policy>
+                  </peer-accept-policies>
+                </accept>
+              </remote>
+              <local config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/local/</xr-path>
+                <xr-xml-map>mpls_ldp_vrf_af_cfg:Local</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <advertise config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/</xr-path>
+                  <xr-xml-map>mpls_ldp_vrf_af_cfg:Advertise</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <peer-advertise-policies config="true" is-key="false" node="container" presence="false">
+                    <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/cc/nbr/</xr-path>
+                    <xr-xml-map>mpls_ldp_vrf_af_cfg:PeerAdvertisePolicyTable</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <peer-advertise-policy config="true" key="label-space-id" node="list">
+                      <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/cc/nbr/________,&lt;mpls_ldp_vrf_af_cfg_PeerAdvertisePolicy_spcid&gt;</xr-path>
+                      <xr-task>mpls-ldp</xr-task>
+                      <must>peer-advertise-policy-data or lsr-id</must>
+                      <peer-advertise-policy-data config="true" is-key="false" node="container" presence="false">
+                        <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/cc/nbr/________,&lt;mpls_ldp_vrf_af_cfg_PeerAdvertisePolicy_spcid&gt;</xr-path>
+                        <xr-xml-map>mpls_ldp_vrf_af_cfg:PeerAdvertisePolicy</xr-xml-map>
+                        <xr-task>mpls-ldp</xr-task>
+                        <prefix-acl-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-primitive-type>string</xr-primitive-type>
+                          <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/cc/nbr/________,&lt;mpls_ldp_vrf_af_cfg_PeerAdvertisePolicy_spcid&gt;</xr-path>
+                          <xr-xml-map>mpls_ldp_vrf_af_cfg:PrefixACLName</xr-xml-map>
+                          <xr-task>mpls-ldp</xr-task>
+                          <xr-sch-type>String</xr-sch-type>
+                          <type>
+                            <type-name>string</type-name>
+                          </type>
+                          <mandatory>true</mandatory>
+                        </prefix-acl-name>
+                      </peer-advertise-policy-data>
+                      <label-space-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                        <xr-data-handler>ignore</xr-data-handler>
+                        <xr-pathformat>hex_nozerox</xr-pathformat>
+                        <xr-primitive-type>uint32</xr-primitive-type>
+                        <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/cc/nbr/&lt;mpls_ldp_vrf_af_cfg_PeerAdvertisePolicy_lsrid&gt;,&lt;mpls_ldp_vrf_af_cfg_PeerAdvertisePolicy_spcid&gt;</xr-path>
+                        <xr-xml-map>mpls_ldp_vrf_af_cfg:LabelSpaceID</xr-xml-map>
+                        <xr-task>mpls-ldp</xr-task>
+                        <xr-sch-type>Range</xr-sch-type>
+                        <xr-sch-arg-name>&lt;mpls_ldp_vrf_af_cfg_PeerAdvertisePolicy_spcid&gt;</xr-sch-arg-name>
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </label-space-id>
+                      <lsr-id config="true" key="lsr-id" node="list">
+                        <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/cc/nbr/&lt;mpls_ldp_vrf_af_cfg_PeerAdvertisePolicy_lsrid&gt;,&lt;mpls_ldp_vrf_af_cfg_PeerAdvertisePolicy_spcid&gt;</xr-path>
+                        <xr-xml-map>mpls_ldp_vrf_af_cfg:PeerAdvertisePolicy</xr-xml-map>
+                        <xr-task>mpls-ldp</xr-task>
+                        <lsr-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                          <xr-data-handler>ignore</xr-data-handler>
+                          <xr-pathformat>hex_padded_nozerox</xr-pathformat>
+                          <xr-primitive-type>inaddr</xr-primitive-type>
+                          <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/cc/nbr/&lt;mpls_ldp_vrf_af_cfg_PeerAdvertisePolicy_lsrid&gt;,&lt;mpls_ldp_vrf_af_cfg_PeerAdvertisePolicy_spcid&gt;</xr-path>
+                          <xr-xml-map>mpls_ldp_vrf_af_cfg:LSR_ID</xr-xml-map>
+                          <xr-task>mpls-ldp</xr-task>
+                          <xr-sch-type>IPV4Address</xr-sch-type>
+                          <xr-sch-arg-name>&lt;mpls_ldp_vrf_af_cfg_PeerAdvertisePolicy_lsrid&gt;</xr-sch-arg-name>
+                          <type>
+                            <type-name>inet:ipv4-address-no-zone</type-name>
+                          </type>
+                        </lsr-id>
+                        <prefix-acl-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <xr-primitive-type>string</xr-primitive-type>
+                          <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/cc/nbr/&lt;mpls_ldp_vrf_af_cfg_PeerAdvertisePolicy_lsrid&gt;,&lt;mpls_ldp_vrf_af_cfg_PeerAdvertisePolicy_spcid&gt;</xr-path>
+                          <xr-xml-map>mpls_ldp_vrf_af_cfg:PrefixACLName</xr-xml-map>
+                          <xr-task>mpls-ldp</xr-task>
+                          <xr-sch-type>String</xr-sch-type>
+                          <type>
+                            <type-name>string</type-name>
+                          </type>
+                          <mandatory>true</mandatory>
+                        </prefix-acl-name>
+                      </lsr-id>
+                    </peer-advertise-policy>
+                  </peer-advertise-policies>
+                  <interfaces config="true" is-key="false" node="container" presence="false">
+                    <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/yy/intf/</xr-path>
+                    <xr-xml-map>mpls_ldp_vrf_af_cfg:InterfaceTable</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <interface config="true" key="interface-name" node="list">
+                      <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/yy/intf/&lt;mpls_ldp_vrf_af_cfg_Interface_interface_name&gt;</xr-path>
+                      <xr-xml-map>mpls_ldp_vrf_af_cfg:Interface</xr-xml-map>
+                      <xr-task>mpls-ldp</xr-task>
+                      <interface-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                        <xr-data-handler>ignore</xr-data-handler>
+                        <xr-create-item-relative-path/>
+                        <xr-primitive-type>string</xr-primitive-type>
+                        <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/yy/intf/&lt;mpls_ldp_vrf_af_cfg_Interface_interface_name&gt;</xr-path>
+                        <xr-xml-map>mpls_ldp_vrf_af_cfg:InterfaceName</xr-xml-map>
+                        <xr-task>mpls-ldp</xr-task>
+                        <xr-sch-type>InterfaceForward</xr-sch-type>
+                        <xr-sch-arg-name>&lt;mpls_ldp_vrf_af_cfg_Interface_interface_name&gt;</xr-sch-arg-name>
+                        <type>
+                          <type-name>xr:Interface-name</type-name>
+                        </type>
+                      </interface-name>
+                    </interface>
+                  </interfaces>
+                  <explicit-null config="true" is-key="false" node="container" presence="false">
+                    <xr-is-packed/>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/zz/exp_null`</xr-path>
+                    <xr-xml-map>mpls_ldp_vrf_af_cfg:ExplicitNull</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-pack-format>%d%s%s</xr-pack-format>
+                    <explicit-null-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%s%s</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/zz/exp_null`0</xr-path>
+                      <xr-xml-map>mpls_ldp_vrf_af_cfg:ExplicitNullType</xr-xml-map>
+                      <xr-task>mpls-ldp</xr-task>
+                      <xr-sch-type>Enum</xr-sch-type>
+                      <type>
+                        <type-name>Mpls-ldp-exp-null</type-name>
+                      </type>
+                    </explicit-null-type>
+                    <prefix-acl-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%s%s</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/zz/exp_null`1</xr-path>
+                      <xr-xml-map>mpls_ldp_vrf_af_cfg:PrefixACLName</xr-xml-map>
+                      <xr-task>mpls-ldp</xr-task>
+                      <xr-sch-type>String</xr-sch-type>
+                      <when>../explicit-null-type = 'for' or ../explicit-null-type = 'for-to'</when>
+                      <type>
+                        <type-name>string</type-name>
+                      </type>
+                    </prefix-acl-name>
+                    <peer-acl-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%s%s</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/zz/exp_null`2</xr-path>
+                      <xr-xml-map>mpls_ldp_vrf_af_cfg:PeerACLName</xr-xml-map>
+                      <xr-task>mpls-ldp</xr-task>
+                      <xr-sch-type>String</xr-sch-type>
+                      <when>../explicit-null-type = 'to' or ../explicit-null-type = 'for-to'</when>
+                      <type>
+                        <type-name>string</type-name>
+                      </type>
+                    </peer-acl-name>
+                  </explicit-null>
+                  <disable config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-primitive-type>uint32</xr-primitive-type>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/local/cc/advt/aa/disable</xr-path>
+                    <xr-xml-map>mpls_ldp_vrf_af_cfg:Disable</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-sch-type>Configured</xr-sch-type>
+                    <type>
+                      <type-name>empty</type-name>
+                    </type>
+                  </disable>
+                </advertise>
+                <allocate config="true" is-key="false" node="container" presence="false">
+                  <xr-is-packed/>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/local/bb/alloc`</xr-path>
+                  <xr-xml-map>mpls_ldp_vrf_af_cfg:Allocate</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-pack-format>%d%s</xr-pack-format>
+                  <allocation-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/local/bb/alloc`0</xr-path>
+                    <xr-xml-map>mpls_ldp_vrf_af_cfg:AllocationType</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-sch-type>Enum</xr-sch-type>
+                    <type>
+                      <type-name>Mpls-ldp-label-allocation</type-name>
+                    </type>
+                  </allocation-type>
+                  <prefix-acl-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/local/bb/alloc`1</xr-path>
+                    <xr-xml-map>mpls_ldp_vrf_af_cfg:PrefixACLName</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-sch-type>String</xr-sch-type>
+                    <when>../allocation-type = 'acl'</when>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </prefix-acl-name>
+                </allocate>
+                <implicit-null-override config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/local/aa/impnull_override</xr-path>
+                  <xr-xml-map>mpls_ldp_vrf_af_cfg:ImplicitNullOverride</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>String</xr-sch-type>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </implicit-null-override>
+                <default-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/vv/lbl/local/aa/default_route</xr-path>
+                  <xr-xml-map>mpls_ldp_vrf_af_cfg:DefaultRoute</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>Configured</xr-sch-type>
+                  <type>
+                    <type-name>empty</type-name>
+                  </type>
+                </default-route>
+              </local>
+            </label>
+            <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/a/submode</xr-path>
+              <xr-xml-map>mpls_ldp_vrf_af_cfg:Enable</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </enable>
+            <af-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-pathformat>hex_zerox</xr-pathformat>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;/</xr-path>
+              <xr-xml-map>mpls_ldp_vrf_af_cfg:AFName</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <xr-sch-arg-name>&lt;mpls_ldp_vrf_af_cfg_AF_af_name&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>Mpls-ldpaf-name</type-name>
+              </type>
+            </af-name>
+          </af>
+        </afs>
+        <interfaces config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_3_if/</xr-path>
+          <xr-xml-map>mpls_ldp_vrf_if_cfg:InterfaceTable</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <interface config="true" key="interface-name" node="list">
+            <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_3_if/&lt;mpls_ldp_vrf_if_cfg_Interface_interface_name&gt;/</xr-path>
+            <xr-xml-map>mpls_ldp_vrf_if_cfg:Interface</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <xr-scope>exported</xr-scope>
+            <afs config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_3_if/&lt;mpls_ldp_vrf_if_cfg_Interface_interface_name&gt;/ord_2_af/</xr-path>
+              <xr-xml-map>mpls_ldp_vrf_if_af_cfg:AFTable</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <af config="true" key="af-name" node="list">
+                <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_3_if/&lt;mpls_ldp_vrf_if_cfg_Interface_interface_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_if_af_cfg_AF_af_name&gt;/</xr-path>
+                <xr-xml-map>mpls_ldp_vrf_if_af_cfg:AF</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-scope>exported</xr-scope>
+                <discovery config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_3_if/&lt;mpls_ldp_vrf_if_cfg_Interface_interface_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_if_af_cfg_AF_af_name&gt;/gg/discovery/</xr-path>
+                  <xr-xml-map>mpls_ldp_vrf_if_af_cfg:Discovery</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <transport-address config="true" is-key="false" node="container" presence="false">
+                    <xr-is-packed/>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_3_if/&lt;mpls_ldp_vrf_if_cfg_Interface_interface_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_if_af_cfg_AF_af_name&gt;/gg/discovery/xport_addr`</xr-path>
+                    <xr-xml-map>mpls_ldp_vrf_if_af_cfg:TransportAddress</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-pack-format>%d%s</xr-pack-format>
+                    <address-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%s</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_3_if/&lt;mpls_ldp_vrf_if_cfg_Interface_interface_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_if_af_cfg_AF_af_name&gt;/gg/discovery/xport_addr`0</xr-path>
+                      <xr-xml-map>mpls_ldp_vrf_if_af_cfg:AddressType</xr-xml-map>
+                      <xr-task>mpls-ldp</xr-task>
+                      <xr-sch-type>Enum</xr-sch-type>
+                      <type>
+                        <type-name>Mpls-ldp-transport-address</type-name>
+                      </type>
+                    </address-type>
+                    <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%s</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_3_if/&lt;mpls_ldp_vrf_if_cfg_Interface_interface_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_if_af_cfg_AF_af_name&gt;/gg/discovery/xport_addr`1</xr-path>
+                      <xr-xml-map>mpls_ldp_vrf_if_af_cfg:Address</xr-xml-map>
+                      <xr-task>mpls-ldp</xr-task>
+                      <xr-sch-type>IPAddress</xr-sch-type>
+                      <when>../address-type = 'address'</when>
+                      <type>
+                        <type-name>inet:ip-address-no-zone</type-name>
+                      </type>
+                    </address>
+                  </transport-address>
+                </discovery>
+                <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_3_if/&lt;mpls_ldp_vrf_if_cfg_Interface_interface_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_if_af_cfg_AF_af_name&gt;/a/submode</xr-path>
+                  <xr-xml-map>mpls_ldp_vrf_if_af_cfg:Enable</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>Configured</xr-sch-type>
+                  <type>
+                    <type-name>empty</type-name>
+                  </type>
+                </enable>
+                <af-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-pathformat>hex_zerox</xr-pathformat>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_3_if/&lt;mpls_ldp_vrf_if_cfg_Interface_interface_name&gt;/ord_2_af/&lt;mpls_ldp_vrf_if_af_cfg_AF_af_name&gt;/</xr-path>
+                  <xr-xml-map>mpls_ldp_vrf_if_af_cfg:AFName</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <xr-sch-arg-name>&lt;mpls_ldp_vrf_if_af_cfg_AF_af_name&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>Mpls-ldpaf-name</type-name>
+                  </type>
+                </af-name>
+              </af>
+            </afs>
+            <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_3_if/&lt;mpls_ldp_vrf_if_cfg_Interface_interface_name&gt;/a/submode</xr-path>
+              <xr-xml-map>mpls_ldp_vrf_if_cfg:Enable</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </enable>
+            <interface-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/ord_3_if/&lt;mpls_ldp_vrf_if_cfg_Interface_interface_name&gt;/</xr-path>
+              <xr-xml-map>mpls_ldp_vrf_if_cfg:InterfaceName</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <xr-sch-type>InterfaceForward</xr-sch-type>
+              <xr-sch-arg-name>&lt;mpls_ldp_vrf_if_cfg_Interface_interface_name&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-name>
+          </interface>
+        </interfaces>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/a/submode</xr-path>
+          <xr-xml-map>mpls_ldp_vrf_cfg:Enable</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </enable>
+        <vrf-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/mpls_ldp/ord_2_vrf/ord_2/&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;/</xr-path>
+          <xr-xml-map>mpls_ldp_common_cfg:VRFName</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-sch-type>VRF_Name</xr-sch-type>
+          <xr-sch-arg-name>&lt;mpls_ldp_common_cfg_VRF_vrf_name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </vrf-name>
+      </vrf>
+    </vrfs>
+    <global config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/</xr-path>
+      <xr-xml-map>mpls_ldp_common_cfg:Global</xr-xml-map>
+      <xr-task>mpls-ldp</xr-task>
+      <xr-scope>exported</xr-scope>
+      <entropy-label config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/kk/elc/</xr-path>
+        <xr-xml-map>mpls_ldp_gl_cfg:EntropyLabel</xr-xml-map>
+        <xr-task>mpls-ldp</xr-task>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/kk/elc/enable</xr-path>
+          <xr-xml-map>mpls_ldp_gl_cfg:Enable</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </enable>
+      </entropy-label>
+      <session config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/ii/session/</xr-path>
+        <xr-xml-map>mpls_ldp_gl_cfg:Session</xr-xml-map>
+        <xr-task>mpls-ldp</xr-task>
+        <backoff-time config="true" is-key="false" node="container" presence="false">
+          <xr-is-packed/>
+          <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/ii/session/backoff`</xr-path>
+          <xr-xml-map>mpls_ldp_gl_cfg:BackoffTime</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <initial-backoff-time config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/ii/session/backoff`0</xr-path>
+            <xr-xml-map>mpls_ldp_gl_cfg:InitialBackoffTime</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="5..2147483">
+              <type-name>uint32</type-name>
+            </type>
+            <default>15</default>
+          </initial-backoff-time>
+          <max-backoff-time config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/ii/session/backoff`1</xr-path>
+            <xr-xml-map>mpls_ldp_gl_cfg:MaxBackoffTime</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="5..2147483">
+              <type-name>uint32</type-name>
+            </type>
+            <default>120</default>
+          </max-backoff-time>
+        </backoff-time>
+        <hold-time config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/ii/session/holdtime</xr-path>
+          <xr-xml-map>mpls_ldp_gl_cfg:HoldTime</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="15..65535">
+            <type-name>uint32</type-name>
+          </type>
+          <default>180</default>
+        </hold-time>
+      </session>
+      <igp config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/ff/igp/</xr-path>
+        <xr-xml-map>mpls_ldp_gl_cfg:IGP</xr-xml-map>
+        <xr-task>mpls-ldp</xr-task>
+        <sync config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/ff/igp/sync/</xr-path>
+          <xr-xml-map>mpls_ldp_gl_cfg:Sync</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <delay config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/ff/igp/sync/delay/</xr-path>
+            <xr-xml-map>mpls_ldp_gl_cfg:Delay</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <on-session-up config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/ff/igp/sync/delay/ab/sess/up</xr-path>
+              <xr-xml-map>mpls_ldp_gl_cfg:OnSessionUp</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="5..300">
+                <type-name>uint32</type-name>
+              </type>
+            </on-session-up>
+            <on-proc-restart config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/ff/igp/sync/delay/aa/proc/restart</xr-path>
+              <xr-xml-map>mpls_ldp_gl_cfg:OnProcRestart</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="60..600">
+                <type-name>uint32</type-name>
+              </type>
+            </on-proc-restart>
+          </delay>
+        </sync>
+      </igp>
+      <enable-logging config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/bb/log/</xr-path>
+        <xr-xml-map>mpls_ldp_gl_cfg:EnableLogging</xr-xml-map>
+        <xr-task>mpls-ldp</xr-task>
+        <nsr config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/bb/log/c/nsr</xr-path>
+          <xr-xml-map>mpls_ldp_gl_cfg:NSR</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </nsr>
+        <neighbor-changes config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/bb/log/b/nbr</xr-path>
+          <xr-xml-map>mpls_ldp_gl_cfg:NeighborChanges</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </neighbor-changes>
+        <adjacency config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/bb/log/a/adj</xr-path>
+          <xr-xml-map>mpls_ldp_gl_cfg:Adjacency</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </adjacency>
+        <session-protection config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/bb/log/e/sp</xr-path>
+          <xr-xml-map>mpls_ldp_gl_cfg:SessionProtection</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </session-protection>
+        <gr-session-changes config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/bb/log/d/gr</xr-path>
+          <xr-xml-map>mpls_ldp_gl_cfg:GRSessionChanges</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </gr-session-changes>
+      </enable-logging>
+      <signalling config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/jj/sig/</xr-path>
+        <xr-xml-map>mpls_ldp_gl_cfg:Signalling</xr-xml-map>
+        <xr-task>mpls-ldp</xr-task>
+        <dscp config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/jj/sig/dscp</xr-path>
+          <xr-xml-map>mpls_ldp_gl_cfg:DSCP</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>Mpls-ldp-dscp</type-name>
+          </type>
+          <default>48</default>
+        </dscp>
+      </signalling>
+      <nsr config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/dd/nsr/</xr-path>
+        <xr-xml-map>mpls_ldp_gl_cfg:NSR</xr-xml-map>
+        <xr-task>mpls-ldp</xr-task>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/dd/nsr/enable</xr-path>
+          <xr-xml-map>mpls_ldp_gl_cfg:Enable</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </enable>
+      </nsr>
+      <graceful-restart config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/ee/gr/</xr-path>
+        <xr-xml-map>mpls_ldp_gl_cfg:GracefulRestart</xr-xml-map>
+        <xr-task>mpls-ldp</xr-task>
+        <reconnect-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/ee/gr/reconn_timeout</xr-path>
+          <xr-xml-map>mpls_ldp_gl_cfg:ReconnectTimeout</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="60..1800">
+            <type-name>uint32</type-name>
+          </type>
+          <default>120</default>
+        </reconnect-timeout>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/ee/gr/enable</xr-path>
+          <xr-xml-map>mpls_ldp_gl_cfg:Enable</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </enable>
+        <forwarding-hold-time config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/ee/gr/fwd_state_holdtime</xr-path>
+          <xr-xml-map>mpls_ldp_gl_cfg:ForwardingHoldTime</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="60..1800">
+            <type-name>uint32</type-name>
+          </type>
+          <default>180</default>
+        </forwarding-hold-time>
+      </graceful-restart>
+      <discovery config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/gg/discovery/</xr-path>
+        <xr-xml-map>mpls_ldp_gl_cfg:Discovery</xr-xml-map>
+        <xr-task>mpls-ldp</xr-task>
+        <link-hello config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/gg/discovery/hello/link/</xr-path>
+          <xr-xml-map>mpls_ldp_gl_cfg:LinkHello</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <interval config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/gg/discovery/hello/link/interval</xr-path>
+            <xr-xml-map>mpls_ldp_gl_cfg:Interval</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type>
+              <type-name>Mpls-ldp-interval-time</type-name>
+            </type>
+            <default>5</default>
+          </interval>
+          <hold-time config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/gg/discovery/hello/link/holdtime</xr-path>
+            <xr-xml-map>mpls_ldp_gl_cfg:HoldTime</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type>
+              <type-name>Mpls-ldp-hold-time</type-name>
+            </type>
+            <default>15</default>
+          </hold-time>
+        </link-hello>
+        <targeted-hello config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/gg/discovery/hello/trgt/</xr-path>
+          <xr-xml-map>mpls_ldp_gl_cfg:TargetedHello</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <interval config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/gg/discovery/hello/trgt/interval</xr-path>
+            <xr-xml-map>mpls_ldp_gl_cfg:Interval</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type>
+              <type-name>Mpls-ldp-interval-time</type-name>
+            </type>
+            <default>10</default>
+          </interval>
+          <hold-time config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/gg/discovery/hello/trgt/holdtime</xr-path>
+            <xr-xml-map>mpls_ldp_gl_cfg:HoldTime</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type>
+              <type-name>Mpls-ldp-hold-time</type-name>
+            </type>
+            <default>90</default>
+          </hold-time>
+        </targeted-hello>
+        <disable-instance-tlv config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/gg/discovery/aa/inst_tlv_disable</xr-path>
+          <xr-xml-map>mpls_ldp_gl_cfg:DisableInstanceTLV</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </disable-instance-tlv>
+        <disable-quick-start config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/gg/discovery/aa/quick/disable</xr-path>
+          <xr-xml-map>mpls_ldp_gl_cfg:DisableQuickStart</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </disable-quick-start>
+      </discovery>
+      <mldp config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/</xr-path>
+        <xr-xml-map>mldp_cfg:MLDP</xr-xml-map>
+        <xr-task>mpls-ldp</xr-task>
+        <vrfs config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/</xr-path>
+          <xr-xml-map>mldp_cfg:VRFTable</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-scope>exported</xr-scope>
+          <vrf config="true" key="vrf-name" node="list">
+            <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/</xr-path>
+            <xr-xml-map>mldp_cfg:VRF</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <xr-scope>exported</xr-scope>
+            <vrf-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/</xr-path>
+              <xr-xml-map>mldp_cfg:VRFName</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <xr-sch-arg-name>&lt;mldp_cfg_VRF_vrf_name&gt;</xr-sch-arg-name>
+              <type length="1..32">
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </vrf-name>
+            <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/a/submode</xr-path>
+              <xr-xml-map>mldp_cfg:Enable</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </enable>
+            <afs config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/</xr-path>
+              <xr-xml-map>mldp_af_cfg:AFTable</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <af config="true" key="af-name" node="list">
+                <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/</xr-path>
+                <xr-xml-map>mldp_af_cfg:AF</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-scope>exported</xr-scope>
+                <recursive-forwarding config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/fwd_rec/</xr-path>
+                  <xr-xml-map>mldp_af_cfg:RecursiveForwarding</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-primitive-type>uint32</xr-primitive-type>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/fwd_rec/en</xr-path>
+                    <xr-xml-map>mldp_af_cfg:Enable</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-sch-type>Configured</xr-sch-type>
+                    <type>
+                      <type-name>empty</type-name>
+                    </type>
+                  </enable>
+                  <policy config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-primitive-type>string</xr-primitive-type>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/fwd_rec/route_policy</xr-path>
+                    <xr-xml-map>mldp_af_cfg:Policy</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-sch-type>BoundedString</xr-sch-type>
+                    <type length="1..64">
+                      <type-name>string</type-name>
+                    </type>
+                  </policy>
+                </recursive-forwarding>
+                <mldp-recursive-fec config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/recursive_fec/</xr-path>
+                  <xr-xml-map>mldp_af_cfg:MLDPRecursiveFEC</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-primitive-type>uint32</xr-primitive-type>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/recursive_fec/en</xr-path>
+                    <xr-xml-map>mldp_af_cfg:Enable</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-compatibility>16.0</xr-compatibility>
+                    <xr-sch-type>Configured</xr-sch-type>
+                    <type>
+                      <type-name>empty</type-name>
+                    </type>
+                  </enable>
+                  <policy config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-primitive-type>string</xr-primitive-type>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/recursive_fec/route_policy</xr-path>
+                    <xr-xml-map>mldp_af_cfg:Policy</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-sch-type>BoundedString</xr-sch-type>
+                    <type length="1..64">
+                      <type-name>string</type-name>
+                    </type>
+                  </policy>
+                </mldp-recursive-fec>
+                <neighbor-policies config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/neighbor/</xr-path>
+                  <xr-xml-map>mldp_af_cfg:NeighborPolicyTable</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <neighbor-policy config="true" key="root-address policy-mode" node="list">
+                    <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/neighbor/&lt;mldp_af_cfg_NeighborPolicy_neighbor_address&gt;/&lt;mldp_af_cfg_NeighborPolicy_policy_mode&gt;/route_p</xr-path>
+                    <xr-xml-map>mldp_af_cfg:NeighborPolicy</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <root-address config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-data-handler>ignore</xr-data-handler>
+                      <xr-pathformat>hex_padded_nozerox</xr-pathformat>
+                      <xr-primitive-type>inaddr</xr-primitive-type>
+                      <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/neighbor/&lt;mldp_af_cfg_NeighborPolicy_neighbor_address&gt;/&lt;mldp_af_cfg_NeighborPolicy_policy_mode&gt;/route_policy</xr-path>
+                      <xr-xml-map>mldp_af_cfg:RootAddress</xr-xml-map>
+                      <xr-task>mpls-ldp</xr-task>
+                      <xr-sch-type>IPV4Address</xr-sch-type>
+                      <xr-sch-arg-name>&lt;mldp_af_cfg_NeighborPolicy_neighbor_address&gt;</xr-sch-arg-name>
+                      <type>
+                        <type-name>inet:ipv4-address-no-zone</type-name>
+                      </type>
+                    </root-address>
+                    <policy-mode config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-data-handler>ignore</xr-data-handler>
+                      <xr-pathformat>hex_zerox</xr-pathformat>
+                      <xr-primitive-type>uint32</xr-primitive-type>
+                      <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/neighbor/&lt;mldp_af_cfg_NeighborPolicy_neighbor_address&gt;/&lt;mldp_af_cfg_NeighborPolicy_policy_mode&gt;/route_policy</xr-path>
+                      <xr-xml-map>mldp_af_cfg:PolicyMode</xr-xml-map>
+                      <xr-task>mpls-ldp</xr-task>
+                      <xr-sch-type>Enum</xr-sch-type>
+                      <xr-sch-arg-name>&lt;mldp_af_cfg_NeighborPolicy_policy_mode&gt;</xr-sch-arg-name>
+                      <type>
+                        <type-name>Mldp-policy-mode</type-name>
+                      </type>
+                    </policy-mode>
+                    <route-policy config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-primitive-type>string</xr-primitive-type>
+                      <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/neighbor/&lt;mldp_af_cfg_NeighborPolicy_neighbor_address&gt;/&lt;mldp_af_cfg_NeighborPolicy_policy_mode&gt;/route_policy</xr-path>
+                      <xr-xml-map>mldp_af_cfg:RoutePolicy</xr-xml-map>
+                      <xr-task>mpls-ldp</xr-task>
+                      <xr-sch-type>BoundedString</xr-sch-type>
+                      <type length="1..64">
+                        <type-name>string</type-name>
+                      </type>
+                      <mandatory>true</mandatory>
+                    </route-policy>
+                  </neighbor-policy>
+                </neighbor-policies>
+                <mo-frr config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/mofrr/</xr-path>
+                  <xr-xml-map>mldp_af_cfg:MoFRR</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-primitive-type>uint32</xr-primitive-type>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/mofrr/en</xr-path>
+                    <xr-xml-map>mldp_af_cfg:Enable</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-compatibility>16.0</xr-compatibility>
+                    <xr-sch-type>Configured</xr-sch-type>
+                    <type>
+                      <type-name>empty</type-name>
+                    </type>
+                  </enable>
+                  <policy config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-primitive-type>string</xr-primitive-type>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/mofrr/route_policy</xr-path>
+                    <xr-xml-map>mldp_af_cfg:Policy</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-sch-type>BoundedString</xr-sch-type>
+                    <type length="1..64">
+                      <type-name>string</type-name>
+                    </type>
+                  </policy>
+                </mo-frr>
+                <make-before-break config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/mbb/</xr-path>
+                  <xr-xml-map>mldp_af_cfg:MakeBeforeBreak</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <signaling config="true" is-key="false" node="container" presence="false">
+                    <xr-is-packed/>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/mbb/delay`</xr-path>
+                    <xr-xml-map>mldp_af_cfg:Signaling</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-pack-format>%d%d</xr-pack-format>
+                    <forward-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/mbb/delay`0</xr-path>
+                      <xr-xml-map>mldp_af_cfg:ForwardDelay</xr-xml-map>
+                      <xr-task>mpls-ldp</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <type range="0..600">
+                        <type-name>uint32</type-name>
+                      </type>
+                    </forward-delay>
+                    <delete-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-is-packed/>
+                      <xr-pack-format>%d%d</xr-pack-format>
+                      <xr-pack-elem-size>1</xr-pack-elem-size>
+                      <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/mbb/delay`1</xr-path>
+                      <xr-xml-map>mldp_af_cfg:DeleteDelay</xr-xml-map>
+                      <xr-task>mpls-ldp</xr-task>
+                      <xr-sch-type>Range</xr-sch-type>
+                      <type range="0..60">
+                        <type-name>uint32</type-name>
+                      </type>
+                    </delete-delay>
+                  </signaling>
+                  <policy config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-primitive-type>string</xr-primitive-type>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/mbb/route_policy</xr-path>
+                    <xr-xml-map>mldp_af_cfg:Policy</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-sch-type>BoundedString</xr-sch-type>
+                    <type length="1..64">
+                      <type-name>string</type-name>
+                    </type>
+                  </policy>
+                </make-before-break>
+                <csc config="true" is-key="false" node="container" presence="false">
+                  <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/csc/</xr-path>
+                  <xr-xml-map>mldp_af_cfg:CSC</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-primitive-type>uint32</xr-primitive-type>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/csc/en</xr-path>
+                    <xr-xml-map>mldp_af_cfg:Enable</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-compatibility>16.0</xr-compatibility>
+                    <xr-sch-type>Configured</xr-sch-type>
+                    <type>
+                      <type-name>empty</type-name>
+                    </type>
+                  </enable>
+                </csc>
+                <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/a/submode</xr-path>
+                  <xr-xml-map>mldp_af_cfg:Enable</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>Configured</xr-sch-type>
+                  <type>
+                    <type-name>empty</type-name>
+                  </type>
+                </enable>
+                <mldp-rib-unicast-always config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/rib/unicast/always</xr-path>
+                  <xr-xml-map>mldp_af_cfg:MLDP_RIBUnicastAlways</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>Configured</xr-sch-type>
+                  <type>
+                    <type-name>empty</type-name>
+                  </type>
+                </mldp-rib-unicast-always>
+                <af-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-pathformat>hex_zerox</xr-pathformat>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_2/&lt;mldp_cfg_VRF_vrf_name&gt;/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/</xr-path>
+                  <xr-xml-map>mldp_af_cfg:AFName</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <xr-sch-arg-name>&lt;mldp_af_cfg_AF_af_name&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>Mpls-ldpaf-name</type-name>
+                  </type>
+                </af-name>
+              </af>
+            </afs>
+          </vrf>
+        </vrfs>
+        <default-vrf config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/</xr-path>
+          <xr-xml-map>mldp_cfg:DefaultVRF</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-scope>exported</xr-scope>
+          <afs config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/</xr-path>
+            <xr-xml-map>mldp_af_cfg:AFTable</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <af config="true" key="af-name" node="list">
+              <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/</xr-path>
+              <xr-xml-map>mldp_af_cfg:AF</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <xr-scope>exported</xr-scope>
+              <recursive-forwarding config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/fwd_rec/</xr-path>
+                <xr-xml-map>mldp_af_cfg:RecursiveForwarding</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/fwd_rec/en</xr-path>
+                  <xr-xml-map>mldp_af_cfg:Enable</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>Configured</xr-sch-type>
+                  <type>
+                    <type-name>empty</type-name>
+                  </type>
+                </enable>
+                <policy config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/fwd_rec/route_policy</xr-path>
+                  <xr-xml-map>mldp_af_cfg:Policy</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>BoundedString</xr-sch-type>
+                  <type length="1..64">
+                    <type-name>string</type-name>
+                  </type>
+                </policy>
+              </recursive-forwarding>
+              <mldp-recursive-fec config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/recursive_fec/</xr-path>
+                <xr-xml-map>mldp_af_cfg:MLDPRecursiveFEC</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/recursive_fec/en</xr-path>
+                  <xr-xml-map>mldp_af_cfg:Enable</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-compatibility>16.0</xr-compatibility>
+                  <xr-sch-type>Configured</xr-sch-type>
+                  <type>
+                    <type-name>empty</type-name>
+                  </type>
+                </enable>
+                <policy config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/recursive_fec/route_policy</xr-path>
+                  <xr-xml-map>mldp_af_cfg:Policy</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>BoundedString</xr-sch-type>
+                  <type length="1..64">
+                    <type-name>string</type-name>
+                  </type>
+                </policy>
+              </mldp-recursive-fec>
+              <neighbor-policies config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/neighbor/</xr-path>
+                <xr-xml-map>mldp_af_cfg:NeighborPolicyTable</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <neighbor-policy config="true" key="root-address policy-mode" node="list">
+                  <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/neighbor/&lt;mldp_af_cfg_NeighborPolicy_neighbor_address&gt;/&lt;mldp_af_cfg_NeighborPolicy_policy_mode&gt;/route_p</xr-path>
+                  <xr-xml-map>mldp_af_cfg:NeighborPolicy</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <root-address config="true" is-key="true" is-yang-key="true" node="leaf">
+                    <xr-data-handler>ignore</xr-data-handler>
+                    <xr-pathformat>hex_padded_nozerox</xr-pathformat>
+                    <xr-primitive-type>inaddr</xr-primitive-type>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/neighbor/&lt;mldp_af_cfg_NeighborPolicy_neighbor_address&gt;/&lt;mldp_af_cfg_NeighborPolicy_policy_mode&gt;/route_policy</xr-path>
+                    <xr-xml-map>mldp_af_cfg:RootAddress</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-sch-type>IPV4Address</xr-sch-type>
+                    <xr-sch-arg-name>&lt;mldp_af_cfg_NeighborPolicy_neighbor_address&gt;</xr-sch-arg-name>
+                    <type>
+                      <type-name>inet:ipv4-address-no-zone</type-name>
+                    </type>
+                  </root-address>
+                  <policy-mode config="true" is-key="true" is-yang-key="true" node="leaf">
+                    <xr-data-handler>ignore</xr-data-handler>
+                    <xr-pathformat>hex_zerox</xr-pathformat>
+                    <xr-primitive-type>uint32</xr-primitive-type>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/neighbor/&lt;mldp_af_cfg_NeighborPolicy_neighbor_address&gt;/&lt;mldp_af_cfg_NeighborPolicy_policy_mode&gt;/route_policy</xr-path>
+                    <xr-xml-map>mldp_af_cfg:PolicyMode</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-sch-type>Enum</xr-sch-type>
+                    <xr-sch-arg-name>&lt;mldp_af_cfg_NeighborPolicy_policy_mode&gt;</xr-sch-arg-name>
+                    <type>
+                      <type-name>Mldp-policy-mode</type-name>
+                    </type>
+                  </policy-mode>
+                  <route-policy config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-primitive-type>string</xr-primitive-type>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/neighbor/&lt;mldp_af_cfg_NeighborPolicy_neighbor_address&gt;/&lt;mldp_af_cfg_NeighborPolicy_policy_mode&gt;/route_policy</xr-path>
+                    <xr-xml-map>mldp_af_cfg:RoutePolicy</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-sch-type>BoundedString</xr-sch-type>
+                    <type length="1..64">
+                      <type-name>string</type-name>
+                    </type>
+                    <mandatory>true</mandatory>
+                  </route-policy>
+                </neighbor-policy>
+              </neighbor-policies>
+              <mo-frr config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/mofrr/</xr-path>
+                <xr-xml-map>mldp_af_cfg:MoFRR</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/mofrr/en</xr-path>
+                  <xr-xml-map>mldp_af_cfg:Enable</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-compatibility>16.0</xr-compatibility>
+                  <xr-sch-type>Configured</xr-sch-type>
+                  <type>
+                    <type-name>empty</type-name>
+                  </type>
+                </enable>
+                <policy config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/mofrr/route_policy</xr-path>
+                  <xr-xml-map>mldp_af_cfg:Policy</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>BoundedString</xr-sch-type>
+                  <type length="1..64">
+                    <type-name>string</type-name>
+                  </type>
+                </policy>
+              </mo-frr>
+              <make-before-break config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/mbb/</xr-path>
+                <xr-xml-map>mldp_af_cfg:MakeBeforeBreak</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <signaling config="true" is-key="false" node="container" presence="false">
+                  <xr-is-packed/>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/mbb/delay`</xr-path>
+                  <xr-xml-map>mldp_af_cfg:Signaling</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-pack-format>%d%d</xr-pack-format>
+                  <forward-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/mbb/delay`0</xr-path>
+                    <xr-xml-map>mldp_af_cfg:ForwardDelay</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <type range="0..600">
+                      <type-name>uint32</type-name>
+                    </type>
+                  </forward-delay>
+                  <delete-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/mbb/delay`1</xr-path>
+                    <xr-xml-map>mldp_af_cfg:DeleteDelay</xr-xml-map>
+                    <xr-task>mpls-ldp</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <type range="0..60">
+                      <type-name>uint32</type-name>
+                    </type>
+                  </delete-delay>
+                </signaling>
+                <policy config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/mbb/route_policy</xr-path>
+                  <xr-xml-map>mldp_af_cfg:Policy</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-sch-type>BoundedString</xr-sch-type>
+                  <type length="1..64">
+                    <type-name>string</type-name>
+                  </type>
+                </policy>
+              </make-before-break>
+              <csc config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/csc/</xr-path>
+                <xr-xml-map>mldp_af_cfg:CSC</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/csc/en</xr-path>
+                  <xr-xml-map>mldp_af_cfg:Enable</xr-xml-map>
+                  <xr-task>mpls-ldp</xr-task>
+                  <xr-compatibility>16.0</xr-compatibility>
+                  <xr-sch-type>Configured</xr-sch-type>
+                  <type>
+                    <type-name>empty</type-name>
+                  </type>
+                </enable>
+              </csc>
+              <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/a/submode</xr-path>
+                <xr-xml-map>mldp_af_cfg:Enable</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-sch-type>Configured</xr-sch-type>
+                <type>
+                  <type-name>empty</type-name>
+                </type>
+              </enable>
+              <mldp-rib-unicast-always config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/rib/unicast/always</xr-path>
+                <xr-xml-map>mldp_af_cfg:MLDP_RIBUnicastAlways</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-sch-type>Configured</xr-sch-type>
+                <type>
+                  <type-name>empty</type-name>
+                </type>
+              </mldp-rib-unicast-always>
+              <af-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-pathformat>hex_zerox</xr-pathformat>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_2_vrf/ord_1/default/ord_2_af/&lt;mldp_af_cfg_AF_af_name&gt;/</xr-path>
+                <xr-xml-map>mldp_af_cfg:AFName</xr-xml-map>
+                <xr-task>mpls-ldp</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-sch-arg-name>&lt;mldp_af_cfg_AF_af_name&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>Mpls-ldpaf-name</type-name>
+                </type>
+              </af-name>
+            </af>
+          </afs>
+        </default-vrf>
+        <mldp-global config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_1_gl/</xr-path>
+          <xr-xml-map>mldp_cfg:MLDP_Global</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-scope>exported</xr-scope>
+          <logging config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_1_gl/aa/log/</xr-path>
+            <xr-xml-map>mldp_cfg:Logging</xr-xml-map>
+            <xr-task>mpls-ldp</xr-task>
+            <notifications config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/ord_1_gl/aa/log/notif</xr-path>
+              <xr-xml-map>mldp_cfg:Notifications</xr-xml-map>
+              <xr-task>mpls-ldp</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </notifications>
+          </logging>
+        </mldp-global>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/yy/mldp/a/submode</xr-path>
+          <xr-xml-map>mldp_cfg:Enable</xr-xml-map>
+          <xr-task>mpls-ldp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </enable>
+      </mldp>
+      <disable-implicit-ipv4 config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/aa/implicit_ipv4_disable</xr-path>
+        <xr-xml-map>mpls_ldp_gl_cfg:DisableImplicitIPv4</xr-xml-map>
+        <xr-task>mpls-ldp</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </disable-implicit-ipv4>
+      <ltrace-buf-multiplier config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/mpls_ldp/ord_1_gl/aa/ltrace_buf_multi</xr-path>
+        <xr-xml-map>mpls_ldp_gl_cfg:LtraceBufMultiplier</xr-xml-map>
+        <xr-task>mpls-ldp</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..5">
+          <type-name>uint32</type-name>
+        </type>
+        <default>1</default>
+      </ltrace-buf-multiplier>
+    </global>
+    <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/mpls_ldp/ord_0/submode</xr-path>
+      <xr-xml-map>mpls_ldp_common_cfg:Enable</xr-xml-map>
+      <xr-task>mpls-ldp</xr-task>
+      <xr-sch-type>Configured</xr-sch-type>
+      <type>
+        <type-name>empty</type-name>
+      </type>
+      <mandatory>true</mandatory>
+    </enable>
+  </mpls-ldp>
+</Cisco-IOS-XR-mpls-ldp-cfg>

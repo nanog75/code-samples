@@ -1,0 +1,1403 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-tunnel-vpdn-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-tunnel-vpdn-oper" revision="2015-11-09">
+  <files>
+    <file revision="2015-11-09" submodule="false">Cisco-IOS-XR-tunnel-vpdn-oper.yang</file>
+    <file revision="2015-11-09" submodule="true">Cisco-IOS-XR-tunnel-vpdn-oper-sub1.yang</file>
+  </files>
+  <prefix>tunnel-vpdn-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="Vpdn-failcode">
+    <type node="enumeration">
+      <enum>unknown</enum>
+      <enum>peer-action</enum>
+      <enum>authentication</enum>
+      <enum>authentication-error</enum>
+      <enum>authentication-failed</enum>
+      <enum>authorization</enum>
+      <enum>authorization-failed</enum>
+      <enum>home-gatewayfailure</enum>
+      <enum>connection-termination</enum>
+      <enum>no-resources-available</enum>
+      <enum>timer-expiry</enum>
+      <enum>session-mid-exceeded</enum>
+      <enum>soft-shut</enum>
+      <enum>session-limit-exceeded</enum>
+      <enum>administrative</enum>
+      <enum>link-failure</enum>
+      <enum>security</enum>
+      <enum>tunnel-in-resync</enum>
+      <enum>call-prarmeters</enum>
+    </type>
+  </typedef>
+  <typedef name="Vpdn-state">
+    <type node="enumeration">
+      <enum>initial-state</enum>
+      <enum>init-sync-in-progress</enum>
+      <enum>steady-state</enum>
+    </type>
+  </typedef>
+  <typedef name="Lsg-status">
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">active</enum>
+      <enum value="2">down</enum>
+      <enum value="3">testable</enum>
+      <enum value="4">testing</enum>
+    </type>
+  </typedef>
+  <typedef name="Tos-mode">
+    <type node="enumeration">
+      <enum value="0">default</enum>
+      <enum value="1">set</enum>
+      <enum value="2">reflect</enum>
+    </type>
+  </typedef>
+  <typedef name="Session-state">
+    <type node="enumeration">
+      <enum>idle</enum>
+      <enum>connected</enum>
+      <enum>established</enum>
+    </type>
+  </typedef>
+  <vpdn config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/vpdn/gl/</xr-path>
+    <xr-xml-map>vpdn_oper:VPDN</xr-xml-map>
+    <xr-task>tunnel</xr-task>
+    <sessions config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/vpdn/gl/session/detail/</xr-path>
+      <xr-xml-map>vpdn_oper:SessionTable</xr-xml-map>
+      <xr-task>tunnel</xr-task>
+      <xr-filterlist>VPDNCombinationFilter</xr-filterlist>
+      <session config="false" key="session-label" node="list">
+        <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;</xr-path>
+        <xr-xml-map>vpdn_oper:Session</xr-xml-map>
+        <xr-task>tunnel</xr-task>
+        <xr-bag-grp-name>vpdn_edm_show_session_det</xr-bag-grp-name>
+        <xr-bag>vpdn_edm.bag</xr-bag>
+        <session-label config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;</xr-path>
+          <xr-xml-map>vpdn_oper:SessionLabel</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-sch-type>HexInteger</xr-sch-type>
+          <xr-sch-arg-name>&lt;vpdn_oper_Session_session_label&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Hex-integer</type-name>
+          </type>
+        </session-label>
+        <session config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Session</xr-path>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-version>0 1</xr-bag-version>
+          <last-change config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Session.LastChange</xr-path>
+            <xr-xml-map>vpdn_edm:LastChange</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </last-change>
+          <interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Session.InterfaceName</xr-path>
+            <xr-xml-map>vpdn_edm:InterfaceName</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+          </interface-name>
+          <username config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Session.Username</xr-path>
+            <xr-xml-map>vpdn_edm:Username</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </username>
+          <domain-name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Session.DomainName</xr-path>
+            <xr-xml-map>vpdn_edm:DomainName</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </domain-name>
+          <state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Session.State</xr-path>
+            <xr-xml-map>vpdn_edm:State</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>Session-state</type-name>
+            </type>
+          </state>
+          <l2tp-session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Session.L2TPSessionID</xr-path>
+            <xr-xml-map>vpdn_edm:L2TPSessionID</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </l2tp-session-id>
+          <l2tp-tunnel-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Session.L2TPTunnelID</xr-path>
+            <xr-xml-map>vpdn_edm:L2TPTunnelID</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </l2tp-tunnel-id>
+          <srg-slave config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Session.srg_slave</xr-path>
+            <xr-xml-map>vpdn_edm:srg_slave</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </srg-slave>
+        </session>
+        <l2tp config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.L2TP</xr-path>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-version>0 1</xr-bag-version>
+          <local-endpoint config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.L2TP.LocalEndpoint</xr-path>
+            <xr-xml-map>vpdn_edm:LocalEndpoint</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </local-endpoint>
+          <remote-endpoint config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.L2TP.RemoteEndpoint</xr-path>
+            <xr-xml-map>vpdn_edm:RemoteEndpoint</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>inet:ipv4-address</type-name>
+            </type>
+          </remote-endpoint>
+          <call-serial-number config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.L2TP.CallSerialNumber</xr-path>
+            <xr-xml-map>vpdn_edm:CallSerialNumber</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </call-serial-number>
+          <is-l2tp-class-attribute-mask-set config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.L2TP.IsL2TPClassAttributeMaskSet</xr-path>
+            <xr-xml-map>vpdn_edm:IsL2TPClassAttributeMaskSet</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </is-l2tp-class-attribute-mask-set>
+          <local-tunnel-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.L2TP.LocalTunnelID</xr-path>
+            <xr-xml-map>vpdn_edm:LocalTunnelID</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </local-tunnel-id>
+          <remote-tunnel-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.L2TP.RemoteTunnelID</xr-path>
+            <xr-xml-map>vpdn_edm:RemoteTunnelID</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </remote-tunnel-id>
+          <local-session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.L2TP.LocalSessionID</xr-path>
+            <xr-xml-map>vpdn_edm:LocalSessionID</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </local-session-id>
+          <remote-session-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.L2TP.RemoteSessionID</xr-path>
+            <xr-xml-map>vpdn_edm:RemoteSessionID</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </remote-session-id>
+          <remote-port config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.L2TP.RemotePort</xr-path>
+            <xr-xml-map>vpdn_edm:RemotePort</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </remote-port>
+          <tunnel-client-authentication-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.L2TP.TunnelClientAuthenticationID</xr-path>
+            <xr-xml-map>vpdn_edm:TunnelClientAuthenticationID</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </tunnel-client-authentication-id>
+          <tunnel-server-authentication-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.L2TP.TunnelServerAuthenticationID</xr-path>
+            <xr-xml-map>vpdn_edm:TunnelServerAuthenticationID</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </tunnel-server-authentication-id>
+          <tunnel-assignment-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.L2TP.TunnelAssignmentID</xr-path>
+            <xr-xml-map>vpdn_edm:TunnelAssignmentID</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </tunnel-assignment-id>
+          <is-tunnel-authentication-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.L2TP.IsTunnelAuthenticationEnabled</xr-path>
+            <xr-xml-map>vpdn_edm:IsTunnelAuthenticationEnabled</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </is-tunnel-authentication-enabled>
+        </l2tp>
+        <subscriber config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Subscriber</xr-path>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-version>0 1</xr-bag-version>
+          <nas-port-id-val config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Subscriber.NASPortIDVal</xr-path>
+            <xr-xml-map>vpdn_edm:NASPortIDVal</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </nas-port-id-val>
+          <nas-port-type config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Subscriber.nas_port_type</xr-path>
+            <xr-xml-map>vpdn_edm:nas_port_type</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </nas-port-type>
+          <physical-channel-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Subscriber.PhysicalChannelID</xr-path>
+            <xr-xml-map>vpdn_edm:PhysicalChannelID</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </physical-channel-id>
+          <receive-connect-speed config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Subscriber.ReceiveConnectSpeed</xr-path>
+            <xr-xml-map>vpdn_edm:ReceiveConnectSpeed</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </receive-connect-speed>
+          <transmit-connect-speed config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Subscriber.TransmitConnectSpeed</xr-path>
+            <xr-xml-map>vpdn_edm:TransmitConnectSpeed</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </transmit-connect-speed>
+        </subscriber>
+        <configuration config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Configuration</xr-path>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-version>0 1</xr-bag-version>
+          <vpn-id config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Configuration.VPN_ID</xr-path>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-version>0 1</xr-bag-version>
+            <oui config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Configuration.VPN_ID.OUI</xr-path>
+              <xr-xml-map>vpdn_edm:OUI</xr-xml-map>
+              <xr-task>tunnel</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </oui>
+            <index config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Configuration.VPN_ID.Index</xr-path>
+              <xr-xml-map>vpdn_edm:Index</xr-xml-map>
+              <xr-task>tunnel</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </index>
+          </vpn-id>
+          <template-name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Configuration.TemplateName</xr-path>
+            <xr-xml-map>vpdn_edm:TemplateName</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </template-name>
+          <vrf-name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Configuration.VRFName</xr-path>
+            <xr-xml-map>vpdn_edm:VRFName</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </vrf-name>
+          <l2tp-busy-timeout config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Configuration.L2TPBusyTimeout</xr-path>
+            <xr-xml-map>vpdn_edm:L2TPBusyTimeout</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </l2tp-busy-timeout>
+          <tos-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Configuration.TOSMode</xr-path>
+            <xr-xml-map>vpdn_edm:TOSMode</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>Tos-mode</type-name>
+            </type>
+          </tos-mode>
+          <tos config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Configuration.TOS</xr-path>
+            <xr-xml-map>vpdn_edm:TOS</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </tos>
+          <dsl-line-forwarding config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.Configuration.DSLLineForwarding</xr-path>
+            <xr-xml-map>vpdn_edm:DSLLineForwarding</xr-xml-map>
+            <xr-task>tunnel</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </dsl-line-forwarding>
+        </configuration>
+        <setup-time config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.SetupTime</xr-path>
+          <xr-xml-map>vpdn_edm:SetupTime</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </setup-time>
+        <parent-interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/session/detail/&lt;vpdn_oper_Session_session_label&gt;~vpdn_edm_show_session_det.ParentInterfaceName</xr-path>
+          <xr-xml-map>vpdn_edm:ParentInterfaceName</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </parent-interface-name>
+      </session>
+    </sessions>
+    <tunnel-destinations config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/vpdn/gl/lsg/</xr-path>
+      <xr-xml-map>vpdn_oper:TunnelDestinationTable</xr-xml-map>
+      <xr-task>tunnel</xr-task>
+      <xr-filterlist>VPDN_LSGFilter</xr-filterlist>
+      <tunnel-destination config="false" node="list">
+        <xr-path>/oper/vpdn/gl/lsg/&lt;vpdn_oper_TunnelDestination_vrfname&gt;,&lt;vpdn_oper_TunnelDestination_addr&gt;</xr-path>
+        <xr-xml-map>vpdn_oper:TunnelDestination</xr-xml-map>
+        <xr-task>tunnel</xr-task>
+        <xr-bag-grp-name>vpdn_lsg_node</xr-bag-grp-name>
+        <xr-bag>vpdn_edm.bag</xr-bag>
+        <vrf-name config="false" is-key="true" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/vpdn/gl/lsg/&lt;vpdn_oper_TunnelDestination_vrfname&gt;,&lt;vpdn_oper_TunnelDestination_addr&gt;</xr-path>
+          <xr-xml-map>vpdn_oper:VRFName</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-sch-type>VRF_Name</xr-sch-type>
+          <xr-sch-arg-name>&lt;vpdn_oper_TunnelDestination_vrfname&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </vrf-name>
+        <address config="false" is-key="true" is-yang-key="false" node="leaf">
+          <xr-pathformat>hex_nozerox</xr-pathformat>
+          <xr-primitive-type>inaddr</xr-primitive-type>
+          <xr-path>/oper/vpdn/gl/lsg/&lt;vpdn_oper_TunnelDestination_vrfname&gt;,&lt;vpdn_oper_TunnelDestination_addr&gt;</xr-path>
+          <xr-xml-map>vpdn_oper:Address</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-sch-type>IPV4Address</xr-sch-type>
+          <xr-sch-arg-name>&lt;vpdn_oper_TunnelDestination_addr&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>inet:ipv4-address-no-zone</type-name>
+          </type>
+        </address>
+        <vrf-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/lsg/&lt;vpdn_oper_TunnelDestination_vrfname&gt;,&lt;vpdn_oper_TunnelDestination_addr&gt;~vpdn_lsg_node.VRFName</xr-path>
+          <xr-xml-map>vpdn_edm:vrf-name-xr</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </vrf-name-xr>
+        <load config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/lsg/&lt;vpdn_oper_TunnelDestination_vrfname&gt;,&lt;vpdn_oper_TunnelDestination_addr&gt;~vpdn_lsg_node.Load</xr-path>
+          <xr-xml-map>vpdn_edm:Load</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </load>
+        <status config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/lsg/&lt;vpdn_oper_TunnelDestination_vrfname&gt;,&lt;vpdn_oper_TunnelDestination_addr&gt;~vpdn_lsg_node.Status</xr-path>
+          <xr-xml-map>vpdn_edm:Status</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>Lsg-status</type-name>
+          </type>
+        </status>
+        <connects config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/lsg/&lt;vpdn_oper_TunnelDestination_vrfname&gt;,&lt;vpdn_oper_TunnelDestination_addr&gt;~vpdn_lsg_node.Connects</xr-path>
+          <xr-xml-map>vpdn_edm:Connects</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </connects>
+        <disconnects config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/lsg/&lt;vpdn_oper_TunnelDestination_vrfname&gt;,&lt;vpdn_oper_TunnelDestination_addr&gt;~vpdn_lsg_node.Disconnects</xr-path>
+          <xr-xml-map>vpdn_edm:Disconnects</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </disconnects>
+        <retry config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/lsg/&lt;vpdn_oper_TunnelDestination_vrfname&gt;,&lt;vpdn_oper_TunnelDestination_addr&gt;~vpdn_lsg_node.Retry</xr-path>
+          <xr-xml-map>vpdn_edm:Retry</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </retry>
+        <status-change-time config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/lsg/&lt;vpdn_oper_TunnelDestination_vrfname&gt;,&lt;vpdn_oper_TunnelDestination_addr&gt;~vpdn_lsg_node.StatusChangeTime</xr-path>
+          <xr-xml-map>vpdn_edm:StatusChangeTime</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </status-change-time>
+      </tunnel-destination>
+    </tunnel-destinations>
+    <vpdn-mirroring config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/vpdn/gl/mirroring</xr-path>
+      <xr-xml-map>vpdn_oper:VPDNMirroring</xr-xml-map>
+      <xr-task>tunnel</xr-task>
+      <xr-bag-grp-name>vpdn_mirroring_stats</xr-bag-grp-name>
+      <xr-bag>vpdn_edm.bag</xr-bag>
+      <qad-send-stats config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats</xr-path>
+        <xr-task>tunnel</xr-task>
+        <xr-bag-version>0 1</xr-bag-version>
+        <msgs-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats.msgs_sent</xr-path>
+          <xr-xml-map>vpdn_edm:msgs_sent</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </msgs-sent>
+        <acks-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats.acks_sent</xr-path>
+          <xr-xml-map>vpdn_edm:acks_sent</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </acks-sent>
+        <no-partner config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats.no_partner</xr-path>
+          <xr-xml-map>vpdn_edm:no_partner</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </no-partner>
+        <sends-failed config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats.sends_failed</xr-path>
+          <xr-xml-map>vpdn_edm:sends_failed</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </sends-failed>
+        <acks-failed config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats.acks_failed</xr-path>
+          <xr-xml-map>vpdn_edm:acks_failed</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </acks-failed>
+        <pending-acks config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats.pending_acks</xr-path>
+          <xr-xml-map>vpdn_edm:pending_acks</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </pending-acks>
+        <timeouts config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats.timeouts</xr-path>
+          <xr-xml-map>vpdn_edm:timeouts</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </timeouts>
+        <suspends config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats.suspends</xr-path>
+          <xr-xml-map>vpdn_edm:suspends</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </suspends>
+        <resumes config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats.resumes</xr-path>
+          <xr-xml-map>vpdn_edm:resumes</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </resumes>
+        <sends-fragment config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats.sends_fragment</xr-path>
+          <xr-xml-map>vpdn_edm:sends_fragment</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </sends-fragment>
+        <qad-last-seq-number config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats.qad_last_seq_number</xr-path>
+          <xr-xml-map>vpdn_edm:qad_last_seq_number</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </qad-last-seq-number>
+        <qad-frag-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats.qad_frag_count</xr-path>
+          <xr-xml-map>vpdn_edm:qad_frag_count</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </qad-frag-count>
+        <qad-ack-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats.qad_ack_count</xr-path>
+          <xr-xml-map>vpdn_edm:qad_ack_count</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </qad-ack-count>
+        <qad-unknown-acks config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats.qad_unknown_acks</xr-path>
+          <xr-xml-map>vpdn_edm:qad_unknown_acks</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </qad-unknown-acks>
+        <qad-timeouts config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats.qad_timeouts</xr-path>
+          <xr-xml-map>vpdn_edm:qad_timeouts</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </qad-timeouts>
+        <qad-rx-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats.qad_rx_count</xr-path>
+          <xr-xml-map>vpdn_edm:qad_rx_count</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </qad-rx-count>
+        <qad-rx-list-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats.qad_rx_list_count</xr-path>
+          <xr-xml-map>vpdn_edm:qad_rx_list_count</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </qad-rx-list-count>
+        <qad-rx-list-q-size config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats.qad_rx_list_q_size</xr-path>
+          <xr-xml-map>vpdn_edm:qad_rx_list_q_size</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </qad-rx-list-q-size>
+        <qad-rx-first-seq-number config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats.qad_rx_first_seq_number</xr-path>
+          <xr-xml-map>vpdn_edm:qad_rx_first_seq_number</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </qad-rx-first-seq-number>
+      </qad-send-stats>
+      <qad-recv-stats config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_recv_stats</xr-path>
+        <xr-task>tunnel</xr-task>
+        <xr-bag-version>0 1</xr-bag-version>
+        <msgs-recvd config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_recv_stats.msgs_recvd</xr-path>
+          <xr-xml-map>vpdn_edm:msgs_recvd</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </msgs-recvd>
+        <acks-recvd config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_recv_stats.acks_recvd</xr-path>
+          <xr-xml-map>vpdn_edm:acks_recvd</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </acks-recvd>
+        <recvd-acks-failed config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_recv_stats.recvd_acks_failed</xr-path>
+          <xr-xml-map>vpdn_edm:recvd_acks_failed</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </recvd-acks-failed>
+        <init-drops config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_recv_stats.init_drops</xr-path>
+          <xr-xml-map>vpdn_edm:init_drops</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </init-drops>
+        <msg-drops config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_recv_stats.msg_drops</xr-path>
+          <xr-xml-map>vpdn_edm:msg_drops</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </msg-drops>
+        <ooo-drops config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_recv_stats.ooo_drops</xr-path>
+          <xr-xml-map>vpdn_edm:ooo_drops</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ooo-drops>
+        <stale-msgs config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_recv_stats.stale_msgs</xr-path>
+          <xr-xml-map>vpdn_edm:stale_msgs</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </stale-msgs>
+      </qad-recv-stats>
+      <qad-send-stats-last-clear config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats_last_clear</xr-path>
+        <xr-task>tunnel</xr-task>
+        <xr-bag-version>0 1</xr-bag-version>
+        <msgs-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats_last_clear.msgs_sent</xr-path>
+          <xr-xml-map>vpdn_edm:msgs_sent</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </msgs-sent>
+        <acks-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats_last_clear.acks_sent</xr-path>
+          <xr-xml-map>vpdn_edm:acks_sent</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </acks-sent>
+        <no-partner config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats_last_clear.no_partner</xr-path>
+          <xr-xml-map>vpdn_edm:no_partner</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </no-partner>
+        <sends-failed config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats_last_clear.sends_failed</xr-path>
+          <xr-xml-map>vpdn_edm:sends_failed</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </sends-failed>
+        <acks-failed config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats_last_clear.acks_failed</xr-path>
+          <xr-xml-map>vpdn_edm:acks_failed</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </acks-failed>
+        <pending-acks config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats_last_clear.pending_acks</xr-path>
+          <xr-xml-map>vpdn_edm:pending_acks</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </pending-acks>
+        <timeouts config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats_last_clear.timeouts</xr-path>
+          <xr-xml-map>vpdn_edm:timeouts</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </timeouts>
+        <suspends config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats_last_clear.suspends</xr-path>
+          <xr-xml-map>vpdn_edm:suspends</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </suspends>
+        <resumes config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats_last_clear.resumes</xr-path>
+          <xr-xml-map>vpdn_edm:resumes</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </resumes>
+        <sends-fragment config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats_last_clear.sends_fragment</xr-path>
+          <xr-xml-map>vpdn_edm:sends_fragment</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </sends-fragment>
+        <qad-last-seq-number config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats_last_clear.qad_last_seq_number</xr-path>
+          <xr-xml-map>vpdn_edm:qad_last_seq_number</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </qad-last-seq-number>
+        <qad-frag-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats_last_clear.qad_frag_count</xr-path>
+          <xr-xml-map>vpdn_edm:qad_frag_count</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </qad-frag-count>
+        <qad-ack-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats_last_clear.qad_ack_count</xr-path>
+          <xr-xml-map>vpdn_edm:qad_ack_count</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </qad-ack-count>
+        <qad-unknown-acks config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats_last_clear.qad_unknown_acks</xr-path>
+          <xr-xml-map>vpdn_edm:qad_unknown_acks</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </qad-unknown-acks>
+        <qad-timeouts config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats_last_clear.qad_timeouts</xr-path>
+          <xr-xml-map>vpdn_edm:qad_timeouts</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </qad-timeouts>
+        <qad-rx-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats_last_clear.qad_rx_count</xr-path>
+          <xr-xml-map>vpdn_edm:qad_rx_count</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </qad-rx-count>
+        <qad-rx-list-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats_last_clear.qad_rx_list_count</xr-path>
+          <xr-xml-map>vpdn_edm:qad_rx_list_count</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </qad-rx-list-count>
+        <qad-rx-list-q-size config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats_last_clear.qad_rx_list_q_size</xr-path>
+          <xr-xml-map>vpdn_edm:qad_rx_list_q_size</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </qad-rx-list-q-size>
+        <qad-rx-first-seq-number config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_send_stats_last_clear.qad_rx_first_seq_number</xr-path>
+          <xr-xml-map>vpdn_edm:qad_rx_first_seq_number</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </qad-rx-first-seq-number>
+      </qad-send-stats-last-clear>
+      <qad-recv-stats-last-clear config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_recv_stats_last_clear</xr-path>
+        <xr-task>tunnel</xr-task>
+        <xr-bag-version>0 1</xr-bag-version>
+        <msgs-recvd config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_recv_stats_last_clear.msgs_recvd</xr-path>
+          <xr-xml-map>vpdn_edm:msgs_recvd</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </msgs-recvd>
+        <acks-recvd config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_recv_stats_last_clear.acks_recvd</xr-path>
+          <xr-xml-map>vpdn_edm:acks_recvd</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </acks-recvd>
+        <recvd-acks-failed config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_recv_stats_last_clear.recvd_acks_failed</xr-path>
+          <xr-xml-map>vpdn_edm:recvd_acks_failed</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </recvd-acks-failed>
+        <init-drops config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_recv_stats_last_clear.init_drops</xr-path>
+          <xr-xml-map>vpdn_edm:init_drops</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </init-drops>
+        <msg-drops config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_recv_stats_last_clear.msg_drops</xr-path>
+          <xr-xml-map>vpdn_edm:msg_drops</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </msg-drops>
+        <ooo-drops config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_recv_stats_last_clear.ooo_drops</xr-path>
+          <xr-xml-map>vpdn_edm:ooo_drops</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </ooo-drops>
+        <stale-msgs config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.qad_recv_stats_last_clear.stale_msgs</xr-path>
+          <xr-xml-map>vpdn_edm:stale_msgs</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </stale-msgs>
+      </qad-recv-stats-last-clear>
+      <sync-not-conn-cnt config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.sync_not_conn_cnt</xr-path>
+        <xr-xml-map>vpdn_edm:sync_not_conn_cnt</xr-xml-map>
+        <xr-task>tunnel</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>0 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </sync-not-conn-cnt>
+      <sso-err-cnt config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.sso_err_cnt</xr-path>
+        <xr-xml-map>vpdn_edm:sso_err_cnt</xr-xml-map>
+        <xr-task>tunnel</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>0 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </sso-err-cnt>
+      <sso-batch-err-cnt config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.sso_batch_err_cnt</xr-path>
+        <xr-xml-map>vpdn_edm:sso_batch_err_cnt</xr-xml-map>
+        <xr-task>tunnel</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>0 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </sso-batch-err-cnt>
+      <alloc-err-cnt config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.alloc_err_cnt</xr-path>
+        <xr-xml-map>vpdn_edm:alloc_err_cnt</xr-xml-map>
+        <xr-task>tunnel</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>0 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </alloc-err-cnt>
+      <alloc-cnt config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/vpdn/gl/mirroring~vpdn_mirroring_stats.alloc_cnt</xr-path>
+        <xr-xml-map>vpdn_edm:alloc_cnt</xr-xml-map>
+        <xr-task>tunnel</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>0 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </alloc-cnt>
+    </vpdn-mirroring>
+    <vpdn-redundancy config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/vpdn/gl/redundancy_info</xr-path>
+      <xr-xml-map>vpdn_oper:VPDNRedundancy</xr-xml-map>
+      <xr-task>tunnel</xr-task>
+      <xr-bag-grp-name>vpdn_redundancy</xr-bag-grp-name>
+      <xr-bag>vpdn_edm.bag</xr-bag>
+      <session-total config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/vpdn/gl/redundancy_info~vpdn_redundancy.session_total</xr-path>
+        <xr-xml-map>vpdn_edm:session_total</xr-xml-map>
+        <xr-task>tunnel</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>0 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </session-total>
+      <session-synced config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/vpdn/gl/redundancy_info~vpdn_redundancy.session_synced</xr-path>
+        <xr-xml-map>vpdn_edm:session_synced</xr-xml-map>
+        <xr-task>tunnel</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>0 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </session-synced>
+      <state config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/vpdn/gl/redundancy_info~vpdn_redundancy.state</xr-path>
+        <xr-xml-map>vpdn_edm:state</xr-xml-map>
+        <xr-task>tunnel</xr-task>
+        <xr-bag-primitive-type>int</xr-bag-primitive-type>
+        <xr-bag-version>0 1</xr-bag-version>
+        <type>
+          <type-name>Vpdn-state</type-name>
+        </type>
+      </state>
+      <start-time config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/vpdn/gl/redundancy_info~vpdn_redundancy.start_time</xr-path>
+        <xr-xml-map>vpdn_edm:start_time</xr-xml-map>
+        <xr-task>tunnel</xr-task>
+        <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+        <xr-bag-version>0 1</xr-bag-version>
+        <type>
+          <type-name>uint64</type-name>
+        </type>
+      </start-time>
+      <finish-time config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/vpdn/gl/redundancy_info~vpdn_redundancy.finish_time</xr-path>
+        <xr-xml-map>vpdn_edm:finish_time</xr-xml-map>
+        <xr-task>tunnel</xr-task>
+        <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+        <xr-bag-version>0 1</xr-bag-version>
+        <type>
+          <type-name>uint64</type-name>
+        </type>
+      </finish-time>
+      <abort-time config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/vpdn/gl/redundancy_info~vpdn_redundancy.abort_time</xr-path>
+        <xr-xml-map>vpdn_edm:abort_time</xr-xml-map>
+        <xr-task>tunnel</xr-task>
+        <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+        <xr-bag-version>0 1</xr-bag-version>
+        <type>
+          <type-name>uint64</type-name>
+        </type>
+      </abort-time>
+    </vpdn-redundancy>
+    <history-failures config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/vpdn/gl/history/failure/</xr-path>
+      <xr-xml-map>vpdn_oper:HistoryFailureTable</xr-xml-map>
+      <xr-task>tunnel</xr-task>
+      <history-failure config="false" node="list">
+        <xr-path>/oper/vpdn/gl/history/failure/&lt;vpdn_oper_HistoryFailure_username&gt;,&lt;vpdn_oper_HistoryFailure_remote_name&gt;</xr-path>
+        <xr-xml-map>vpdn_oper:HistoryFailure</xr-xml-map>
+        <xr-task>tunnel</xr-task>
+        <xr-bag-grp-name>vpdn_history_entry</xr-bag-grp-name>
+        <xr-bag>vpdn_edm.bag</xr-bag>
+        <username config="false" is-key="true" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/vpdn/gl/history/failure/&lt;vpdn_oper_HistoryFailure_username&gt;,&lt;vpdn_oper_HistoryFailure_remote_name&gt;</xr-path>
+          <xr-xml-map>vpdn_oper:Username</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-sch-type>EncodedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;vpdn_oper_HistoryFailure_username&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </username>
+        <remote-name config="false" is-key="true" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/vpdn/gl/history/failure/&lt;vpdn_oper_HistoryFailure_username&gt;,&lt;vpdn_oper_HistoryFailure_remote_name&gt;</xr-path>
+          <xr-xml-map>vpdn_oper:RemoteName</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;vpdn_oper_HistoryFailure_remote_name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </remote-name>
+        <username-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/history/failure/&lt;vpdn_oper_HistoryFailure_username&gt;,&lt;vpdn_oper_HistoryFailure_remote_name&gt;~vpdn_history_entry.Username</xr-path>
+          <xr-xml-map>vpdn_edm:username-xr</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </username-xr>
+        <domain-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/history/failure/&lt;vpdn_oper_HistoryFailure_username&gt;,&lt;vpdn_oper_HistoryFailure_remote_name&gt;~vpdn_history_entry.DomainName</xr-path>
+          <xr-xml-map>vpdn_edm:DomainName</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </domain-name>
+        <mid config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/history/failure/&lt;vpdn_oper_HistoryFailure_username&gt;,&lt;vpdn_oper_HistoryFailure_remote_name&gt;~vpdn_history_entry.MID</xr-path>
+          <xr-xml-map>vpdn_edm:MID</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint16</type-name>
+          </type>
+        </mid>
+        <nas config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/history/failure/&lt;vpdn_oper_HistoryFailure_username&gt;,&lt;vpdn_oper_HistoryFailure_remote_name&gt;~vpdn_history_entry.NAS</xr-path>
+          <xr-xml-map>vpdn_edm:NAS</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </nas>
+        <destination-address config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/history/failure/&lt;vpdn_oper_HistoryFailure_username&gt;,&lt;vpdn_oper_HistoryFailure_remote_name&gt;~vpdn_history_entry.DestinationAddress</xr-path>
+          <xr-xml-map>vpdn_edm:DestinationAddress</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>inet:ipv4-address</type-name>
+          </type>
+        </destination-address>
+        <remote-client-id config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/history/failure/&lt;vpdn_oper_HistoryFailure_username&gt;,&lt;vpdn_oper_HistoryFailure_remote_name&gt;~vpdn_history_entry.RemoteClientID</xr-path>
+          <xr-xml-map>vpdn_edm:RemoteClientID</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint16</type-name>
+          </type>
+        </remote-client-id>
+        <home-gateway config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/history/failure/&lt;vpdn_oper_HistoryFailure_username&gt;,&lt;vpdn_oper_HistoryFailure_remote_name&gt;~vpdn_history_entry.HomeGateway</xr-path>
+          <xr-xml-map>vpdn_edm:HomeGateway</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </home-gateway>
+        <source-address config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/history/failure/&lt;vpdn_oper_HistoryFailure_username&gt;,&lt;vpdn_oper_HistoryFailure_remote_name&gt;~vpdn_history_entry.SourceAddress</xr-path>
+          <xr-xml-map>vpdn_edm:SourceAddress</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>inet:ipv4-address</type-name>
+          </type>
+        </source-address>
+        <local-client-id config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/history/failure/&lt;vpdn_oper_HistoryFailure_username&gt;,&lt;vpdn_oper_HistoryFailure_remote_name&gt;~vpdn_history_entry.LocalClientID</xr-path>
+          <xr-xml-map>vpdn_edm:LocalClientID</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint16</type-name>
+          </type>
+        </local-client-id>
+        <event-time config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/history/failure/&lt;vpdn_oper_HistoryFailure_username&gt;,&lt;vpdn_oper_HistoryFailure_remote_name&gt;~vpdn_history_entry.EventTime</xr-path>
+          <xr-xml-map>vpdn_edm:EventTime</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </event-time>
+        <error-repeat-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/history/failure/&lt;vpdn_oper_HistoryFailure_username&gt;,&lt;vpdn_oper_HistoryFailure_remote_name&gt;~vpdn_history_entry.ErrorRepeatCount</xr-path>
+          <xr-xml-map>vpdn_edm:ErrorRepeatCount</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint16</type-name>
+          </type>
+        </error-repeat-count>
+        <failure-type config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/vpdn/gl/history/failure/&lt;vpdn_oper_HistoryFailure_username&gt;,&lt;vpdn_oper_HistoryFailure_remote_name&gt;~vpdn_history_entry.FailureType</xr-path>
+          <xr-xml-map>vpdn_edm:FailureType</xr-xml-map>
+          <xr-task>tunnel</xr-task>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>Vpdn-failcode</type-name>
+          </type>
+        </failure-type>
+      </history-failure>
+    </history-failures>
+  </vpdn>
+</Cisco-IOS-XR-tunnel-vpdn-oper>

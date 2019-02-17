@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<SNMP-USER-BASED-SM-MIB ns="http://tail-f.com/ns/mibs/SNMP-USER-BASED-SM-MIB/200210160000Z" revision="2002-10-16">
+  <files>
+    <file revision="2002-10-16" submodule="false">SNMP-USER-BASED-SM-MIB.yang</file>
+  </files>
+  <prefix>SNMP_USER_BASED_SM_MIB</prefix>
+  <import prefix="yang">ietf-yang-types</import>
+  <import prefix="tailf">tailf-common</import>
+  <import prefix="SNMPv2_TC">SNMPv2-TC</import>
+  <import prefix="SNMP_FRAMEWORK_MIB">SNMP-FRAMEWORK-MIB</import>
+  <typedef name="KeyChange">
+    <type>
+      <pattern>(((([0-9A-Fa-f]{2}):)*([0-9A-Fa-f]{2}))){0,1}</pattern>
+      <type-name>tailf:hex-list</type-name>
+    </type>
+  </typedef>
+  <typedef name="usmUserNameType">
+    <type length="1 .. 32">
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="usmUserPublicType">
+    <type>
+      <pattern>(((([0-9A-Fa-f]{2}):){0,31}([0-9A-Fa-f]{2}))){0,1}</pattern>
+      <type-name>tailf:hex-list</type-name>
+    </type>
+  </typedef>
+  <SNMP-USER-BASED-SM-MIB config="true" is-key="false" node="container" presence="false">
+    <usmStats config="true" is-key="false" node="container" presence="false">
+      <usmStatsUnsupportedSecLevels config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>yang:counter32</type-name>
+        </type>
+      </usmStatsUnsupportedSecLevels>
+      <usmStatsNotInTimeWindows config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>yang:counter32</type-name>
+        </type>
+      </usmStatsNotInTimeWindows>
+      <usmStatsUnknownUserNames config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>yang:counter32</type-name>
+        </type>
+      </usmStatsUnknownUserNames>
+      <usmStatsUnknownEngineIDs config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>yang:counter32</type-name>
+        </type>
+      </usmStatsUnknownEngineIDs>
+      <usmStatsWrongDigests config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>yang:counter32</type-name>
+        </type>
+      </usmStatsWrongDigests>
+      <usmStatsDecryptionErrors config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>yang:counter32</type-name>
+        </type>
+      </usmStatsDecryptionErrors>
+    </usmStats>
+    <usmUserTable config="true" is-key="false" node="container" presence="false">
+      <usmUserEntry config="true" key="usmUserEngineID usmUserName" node="list">
+        <xr-path/>
+        <usmUserEngineID config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>SNMP_FRAMEWORK_MIB:SnmpEngineID</type-name>
+          </type>
+        </usmUserEngineID>
+        <usmUserName config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>usmUserNameType</type-name>
+          </type>
+        </usmUserName>
+        <usmUserSecurityName config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SNMP_FRAMEWORK_MIB:SnmpAdminString</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </usmUserSecurityName>
+        <usmUserCloneFrom config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SNMPv2_TC:RowPointer</type-name>
+          </type>
+        </usmUserCloneFrom>
+        <usmUserAuthProtocol config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SNMPv2_TC:AutonomousType</type-name>
+          </type>
+          <default>1.3.6.1.6.3.10.1.1.1</default>
+        </usmUserAuthProtocol>
+        <usmUserAuthKeyChange config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>KeyChange</type-name>
+          </type>
+        </usmUserAuthKeyChange>
+        <usmUserOwnAuthKeyChange config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>KeyChange</type-name>
+          </type>
+        </usmUserOwnAuthKeyChange>
+        <usmUserPrivProtocol config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SNMPv2_TC:AutonomousType</type-name>
+          </type>
+          <default>1.3.6.1.6.3.10.1.2.1</default>
+        </usmUserPrivProtocol>
+        <usmUserPrivKeyChange config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>KeyChange</type-name>
+          </type>
+        </usmUserPrivKeyChange>
+        <usmUserOwnPrivKeyChange config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>KeyChange</type-name>
+          </type>
+        </usmUserOwnPrivKeyChange>
+        <usmUserPublic config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>usmUserPublicType</type-name>
+          </type>
+        </usmUserPublic>
+        <usmUserStorageType config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>SNMPv2_TC:StorageType</type-name>
+          </type>
+          <default>nonVolatile</default>
+        </usmUserStorageType>
+        <usmUserAuthKey config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>KeyChange</type-name>
+          </type>
+        </usmUserAuthKey>
+        <usmUserPrivKey config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>KeyChange</type-name>
+          </type>
+        </usmUserPrivKey>
+      </usmUserEntry>
+    </usmUserTable>
+  </SNMP-USER-BASED-SM-MIB>
+</SNMP-USER-BASED-SM-MIB>

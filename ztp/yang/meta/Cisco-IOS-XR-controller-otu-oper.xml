@@ -1,0 +1,1781 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-controller-otu-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-controller-otu-oper" revision="2017-05-01">
+  <files>
+    <file revision="2017-05-01" submodule="false">Cisco-IOS-XR-controller-otu-oper.yang</file>
+    <file revision="2017-05-01" submodule="true">Cisco-IOS-XR-controller-otu-oper-sub1.yang</file>
+  </files>
+  <prefix>controller-otu-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="Otu-ains-state-et">
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">active-running</enum>
+      <enum value="2">active-pending</enum>
+    </type>
+  </typedef>
+  <typedef name="Gmpls-otu-tti-mode">
+    <type node="enumeration">
+      <enum>gmpls-otu-tti-mode-none</enum>
+      <enum>gmpls-otu-tti-mode-sm</enum>
+      <enum>gmpls-otu-tti-mode-pm</enum>
+      <enum>gmpls-otu-tti-mode-tcm</enum>
+    </type>
+  </typedef>
+  <typedef name="Otu-pp-intf-state">
+    <type node="enumeration">
+      <enum value="0">otu-pp-intf-up</enum>
+      <enum value="1">otu-pp-intf-failing</enum>
+      <enum value="2">otu-pp-intf-down</enum>
+    </type>
+  </typedef>
+  <typedef name="Otu-pp-fsm-state">
+    <type node="enumeration">
+      <enum value="0">otu-in-active</enum>
+      <enum value="1">otu-disabled</enum>
+      <enum value="2">otu-normal-state</enum>
+      <enum value="3">otu-local-failing</enum>
+      <enum value="4">otu-remote-failing</enum>
+      <enum value="5">otu-main-t-failing</enum>
+      <enum value="6">otu-regen-failing</enum>
+      <enum value="7">otu-local-failed</enum>
+      <enum value="8">otu-remote-failed</enum>
+      <enum value="9">otu-main-t-failed</enum>
+      <enum value="10">otu-regen-failed</enum>
+    </type>
+  </typedef>
+  <typedef name="Otu-per-mon">
+    <type node="enumeration">
+      <enum value="0">disable</enum>
+      <enum value="1">enable</enum>
+    </type>
+  </typedef>
+  <typedef name="Otu-sec-state">
+    <type node="enumeration">
+      <enum value="0">normal</enum>
+      <enum value="1">maintenance</enum>
+      <enum value="2">ains</enum>
+    </type>
+  </typedef>
+  <typedef name="Otu-der-state">
+    <type node="enumeration">
+      <enum value="0">out-of-service</enum>
+      <enum value="1">in-service</enum>
+      <enum value="2">maintenance</enum>
+      <enum value="3">ains</enum>
+    </type>
+  </typedef>
+  <typedef name="Otu-g709fec-mode">
+    <type node="enumeration">
+      <enum value="1">otu-bag-none-fec</enum>
+      <enum value="2">otu-bag-standard-fec</enum>
+      <enum value="4">otu-bag-1-i-7-fec</enum>
+      <enum value="8">otu-bag-1-i-4-fec</enum>
+      <enum value="16">otu-bag-swizzle-fec</enum>
+      <enum value="32">otu-bag-hg20-fec</enum>
+      <enum value="64">otu-bag-enhanced-hg7-fec</enum>
+      <enum value="128">otu-bag-sd20-fec</enum>
+      <enum value="256">otu-bag-sd7-fec</enum>
+      <enum value="512">otu-bag-sd15-fec</enum>
+      <enum value="1024">otu-bag-sd27-fec</enum>
+      <enum value="2048">otu-bag-all-fec</enum>
+    </type>
+  </typedef>
+  <typedef name="Otu-loop-back-mode">
+    <type node="enumeration">
+      <enum value="1">none</enum>
+      <enum value="2">line</enum>
+      <enum value="4">internal</enum>
+    </type>
+  </typedef>
+  <typedef name="Otu-tti-et">
+    <type node="enumeration">
+      <enum value="0">ascii</enum>
+      <enum value="1">hex</enum>
+      <enum value="2">full-ascii</enum>
+      <enum value="3">full-hex</enum>
+    </type>
+  </typedef>
+  <typedef name="Otu-state-et">
+    <type node="enumeration">
+      <enum value="0">not-ready</enum>
+      <enum value="1">admin-down</enum>
+      <enum value="2">down</enum>
+      <enum value="3">up</enum>
+      <enum value="4">shutdown</enum>
+      <enum value="5">error-disable</enum>
+      <enum value="6">down-immediate</enum>
+      <enum value="7">down-immediate-admin</enum>
+      <enum value="8">down-graceful</enum>
+      <enum value="9">begin-shutdown</enum>
+      <enum value="10">end-shutdown</enum>
+      <enum value="11">begin-error-disable</enum>
+      <enum value="12">end-error-disable</enum>
+      <enum value="13">begin-down-graceful</enum>
+      <enum value="14">reset</enum>
+      <enum value="15">operational</enum>
+      <enum value="16">not-operational</enum>
+      <enum value="17">unknown</enum>
+      <enum value="18">last</enum>
+    </type>
+  </typedef>
+  <typedef name="Otu-prbs-status">
+    <type node="enumeration">
+      <enum value="0">locked</enum>
+      <enum value="1">unlocked</enum>
+      <enum value="2">not-applicable</enum>
+    </type>
+  </typedef>
+  <typedef name="Otu-prbs-pattern">
+    <type node="enumeration">
+      <enum value="0">not-applicable</enum>
+      <enum value="1">pn31</enum>
+      <enum value="2">pn23</enum>
+      <enum value="4">pn11</enum>
+      <enum value="8">inverted-pn31</enum>
+      <enum value="16">inverted-pn11</enum>
+      <enum value="32">pn15</enum>
+    </type>
+  </typedef>
+  <typedef name="Otu-prbs-mode">
+    <type node="enumeration">
+      <enum value="0">not-applicable</enum>
+      <enum value="1">source</enum>
+      <enum value="2">sink</enum>
+      <enum value="3">source-sink</enum>
+    </type>
+  </typedef>
+  <typedef name="Otu-prbs-test">
+    <type node="enumeration">
+      <enum value="0">disable</enum>
+      <enum value="1">enable</enum>
+    </type>
+  </typedef>
+  <otu config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/otu/</xr-path>
+    <xr-xml-map>otu_ui_oper:OTU</xr-xml-map>
+    <xr-task>otn</xr-task>
+    <controllers config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/otu/if/</xr-path>
+      <xr-xml-map>otu_ui_oper:ControllerTable</xr-xml-map>
+      <xr-task>otn</xr-task>
+      <controller config="false" key="controller-name" node="list">
+        <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/</xr-path>
+        <xr-xml-map>otu_ui_oper:Controller</xr-xml-map>
+        <xr-task>otn</xr-task>
+        <prbs config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/prbs_details</xr-path>
+          <xr-xml-map>otu_ui_oper:Prbs</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-bag-grp-name>otu_prbs_info</xr-bag-grp-name>
+          <xr-bag>otu_ma.bag</xr-bag>
+          <otu-prbs-test config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/prbs_details~otu_prbs_info.OtuPrbsTest</xr-path>
+            <xr-xml-map>otu_ma:OtuPrbsTest</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>Otu-prbs-test</type-name>
+            </type>
+          </otu-prbs-test>
+          <otu-prbs-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/prbs_details~otu_prbs_info.OtuPrbsMode</xr-path>
+            <xr-xml-map>otu_ma:OtuPrbsMode</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>Otu-prbs-mode</type-name>
+            </type>
+          </otu-prbs-mode>
+          <otu-prbs-pattern config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/prbs_details~otu_prbs_info.OtuPrbsPattern</xr-path>
+            <xr-xml-map>otu_ma:OtuPrbsPattern</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>Otu-prbs-pattern</type-name>
+            </type>
+          </otu-prbs-pattern>
+          <otu-prbs-status config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/prbs_details~otu_prbs_info.OtuPrbsStatus</xr-path>
+            <xr-xml-map>otu_ma:OtuPrbsStatus</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>Otu-prbs-status</type-name>
+            </type>
+          </otu-prbs-status>
+        </prbs>
+        <info config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info</xr-path>
+          <xr-xml-map>otu_ui_oper:Info</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-bag-grp-name>otu_per_port_info</xr-bag-grp-name>
+          <xr-bag>otu_ma.bag</xr-bag>
+          <local config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Local</xr-path>
+            <xr-task>otn</xr-task>
+            <xr-bag-version>3 2</xr-bag-version>
+            <router-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Local.RouterID</xr-path>
+              <xr-xml-map>otu_ma:RouterID</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </router-id>
+            <if-index config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Local.IfIndex</xr-path>
+              <xr-xml-map>otu_ma:IfIndex</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </if-index>
+          </local>
+          <remote config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Remote</xr-path>
+            <xr-task>otn</xr-task>
+            <xr-bag-version>3 2</xr-bag-version>
+            <router-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Remote.RouterID</xr-path>
+              <xr-xml-map>otu_ma:RouterID</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </router-id>
+            <if-index config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Remote.IfIndex</xr-path>
+              <xr-xml-map>otu_ma:IfIndex</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </if-index>
+          </remote>
+          <tti-mode config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode</xr-path>
+            <xr-task>otn</xr-task>
+            <xr-bag-version>3 2</xr-bag-version>
+            <tx config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Tx</xr-path>
+              <xr-task>otn</xr-task>
+              <xr-bag-version>3 2</xr-bag-version>
+              <full-tti-ascii-string config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Tx.FullTtiAsciiString</xr-path>
+                <xr-xml-map>otu_ma:FullTtiAsciiString</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </full-tti-ascii-string>
+              <sapi config="false" node="list">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Tx.SAPI[&lt;bag_arg1&gt;]</xr-path>
+                <xr-task>otn</xr-task>
+                <xr-bag-version>3 2</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+                <entry config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Tx.SAPI[&lt;bag_arg1&gt;]</xr-path>
+                  <xr-xml-map>otu_ma:SAPI</xr-xml-map>
+                  <xr-task>otn</xr-task>
+                  <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                  <xr-bag-version>3 2</xr-bag-version>
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </entry>
+              </sapi>
+              <dapi config="false" node="list">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Tx.DAPI[&lt;bag_arg2&gt;]</xr-path>
+                <xr-task>otn</xr-task>
+                <xr-bag-version>3 2</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+                <entry config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Tx.DAPI[&lt;bag_arg2&gt;]</xr-path>
+                  <xr-xml-map>otu_ma:DAPI</xr-xml-map>
+                  <xr-task>otn</xr-task>
+                  <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                  <xr-bag-version>3 2</xr-bag-version>
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </entry>
+              </dapi>
+              <operator-specific config="false" node="list">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Tx.OperatorSpecific[&lt;bag_arg3&gt;]</xr-path>
+                <xr-task>otn</xr-task>
+                <xr-bag-version>3 2</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+                <entry config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Tx.OperatorSpecific[&lt;bag_arg3&gt;]</xr-path>
+                  <xr-xml-map>otu_ma:OperatorSpecific</xr-xml-map>
+                  <xr-task>otn</xr-task>
+                  <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                  <xr-bag-version>3 2</xr-bag-version>
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </entry>
+              </operator-specific>
+            </tx>
+            <exp config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Exp</xr-path>
+              <xr-task>otn</xr-task>
+              <xr-bag-version>3 2</xr-bag-version>
+              <full-tti-ascii-string config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Exp.FullTtiAsciiString</xr-path>
+                <xr-xml-map>otu_ma:FullTtiAsciiString</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </full-tti-ascii-string>
+              <sapi config="false" node="list">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Exp.SAPI[&lt;bag_arg1&gt;]</xr-path>
+                <xr-task>otn</xr-task>
+                <xr-bag-version>3 2</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+                <entry config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Exp.SAPI[&lt;bag_arg1&gt;]</xr-path>
+                  <xr-xml-map>otu_ma:SAPI</xr-xml-map>
+                  <xr-task>otn</xr-task>
+                  <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                  <xr-bag-version>3 2</xr-bag-version>
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </entry>
+              </sapi>
+              <dapi config="false" node="list">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Exp.DAPI[&lt;bag_arg2&gt;]</xr-path>
+                <xr-task>otn</xr-task>
+                <xr-bag-version>3 2</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+                <entry config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Exp.DAPI[&lt;bag_arg2&gt;]</xr-path>
+                  <xr-xml-map>otu_ma:DAPI</xr-xml-map>
+                  <xr-task>otn</xr-task>
+                  <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                  <xr-bag-version>3 2</xr-bag-version>
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </entry>
+              </dapi>
+              <operator-specific config="false" node="list">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Exp.OperatorSpecific[&lt;bag_arg3&gt;]</xr-path>
+                <xr-task>otn</xr-task>
+                <xr-bag-version>3 2</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+                <entry config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Exp.OperatorSpecific[&lt;bag_arg3&gt;]</xr-path>
+                  <xr-xml-map>otu_ma:OperatorSpecific</xr-xml-map>
+                  <xr-task>otn</xr-task>
+                  <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                  <xr-bag-version>3 2</xr-bag-version>
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </entry>
+              </operator-specific>
+            </exp>
+            <rec config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Rec</xr-path>
+              <xr-task>otn</xr-task>
+              <xr-bag-version>3 2</xr-bag-version>
+              <full-tti-ascii-string config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Rec.FullTtiAsciiString</xr-path>
+                <xr-xml-map>otu_ma:FullTtiAsciiString</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </full-tti-ascii-string>
+              <sapi config="false" node="list">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Rec.SAPI[&lt;bag_arg1&gt;]</xr-path>
+                <xr-task>otn</xr-task>
+                <xr-bag-version>3 2</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+                <entry config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Rec.SAPI[&lt;bag_arg1&gt;]</xr-path>
+                  <xr-xml-map>otu_ma:SAPI</xr-xml-map>
+                  <xr-task>otn</xr-task>
+                  <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                  <xr-bag-version>3 2</xr-bag-version>
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </entry>
+              </sapi>
+              <dapi config="false" node="list">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Rec.DAPI[&lt;bag_arg2&gt;]</xr-path>
+                <xr-task>otn</xr-task>
+                <xr-bag-version>3 2</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+                <entry config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Rec.DAPI[&lt;bag_arg2&gt;]</xr-path>
+                  <xr-xml-map>otu_ma:DAPI</xr-xml-map>
+                  <xr-task>otn</xr-task>
+                  <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                  <xr-bag-version>3 2</xr-bag-version>
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </entry>
+              </dapi>
+              <operator-specific config="false" node="list">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Rec.OperatorSpecific[&lt;bag_arg3&gt;]</xr-path>
+                <xr-task>otn</xr-task>
+                <xr-bag-version>3 2</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+                <entry config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.Rec.OperatorSpecific[&lt;bag_arg3&gt;]</xr-path>
+                  <xr-xml-map>otu_ma:OperatorSpecific</xr-xml-map>
+                  <xr-task>otn</xr-task>
+                  <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                  <xr-bag-version>3 2</xr-bag-version>
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </entry>
+              </operator-specific>
+            </rec>
+            <g709tti-sent-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.G709TTI_Sent_Mode</xr-path>
+              <xr-xml-map>otu_ma:G709TTI_Sent_Mode</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>Otu-tti-et</type-name>
+              </type>
+            </g709tti-sent-mode>
+            <g709tti-exp-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.G709TTI_Exp_Mode</xr-path>
+              <xr-xml-map>otu_ma:G709TTI_Exp_Mode</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>Otu-tti-et</type-name>
+              </type>
+            </g709tti-exp-mode>
+            <g709tti-rec-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.G709TTI_Rec_Mode</xr-path>
+              <xr-xml-map>otu_ma:G709TTI_Rec_Mode</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>Otu-tti-et</type-name>
+              </type>
+            </g709tti-rec-mode>
+            <remote-interface config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.RemoteInterface</xr-path>
+              <xr-xml-map>otu_ma:RemoteInterface</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </remote-interface>
+            <remote-host-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.RemoteHostname</xr-path>
+              <xr-xml-map>otu_ma:RemoteHostname</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </remote-host-name>
+            <remote-ip-addr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.TTIMode.RemoteIPAddr</xr-path>
+              <xr-xml-map>otu_ma:RemoteIPAddr</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </remote-ip-addr>
+          </tti-mode>
+          <network-srlg config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.NetworkSRLG</xr-path>
+            <xr-task>otn</xr-task>
+            <xr-bag-version>3 2</xr-bag-version>
+            <srlg-info config="false" node="list">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.NetworkSRLG.SRLGInfo[&lt;bag_arg5&gt;]</xr-path>
+              <xr-task>otn</xr-task>
+              <xr-bag-version>3 2</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg5&gt;</xr-internal-key>
+              <set-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.NetworkSRLG.SRLGInfo[&lt;bag_arg5&gt;].SetId</xr-path>
+                <xr-xml-map>otu_ma:SetId</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </set-id>
+              <srlg config="false" node="list">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.NetworkSRLG.SRLGInfo[&lt;bag_arg5&gt;].SRLG[&lt;bag_arg4&gt;]</xr-path>
+                <xr-task>otn</xr-task>
+                <xr-bag-version>3 2</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg4&gt;</xr-internal-key>
+                <entry config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.NetworkSRLG.SRLGInfo[&lt;bag_arg5&gt;].SRLG[&lt;bag_arg4&gt;]</xr-path>
+                  <xr-xml-map>otu_ma:SRLG</xr-xml-map>
+                  <xr-task>otn</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>3 2</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </entry>
+              </srlg>
+            </srlg-info>
+          </network-srlg>
+          <otu-alarm-info config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info</xr-path>
+            <xr-task>otn</xr-task>
+            <xr-bag-version>3 2</xr-bag-version>
+            <los config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.LOS</xr-path>
+              <xr-task>otn</xr-task>
+              <xr-bag-version>3 2</xr-bag-version>
+              <reporting-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.LOS.ReportingEnabled</xr-path>
+                <xr-xml-map>otu_ma:ReportingEnabled</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </reporting-enabled>
+              <is-detected config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.LOS.IsDetected</xr-path>
+                <xr-xml-map>otu_ma:IsDetected</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-detected>
+              <is-asserted config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.LOS.IsAsserted</xr-path>
+                <xr-xml-map>otu_ma:IsAsserted</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-asserted>
+              <counter config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.LOS.Counter</xr-path>
+                <xr-xml-map>otu_ma:Counter</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </counter>
+            </los>
+            <lof config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.LOF</xr-path>
+              <xr-task>otn</xr-task>
+              <xr-bag-version>3 2</xr-bag-version>
+              <reporting-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.LOF.ReportingEnabled</xr-path>
+                <xr-xml-map>otu_ma:ReportingEnabled</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </reporting-enabled>
+              <is-detected config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.LOF.IsDetected</xr-path>
+                <xr-xml-map>otu_ma:IsDetected</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-detected>
+              <is-asserted config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.LOF.IsAsserted</xr-path>
+                <xr-xml-map>otu_ma:IsAsserted</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-asserted>
+              <counter config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.LOF.Counter</xr-path>
+                <xr-xml-map>otu_ma:Counter</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </counter>
+            </lof>
+            <lom config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.LOM</xr-path>
+              <xr-task>otn</xr-task>
+              <xr-bag-version>3 2</xr-bag-version>
+              <reporting-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.LOM.ReportingEnabled</xr-path>
+                <xr-xml-map>otu_ma:ReportingEnabled</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </reporting-enabled>
+              <is-detected config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.LOM.IsDetected</xr-path>
+                <xr-xml-map>otu_ma:IsDetected</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-detected>
+              <is-asserted config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.LOM.IsAsserted</xr-path>
+                <xr-xml-map>otu_ma:IsAsserted</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-asserted>
+              <counter config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.LOM.Counter</xr-path>
+                <xr-xml-map>otu_ma:Counter</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </counter>
+            </lom>
+            <oof config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.OOF</xr-path>
+              <xr-task>otn</xr-task>
+              <xr-bag-version>3 2</xr-bag-version>
+              <reporting-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.OOF.ReportingEnabled</xr-path>
+                <xr-xml-map>otu_ma:ReportingEnabled</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </reporting-enabled>
+              <is-detected config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.OOF.IsDetected</xr-path>
+                <xr-xml-map>otu_ma:IsDetected</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-detected>
+              <is-asserted config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.OOF.IsAsserted</xr-path>
+                <xr-xml-map>otu_ma:IsAsserted</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-asserted>
+              <counter config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.OOF.Counter</xr-path>
+                <xr-xml-map>otu_ma:Counter</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </counter>
+            </oof>
+            <oom config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.OOM</xr-path>
+              <xr-task>otn</xr-task>
+              <xr-bag-version>3 2</xr-bag-version>
+              <reporting-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.OOM.ReportingEnabled</xr-path>
+                <xr-xml-map>otu_ma:ReportingEnabled</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </reporting-enabled>
+              <is-detected config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.OOM.IsDetected</xr-path>
+                <xr-xml-map>otu_ma:IsDetected</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-detected>
+              <is-asserted config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.OOM.IsAsserted</xr-path>
+                <xr-xml-map>otu_ma:IsAsserted</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-asserted>
+              <counter config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.OOM.Counter</xr-path>
+                <xr-xml-map>otu_ma:Counter</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </counter>
+            </oom>
+            <ais config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.AIS</xr-path>
+              <xr-task>otn</xr-task>
+              <xr-bag-version>3 2</xr-bag-version>
+              <reporting-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.AIS.ReportingEnabled</xr-path>
+                <xr-xml-map>otu_ma:ReportingEnabled</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </reporting-enabled>
+              <is-detected config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.AIS.IsDetected</xr-path>
+                <xr-xml-map>otu_ma:IsDetected</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-detected>
+              <is-asserted config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.AIS.IsAsserted</xr-path>
+                <xr-xml-map>otu_ma:IsAsserted</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-asserted>
+              <counter config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.AIS.Counter</xr-path>
+                <xr-xml-map>otu_ma:Counter</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </counter>
+            </ais>
+            <iae config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.IAE</xr-path>
+              <xr-task>otn</xr-task>
+              <xr-bag-version>3 2</xr-bag-version>
+              <reporting-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.IAE.ReportingEnabled</xr-path>
+                <xr-xml-map>otu_ma:ReportingEnabled</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </reporting-enabled>
+              <is-detected config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.IAE.IsDetected</xr-path>
+                <xr-xml-map>otu_ma:IsDetected</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-detected>
+              <is-asserted config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.IAE.IsAsserted</xr-path>
+                <xr-xml-map>otu_ma:IsAsserted</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-asserted>
+              <counter config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.IAE.Counter</xr-path>
+                <xr-xml-map>otu_ma:Counter</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </counter>
+            </iae>
+            <biae config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.BIAE</xr-path>
+              <xr-task>otn</xr-task>
+              <xr-bag-version>3 2</xr-bag-version>
+              <reporting-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.BIAE.ReportingEnabled</xr-path>
+                <xr-xml-map>otu_ma:ReportingEnabled</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </reporting-enabled>
+              <is-detected config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.BIAE.IsDetected</xr-path>
+                <xr-xml-map>otu_ma:IsDetected</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-detected>
+              <is-asserted config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.BIAE.IsAsserted</xr-path>
+                <xr-xml-map>otu_ma:IsAsserted</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-asserted>
+              <counter config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.BIAE.Counter</xr-path>
+                <xr-xml-map>otu_ma:Counter</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </counter>
+            </biae>
+            <bdi config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.BDI</xr-path>
+              <xr-task>otn</xr-task>
+              <xr-bag-version>3 2</xr-bag-version>
+              <reporting-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.BDI.ReportingEnabled</xr-path>
+                <xr-xml-map>otu_ma:ReportingEnabled</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </reporting-enabled>
+              <is-detected config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.BDI.IsDetected</xr-path>
+                <xr-xml-map>otu_ma:IsDetected</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-detected>
+              <is-asserted config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.BDI.IsAsserted</xr-path>
+                <xr-xml-map>otu_ma:IsAsserted</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-asserted>
+              <counter config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.BDI.Counter</xr-path>
+                <xr-xml-map>otu_ma:Counter</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </counter>
+            </bdi>
+            <tim config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.TIM</xr-path>
+              <xr-task>otn</xr-task>
+              <xr-bag-version>3 2</xr-bag-version>
+              <reporting-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.TIM.ReportingEnabled</xr-path>
+                <xr-xml-map>otu_ma:ReportingEnabled</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </reporting-enabled>
+              <is-detected config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.TIM.IsDetected</xr-path>
+                <xr-xml-map>otu_ma:IsDetected</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-detected>
+              <is-asserted config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.TIM.IsAsserted</xr-path>
+                <xr-xml-map>otu_ma:IsAsserted</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-asserted>
+              <counter config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.TIM.Counter</xr-path>
+                <xr-xml-map>otu_ma:Counter</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </counter>
+            </tim>
+            <eoc config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.EOC</xr-path>
+              <xr-task>otn</xr-task>
+              <xr-bag-version>3 2</xr-bag-version>
+              <reporting-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.EOC.ReportingEnabled</xr-path>
+                <xr-xml-map>otu_ma:ReportingEnabled</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </reporting-enabled>
+              <is-detected config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.EOC.IsDetected</xr-path>
+                <xr-xml-map>otu_ma:IsDetected</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-detected>
+              <is-asserted config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.EOC.IsAsserted</xr-path>
+                <xr-xml-map>otu_ma:IsAsserted</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-asserted>
+              <counter config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.EOC.Counter</xr-path>
+                <xr-xml-map>otu_ma:Counter</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </counter>
+            </eoc>
+            <fec-mismatch config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.FECMismatch</xr-path>
+              <xr-task>otn</xr-task>
+              <xr-bag-version>3 2</xr-bag-version>
+              <reporting-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.FECMismatch.ReportingEnabled</xr-path>
+                <xr-xml-map>otu_ma:ReportingEnabled</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </reporting-enabled>
+              <is-detected config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.FECMismatch.IsDetected</xr-path>
+                <xr-xml-map>otu_ma:IsDetected</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-detected>
+              <is-asserted config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.FECMismatch.IsAsserted</xr-path>
+                <xr-xml-map>otu_ma:IsAsserted</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-asserted>
+              <counter config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.FECMismatch.Counter</xr-path>
+                <xr-xml-map>otu_ma:Counter</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </counter>
+            </fec-mismatch>
+            <sf-ber config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.sf_ber</xr-path>
+              <xr-task>otn</xr-task>
+              <xr-bag-version>3 2</xr-bag-version>
+              <reporting-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.sf_ber.ReportingEnabled</xr-path>
+                <xr-xml-map>otu_ma:ReportingEnabled</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </reporting-enabled>
+              <is-detected config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.sf_ber.IsDetected</xr-path>
+                <xr-xml-map>otu_ma:IsDetected</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-detected>
+              <is-asserted config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.sf_ber.IsAsserted</xr-path>
+                <xr-xml-map>otu_ma:IsAsserted</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-asserted>
+              <counter config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.sf_ber.Counter</xr-path>
+                <xr-xml-map>otu_ma:Counter</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </counter>
+            </sf-ber>
+            <sd-ber config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.sd_ber</xr-path>
+              <xr-task>otn</xr-task>
+              <xr-bag-version>3 2</xr-bag-version>
+              <reporting-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.sd_ber.ReportingEnabled</xr-path>
+                <xr-xml-map>otu_ma:ReportingEnabled</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </reporting-enabled>
+              <is-detected config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.sd_ber.IsDetected</xr-path>
+                <xr-xml-map>otu_ma:IsDetected</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-detected>
+              <is-asserted config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.sd_ber.IsAsserted</xr-path>
+                <xr-xml-map>otu_ma:IsAsserted</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-asserted>
+              <counter config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.sd_ber.Counter</xr-path>
+                <xr-xml-map>otu_ma:Counter</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </counter>
+            </sd-ber>
+            <ec config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.EC</xr-path>
+              <xr-task>otn</xr-task>
+              <xr-bag-version>3 2</xr-bag-version>
+              <reporting-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.EC.ReportingEnabled</xr-path>
+                <xr-xml-map>otu_ma:ReportingEnabled</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </reporting-enabled>
+              <is-detected config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.EC.IsDetected</xr-path>
+                <xr-xml-map>otu_ma:IsDetected</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-detected>
+              <is-asserted config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.EC.IsAsserted</xr-path>
+                <xr-xml-map>otu_ma:IsAsserted</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-asserted>
+              <counter config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.EC.Counter</xr-path>
+                <xr-xml-map>otu_ma:Counter</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </counter>
+            </ec>
+            <uc config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.UC</xr-path>
+              <xr-task>otn</xr-task>
+              <xr-bag-version>3 2</xr-bag-version>
+              <reporting-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.UC.ReportingEnabled</xr-path>
+                <xr-xml-map>otu_ma:ReportingEnabled</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </reporting-enabled>
+              <is-detected config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.UC.IsDetected</xr-path>
+                <xr-xml-map>otu_ma:IsDetected</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-detected>
+              <is-asserted config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.UC.IsAsserted</xr-path>
+                <xr-xml-map>otu_ma:IsAsserted</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-asserted>
+              <counter config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.UC.Counter</xr-path>
+                <xr-xml-map>otu_ma:Counter</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </counter>
+            </uc>
+            <fecunc config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.FECUNC</xr-path>
+              <xr-task>otn</xr-task>
+              <xr-bag-version>3 2</xr-bag-version>
+              <reporting-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.FECUNC.ReportingEnabled</xr-path>
+                <xr-xml-map>otu_ma:ReportingEnabled</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </reporting-enabled>
+              <is-detected config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.FECUNC.IsDetected</xr-path>
+                <xr-xml-map>otu_ma:IsDetected</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-detected>
+              <is-asserted config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.FECUNC.IsAsserted</xr-path>
+                <xr-xml-map>otu_ma:IsAsserted</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-asserted>
+              <counter config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OTU_alarm_info.FECUNC.Counter</xr-path>
+                <xr-xml-map>otu_ma:Counter</xr-xml-map>
+                <xr-task>otn</xr-task>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>3 2</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </counter>
+            </fecunc>
+          </otu-alarm-info>
+          <proactive config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Proactive</xr-path>
+            <xr-task>otn</xr-task>
+            <xr-bag-version>3 2</xr-bag-version>
+            <proactive-status config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Proactive.ProactiveStatus</xr-path>
+              <xr-xml-map>otu_ma:ProactiveStatus</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </proactive-status>
+            <inherit-sec-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Proactive.InheritSecState</xr-path>
+              <xr-xml-map>otu_ma:InheritSecState</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>Otu-sec-state</type-name>
+              </type>
+            </inherit-sec-state>
+            <config-sec-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Proactive.ConfigSecState</xr-path>
+              <xr-xml-map>otu_ma:ConfigSecState</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>Otu-sec-state</type-name>
+              </type>
+            </config-sec-state>
+            <proactive-fsm-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Proactive.ProactiveFSMState</xr-path>
+              <xr-xml-map>otu_ma:ProactiveFSMState</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>Otu-pp-fsm-state</type-name>
+              </type>
+            </proactive-fsm-state>
+            <proactive-fsm-if-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Proactive.ProactiveFSMIfState</xr-path>
+              <xr-xml-map>otu_ma:ProactiveFSMIfState</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>Otu-pp-intf-state</type-name>
+              </type>
+            </proactive-fsm-if-state>
+            <trig-thresh-coeff config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Proactive.TrigThreshCoeff</xr-path>
+              <xr-xml-map>otu_ma:TrigThreshCoeff</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+            </trig-thresh-coeff>
+            <trig-thresh-power config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Proactive.TrigThreshPower</xr-path>
+              <xr-xml-map>otu_ma:TrigThreshPower</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+            </trig-thresh-power>
+            <rvrt-thresh-coeff config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Proactive.RvrtThreshCoeff</xr-path>
+              <xr-xml-map>otu_ma:RvrtThreshCoeff</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+            </rvrt-thresh-coeff>
+            <rvrt-thresh-power config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Proactive.RvrtThreshPower</xr-path>
+              <xr-xml-map>otu_ma:RvrtThreshPower</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+            </rvrt-thresh-power>
+            <trigger-window config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Proactive.TriggerWindow</xr-path>
+              <xr-xml-map>otu_ma:TriggerWindow</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </trigger-window>
+            <revert-window config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Proactive.RevertWindow</xr-path>
+              <xr-xml-map>otu_ma:RevertWindow</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </revert-window>
+          </proactive>
+          <otu-fec-satistics config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OtuFecSatistics</xr-path>
+            <xr-task>otn</xr-task>
+            <xr-bag-version>3 2</xr-bag-version>
+            <post-fec-ber config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OtuFecSatistics.PostFecBer</xr-path>
+              <xr-xml-map>otu_ma:PostFecBer</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </post-fec-ber>
+            <pre-fec-ber config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.OtuFecSatistics.PreFecBer</xr-path>
+              <xr-xml-map>otu_ma:PreFecBer</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </pre-fec-ber>
+          </otu-fec-satistics>
+          <ains-info config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.AINSInfo</xr-path>
+            <xr-task>otn</xr-task>
+            <xr-bag-version>3 2</xr-bag-version>
+            <ains-state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.AINSInfo.AinsState</xr-path>
+              <xr-xml-map>otu_ma:AinsState</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>Otu-ains-state-et</type-name>
+              </type>
+            </ains-state>
+            <ains-timer-minutes config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.AINSInfo.AINSTimerMinutes</xr-path>
+              <xr-xml-map>otu_ma:AINSTimerMinutes</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </ains-timer-minutes>
+            <ains-remaining-secs config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.AINSInfo.AINSRemainingSecs</xr-path>
+              <xr-xml-map>otu_ma:AINSRemainingSecs</xr-xml-map>
+              <xr-task>otn</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>3 2</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </ains-remaining-secs>
+          </ains-info>
+          <state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.State</xr-path>
+            <xr-xml-map>otu_ma:State</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>Otu-state-et</type-name>
+            </type>
+          </state>
+          <name config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Name</xr-path>
+            <xr-xml-map>otu_ma:Name</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </name>
+          <sf config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.SF</xr-path>
+            <xr-xml-map>otu_ma:SF</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </sf>
+          <sd config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.SD</xr-path>
+            <xr-xml-map>otu_ma:SD</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </sd>
+          <loopback-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.LoopbackMode</xr-path>
+            <xr-xml-map>otu_ma:LoopbackMode</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>Otu-loop-back-mode</type-name>
+            </type>
+          </loopback-mode>
+          <fec-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.FECMode</xr-path>
+            <xr-xml-map>otu_ma:FECMode</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>Otu-g709fec-mode</type-name>
+            </type>
+          </fec-mode>
+          <derivedstate-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.DERIVEDSTATEMode</xr-path>
+            <xr-xml-map>otu_ma:DERIVEDSTATEMode</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>Otu-der-state</type-name>
+            </type>
+          </derivedstate-mode>
+          <inherit-sec-state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.InheritSecState</xr-path>
+            <xr-xml-map>otu_ma:InheritSecState</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>Otu-sec-state</type-name>
+            </type>
+          </inherit-sec-state>
+          <config-sec-state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.ConfigSecState</xr-path>
+            <xr-xml-map>otu_ma:ConfigSecState</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>Otu-sec-state</type-name>
+            </type>
+          </config-sec-state>
+          <gcc-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.GCCMode</xr-path>
+            <xr-xml-map>otu_ma:GCCMode</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </gcc-mode>
+          <q config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Q</xr-path>
+            <xr-xml-map>otu_ma:Q</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </q>
+          <q-margin config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Q_MARGIN</xr-path>
+            <xr-xml-map>otu_ma:Q_MARGIN</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </q-margin>
+          <performance-monitoring config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.PerformanceMonitoring</xr-path>
+            <xr-xml-map>otu_ma:PerformanceMonitoring</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>Otu-per-mon</type-name>
+            </type>
+          </performance-monitoring>
+          <ec config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.EC</xr-path>
+            <xr-xml-map>otu_ma:EC</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </ec>
+          <uc config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.UC</xr-path>
+            <xr-xml-map>otu_ma:UC</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </uc>
+          <pre-fec-val config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.PreFECVal</xr-path>
+            <xr-xml-map>otu_ma:PreFECVal</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>int32_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>int32</type-name>
+            </type>
+          </pre-fec-val>
+          <pre-fec-mantissa config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.PreFECMantissa</xr-path>
+            <xr-xml-map>otu_ma:PreFECMantissa</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>int8_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>int8</type-name>
+            </type>
+          </pre-fec-mantissa>
+          <ec-value config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.EC_value</xr-path>
+            <xr-xml-map>otu_ma:EC_value</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </ec-value>
+          <uc-value config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.UC_value</xr-path>
+            <xr-xml-map>otu_ma:UC_value</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </uc-value>
+          <pre-fec-ber-value config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Pre_fec_ber_value</xr-path>
+            <xr-xml-map>otu_ma:Pre_fec_ber_value</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </pre-fec-ber-value>
+          <pre-fec-ber-mantissa config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Pre_fec_ber_mantissa</xr-path>
+            <xr-xml-map>otu_ma:Pre_fec_ber_mantissa</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </pre-fec-ber-mantissa>
+          <nv-optical-support config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.NvOpticalSupport</xr-path>
+            <xr-xml-map>otu_ma:NvOpticalSupport</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </nv-optical-support>
+          <gmpls-tti-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.GMPLS_TTI_MODE</xr-path>
+            <xr-xml-map>otu_ma:GMPLS_TTI_MODE</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>Gmpls-otu-tti-mode</type-name>
+            </type>
+          </gmpls-tti-mode>
+          <gmpls-tvm-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.GMPLS_TVM_ID</xr-path>
+            <xr-xml-map>otu_ma:GMPLS_TVM_ID</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </gmpls-tvm-id>
+          <auto-tti-flag config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.AutoTTIFlag</xr-path>
+            <xr-xml-map>otu_ma:AutoTTIFlag</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </auto-tti-flag>
+          <description config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/otu_port_info~otu_per_port_info.Description</xr-path>
+            <xr-xml-map>otu_ma:Description</xr-xml-map>
+            <xr-task>otn</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>3 2</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </description>
+        </info>
+        <controller-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/otu/if/&lt;otu_ui_oper_Controller_port_name&gt;/</xr-path>
+          <xr-xml-map>otu_ui_oper:ControllerName</xr-xml-map>
+          <xr-task>otn</xr-task>
+          <xr-sch-type>InterfaceName</xr-sch-type>
+          <xr-sch-arg-name>&lt;otu_ui_oper_Controller_port_name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </controller-name>
+      </controller>
+    </controllers>
+  </otu>
+</Cisco-IOS-XR-controller-otu-oper>

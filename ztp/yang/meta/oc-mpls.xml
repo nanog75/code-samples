@@ -1,0 +1,2393 @@
+<?xml version="1.0"?>
+<openconfig-mpls ns="http://openconfig.net/yang/mpls" oc-ver="2.3.0" revision="2017-03-22">
+  <files>
+    <file revision="2017-03-22" submodule="false">openconfig-mpls.yang</file>
+    <file revision="2017-03-22" submodule="true">openconfig-mpls-static.yang</file>
+    <file revision="2017-03-22" submodule="true">openconfig-mpls-igp.yang</file>
+    <file revision="2017-03-22" submodule="true">openconfig-mpls-te.yang</file>
+  </files>
+  <prefix>oc-mpls</prefix>
+  <organization>OpenConfig working group</organization>
+  <import prefix="oc-mplst">openconfig-mpls-types</import>
+  <import prefix="oc-rsvp">openconfig-mpls-rsvp</import>
+  <import prefix="oc-ldp">openconfig-mpls-ldp</import>
+  <import prefix="oc-types">openconfig-types</import>
+  <import prefix="oc-if">openconfig-interfaces</import>
+  <import prefix="oc-ext">openconfig-extensions</import>
+  <import prefix="oc-sr">openconfig-segment-routing</import>
+  <import prefix="inet">openconfig-inet-types</import>
+  <import prefix="oc-sr">openconfig-mpls-sr</import>
+  <import prefix="yang">openconfig-yang-types</import>
+  <typedef name="te-bandwidth-type">
+    <type node="enumeration">
+      <enum>SPECIFIED</enum>
+      <enum>AUTO</enum>
+    </type>
+  </typedef>
+  <typedef name="mpls-srlg-flooding-type">
+    <type node="enumeration">
+      <enum>FLOODED_SRLG</enum>
+      <enum>STATIC_SRLG</enum>
+    </type>
+  </typedef>
+  <typedef name="mpls-hop-type">
+    <type node="enumeration">
+      <enum>LOOSE</enum>
+      <enum>STRICT</enum>
+    </type>
+  </typedef>
+  <typedef name="te-metric-type">
+    <type node="union">
+      <type node="enumeration">
+        <enum>IGP</enum>
+      </type>
+      <type>
+        <type-name>uint32</type-name>
+      </type>
+    </type>
+  </typedef>
+  <typedef name="cspf-tie-breaking">
+    <type node="enumeration">
+      <enum>RANDOM</enum>
+      <enum>LEAST_FILL</enum>
+      <enum>MOST_FILL</enum>
+    </type>
+    <default>RANDOM</default>
+  </typedef>
+  <mpls config="true" is-key="false" node="container" presence="false">
+    <global config="true" is-key="false" node="container" presence="false">
+      <config config="true" is-key="false" node="container" presence="false">
+        <null-label config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="identityref">
+            <base>oc-mplst:NULL_LABEL_TYPE</base>
+          </type>
+          <default>oc-mplst:IMPLICIT</default>
+        </null-label>
+      </config>
+      <state config="true" is-key="false" node="container" presence="false">
+        <null-label config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="identityref">
+            <base>oc-mplst:NULL_LABEL_TYPE</base>
+          </type>
+          <default>oc-mplst:IMPLICIT</default>
+        </null-label>
+      </state>
+      <interface-attributes config="true" is-key="false" node="container" presence="false">
+        <interface config="true" key="interface-id" node="list">
+          <interface-id config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </interface-id>
+          <config config="true" is-key="false" node="container" presence="false">
+            <interface-id config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>oc-if:interface-id</type-name>
+              </type>
+            </interface-id>
+            <mpls-enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </mpls-enabled>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <interface-id config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>oc-if:interface-id</type-name>
+              </type>
+            </interface-id>
+            <mpls-enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </mpls-enabled>
+          </state>
+          <interface-ref config="true" is-key="false" node="container" presence="false">
+            <config config="true" is-key="false" node="container" presence="false">
+              <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>leafref</type-name>
+                </type>
+              </interface>
+              <subinterface config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>leafref</type-name>
+                </type>
+              </subinterface>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>leafref</type-name>
+                </type>
+              </interface>
+              <subinterface config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>leafref</type-name>
+                </type>
+              </subinterface>
+            </state>
+          </interface-ref>
+        </interface>
+      </interface-attributes>
+      <reserved-label-blocks config="true" is-key="false" node="container" presence="false">
+        <reserved-label-block config="true" key="local-id" node="list">
+          <local-id config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </local-id>
+          <config config="true" is-key="false" node="container" presence="false">
+            <local-id config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </local-id>
+            <lower-bound config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>oc-mplst:mpls-label</type-name>
+              </type>
+            </lower-bound>
+            <upper-bound config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>oc-mplst:mpls-label</type-name>
+              </type>
+            </upper-bound>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <local-id config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </local-id>
+            <lower-bound config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>oc-mplst:mpls-label</type-name>
+              </type>
+            </lower-bound>
+            <upper-bound config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>oc-mplst:mpls-label</type-name>
+              </type>
+            </upper-bound>
+          </state>
+        </reserved-label-block>
+      </reserved-label-blocks>
+    </global>
+    <te-global-attributes config="true" is-key="false" node="container" presence="false">
+      <srlgs config="true" is-key="false" node="container" presence="false">
+        <srlg config="true" key="name" node="list">
+          <name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </name>
+          <config config="true" is-key="false" node="container" presence="false">
+            <name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </name>
+            <value config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </value>
+            <cost config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </cost>
+            <flooding-type config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>mpls-srlg-flooding-type</type-name>
+              </type>
+              <default>FLOODED_SRLG</default>
+            </flooding-type>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </name>
+            <value config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </value>
+            <cost config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </cost>
+            <flooding-type config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>mpls-srlg-flooding-type</type-name>
+              </type>
+              <default>FLOODED_SRLG</default>
+            </flooding-type>
+          </state>
+          <static-srlg-members config="true" is-key="false" node="container" presence="false">
+            <when>../config/flooding-type = 'STATIC_SRLG'</when>
+            <members-list config="true" key="from-address" node="list">
+              <from-address config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <type>
+                  <type-name>leafref</type-name>
+                </type>
+              </from-address>
+              <config config="true" is-key="false" node="container" presence="false">
+                <from-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>inet:ip-address</type-name>
+                  </type>
+                </from-address>
+                <to-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>inet:ip-address</type-name>
+                  </type>
+                </to-address>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <from-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>inet:ip-address</type-name>
+                  </type>
+                </from-address>
+                <to-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>inet:ip-address</type-name>
+                  </type>
+                </to-address>
+              </state>
+            </members-list>
+          </static-srlg-members>
+        </srlg>
+      </srlgs>
+      <mpls-admin-groups config="true" is-key="false" node="container" presence="false">
+        <admin-group config="true" key="admin-group-name" node="list">
+          <admin-group-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </admin-group-name>
+          <config config="true" is-key="false" node="container" presence="false">
+            <admin-group-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </admin-group-name>
+            <bit-position config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </bit-position>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <admin-group-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </admin-group-name>
+            <bit-position config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </bit-position>
+          </state>
+        </admin-group>
+      </mpls-admin-groups>
+      <te-lsp-timers config="true" is-key="false" node="container" presence="false">
+        <config config="true" is-key="false" node="container" presence="false">
+          <install-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="0..3600">
+              <type-name>uint16</type-name>
+            </type>
+          </install-delay>
+          <cleanup-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </cleanup-delay>
+          <reoptimize-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </reoptimize-timer>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <install-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="0..3600">
+              <type-name>uint16</type-name>
+            </type>
+          </install-delay>
+          <cleanup-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </cleanup-delay>
+          <reoptimize-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </reoptimize-timer>
+        </state>
+      </te-lsp-timers>
+    </te-global-attributes>
+    <te-interface-attributes config="true" is-key="false" node="container" presence="false">
+      <interface config="true" key="interface-id" node="list">
+        <interface-id config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <type>
+            <type-name>leafref</type-name>
+          </type>
+        </interface-id>
+        <config config="true" is-key="false" node="container" presence="false">
+          <interface-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-if:interface-id</type-name>
+            </type>
+          </interface-id>
+          <te-metric config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </te-metric>
+          <srlg-membership config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </srlg-membership>
+          <admin-group config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </admin-group>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <interface-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-if:interface-id</type-name>
+            </type>
+          </interface-id>
+          <te-metric config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </te-metric>
+          <srlg-membership config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </srlg-membership>
+          <admin-group config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </admin-group>
+        </state>
+        <interface-ref config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </interface>
+            <subinterface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </subinterface>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </interface>
+            <subinterface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </subinterface>
+          </state>
+        </interface-ref>
+        <igp-flooding-bandwidth config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <threshold-type config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type node="enumeration">
+                <enum>DELTA</enum>
+                <enum>THRESHOLD_CROSSED</enum>
+              </type>
+            </threshold-type>
+            <delta-percentage config="true" is-key="false" is-yang-key="false" node="leaf">
+              <when>../threshold-type = 'DELTA'</when>
+              <type>
+                <type-name>oc-types:percentage</type-name>
+              </type>
+            </delta-percentage>
+            <threshold-specification config="true" is-key="false" is-yang-key="false" node="leaf">
+              <when>../threshold-type = 'THRESHOLD_CROSSED'</when>
+              <type node="enumeration">
+                <enum>MIRRORED_UP_DOWN</enum>
+                <enum>SEPARATE_UP_DOWN</enum>
+              </type>
+            </threshold-specification>
+            <up-thresholds config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <when>../threshold-type = 'THRESHOLD_CROSSED'and ../threshold-specification = 'SEPARATE_UP_DOWN'</when>
+              <type>
+                <type-name>oc-types:percentage</type-name>
+              </type>
+            </up-thresholds>
+            <down-thresholds config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <when>../threshold-type = 'THRESHOLD_CROSSED'and ../threshold-specification = 'SEPARATE_UP_DOWN'</when>
+              <type>
+                <type-name>oc-types:percentage</type-name>
+              </type>
+            </down-thresholds>
+            <up-down-thresholds config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <when>../threshold-type = 'THRESHOLD_CROSSED'and ../threshold-specification = 'MIRRORED_UP_DOWN'</when>
+              <type>
+                <type-name>oc-types:percentage</type-name>
+              </type>
+            </up-down-thresholds>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <threshold-type config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type node="enumeration">
+                <enum>DELTA</enum>
+                <enum>THRESHOLD_CROSSED</enum>
+              </type>
+            </threshold-type>
+            <delta-percentage config="true" is-key="false" is-yang-key="false" node="leaf">
+              <when>../threshold-type = 'DELTA'</when>
+              <type>
+                <type-name>oc-types:percentage</type-name>
+              </type>
+            </delta-percentage>
+            <threshold-specification config="true" is-key="false" is-yang-key="false" node="leaf">
+              <when>../threshold-type = 'THRESHOLD_CROSSED'</when>
+              <type node="enumeration">
+                <enum>MIRRORED_UP_DOWN</enum>
+                <enum>SEPARATE_UP_DOWN</enum>
+              </type>
+            </threshold-specification>
+            <up-thresholds config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <when>../threshold-type = 'THRESHOLD_CROSSED'and ../threshold-specification = 'SEPARATE_UP_DOWN'</when>
+              <type>
+                <type-name>oc-types:percentage</type-name>
+              </type>
+            </up-thresholds>
+            <down-thresholds config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <when>../threshold-type = 'THRESHOLD_CROSSED'and ../threshold-specification = 'SEPARATE_UP_DOWN'</when>
+              <type>
+                <type-name>oc-types:percentage</type-name>
+              </type>
+            </down-thresholds>
+            <up-down-thresholds config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <when>../threshold-type = 'THRESHOLD_CROSSED'and ../threshold-specification = 'MIRRORED_UP_DOWN'</when>
+              <type>
+                <type-name>oc-types:percentage</type-name>
+              </type>
+            </up-down-thresholds>
+          </state>
+        </igp-flooding-bandwidth>
+      </interface>
+    </te-interface-attributes>
+    <signaling-protocols config="true" is-key="false" node="container" presence="false">
+      <rsvp-te config="true" is-key="false" node="container" presence="false">
+        <neighbors config="true" is-key="false" node="container" presence="false">
+          <neighbor config="true" key="address" node="list">
+            <address config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </address>
+            <state config="true" is-key="false" node="container" presence="false">
+              <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>inet:ip-address</type-name>
+                </type>
+              </address>
+              <detected-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </detected-interface>
+              <neighbor-status config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="enumeration">
+                  <enum>UP</enum>
+                  <enum>DOWN</enum>
+                </type>
+              </neighbor-status>
+              <refresh-reduction config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </refresh-reduction>
+            </state>
+          </neighbor>
+        </neighbors>
+        <global config="true" is-key="false" node="container" presence="false">
+          <state config="true" is-key="false" node="container" presence="false">
+            <counters config="true" is-key="false" node="container" presence="false">
+              <path-timeouts config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </path-timeouts>
+              <reservation-timeouts config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </reservation-timeouts>
+              <rate-limited-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </rate-limited-messages>
+              <in-path-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </in-path-messages>
+              <in-path-error-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </in-path-error-messages>
+              <in-path-tear-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </in-path-tear-messages>
+              <in-reservation-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </in-reservation-messages>
+              <in-reservation-error-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </in-reservation-error-messages>
+              <in-reservation-tear-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </in-reservation-tear-messages>
+              <in-hello-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </in-hello-messages>
+              <in-srefresh-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </in-srefresh-messages>
+              <in-ack-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </in-ack-messages>
+              <out-path-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </out-path-messages>
+              <out-path-error-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </out-path-error-messages>
+              <out-path-tear-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </out-path-tear-messages>
+              <out-reservation-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </out-reservation-messages>
+              <out-reservation-error-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </out-reservation-error-messages>
+              <out-reservation-tear-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </out-reservation-tear-messages>
+              <out-hello-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </out-hello-messages>
+              <out-srefresh-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </out-srefresh-messages>
+              <out-ack-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </out-ack-messages>
+            </counters>
+          </state>
+          <graceful-restart config="true" is-key="false" node="container" presence="false">
+            <config config="true" is-key="false" node="container" presence="false">
+              <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </enable>
+              <restart-time config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </restart-time>
+              <recovery-time config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </recovery-time>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </enable>
+              <restart-time config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </restart-time>
+              <recovery-time config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </recovery-time>
+            </state>
+          </graceful-restart>
+          <soft-preemption config="true" is-key="false" node="container" presence="false">
+            <config config="true" is-key="false" node="container" presence="false">
+              <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </enable>
+              <soft-preemption-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type range="0..max">
+                  <type-name>uint16</type-name>
+                </type>
+                <default>30</default>
+              </soft-preemption-timeout>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </enable>
+              <soft-preemption-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type range="0..max">
+                  <type-name>uint16</type-name>
+                </type>
+                <default>30</default>
+              </soft-preemption-timeout>
+            </state>
+          </soft-preemption>
+          <hellos config="true" is-key="false" node="container" presence="false">
+            <config config="true" is-key="false" node="container" presence="false">
+              <hello-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type range="1000..60000">
+                  <type-name>uint16</type-name>
+                </type>
+                <default>9000</default>
+              </hello-interval>
+              <refresh-reduction config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>true</default>
+              </refresh-reduction>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <hello-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type range="1000..60000">
+                  <type-name>uint16</type-name>
+                </type>
+                <default>9000</default>
+              </hello-interval>
+              <refresh-reduction config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>true</default>
+              </refresh-reduction>
+            </state>
+          </hellos>
+        </global>
+        <interface-attributes config="true" is-key="false" node="container" presence="false">
+          <interface config="true" key="interface-id" node="list">
+            <interface-id config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </interface-id>
+            <config config="true" is-key="false" node="container" presence="false">
+              <interface-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>oc-if:interface-id</type-name>
+                </type>
+              </interface-id>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <counters config="true" is-key="false" node="container" presence="false">
+                <in-path-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </in-path-messages>
+                <in-path-error-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </in-path-error-messages>
+                <in-path-tear-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </in-path-tear-messages>
+                <in-reservation-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </in-reservation-messages>
+                <in-reservation-error-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </in-reservation-error-messages>
+                <in-reservation-tear-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </in-reservation-tear-messages>
+                <in-hello-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </in-hello-messages>
+                <in-srefresh-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </in-srefresh-messages>
+                <in-ack-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </in-ack-messages>
+                <out-path-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </out-path-messages>
+                <out-path-error-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </out-path-error-messages>
+                <out-path-tear-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </out-path-tear-messages>
+                <out-reservation-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </out-reservation-messages>
+                <out-reservation-error-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </out-reservation-error-messages>
+                <out-reservation-tear-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </out-reservation-tear-messages>
+                <out-hello-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </out-hello-messages>
+                <out-srefresh-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </out-srefresh-messages>
+                <out-ack-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </out-ack-messages>
+              </counters>
+              <interface-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>oc-if:interface-id</type-name>
+                </type>
+              </interface-id>
+            </state>
+            <interface-ref config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </interface>
+                <subinterface config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </subinterface>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </interface>
+                <subinterface config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </subinterface>
+              </state>
+            </interface-ref>
+            <bandwidth-reservations config="true" is-key="false" node="container" presence="false">
+              <bandwidth-reservation config="true" key="priority" node="list">
+                <priority config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </priority>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type node="union">
+                      <type range="0..7">
+                        <type-name>uint8</type-name>
+                      </type>
+                      <type node="enumeration">
+                        <enum>ALL</enum>
+                      </type>
+                    </type>
+                  </priority>
+                  <available-bandwidth config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-mplst:bandwidth-mbps</type-name>
+                    </type>
+                  </available-bandwidth>
+                  <reserved-bandwidth config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-mplst:bandwidth-mbps</type-name>
+                    </type>
+                  </reserved-bandwidth>
+                  <active-reservations-count config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>yang:gauge64</type-name>
+                    </type>
+                  </active-reservations-count>
+                  <highwater-mark config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-mplst:bandwidth-mbps</type-name>
+                    </type>
+                  </highwater-mark>
+                </state>
+              </bandwidth-reservation>
+            </bandwidth-reservations>
+            <hellos config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <hello-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1000..60000">
+                    <type-name>uint16</type-name>
+                  </type>
+                  <default>9000</default>
+                </hello-interval>
+                <refresh-reduction config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>true</default>
+                </refresh-reduction>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <hello-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1000..60000">
+                    <type-name>uint16</type-name>
+                  </type>
+                  <default>9000</default>
+                </hello-interval>
+                <refresh-reduction config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>true</default>
+                </refresh-reduction>
+              </state>
+            </hellos>
+            <authentication config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </enable>
+                <authentication-key config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type length="1..32">
+                    <type-name>string</type-name>
+                  </type>
+                </authentication-key>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </enable>
+                <authentication-key config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type length="1..32">
+                    <type-name>string</type-name>
+                  </type>
+                </authentication-key>
+              </state>
+            </authentication>
+            <subscription config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <subscription config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:percentage</type-name>
+                  </type>
+                </subscription>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <subscription config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:percentage</type-name>
+                  </type>
+                </subscription>
+                <calculated-absolute-subscription-bw config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint64</type-name>
+                  </type>
+                </calculated-absolute-subscription-bw>
+              </state>
+            </subscription>
+            <protection config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <link-protection-style-requested config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type node="identityref">
+                    <base>oc-mplst:PROTECTION_TYPE</base>
+                  </type>
+                  <default>oc-mplst:LINK_NODE_PROTECTION_REQUESTED</default>
+                </link-protection-style-requested>
+                <bypass-optimize-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint16</type-name>
+                  </type>
+                </bypass-optimize-interval>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <link-protection-style-requested config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type node="identityref">
+                    <base>oc-mplst:PROTECTION_TYPE</base>
+                  </type>
+                  <default>oc-mplst:LINK_NODE_PROTECTION_REQUESTED</default>
+                </link-protection-style-requested>
+                <bypass-optimize-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint16</type-name>
+                  </type>
+                </bypass-optimize-interval>
+              </state>
+            </protection>
+          </interface>
+        </interface-attributes>
+        <sessions config="true" is-key="false" node="container" presence="false">
+          <session config="true" key="local-index" node="list">
+            <local-index config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </local-index>
+            <state config="true" is-key="false" node="container" presence="false">
+              <local-index config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </local-index>
+              <source-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>inet:ip-address</type-name>
+                </type>
+              </source-address>
+              <destination-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>inet:ip-address</type-name>
+                </type>
+              </destination-address>
+              <tunnel-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </tunnel-id>
+              <lsp-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </lsp-id>
+              <session-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </session-name>
+              <status config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="enumeration">
+                  <enum>UP</enum>
+                  <enum>DOWN</enum>
+                </type>
+              </status>
+              <type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="identityref">
+                  <base>oc-mplst:LSP_ROLE</base>
+                </type>
+              </type>
+              <protection-requested config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="identityref">
+                  <base>oc-mplst:PROTECTION_TYPE</base>
+                </type>
+              </protection-requested>
+              <label-in config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>oc-mplst:mpls-label</type-name>
+                </type>
+              </label-in>
+              <label-out config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>oc-mplst:mpls-label</type-name>
+                </type>
+              </label-out>
+              <sender-tspec config="true" is-key="false" node="container" presence="false">
+                <rate config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:ieeefloat32</type-name>
+                  </type>
+                </rate>
+                <size config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:ieeefloat32</type-name>
+                  </type>
+                </size>
+                <peak-data-rate config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type node="union">
+                    <type>
+                      <type-name>oc-types:ieeefloat32</type-name>
+                    </type>
+                    <type node="enumeration">
+                      <enum>INFINITY</enum>
+                    </type>
+                  </type>
+                </peak-data-rate>
+              </sender-tspec>
+            </state>
+            <record-route-objects config="true" is-key="false" node="container" presence="false">
+              <record-route-object config="true" key="index" node="list">
+                <index config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </index>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <index config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint8</type-name>
+                    </type>
+                  </index>
+                  <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>inet:ip-address</type-name>
+                    </type>
+                  </address>
+                  <reported-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-mplst:mpls-label</type-name>
+                    </type>
+                  </reported-label>
+                  <reported-flags config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint8</type-name>
+                    </type>
+                  </reported-flags>
+                </state>
+              </record-route-object>
+            </record-route-objects>
+          </session>
+        </sessions>
+      </rsvp-te>
+      <ldp config="true" is-key="false" node="container" presence="false"/>
+      <segment-routing config="true" is-key="false" node="container" presence="false">
+        <aggregate-sid-counters config="true" is-key="false" node="container" presence="false">
+          <aggregate-sid-counter config="true" key="mpls-label" node="list">
+            <mpls-label config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </mpls-label>
+            <state config="true" is-key="false" node="container" presence="false">
+              <mpls-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>oc-mpls-t:mpls-label</type-name>
+                </type>
+              </mpls-label>
+              <in-pkts config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </in-pkts>
+              <in-octets config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </in-octets>
+              <out-pkts config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </out-pkts>
+              <out-octets config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </out-octets>
+            </state>
+          </aggregate-sid-counter>
+        </aggregate-sid-counters>
+        <interfaces config="true" is-key="false" node="container" presence="false">
+          <interface config="true" key="interface-id" node="list">
+            <interface-id config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </interface-id>
+            <config config="true" is-key="false" node="container" presence="false">
+              <interface-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </interface-id>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <interface-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </interface-id>
+              <in-pkts config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </in-pkts>
+              <in-octets config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </in-octets>
+              <out-pkts config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </out-pkts>
+              <out-octets config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:counter64</type-name>
+                </type>
+              </out-octets>
+            </state>
+            <sid-counters config="true" is-key="false" node="container" presence="false">
+              <sid-counter config="true" key="mpls-label" node="list">
+                <mpls-label config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </mpls-label>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <mpls-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-mpls-t:mpls-label</type-name>
+                    </type>
+                  </mpls-label>
+                  <in-pkts config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>yang:counter64</type-name>
+                    </type>
+                  </in-pkts>
+                  <in-octets config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>yang:counter64</type-name>
+                    </type>
+                  </in-octets>
+                  <out-pkts config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>yang:counter64</type-name>
+                    </type>
+                  </out-pkts>
+                  <out-octets config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>yang:counter64</type-name>
+                    </type>
+                  </out-octets>
+                </state>
+                <forwarding-classes config="true" is-key="false" node="container" presence="false">
+                  <forwarding-class config="true" key="exp" node="list">
+                    <exp config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-data-handler>ignore</xr-data-handler>
+                      <type>
+                        <type-name>leafref</type-name>
+                      </type>
+                    </exp>
+                    <state config="true" is-key="false" node="container" presence="false">
+                      <exp config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type range="0..7">
+                          <type-name>uint8</type-name>
+                        </type>
+                      </exp>
+                      <in-pkts config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>yang:counter64</type-name>
+                        </type>
+                      </in-pkts>
+                      <in-octets config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>yang:counter64</type-name>
+                        </type>
+                      </in-octets>
+                      <out-pkts config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>yang:counter64</type-name>
+                        </type>
+                      </out-pkts>
+                      <out-octets config="true" is-key="false" is-yang-key="false" node="leaf">
+                        <type>
+                          <type-name>yang:counter64</type-name>
+                        </type>
+                      </out-octets>
+                    </state>
+                  </forwarding-class>
+                </forwarding-classes>
+              </sid-counter>
+            </sid-counters>
+            <interface-ref config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </interface>
+                <subinterface config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </subinterface>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </interface>
+                <subinterface config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </subinterface>
+              </state>
+            </interface-ref>
+          </interface>
+        </interfaces>
+      </segment-routing>
+    </signaling-protocols>
+    <lsps config="true" is-key="false" node="container" presence="false">
+      <constrained-path config="true" is-key="false" node="container" presence="false">
+        <named-explicit-paths config="true" is-key="false" node="container" presence="false">
+          <named-explicit-path config="true" key="name" node="list">
+            <name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </name>
+            <config config="true" is-key="false" node="container" presence="false">
+              <name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </name>
+              <sid-selection-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="enumeration">
+                  <enum>ADJ_SID_ONLY</enum>
+                  <enum>MIXED_MODE</enum>
+                </type>
+                <default>MIXED_MODE</default>
+              </sid-selection-mode>
+              <sid-protection-required config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </sid-protection-required>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </name>
+              <sid-selection-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="enumeration">
+                  <enum>ADJ_SID_ONLY</enum>
+                  <enum>MIXED_MODE</enum>
+                </type>
+                <default>MIXED_MODE</default>
+              </sid-selection-mode>
+              <sid-protection-required config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </sid-protection-required>
+            </state>
+            <explicit-route-objects config="true" is-key="false" node="container" presence="false">
+              <explicit-route-object config="true" key="index" node="list">
+                <index config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </index>
+                <config config="true" is-key="false" node="container" presence="false">
+                  <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>inet:ip-address</type-name>
+                    </type>
+                  </address>
+                  <hop-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>mpls-hop-type</type-name>
+                    </type>
+                  </hop-type>
+                  <index config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type range="0..255">
+                      <type-name>uint8</type-name>
+                    </type>
+                  </index>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <address config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>inet:ip-address</type-name>
+                    </type>
+                  </address>
+                  <hop-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>mpls-hop-type</type-name>
+                    </type>
+                  </hop-type>
+                  <index config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type range="0..255">
+                      <type-name>uint8</type-name>
+                    </type>
+                  </index>
+                </state>
+              </explicit-route-object>
+            </explicit-route-objects>
+          </named-explicit-path>
+        </named-explicit-paths>
+        <tunnels config="true" is-key="false" node="container" presence="false">
+          <tunnel config="true" key="name" node="list">
+            <name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </name>
+            <config config="true" is-key="false" node="container" presence="false">
+              <name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </name>
+              <type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="identityref">
+                  <base>oc-mplst:TUNNEL_TYPE</base>
+                </type>
+              </type>
+              <signaling-protocol config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="identityref">
+                  <base>oc-mplst:PATH_SETUP_PROTOCOL</base>
+                </type>
+              </signaling-protocol>
+              <description config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </description>
+              <admin-status config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="identityref">
+                  <base>oc-mplst:TUNNEL_ADMIN_STATUS</base>
+                </type>
+                <default>oc-mplst:ADMIN_UP</default>
+              </admin-status>
+              <preference config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type range="1..255">
+                  <type-name>uint8</type-name>
+                </type>
+              </preference>
+              <metric-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="identityref">
+                  <base>oc-mplst:LSP_METRIC_TYPE</base>
+                </type>
+                <default>oc-mplst:LSP_METRIC_INHERITED</default>
+              </metric-type>
+              <metric config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>int32</type-name>
+                </type>
+              </metric>
+              <shortcut-eligible config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>true</default>
+              </shortcut-eligible>
+              <protection-style-requested config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="identityref">
+                  <base>oc-mplst:PROTECTION_TYPE</base>
+                </type>
+                <default>oc-mplst:UNPROTECTED</default>
+              </protection-style-requested>
+              <reoptimize-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </reoptimize-timer>
+              <source config="true" is-key="false" is-yang-key="false" node="leaf">
+                <when>/mpls/lsps/constrained-path/tunnel/config/signaling-protocol = 'PATH_SETUP_RSVP'</when>
+                <type>
+                  <type-name>inet:ip-address</type-name>
+                </type>
+              </source>
+              <soft-preemption config="true" is-key="false" is-yang-key="false" node="leaf">
+                <when>/mpls/lsps/constrained-path/tunnel/config/signaling-protocol = 'PATH_SETUP_RSVP'</when>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </soft-preemption>
+              <setup-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                <when>/mpls/lsps/constrained-path/tunnel/config/signaling-protocol = 'PATH_SETUP_RSVP'</when>
+                <type range="0..7">
+                  <type-name>uint8</type-name>
+                </type>
+                <default>7</default>
+              </setup-priority>
+              <hold-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                <when>/mpls/lsps/constrained-path/tunnel/config/signaling-protocol = 'PATH_SETUP_RSVP'</when>
+                <type range="0..7">
+                  <type-name>uint8</type-name>
+                </type>
+                <default>0</default>
+              </hold-priority>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </name>
+              <type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="identityref">
+                  <base>oc-mplst:TUNNEL_TYPE</base>
+                </type>
+              </type>
+              <signaling-protocol config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="identityref">
+                  <base>oc-mplst:PATH_SETUP_PROTOCOL</base>
+                </type>
+              </signaling-protocol>
+              <description config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </description>
+              <admin-status config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="identityref">
+                  <base>oc-mplst:TUNNEL_ADMIN_STATUS</base>
+                </type>
+                <default>oc-mplst:ADMIN_UP</default>
+              </admin-status>
+              <preference config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type range="1..255">
+                  <type-name>uint8</type-name>
+                </type>
+              </preference>
+              <metric-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="identityref">
+                  <base>oc-mplst:LSP_METRIC_TYPE</base>
+                </type>
+                <default>oc-mplst:LSP_METRIC_INHERITED</default>
+              </metric-type>
+              <metric config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>int32</type-name>
+                </type>
+              </metric>
+              <shortcut-eligible config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>true</default>
+              </shortcut-eligible>
+              <protection-style-requested config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="identityref">
+                  <base>oc-mplst:PROTECTION_TYPE</base>
+                </type>
+                <default>oc-mplst:UNPROTECTED</default>
+              </protection-style-requested>
+              <reoptimize-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </reoptimize-timer>
+              <source config="true" is-key="false" is-yang-key="false" node="leaf">
+                <when>/mpls/lsps/constrained-path/tunnel/config/signaling-protocol = 'PATH_SETUP_RSVP'</when>
+                <type>
+                  <type-name>inet:ip-address</type-name>
+                </type>
+              </source>
+              <soft-preemption config="true" is-key="false" is-yang-key="false" node="leaf">
+                <when>/mpls/lsps/constrained-path/tunnel/config/signaling-protocol = 'PATH_SETUP_RSVP'</when>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </soft-preemption>
+              <setup-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                <when>/mpls/lsps/constrained-path/tunnel/config/signaling-protocol = 'PATH_SETUP_RSVP'</when>
+                <type range="0..7">
+                  <type-name>uint8</type-name>
+                </type>
+                <default>7</default>
+              </setup-priority>
+              <hold-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                <when>/mpls/lsps/constrained-path/tunnel/config/signaling-protocol = 'PATH_SETUP_RSVP'</when>
+                <type range="0..7">
+                  <type-name>uint8</type-name>
+                </type>
+                <default>0</default>
+              </hold-priority>
+              <oper-status config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="identityref">
+                  <base>oc-mplst:LSP_OPER_STATUS</base>
+                </type>
+              </oper-status>
+              <role config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="identityref">
+                  <base>oc-mplst:LSP_ROLE</base>
+                </type>
+              </role>
+              <counters config="true" is-key="false" node="container" presence="false">
+                <bytes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </bytes>
+                <packets config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </packets>
+                <path-changes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </path-changes>
+                <state-changes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </state-changes>
+                <online-time config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:date-and-time</type-name>
+                  </type>
+                </online-time>
+                <current-path-time config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:date-and-time</type-name>
+                  </type>
+                </current-path-time>
+                <next-reoptimization-time config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:date-and-time</type-name>
+                  </type>
+                </next-reoptimization-time>
+              </counters>
+            </state>
+            <bandwidth config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <specification-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>te-bandwidth-type</type-name>
+                  </type>
+                  <default>SPECIFIED</default>
+                </specification-type>
+                <set-bandwidth config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <when>../specification-type = 'SPECIFIED'</when>
+                  <type>
+                    <type-name>oc-mplst:bandwidth-kbps</type-name>
+                  </type>
+                </set-bandwidth>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <specification-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>te-bandwidth-type</type-name>
+                  </type>
+                  <default>SPECIFIED</default>
+                </specification-type>
+                <set-bandwidth config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <when>../specification-type = 'SPECIFIED'</when>
+                  <type>
+                    <type-name>oc-mplst:bandwidth-kbps</type-name>
+                  </type>
+                </set-bandwidth>
+                <signaled-bandwidth config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-mplst:bandwidth-kbps</type-name>
+                  </type>
+                </signaled-bandwidth>
+              </state>
+              <auto-bandwidth config="true" is-key="false" node="container" presence="false">
+                <when>../config/specification-type = 'AUTO'</when>
+                <config config="true" is-key="false" node="container" presence="false">
+                  <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </enabled>
+                  <min-bw config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-mplst:bandwidth-kbps</type-name>
+                    </type>
+                  </min-bw>
+                  <max-bw config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-mplst:bandwidth-kbps</type-name>
+                    </type>
+                  </max-bw>
+                  <adjust-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </adjust-interval>
+                  <adjust-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </adjust-threshold>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </enabled>
+                  <min-bw config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-mplst:bandwidth-kbps</type-name>
+                    </type>
+                  </min-bw>
+                  <max-bw config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-mplst:bandwidth-kbps</type-name>
+                    </type>
+                  </max-bw>
+                  <adjust-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </adjust-interval>
+                  <adjust-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </adjust-threshold>
+                </state>
+                <overflow config="true" is-key="false" node="container" presence="false">
+                  <config config="true" is-key="false" node="container" presence="false">
+                    <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                      <default>false</default>
+                    </enabled>
+                    <overflow-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>oc-types:percentage</type-name>
+                      </type>
+                    </overflow-threshold>
+                    <trigger-event-count config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>uint16</type-name>
+                      </type>
+                    </trigger-event-count>
+                  </config>
+                  <state config="true" is-key="false" node="container" presence="false">
+                    <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                      <default>false</default>
+                    </enabled>
+                    <overflow-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>oc-types:percentage</type-name>
+                      </type>
+                    </overflow-threshold>
+                    <trigger-event-count config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>uint16</type-name>
+                      </type>
+                    </trigger-event-count>
+                  </state>
+                </overflow>
+                <underflow config="true" is-key="false" node="container" presence="false">
+                  <config config="true" is-key="false" node="container" presence="false">
+                    <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                      <default>false</default>
+                    </enabled>
+                    <underflow-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>oc-types:percentage</type-name>
+                      </type>
+                    </underflow-threshold>
+                    <trigger-event-count config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>uint16</type-name>
+                      </type>
+                    </trigger-event-count>
+                  </config>
+                  <state config="true" is-key="false" node="container" presence="false">
+                    <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                      <default>false</default>
+                    </enabled>
+                    <underflow-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>oc-types:percentage</type-name>
+                      </type>
+                    </underflow-threshold>
+                    <trigger-event-count config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>uint16</type-name>
+                      </type>
+                    </trigger-event-count>
+                  </state>
+                </underflow>
+              </auto-bandwidth>
+            </bandwidth>
+            <p2p-tunnel-attributes config="true" is-key="false" node="container" presence="false">
+              <when>../config/type = 'P2P'</when>
+              <config config="true" is-key="false" node="container" presence="false">
+                <destination config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>inet:ip-address</type-name>
+                  </type>
+                </destination>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <destination config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>inet:ip-address</type-name>
+                  </type>
+                </destination>
+              </state>
+              <p2p-primary-path config="true" is-key="false" node="container" presence="false">
+                <p2p-primary-path config="true" key="name" node="list">
+                  <name config="true" is-key="true" is-yang-key="true" node="leaf">
+                    <xr-data-handler>ignore</xr-data-handler>
+                    <type>
+                      <type-name>leafref</type-name>
+                    </type>
+                  </name>
+                  <config config="true" is-key="false" node="container" presence="false">
+                    <name config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>string</type-name>
+                      </type>
+                    </name>
+                    <path-computation-method config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type node="identityref">
+                        <base>oc-mplst:PATH_COMPUTATION_METHOD</base>
+                      </type>
+                      <default>oc-mplst:LOCALLY_COMPUTED</default>
+                    </path-computation-method>
+                    <use-cspf config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>../path-computation-method = 'LOCALLY_COMPUTED'</when>
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </use-cspf>
+                    <cspf-tiebreaker config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>../path-computation-method = 'LOCALLY_COMPUTED'</when>
+                      <type>
+                        <type-name>cspf-tie-breaking</type-name>
+                      </type>
+                    </cspf-tiebreaker>
+                    <path-computation-server config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>../path-computation-method = 'EXTERNALLY_QUERIED'</when>
+                      <type>
+                        <type-name>inet:ip-address</type-name>
+                      </type>
+                    </path-computation-server>
+                    <explicit-path-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>../path-computation-method = 'EXPLICITLY_DEFINED'</when>
+                      <type>
+                        <type-name>leafref</type-name>
+                      </type>
+                    </explicit-path-name>
+                    <preference config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type range="1..255">
+                        <type-name>uint8</type-name>
+                      </type>
+                    </preference>
+                    <setup-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>/mpls/lsps/constrained-path/tunnel/config/signaling-protocol = 'PATH_SETUP_RSVP'</when>
+                      <type range="0..7">
+                        <type-name>uint8</type-name>
+                      </type>
+                      <default>7</default>
+                    </setup-priority>
+                    <hold-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>/mpls/lsps/constrained-path/tunnel/config/signaling-protocol = 'PATH_SETUP_RSVP'</when>
+                      <type range="0..7">
+                        <type-name>uint8</type-name>
+                      </type>
+                      <default>0</default>
+                    </hold-priority>
+                    <retry-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>/mpls/lsps/constrained-path/tunnel/config/signaling-protocol = 'PATH_SETUP_RSVP'</when>
+                      <type range="1..600">
+                        <type-name>uint16</type-name>
+                      </type>
+                    </retry-timer>
+                  </config>
+                  <state config="true" is-key="false" node="container" presence="false">
+                    <name config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>string</type-name>
+                      </type>
+                    </name>
+                    <path-computation-method config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type node="identityref">
+                        <base>oc-mplst:PATH_COMPUTATION_METHOD</base>
+                      </type>
+                      <default>oc-mplst:LOCALLY_COMPUTED</default>
+                    </path-computation-method>
+                    <use-cspf config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>../path-computation-method = 'LOCALLY_COMPUTED'</when>
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </use-cspf>
+                    <cspf-tiebreaker config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>../path-computation-method = 'LOCALLY_COMPUTED'</when>
+                      <type>
+                        <type-name>cspf-tie-breaking</type-name>
+                      </type>
+                    </cspf-tiebreaker>
+                    <path-computation-server config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>../path-computation-method = 'EXTERNALLY_QUERIED'</when>
+                      <type>
+                        <type-name>inet:ip-address</type-name>
+                      </type>
+                    </path-computation-server>
+                    <explicit-path-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>../path-computation-method = 'EXPLICITLY_DEFINED'</when>
+                      <type>
+                        <type-name>leafref</type-name>
+                      </type>
+                    </explicit-path-name>
+                    <preference config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type range="1..255">
+                        <type-name>uint8</type-name>
+                      </type>
+                    </preference>
+                    <setup-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>/mpls/lsps/constrained-path/tunnel/config/signaling-protocol = 'PATH_SETUP_RSVP'</when>
+                      <type range="0..7">
+                        <type-name>uint8</type-name>
+                      </type>
+                      <default>7</default>
+                    </setup-priority>
+                    <hold-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>/mpls/lsps/constrained-path/tunnel/config/signaling-protocol = 'PATH_SETUP_RSVP'</when>
+                      <type range="0..7">
+                        <type-name>uint8</type-name>
+                      </type>
+                      <default>0</default>
+                    </hold-priority>
+                    <retry-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>/mpls/lsps/constrained-path/tunnel/config/signaling-protocol = 'PATH_SETUP_RSVP'</when>
+                      <type range="1..600">
+                        <type-name>uint16</type-name>
+                      </type>
+                    </retry-timer>
+                    <associated-rsvp-session config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>leafref</type-name>
+                      </type>
+                    </associated-rsvp-session>
+                  </state>
+                  <candidate-secondary-paths config="true" is-key="false" node="container" presence="false">
+                    <candidate-secondary-path config="true" key="secondary-path" node="list">
+                      <secondary-path config="true" is-key="true" is-yang-key="true" node="leaf">
+                        <xr-data-handler>ignore</xr-data-handler>
+                        <type>
+                          <type-name>leafref</type-name>
+                        </type>
+                      </secondary-path>
+                      <config config="true" is-key="false" node="container" presence="false">
+                        <secondary-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>leafref</type-name>
+                          </type>
+                        </secondary-path>
+                        <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint16</type-name>
+                          </type>
+                        </priority>
+                      </config>
+                      <state config="true" is-key="false" node="container" presence="false">
+                        <secondary-path config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>leafref</type-name>
+                          </type>
+                        </secondary-path>
+                        <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>uint16</type-name>
+                          </type>
+                        </priority>
+                        <active config="true" is-key="false" is-yang-key="false" node="leaf">
+                          <type>
+                            <type-name>boolean</type-name>
+                          </type>
+                        </active>
+                      </state>
+                    </candidate-secondary-path>
+                  </candidate-secondary-paths>
+                  <admin-groups config="true" is-key="false" node="container" presence="false">
+                    <config config="true" is-key="false" node="container" presence="false">
+                      <exclude-group config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>leafref</type-name>
+                        </type>
+                      </exclude-group>
+                      <include-all-group config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>leafref</type-name>
+                        </type>
+                      </include-all-group>
+                      <include-any-group config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>leafref</type-name>
+                        </type>
+                      </include-any-group>
+                    </config>
+                    <state config="true" is-key="false" node="container" presence="false">
+                      <exclude-group config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>leafref</type-name>
+                        </type>
+                      </exclude-group>
+                      <include-all-group config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>leafref</type-name>
+                        </type>
+                      </include-all-group>
+                      <include-any-group config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>leafref</type-name>
+                        </type>
+                      </include-any-group>
+                    </state>
+                  </admin-groups>
+                </p2p-primary-path>
+              </p2p-primary-path>
+              <p2p-secondary-paths config="true" is-key="false" node="container" presence="false">
+                <p2p-secondary-path config="true" key="name" node="list">
+                  <name config="true" is-key="true" is-yang-key="true" node="leaf">
+                    <xr-data-handler>ignore</xr-data-handler>
+                    <type>
+                      <type-name>leafref</type-name>
+                    </type>
+                  </name>
+                  <config config="true" is-key="false" node="container" presence="false">
+                    <name config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>string</type-name>
+                      </type>
+                    </name>
+                    <path-computation-method config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type node="identityref">
+                        <base>oc-mplst:PATH_COMPUTATION_METHOD</base>
+                      </type>
+                      <default>oc-mplst:LOCALLY_COMPUTED</default>
+                    </path-computation-method>
+                    <use-cspf config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>../path-computation-method = 'LOCALLY_COMPUTED'</when>
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </use-cspf>
+                    <cspf-tiebreaker config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>../path-computation-method = 'LOCALLY_COMPUTED'</when>
+                      <type>
+                        <type-name>cspf-tie-breaking</type-name>
+                      </type>
+                    </cspf-tiebreaker>
+                    <path-computation-server config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>../path-computation-method = 'EXTERNALLY_QUERIED'</when>
+                      <type>
+                        <type-name>inet:ip-address</type-name>
+                      </type>
+                    </path-computation-server>
+                    <explicit-path-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>../path-computation-method = 'EXPLICITLY_DEFINED'</when>
+                      <type>
+                        <type-name>leafref</type-name>
+                      </type>
+                    </explicit-path-name>
+                    <preference config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type range="1..255">
+                        <type-name>uint8</type-name>
+                      </type>
+                    </preference>
+                    <setup-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>/mpls/lsps/constrained-path/tunnel/config/signaling-protocol = 'PATH_SETUP_RSVP'</when>
+                      <type range="0..7">
+                        <type-name>uint8</type-name>
+                      </type>
+                      <default>7</default>
+                    </setup-priority>
+                    <hold-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>/mpls/lsps/constrained-path/tunnel/config/signaling-protocol = 'PATH_SETUP_RSVP'</when>
+                      <type range="0..7">
+                        <type-name>uint8</type-name>
+                      </type>
+                      <default>0</default>
+                    </hold-priority>
+                    <retry-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>/mpls/lsps/constrained-path/tunnel/config/signaling-protocol = 'PATH_SETUP_RSVP'</when>
+                      <type range="1..600">
+                        <type-name>uint16</type-name>
+                      </type>
+                    </retry-timer>
+                  </config>
+                  <state config="true" is-key="false" node="container" presence="false">
+                    <name config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>string</type-name>
+                      </type>
+                    </name>
+                    <path-computation-method config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type node="identityref">
+                        <base>oc-mplst:PATH_COMPUTATION_METHOD</base>
+                      </type>
+                      <default>oc-mplst:LOCALLY_COMPUTED</default>
+                    </path-computation-method>
+                    <use-cspf config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>../path-computation-method = 'LOCALLY_COMPUTED'</when>
+                      <type>
+                        <type-name>boolean</type-name>
+                      </type>
+                    </use-cspf>
+                    <cspf-tiebreaker config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>../path-computation-method = 'LOCALLY_COMPUTED'</when>
+                      <type>
+                        <type-name>cspf-tie-breaking</type-name>
+                      </type>
+                    </cspf-tiebreaker>
+                    <path-computation-server config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>../path-computation-method = 'EXTERNALLY_QUERIED'</when>
+                      <type>
+                        <type-name>inet:ip-address</type-name>
+                      </type>
+                    </path-computation-server>
+                    <explicit-path-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>../path-computation-method = 'EXPLICITLY_DEFINED'</when>
+                      <type>
+                        <type-name>leafref</type-name>
+                      </type>
+                    </explicit-path-name>
+                    <preference config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type range="1..255">
+                        <type-name>uint8</type-name>
+                      </type>
+                    </preference>
+                    <setup-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>/mpls/lsps/constrained-path/tunnel/config/signaling-protocol = 'PATH_SETUP_RSVP'</when>
+                      <type range="0..7">
+                        <type-name>uint8</type-name>
+                      </type>
+                      <default>7</default>
+                    </setup-priority>
+                    <hold-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>/mpls/lsps/constrained-path/tunnel/config/signaling-protocol = 'PATH_SETUP_RSVP'</when>
+                      <type range="0..7">
+                        <type-name>uint8</type-name>
+                      </type>
+                      <default>0</default>
+                    </hold-priority>
+                    <retry-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <when>/mpls/lsps/constrained-path/tunnel/config/signaling-protocol = 'PATH_SETUP_RSVP'</when>
+                      <type range="1..600">
+                        <type-name>uint16</type-name>
+                      </type>
+                    </retry-timer>
+                    <associated-rsvp-session config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <type>
+                        <type-name>leafref</type-name>
+                      </type>
+                    </associated-rsvp-session>
+                  </state>
+                  <admin-groups config="true" is-key="false" node="container" presence="false">
+                    <config config="true" is-key="false" node="container" presence="false">
+                      <exclude-group config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>leafref</type-name>
+                        </type>
+                      </exclude-group>
+                      <include-all-group config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>leafref</type-name>
+                        </type>
+                      </include-all-group>
+                      <include-any-group config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>leafref</type-name>
+                        </type>
+                      </include-any-group>
+                    </config>
+                    <state config="true" is-key="false" node="container" presence="false">
+                      <exclude-group config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>leafref</type-name>
+                        </type>
+                      </exclude-group>
+                      <include-all-group config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>leafref</type-name>
+                        </type>
+                      </include-all-group>
+                      <include-any-group config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                        <type>
+                          <type-name>leafref</type-name>
+                        </type>
+                      </include-any-group>
+                    </state>
+                  </admin-groups>
+                </p2p-secondary-path>
+              </p2p-secondary-paths>
+            </p2p-tunnel-attributes>
+          </tunnel>
+        </tunnels>
+      </constrained-path>
+      <unconstrained-path config="true" is-key="false" node="container" presence="false">
+        <path-setup-protocol config="true" is-key="false" node="container" presence="false">
+          <ldp config="true" is-key="false" node="container" presence="false"/>
+        </path-setup-protocol>
+      </unconstrained-path>
+      <static-lsps config="true" is-key="false" node="container" presence="false">
+        <static-lsp config="true" key="name" node="list">
+          <name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </name>
+          <config config="true" is-key="false" node="container" presence="false">
+            <name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </name>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </name>
+          </state>
+          <ingress config="true" is-key="false" node="container" presence="false">
+            <config config="true" is-key="false" node="container" presence="false">
+              <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>inet:ip-address</type-name>
+                </type>
+              </next-hop>
+              <incoming-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>oc-mplst:mpls-label</type-name>
+                </type>
+              </incoming-label>
+              <push-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>oc-mplst:mpls-label</type-name>
+                </type>
+              </push-label>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>inet:ip-address</type-name>
+                </type>
+              </next-hop>
+              <incoming-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>oc-mplst:mpls-label</type-name>
+                </type>
+              </incoming-label>
+              <push-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>oc-mplst:mpls-label</type-name>
+                </type>
+              </push-label>
+            </state>
+          </ingress>
+          <transit config="true" is-key="false" node="container" presence="false">
+            <config config="true" is-key="false" node="container" presence="false">
+              <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>inet:ip-address</type-name>
+                </type>
+              </next-hop>
+              <incoming-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>oc-mplst:mpls-label</type-name>
+                </type>
+              </incoming-label>
+              <push-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>oc-mplst:mpls-label</type-name>
+                </type>
+              </push-label>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>inet:ip-address</type-name>
+                </type>
+              </next-hop>
+              <incoming-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>oc-mplst:mpls-label</type-name>
+                </type>
+              </incoming-label>
+              <push-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>oc-mplst:mpls-label</type-name>
+                </type>
+              </push-label>
+            </state>
+          </transit>
+          <egress config="true" is-key="false" node="container" presence="false">
+            <config config="true" is-key="false" node="container" presence="false">
+              <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>inet:ip-address</type-name>
+                </type>
+              </next-hop>
+              <incoming-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>oc-mplst:mpls-label</type-name>
+                </type>
+              </incoming-label>
+              <push-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>oc-mplst:mpls-label</type-name>
+                </type>
+              </push-label>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <next-hop config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>inet:ip-address</type-name>
+                </type>
+              </next-hop>
+              <incoming-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>oc-mplst:mpls-label</type-name>
+                </type>
+              </incoming-label>
+              <push-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>oc-mplst:mpls-label</type-name>
+                </type>
+              </push-label>
+            </state>
+          </egress>
+        </static-lsp>
+      </static-lsps>
+    </lsps>
+  </mpls>
+</openconfig-mpls>

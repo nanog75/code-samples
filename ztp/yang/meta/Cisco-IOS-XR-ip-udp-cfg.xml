@@ -1,0 +1,240 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ip-udp-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ip-udp-cfg" revision="2017-09-30">
+  <files>
+    <file revision="2017-09-30" submodule="false">Cisco-IOS-XR-ip-udp-cfg.yang</file>
+  </files>
+  <prefix>ip-udp-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-ip-tcp-cfg</import>
+  <augment path="/a1:ip">
+    <forward-protocol config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip/services/forward/</xr-path>
+      <xr-xml-map>ip_udp_cfg:ForwardProtocol</xr-xml-map>
+      <xr-task>transport</xr-task>
+      <udp config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/ip/services/forward/udp/</xr-path>
+        <xr-xml-map>ip_udp_cfg:UDP</xr-xml-map>
+        <xr-task>transport</xr-task>
+        <ports config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/ip/services/forward/udp/ports/</xr-path>
+          <xr-xml-map>ip_udp_cfg:PortTable</xr-xml-map>
+          <xr-task>transport</xr-task>
+          <port config="true" key="port-id" node="list">
+            <xr-path>/cfg/gl/ip/services/forward/udp/ports/&lt;ip_udp_cfg_Port_port&gt;</xr-path>
+            <xr-xml-map>ip_udp_cfg:Port</xr-xml-map>
+            <xr-task>transport</xr-task>
+            <port-id config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/ip/services/forward/udp/ports/&lt;ip_udp_cfg_Port_port&gt;</xr-path>
+              <xr-xml-map>ip_udp_cfg:PortID</xr-xml-map>
+              <xr-task>transport</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-sch-arg-name>&lt;ip_udp_cfg_Port_port&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-port-number</type-name>
+              </type>
+            </port-id>
+            <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/ip/services/forward/udp/ports/&lt;ip_udp_cfg_Port_port&gt;</xr-path>
+              <xr-xml-map>ip_udp_cfg:Enable</xr-xml-map>
+              <xr-task>transport</xr-task>
+              <xr-sch-type>Boolean</xr-sch-type>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </enable>
+          </port>
+        </ports>
+        <disable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ip/services/forward/udp/disable</xr-path>
+          <xr-xml-map>ip_udp_cfg:Disable</xr-xml-map>
+          <xr-task>transport</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </disable>
+      </udp>
+    </forward-protocol>
+  </augment>
+  <augment path="/a1:ip/a1:cinetd/a1:services/a1:ipv4/a1:small-servers">
+    <udp-small-servers config="true" is-key="false" node="container" presence="true">
+      <xr-data-handler>ignore</xr-data-handler>
+      <xr-is-packed/>
+      <xr-path>/cfg/gl/ip/services/cinetd/service/ipv4/small_servers/udp`</xr-path>
+      <xr-xml-map>ip_udp_cfg:UDPSmallServers</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <xr-pack-format>%s%d</xr-pack-format>
+      <access-control-list-name config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%s%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/gl/ip/services/cinetd/service/ipv4/small_servers/udp`0</xr-path>
+        <xr-xml-map>ip_udp_cfg:AccessControlListName</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-sch-type>String</xr-sch-type>
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </access-control-list-name>
+      <small-server config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%s%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/gl/ip/services/cinetd/service/ipv4/small_servers/udp`1</xr-path>
+        <xr-xml-map>ip_udp_cfg:SmallServer</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-sch-type>RangeEnum</xr-sch-type>
+        <type node="union">
+          <type node="enumeration">
+            <enum value="0">no-limit</enum>
+          </type>
+          <type range="0..2147483647">
+            <type-name>uint32</type-name>
+          </type>
+        </type>
+        <mandatory>true</mandatory>
+      </small-server>
+    </udp-small-servers>
+  </augment>
+  <augment path="/a1:ip/a1:cinetd/a1:services/a1:ipv6/a1:small-servers">
+    <udp-small-servers config="true" is-key="false" node="container" presence="true">
+      <xr-data-handler>ignore</xr-data-handler>
+      <xr-is-packed/>
+      <xr-path>/cfg/gl/ip/services/cinetd/service/ipv6/small_servers/udp`</xr-path>
+      <xr-xml-map>ip_udp_cfg:UDPSmallServers</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <xr-pack-format>%s%d</xr-pack-format>
+      <access-control-list-name config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%s%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/gl/ip/services/cinetd/service/ipv6/small_servers/udp`0</xr-path>
+        <xr-xml-map>ip_udp_cfg:AccessControlListName</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-sch-type>String</xr-sch-type>
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </access-control-list-name>
+      <small-server config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%s%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/gl/ip/services/cinetd/service/ipv6/small_servers/udp`1</xr-path>
+        <xr-xml-map>ip_udp_cfg:SmallServer</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-sch-type>RangeEnum</xr-sch-type>
+        <type node="union">
+          <type node="enumeration">
+            <enum value="0">no-limit</enum>
+          </type>
+          <type range="0..2147483647">
+            <type-name>uint32</type-name>
+          </type>
+        </type>
+        <mandatory>true</mandatory>
+      </small-server>
+    </udp-small-servers>
+  </augment>
+  <ip-udp config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/udp/</xr-path>
+    <xr-xml-map>ip_udp_detail_cfg:IP_UDP</xr-xml-map>
+    <xr-task>transport</xr-task>
+    <num-thread config="true" is-key="false" node="container" presence="true">
+      <xr-data-handler>ignore</xr-data-handler>
+      <xr-is-packed/>
+      <xr-path>/cfg/gl/udp/num_thread`</xr-path>
+      <xr-xml-map>ip_udp_detail_cfg:NumThread</xr-xml-map>
+      <xr-task>transport</xr-task>
+      <xr-pack-format>%d%d</xr-pack-format>
+      <udp-in-q-threads config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/gl/udp/num_thread`0</xr-path>
+        <xr-xml-map>ip_udp_detail_cfg:udpInQThreads</xr-xml-map>
+        <xr-task>transport</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..16">
+          <type-name>uint32</type-name>
+        </type>
+        <mandatory>true</mandatory>
+      </udp-in-q-threads>
+      <udp-out-q-threads config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/gl/udp/num_thread`1</xr-path>
+        <xr-xml-map>ip_udp_detail_cfg:udpOutQThreads</xr-xml-map>
+        <xr-task>transport</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..16">
+          <type-name>uint32</type-name>
+        </type>
+        <mandatory>true</mandatory>
+      </udp-out-q-threads>
+    </num-thread>
+    <directory config="true" is-key="false" node="container" presence="true">
+      <xr-data-handler>ignore</xr-data-handler>
+      <xr-is-packed/>
+      <xr-path>/cfg/gl/udp/directory`</xr-path>
+      <xr-xml-map>ip_udp_detail_cfg:Directory</xr-xml-map>
+      <xr-task>transport</xr-task>
+      <xr-pack-format>%s%d%d</xr-pack-format>
+      <directoryname config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%s%d%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/gl/udp/directory`0</xr-path>
+        <xr-xml-map>ip_udp_detail_cfg:Directoryname</xr-xml-map>
+        <xr-task>transport</xr-task>
+        <xr-sch-type>String</xr-sch-type>
+        <type>
+          <type-name>string</type-name>
+        </type>
+        <mandatory>true</mandatory>
+      </directoryname>
+      <max-udp-debug-files config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%s%d%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/gl/udp/directory`1</xr-path>
+        <xr-xml-map>ip_udp_detail_cfg:MaxUdpDebugFiles</xr-xml-map>
+        <xr-task>transport</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..5000">
+          <type-name>uint32</type-name>
+        </type>
+        <default>256</default>
+      </max-udp-debug-files>
+      <max-file-size-files config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%s%d%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/gl/udp/directory`2</xr-path>
+        <xr-xml-map>ip_udp_detail_cfg:MaxFileSizeFiles</xr-xml-map>
+        <xr-task>transport</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1024..4294967295">
+          <type-name>uint32</type-name>
+        </type>
+      </max-file-size-files>
+    </directory>
+    <receive-q config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/udp/receive_queue</xr-path>
+      <xr-xml-map>ip_udp_detail_cfg:ReceiveQ</xr-xml-map>
+      <xr-task>transport</xr-task>
+      <xr-sch-type>Range</xr-sch-type>
+      <type range="40..800">
+        <type-name>uint32</type-name>
+      </type>
+    </receive-q>
+  </ip-udp>
+</Cisco-IOS-XR-ip-udp-cfg>

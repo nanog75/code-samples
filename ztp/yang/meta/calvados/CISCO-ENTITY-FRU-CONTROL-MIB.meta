@@ -1,0 +1,344 @@
+<?xml version="1.0"?>
+<CISCO-ENTITY-FRU-CONTROL-MIB ns="http://tail-f.com/ns/mibs/CISCO-ENTITY-FRU-CONTROL-MIB/200311240000Z" revision="2003-11-24">
+  <files>
+    <file revision="2003-11-24" submodule="false">CISCO-ENTITY-FRU-CONTROL-MIB.yang</file>
+  </files>
+  <prefix>CISCO_ENTITY_FRU_CONTROL_MIB</prefix>
+  <import prefix="yang">ietf-yang-types</import>
+  <import prefix="tailf">tailf-common</import>
+  <import prefix="SNMPv2-TC">SNMPv2-TC</import>
+  <import prefix="INET-ADDRESS-MIB">INET-ADDRESS-MIB</import>
+  <import prefix="ENTITY-MIB">Cisco-IOS-XR-sysadmin-entity-mib</import>
+  <typedef name="PowerRedundancyType">
+    <type node="enumeration">
+      <enum value="1">notsupported</enum>
+      <enum value="2">redundant</enum>
+      <enum value="3">combined</enum>
+    </type>
+  </typedef>
+  <typedef name="PowerAdminType">
+    <type node="enumeration">
+      <enum value="1">on</enum>
+      <enum value="2">off</enum>
+      <enum value="3">inlineAuto</enum>
+      <enum value="4">inlineOn</enum>
+    </type>
+  </typedef>
+  <typedef name="PowerOperType">
+    <type node="enumeration">
+      <enum value="1">offEnvOther</enum>
+      <enum value="2">on</enum>
+      <enum value="3">offAdmin</enum>
+      <enum value="4">offDenied</enum>
+      <enum value="5">offEnvPower</enum>
+      <enum value="6">offEnvTemp</enum>
+      <enum value="7">offEnvFan</enum>
+      <enum value="8">failed</enum>
+      <enum value="9">onButFanFail</enum>
+    </type>
+  </typedef>
+  <typedef name="FRUCurrentType">
+    <type range="-1000000000 .. 1000000000">
+      <type-name>int32</type-name>
+    </type>
+  </typedef>
+  <typedef name="ModuleAdminType">
+    <type node="enumeration">
+      <enum value="1">enabled</enum>
+      <enum value="2">disabled</enum>
+      <enum value="3">reset</enum>
+      <enum value="4">outOfServiceAdmin</enum>
+    </type>
+  </typedef>
+  <typedef name="ModuleOperType">
+    <type node="enumeration">
+      <enum value="1">unknown</enum>
+      <enum value="2">ok</enum>
+      <enum value="3">disabled</enum>
+      <enum value="4">okButDiagFailed</enum>
+      <enum value="5">boot</enum>
+      <enum value="6">selfTest</enum>
+      <enum value="7">failed</enum>
+      <enum value="8">missing</enum>
+      <enum value="9">mismatchWithParent</enum>
+      <enum value="10">mismatchConfig</enum>
+      <enum value="11">diagFailed</enum>
+      <enum value="12">dormant</enum>
+      <enum value="13">outOfServiceAdmin</enum>
+      <enum value="14">outOfServiceEnvTemp</enum>
+      <enum value="15">poweredDown</enum>
+      <enum value="16">poweredUp</enum>
+      <enum value="17">powerDenied</enum>
+      <enum value="18">powerCycled</enum>
+      <enum value="19">okButPowerOverWarning</enum>
+      <enum value="20">okButPowerOverCritical</enum>
+      <enum value="21">updatingFPD</enum>
+    </type>
+  </typedef>
+  <typedef name="ModuleResetReasonType">
+    <type node="enumeration">
+      <enum value="1">unknown</enum>
+      <enum value="2">powerUp</enum>
+      <enum value="3">parityError</enum>
+      <enum value="4">clearConfigReset</enum>
+      <enum value="5">manualReset</enum>
+      <enum value="6">watchDogTimeoutReset</enum>
+      <enum value="7">resourceOverflowReset</enum>
+      <enum value="8">missingTaskReset</enum>
+      <enum value="9">lowVoltageReset</enum>
+      <enum value="10">controllerReset</enum>
+      <enum value="11">systemReset</enum>
+      <enum value="12">switchoverReset</enum>
+      <enum value="13">upgradeReset</enum>
+      <enum value="14">downgradeReset</enum>
+      <enum value="15">cacheErrorReset</enum>
+      <enum value="16">deviceDriverReset</enum>
+      <enum value="17">softwareExceptionReset</enum>
+      <enum value="18">restoreConfigReset</enum>
+      <enum value="19">abortRevReset</enum>
+      <enum value="20">burnBootReset</enum>
+      <enum value="21">standbyCdHealthierReset</enum>
+      <enum value="22">nonNativeConfigClearReset</enum>
+      <enum value="23">memoryProtectionErrorReset</enum>
+    </type>
+  </typedef>
+  <typedef name="FRUTimeSeconds">
+    <type range="0 .. 4294967295">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="cefcMaxDefaultInLinePowerType">
+    <type range="0 .. 12500">
+      <type-name>int32</type-name>
+    </type>
+  </typedef>
+  <typedef name="cefcFanTrayOperStatusType">
+    <type node="enumeration">
+      <enum value="1">unknown</enum>
+      <enum value="2">up</enum>
+      <enum value="3">down</enum>
+      <enum value="4">warning</enum>
+    </type>
+  </typedef>
+  <typedef name="cefcPhysicalStatusType">
+    <type node="enumeration">
+      <enum value="1">other</enum>
+      <enum value="2">supported</enum>
+      <enum value="3">unsupported</enum>
+      <enum value="4">incompatible</enum>
+    </type>
+  </typedef>
+  <CISCO-ENTITY-FRU-CONTROL-MIB config="true" is-key="false" node="container" presence="false">
+    <cefcFRUPower config="true" is-key="false" node="container" presence="false">
+      <cefcMaxDefaultInLinePower config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>cefcMaxDefaultInLinePowerType</type-name>
+        </type>
+        <default>12500</default>
+      </cefcMaxDefaultInLinePower>
+      <cefcMaxDefaultHighInLinePower config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </cefcMaxDefaultHighInLinePower>
+    </cefcFRUPower>
+    <cefcMIBNotificationEnables config="true" is-key="false" node="container" presence="false">
+      <cefcMIBEnableStatusNotification config="true" is-key="false" node="leaf">
+        <type>
+          <type-name>SNMPv2-TC:TruthValue</type-name>
+        </type>
+        <default>false</default>
+      </cefcMIBEnableStatusNotification>
+    </cefcMIBNotificationEnables>
+    <cefcFRUPowerSupplyGroupTable config="true" is-key="false" node="container" presence="false">
+      <cefcFRUPowerSupplyGroupEntry config="true" key="entPhysicalIndex" node="list">
+        <xr-path/>
+        <entPhysicalIndex config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>ENTITY-MIB:PhysicalIndex</type-name>
+          </type>
+        </entPhysicalIndex>
+        <cefcPowerRedundancyMode config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>PowerRedundancyType</type-name>
+          </type>
+        </cefcPowerRedundancyMode>
+        <cefcPowerUnits config="true" is-key="false" node="leaf">
+          <type length="0 .. 255">
+            <type-name>string</type-name>
+          </type>
+        </cefcPowerUnits>
+        <cefcTotalAvailableCurrent config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>FRUCurrentType</type-name>
+          </type>
+        </cefcTotalAvailableCurrent>
+        <cefcTotalDrawnCurrent config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>FRUCurrentType</type-name>
+          </type>
+        </cefcTotalDrawnCurrent>
+        <cefcPowerRedundancyOperMode config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>PowerRedundancyType</type-name>
+          </type>
+        </cefcPowerRedundancyOperMode>
+      </cefcFRUPowerSupplyGroupEntry>
+    </cefcFRUPowerSupplyGroupTable>
+    <cefcFRUPowerStatusTable config="true" is-key="false" node="container" presence="false">
+      <cefcFRUPowerStatusEntry config="true" key="entPhysicalIndex" node="list">
+        <xr-path/>
+        <entPhysicalIndex config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>ENTITY-MIB:PhysicalIndex</type-name>
+          </type>
+        </entPhysicalIndex>
+        <cefcFRUPowerAdminStatus config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>PowerAdminType</type-name>
+          </type>
+        </cefcFRUPowerAdminStatus>
+        <cefcFRUPowerOperStatus config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>PowerOperType</type-name>
+          </type>
+        </cefcFRUPowerOperStatus>
+        <cefcFRUCurrent config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>FRUCurrentType</type-name>
+          </type>
+        </cefcFRUCurrent>
+      </cefcFRUPowerStatusEntry>
+    </cefcFRUPowerStatusTable>
+    <cefcFRUPowerSupplyValueTable config="true" is-key="false" node="container" presence="false">
+      <cefcFRUPowerSupplyValueEntry config="true" key="entPhysicalIndex" node="list">
+        <xr-path/>
+        <entPhysicalIndex config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>ENTITY-MIB:PhysicalIndex</type-name>
+          </type>
+        </entPhysicalIndex>
+        <cefcFRUTotalSystemCurrent config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>FRUCurrentType</type-name>
+          </type>
+        </cefcFRUTotalSystemCurrent>
+        <cefcFRUDrawnSystemCurrent config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>FRUCurrentType</type-name>
+          </type>
+        </cefcFRUDrawnSystemCurrent>
+        <cefcFRUTotalInlineCurrent config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>FRUCurrentType</type-name>
+          </type>
+        </cefcFRUTotalInlineCurrent>
+        <cefcFRUDrawnInlineCurrent config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>FRUCurrentType</type-name>
+          </type>
+        </cefcFRUDrawnInlineCurrent>
+      </cefcFRUPowerSupplyValueEntry>
+    </cefcFRUPowerSupplyValueTable>
+    <cefcModuleTable config="true" is-key="false" node="container" presence="false">
+      <cefcModuleEntry config="true" key="entPhysicalIndex" node="list">
+        <xr-path/>
+        <entPhysicalIndex config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>ENTITY-MIB:PhysicalIndex</type-name>
+          </type>
+        </entPhysicalIndex>
+        <cefcModuleAdminStatus config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>ModuleAdminType</type-name>
+          </type>
+        </cefcModuleAdminStatus>
+        <cefcModuleOperStatus config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>ModuleOperType</type-name>
+          </type>
+        </cefcModuleOperStatus>
+        <cefcModuleResetReason config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>ModuleResetReasonType</type-name>
+          </type>
+        </cefcModuleResetReason>
+        <cefcModuleStatusLastChangeTime config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>yang:timestamp</type-name>
+          </type>
+        </cefcModuleStatusLastChangeTime>
+        <cefcModuleLastClearConfigTime config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>yang:timestamp</type-name>
+          </type>
+        </cefcModuleLastClearConfigTime>
+        <cefcModuleResetReasonDescription config="true" is-key="false" node="leaf">
+          <type length="0 .. 255">
+            <type-name>string</type-name>
+          </type>
+        </cefcModuleResetReasonDescription>
+        <cefcModuleStateChangeReasonDescr config="true" is-key="false" node="leaf">
+          <type length="0 .. 255">
+            <type-name>string</type-name>
+          </type>
+        </cefcModuleStateChangeReasonDescr>
+        <cefcModuleUpTime config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>FRUTimeSeconds</type-name>
+          </type>
+        </cefcModuleUpTime>
+      </cefcModuleEntry>
+    </cefcModuleTable>
+    <cefcIntelliModuleTable config="true" is-key="false" node="container" presence="false">
+      <cefcIntelliModuleEntry config="true" key="entPhysicalIndex" node="list">
+        <xr-path/>
+        <entPhysicalIndex config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>ENTITY-MIB:PhysicalIndex</type-name>
+          </type>
+        </entPhysicalIndex>
+        <cefcIntelliModuleIPAddrType config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>INET-ADDRESS-MIB:InetAddressType</type-name>
+          </type>
+        </cefcIntelliModuleIPAddrType>
+        <cefcIntelliModuleIPAddr config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>INET-ADDRESS-MIB:InetAddress</type-name>
+          </type>
+        </cefcIntelliModuleIPAddr>
+      </cefcIntelliModuleEntry>
+    </cefcIntelliModuleTable>
+    <cefcFanTrayStatusTable config="true" is-key="false" node="container" presence="false">
+      <cefcFanTrayStatusEntry config="true" key="entPhysicalIndex" node="list">
+        <xr-path/>
+        <entPhysicalIndex config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>ENTITY-MIB:PhysicalIndex</type-name>
+          </type>
+        </entPhysicalIndex>
+        <cefcFanTrayOperStatus config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>cefcFanTrayOperStatusType</type-name>
+          </type>
+        </cefcFanTrayOperStatus>
+      </cefcFanTrayStatusEntry>
+    </cefcFanTrayStatusTable>
+    <cefcPhysicalTable config="true" is-key="false" node="container" presence="false">
+      <cefcPhysicalEntry config="true" key="entPhysicalIndex" node="list">
+        <xr-path/>
+        <entPhysicalIndex config="true" is-key="true" node="leaf">
+          <type>
+            <type-name>ENTITY-MIB:PhysicalIndex</type-name>
+          </type>
+        </entPhysicalIndex>
+        <cefcPhysicalStatus config="true" is-key="false" node="leaf">
+          <type>
+            <type-name>cefcPhysicalStatusType</type-name>
+          </type>
+        </cefcPhysicalStatus>
+      </cefcPhysicalEntry>
+    </cefcPhysicalTable>
+  </CISCO-ENTITY-FRU-CONTROL-MIB>
+</CISCO-ENTITY-FRU-CONTROL-MIB>

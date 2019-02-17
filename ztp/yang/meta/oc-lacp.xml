@@ -1,0 +1,218 @@
+<?xml version="1.0"?>
+<openconfig-lacp ns="http://openconfig.net/yang/lacp" oc-ver="1.0.2" revision="2016-05-26">
+  <files>
+    <file revision="2016-05-26" submodule="false">openconfig-lacp.yang</file>
+  </files>
+  <prefix>oc-lacp</prefix>
+  <organization>OpenConfig working group</organization>
+  <import prefix="oc-if">openconfig-interfaces</import>
+  <import prefix="yang">ietf-yang-types</import>
+  <import prefix="oc-ext">openconfig-extensions</import>
+  <typedef name="lacp-activity-type">
+    <type node="enumeration">
+      <enum>ACTIVE</enum>
+      <enum>PASSIVE</enum>
+    </type>
+  </typedef>
+  <typedef name="lacp-timeout-type">
+    <type node="enumeration">
+      <enum>LONG</enum>
+      <enum>SHORT</enum>
+    </type>
+  </typedef>
+  <typedef name="lacp-synchronization-type">
+    <type node="enumeration">
+      <enum>IN_SYNC</enum>
+      <enum>OUT_SYNC</enum>
+    </type>
+  </typedef>
+  <typedef name="lacp-period-type">
+    <type node="enumeration">
+      <enum>FAST</enum>
+      <enum>SLOW</enum>
+    </type>
+  </typedef>
+  <lacp config="true" is-key="false" node="container" presence="false">
+    <config config="true" is-key="false" node="container" presence="false">
+      <system-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+        <type>
+          <type-name>uint16</type-name>
+        </type>
+      </system-priority>
+    </config>
+    <state config="true" is-key="false" node="container" presence="false">
+      <system-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+        <type>
+          <type-name>uint16</type-name>
+        </type>
+      </system-priority>
+    </state>
+    <interfaces config="true" is-key="false" node="container" presence="false">
+      <interface config="true" key="name" node="list">
+        <name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <type>
+            <type-name>leafref</type-name>
+          </type>
+        </name>
+        <config config="true" is-key="false" node="container" presence="false">
+          <name config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-if:base-interface-ref</type-name>
+            </type>
+          </name>
+          <interval config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>lacp-period-type</type-name>
+            </type>
+            <default>SLOW</default>
+          </interval>
+          <lacp-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>lacp-activity-type</type-name>
+            </type>
+            <default>ACTIVE</default>
+          </lacp-mode>
+          <system-id-mac config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>yang:mac-address</type-name>
+            </type>
+          </system-id-mac>
+          <system-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </system-priority>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <name config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-if:base-interface-ref</type-name>
+            </type>
+          </name>
+          <interval config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>lacp-period-type</type-name>
+            </type>
+            <default>SLOW</default>
+          </interval>
+          <lacp-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>lacp-activity-type</type-name>
+            </type>
+            <default>ACTIVE</default>
+          </lacp-mode>
+          <system-id-mac config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>yang:mac-address</type-name>
+            </type>
+          </system-id-mac>
+          <system-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </system-priority>
+        </state>
+        <members config="true" is-key="false" node="container" presence="false">
+          <member config="true" key="interface" node="list">
+            <interface config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </interface>
+            <state config="true" is-key="false" node="container" presence="false">
+              <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>oc-if:base-interface-ref</type-name>
+                </type>
+              </interface>
+              <activity config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>lacp-activity-type</type-name>
+                </type>
+              </activity>
+              <timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>lacp-timeout-type</type-name>
+                </type>
+              </timeout>
+              <synchronization config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>lacp-synchronization-type</type-name>
+                </type>
+              </synchronization>
+              <aggregatable config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </aggregatable>
+              <collecting config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </collecting>
+              <distributing config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </distributing>
+              <system-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:mac-address</type-name>
+                </type>
+              </system-id>
+              <oper-key config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </oper-key>
+              <partner-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>yang:mac-address</type-name>
+                </type>
+              </partner-id>
+              <partner-key config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </partner-key>
+              <counters config="true" is-key="false" node="container" presence="false">
+                <lacp-in-pkts config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </lacp-in-pkts>
+                <lacp-out-pkts config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </lacp-out-pkts>
+                <lacp-rx-errors config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </lacp-rx-errors>
+                <lacp-tx-errors config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </lacp-tx-errors>
+                <lacp-unknown-errors config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </lacp-unknown-errors>
+                <lacp-errors config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>yang:counter64</type-name>
+                  </type>
+                </lacp-errors>
+              </counters>
+            </state>
+          </member>
+        </members>
+      </interface>
+    </interfaces>
+  </lacp>
+</openconfig-lacp>

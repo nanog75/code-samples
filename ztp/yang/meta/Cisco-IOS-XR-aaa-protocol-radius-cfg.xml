@@ -1,0 +1,1412 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-aaa-protocol-radius-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-aaa-protocol-radius-cfg" revision="2017-09-07">
+  <files>
+    <file revision="2017-09-07" submodule="false">Cisco-IOS-XR-aaa-protocol-radius-cfg.yang</file>
+  </files>
+  <prefix>aaa-protocol-radius-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-aaa-locald-cfg</import>
+  <import prefix="a2">Cisco-IOS-XR-aaa-lib-cfg</import>
+  <typedef name="Aaa-radius-timeout">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="1..1000">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Aaa-dscp-value">
+    <xr-sch-type>RangeEnum</xr-sch-type>
+    <type node="union">
+      <type node="enumeration">
+        <enum value="10">af11</enum>
+        <enum value="12">af12</enum>
+        <enum value="14">af13</enum>
+        <enum value="18">af21</enum>
+        <enum value="20">af22</enum>
+        <enum value="22">af23</enum>
+        <enum value="26">af31</enum>
+        <enum value="28">af32</enum>
+        <enum value="30">af33</enum>
+        <enum value="34">af41</enum>
+        <enum value="36">af42</enum>
+        <enum value="38">af43</enum>
+        <enum value="8">cs1</enum>
+        <enum value="16">cs2</enum>
+        <enum value="24">cs3</enum>
+        <enum value="32">cs4</enum>
+        <enum value="40">cs5</enum>
+        <enum value="48">cs6</enum>
+        <enum value="56">cs7</enum>
+        <enum value="0">default</enum>
+        <enum value="46">ef</enum>
+      </type>
+      <type range="0..63">
+        <type-name>uint32</type-name>
+      </type>
+    </type>
+  </typedef>
+  <typedef name="Aaa-action">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">accept</enum>
+      <enum value="2">reject</enum>
+    </type>
+  </typedef>
+  <typedef name="Aaa-authentication">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="101">all</enum>
+      <enum value="102">any</enum>
+      <enum value="103">session-key</enum>
+    </type>
+  </typedef>
+  <typedef name="Aaa-select-key">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">server-key</enum>
+      <enum value="2">session-key</enum>
+    </type>
+  </typedef>
+  <typedef name="Aaa-throttle-access-timeout">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="1..10">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Aaa-radius-dead-detect-tries">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="1..100">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Aaa-radius-dead-time">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="1..1440">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Aaa-throttle-accounting">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="0..65535">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Aaa-radius-idle-time">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="1..60">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Aaa-direction">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">inbound</enum>
+      <enum value="1">outbound</enum>
+    </type>
+  </typedef>
+  <typedef name="Aaa-radius-dead-detect-time">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="1..120">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Aaa-radius-retransmit">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="1..100">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Aaa-throttle-access">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="0..65535">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Aaa-config">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">false</enum>
+      <enum value="1">true</enum>
+    </type>
+  </typedef>
+  <typedef name="Aaa-radius-retransmit-with-disable">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="0..100">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <augment path="/a2:aaa">
+    <radius config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/aaa/radius/</xr-path>
+      <xr-xml-map>aaa_radius_cfg:RADIUS</xr-xml-map>
+      <xr-task>aaa</xr-task>
+      <xr-scope>exported</xr-scope>
+      <hosts config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/radius/host/</xr-path>
+        <xr-xml-map>aaa_radius_cfg:HostTable</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <host config="true" key="ordering-index ip-address auth-port-number acct-port-number" node="list">
+          <xr-path>/cfg/gl/aaa/radius/host/&lt;aaa_radius_cfg_Host_arg995&gt;/&lt;aaa_radius_cfg_Host_arg1&gt;,&lt;aaa_radius_cfg_Host_arg3&gt;,&lt;aaa_radius_cfg_Host_arg4&gt;/</xr-path>
+          <xr-xml-map>aaa_radius_cfg:Host</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <host-retransmit config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/radius/host/&lt;aaa_radius_cfg_Host_arg995&gt;/&lt;aaa_radius_cfg_Host_arg1&gt;,&lt;aaa_radius_cfg_Host_arg3&gt;,&lt;aaa_radius_cfg_Host_arg4&gt;/retransmit</xr-path>
+            <xr-xml-map>aaa_radius_cfg:HostRetransmit</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type>
+              <type-name>Aaa-radius-retransmit</type-name>
+            </type>
+            <default>3</default>
+          </host-retransmit>
+          <host-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/radius/host/&lt;aaa_radius_cfg_Host_arg995&gt;/&lt;aaa_radius_cfg_Host_arg1&gt;,&lt;aaa_radius_cfg_Host_arg3&gt;,&lt;aaa_radius_cfg_Host_arg4&gt;/timeout</xr-path>
+            <xr-xml-map>aaa_radius_cfg:HostTimeout</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type>
+              <type-name>Aaa-radius-timeout</type-name>
+            </type>
+            <default>5</default>
+          </host-timeout>
+          <host-key config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/radius/host/&lt;aaa_radius_cfg_Host_arg995&gt;/&lt;aaa_radius_cfg_Host_arg1&gt;,&lt;aaa_radius_cfg_Host_arg3&gt;,&lt;aaa_radius_cfg_Host_arg4&gt;/secret</xr-path>
+            <xr-xml-map>aaa_radius_cfg:HostKey</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>ProprietaryPassword</xr-sch-type>
+            <type>
+              <type-name>xr:Proprietary-password</type-name>
+            </type>
+          </host-key>
+          <ordering-index config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-create-item-relative-path>enter</xr-create-item-relative-path>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/radius/host/&lt;aaa_radius_cfg_Host_arg995&gt;/&lt;aaa_radius_cfg_Host_arg1&gt;,&lt;aaa_radius_cfg_Host_arg3&gt;,&lt;aaa_radius_cfg_Host_arg4&gt;/</xr-path>
+            <xr-xml-map>aaa_radius_cfg:OrderingIndex</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Integer</xr-sch-type>
+            <xr-sch-arg-name>&lt;aaa_radius_cfg_Host_arg995&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </ordering-index>
+          <ip-address config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-create-item-relative-path>enter</xr-create-item-relative-path>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/radius/host/&lt;aaa_radius_cfg_Host_arg995&gt;/&lt;aaa_radius_cfg_Host_arg1&gt;,&lt;aaa_radius_cfg_Host_arg3&gt;,&lt;aaa_radius_cfg_Host_arg4&gt;/</xr-path>
+            <xr-xml-map>aaa_radius_cfg:IPAddress</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>IPAddressString</xr-sch-type>
+            <xr-sch-arg-name>&lt;aaa_radius_cfg_Host_arg1&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>inet:ip-address-no-zone</type-name>
+            </type>
+          </ip-address>
+          <auth-port-number config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-pathformat>decimal</xr-pathformat>
+            <xr-create-item-relative-path>enter</xr-create-item-relative-path>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/radius/host/&lt;aaa_radius_cfg_Host_arg995&gt;/&lt;aaa_radius_cfg_Host_arg1&gt;,&lt;aaa_radius_cfg_Host_arg3&gt;,&lt;aaa_radius_cfg_Host_arg4&gt;/</xr-path>
+            <xr-xml-map>aaa_radius_cfg:AuthPortNumber</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <xr-sch-arg-name>&lt;aaa_radius_cfg_Host_arg3&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>inet:port-number</type-name>
+            </type>
+          </auth-port-number>
+          <acct-port-number config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-pathformat>decimal</xr-pathformat>
+            <xr-create-item-relative-path>enter</xr-create-item-relative-path>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/radius/host/&lt;aaa_radius_cfg_Host_arg995&gt;/&lt;aaa_radius_cfg_Host_arg1&gt;,&lt;aaa_radius_cfg_Host_arg3&gt;,&lt;aaa_radius_cfg_Host_arg4&gt;/</xr-path>
+            <xr-xml-map>aaa_radius_cfg:AcctPortNumber</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <xr-sch-arg-name>&lt;aaa_radius_cfg_Host_arg4&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>inet:port-number</type-name>
+            </type>
+          </acct-port-number>
+          <ignore-accounting-port config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/radius/host/&lt;aaa_radius_cfg_Host_arg995&gt;/&lt;aaa_radius_cfg_Host_arg1&gt;,&lt;aaa_radius_cfg_Host_arg3&gt;,&lt;aaa_radius_cfg_Host_arg4&gt;/ignore_acct_port</xr-path>
+            <xr-xml-map>aaa_radius_cfg:IgnoreAccountingPort</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Boolean</xr-sch-type>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </ignore-accounting-port>
+          <idle-time config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/radius/host/&lt;aaa_radius_cfg_Host_arg995&gt;/&lt;aaa_radius_cfg_Host_arg1&gt;,&lt;aaa_radius_cfg_Host_arg3&gt;,&lt;aaa_radius_cfg_Host_arg4&gt;/idle_time</xr-path>
+            <xr-xml-map>aaa_radius_cfg:IdleTime</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type>
+              <type-name>Aaa-radius-timeout</type-name>
+            </type>
+            <default>5</default>
+          </idle-time>
+          <username config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/radius/host/&lt;aaa_radius_cfg_Host_arg995&gt;/&lt;aaa_radius_cfg_Host_arg1&gt;,&lt;aaa_radius_cfg_Host_arg3&gt;,&lt;aaa_radius_cfg_Host_arg4&gt;/username</xr-path>
+            <xr-xml-map>aaa_radius_cfg:Username</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </username>
+          <ignore-auth-port config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/radius/host/&lt;aaa_radius_cfg_Host_arg995&gt;/&lt;aaa_radius_cfg_Host_arg1&gt;,&lt;aaa_radius_cfg_Host_arg3&gt;,&lt;aaa_radius_cfg_Host_arg4&gt;/ignore_auth_port</xr-path>
+            <xr-xml-map>aaa_radius_cfg:IgnoreAuthPort</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Boolean</xr-sch-type>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </ignore-auth-port>
+        </host>
+      </hosts>
+      <dead-criteria config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/radius/dead-criteria/</xr-path>
+        <xr-xml-map>aaa_radius_cfg:DeadCriteria</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <tries config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/radius/dead-criteria/tries</xr-path>
+          <xr-xml-map>aaa_radius_cfg:Tries</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>Aaa-radius-dead-detect-tries</type-name>
+          </type>
+        </tries>
+        <time config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/radius/dead-criteria/time</xr-path>
+          <xr-xml-map>aaa_radius_cfg:Time</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>Aaa-radius-dead-detect-time</type-name>
+          </type>
+        </time>
+      </dead-criteria>
+      <disallow config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/radius/disallow/</xr-path>
+        <xr-xml-map>aaa_radius_cfg:Disallow</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <null-username config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/radius/disallow/null-username/config</xr-path>
+          <xr-xml-map>aaa_radius_cfg:NullUsername</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>Integer</xr-sch-type>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </null-username>
+      </disallow>
+      <ipv6 config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/radius/ipv6/</xr-path>
+        <xr-xml-map>aaa_radius_attr_cfg:IPv6</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <dscp config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/radius/ipv6/dscp</xr-path>
+          <xr-xml-map>aaa_radius_attr_cfg:DSCP</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>Aaa-dscp-value</type-name>
+          </type>
+        </dscp>
+      </ipv6>
+      <dynamic-authorization config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/radius/dyn-auth/</xr-path>
+        <xr-xml-map>aaa_radius_dyn_auth_cfg:DynamicAuthorization</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <xr-scope>exported</xr-scope>
+        <clients config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/aaa/radius/dyn-auth/client/</xr-path>
+          <xr-xml-map>aaa_radius_dyn_auth_cfg:ClientTable</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <client config="true" key="ip-address" node="list">
+            <xr-path>/cfg/gl/aaa/radius/dyn-auth/client/&lt;aaa_radius_dyn_auth_cfg_Client_arg1&gt;,________/</xr-path>
+            <xr-task>aaa</xr-task>
+            <ip-address config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-pathformat>hex_nozerox</xr-pathformat>
+              <xr-create-item-relative-path>enter</xr-create-item-relative-path>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/radius/dyn-auth/client/&lt;aaa_radius_dyn_auth_cfg_Client_arg1&gt;,________/</xr-path>
+              <xr-xml-map>aaa_radius_dyn_auth_cfg:IPAddress</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>IPAddressString</xr-sch-type>
+              <xr-sch-arg-name>&lt;aaa_radius_dyn_auth_cfg_Client_arg1&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ip-address-no-zone</type-name>
+              </type>
+            </ip-address>
+            <server-key config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/radius/dyn-auth/client/&lt;aaa_radius_dyn_auth_cfg_Client_arg1&gt;,________/secret</xr-path>
+              <xr-xml-map>aaa_radius_dyn_auth_cfg:ServerKey</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>ProprietaryPassword</xr-sch-type>
+              <type>
+                <type-name>xr:Proprietary-password</type-name>
+              </type>
+            </server-key>
+          </client>
+          <client-vrf-name config="true" key="vrf-name ip-address" node="list">
+            <xr-path>/cfg/gl/aaa/radius/dyn-auth/client/&lt;aaa_radius_dyn_auth_cfg_Client_arg1&gt;,&lt;aaa_radius_dyn_auth_cfg_Client_arg2&gt;/</xr-path>
+            <xr-task>aaa</xr-task>
+            <vrf-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-create-item-relative-path>enter</xr-create-item-relative-path>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/radius/dyn-auth/client/&lt;aaa_radius_dyn_auth_cfg_Client_arg1&gt;,&lt;aaa_radius_dyn_auth_cfg_Client_arg2&gt;/</xr-path>
+              <xr-xml-map>aaa_radius_dyn_auth_cfg:VRFName</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>VRF_Name</xr-sch-type>
+              <xr-sch-arg-name>&lt;aaa_radius_dyn_auth_cfg_Client_arg2&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </vrf-name>
+            <ip-address config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-pathformat>hex_nozerox</xr-pathformat>
+              <xr-create-item-relative-path>enter</xr-create-item-relative-path>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/radius/dyn-auth/client/&lt;aaa_radius_dyn_auth_cfg_Client_arg1&gt;,&lt;aaa_radius_dyn_auth_cfg_Client_arg2&gt;/</xr-path>
+              <xr-xml-map>aaa_radius_dyn_auth_cfg:IPAddress</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>IPAddressString</xr-sch-type>
+              <xr-sch-arg-name>&lt;aaa_radius_dyn_auth_cfg_Client_arg1&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ip-address-no-zone</type-name>
+              </type>
+            </ip-address>
+            <server-key config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/radius/dyn-auth/client/&lt;aaa_radius_dyn_auth_cfg_Client_arg1&gt;,&lt;aaa_radius_dyn_auth_cfg_Client_arg2&gt;/secret</xr-path>
+              <xr-xml-map>aaa_radius_dyn_auth_cfg:ServerKey</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>ProprietaryPassword</xr-sch-type>
+              <type>
+                <type-name>xr:Proprietary-password</type-name>
+              </type>
+            </server-key>
+          </client-vrf-name>
+        </clients>
+        <ignore config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/radius/dyn-auth/ignore</xr-path>
+          <xr-xml-map>aaa_radius_dyn_auth_cfg:Ignore</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Aaa-select-key</type-name>
+          </type>
+        </ignore>
+        <port config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/radius/dyn-auth/port</xr-path>
+          <xr-xml-map>aaa_radius_dyn_auth_cfg:Port</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1000..5000">
+            <type-name>uint32</type-name>
+          </type>
+        </port>
+        <authentication-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/radius/dyn-auth/auth-type</xr-path>
+          <xr-xml-map>aaa_radius_dyn_auth_cfg:AuthenticationType</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Aaa-authentication</type-name>
+          </type>
+        </authentication-type>
+        <server-key config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/radius/dyn-auth/secret</xr-path>
+          <xr-xml-map>aaa_radius_dyn_auth_cfg:ServerKey</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>ProprietaryPassword</xr-sch-type>
+          <type>
+            <type-name>xr:Proprietary-password</type-name>
+          </type>
+        </server-key>
+      </dynamic-authorization>
+      <load-balance-options config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/radius/load-balance/</xr-path>
+        <xr-xml-map>aaa_radius_cfg:LoadBalanceOptions</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <load-balance-method config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/aaa/radius/load-balance/method/</xr-path>
+          <xr-xml-map>aaa_radius_cfg:LoadBalanceMethod</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <batch-size config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/aaa/radius/load-balance/method/batch_size`</xr-path>
+            <xr-xml-map>aaa_radius_cfg:BatchSize</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <batch-size config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/aaa/radius/load-balance/method/batch_size`0</xr-path>
+              <xr-xml-map>aaa_radius_cfg:BatchSize</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-default-set/>
+              <type range="1..1500">
+                <type-name>uint32</type-name>
+              </type>
+              <default>25</default>
+            </batch-size>
+            <ignore-preferred-server config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/aaa/radius/load-balance/method/batch_size`1</xr-path>
+              <xr-xml-map>aaa_radius_cfg:IgnorePreferredServer</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Boolean</xr-sch-type>
+              <xr-default-set/>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>true</default>
+            </ignore-preferred-server>
+          </batch-size>
+        </load-balance-method>
+      </load-balance-options>
+      <vrfs config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/radius/vrf/</xr-path>
+        <xr-xml-map>aaa_radius_cfg:VRFTable</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <vrf config="true" key="vrf-name" node="list">
+          <xr-path>/cfg/gl/aaa/radius/vrf/&lt;aaa_radius_cfg_VRF_vrf&gt;/</xr-path>
+          <xr-xml-map>aaa_radius_cfg:VRF</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <source-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/radius/vrf/&lt;aaa_radius_cfg_VRF_vrf&gt;/source-interface</xr-path>
+            <xr-xml-map>aaa_radius_cfg:SourceInterface</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>InterfaceName</xr-sch-type>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+          </source-interface>
+          <vrf-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/radius/vrf/&lt;aaa_radius_cfg_VRF_vrf&gt;/</xr-path>
+            <xr-xml-map>aaa_radius_cfg:VRFName</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>VRF_Name</xr-sch-type>
+            <xr-sch-arg-name>&lt;aaa_radius_cfg_VRF_vrf&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </vrf-name>
+        </vrf>
+      </vrfs>
+      <throttle config="true" is-key="false" node="container" presence="false">
+        <xr-is-packed/>
+        <xr-path>/cfg/gl/aaa/radius/throttle/throttle_params`</xr-path>
+        <xr-xml-map>aaa_radius_cfg:Throttle</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <xr-pack-format>%d%d%d</xr-pack-format>
+        <access config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/aaa/radius/throttle/throttle_params`0</xr-path>
+          <xr-xml-map>aaa_radius_cfg:Access</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <xr-default-set/>
+          <type>
+            <type-name>Aaa-throttle-access</type-name>
+          </type>
+          <default>0</default>
+        </access>
+        <accounting config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/aaa/radius/throttle/throttle_params`1</xr-path>
+          <xr-xml-map>aaa_radius_cfg:Accounting</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <xr-default-set/>
+          <type>
+            <type-name>Aaa-throttle-accounting</type-name>
+          </type>
+          <default>0</default>
+        </accounting>
+        <access-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/aaa/radius/throttle/throttle_params`2</xr-path>
+          <xr-xml-map>aaa_radius_cfg:AccessTimeout</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <xr-default-set/>
+          <type>
+            <type-name>Aaa-throttle-access-timeout</type-name>
+          </type>
+          <default>3</default>
+        </access-timeout>
+      </throttle>
+      <vsa config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/radius/vsa/</xr-path>
+        <xr-xml-map>aaa_radius_cfg:VSA</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <attribute config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/aaa/radius/vsa/attribute/</xr-path>
+          <xr-xml-map>aaa_radius_cfg:Attribute</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <ignore config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/aaa/radius/vsa/attribute/ignore/</xr-path>
+            <xr-xml-map>aaa_radius_cfg:Ignore</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <unknown config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/radius/vsa/attribute/ignore/unknown</xr-path>
+              <xr-xml-map>aaa_radius_cfg:Unknown</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </unknown>
+          </ignore>
+        </attribute>
+      </vsa>
+      <ipv4 config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/radius/ipv4/</xr-path>
+        <xr-xml-map>aaa_radius_attr_cfg:IPv4</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <dscp config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/radius/ipv4/dscp</xr-path>
+          <xr-xml-map>aaa_radius_attr_cfg:DSCP</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <type>
+            <type-name>Aaa-dscp-value</type-name>
+          </type>
+        </dscp>
+      </ipv4>
+      <radius-attribute config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/radius/attribute/</xr-path>
+        <xr-xml-map>aaa_radius_attr_cfg:RADIUSAttribute</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <filter-id-11 config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/aaa/radius/attribute/11/</xr-path>
+          <xr-xml-map>aaa_radius_attr_cfg:FilterId-11</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <defaults config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/aaa/radius/attribute/11/direction/</xr-path>
+            <xr-xml-map>aaa_radius_attr_cfg:Defaults</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <direction config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/radius/attribute/11/direction/acl</xr-path>
+              <xr-xml-map>aaa_radius_attr_cfg:Direction</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Aaa-direction</type-name>
+              </type>
+            </direction>
+          </defaults>
+        </filter-id-11>
+        <acct-multi-session-id config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/aaa/radius/attribute/acct-multi-session-id/</xr-path>
+          <xr-xml-map>aaa_radius_attr_cfg:AcctMultiSessionId</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <include-parent-session-id config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/aaa/radius/attribute/acct-multi-session-id/include-parent-session-id/</xr-path>
+            <xr-xml-map>aaa_radius_attr_cfg:IncludeParentSessionId</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <config config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/radius/attribute/acct-multi-session-id/include-parent-session-id/config</xr-path>
+              <xr-xml-map>aaa_radius_attr_cfg:Config</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Aaa-config</type-name>
+              </type>
+            </config>
+          </include-parent-session-id>
+        </acct-multi-session-id>
+        <acct-session-id config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/aaa/radius/attribute/acct-session-id/</xr-path>
+          <xr-xml-map>aaa_radius_attr_cfg:AcctSessionId</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <prepend-nas-port-id config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/aaa/radius/attribute/acct-session-id/prepend-nas-port-id/</xr-path>
+            <xr-xml-map>aaa_radius_attr_cfg:PrependNASPortId</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <config config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/radius/attribute/acct-session-id/prepend-nas-port-id/config</xr-path>
+              <xr-xml-map>aaa_radius_attr_cfg:Config</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Aaa-config</type-name>
+              </type>
+            </config>
+          </prepend-nas-port-id>
+        </acct-session-id>
+      </radius-attribute>
+      <attributes config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/radius/attr-filter/</xr-path>
+        <xr-xml-map>aaa_radius_attr_cfg:AttributeListTable</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <attribute config="true" key="attribute-list-name" node="list">
+          <xr-path>/cfg/gl/aaa/radius/attr-filter/&lt;aaa_radius_attr_cfg_AttributeList_arg40&gt;/</xr-path>
+          <xr-xml-map>aaa_radius_attr_cfg:AttributeList</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <vendor-ids config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/aaa/radius/attr-filter/&lt;aaa_radius_attr_cfg_AttributeList_arg40&gt;/vsa/</xr-path>
+            <xr-xml-map>aaa_radius_attr_cfg:VSA</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <vendor-id config="true" key="vendor-id" node="list">
+              <xr-path>/cfg/gl/aaa/radius/attr-filter/&lt;aaa_radius_attr_cfg_AttributeList_arg40&gt;/vsa/&lt;aaa_radius_attr_cfg_VendorId_arg2&gt;/</xr-path>
+              <xr-xml-map>aaa_radius_attr_cfg:VendorId</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <vendor-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-pathformat>decimal</xr-pathformat>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/aaa/radius/attr-filter/&lt;aaa_radius_attr_cfg_AttributeList_arg40&gt;/vsa/&lt;aaa_radius_attr_cfg_VendorId_arg2&gt;/</xr-path>
+                <xr-xml-map>aaa_radius_attr_cfg:VendorId</xr-xml-map>
+                <xr-task>aaa</xr-task>
+                <xr-sch-type>Integer</xr-sch-type>
+                <xr-sch-arg-name>&lt;aaa_radius_attr_cfg_VendorId_arg2&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </vendor-id>
+              <vendor-type config="true" key="vendor-type" node="list">
+                <xr-path>/cfg/gl/aaa/radius/attr-filter/&lt;aaa_radius_attr_cfg_AttributeList_arg40&gt;/vsa/&lt;aaa_radius_attr_cfg_VendorId_arg2&gt;/&lt;aaa_radius_attr_cfg_VendorType_arg3&gt;/</xr-path>
+                <xr-xml-map>aaa_radius_attr_cfg:VendorType</xr-xml-map>
+                <xr-task>aaa</xr-task>
+                <vendor-type config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/aaa/radius/attr-filter/&lt;aaa_radius_attr_cfg_AttributeList_arg40&gt;/vsa/&lt;aaa_radius_attr_cfg_VendorId_arg2&gt;/&lt;aaa_radius_attr_cfg_VendorType_arg3&gt;/</xr-path>
+                  <xr-xml-map>aaa_radius_attr_cfg:VendorType</xr-xml-map>
+                  <xr-task>aaa</xr-task>
+                  <xr-sch-type>Integer</xr-sch-type>
+                  <xr-sch-arg-name>&lt;aaa_radius_attr_cfg_VendorType_arg3&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </vendor-type>
+                <attribute-name config="true" key="attribute-name" node="list">
+                  <xr-path>/cfg/gl/aaa/radius/attr-filter/&lt;aaa_radius_attr_cfg_AttributeList_arg40&gt;/vsa/&lt;aaa_radius_attr_cfg_VendorId_arg2&gt;/&lt;aaa_radius_attr_cfg_VendorType_arg3&gt;/&lt;aaa_radius_attr_cfg_AttributeName_arg4&gt;/</xr-path>
+                  <xr-xml-map>aaa_radius_attr_cfg:AttributeName</xr-xml-map>
+                  <xr-task>aaa</xr-task>
+                  <attribute-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                    <xr-data-handler>ignore</xr-data-handler>
+                    <xr-primitive-type>string</xr-primitive-type>
+                    <xr-path>/cfg/gl/aaa/radius/attr-filter/&lt;aaa_radius_attr_cfg_AttributeList_arg40&gt;/vsa/&lt;aaa_radius_attr_cfg_VendorId_arg2&gt;/&lt;aaa_radius_attr_cfg_VendorType_arg3&gt;/&lt;aaa_radius_attr_cfg_AttributeName_arg4&gt;/</xr-path>
+                    <xr-xml-map>aaa_radius_attr_cfg:AttributeName</xr-xml-map>
+                    <xr-task>aaa</xr-task>
+                    <xr-sch-type>String</xr-sch-type>
+                    <xr-sch-arg-name>&lt;aaa_radius_attr_cfg_AttributeName_arg4&gt;</xr-sch-arg-name>
+                    <type>
+                      <type-name>xr:Cisco-ios-xr-string</type-name>
+                    </type>
+                  </attribute-name>
+                  <attribute-name-absent config="true" key="attribute-name-absent" node="list">
+                    <xr-path>/cfg/gl/aaa/radius/attr-filter/&lt;aaa_radius_attr_cfg_AttributeList_arg40&gt;/vsa/&lt;aaa_radius_attr_cfg_VendorId_arg2&gt;/&lt;aaa_radius_attr_cfg_VendorType_arg3&gt;/&lt;aaa_radius_attr_cfg_AttributeName_arg4&gt;/&lt;aaa_radius_attr_cfg_AttributeNameAbsent_arg5&gt;/</xr-path>
+                    <xr-xml-map>aaa_radius_attr_cfg:AttributeNameAbsent</xr-xml-map>
+                    <xr-task>aaa</xr-task>
+                    <attribute-name-absent config="true" is-key="true" is-yang-key="true" node="leaf">
+                      <xr-data-handler>ignore</xr-data-handler>
+                      <xr-primitive-type>uint32</xr-primitive-type>
+                      <xr-path>/cfg/gl/aaa/radius/attr-filter/&lt;aaa_radius_attr_cfg_AttributeList_arg40&gt;/vsa/&lt;aaa_radius_attr_cfg_VendorId_arg2&gt;/&lt;aaa_radius_attr_cfg_VendorType_arg3&gt;/&lt;aaa_radius_attr_cfg_AttributeName_arg4&gt;/&lt;aaa_radius_attr_cfg_AttributeNameAbsent_arg5&gt;/</xr-path>
+                      <xr-xml-map>aaa_radius_attr_cfg:AttributeNameAbsent</xr-xml-map>
+                      <xr-task>aaa</xr-task>
+                      <xr-sch-type>Integer</xr-sch-type>
+                      <xr-sch-arg-name>&lt;aaa_radius_attr_cfg_AttributeNameAbsent_arg5&gt;</xr-sch-arg-name>
+                      <type>
+                        <type-name>uint32</type-name>
+                      </type>
+                    </attribute-name-absent>
+                    <attribute-name-present config="true" key="attribute-name-present" node="list">
+                      <xr-path>/cfg/gl/aaa/radius/attr-filter/&lt;aaa_radius_attr_cfg_AttributeList_arg40&gt;/vsa/&lt;aaa_radius_attr_cfg_VendorId_arg2&gt;/&lt;aaa_radius_attr_cfg_VendorType_arg3&gt;/&lt;aaa_radius_attr_cfg_AttributeName_arg4&gt;/&lt;aaa_radius_attr_cfg_AttributeNameAbsent_arg5&gt;/&lt;aaa_radius_attr_cfg_AttributeNamePresent_arg6&gt;</xr-path>
+                      <xr-xml-map>aaa_radius_attr_cfg:AttributeNamePresent</xr-xml-map>
+                      <xr-task>aaa</xr-task>
+                      <attribute-name-present config="true" is-key="true" is-yang-key="true" node="leaf">
+                        <xr-data-handler>ignore</xr-data-handler>
+                        <xr-create-item-relative-path/>
+                        <xr-primitive-type>uint32</xr-primitive-type>
+                        <xr-path>/cfg/gl/aaa/radius/attr-filter/&lt;aaa_radius_attr_cfg_AttributeList_arg40&gt;/vsa/&lt;aaa_radius_attr_cfg_VendorId_arg2&gt;/&lt;aaa_radius_attr_cfg_VendorType_arg3&gt;/&lt;aaa_radius_attr_cfg_AttributeName_arg4&gt;/&lt;aaa_radius_attr_cfg_AttributeNameAbsent_arg5&gt;/&lt;aaa_radius_attr_cfg_AttributeNamePresent_arg6&gt;</xr-path>
+                        <xr-xml-map>aaa_radius_attr_cfg:AttributeNamePresent</xr-xml-map>
+                        <xr-task>aaa</xr-task>
+                        <xr-sch-type>Integer</xr-sch-type>
+                        <xr-sch-arg-name>&lt;aaa_radius_attr_cfg_AttributeNamePresent_arg6&gt;</xr-sch-arg-name>
+                        <type>
+                          <type-name>uint32</type-name>
+                        </type>
+                      </attribute-name-present>
+                    </attribute-name-present>
+                  </attribute-name-absent>
+                </attribute-name>
+              </vendor-type>
+            </vendor-id>
+          </vendor-ids>
+          <attribute config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/radius/attr-filter/&lt;aaa_radius_attr_cfg_AttributeList_arg40&gt;/attribute</xr-path>
+            <xr-xml-map>aaa_radius_attr_cfg:Attribute</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </attribute>
+          <attribute-list-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-create-item-relative-path>enter</xr-create-item-relative-path>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/aaa/radius/attr-filter/&lt;aaa_radius_attr_cfg_AttributeList_arg40&gt;/</xr-path>
+            <xr-xml-map>aaa_radius_attr_cfg:AttributeListName</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;aaa_radius_attr_cfg_AttributeList_arg40&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </attribute-list-name>
+        </attribute>
+      </attributes>
+      <source-port config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/aaa/radius/source-port/</xr-path>
+        <xr-xml-map>aaa_radius_attr_cfg:SourcePort</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <extended config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/radius/source-port/extended</xr-path>
+          <xr-xml-map>aaa_radius_attr_cfg:Extended</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </extended>
+      </source-port>
+      <retransmit config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/aaa/radius/retransmit</xr-path>
+        <xr-xml-map>aaa_radius_cfg:Retransmit</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type>
+          <type-name>Aaa-radius-retransmit-with-disable</type-name>
+        </type>
+        <default>3</default>
+      </retransmit>
+      <dead-time config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/aaa/radius/deadtime</xr-path>
+        <xr-xml-map>aaa_radius_cfg:DeadTime</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type>
+          <type-name>Aaa-radius-dead-time</type-name>
+        </type>
+      </dead-time>
+      <key config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/gl/aaa/radius/secret</xr-path>
+        <xr-xml-map>aaa_radius_cfg:Key</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <xr-sch-type>ProprietaryPassword</xr-sch-type>
+        <type>
+          <type-name>xr:Proprietary-password</type-name>
+        </type>
+      </key>
+      <timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/aaa/radius/timeout</xr-path>
+        <xr-xml-map>aaa_radius_cfg:Timeout</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type>
+          <type-name>Aaa-radius-timeout</type-name>
+        </type>
+        <default>5</default>
+      </timeout>
+      <ignore-accounting-port config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/aaa/radius/ignore_acct_port</xr-path>
+        <xr-xml-map>aaa_radius_cfg:IgnoreAccountingPort</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <xr-sch-type>Boolean</xr-sch-type>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </ignore-accounting-port>
+      <idle-time config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/aaa/radius/idle_time</xr-path>
+        <xr-xml-map>aaa_radius_cfg:IdleTime</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type>
+          <type-name>Aaa-radius-timeout</type-name>
+        </type>
+        <default>5</default>
+      </idle-time>
+      <username config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/gl/aaa/radius/username</xr-path>
+        <xr-xml-map>aaa_radius_cfg:Username</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <xr-sch-type>String</xr-sch-type>
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </username>
+      <ignore-auth-port config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/aaa/radius/ignore_auth_port</xr-path>
+        <xr-xml-map>aaa_radius_cfg:IgnoreAuthPort</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <xr-sch-type>Boolean</xr-sch-type>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </ignore-auth-port>
+    </radius>
+  </augment>
+  <augment path="/a2:aaa/a1:server-groups">
+    <radius-server-groups config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/aaa/group-server/radius/</xr-path>
+      <xr-xml-map>aaa_radius_cfg:RADIUSServerGroupTable</xr-xml-map>
+      <xr-task>aaa</xr-task>
+      <radius-server-group config="true" key="server-group-name" node="list">
+        <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/</xr-path>
+        <xr-xml-map>aaa_radius_cfg:RADIUSServerGroup</xr-xml-map>
+        <xr-task>aaa</xr-task>
+        <xr-scope>exported</xr-scope>
+        <accounting config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/filter/accounting/</xr-path>
+          <xr-xml-map>aaa_radius_attr_cfg:Accounting</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <request config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/filter/accounting/request/cfg`</xr-path>
+            <xr-xml-map>aaa_radius_attr_cfg:Request</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-pack-format>%d%s</xr-pack-format>
+            <action config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/filter/accounting/request/cfg`0</xr-path>
+              <xr-xml-map>aaa_radius_attr_cfg:Action</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Aaa-action</type-name>
+              </type>
+            </action>
+            <attribute-list-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/filter/accounting/request/cfg`1</xr-path>
+              <xr-xml-map>aaa_radius_attr_cfg:AttributeListName</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </attribute-list-name>
+          </request>
+          <reply config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/filter/accounting/reply/cfg`</xr-path>
+            <xr-xml-map>aaa_radius_attr_cfg:Reply</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-pack-format>%d%s</xr-pack-format>
+            <action config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/filter/accounting/reply/cfg`0</xr-path>
+              <xr-xml-map>aaa_radius_attr_cfg:Action</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Aaa-action</type-name>
+              </type>
+            </action>
+            <attribute-list-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/filter/accounting/reply/cfg`1</xr-path>
+              <xr-xml-map>aaa_radius_attr_cfg:AttributeListName</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </attribute-list-name>
+          </reply>
+        </accounting>
+        <servers config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/server/</xr-path>
+          <xr-xml-map>aaa_radius_cfg:ServerTable</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <server config="true" key="ordering-index ip-address auth-port-number acct-port-number" node="list">
+            <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/server/&lt;aaa_radius_cfg_Server_arg992&gt;/&lt;aaa_radius_cfg_Server_arg10&gt;,&lt;aaa_radius_cfg_Server_arg11&gt;,&lt;aaa_radius_cfg_Server_arg12&gt;</xr-path>
+            <xr-xml-map>aaa_radius_cfg:Server</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <ordering-index config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-create-item-relative-path/>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/server/&lt;aaa_radius_cfg_Server_arg992&gt;/&lt;aaa_radius_cfg_Server_arg10&gt;,&lt;aaa_radius_cfg_Server_arg11&gt;,&lt;aaa_radius_cfg_Server_arg12&gt;</xr-path>
+              <xr-xml-map>aaa_radius_cfg:OrderingIndex</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Integer</xr-sch-type>
+              <xr-sch-arg-name>&lt;aaa_radius_cfg_Server_arg992&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </ordering-index>
+            <ip-address config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-create-item-relative-path/>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/server/&lt;aaa_radius_cfg_Server_arg992&gt;/&lt;aaa_radius_cfg_Server_arg10&gt;,&lt;aaa_radius_cfg_Server_arg11&gt;,&lt;aaa_radius_cfg_Server_arg12&gt;</xr-path>
+              <xr-xml-map>aaa_radius_cfg:IPAddress</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>IPAddressString</xr-sch-type>
+              <xr-sch-arg-name>&lt;aaa_radius_cfg_Server_arg10&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ip-address-no-zone</type-name>
+              </type>
+            </ip-address>
+            <auth-port-number config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-pathformat>decimal</xr-pathformat>
+              <xr-create-item-relative-path/>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/server/&lt;aaa_radius_cfg_Server_arg992&gt;/&lt;aaa_radius_cfg_Server_arg10&gt;,&lt;aaa_radius_cfg_Server_arg11&gt;,&lt;aaa_radius_cfg_Server_arg12&gt;</xr-path>
+              <xr-xml-map>aaa_radius_cfg:AuthPortNumber</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-sch-arg-name>&lt;aaa_radius_cfg_Server_arg11&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:port-number</type-name>
+              </type>
+            </auth-port-number>
+            <acct-port-number config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-pathformat>decimal</xr-pathformat>
+              <xr-create-item-relative-path/>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/server/&lt;aaa_radius_cfg_Server_arg992&gt;/&lt;aaa_radius_cfg_Server_arg10&gt;,&lt;aaa_radius_cfg_Server_arg11&gt;,&lt;aaa_radius_cfg_Server_arg12&gt;</xr-path>
+              <xr-xml-map>aaa_radius_cfg:AcctPortNumber</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-sch-arg-name>&lt;aaa_radius_cfg_Server_arg12&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:port-number</type-name>
+              </type>
+            </acct-port-number>
+          </server>
+        </servers>
+        <private-servers config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/server-private/</xr-path>
+          <xr-xml-map>aaa_radius_cfg:PrivateServerTable</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <private-server config="true" key="ordering-index ip-address auth-port-number acct-port-number" node="list">
+            <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/server-private/&lt;aaa_radius_cfg_PrivateServer_arg992&gt;/&lt;aaa_radius_cfg_PrivateServer_arg10&gt;,&lt;aaa_radius_cfg_PrivateServer_arg11&gt;,&lt;aaa_radius_cfg_PrivateServer_arg12&gt;/</xr-path>
+            <xr-xml-map>aaa_radius_cfg:PrivateServer</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <private-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/server-private/&lt;aaa_radius_cfg_PrivateServer_arg992&gt;/&lt;aaa_radius_cfg_PrivateServer_arg10&gt;,&lt;aaa_radius_cfg_PrivateServer_arg11&gt;,&lt;aaa_radius_cfg_PrivateServer_arg12&gt;/timeout</xr-path>
+              <xr-xml-map>aaa_radius_cfg:PrivateTimeout</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type>
+                <type-name>Aaa-radius-timeout</type-name>
+              </type>
+              <default>5</default>
+            </private-timeout>
+            <ignore-accounting-port config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/server-private/&lt;aaa_radius_cfg_PrivateServer_arg992&gt;/&lt;aaa_radius_cfg_PrivateServer_arg10&gt;,&lt;aaa_radius_cfg_PrivateServer_arg11&gt;,&lt;aaa_radius_cfg_PrivateServer_arg12&gt;/ignore_acct_port</xr-path>
+              <xr-xml-map>aaa_radius_cfg:IgnoreAccountingPort</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Boolean</xr-sch-type>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </ignore-accounting-port>
+            <private-retransmit config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/server-private/&lt;aaa_radius_cfg_PrivateServer_arg992&gt;/&lt;aaa_radius_cfg_PrivateServer_arg10&gt;,&lt;aaa_radius_cfg_PrivateServer_arg11&gt;,&lt;aaa_radius_cfg_PrivateServer_arg12&gt;/retransmit</xr-path>
+              <xr-xml-map>aaa_radius_cfg:PrivateRetransmit</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type>
+                <type-name>Aaa-radius-retransmit</type-name>
+              </type>
+              <default>3</default>
+            </private-retransmit>
+            <idle-time config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/server-private/&lt;aaa_radius_cfg_PrivateServer_arg992&gt;/&lt;aaa_radius_cfg_PrivateServer_arg10&gt;,&lt;aaa_radius_cfg_PrivateServer_arg11&gt;,&lt;aaa_radius_cfg_PrivateServer_arg12&gt;/idle_time</xr-path>
+              <xr-xml-map>aaa_radius_cfg:IdleTime</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type>
+                <type-name>Aaa-radius-idle-time</type-name>
+              </type>
+              <default>5</default>
+            </idle-time>
+            <private-key config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/server-private/&lt;aaa_radius_cfg_PrivateServer_arg992&gt;/&lt;aaa_radius_cfg_PrivateServer_arg10&gt;,&lt;aaa_radius_cfg_PrivateServer_arg11&gt;,&lt;aaa_radius_cfg_PrivateServer_arg12&gt;/secret</xr-path>
+              <xr-xml-map>aaa_radius_cfg:PrivateKey</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>ProprietaryPassword</xr-sch-type>
+              <type>
+                <type-name>xr:Proprietary-password</type-name>
+              </type>
+            </private-key>
+            <username config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/server-private/&lt;aaa_radius_cfg_PrivateServer_arg992&gt;/&lt;aaa_radius_cfg_PrivateServer_arg10&gt;,&lt;aaa_radius_cfg_PrivateServer_arg11&gt;,&lt;aaa_radius_cfg_PrivateServer_arg12&gt;/username</xr-path>
+              <xr-xml-map>aaa_radius_cfg:Username</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </username>
+            <ignore-auth-port config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/server-private/&lt;aaa_radius_cfg_PrivateServer_arg992&gt;/&lt;aaa_radius_cfg_PrivateServer_arg10&gt;,&lt;aaa_radius_cfg_PrivateServer_arg11&gt;,&lt;aaa_radius_cfg_PrivateServer_arg12&gt;/ignore_auth_port</xr-path>
+              <xr-xml-map>aaa_radius_cfg:IgnoreAuthPort</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Boolean</xr-sch-type>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </ignore-auth-port>
+            <ordering-index config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-create-item-relative-path>enter</xr-create-item-relative-path>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/server-private/&lt;aaa_radius_cfg_PrivateServer_arg992&gt;/&lt;aaa_radius_cfg_PrivateServer_arg10&gt;,&lt;aaa_radius_cfg_PrivateServer_arg11&gt;,&lt;aaa_radius_cfg_PrivateServer_arg12&gt;/</xr-path>
+              <xr-xml-map>aaa_radius_cfg:OrderingIndex</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Integer</xr-sch-type>
+              <xr-sch-arg-name>&lt;aaa_radius_cfg_PrivateServer_arg992&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </ordering-index>
+            <ip-address config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-create-item-relative-path>enter</xr-create-item-relative-path>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/server-private/&lt;aaa_radius_cfg_PrivateServer_arg992&gt;/&lt;aaa_radius_cfg_PrivateServer_arg10&gt;,&lt;aaa_radius_cfg_PrivateServer_arg11&gt;,&lt;aaa_radius_cfg_PrivateServer_arg12&gt;/</xr-path>
+              <xr-xml-map>aaa_radius_cfg:IPAddress</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>IPAddressString</xr-sch-type>
+              <xr-sch-arg-name>&lt;aaa_radius_cfg_PrivateServer_arg10&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ip-address-no-zone</type-name>
+              </type>
+            </ip-address>
+            <auth-port-number config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-pathformat>decimal</xr-pathformat>
+              <xr-create-item-relative-path>enter</xr-create-item-relative-path>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/server-private/&lt;aaa_radius_cfg_PrivateServer_arg992&gt;/&lt;aaa_radius_cfg_PrivateServer_arg10&gt;,&lt;aaa_radius_cfg_PrivateServer_arg11&gt;,&lt;aaa_radius_cfg_PrivateServer_arg12&gt;/</xr-path>
+              <xr-xml-map>aaa_radius_cfg:AuthPortNumber</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-sch-arg-name>&lt;aaa_radius_cfg_PrivateServer_arg11&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:port-number</type-name>
+              </type>
+            </auth-port-number>
+            <acct-port-number config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-pathformat>decimal</xr-pathformat>
+              <xr-create-item-relative-path>enter</xr-create-item-relative-path>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/server-private/&lt;aaa_radius_cfg_PrivateServer_arg992&gt;/&lt;aaa_radius_cfg_PrivateServer_arg10&gt;,&lt;aaa_radius_cfg_PrivateServer_arg11&gt;,&lt;aaa_radius_cfg_PrivateServer_arg12&gt;/</xr-path>
+              <xr-xml-map>aaa_radius_cfg:AcctPortNumber</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-sch-arg-name>&lt;aaa_radius_cfg_PrivateServer_arg12&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:port-number</type-name>
+              </type>
+            </acct-port-number>
+          </private-server>
+        </private-servers>
+        <server-group-throttle config="true" is-key="false" node="container" presence="false">
+          <xr-is-packed/>
+          <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/throttle/throttle_values`</xr-path>
+          <xr-xml-map>aaa_radius_cfg:ServerGroupThrottle</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <access config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/throttle/throttle_values`0</xr-path>
+            <xr-xml-map>aaa_radius_cfg:Access</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <xr-default-set/>
+            <type>
+              <type-name>Aaa-throttle-access</type-name>
+            </type>
+            <default>0</default>
+          </access>
+          <accounting config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/throttle/throttle_values`1</xr-path>
+            <xr-xml-map>aaa_radius_cfg:Accounting</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <xr-default-set/>
+            <type>
+              <type-name>Aaa-throttle-accounting</type-name>
+            </type>
+            <default>0</default>
+          </accounting>
+          <access-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/throttle/throttle_values`2</xr-path>
+            <xr-xml-map>aaa_radius_cfg:AccessTimeout</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <xr-default-set/>
+            <type>
+              <type-name>Aaa-throttle-access-timeout</type-name>
+            </type>
+            <default>3</default>
+          </access-timeout>
+        </server-group-throttle>
+        <load-balance config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/load-balance/</xr-path>
+          <xr-xml-map>aaa_radius_cfg:LoadBalance</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <method config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/load-balance/method/</xr-path>
+            <xr-xml-map>aaa_radius_cfg:Method</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <name config="true" is-key="false" node="container" presence="false">
+              <xr-is-packed/>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/load-balance/method/name`</xr-path>
+              <xr-xml-map>aaa_radius_cfg:Name</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-pack-format>%d%d%d</xr-pack-format>
+              <least-outstanding config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/load-balance/method/name`0</xr-path>
+                <xr-xml-map>aaa_radius_cfg:LeastOutstanding</xr-xml-map>
+                <xr-task>aaa</xr-task>
+                <xr-sch-type>Integer</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+                <default>4</default>
+              </least-outstanding>
+              <batch-size config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/load-balance/method/name`1</xr-path>
+                <xr-xml-map>aaa_radius_cfg:BatchSize</xr-xml-map>
+                <xr-task>aaa</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-default-set/>
+                <type range="1..1500">
+                  <type-name>uint32</type-name>
+                </type>
+                <default>25</default>
+              </batch-size>
+              <ignore-preferred-server config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/load-balance/method/name`2</xr-path>
+                <xr-xml-map>aaa_radius_cfg:IgnorePreferredServer</xr-xml-map>
+                <xr-task>aaa</xr-task>
+                <xr-sch-type>Boolean</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>true</default>
+              </ignore-preferred-server>
+            </name>
+          </method>
+        </load-balance>
+        <authorization config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/filter/authorization/</xr-path>
+          <xr-xml-map>aaa_radius_attr_cfg:Authorization</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <request config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/filter/authorization/request/cfg`</xr-path>
+            <xr-xml-map>aaa_radius_attr_cfg:Request</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-pack-format>%d%s</xr-pack-format>
+            <action config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/filter/authorization/request/cfg`0</xr-path>
+              <xr-xml-map>aaa_radius_attr_cfg:Action</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Aaa-action</type-name>
+              </type>
+            </action>
+            <attribute-list-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/filter/authorization/request/cfg`1</xr-path>
+              <xr-xml-map>aaa_radius_attr_cfg:AttributeListName</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </attribute-list-name>
+          </request>
+          <reply config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/filter/authorization/reply/cfg`</xr-path>
+            <xr-xml-map>aaa_radius_attr_cfg:Reply</xr-xml-map>
+            <xr-task>aaa</xr-task>
+            <xr-pack-format>%d%s</xr-pack-format>
+            <action config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/filter/authorization/reply/cfg`0</xr-path>
+              <xr-xml-map>aaa_radius_attr_cfg:Action</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Aaa-action</type-name>
+              </type>
+            </action>
+            <attribute-list-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/filter/authorization/reply/cfg`1</xr-path>
+              <xr-xml-map>aaa_radius_attr_cfg:AttributeListName</xr-xml-map>
+              <xr-task>aaa</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </attribute-list-name>
+          </reply>
+        </authorization>
+        <dead-time config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/deadtime</xr-path>
+          <xr-xml-map>aaa_radius_cfg:DeadTime</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>Aaa-radius-dead-time</type-name>
+          </type>
+        </dead-time>
+        <source-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/source-interface</xr-path>
+          <xr-xml-map>aaa_radius_attr_cfg:SourceInterface</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>InterfaceName</xr-sch-type>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </source-interface>
+        <vrf config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/vrf-name</xr-path>
+          <xr-xml-map>aaa_radius_cfg:VRF</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </vrf>
+        <server-group-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-create-item-relative-path>enter</xr-create-item-relative-path>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/aaa/group-server/radius/&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;/</xr-path>
+          <xr-xml-map>aaa_radius_cfg:ServerGroupName</xr-xml-map>
+          <xr-task>aaa</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;aaa_radius_cfg_RADIUSServerGroup_arg20&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </server-group-name>
+      </radius-server-group>
+    </radius-server-groups>
+  </augment>
+</Cisco-IOS-XR-aaa-protocol-radius-cfg>

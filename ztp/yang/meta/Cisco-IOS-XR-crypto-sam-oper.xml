@@ -1,0 +1,689 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-crypto-sam-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-crypto-sam-oper" revision="2017-09-07">
+  <files>
+    <file revision="2017-09-07" submodule="false">Cisco-IOS-XR-crypto-sam-oper.yang</file>
+    <file revision="2017-09-07" submodule="true">Cisco-IOS-XR-crypto-sam-oper-sub1.yang</file>
+  </files>
+  <prefix>crypto-sam-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="Log-tables">
+    <type node="enumeration">
+      <enum>unkown</enum>
+      <enum>memory-digest-table</enum>
+      <enum>system-database-digest</enum>
+      <enum>sam-tables</enum>
+    </type>
+  </typedef>
+  <typedef name="Certificate-issuer">
+    <type node="enumeration">
+      <enum>unknown</enum>
+      <enum>code-signing-server-certificate-authority</enum>
+    </type>
+  </typedef>
+  <typedef name="Log-error">
+    <type node="enumeration">
+      <enum>unknown</enum>
+      <enum>log-message-error</enum>
+      <enum>get-issuer-name-failed</enum>
+    </type>
+  </typedef>
+  <typedef name="Log-code">
+    <type node="enumeration">
+      <enum>unknown</enum>
+      <enum>sam-server-restared-router-reboot</enum>
+      <enum>sam-server-restared</enum>
+      <enum>added-certificate-in-table</enum>
+      <enum>copied-certificate-in-table</enum>
+      <enum>certificate-flag-changed</enum>
+      <enum>validated-certificate</enum>
+      <enum>certificate-expired-detected</enum>
+      <enum>certificate-revoked-detected</enum>
+      <enum>ca-certificate-expired-detected</enum>
+      <enum>ca-certificate-revoked-detected</enum>
+      <enum>deleted-certificate-from-table</enum>
+      <enum>crl-added-updated-in-table</enum>
+      <enum>checked-memory-digest</enum>
+      <enum>nvram-digest-mismatch-detected</enum>
+      <enum>insecure-backup-file-detected</enum>
+      <enum>error-restore-operation</enum>
+      <enum>backup-file-on-nvram-deleted</enum>
+      <enum>sam-log-file-recovered-from-system-database</enum>
+      <enum>validated-elf</enum>
+      <enum>namespace-deleted-recovered-by-sam</enum>
+    </type>
+  </typedef>
+  <sam config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/sam/gl/</xr-path>
+    <xr-xml-map>crypto_sam_oper:SAM</xr-xml-map>
+    <xr-task>system</xr-task>
+    <system-information config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/sam/gl/sysinfo</xr-path>
+      <xr-xml-map>crypto_sam_oper:SystemInformation</xr-xml-map>
+      <xr-task>system</xr-task>
+      <xr-bag-grp-name>crypto_sam_sysinfo</xr-bag-grp-name>
+      <xr-bag>sam.bag</xr-bag>
+      <is-running config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/sam/gl/sysinfo~crypto_sam_sysinfo.IsRunning</xr-path>
+        <xr-xml-map>sam:IsRunning</xr-xml-map>
+        <xr-task>system</xr-task>
+        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+        <xr-bag-version>0 1</xr-bag-version>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </is-running>
+      <prompt-interval config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/sam/gl/sysinfo~crypto_sam_sysinfo.PromptInterval</xr-path>
+        <xr-xml-map>sam:PromptInterval</xr-xml-map>
+        <xr-task>system</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>0 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </prompt-interval>
+      <is-default-response config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/sam/gl/sysinfo~crypto_sam_sysinfo.IsDefaultResponse</xr-path>
+        <xr-xml-map>sam:IsDefaultResponse</xr-xml-map>
+        <xr-task>system</xr-task>
+        <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+        <xr-bag-version>0 1</xr-bag-version>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </is-default-response>
+    </system-information>
+    <log-contents config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/sam/gl/logcontent/</xr-path>
+      <xr-xml-map>crypto_sam_oper:LogContentTable</xr-xml-map>
+      <xr-task>system</xr-task>
+      <log-content config="false" key="number-of-lines" node="list">
+        <xr-path>/oper/sam/gl/logcontent/&lt;crypto_sam_oper_LogContent_linecount&gt;</xr-path>
+        <xr-xml-map>crypto_sam_oper:LogContent</xr-xml-map>
+        <xr-task>system</xr-task>
+        <xr-bag-grp-name>crypto_log</xr-bag-grp-name>
+        <xr-bag>sam.bag</xr-bag>
+        <number-of-lines config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-pathformat>decimal</xr-pathformat>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/sam/gl/logcontent/&lt;crypto_sam_oper_LogContent_linecount&gt;</xr-path>
+          <xr-xml-map>crypto_sam_oper:NumberOfLines</xr-xml-map>
+          <xr-task>system</xr-task>
+          <xr-sch-type>Integer</xr-sch-type>
+          <xr-sch-arg-name>&lt;crypto_sam_oper_LogContent_linecount&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </number-of-lines>
+        <total-entries config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/sam/gl/logcontent/&lt;crypto_sam_oper_LogContent_linecount&gt;~crypto_log.TotalEntries</xr-path>
+          <xr-xml-map>sam:TotalEntries</xr-xml-map>
+          <xr-task>system</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </total-entries>
+        <entries-shown config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/sam/gl/logcontent/&lt;crypto_sam_oper_LogContent_linecount&gt;~crypto_log.EntriesShown</xr-path>
+          <xr-xml-map>sam:EntriesShown</xr-xml-map>
+          <xr-task>system</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </entries-shown>
+        <logs config="false" node="list">
+          <xr-path>/oper/sam/gl/logcontent/&lt;crypto_sam_oper_LogContent_linecount&gt;~crypto_log.Logs[&lt;bag_arg1&gt;]</xr-path>
+          <xr-task>system</xr-task>
+          <xr-bag-version>0 1</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+          <time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/sam/gl/logcontent/&lt;crypto_sam_oper_LogContent_linecount&gt;~crypto_log.Logs[&lt;bag_arg1&gt;].Time</xr-path>
+            <xr-xml-map>sam:Time</xr-xml-map>
+            <xr-task>system</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </time>
+          <code config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/sam/gl/logcontent/&lt;crypto_sam_oper_LogContent_linecount&gt;~crypto_log.Logs[&lt;bag_arg1&gt;].Code</xr-path>
+            <xr-xml-map>sam:Code</xr-xml-map>
+            <xr-task>system</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>Log-code</type-name>
+            </type>
+          </code>
+          <target-device config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/sam/gl/logcontent/&lt;crypto_sam_oper_LogContent_linecount&gt;~crypto_log.Logs[&lt;bag_arg1&gt;].TargetDevice</xr-path>
+            <xr-xml-map>sam:TargetDevice</xr-xml-map>
+            <xr-task>system</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </target-device>
+          <index config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/sam/gl/logcontent/&lt;crypto_sam_oper_LogContent_linecount&gt;~crypto_log.Logs[&lt;bag_arg1&gt;].Index</xr-path>
+            <xr-xml-map>sam:Index</xr-xml-map>
+            <xr-task>system</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </index>
+          <error config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/sam/gl/logcontent/&lt;crypto_sam_oper_LogContent_linecount&gt;~crypto_log.Logs[&lt;bag_arg1&gt;].Error</xr-path>
+            <xr-xml-map>sam:Error</xr-xml-map>
+            <xr-task>system</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>Log-error</type-name>
+            </type>
+          </error>
+          <issuer config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/sam/gl/logcontent/&lt;crypto_sam_oper_LogContent_linecount&gt;~crypto_log.Logs[&lt;bag_arg1&gt;].Issuer</xr-path>
+            <xr-xml-map>sam:Issuer</xr-xml-map>
+            <xr-task>system</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>Certificate-issuer</type-name>
+            </type>
+          </issuer>
+          <serial-no config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/sam/gl/logcontent/&lt;crypto_sam_oper_LogContent_linecount&gt;~crypto_log.Logs[&lt;bag_arg1&gt;].SerialNo</xr-path>
+            <xr-xml-map>sam:SerialNo</xr-xml-map>
+            <xr-task>system</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </serial-no>
+          <sam-table-index config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/sam/gl/logcontent/&lt;crypto_sam_oper_LogContent_linecount&gt;~crypto_log.Logs[&lt;bag_arg1&gt;].SAMTableIndex</xr-path>
+            <xr-xml-map>sam:SAMTableIndex</xr-xml-map>
+            <xr-task>system</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </sam-table-index>
+          <update-time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/sam/gl/logcontent/&lt;crypto_sam_oper_LogContent_linecount&gt;~crypto_log.Logs[&lt;bag_arg1&gt;].UpdateTime</xr-path>
+            <xr-xml-map>sam:UpdateTime</xr-xml-map>
+            <xr-task>system</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </update-time>
+          <source-device config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/sam/gl/logcontent/&lt;crypto_sam_oper_LogContent_linecount&gt;~crypto_log.Logs[&lt;bag_arg1&gt;].source_device</xr-path>
+            <xr-xml-map>sam:source_device</xr-xml-map>
+            <xr-task>system</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </source-device>
+          <table config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/sam/gl/logcontent/&lt;crypto_sam_oper_LogContent_linecount&gt;~crypto_log.Logs[&lt;bag_arg1&gt;].Table</xr-path>
+            <xr-xml-map>sam:Table</xr-xml-map>
+            <xr-task>system</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>Log-tables</type-name>
+            </type>
+          </table>
+        </logs>
+      </log-content>
+    </log-contents>
+    <devices config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/sam/gl/device/</xr-path>
+      <xr-xml-map>crypto_sam_oper:DeviceTable</xr-xml-map>
+      <xr-task>system</xr-task>
+      <device config="false" key="device-name" node="list">
+        <xr-path>/oper/sam/gl/device/&lt;crypto_sam_oper_Device_device&gt;/</xr-path>
+        <xr-xml-map>crypto_sam_oper:Device</xr-xml-map>
+        <xr-task>system</xr-task>
+        <certificate config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/sam/gl/device/&lt;crypto_sam_oper_Device_device&gt;/certificate/</xr-path>
+          <xr-xml-map>crypto_sam_oper:Certificate</xr-xml-map>
+          <xr-task>system</xr-task>
+          <brief config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/sam/gl/device/&lt;crypto_sam_oper_Device_device&gt;/certificate/brief</xr-path>
+            <xr-xml-map>crypto_sam_oper:Brief</xr-xml-map>
+            <xr-task>system</xr-task>
+            <xr-bag-grp-name>crypto_sam_certificate_common</xr-bag-grp-name>
+            <xr-bag>sam.bag</xr-bag>
+            <certificate-flags config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/sam/gl/device/&lt;crypto_sam_oper_Device_device&gt;/certificate/brief~crypto_sam_certificate_common.CertificateFlags</xr-path>
+              <xr-task>system</xr-task>
+              <xr-bag-version>0 1</xr-bag-version>
+              <is-trusted config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/sam/gl/device/&lt;crypto_sam_oper_Device_device&gt;/certificate/brief~crypto_sam_certificate_common.CertificateFlags.IsTrusted</xr-path>
+                <xr-xml-map>sam:IsTrusted</xr-xml-map>
+                <xr-task>system</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-trusted>
+              <is-revoked config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/sam/gl/device/&lt;crypto_sam_oper_Device_device&gt;/certificate/brief~crypto_sam_certificate_common.CertificateFlags.IsRevoked</xr-path>
+                <xr-xml-map>sam:IsRevoked</xr-xml-map>
+                <xr-task>system</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-revoked>
+              <is-expired config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/sam/gl/device/&lt;crypto_sam_oper_Device_device&gt;/certificate/brief~crypto_sam_certificate_common.CertificateFlags.IsExpired</xr-path>
+                <xr-xml-map>sam:IsExpired</xr-xml-map>
+                <xr-task>system</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-expired>
+              <is-validated config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/sam/gl/device/&lt;crypto_sam_oper_Device_device&gt;/certificate/brief~crypto_sam_certificate_common.CertificateFlags.IsValidated</xr-path>
+                <xr-xml-map>sam:IsValidated</xr-xml-map>
+                <xr-task>system</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-validated>
+            </certificate-flags>
+            <location config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/sam/gl/device/&lt;crypto_sam_oper_Device_device&gt;/certificate/brief~crypto_sam_certificate_common.Location</xr-path>
+              <xr-xml-map>sam:Location</xr-xml-map>
+              <xr-task>system</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </location>
+            <certificate-index config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/sam/gl/device/&lt;crypto_sam_oper_Device_device&gt;/certificate/brief~crypto_sam_certificate_common.CertificateIndex</xr-path>
+              <xr-xml-map>sam:CertificateIndex</xr-xml-map>
+              <xr-task>system</xr-task>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </certificate-index>
+          </brief>
+          <certificate-indexes config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/sam/gl/device/&lt;crypto_sam_oper_Device_device&gt;/certificate/certificateindex/</xr-path>
+            <xr-xml-map>crypto_sam_oper:CertificateIndexTable</xr-xml-map>
+            <xr-task>system</xr-task>
+            <certificate-index config="false" key="index" node="list">
+              <xr-path>/oper/sam/gl/device/&lt;crypto_sam_oper_Device_device&gt;/certificate/certificateindex/&lt;crypto_sam_oper_CertificateIndex_certificateindex&gt;/</xr-path>
+              <xr-xml-map>crypto_sam_oper:CertificateIndex</xr-xml-map>
+              <xr-task>system</xr-task>
+              <detail config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/sam/gl/device/&lt;crypto_sam_oper_Device_device&gt;/certificate/certificateindex/&lt;crypto_sam_oper_CertificateIndex_certificateindex&gt;/detail</xr-path>
+                <xr-xml-map>crypto_sam_oper:Detail</xr-xml-map>
+                <xr-task>system</xr-task>
+                <xr-bag-grp-name>crypto_sam_certificate_common</xr-bag-grp-name>
+                <xr-bag>sam.bag</xr-bag>
+                <certificate-flags config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/sam/gl/device/&lt;crypto_sam_oper_Device_device&gt;/certificate/certificateindex/&lt;crypto_sam_oper_CertificateIndex_certificateindex&gt;/detail~crypto_sam_certificate_common.CertificateFlags</xr-path>
+                  <xr-task>system</xr-task>
+                  <xr-bag-version>0 1</xr-bag-version>
+                  <is-trusted config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/sam/gl/device/&lt;crypto_sam_oper_Device_device&gt;/certificate/certificateindex/&lt;crypto_sam_oper_CertificateIndex_certificateindex&gt;/detail~crypto_sam_certificate_common.CertificateFlags.IsTrusted</xr-path>
+                    <xr-xml-map>sam:IsTrusted</xr-xml-map>
+                    <xr-task>system</xr-task>
+                    <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </is-trusted>
+                  <is-revoked config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/sam/gl/device/&lt;crypto_sam_oper_Device_device&gt;/certificate/certificateindex/&lt;crypto_sam_oper_CertificateIndex_certificateindex&gt;/detail~crypto_sam_certificate_common.CertificateFlags.IsRevoked</xr-path>
+                    <xr-xml-map>sam:IsRevoked</xr-xml-map>
+                    <xr-task>system</xr-task>
+                    <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </is-revoked>
+                  <is-expired config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/sam/gl/device/&lt;crypto_sam_oper_Device_device&gt;/certificate/certificateindex/&lt;crypto_sam_oper_CertificateIndex_certificateindex&gt;/detail~crypto_sam_certificate_common.CertificateFlags.IsExpired</xr-path>
+                    <xr-xml-map>sam:IsExpired</xr-xml-map>
+                    <xr-task>system</xr-task>
+                    <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </is-expired>
+                  <is-validated config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/sam/gl/device/&lt;crypto_sam_oper_Device_device&gt;/certificate/certificateindex/&lt;crypto_sam_oper_CertificateIndex_certificateindex&gt;/detail~crypto_sam_certificate_common.CertificateFlags.IsValidated</xr-path>
+                    <xr-xml-map>sam:IsValidated</xr-xml-map>
+                    <xr-task>system</xr-task>
+                    <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                    <xr-bag-version>0 1</xr-bag-version>
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                  </is-validated>
+                </certificate-flags>
+                <location config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/sam/gl/device/&lt;crypto_sam_oper_Device_device&gt;/certificate/certificateindex/&lt;crypto_sam_oper_CertificateIndex_certificateindex&gt;/detail~crypto_sam_certificate_common.Location</xr-path>
+                  <xr-xml-map>sam:Location</xr-xml-map>
+                  <xr-task>system</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>0 1</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </location>
+                <certificate-index config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/sam/gl/device/&lt;crypto_sam_oper_Device_device&gt;/certificate/certificateindex/&lt;crypto_sam_oper_CertificateIndex_certificateindex&gt;/detail~crypto_sam_certificate_common.CertificateIndex</xr-path>
+                  <xr-xml-map>sam:CertificateIndex</xr-xml-map>
+                  <xr-task>system</xr-task>
+                  <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                  <xr-bag-version>0 1</xr-bag-version>
+                  <type>
+                    <type-name>uint16</type-name>
+                  </type>
+                </certificate-index>
+              </detail>
+              <index config="false" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-pathformat>decimal</xr-pathformat>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/oper/sam/gl/device/&lt;crypto_sam_oper_Device_device&gt;/certificate/certificateindex/&lt;crypto_sam_oper_CertificateIndex_certificateindex&gt;/</xr-path>
+                <xr-xml-map>crypto_sam_oper:Index</xr-xml-map>
+                <xr-task>system</xr-task>
+                <xr-sch-type>Integer</xr-sch-type>
+                <xr-sch-arg-name>&lt;crypto_sam_oper_CertificateIndex_certificateindex&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </index>
+            </certificate-index>
+          </certificate-indexes>
+        </certificate>
+        <device-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/sam/gl/device/&lt;crypto_sam_oper_Device_device&gt;/</xr-path>
+          <xr-xml-map>crypto_sam_oper:DeviceName</xr-xml-map>
+          <xr-task>system</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;crypto_sam_oper_Device_device&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </device-name>
+      </device>
+    </devices>
+    <packages config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/sam/gl/package/</xr-path>
+      <xr-xml-map>crypto_sam_oper:PackageTable</xr-xml-map>
+      <xr-task>system</xr-task>
+      <package config="false" key="package-name" node="list">
+        <xr-path>/oper/sam/gl/package/&lt;crypto_sam_oper_Package_name&gt;</xr-path>
+        <xr-xml-map>crypto_sam_oper:Package</xr-xml-map>
+        <xr-task>system</xr-task>
+        <xr-bag-grp-name>crypto_sam_certificate_common</xr-bag-grp-name>
+        <xr-bag>sam.bag</xr-bag>
+        <package-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/sam/gl/package/&lt;crypto_sam_oper_Package_name&gt;</xr-path>
+          <xr-xml-map>crypto_sam_oper:PackageName</xr-xml-map>
+          <xr-task>system</xr-task>
+          <xr-sch-type>EncodedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;crypto_sam_oper_Package_name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </package-name>
+        <certificate-flags config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/sam/gl/package/&lt;crypto_sam_oper_Package_name&gt;~crypto_sam_certificate_common.CertificateFlags</xr-path>
+          <xr-task>system</xr-task>
+          <xr-bag-version>0 1</xr-bag-version>
+          <is-trusted config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/sam/gl/package/&lt;crypto_sam_oper_Package_name&gt;~crypto_sam_certificate_common.CertificateFlags.IsTrusted</xr-path>
+            <xr-xml-map>sam:IsTrusted</xr-xml-map>
+            <xr-task>system</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </is-trusted>
+          <is-revoked config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/sam/gl/package/&lt;crypto_sam_oper_Package_name&gt;~crypto_sam_certificate_common.CertificateFlags.IsRevoked</xr-path>
+            <xr-xml-map>sam:IsRevoked</xr-xml-map>
+            <xr-task>system</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </is-revoked>
+          <is-expired config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/sam/gl/package/&lt;crypto_sam_oper_Package_name&gt;~crypto_sam_certificate_common.CertificateFlags.IsExpired</xr-path>
+            <xr-xml-map>sam:IsExpired</xr-xml-map>
+            <xr-task>system</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </is-expired>
+          <is-validated config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/sam/gl/package/&lt;crypto_sam_oper_Package_name&gt;~crypto_sam_certificate_common.CertificateFlags.IsValidated</xr-path>
+            <xr-xml-map>sam:IsValidated</xr-xml-map>
+            <xr-task>system</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </is-validated>
+        </certificate-flags>
+        <location config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/sam/gl/package/&lt;crypto_sam_oper_Package_name&gt;~crypto_sam_certificate_common.Location</xr-path>
+          <xr-xml-map>sam:Location</xr-xml-map>
+          <xr-task>system</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </location>
+        <certificate-index config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/sam/gl/package/&lt;crypto_sam_oper_Package_name&gt;~crypto_sam_certificate_common.CertificateIndex</xr-path>
+          <xr-xml-map>sam:CertificateIndex</xr-xml-map>
+          <xr-task>system</xr-task>
+          <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>uint16</type-name>
+          </type>
+        </certificate-index>
+      </package>
+    </packages>
+    <certificate-revocations config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/sam/gl/crlindex/</xr-path>
+      <xr-xml-map>crypto_sam_oper:CertificateRevocationListTable</xr-xml-map>
+      <xr-task>system</xr-task>
+      <certificate-revocation config="false" key="crl-index" node="list">
+        <xr-path>/oper/sam/gl/crlindex/&lt;crypto_sam_oper_CertificateRevocationList_index&gt;/</xr-path>
+        <xr-xml-map>crypto_sam_oper:CertificateRevocationList</xr-xml-map>
+        <xr-task>system</xr-task>
+        <certificate-revocation-list-detail config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/sam/gl/crlindex/&lt;crypto_sam_oper_CertificateRevocationList_index&gt;/crldetail</xr-path>
+          <xr-xml-map>crypto_sam_oper:CertificateRevocationListDetail</xr-xml-map>
+          <xr-task>system</xr-task>
+          <xr-bag-grp-name>crypto_sam_crl_info</xr-bag-grp-name>
+          <xr-bag>sam.bag</xr-bag>
+          <issuer config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/sam/gl/crlindex/&lt;crypto_sam_oper_CertificateRevocationList_index&gt;/crldetail~crypto_sam_crl_info.Issuer</xr-path>
+            <xr-task>system</xr-task>
+            <xr-bag-version>0 1</xr-bag-version>
+            <common-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/sam/gl/crlindex/&lt;crypto_sam_oper_CertificateRevocationList_index&gt;/crldetail~crypto_sam_crl_info.Issuer.CommonName</xr-path>
+              <xr-xml-map>sam:CommonName</xr-xml-map>
+              <xr-task>system</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </common-name>
+            <organization config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/sam/gl/crlindex/&lt;crypto_sam_oper_CertificateRevocationList_index&gt;/crldetail~crypto_sam_crl_info.Issuer.Organization</xr-path>
+              <xr-xml-map>sam:Organization</xr-xml-map>
+              <xr-task>system</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </organization>
+            <country config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/sam/gl/crlindex/&lt;crypto_sam_oper_CertificateRevocationList_index&gt;/crldetail~crypto_sam_crl_info.Issuer.Country</xr-path>
+              <xr-xml-map>sam:Country</xr-xml-map>
+              <xr-task>system</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </country>
+          </issuer>
+          <crl-index config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/sam/gl/crlindex/&lt;crypto_sam_oper_CertificateRevocationList_index&gt;/crldetail~crypto_sam_crl_info.CRLIndex</xr-path>
+            <xr-xml-map>sam:CRLIndex</xr-xml-map>
+            <xr-task>system</xr-task>
+            <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint16</type-name>
+            </type>
+          </crl-index>
+          <updates config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/sam/gl/crlindex/&lt;crypto_sam_oper_CertificateRevocationList_index&gt;/crldetail~crypto_sam_crl_info.Updates</xr-path>
+            <xr-xml-map>sam:Updates</xr-xml-map>
+            <xr-task>system</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </updates>
+        </certificate-revocation-list-detail>
+        <crl-index config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-pathformat>decimal</xr-pathformat>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/sam/gl/crlindex/&lt;crypto_sam_oper_CertificateRevocationList_index&gt;/</xr-path>
+          <xr-xml-map>crypto_sam_oper:CRLIndex</xr-xml-map>
+          <xr-task>system</xr-task>
+          <xr-sch-type>Integer</xr-sch-type>
+          <xr-sch-arg-name>&lt;crypto_sam_oper_CertificateRevocationList_index&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </crl-index>
+      </certificate-revocation>
+    </certificate-revocations>
+    <certificate-revocation-list-summary config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/sam/gl/crlsummary</xr-path>
+      <xr-xml-map>crypto_sam_oper:CertificateRevocationListSummary</xr-xml-map>
+      <xr-task>system</xr-task>
+      <xr-bag-grp-name>crypto_sam_crl_info</xr-bag-grp-name>
+      <xr-bag>sam.bag</xr-bag>
+      <issuer config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/sam/gl/crlsummary~crypto_sam_crl_info.Issuer</xr-path>
+        <xr-task>system</xr-task>
+        <xr-bag-version>0 1</xr-bag-version>
+        <common-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/sam/gl/crlsummary~crypto_sam_crl_info.Issuer.CommonName</xr-path>
+          <xr-xml-map>sam:CommonName</xr-xml-map>
+          <xr-task>system</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </common-name>
+        <organization config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/sam/gl/crlsummary~crypto_sam_crl_info.Issuer.Organization</xr-path>
+          <xr-xml-map>sam:Organization</xr-xml-map>
+          <xr-task>system</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </organization>
+        <country config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/sam/gl/crlsummary~crypto_sam_crl_info.Issuer.Country</xr-path>
+          <xr-xml-map>sam:Country</xr-xml-map>
+          <xr-task>system</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>0 1</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </country>
+      </issuer>
+      <crl-index config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/sam/gl/crlsummary~crypto_sam_crl_info.CRLIndex</xr-path>
+        <xr-xml-map>sam:CRLIndex</xr-xml-map>
+        <xr-task>system</xr-task>
+        <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+        <xr-bag-version>0 1</xr-bag-version>
+        <type>
+          <type-name>uint16</type-name>
+        </type>
+      </crl-index>
+      <updates config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/sam/gl/crlsummary~crypto_sam_crl_info.Updates</xr-path>
+        <xr-xml-map>sam:Updates</xr-xml-map>
+        <xr-task>system</xr-task>
+        <xr-bag-primitive-type>string</xr-bag-primitive-type>
+        <xr-bag-version>0 1</xr-bag-version>
+        <type>
+          <type-name>string</type-name>
+        </type>
+      </updates>
+    </certificate-revocation-list-summary>
+  </sam>
+</Cisco-IOS-XR-crypto-sam-oper>

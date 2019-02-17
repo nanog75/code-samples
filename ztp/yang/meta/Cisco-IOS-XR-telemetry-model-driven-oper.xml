@@ -1,0 +1,1854 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-telemetry-model-driven-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-telemetry-model-driven-oper" revision="2017-09-27">
+  <files>
+    <file revision="2017-09-27" submodule="false">Cisco-IOS-XR-telemetry-model-driven-oper.yang</file>
+    <file revision="2017-09-27" submodule="true">Cisco-IOS-XR-telemetry-model-driven-oper-sub1.yang</file>
+    <file revision="2017-09-27" submodule="true">Cisco-IOS-XR-telemetry-model-driven-oper-sub2.yang</file>
+  </files>
+  <prefix>telemetry-model-driven-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="inet">ietf-inet-types</import>
+  <typedef name="Mdt-source-qos-marking">
+    <type node="enumeration">
+      <enum value="0">dscp-default</enum>
+      <enum value="8">dscp-cs1</enum>
+      <enum value="10">dscp-af11</enum>
+      <enum value="12">dscp-af12</enum>
+      <enum value="14">dscp-af13</enum>
+      <enum value="16">dscp-cs2</enum>
+      <enum value="18">dscp-af21</enum>
+      <enum value="20">dscp-af22</enum>
+      <enum value="22">dscp-af23</enum>
+      <enum value="24">dscp-cs3</enum>
+      <enum value="26">dscp-af31</enum>
+      <enum value="28">dscp-af32</enum>
+      <enum value="30">dscp-af33</enum>
+      <enum value="32">dscp-cs4</enum>
+      <enum value="34">dscp-af41</enum>
+      <enum value="36">dscp-af42</enum>
+      <enum value="38">dscp-af43</enum>
+      <enum value="40">dscp-cs5</enum>
+      <enum value="46">dscp-ef</enum>
+      <enum value="48">dscp-cs6</enum>
+      <enum value="56">dscp-cs7</enum>
+    </type>
+  </typedef>
+  <typedef name="Mdt-subs-state-enum">
+    <type node="enumeration">
+      <enum value="0">not-active</enum>
+      <enum value="1">active</enum>
+      <enum value="2">paused</enum>
+    </type>
+  </typedef>
+  <typedef name="Mdt-internal-path-status">
+    <type node="enumeration">
+      <enum value="0">active</enum>
+      <enum value="1">internal-err</enum>
+      <enum value="2">plugin-active</enum>
+      <enum value="3">plugin-not-initialized</enum>
+      <enum value="4">plugin-invalid-cadence</enum>
+      <enum value="5">plugin-err</enum>
+      <enum value="6">filter-err</enum>
+      <enum value="7">paused</enum>
+      <enum value="8">event-ing-active</enum>
+      <enum value="9">event-ing-not-active</enum>
+      <enum value="10">event-ing-err</enum>
+    </type>
+  </typedef>
+  <typedef name="Mdt-dest-state-enum">
+    <type node="enumeration">
+      <enum value="0">dest-not-active</enum>
+      <enum value="1">dest-active</enum>
+      <enum value="2">dest-asking-pause</enum>
+      <enum value="3">dest-paused</enum>
+      <enum value="4">dest-resuming</enum>
+      <enum value="5">dest-channel-not-found</enum>
+    </type>
+  </typedef>
+  <typedef name="Mdt-transport-enum">
+    <type node="enumeration">
+      <enum value="0">not-set</enum>
+      <enum value="1">grpc</enum>
+      <enum value="2">tcp</enum>
+      <enum value="3">udp</enum>
+      <enum value="6">dialin</enum>
+    </type>
+  </typedef>
+  <typedef name="Mdt-encoding-enum">
+    <type node="enumeration">
+      <enum value="0">not-set</enum>
+      <enum value="2">gpb</enum>
+      <enum value="3">self-describing-gpb</enum>
+      <enum value="4">json</enum>
+    </type>
+  </typedef>
+  <typedef name="Mdt-in6-addr">
+    <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+    <type>
+      <type-name>inet:ipv6-address</type-name>
+    </type>
+  </typedef>
+  <typedef name="Mdt-ip">
+    <type node="enumeration">
+      <enum value="1">ipv4</enum>
+      <enum value="2">ipv6</enum>
+    </type>
+  </typedef>
+  <telemetry-model-driven config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/mdt/gl/</xr-path>
+    <xr-xml-map>telemetry_modeldriven_oper:TelemetryModelDriven</xr-xml-map>
+    <destinations config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/mdt/gl/destinations/</xr-path>
+      <xr-xml-map>telemetry_modeldriven_oper:DestinationTable</xr-xml-map>
+      <destination config="false" key="destination-id" node="list">
+        <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;</xr-path>
+        <xr-xml-map>telemetry_modeldriven_oper:Destination</xr-xml-map>
+        <xr-bag-grp-name>mdt_destination_group_detail</xr-bag-grp-name>
+        <xr-bag>mdt_show.bag</xr-bag>
+        <destination-id config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;</xr-path>
+          <xr-xml-map>telemetry_modeldriven_oper:DestinationId</xr-xml-map>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </destination-id>
+        <id config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Id</xr-path>
+          <xr-xml-map>mdt_show:Id</xr-xml-map>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 6</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </id>
+        <configured config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Configured</xr-path>
+          <xr-xml-map>mdt_show:Configured</xr-xml-map>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 6</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </configured>
+        <destination config="false" node="list">
+          <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;]</xr-path>
+          <xr-bag-version>1 6</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg7&gt;</xr-internal-key>
+          <destination config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].Destination</xr-path>
+            <xr-bag-version>1 6</xr-bag-version>
+            <dest-ip-address config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].Destination.DestIPAddress</xr-path>
+              <xr-bag-version>1 6</xr-bag-version>
+              <ip-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].Destination.DestIPAddress.IPType</xr-path>
+                <xr-xml-map>mdt_show:IPType</xr-xml-map>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>Mdt-ip</type-name>
+                </type>
+              </ip-type>
+              <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].Destination.DestIPAddress.IPV4Address</xr-path>
+                <xr-xml-map>mdt_show:IPV4Address</xr-xml-map>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <when>../ip-type = 'ipv4'</when>
+                <type>
+                  <type-name>inet:ipv4-address</type-name>
+                </type>
+              </ipv4-address>
+              <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].Destination.DestIPAddress.IPV6Address</xr-path>
+                <xr-xml-map>mdt_show:IPV6Address</xr-xml-map>
+                <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <when>../ip-type = 'ipv6'</when>
+                <type>
+                  <type-name>Mdt-in6-addr</type-name>
+                </type>
+              </ipv6-address>
+            </dest-ip-address>
+            <id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].Destination.Id</xr-path>
+              <xr-xml-map>mdt_show:Id</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </id>
+            <sub-id-str config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].Destination.SubIdStr</xr-path>
+              <xr-xml-map>mdt_show:SubIdStr</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </sub-id-str>
+            <dest-port config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].Destination.DestPort</xr-path>
+              <xr-xml-map>mdt_show:DestPort</xr-xml-map>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </dest-port>
+            <encoding config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].Destination.Encoding</xr-path>
+              <xr-xml-map>mdt_show:Encoding</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>Mdt-encoding-enum</type-name>
+              </type>
+            </encoding>
+            <transport config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].Destination.Transport</xr-path>
+              <xr-xml-map>mdt_show:Transport</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>Mdt-transport-enum</type-name>
+              </type>
+            </transport>
+            <vrf config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].Destination.Vrf</xr-path>
+              <xr-xml-map>mdt_show:Vrf</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </vrf>
+            <vrf-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].Destination.VrfId</xr-path>
+              <xr-xml-map>mdt_show:VrfId</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </vrf-id>
+            <state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].Destination.State</xr-path>
+              <xr-xml-map>mdt_show:State</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>Mdt-dest-state-enum</type-name>
+              </type>
+            </state>
+            <udp-mtu config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].Destination.UdpMTU</xr-path>
+              <xr-xml-map>mdt_show:UdpMTU</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </udp-mtu>
+            <tls config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].Destination.TLS</xr-path>
+              <xr-xml-map>mdt_show:TLS</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </tls>
+            <tls-host config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].Destination.TLSHost</xr-path>
+              <xr-xml-map>mdt_show:TLSHost</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </tls-host>
+            <total-num-of-packets-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].Destination.Total_Num_of_Packets_sent</xr-path>
+              <xr-xml-map>mdt_show:Total_Num_of_Packets_sent</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </total-num-of-packets-sent>
+            <total-num-of-bytes-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].Destination.Total_Num_of_Bytes_sent</xr-path>
+              <xr-xml-map>mdt_show:Total_Num_of_Bytes_sent</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </total-num-of-bytes-sent>
+            <last-collection-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].Destination.LastCollectionTime</xr-path>
+              <xr-xml-map>mdt_show:LastCollectionTime</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </last-collection-time>
+            <dscp config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].Destination.DSCP</xr-path>
+              <xr-xml-map>mdt_show:DSCP</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </dscp>
+            <sub-id config="false" is-key="false" is-yang-key="false" node="leaf-list">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].Destination.SubId[&lt;bag_arg4&gt;]</xr-path>
+              <xr-xml-map>mdt_show:SubId</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg4&gt;</xr-internal-key>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </sub-id>
+          </destination>
+          <collection-group config="false" node="list">
+            <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;]</xr-path>
+            <xr-bag-version>1 6</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg5&gt;</xr-internal-key>
+            <id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].Id</xr-path>
+              <xr-xml-map>mdt_show:Id</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </id>
+            <cadence config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].Cadence</xr-path>
+              <xr-xml-map>mdt_show:Cadence</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </cadence>
+            <total-collections config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].TotalCollections</xr-path>
+              <xr-xml-map>mdt_show:TotalCollections</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </total-collections>
+            <encoding config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].Encoding</xr-path>
+              <xr-xml-map>mdt_show:Encoding</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>Mdt-encoding-enum</type-name>
+              </type>
+            </encoding>
+            <last-collection-start-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].LastCollectionStartTime</xr-path>
+              <xr-xml-map>mdt_show:LastCollectionStartTime</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </last-collection-start-time>
+            <last-collection-end-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].LastCollectionEndTime</xr-path>
+              <xr-xml-map>mdt_show:LastCollectionEndTime</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </last-collection-end-time>
+            <max-collection-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].MaxCollectionTime</xr-path>
+              <xr-xml-map>mdt_show:MaxCollectionTime</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </max-collection-time>
+            <min-collection-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].MinCollectionTime</xr-path>
+              <xr-xml-map>mdt_show:MinCollectionTime</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </min-collection-time>
+            <min-total-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].MinTotalTime</xr-path>
+              <xr-xml-map>mdt_show:MinTotalTime</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </min-total-time>
+            <max-total-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].MaxTotalTime</xr-path>
+              <xr-xml-map>mdt_show:MaxTotalTime</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </max-total-time>
+            <avg-total-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].AvgTotalTime</xr-path>
+              <xr-xml-map>mdt_show:AvgTotalTime</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </avg-total-time>
+            <total-other-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].TotalOtherErrors</xr-path>
+              <xr-xml-map>mdt_show:TotalOtherErrors</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </total-other-errors>
+            <total-on-data-instances config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].TotalOnDataInstances</xr-path>
+              <xr-xml-map>mdt_show:TotalOnDataInstances</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </total-on-data-instances>
+            <total-not-ready config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].TotalNotReady</xr-path>
+              <xr-xml-map>mdt_show:TotalNotReady</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </total-not-ready>
+            <total-send-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].TotalSendErrors</xr-path>
+              <xr-xml-map>mdt_show:TotalSendErrors</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </total-send-errors>
+            <total-send-drops config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].TotalSendDrops</xr-path>
+              <xr-xml-map>mdt_show:TotalSendDrops</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </total-send-drops>
+            <strict-timer config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].StrictTimer</xr-path>
+              <xr-xml-map>mdt_show:StrictTimer</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </strict-timer>
+            <collection-path config="false" node="list">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].CollectionPaths[&lt;bag_arg2&gt;]</xr-path>
+              <xr-bag-version>1 6</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+              <path config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].CollectionPaths[&lt;bag_arg2&gt;].Path</xr-path>
+                <xr-xml-map>mdt_show:Path</xr-xml-map>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </path>
+              <state config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].CollectionPaths[&lt;bag_arg2&gt;].State</xr-path>
+                <xr-xml-map>mdt_show:State</xr-xml-map>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </state>
+              <status-str config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].CollectionPaths[&lt;bag_arg2&gt;].Status_Str</xr-path>
+                <xr-xml-map>mdt_show:Status_Str</xr-xml-map>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </status-str>
+            </collection-path>
+            <internal-collection-group config="false" node="list">
+              <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;]</xr-path>
+              <xr-bag-version>1 6</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+              <path config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].Path</xr-path>
+                <xr-xml-map>mdt_show:Path</xr-xml-map>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </path>
+              <cadence config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].Cadence</xr-path>
+                <xr-xml-map>mdt_show:Cadence</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </cadence>
+              <total-get-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalGetCount</xr-path>
+                <xr-xml-map>mdt_show:TotalGetCount</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </total-get-count>
+              <total-list-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalListCount</xr-path>
+                <xr-xml-map>mdt_show:TotalListCount</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </total-list-count>
+              <total-datalist-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalDatalistCount</xr-path>
+                <xr-xml-map>mdt_show:TotalDatalistCount</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </total-datalist-count>
+              <total-finddata-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalFinddataCount</xr-path>
+                <xr-xml-map>mdt_show:TotalFinddataCount</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </total-finddata-count>
+              <total-get-bulk-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalGetBulkCount</xr-path>
+                <xr-xml-map>mdt_show:TotalGetBulkCount</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </total-get-bulk-count>
+              <total-item-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalItemCount</xr-path>
+                <xr-xml-map>mdt_show:TotalItemCount</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </total-item-count>
+              <total-get-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalGetErrors</xr-path>
+                <xr-xml-map>mdt_show:TotalGetErrors</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </total-get-errors>
+              <total-list-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalListErrors</xr-path>
+                <xr-xml-map>mdt_show:TotalListErrors</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </total-list-errors>
+              <total-datalist-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalDatalistErrors</xr-path>
+                <xr-xml-map>mdt_show:TotalDatalistErrors</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </total-datalist-errors>
+              <total-finddata-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalFinddataErrors</xr-path>
+                <xr-xml-map>mdt_show:TotalFinddataErrors</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </total-finddata-errors>
+              <total-get-bulk-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalGetBulkErrors</xr-path>
+                <xr-xml-map>mdt_show:TotalGetBulkErrors</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </total-get-bulk-errors>
+              <total-encode-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalEncodeErrors</xr-path>
+                <xr-xml-map>mdt_show:TotalEncodeErrors</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </total-encode-errors>
+              <total-encode-notready config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalEncodeNotready</xr-path>
+                <xr-xml-map>mdt_show:TotalEncodeNotready</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </total-encode-notready>
+              <total-send-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalSendErrors</xr-path>
+                <xr-xml-map>mdt_show:TotalSendErrors</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </total-send-errors>
+              <total-send-drops config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalSendDrops</xr-path>
+                <xr-xml-map>mdt_show:TotalSendDrops</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </total-send-drops>
+              <total-sent-bytes config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalSentBytes</xr-path>
+                <xr-xml-map>mdt_show:TotalSentBytes</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </total-sent-bytes>
+              <total-send-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalSendPackets</xr-path>
+                <xr-xml-map>mdt_show:TotalSendPackets</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </total-send-packets>
+              <total-send-bytes-dropped config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalSendBytesDropped</xr-path>
+                <xr-xml-map>mdt_show:TotalSendBytesDropped</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </total-send-bytes-dropped>
+              <total-collections config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalCollections</xr-path>
+                <xr-xml-map>mdt_show:TotalCollections</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </total-collections>
+              <total-collections-missed config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalCollectionsMissed</xr-path>
+                <xr-xml-map>mdt_show:TotalCollectionsMissed</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </total-collections-missed>
+              <max-collection-time config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].MaxCollectionTime</xr-path>
+                <xr-xml-map>mdt_show:MaxCollectionTime</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </max-collection-time>
+              <min-collection-time config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].MinCollectionTime</xr-path>
+                <xr-xml-map>mdt_show:MinCollectionTime</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </min-collection-time>
+              <avg-collection-time config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].AvgCollectionTime</xr-path>
+                <xr-xml-map>mdt_show:AvgCollectionTime</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </avg-collection-time>
+              <collection-method config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].CollectionMethod</xr-path>
+                <xr-xml-map>mdt_show:CollectionMethod</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </collection-method>
+              <status config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/destinations/&lt;telemetry_modeldriven_oper_Destination_destination_id&gt;~mdt_destination_group_detail.Destinations[&lt;bag_arg7&gt;].CollectionGroups[&lt;bag_arg5&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].Status</xr-path>
+                <xr-xml-map>mdt_show:Status</xr-xml-map>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>Mdt-internal-path-status</type-name>
+                </type>
+              </status>
+            </internal-collection-group>
+          </collection-group>
+        </destination>
+      </destination>
+    </destinations>
+    <subscriptions config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/mdt/gl/subs/stats/</xr-path>
+      <xr-xml-map>telemetry_modeldriven_oper:SubscriptionTable</xr-xml-map>
+      <subscription config="false" key="subscription-id" node="list">
+        <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;</xr-path>
+        <xr-xml-map>telemetry_modeldriven_oper:Subscription</xr-xml-map>
+        <xr-bag-grp-name>mdt_subscription_details</xr-bag-grp-name>
+        <xr-bag>mdt_show.bag</xr-bag>
+        <subscription-id config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;</xr-path>
+          <xr-xml-map>telemetry_modeldriven_oper:SubscriptionId</xr-xml-map>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </subscription-id>
+        <subscription config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription</xr-path>
+          <xr-bag-version>1 6</xr-bag-version>
+          <source-interface config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.SourceInterface</xr-path>
+            <xr-bag-version>1 6</xr-bag-version>
+            <interface-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.SourceInterface.InterfaceName</xr-path>
+              <xr-xml-map>mdt_show:InterfaceName</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </interface-name>
+            <state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.SourceInterface.State</xr-path>
+              <xr-xml-map>mdt_show:State</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </state>
+            <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.SourceInterface.IPV4Address</xr-path>
+              <xr-xml-map>mdt_show:IPV4Address</xr-xml-map>
+              <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </ipv4-address>
+            <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.SourceInterface.IPV6Address</xr-path>
+              <xr-xml-map>mdt_show:IPV6Address</xr-xml-map>
+              <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>Mdt-in6-addr</type-name>
+              </type>
+            </ipv6-address>
+            <vrf-id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.SourceInterface.VrfId</xr-path>
+              <xr-xml-map>mdt_show:VrfId</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </vrf-id>
+          </source-interface>
+          <id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Id</xr-path>
+            <xr-xml-map>mdt_show:Id</xr-xml-map>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 6</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </id>
+          <state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.State</xr-path>
+            <xr-xml-map>mdt_show:State</xr-xml-map>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>1 6</xr-bag-version>
+            <type>
+              <type-name>Mdt-subs-state-enum</type-name>
+            </type>
+          </state>
+          <source-qos-marking config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.SourceQosMarking</xr-path>
+            <xr-xml-map>mdt_show:SourceQosMarking</xr-xml-map>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>1 6</xr-bag-version>
+            <type>
+              <type-name>Mdt-source-qos-marking</type-name>
+            </type>
+          </source-qos-marking>
+          <sensor-profile config="false" node="list">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.SensorProfiles[&lt;bag_arg10&gt;]</xr-path>
+            <xr-bag-version>1 6</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg10&gt;</xr-internal-key>
+            <sensor-group config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.SensorProfiles[&lt;bag_arg10&gt;].SensorGroup</xr-path>
+              <xr-bag-version>1 6</xr-bag-version>
+              <id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.SensorProfiles[&lt;bag_arg10&gt;].SensorGroup.Id</xr-path>
+                <xr-xml-map>mdt_show:Id</xr-xml-map>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </id>
+              <configured config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.SensorProfiles[&lt;bag_arg10&gt;].SensorGroup.Configured</xr-path>
+                <xr-xml-map>mdt_show:Configured</xr-xml-map>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </configured>
+              <sensor-path config="false" node="list">
+                <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.SensorProfiles[&lt;bag_arg10&gt;].SensorGroup.SensorPaths[&lt;bag_arg8&gt;]</xr-path>
+                <xr-bag-version>1 6</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg8&gt;</xr-internal-key>
+                <path config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.SensorProfiles[&lt;bag_arg10&gt;].SensorGroup.SensorPaths[&lt;bag_arg8&gt;].Path</xr-path>
+                  <xr-xml-map>mdt_show:Path</xr-xml-map>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>1 6</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </path>
+                <state config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.SensorProfiles[&lt;bag_arg10&gt;].SensorGroup.SensorPaths[&lt;bag_arg8&gt;].State</xr-path>
+                  <xr-xml-map>mdt_show:State</xr-xml-map>
+                  <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                  <xr-bag-version>1 6</xr-bag-version>
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </state>
+                <status-str config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.SensorProfiles[&lt;bag_arg10&gt;].SensorGroup.SensorPaths[&lt;bag_arg8&gt;].Status_Str</xr-path>
+                  <xr-xml-map>mdt_show:Status_Str</xr-xml-map>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>1 6</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </status-str>
+              </sensor-path>
+            </sensor-group>
+            <sample-interval config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.SensorProfiles[&lt;bag_arg10&gt;].SampleInterval</xr-path>
+              <xr-xml-map>mdt_show:SampleInterval</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </sample-interval>
+            <heartbeat-interval config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.SensorProfiles[&lt;bag_arg10&gt;].HeartbeatInterval</xr-path>
+              <xr-xml-map>mdt_show:HeartbeatInterval</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </heartbeat-interval>
+            <suppress-redundant config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.SensorProfiles[&lt;bag_arg10&gt;].SuppressRedundant</xr-path>
+              <xr-xml-map>mdt_show:SuppressRedundant</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </suppress-redundant>
+          </sensor-profile>
+          <destination-grp config="false" node="list">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;]</xr-path>
+            <xr-bag-version>1 6</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg11&gt;</xr-internal-key>
+            <id config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;].Id</xr-path>
+              <xr-xml-map>mdt_show:Id</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </id>
+            <configured config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;].Configured</xr-path>
+              <xr-xml-map>mdt_show:Configured</xr-xml-map>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </configured>
+            <destination config="false" node="list">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;].Destinations[&lt;bag_arg6&gt;]</xr-path>
+              <xr-bag-version>1 6</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg6&gt;</xr-internal-key>
+              <dest-ip-address config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;].Destinations[&lt;bag_arg6&gt;].DestIPAddress</xr-path>
+                <xr-bag-version>1 6</xr-bag-version>
+                <ip-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;].Destinations[&lt;bag_arg6&gt;].DestIPAddress.IPType</xr-path>
+                  <xr-xml-map>mdt_show:IPType</xr-xml-map>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>1 6</xr-bag-version>
+                  <type>
+                    <type-name>Mdt-ip</type-name>
+                  </type>
+                </ip-type>
+                <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;].Destinations[&lt;bag_arg6&gt;].DestIPAddress.IPV4Address</xr-path>
+                  <xr-xml-map>mdt_show:IPV4Address</xr-xml-map>
+                  <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>1 6</xr-bag-version>
+                  <when>../ip-type = 'ipv4'</when>
+                  <type>
+                    <type-name>inet:ipv4-address</type-name>
+                  </type>
+                </ipv4-address>
+                <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;].Destinations[&lt;bag_arg6&gt;].DestIPAddress.IPV6Address</xr-path>
+                  <xr-xml-map>mdt_show:IPV6Address</xr-xml-map>
+                  <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>1 6</xr-bag-version>
+                  <when>../ip-type = 'ipv6'</when>
+                  <type>
+                    <type-name>Mdt-in6-addr</type-name>
+                  </type>
+                </ipv6-address>
+              </dest-ip-address>
+              <id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;].Destinations[&lt;bag_arg6&gt;].Id</xr-path>
+                <xr-xml-map>mdt_show:Id</xr-xml-map>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </id>
+              <sub-id-str config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;].Destinations[&lt;bag_arg6&gt;].SubIdStr</xr-path>
+                <xr-xml-map>mdt_show:SubIdStr</xr-xml-map>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </sub-id-str>
+              <dest-port config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;].Destinations[&lt;bag_arg6&gt;].DestPort</xr-path>
+                <xr-xml-map>mdt_show:DestPort</xr-xml-map>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </dest-port>
+              <encoding config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;].Destinations[&lt;bag_arg6&gt;].Encoding</xr-path>
+                <xr-xml-map>mdt_show:Encoding</xr-xml-map>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>Mdt-encoding-enum</type-name>
+                </type>
+              </encoding>
+              <transport config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;].Destinations[&lt;bag_arg6&gt;].Transport</xr-path>
+                <xr-xml-map>mdt_show:Transport</xr-xml-map>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>Mdt-transport-enum</type-name>
+                </type>
+              </transport>
+              <vrf config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;].Destinations[&lt;bag_arg6&gt;].Vrf</xr-path>
+                <xr-xml-map>mdt_show:Vrf</xr-xml-map>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </vrf>
+              <vrf-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;].Destinations[&lt;bag_arg6&gt;].VrfId</xr-path>
+                <xr-xml-map>mdt_show:VrfId</xr-xml-map>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </vrf-id>
+              <state config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;].Destinations[&lt;bag_arg6&gt;].State</xr-path>
+                <xr-xml-map>mdt_show:State</xr-xml-map>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>Mdt-dest-state-enum</type-name>
+                </type>
+              </state>
+              <udp-mtu config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;].Destinations[&lt;bag_arg6&gt;].UdpMTU</xr-path>
+                <xr-xml-map>mdt_show:UdpMTU</xr-xml-map>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </udp-mtu>
+              <tls config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;].Destinations[&lt;bag_arg6&gt;].TLS</xr-path>
+                <xr-xml-map>mdt_show:TLS</xr-xml-map>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </tls>
+              <tls-host config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;].Destinations[&lt;bag_arg6&gt;].TLSHost</xr-path>
+                <xr-xml-map>mdt_show:TLSHost</xr-xml-map>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </tls-host>
+              <total-num-of-packets-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;].Destinations[&lt;bag_arg6&gt;].Total_Num_of_Packets_sent</xr-path>
+                <xr-xml-map>mdt_show:Total_Num_of_Packets_sent</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </total-num-of-packets-sent>
+              <total-num-of-bytes-sent config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;].Destinations[&lt;bag_arg6&gt;].Total_Num_of_Bytes_sent</xr-path>
+                <xr-xml-map>mdt_show:Total_Num_of_Bytes_sent</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </total-num-of-bytes-sent>
+              <last-collection-time config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;].Destinations[&lt;bag_arg6&gt;].LastCollectionTime</xr-path>
+                <xr-xml-map>mdt_show:LastCollectionTime</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </last-collection-time>
+              <dscp config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;].Destinations[&lt;bag_arg6&gt;].DSCP</xr-path>
+                <xr-xml-map>mdt_show:DSCP</xr-xml-map>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </dscp>
+              <sub-id config="false" is-key="false" is-yang-key="false" node="leaf-list">
+                <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.Subscription.Destination_Grps[&lt;bag_arg11&gt;].Destinations[&lt;bag_arg6&gt;].SubId[&lt;bag_arg4&gt;]</xr-path>
+                <xr-xml-map>mdt_show:SubId</xr-xml-map>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>1 6</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg4&gt;</xr-internal-key>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </sub-id>
+            </destination>
+          </destination-grp>
+        </subscription>
+        <collection-group config="false" node="list">
+          <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;]</xr-path>
+          <xr-bag-version>1 6</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg12&gt;</xr-internal-key>
+          <id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].Id</xr-path>
+            <xr-xml-map>mdt_show:Id</xr-xml-map>
+            <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+            <xr-bag-version>1 6</xr-bag-version>
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </id>
+          <cadence config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].Cadence</xr-path>
+            <xr-xml-map>mdt_show:Cadence</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 6</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </cadence>
+          <total-collections config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].TotalCollections</xr-path>
+            <xr-xml-map>mdt_show:TotalCollections</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 6</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </total-collections>
+          <encoding config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].Encoding</xr-path>
+            <xr-xml-map>mdt_show:Encoding</xr-xml-map>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>1 6</xr-bag-version>
+            <type>
+              <type-name>Mdt-encoding-enum</type-name>
+            </type>
+          </encoding>
+          <last-collection-start-time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].LastCollectionStartTime</xr-path>
+            <xr-xml-map>mdt_show:LastCollectionStartTime</xr-xml-map>
+            <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+            <xr-bag-version>1 6</xr-bag-version>
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </last-collection-start-time>
+          <last-collection-end-time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].LastCollectionEndTime</xr-path>
+            <xr-xml-map>mdt_show:LastCollectionEndTime</xr-xml-map>
+            <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+            <xr-bag-version>1 6</xr-bag-version>
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </last-collection-end-time>
+          <max-collection-time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].MaxCollectionTime</xr-path>
+            <xr-xml-map>mdt_show:MaxCollectionTime</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 6</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </max-collection-time>
+          <min-collection-time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].MinCollectionTime</xr-path>
+            <xr-xml-map>mdt_show:MinCollectionTime</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 6</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </min-collection-time>
+          <min-total-time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].MinTotalTime</xr-path>
+            <xr-xml-map>mdt_show:MinTotalTime</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 6</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </min-total-time>
+          <max-total-time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].MaxTotalTime</xr-path>
+            <xr-xml-map>mdt_show:MaxTotalTime</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 6</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </max-total-time>
+          <avg-total-time config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].AvgTotalTime</xr-path>
+            <xr-xml-map>mdt_show:AvgTotalTime</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 6</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </avg-total-time>
+          <total-other-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].TotalOtherErrors</xr-path>
+            <xr-xml-map>mdt_show:TotalOtherErrors</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 6</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </total-other-errors>
+          <total-on-data-instances config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].TotalOnDataInstances</xr-path>
+            <xr-xml-map>mdt_show:TotalOnDataInstances</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 6</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </total-on-data-instances>
+          <total-not-ready config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].TotalNotReady</xr-path>
+            <xr-xml-map>mdt_show:TotalNotReady</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 6</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </total-not-ready>
+          <total-send-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].TotalSendErrors</xr-path>
+            <xr-xml-map>mdt_show:TotalSendErrors</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 6</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </total-send-errors>
+          <total-send-drops config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].TotalSendDrops</xr-path>
+            <xr-xml-map>mdt_show:TotalSendDrops</xr-xml-map>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>1 6</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </total-send-drops>
+          <strict-timer config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].StrictTimer</xr-path>
+            <xr-xml-map>mdt_show:StrictTimer</xr-xml-map>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>1 6</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </strict-timer>
+          <collection-path config="false" node="list">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].CollectionPaths[&lt;bag_arg2&gt;]</xr-path>
+            <xr-bag-version>1 6</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+            <path config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].CollectionPaths[&lt;bag_arg2&gt;].Path</xr-path>
+              <xr-xml-map>mdt_show:Path</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </path>
+            <state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].CollectionPaths[&lt;bag_arg2&gt;].State</xr-path>
+              <xr-xml-map>mdt_show:State</xr-xml-map>
+              <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </state>
+            <status-str config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].CollectionPaths[&lt;bag_arg2&gt;].Status_Str</xr-path>
+              <xr-xml-map>mdt_show:Status_Str</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </status-str>
+          </collection-path>
+          <internal-collection-group config="false" node="list">
+            <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;]</xr-path>
+            <xr-bag-version>1 6</xr-bag-version>
+            <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+            <path config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].Path</xr-path>
+              <xr-xml-map>mdt_show:Path</xr-xml-map>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </path>
+            <cadence config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].Cadence</xr-path>
+              <xr-xml-map>mdt_show:Cadence</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </cadence>
+            <total-get-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalGetCount</xr-path>
+              <xr-xml-map>mdt_show:TotalGetCount</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </total-get-count>
+            <total-list-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalListCount</xr-path>
+              <xr-xml-map>mdt_show:TotalListCount</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </total-list-count>
+            <total-datalist-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalDatalistCount</xr-path>
+              <xr-xml-map>mdt_show:TotalDatalistCount</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </total-datalist-count>
+            <total-finddata-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalFinddataCount</xr-path>
+              <xr-xml-map>mdt_show:TotalFinddataCount</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </total-finddata-count>
+            <total-get-bulk-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalGetBulkCount</xr-path>
+              <xr-xml-map>mdt_show:TotalGetBulkCount</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </total-get-bulk-count>
+            <total-item-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalItemCount</xr-path>
+              <xr-xml-map>mdt_show:TotalItemCount</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </total-item-count>
+            <total-get-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalGetErrors</xr-path>
+              <xr-xml-map>mdt_show:TotalGetErrors</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </total-get-errors>
+            <total-list-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalListErrors</xr-path>
+              <xr-xml-map>mdt_show:TotalListErrors</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </total-list-errors>
+            <total-datalist-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalDatalistErrors</xr-path>
+              <xr-xml-map>mdt_show:TotalDatalistErrors</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </total-datalist-errors>
+            <total-finddata-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalFinddataErrors</xr-path>
+              <xr-xml-map>mdt_show:TotalFinddataErrors</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </total-finddata-errors>
+            <total-get-bulk-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalGetBulkErrors</xr-path>
+              <xr-xml-map>mdt_show:TotalGetBulkErrors</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </total-get-bulk-errors>
+            <total-encode-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalEncodeErrors</xr-path>
+              <xr-xml-map>mdt_show:TotalEncodeErrors</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </total-encode-errors>
+            <total-encode-notready config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalEncodeNotready</xr-path>
+              <xr-xml-map>mdt_show:TotalEncodeNotready</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </total-encode-notready>
+            <total-send-errors config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalSendErrors</xr-path>
+              <xr-xml-map>mdt_show:TotalSendErrors</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </total-send-errors>
+            <total-send-drops config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalSendDrops</xr-path>
+              <xr-xml-map>mdt_show:TotalSendDrops</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </total-send-drops>
+            <total-sent-bytes config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalSentBytes</xr-path>
+              <xr-xml-map>mdt_show:TotalSentBytes</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </total-sent-bytes>
+            <total-send-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalSendPackets</xr-path>
+              <xr-xml-map>mdt_show:TotalSendPackets</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </total-send-packets>
+            <total-send-bytes-dropped config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalSendBytesDropped</xr-path>
+              <xr-xml-map>mdt_show:TotalSendBytesDropped</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </total-send-bytes-dropped>
+            <total-collections config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalCollections</xr-path>
+              <xr-xml-map>mdt_show:TotalCollections</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </total-collections>
+            <total-collections-missed config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].TotalCollectionsMissed</xr-path>
+              <xr-xml-map>mdt_show:TotalCollectionsMissed</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </total-collections-missed>
+            <max-collection-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].MaxCollectionTime</xr-path>
+              <xr-xml-map>mdt_show:MaxCollectionTime</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </max-collection-time>
+            <min-collection-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].MinCollectionTime</xr-path>
+              <xr-xml-map>mdt_show:MinCollectionTime</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </min-collection-time>
+            <avg-collection-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].AvgCollectionTime</xr-path>
+              <xr-xml-map>mdt_show:AvgCollectionTime</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </avg-collection-time>
+            <collection-method config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].CollectionMethod</xr-path>
+              <xr-xml-map>mdt_show:CollectionMethod</xr-xml-map>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </collection-method>
+            <status config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/mdt/gl/subs/stats/&lt;telemetry_modeldriven_oper_Subscription_subscription_id&gt;~mdt_subscription_details.CollectionGroups[&lt;bag_arg12&gt;].InternalCollectionGroup[&lt;bag_arg3&gt;].Status</xr-path>
+              <xr-xml-map>mdt_show:Status</xr-xml-map>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>1 6</xr-bag-version>
+              <type>
+                <type-name>Mdt-internal-path-status</type-name>
+              </type>
+            </status>
+          </internal-collection-group>
+        </collection-group>
+      </subscription>
+    </subscriptions>
+    <sensor-groups config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/mdt/gl/sensor-groups/</xr-path>
+      <xr-xml-map>telemetry_modeldriven_oper:SensorGroupTable</xr-xml-map>
+      <sensor-group config="false" key="sensor-group-id" node="list">
+        <xr-path>/oper/mdt/gl/sensor-groups/&lt;telemetry_modeldriven_oper_SensorGroup_sensorgroup_id&gt;</xr-path>
+        <xr-xml-map>telemetry_modeldriven_oper:SensorGroup</xr-xml-map>
+        <xr-bag-grp-name>mdt_sensor_group</xr-bag-grp-name>
+        <xr-bag>mdt_show.bag</xr-bag>
+        <sensor-group-id config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/mdt/gl/sensor-groups/&lt;telemetry_modeldriven_oper_SensorGroup_sensorgroup_id&gt;</xr-path>
+          <xr-xml-map>telemetry_modeldriven_oper:SensorGroupId</xr-xml-map>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;telemetry_modeldriven_oper_SensorGroup_sensorgroup_id&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </sensor-group-id>
+        <id config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/mdt/gl/sensor-groups/&lt;telemetry_modeldriven_oper_SensorGroup_sensorgroup_id&gt;~mdt_sensor_group.Id</xr-path>
+          <xr-xml-map>mdt_show:Id</xr-xml-map>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>1 6</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </id>
+        <configured config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/mdt/gl/sensor-groups/&lt;telemetry_modeldriven_oper_SensorGroup_sensorgroup_id&gt;~mdt_sensor_group.Configured</xr-path>
+          <xr-xml-map>mdt_show:Configured</xr-xml-map>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>1 6</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </configured>
+        <sensor-path config="false" node="list">
+          <xr-path>/oper/mdt/gl/sensor-groups/&lt;telemetry_modeldriven_oper_SensorGroup_sensorgroup_id&gt;~mdt_sensor_group.SensorPaths[&lt;bag_arg8&gt;]</xr-path>
+          <xr-bag-version>1 6</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg8&gt;</xr-internal-key>
+          <path config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mdt/gl/sensor-groups/&lt;telemetry_modeldriven_oper_SensorGroup_sensorgroup_id&gt;~mdt_sensor_group.SensorPaths[&lt;bag_arg8&gt;].Path</xr-path>
+            <xr-xml-map>mdt_show:Path</xr-xml-map>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 6</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </path>
+          <state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mdt/gl/sensor-groups/&lt;telemetry_modeldriven_oper_SensorGroup_sensorgroup_id&gt;~mdt_sensor_group.SensorPaths[&lt;bag_arg8&gt;].State</xr-path>
+            <xr-xml-map>mdt_show:State</xr-xml-map>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>1 6</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </state>
+          <status-str config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mdt/gl/sensor-groups/&lt;telemetry_modeldriven_oper_SensorGroup_sensorgroup_id&gt;~mdt_sensor_group.SensorPaths[&lt;bag_arg8&gt;].Status_Str</xr-path>
+            <xr-xml-map>mdt_show:Status_Str</xr-xml-map>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>1 6</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </status-str>
+        </sensor-path>
+      </sensor-group>
+    </sensor-groups>
+    <summary config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/mdt/gl/summary</xr-path>
+      <xr-xml-map>telemetry_modeldriven_oper:Summary</xr-xml-map>
+      <xr-bag-grp-name>telemetry_show_summary</xr-bag-grp-name>
+      <xr-bag>mdt_show_summary.bag</xr-bag>
+      <num-of-subscriptions config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mdt/gl/summary~telemetry_show_summary.Num_of_Subscriptions</xr-path>
+        <xr-xml-map>mdt_show_summary:Num_of_Subscriptions</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </num-of-subscriptions>
+      <num-of-active-subscriptions config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mdt/gl/summary~telemetry_show_summary.Num_of_Active_Subscriptions</xr-path>
+        <xr-xml-map>mdt_show_summary:Num_of_Active_Subscriptions</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </num-of-active-subscriptions>
+      <num-of-paused-subscriptions config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mdt/gl/summary~telemetry_show_summary.Num_of_Paused_Subscriptions</xr-path>
+        <xr-xml-map>mdt_show_summary:Num_of_Paused_Subscriptions</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </num-of-paused-subscriptions>
+      <num-of-destination-groups config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mdt/gl/summary~telemetry_show_summary.Num_of_DestinationGroups</xr-path>
+        <xr-xml-map>mdt_show_summary:Num_of_DestinationGroups</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </num-of-destination-groups>
+      <num-of-destinations config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mdt/gl/summary~telemetry_show_summary.Num_of_Destinations</xr-path>
+        <xr-xml-map>mdt_show_summary:Num_of_Destinations</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </num-of-destinations>
+      <num-of-tcp-dialouts config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mdt/gl/summary~telemetry_show_summary.Num_of_TCP_Dialouts</xr-path>
+        <xr-xml-map>mdt_show_summary:Num_of_TCP_Dialouts</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </num-of-tcp-dialouts>
+      <num-of-udp-dialouts config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mdt/gl/summary~telemetry_show_summary.Num_of_UDP_Dialouts</xr-path>
+        <xr-xml-map>mdt_show_summary:Num_of_UDP_Dialouts</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </num-of-udp-dialouts>
+      <num-of-grpc-tls-dialouts config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mdt/gl/summary~telemetry_show_summary.Num_of_GRPC_TLS_Dialouts</xr-path>
+        <xr-xml-map>mdt_show_summary:Num_of_GRPC_TLS_Dialouts</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </num-of-grpc-tls-dialouts>
+      <num-of-grpc-non-tls-dialouts config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mdt/gl/summary~telemetry_show_summary.Num_of_GRPC_NonTLS_Dialouts</xr-path>
+        <xr-xml-map>mdt_show_summary:Num_of_GRPC_NonTLS_Dialouts</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </num-of-grpc-non-tls-dialouts>
+      <num-of-dialins config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mdt/gl/summary~telemetry_show_summary.Num_of_Dialins</xr-path>
+        <xr-xml-map>mdt_show_summary:Num_of_Dialins</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </num-of-dialins>
+      <num-of-active-destinations config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mdt/gl/summary~telemetry_show_summary.Num_of_Active_Destinations</xr-path>
+        <xr-xml-map>mdt_show_summary:Num_of_Active_Destinations</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </num-of-active-destinations>
+      <num-of-connected-sessions config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mdt/gl/summary~telemetry_show_summary.Num_of_Connected_Sessions</xr-path>
+        <xr-xml-map>mdt_show_summary:Num_of_Connected_Sessions</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </num-of-connected-sessions>
+      <num-of-connecting-sessions config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mdt/gl/summary~telemetry_show_summary.Num_of_Connecting_Sessions</xr-path>
+        <xr-xml-map>mdt_show_summary:Num_of_Connecting_Sessions</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </num-of-connecting-sessions>
+      <num-of-sensor-groups config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mdt/gl/summary~telemetry_show_summary.Num_of_SensorGroups</xr-path>
+        <xr-xml-map>mdt_show_summary:Num_of_SensorGroups</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </num-of-sensor-groups>
+      <num-of-unique-sensor-paths config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mdt/gl/summary~telemetry_show_summary.Num_of_Unique_SensorPaths</xr-path>
+        <xr-xml-map>mdt_show_summary:Num_of_Unique_SensorPaths</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </num-of-unique-sensor-paths>
+      <num-of-sensor-paths config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mdt/gl/summary~telemetry_show_summary.Num_of_SensorPaths</xr-path>
+        <xr-xml-map>mdt_show_summary:Num_of_SensorPaths</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </num-of-sensor-paths>
+      <num-of-not-resolved-sensor-paths config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mdt/gl/summary~telemetry_show_summary.Num_of_NotResolved_SensorPaths</xr-path>
+        <xr-xml-map>mdt_show_summary:Num_of_NotResolved_SensorPaths</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </num-of-not-resolved-sensor-paths>
+      <num-of-active-sensor-paths config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mdt/gl/summary~telemetry_show_summary.Num_of_Active_SensorPaths</xr-path>
+        <xr-xml-map>mdt_show_summary:Num_of_Active_SensorPaths</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </num-of-active-sensor-paths>
+      <max-sensor-paths config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mdt/gl/summary~telemetry_show_summary.Max_SensorPaths</xr-path>
+        <xr-xml-map>mdt_show_summary:Max_SensorPaths</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </max-sensor-paths>
+      <max-containers-per-path config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/mdt/gl/summary~telemetry_show_summary.Max_Containers_per_Path</xr-path>
+        <xr-xml-map>mdt_show_summary:Max_Containers_per_Path</xr-xml-map>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>1 1</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </max-containers-per-path>
+    </summary>
+  </telemetry-model-driven>
+</Cisco-IOS-XR-telemetry-model-driven-oper>

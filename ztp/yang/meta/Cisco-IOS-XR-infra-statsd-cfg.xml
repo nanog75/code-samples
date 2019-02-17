@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-infra-statsd-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-infra-statsd-cfg" revision="2017-05-01">
+  <files>
+    <file revision="2017-05-01" submodule="false">Cisco-IOS-XR-infra-statsd-cfg.yang</file>
+  </files>
+  <prefix>infra-statsd-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-ifmgr-cfg</import>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <statistics config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/statsd/</xr-path>
+      <xr-xml-map>infra_statsd_cfg:Statistics</xr-xml-map>
+      <xr-task>interface</xr-task>
+      <load-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/statsd/load-interval</xr-path>
+        <xr-xml-map>infra_statsd_cfg:LoadInterval</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..600">
+          <type-name>uint32</type-name>
+        </type>
+        <default>300</default>
+      </load-interval>
+    </statistics>
+  </augment>
+  <statistics config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/statistics/</xr-path>
+    <xr-xml-map>infra_statsd_gl_cfg:Statistics</xr-xml-map>
+    <xr-task>diag</xr-task>
+    <period config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/statistics/period/</xr-path>
+      <xr-xml-map>infra_statsd_gl_cfg:Period</xr-xml-map>
+      <xr-task>diag</xr-task>
+      <service-accounting config="true" is-key="false" node="container" presence="false">
+        <xr-is-packed/>
+        <xr-path>/cfg/gl/statistics/period/service-accounting`</xr-path>
+        <xr-xml-map>infra_statsd_gl_cfg:ServiceAccounting</xr-xml-map>
+        <xr-task>diag</xr-task>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <polling-period config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/statistics/period/service-accounting`0</xr-path>
+          <xr-xml-map>infra_statsd_gl_cfg:PollingPeriod</xr-xml-map>
+          <xr-task>diag</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="30..3600">
+            <type-name>uint32</type-name>
+          </type>
+          <must>not(../polling-disable)</must>
+        </polling-period>
+        <polling-disable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/statistics/period/service-accounting`1</xr-path>
+          <xr-xml-map>infra_statsd_gl_cfg:PollingDisable</xr-xml-map>
+          <xr-task>diag</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+          <must>not(../polling-period)</must>
+        </polling-disable>
+      </service-accounting>
+    </period>
+  </statistics>
+</Cisco-IOS-XR-infra-statsd-cfg>

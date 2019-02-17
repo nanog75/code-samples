@@ -1,0 +1,3806 @@
+<?xml version="1.0"?>
+<openconfig-bgp ns="http://openconfig.net/yang/bgp" oc-ver="3.0.1" revision="2017-02-02">
+  <files>
+    <file revision="2017-02-02" submodule="false">openconfig-bgp.yang</file>
+    <file revision="2017-02-02" submodule="true">openconfig-bgp-neighbor.yang</file>
+    <file revision="2017-02-02" submodule="true">openconfig-bgp-global.yang</file>
+    <file revision="2017-02-02" submodule="true">openconfig-bgp-common.yang</file>
+    <file revision="2017-02-02" submodule="true">openconfig-bgp-peer-group.yang</file>
+    <file revision="2017-02-02" submodule="true">openconfig-bgp-common-structure.yang</file>
+    <file revision="2017-02-02" submodule="true">openconfig-bgp-common-multiprotocol.yang</file>
+  </files>
+  <prefix>oc-bgp</prefix>
+  <organization>OpenConfig working group</organization>
+  <import prefix="oc-ext">openconfig-extensions</import>
+  <import prefix="oc-bgp-types">openconfig-bgp-types</import>
+  <import prefix="oc-rpol">openconfig-routing-policy</import>
+  <import prefix="oc-types">openconfig-types</import>
+  <import prefix="oc-inet">openconfig-inet-types</import>
+  <import prefix="oc-yang">openconfig-yang-types</import>
+  <bgp config="true" is-key="false" node="container" presence="false">
+    <global config="true" is-key="false" node="container" presence="false">
+      <config config="true" is-key="false" node="container" presence="false">
+        <as config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>oc-inet:as-number</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </as>
+        <router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>oc-yang:dotted-quad</type-name>
+          </type>
+        </router-id>
+      </config>
+      <state config="true" is-key="false" node="container" presence="false">
+        <as config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>oc-inet:as-number</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </as>
+        <router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>oc-yang:dotted-quad</type-name>
+          </type>
+        </router-id>
+        <total-paths config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </total-paths>
+        <total-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </total-prefixes>
+      </state>
+      <default-route-distance config="true" is-key="false" node="container" presence="false">
+        <config config="true" is-key="false" node="container" presence="false">
+          <external-route-distance config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..255">
+              <type-name>uint8</type-name>
+            </type>
+          </external-route-distance>
+          <internal-route-distance config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..255">
+              <type-name>uint8</type-name>
+            </type>
+          </internal-route-distance>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <external-route-distance config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..255">
+              <type-name>uint8</type-name>
+            </type>
+          </external-route-distance>
+          <internal-route-distance config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..255">
+              <type-name>uint8</type-name>
+            </type>
+          </internal-route-distance>
+        </state>
+      </default-route-distance>
+      <confederation config="true" is-key="false" node="container" presence="false">
+        <config config="true" is-key="false" node="container" presence="false">
+          <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </enabled>
+          <identifier config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-inet:as-number</type-name>
+            </type>
+          </identifier>
+          <member-as config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>oc-inet:as-number</type-name>
+            </type>
+          </member-as>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </enabled>
+          <identifier config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-inet:as-number</type-name>
+            </type>
+          </identifier>
+          <member-as config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>oc-inet:as-number</type-name>
+            </type>
+          </member-as>
+        </state>
+      </confederation>
+      <graceful-restart config="true" is-key="false" node="container" presence="false">
+        <config config="true" is-key="false" node="container" presence="false">
+          <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </enabled>
+          <restart-time config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="0..4096">
+              <type-name>uint16</type-name>
+            </type>
+          </restart-time>
+          <stale-routes-time config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>decimal64</type-name>
+            </type>
+          </stale-routes-time>
+          <helper-only config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </helper-only>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </enabled>
+          <restart-time config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="0..4096">
+              <type-name>uint16</type-name>
+            </type>
+          </restart-time>
+          <stale-routes-time config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>decimal64</type-name>
+            </type>
+          </stale-routes-time>
+          <helper-only config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </helper-only>
+        </state>
+      </graceful-restart>
+      <use-multiple-paths config="true" is-key="false" node="container" presence="false">
+        <config config="true" is-key="false" node="container" presence="false">
+          <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </enabled>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </enabled>
+        </state>
+        <ebgp config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <allow-multiple-as config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </allow-multiple-as>
+            <maximum-paths config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+              <default>1</default>
+            </maximum-paths>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <allow-multiple-as config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </allow-multiple-as>
+            <maximum-paths config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+              <default>1</default>
+            </maximum-paths>
+          </state>
+        </ebgp>
+        <ibgp config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <maximum-paths config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+              <default>1</default>
+            </maximum-paths>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <maximum-paths config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+              <default>1</default>
+            </maximum-paths>
+          </state>
+        </ibgp>
+      </use-multiple-paths>
+      <route-selection-options config="true" is-key="false" node="container" presence="false">
+        <config config="true" is-key="false" node="container" presence="false">
+          <always-compare-med config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </always-compare-med>
+          <ignore-as-path-length config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </ignore-as-path-length>
+          <external-compare-router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>true</default>
+          </external-compare-router-id>
+          <advertise-inactive-routes config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </advertise-inactive-routes>
+          <enable-aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </enable-aigp>
+          <ignore-next-hop-igp-metric config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </ignore-next-hop-igp-metric>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <always-compare-med config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </always-compare-med>
+          <ignore-as-path-length config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </ignore-as-path-length>
+          <external-compare-router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>true</default>
+          </external-compare-router-id>
+          <advertise-inactive-routes config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </advertise-inactive-routes>
+          <enable-aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </enable-aigp>
+          <ignore-next-hop-igp-metric config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </ignore-next-hop-igp-metric>
+        </state>
+      </route-selection-options>
+      <afi-safis config="true" is-key="false" node="container" presence="false">
+        <afi-safi config="true" key="afi-safi-name" node="list">
+          <afi-safi-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </afi-safi-name>
+          <config config="true" is-key="false" node="container" presence="false">
+            <afi-safi-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type node="identityref">
+                <base>oc-bgp-types:AFI_SAFI_TYPE</base>
+              </type>
+            </afi-safi-name>
+            <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </enabled>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <afi-safi-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type node="identityref">
+                <base>oc-bgp-types:AFI_SAFI_TYPE</base>
+              </type>
+            </afi-safi-name>
+            <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </enabled>
+            <total-paths config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </total-paths>
+            <total-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </total-prefixes>
+          </state>
+          <graceful-restart config="true" is-key="false" node="container" presence="false">
+            <config config="true" is-key="false" node="container" presence="false">
+              <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </enabled>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </enabled>
+            </state>
+          </graceful-restart>
+          <route-selection-options config="true" is-key="false" node="container" presence="false">
+            <config config="true" is-key="false" node="container" presence="false">
+              <always-compare-med config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </always-compare-med>
+              <ignore-as-path-length config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </ignore-as-path-length>
+              <external-compare-router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>true</default>
+              </external-compare-router-id>
+              <advertise-inactive-routes config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </advertise-inactive-routes>
+              <enable-aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </enable-aigp>
+              <ignore-next-hop-igp-metric config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </ignore-next-hop-igp-metric>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <always-compare-med config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </always-compare-med>
+              <ignore-as-path-length config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </ignore-as-path-length>
+              <external-compare-router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>true</default>
+              </external-compare-router-id>
+              <advertise-inactive-routes config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </advertise-inactive-routes>
+              <enable-aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </enable-aigp>
+              <ignore-next-hop-igp-metric config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </ignore-next-hop-igp-metric>
+            </state>
+          </route-selection-options>
+          <use-multiple-paths config="true" is-key="false" node="container" presence="false">
+            <config config="true" is-key="false" node="container" presence="false">
+              <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </enabled>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </enabled>
+            </state>
+            <ebgp config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <allow-multiple-as config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </allow-multiple-as>
+                <maximum-paths config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>1</default>
+                </maximum-paths>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <allow-multiple-as config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </allow-multiple-as>
+                <maximum-paths config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>1</default>
+                </maximum-paths>
+              </state>
+            </ebgp>
+            <ibgp config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <maximum-paths config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>1</default>
+                </maximum-paths>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <maximum-paths config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>1</default>
+                </maximum-paths>
+              </state>
+            </ibgp>
+          </use-multiple-paths>
+          <ipv4-unicast config="true" is-key="false" node="container" presence="false">
+            <when>../afi-safi-name = 'oc-bgp-types:IPV4_UNICAST'</when>
+            <prefix-limit config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </max-prefixes>
+                <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </prevent-teardown>
+                <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:percentage</type-name>
+                  </type>
+                </shutdown-threshold-pct>
+                <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>decimal64</type-name>
+                  </type>
+                </restart-timer>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </max-prefixes>
+                <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </prevent-teardown>
+                <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:percentage</type-name>
+                  </type>
+                </shutdown-threshold-pct>
+                <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>decimal64</type-name>
+                  </type>
+                </restart-timer>
+              </state>
+            </prefix-limit>
+            <config config="true" is-key="false" node="container" presence="false">
+              <send-default-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </send-default-route>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <send-default-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </send-default-route>
+            </state>
+          </ipv4-unicast>
+          <ipv6-unicast config="true" is-key="false" node="container" presence="false">
+            <when>../afi-safi-name = 'oc-bgp-types:IPV6_UNICAST'</when>
+            <prefix-limit config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </max-prefixes>
+                <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </prevent-teardown>
+                <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:percentage</type-name>
+                  </type>
+                </shutdown-threshold-pct>
+                <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>decimal64</type-name>
+                  </type>
+                </restart-timer>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </max-prefixes>
+                <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </prevent-teardown>
+                <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:percentage</type-name>
+                  </type>
+                </shutdown-threshold-pct>
+                <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>decimal64</type-name>
+                  </type>
+                </restart-timer>
+              </state>
+            </prefix-limit>
+            <config config="true" is-key="false" node="container" presence="false">
+              <send-default-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </send-default-route>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <send-default-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </send-default-route>
+            </state>
+          </ipv6-unicast>
+          <ipv4-labeled-unicast config="true" is-key="false" node="container" presence="false">
+            <when>../afi-safi-name = 'oc-bgp-types:IPV4_LABELED_UNICAST'</when>
+            <prefix-limit config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </max-prefixes>
+                <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </prevent-teardown>
+                <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:percentage</type-name>
+                  </type>
+                </shutdown-threshold-pct>
+                <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>decimal64</type-name>
+                  </type>
+                </restart-timer>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </max-prefixes>
+                <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </prevent-teardown>
+                <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:percentage</type-name>
+                  </type>
+                </shutdown-threshold-pct>
+                <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>decimal64</type-name>
+                  </type>
+                </restart-timer>
+              </state>
+            </prefix-limit>
+          </ipv4-labeled-unicast>
+          <ipv6-labeled-unicast config="true" is-key="false" node="container" presence="false">
+            <when>../afi-safi-name = 'oc-bgp-types:IPV6_LABELED_UNICAST'</when>
+            <prefix-limit config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </max-prefixes>
+                <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </prevent-teardown>
+                <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:percentage</type-name>
+                  </type>
+                </shutdown-threshold-pct>
+                <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>decimal64</type-name>
+                  </type>
+                </restart-timer>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </max-prefixes>
+                <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </prevent-teardown>
+                <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:percentage</type-name>
+                  </type>
+                </shutdown-threshold-pct>
+                <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>decimal64</type-name>
+                  </type>
+                </restart-timer>
+              </state>
+            </prefix-limit>
+          </ipv6-labeled-unicast>
+          <l3vpn-ipv4-unicast config="true" is-key="false" node="container" presence="false">
+            <when>../afi-safi-name = 'oc-bgp-types:L3VPN_IPV4_UNICAST'</when>
+            <prefix-limit config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </max-prefixes>
+                <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </prevent-teardown>
+                <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:percentage</type-name>
+                  </type>
+                </shutdown-threshold-pct>
+                <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>decimal64</type-name>
+                  </type>
+                </restart-timer>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </max-prefixes>
+                <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </prevent-teardown>
+                <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:percentage</type-name>
+                  </type>
+                </shutdown-threshold-pct>
+                <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>decimal64</type-name>
+                  </type>
+                </restart-timer>
+              </state>
+            </prefix-limit>
+          </l3vpn-ipv4-unicast>
+          <l3vpn-ipv6-unicast config="true" is-key="false" node="container" presence="false">
+            <when>../afi-safi-name = 'oc-bgp-types:L3VPN_IPV6_UNICAST'</when>
+            <prefix-limit config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </max-prefixes>
+                <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </prevent-teardown>
+                <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:percentage</type-name>
+                  </type>
+                </shutdown-threshold-pct>
+                <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>decimal64</type-name>
+                  </type>
+                </restart-timer>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </max-prefixes>
+                <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </prevent-teardown>
+                <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:percentage</type-name>
+                  </type>
+                </shutdown-threshold-pct>
+                <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>decimal64</type-name>
+                  </type>
+                </restart-timer>
+              </state>
+            </prefix-limit>
+          </l3vpn-ipv6-unicast>
+          <l3vpn-ipv4-multicast config="true" is-key="false" node="container" presence="false">
+            <when>../afi-safi-name = 'oc-bgp-types:L3VPN_IPV4_MULTICAST'</when>
+            <prefix-limit config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </max-prefixes>
+                <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </prevent-teardown>
+                <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:percentage</type-name>
+                  </type>
+                </shutdown-threshold-pct>
+                <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>decimal64</type-name>
+                  </type>
+                </restart-timer>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </max-prefixes>
+                <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </prevent-teardown>
+                <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:percentage</type-name>
+                  </type>
+                </shutdown-threshold-pct>
+                <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>decimal64</type-name>
+                  </type>
+                </restart-timer>
+              </state>
+            </prefix-limit>
+          </l3vpn-ipv4-multicast>
+          <l3vpn-ipv6-multicast config="true" is-key="false" node="container" presence="false">
+            <when>../afi-safi-name = 'oc-bgp-types:L3VPN_IPV6_MULTICAST'</when>
+            <prefix-limit config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </max-prefixes>
+                <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </prevent-teardown>
+                <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:percentage</type-name>
+                  </type>
+                </shutdown-threshold-pct>
+                <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>decimal64</type-name>
+                  </type>
+                </restart-timer>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </max-prefixes>
+                <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </prevent-teardown>
+                <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:percentage</type-name>
+                  </type>
+                </shutdown-threshold-pct>
+                <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>decimal64</type-name>
+                  </type>
+                </restart-timer>
+              </state>
+            </prefix-limit>
+          </l3vpn-ipv6-multicast>
+          <l2vpn-vpls config="true" is-key="false" node="container" presence="false">
+            <when>../afi-safi-name = 'oc-bgp-types:L2VPN_VPLS'</when>
+            <prefix-limit config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </max-prefixes>
+                <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </prevent-teardown>
+                <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:percentage</type-name>
+                  </type>
+                </shutdown-threshold-pct>
+                <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>decimal64</type-name>
+                  </type>
+                </restart-timer>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </max-prefixes>
+                <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </prevent-teardown>
+                <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:percentage</type-name>
+                  </type>
+                </shutdown-threshold-pct>
+                <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>decimal64</type-name>
+                  </type>
+                </restart-timer>
+              </state>
+            </prefix-limit>
+          </l2vpn-vpls>
+          <l2vpn-evpn config="true" is-key="false" node="container" presence="false">
+            <when>../afi-safi-name = 'oc-bgp-types:L2VPN_EVPN'</when>
+            <prefix-limit config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </max-prefixes>
+                <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </prevent-teardown>
+                <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:percentage</type-name>
+                  </type>
+                </shutdown-threshold-pct>
+                <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>decimal64</type-name>
+                  </type>
+                </restart-timer>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </max-prefixes>
+                <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </prevent-teardown>
+                <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>oc-types:percentage</type-name>
+                  </type>
+                </shutdown-threshold-pct>
+                <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>decimal64</type-name>
+                  </type>
+                </restart-timer>
+              </state>
+            </prefix-limit>
+          </l2vpn-evpn>
+        </afi-safi>
+      </afi-safis>
+      <dynamic-neighbor-prefixes config="true" is-key="false" node="container" presence="false">
+        <dynamic-neighbor-prefix config="true" key="prefix" node="list">
+          <prefix config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </prefix>
+          <config config="true" is-key="false" node="container" presence="false">
+            <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>oc-inet:ip-prefix</type-name>
+              </type>
+            </prefix>
+            <peer-group config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </peer-group>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <prefix config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>oc-inet:ip-prefix</type-name>
+              </type>
+            </prefix>
+            <peer-group config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </peer-group>
+          </state>
+        </dynamic-neighbor-prefix>
+      </dynamic-neighbor-prefixes>
+    </global>
+    <neighbors config="true" is-key="false" node="container" presence="false">
+      <neighbor config="true" key="neighbor-address" node="list">
+        <neighbor-address config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <type>
+            <type-name>leafref</type-name>
+          </type>
+        </neighbor-address>
+        <config config="true" is-key="false" node="container" presence="false">
+          <peer-group config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </peer-group>
+          <neighbor-address config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-inet:ip-address</type-name>
+            </type>
+          </neighbor-address>
+          <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>true</default>
+          </enabled>
+          <peer-as config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-inet:as-number</type-name>
+            </type>
+          </peer-as>
+          <local-as config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-inet:as-number</type-name>
+            </type>
+          </local-as>
+          <peer-type config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-bgp-types:peer-type</type-name>
+            </type>
+          </peer-type>
+          <auth-password config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-types:routing-password</type-name>
+            </type>
+          </auth-password>
+          <remove-private-as config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-bgp-types:remove-private-as-option</type-name>
+            </type>
+          </remove-private-as>
+          <route-flap-damping config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </route-flap-damping>
+          <send-community config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-bgp-types:community-type</type-name>
+            </type>
+            <default>NONE</default>
+          </send-community>
+          <description config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </description>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <peer-group config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </peer-group>
+          <neighbor-address config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-inet:ip-address</type-name>
+            </type>
+          </neighbor-address>
+          <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>true</default>
+          </enabled>
+          <peer-as config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-inet:as-number</type-name>
+            </type>
+          </peer-as>
+          <local-as config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-inet:as-number</type-name>
+            </type>
+          </local-as>
+          <peer-type config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-bgp-types:peer-type</type-name>
+            </type>
+          </peer-type>
+          <auth-password config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-types:routing-password</type-name>
+            </type>
+          </auth-password>
+          <remove-private-as config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-bgp-types:remove-private-as-option</type-name>
+            </type>
+          </remove-private-as>
+          <route-flap-damping config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </route-flap-damping>
+          <send-community config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-bgp-types:community-type</type-name>
+            </type>
+            <default>NONE</default>
+          </send-community>
+          <description config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </description>
+          <session-state config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type node="enumeration">
+              <enum>IDLE</enum>
+              <enum>CONNECT</enum>
+              <enum>ACTIVE</enum>
+              <enum>OPENSENT</enum>
+              <enum>OPENCONFIRM</enum>
+              <enum>ESTABLISHED</enum>
+            </type>
+          </session-state>
+          <last-established config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-types:timeticks64</type-name>
+            </type>
+          </last-established>
+          <established-transitions config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-yang:counter64</type-name>
+            </type>
+          </established-transitions>
+          <supported-capabilities config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type node="identityref">
+              <base>oc-bgp-types:BGP_CAPABILITY</base>
+            </type>
+          </supported-capabilities>
+          <messages config="true" is-key="false" node="container" presence="false">
+            <sent config="true" is-key="false" node="container" presence="false">
+              <UPDATE config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </UPDATE>
+              <NOTIFICATION config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </NOTIFICATION>
+            </sent>
+            <received config="true" is-key="false" node="container" presence="false">
+              <UPDATE config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </UPDATE>
+              <NOTIFICATION config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </NOTIFICATION>
+            </received>
+          </messages>
+          <queues config="true" is-key="false" node="container" presence="false">
+            <input config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </input>
+            <output config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </output>
+          </queues>
+          <dynamically-configured config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </dynamically-configured>
+        </state>
+        <timers config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <connect-retry config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>decimal64</type-name>
+              </type>
+              <default>30</default>
+            </connect-retry>
+            <hold-time config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>decimal64</type-name>
+              </type>
+              <default>90</default>
+            </hold-time>
+            <keepalive-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>decimal64</type-name>
+              </type>
+              <default>30</default>
+            </keepalive-interval>
+            <minimum-advertisement-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>decimal64</type-name>
+              </type>
+              <default>30</default>
+            </minimum-advertisement-interval>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <connect-retry config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>decimal64</type-name>
+              </type>
+              <default>30</default>
+            </connect-retry>
+            <hold-time config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>decimal64</type-name>
+              </type>
+              <default>90</default>
+            </hold-time>
+            <keepalive-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>decimal64</type-name>
+              </type>
+              <default>30</default>
+            </keepalive-interval>
+            <minimum-advertisement-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>decimal64</type-name>
+              </type>
+              <default>30</default>
+            </minimum-advertisement-interval>
+            <negotiated-hold-time config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>decimal64</type-name>
+              </type>
+            </negotiated-hold-time>
+          </state>
+        </timers>
+        <transport config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <tcp-mss config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </tcp-mss>
+            <mtu-discovery config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </mtu-discovery>
+            <passive-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </passive-mode>
+            <local-address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type node="union">
+                <type>
+                  <type-name>oc-inet:ip-address</type-name>
+                </type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </type>
+            </local-address>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <tcp-mss config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </tcp-mss>
+            <mtu-discovery config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </mtu-discovery>
+            <passive-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </passive-mode>
+            <local-address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type node="union">
+                <type>
+                  <type-name>oc-inet:ip-address</type-name>
+                </type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </type>
+            </local-address>
+            <local-port config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>oc-inet:port-number</type-name>
+              </type>
+            </local-port>
+            <remote-address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>oc-inet:ip-address</type-name>
+              </type>
+            </remote-address>
+            <remote-port config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>oc-inet:port-number</type-name>
+              </type>
+            </remote-port>
+          </state>
+        </transport>
+        <error-handling config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <treat-as-withdraw config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </treat-as-withdraw>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <treat-as-withdraw config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </treat-as-withdraw>
+            <erroneous-update-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </erroneous-update-messages>
+          </state>
+        </error-handling>
+        <graceful-restart config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </enabled>
+            <restart-time config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type range="0..4096">
+                <type-name>uint16</type-name>
+              </type>
+            </restart-time>
+            <stale-routes-time config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>decimal64</type-name>
+              </type>
+            </stale-routes-time>
+            <helper-only config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </helper-only>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </enabled>
+            <restart-time config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type range="0..4096">
+                <type-name>uint16</type-name>
+              </type>
+            </restart-time>
+            <stale-routes-time config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>decimal64</type-name>
+              </type>
+            </stale-routes-time>
+            <helper-only config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </helper-only>
+            <peer-restart-time config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type range="0..4096">
+                <type-name>uint16</type-name>
+              </type>
+            </peer-restart-time>
+            <peer-restarting config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </peer-restarting>
+            <local-restarting config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </local-restarting>
+            <mode config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type node="enumeration">
+                <enum>HELPER_ONLY</enum>
+                <enum>BILATERAL</enum>
+                <enum>REMOTE_HELPER</enum>
+              </type>
+            </mode>
+          </state>
+        </graceful-restart>
+        <logging-options config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <log-neighbor-state-changes config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>true</default>
+            </log-neighbor-state-changes>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <log-neighbor-state-changes config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>true</default>
+            </log-neighbor-state-changes>
+          </state>
+        </logging-options>
+        <ebgp-multihop config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </enabled>
+            <multihop-ttl config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+            </multihop-ttl>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </enabled>
+            <multihop-ttl config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+            </multihop-ttl>
+          </state>
+        </ebgp-multihop>
+        <route-reflector config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <route-reflector-cluster-id config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>oc-bgp-types:rr-cluster-id-type</type-name>
+              </type>
+            </route-reflector-cluster-id>
+            <route-reflector-client config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </route-reflector-client>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <route-reflector-cluster-id config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>oc-bgp-types:rr-cluster-id-type</type-name>
+              </type>
+            </route-reflector-cluster-id>
+            <route-reflector-client config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </route-reflector-client>
+          </state>
+        </route-reflector>
+        <as-path-options config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <allow-own-as config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+              <default>0</default>
+            </allow-own-as>
+            <replace-peer-as config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </replace-peer-as>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <allow-own-as config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+              <default>0</default>
+            </allow-own-as>
+            <replace-peer-as config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </replace-peer-as>
+          </state>
+        </as-path-options>
+        <add-paths config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <receive config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </receive>
+            <send-max config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+            </send-max>
+            <eligible-prefix-policy config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </eligible-prefix-policy>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <receive config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </receive>
+            <send-max config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+            </send-max>
+            <eligible-prefix-policy config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </eligible-prefix-policy>
+          </state>
+        </add-paths>
+        <use-multiple-paths config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </enabled>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </enabled>
+          </state>
+          <ebgp config="true" is-key="false" node="container" presence="false">
+            <config config="true" is-key="false" node="container" presence="false">
+              <allow-multiple-as config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </allow-multiple-as>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <allow-multiple-as config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </allow-multiple-as>
+            </state>
+          </ebgp>
+        </use-multiple-paths>
+        <apply-policy config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <import-policy config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </import-policy>
+            <default-import-policy config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>default-policy-type</type-name>
+              </type>
+              <default>REJECT_ROUTE</default>
+            </default-import-policy>
+            <export-policy config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </export-policy>
+            <default-export-policy config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>default-policy-type</type-name>
+              </type>
+              <default>REJECT_ROUTE</default>
+            </default-export-policy>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <import-policy config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </import-policy>
+            <default-import-policy config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>default-policy-type</type-name>
+              </type>
+              <default>REJECT_ROUTE</default>
+            </default-import-policy>
+            <export-policy config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </export-policy>
+            <default-export-policy config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>default-policy-type</type-name>
+              </type>
+              <default>REJECT_ROUTE</default>
+            </default-export-policy>
+          </state>
+        </apply-policy>
+        <afi-safis config="true" is-key="false" node="container" presence="false">
+          <afi-safi config="true" key="afi-safi-name" node="list">
+            <afi-safi-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </afi-safi-name>
+            <config config="true" is-key="false" node="container" presence="false">
+              <afi-safi-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="identityref">
+                  <base>oc-bgp-types:AFI_SAFI_TYPE</base>
+                </type>
+              </afi-safi-name>
+              <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </enabled>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <afi-safi-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="identityref">
+                  <base>oc-bgp-types:AFI_SAFI_TYPE</base>
+                </type>
+              </afi-safi-name>
+              <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </enabled>
+              <active config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </active>
+              <prefixes config="true" is-key="false" node="container" presence="false">
+                <received config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </received>
+                <sent config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </sent>
+                <installed config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </installed>
+              </prefixes>
+            </state>
+            <graceful-restart config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </enabled>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </enabled>
+                <received config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </received>
+                <advertised config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </advertised>
+              </state>
+            </graceful-restart>
+            <apply-policy config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <import-policy config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </import-policy>
+                <default-import-policy config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>default-policy-type</type-name>
+                  </type>
+                  <default>REJECT_ROUTE</default>
+                </default-import-policy>
+                <export-policy config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </export-policy>
+                <default-export-policy config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>default-policy-type</type-name>
+                  </type>
+                  <default>REJECT_ROUTE</default>
+                </default-export-policy>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <import-policy config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </import-policy>
+                <default-import-policy config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>default-policy-type</type-name>
+                  </type>
+                  <default>REJECT_ROUTE</default>
+                </default-import-policy>
+                <export-policy config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </export-policy>
+                <default-export-policy config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>default-policy-type</type-name>
+                  </type>
+                  <default>REJECT_ROUTE</default>
+                </default-export-policy>
+              </state>
+            </apply-policy>
+            <ipv4-unicast config="true" is-key="false" node="container" presence="false">
+              <when>../afi-safi-name = 'oc-bgp-types:IPV4_UNICAST'</when>
+              <prefix-limit config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </state>
+              </prefix-limit>
+              <config config="true" is-key="false" node="container" presence="false">
+                <send-default-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </send-default-route>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <send-default-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </send-default-route>
+              </state>
+            </ipv4-unicast>
+            <ipv6-unicast config="true" is-key="false" node="container" presence="false">
+              <when>../afi-safi-name = 'oc-bgp-types:IPV6_UNICAST'</when>
+              <prefix-limit config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </state>
+              </prefix-limit>
+              <config config="true" is-key="false" node="container" presence="false">
+                <send-default-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </send-default-route>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <send-default-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </send-default-route>
+              </state>
+            </ipv6-unicast>
+            <ipv4-labeled-unicast config="true" is-key="false" node="container" presence="false">
+              <when>../afi-safi-name = 'oc-bgp-types:IPV4_LABELED_UNICAST'</when>
+              <prefix-limit config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </state>
+              </prefix-limit>
+            </ipv4-labeled-unicast>
+            <ipv6-labeled-unicast config="true" is-key="false" node="container" presence="false">
+              <when>../afi-safi-name = 'oc-bgp-types:IPV6_LABELED_UNICAST'</when>
+              <prefix-limit config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </state>
+              </prefix-limit>
+            </ipv6-labeled-unicast>
+            <l3vpn-ipv4-unicast config="true" is-key="false" node="container" presence="false">
+              <when>../afi-safi-name = 'oc-bgp-types:L3VPN_IPV4_UNICAST'</when>
+              <prefix-limit config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </state>
+              </prefix-limit>
+            </l3vpn-ipv4-unicast>
+            <l3vpn-ipv6-unicast config="true" is-key="false" node="container" presence="false">
+              <when>../afi-safi-name = 'oc-bgp-types:L3VPN_IPV6_UNICAST'</when>
+              <prefix-limit config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </state>
+              </prefix-limit>
+            </l3vpn-ipv6-unicast>
+            <l3vpn-ipv4-multicast config="true" is-key="false" node="container" presence="false">
+              <when>../afi-safi-name = 'oc-bgp-types:L3VPN_IPV4_MULTICAST'</when>
+              <prefix-limit config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </state>
+              </prefix-limit>
+            </l3vpn-ipv4-multicast>
+            <l3vpn-ipv6-multicast config="true" is-key="false" node="container" presence="false">
+              <when>../afi-safi-name = 'oc-bgp-types:L3VPN_IPV6_MULTICAST'</when>
+              <prefix-limit config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </state>
+              </prefix-limit>
+            </l3vpn-ipv6-multicast>
+            <l2vpn-vpls config="true" is-key="false" node="container" presence="false">
+              <when>../afi-safi-name = 'oc-bgp-types:L2VPN_VPLS'</when>
+              <prefix-limit config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </state>
+              </prefix-limit>
+            </l2vpn-vpls>
+            <l2vpn-evpn config="true" is-key="false" node="container" presence="false">
+              <when>../afi-safi-name = 'oc-bgp-types:L2VPN_EVPN'</when>
+              <prefix-limit config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </state>
+              </prefix-limit>
+            </l2vpn-evpn>
+            <use-multiple-paths config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </enabled>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </enabled>
+              </state>
+              <ebgp config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <allow-multiple-as config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </allow-multiple-as>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <allow-multiple-as config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </allow-multiple-as>
+                </state>
+              </ebgp>
+            </use-multiple-paths>
+          </afi-safi>
+        </afi-safis>
+      </neighbor>
+    </neighbors>
+    <peer-groups config="true" is-key="false" node="container" presence="false">
+      <peer-group config="true" key="peer-group-name" node="list">
+        <peer-group-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <type>
+            <type-name>leafref</type-name>
+          </type>
+        </peer-group-name>
+        <config config="true" is-key="false" node="container" presence="false">
+          <peer-group-name config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </peer-group-name>
+          <peer-as config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-inet:as-number</type-name>
+            </type>
+          </peer-as>
+          <local-as config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-inet:as-number</type-name>
+            </type>
+          </local-as>
+          <peer-type config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-bgp-types:peer-type</type-name>
+            </type>
+          </peer-type>
+          <auth-password config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-types:routing-password</type-name>
+            </type>
+          </auth-password>
+          <remove-private-as config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-bgp-types:remove-private-as-option</type-name>
+            </type>
+          </remove-private-as>
+          <route-flap-damping config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </route-flap-damping>
+          <send-community config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-bgp-types:community-type</type-name>
+            </type>
+            <default>NONE</default>
+          </send-community>
+          <description config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </description>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <peer-group-name config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </peer-group-name>
+          <peer-as config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-inet:as-number</type-name>
+            </type>
+          </peer-as>
+          <local-as config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-inet:as-number</type-name>
+            </type>
+          </local-as>
+          <peer-type config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-bgp-types:peer-type</type-name>
+            </type>
+          </peer-type>
+          <auth-password config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-types:routing-password</type-name>
+            </type>
+          </auth-password>
+          <remove-private-as config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-bgp-types:remove-private-as-option</type-name>
+            </type>
+          </remove-private-as>
+          <route-flap-damping config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </route-flap-damping>
+          <send-community config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>oc-bgp-types:community-type</type-name>
+            </type>
+            <default>NONE</default>
+          </send-community>
+          <description config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </description>
+          <total-paths config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </total-paths>
+          <total-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </total-prefixes>
+        </state>
+        <timers config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <connect-retry config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>decimal64</type-name>
+              </type>
+              <default>30</default>
+            </connect-retry>
+            <hold-time config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>decimal64</type-name>
+              </type>
+              <default>90</default>
+            </hold-time>
+            <keepalive-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>decimal64</type-name>
+              </type>
+              <default>30</default>
+            </keepalive-interval>
+            <minimum-advertisement-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>decimal64</type-name>
+              </type>
+              <default>30</default>
+            </minimum-advertisement-interval>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <connect-retry config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>decimal64</type-name>
+              </type>
+              <default>30</default>
+            </connect-retry>
+            <hold-time config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>decimal64</type-name>
+              </type>
+              <default>90</default>
+            </hold-time>
+            <keepalive-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>decimal64</type-name>
+              </type>
+              <default>30</default>
+            </keepalive-interval>
+            <minimum-advertisement-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>decimal64</type-name>
+              </type>
+              <default>30</default>
+            </minimum-advertisement-interval>
+          </state>
+        </timers>
+        <transport config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <tcp-mss config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </tcp-mss>
+            <mtu-discovery config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </mtu-discovery>
+            <passive-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </passive-mode>
+            <local-address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type node="union">
+                <type>
+                  <type-name>oc-inet:ip-address</type-name>
+                </type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </type>
+            </local-address>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <tcp-mss config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </tcp-mss>
+            <mtu-discovery config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </mtu-discovery>
+            <passive-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </passive-mode>
+            <local-address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type node="union">
+                <type>
+                  <type-name>oc-inet:ip-address</type-name>
+                </type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </type>
+            </local-address>
+          </state>
+        </transport>
+        <error-handling config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <treat-as-withdraw config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </treat-as-withdraw>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <treat-as-withdraw config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </treat-as-withdraw>
+          </state>
+        </error-handling>
+        <graceful-restart config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </enabled>
+            <restart-time config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type range="0..4096">
+                <type-name>uint16</type-name>
+              </type>
+            </restart-time>
+            <stale-routes-time config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>decimal64</type-name>
+              </type>
+            </stale-routes-time>
+            <helper-only config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </helper-only>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </enabled>
+            <restart-time config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type range="0..4096">
+                <type-name>uint16</type-name>
+              </type>
+            </restart-time>
+            <stale-routes-time config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>decimal64</type-name>
+              </type>
+            </stale-routes-time>
+            <helper-only config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </helper-only>
+          </state>
+        </graceful-restart>
+        <logging-options config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <log-neighbor-state-changes config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>true</default>
+            </log-neighbor-state-changes>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <log-neighbor-state-changes config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>true</default>
+            </log-neighbor-state-changes>
+          </state>
+        </logging-options>
+        <ebgp-multihop config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </enabled>
+            <multihop-ttl config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+            </multihop-ttl>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </enabled>
+            <multihop-ttl config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+            </multihop-ttl>
+          </state>
+        </ebgp-multihop>
+        <route-reflector config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <route-reflector-cluster-id config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>oc-bgp-types:rr-cluster-id-type</type-name>
+              </type>
+            </route-reflector-cluster-id>
+            <route-reflector-client config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </route-reflector-client>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <route-reflector-cluster-id config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>oc-bgp-types:rr-cluster-id-type</type-name>
+              </type>
+            </route-reflector-cluster-id>
+            <route-reflector-client config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </route-reflector-client>
+          </state>
+        </route-reflector>
+        <as-path-options config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <allow-own-as config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+              <default>0</default>
+            </allow-own-as>
+            <replace-peer-as config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </replace-peer-as>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <allow-own-as config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+              <default>0</default>
+            </allow-own-as>
+            <replace-peer-as config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </replace-peer-as>
+          </state>
+        </as-path-options>
+        <add-paths config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <receive config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </receive>
+            <send-max config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+            </send-max>
+            <eligible-prefix-policy config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </eligible-prefix-policy>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <receive config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </receive>
+            <send-max config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+            </send-max>
+            <eligible-prefix-policy config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </eligible-prefix-policy>
+          </state>
+        </add-paths>
+        <use-multiple-paths config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </enabled>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <default>false</default>
+            </enabled>
+          </state>
+          <ebgp config="true" is-key="false" node="container" presence="false">
+            <config config="true" is-key="false" node="container" presence="false">
+              <allow-multiple-as config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </allow-multiple-as>
+              <maximum-paths config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+                <default>1</default>
+              </maximum-paths>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <allow-multiple-as config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </allow-multiple-as>
+              <maximum-paths config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+                <default>1</default>
+              </maximum-paths>
+            </state>
+          </ebgp>
+          <ibgp config="true" is-key="false" node="container" presence="false">
+            <config config="true" is-key="false" node="container" presence="false">
+              <maximum-paths config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+                <default>1</default>
+              </maximum-paths>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <maximum-paths config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+                <default>1</default>
+              </maximum-paths>
+            </state>
+          </ibgp>
+        </use-multiple-paths>
+        <apply-policy config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <import-policy config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </import-policy>
+            <default-import-policy config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>default-policy-type</type-name>
+              </type>
+              <default>REJECT_ROUTE</default>
+            </default-import-policy>
+            <export-policy config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </export-policy>
+            <default-export-policy config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>default-policy-type</type-name>
+              </type>
+              <default>REJECT_ROUTE</default>
+            </default-export-policy>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <import-policy config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </import-policy>
+            <default-import-policy config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>default-policy-type</type-name>
+              </type>
+              <default>REJECT_ROUTE</default>
+            </default-import-policy>
+            <export-policy config="true" is-key="false" is-yang-key="false" node="leaf-list">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </export-policy>
+            <default-export-policy config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>default-policy-type</type-name>
+              </type>
+              <default>REJECT_ROUTE</default>
+            </default-export-policy>
+          </state>
+        </apply-policy>
+        <afi-safis config="true" is-key="false" node="container" presence="false">
+          <afi-safi config="true" key="afi-safi-name" node="list">
+            <afi-safi-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </afi-safi-name>
+            <config config="true" is-key="false" node="container" presence="false">
+              <afi-safi-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="identityref">
+                  <base>oc-bgp-types:AFI_SAFI_TYPE</base>
+                </type>
+              </afi-safi-name>
+              <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </enabled>
+            </config>
+            <state config="true" is-key="false" node="container" presence="false">
+              <afi-safi-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type node="identityref">
+                  <base>oc-bgp-types:AFI_SAFI_TYPE</base>
+                </type>
+              </afi-safi-name>
+              <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+                <default>false</default>
+              </enabled>
+            </state>
+            <graceful-restart config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </enabled>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </enabled>
+              </state>
+            </graceful-restart>
+            <route-selection-options config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <always-compare-med config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </always-compare-med>
+                <ignore-as-path-length config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </ignore-as-path-length>
+                <external-compare-router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>true</default>
+                </external-compare-router-id>
+                <advertise-inactive-routes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </advertise-inactive-routes>
+                <enable-aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </enable-aigp>
+                <ignore-next-hop-igp-metric config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </ignore-next-hop-igp-metric>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <always-compare-med config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </always-compare-med>
+                <ignore-as-path-length config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </ignore-as-path-length>
+                <external-compare-router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>true</default>
+                </external-compare-router-id>
+                <advertise-inactive-routes config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </advertise-inactive-routes>
+                <enable-aigp config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </enable-aigp>
+                <ignore-next-hop-igp-metric config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </ignore-next-hop-igp-metric>
+              </state>
+            </route-selection-options>
+            <use-multiple-paths config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </enabled>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </enabled>
+              </state>
+              <ebgp config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <allow-multiple-as config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </allow-multiple-as>
+                  <maximum-paths config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                    <default>1</default>
+                  </maximum-paths>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <allow-multiple-as config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </allow-multiple-as>
+                  <maximum-paths config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                    <default>1</default>
+                  </maximum-paths>
+                </state>
+              </ebgp>
+              <ibgp config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <maximum-paths config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                    <default>1</default>
+                  </maximum-paths>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <maximum-paths config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                    <default>1</default>
+                  </maximum-paths>
+                </state>
+              </ibgp>
+            </use-multiple-paths>
+            <apply-policy config="true" is-key="false" node="container" presence="false">
+              <config config="true" is-key="false" node="container" presence="false">
+                <import-policy config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </import-policy>
+                <default-import-policy config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>default-policy-type</type-name>
+                  </type>
+                  <default>REJECT_ROUTE</default>
+                </default-import-policy>
+                <export-policy config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </export-policy>
+                <default-export-policy config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>default-policy-type</type-name>
+                  </type>
+                  <default>REJECT_ROUTE</default>
+                </default-export-policy>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <import-policy config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </import-policy>
+                <default-import-policy config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>default-policy-type</type-name>
+                  </type>
+                  <default>REJECT_ROUTE</default>
+                </default-import-policy>
+                <export-policy config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                  <type>
+                    <type-name>leafref</type-name>
+                  </type>
+                </export-policy>
+                <default-export-policy config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>default-policy-type</type-name>
+                  </type>
+                  <default>REJECT_ROUTE</default>
+                </default-export-policy>
+              </state>
+            </apply-policy>
+            <ipv4-unicast config="true" is-key="false" node="container" presence="false">
+              <when>../afi-safi-name = 'oc-bgp-types:IPV4_UNICAST'</when>
+              <prefix-limit config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </state>
+              </prefix-limit>
+              <config config="true" is-key="false" node="container" presence="false">
+                <send-default-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </send-default-route>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <send-default-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </send-default-route>
+              </state>
+            </ipv4-unicast>
+            <ipv6-unicast config="true" is-key="false" node="container" presence="false">
+              <when>../afi-safi-name = 'oc-bgp-types:IPV6_UNICAST'</when>
+              <prefix-limit config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </state>
+              </prefix-limit>
+              <config config="true" is-key="false" node="container" presence="false">
+                <send-default-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </send-default-route>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <send-default-route config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </send-default-route>
+              </state>
+            </ipv6-unicast>
+            <ipv4-labeled-unicast config="true" is-key="false" node="container" presence="false">
+              <when>../afi-safi-name = 'oc-bgp-types:IPV4_LABELED_UNICAST'</when>
+              <prefix-limit config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </state>
+              </prefix-limit>
+            </ipv4-labeled-unicast>
+            <ipv6-labeled-unicast config="true" is-key="false" node="container" presence="false">
+              <when>../afi-safi-name = 'oc-bgp-types:IPV6_LABELED_UNICAST'</when>
+              <prefix-limit config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </state>
+              </prefix-limit>
+            </ipv6-labeled-unicast>
+            <l3vpn-ipv4-unicast config="true" is-key="false" node="container" presence="false">
+              <when>../afi-safi-name = 'oc-bgp-types:L3VPN_IPV4_UNICAST'</when>
+              <prefix-limit config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </state>
+              </prefix-limit>
+            </l3vpn-ipv4-unicast>
+            <l3vpn-ipv6-unicast config="true" is-key="false" node="container" presence="false">
+              <when>../afi-safi-name = 'oc-bgp-types:L3VPN_IPV6_UNICAST'</when>
+              <prefix-limit config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </state>
+              </prefix-limit>
+            </l3vpn-ipv6-unicast>
+            <l3vpn-ipv4-multicast config="true" is-key="false" node="container" presence="false">
+              <when>../afi-safi-name = 'oc-bgp-types:L3VPN_IPV4_MULTICAST'</when>
+              <prefix-limit config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </state>
+              </prefix-limit>
+            </l3vpn-ipv4-multicast>
+            <l3vpn-ipv6-multicast config="true" is-key="false" node="container" presence="false">
+              <when>../afi-safi-name = 'oc-bgp-types:L3VPN_IPV6_MULTICAST'</when>
+              <prefix-limit config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </state>
+              </prefix-limit>
+            </l3vpn-ipv6-multicast>
+            <l2vpn-vpls config="true" is-key="false" node="container" presence="false">
+              <when>../afi-safi-name = 'oc-bgp-types:L2VPN_VPLS'</when>
+              <prefix-limit config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </state>
+              </prefix-limit>
+            </l2vpn-vpls>
+            <l2vpn-evpn config="true" is-key="false" node="container" presence="false">
+              <when>../afi-safi-name = 'oc-bgp-types:L2VPN_EVPN'</when>
+              <prefix-limit config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <max-prefixes config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </max-prefixes>
+                  <prevent-teardown config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>boolean</type-name>
+                    </type>
+                    <default>false</default>
+                  </prevent-teardown>
+                  <shutdown-threshold-pct config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>oc-types:percentage</type-name>
+                    </type>
+                  </shutdown-threshold-pct>
+                  <restart-timer config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>decimal64</type-name>
+                    </type>
+                  </restart-timer>
+                </state>
+              </prefix-limit>
+            </l2vpn-evpn>
+          </afi-safi>
+        </afi-safis>
+      </peer-group>
+    </peer-groups>
+  </bgp>
+</openconfig-bgp>

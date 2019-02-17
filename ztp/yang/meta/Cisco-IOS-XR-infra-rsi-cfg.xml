@@ -1,0 +1,859 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-infra-rsi-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-infra-rsi-cfg" revision="2017-05-01">
+  <files>
+    <file revision="2017-05-01" submodule="false">Cisco-IOS-XR-infra-rsi-cfg.yang</file>
+  </files>
+  <prefix>infra-rsi-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-ifmgr-cfg</import>
+  <import prefix="a2">Cisco-IOS-XR-snmp-agent-cfg</import>
+  <typedef name="Vrf-sub-address-family">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">unicast</enum>
+      <enum value="2">multicast</enum>
+      <enum value="133">flow-spec</enum>
+    </type>
+  </typedef>
+  <typedef name="Vrf-address-family">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">ipv4</enum>
+      <enum value="2">ipv6</enum>
+    </type>
+  </typedef>
+  <typedef name="Srlg-priority">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">critical</enum>
+      <enum value="1">high</enum>
+      <enum value="2">default</enum>
+      <enum value="3">low</enum>
+      <enum value="4">very-low</enum>
+    </type>
+  </typedef>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <vrf config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>string</xr-primitive-type>
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/rsi/vrf</xr-path>
+      <xr-xml-map>rsi_vrf_interface_cfg:VRF</xr-xml-map>
+      <xr-task>interface</xr-task>
+      <xr-sch-type>BoundedString</xr-sch-type>
+      <type length="1..32">
+        <type-name>xr:Cisco-ios-xr-string</type-name>
+      </type>
+    </vrf>
+  </augment>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <afs config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/rsi/afi_safi/</xr-path>
+      <xr-xml-map>rsi_vrf_interface_cfg:AFTable</xr-xml-map>
+      <xr-task>interface</xr-task>
+      <af config="true" key="af-name saf-name" node="list">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/rsi/afi_safi/&lt;rsi_vrf_interface_cfg_AF_AF&gt;/&lt;rsi_vrf_interface_cfg_AF_SubAF&gt;/________/</xr-path>
+        <xr-task>interface</xr-task>
+        <af-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/rsi/afi_safi/&lt;rsi_vrf_interface_cfg_AF_AF&gt;/&lt;rsi_vrf_interface_cfg_AF_SubAF&gt;/________/running</xr-path>
+          <xr-xml-map>rsi_vrf_interface_cfg:AFName</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <xr-sch-arg-name>&lt;rsi_vrf_interface_cfg_AF_AF&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>Vrf-address-family</type-name>
+          </type>
+        </af-name>
+        <saf-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-create-item-relative-path/>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/rsi/afi_safi/&lt;rsi_vrf_interface_cfg_AF_AF&gt;/&lt;rsi_vrf_interface_cfg_AF_SubAF&gt;/________/running</xr-path>
+          <xr-xml-map>rsi_vrf_interface_cfg:SAFName</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <xr-sch-arg-name>&lt;rsi_vrf_interface_cfg_AF_SubAF&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>Vrf-sub-address-family</type-name>
+          </type>
+        </saf-name>
+      </af>
+      <af-topology-name config="true" key="topology-name af-name saf-name" node="list">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/rsi/afi_safi/&lt;rsi_vrf_interface_cfg_AF_AF&gt;/&lt;rsi_vrf_interface_cfg_AF_SubAF&gt;/&lt;rsi_vrf_interface_cfg_AF_TopoName&gt;/</xr-path>
+        <xr-task>interface</xr-task>
+        <topology-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/rsi/afi_safi/&lt;rsi_vrf_interface_cfg_AF_AF&gt;/&lt;rsi_vrf_interface_cfg_AF_SubAF&gt;/&lt;rsi_vrf_interface_cfg_AF_TopoName&gt;/running</xr-path>
+          <xr-xml-map>rsi_vrf_interface_cfg:TopologyName</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;rsi_vrf_interface_cfg_AF_TopoName&gt;</xr-sch-arg-name>
+          <type length="1..32">
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </topology-name>
+        <af-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/rsi/afi_safi/&lt;rsi_vrf_interface_cfg_AF_AF&gt;/&lt;rsi_vrf_interface_cfg_AF_SubAF&gt;/&lt;rsi_vrf_interface_cfg_AF_TopoName&gt;/running</xr-path>
+          <xr-xml-map>rsi_vrf_interface_cfg:AFName</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <xr-sch-arg-name>&lt;rsi_vrf_interface_cfg_AF_AF&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>Vrf-address-family</type-name>
+          </type>
+        </af-name>
+        <saf-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-create-item-relative-path/>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/rsi/afi_safi/&lt;rsi_vrf_interface_cfg_AF_AF&gt;/&lt;rsi_vrf_interface_cfg_AF_SubAF&gt;/&lt;rsi_vrf_interface_cfg_AF_TopoName&gt;/running</xr-path>
+          <xr-xml-map>rsi_vrf_interface_cfg:SAFName</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <xr-sch-arg-name>&lt;rsi_vrf_interface_cfg_AF_SubAF&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>Vrf-sub-address-family</type-name>
+          </type>
+        </saf-name>
+      </af-topology-name>
+    </afs>
+  </augment>
+  <augment path="/a2:snmp/a2:notification">
+    <selective-vrf-download config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/enable/traps/svdmib/</xr-path>
+      <xr-xml-map>svd_mib_cfg:SelectiveVRFDownload</xr-xml-map>
+      <xr-task>basic-services</xr-task>
+      <role-change config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/enable/traps/svdmib/role</xr-path>
+        <xr-xml-map>svd_mib_cfg:RoleChange</xr-xml-map>
+        <xr-task>basic-services</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </role-change>
+    </selective-vrf-download>
+  </augment>
+  <vrfs config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/rsi/vrf/</xr-path>
+    <xr-xml-map>rsi_vrf_cfg:VRFTable</xr-xml-map>
+    <xr-task>ip-services</xr-task>
+    <vrf config="true" key="vrf-name" node="list">
+      <xr-path>/cfg/gl/rsi/vrf/&lt;rsi_vrf_cfg_VRF_vrf&gt;/</xr-path>
+      <xr-xml-map>rsi_vrf_cfg:VRF</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <xr-scope>exported</xr-scope>
+      <vpn-id config="true" is-key="false" node="container" presence="true">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-is-packed/>
+        <xr-path>/cfg/gl/rsi/vrf/&lt;rsi_vrf_cfg_VRF_vrf&gt;/ord_a/rsi/ord_k/rsi/vpnid`</xr-path>
+        <xr-xml-map>rsi_vrf_cfg:VPN_ID</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <vpn-oui config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/rsi/vrf/&lt;rsi_vrf_cfg_VRF_vrf&gt;/ord_a/rsi/ord_k/rsi/vpnid`0</xr-path>
+          <xr-xml-map>rsi_vrf_cfg:VPN_OUI</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="0..16777215">
+            <type-name>uint32</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </vpn-oui>
+        <vpn-index config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/rsi/vrf/&lt;rsi_vrf_cfg_VRF_vrf&gt;/ord_a/rsi/ord_k/rsi/vpnid`1</xr-path>
+          <xr-xml-map>rsi_vrf_cfg:VPNIndex</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="0..4294967295">
+            <type-name>uint32</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </vpn-index>
+      </vpn-id>
+      <fallback-vrf config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/gl/rsi/vrf/&lt;rsi_vrf_cfg_VRF_vrf&gt;/ord_a/rsi/ord_k/rsi/fallbackvrf</xr-path>
+        <xr-xml-map>rsi_vrf_cfg:FallbackVRF</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-sch-type>BoundedString</xr-sch-type>
+        <type length="1..32">
+          <type-name>xr:Cisco-ios-xr-string</type-name>
+        </type>
+      </fallback-vrf>
+      <remote-route-filter-disable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/rsi/vrf/&lt;rsi_vrf_cfg_VRF_vrf&gt;/ord_a/rsi/ord_k/rsi/remoteroutefilterdisable</xr-path>
+        <xr-xml-map>rsi_vrf_cfg:RemoteRouteFilterDisable</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </remote-route-filter-disable>
+      <create config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/rsi/vrf/&lt;rsi_vrf_cfg_VRF_vrf&gt;/ord_a/rsi/ord_a</xr-path>
+        <xr-xml-map>rsi_vrf_cfg:Create</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </create>
+      <mode-big config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/rsi/vrf/&lt;rsi_vrf_cfg_VRF_vrf&gt;/ord_a/rsi/ord_a/rsi/mode</xr-path>
+        <xr-xml-map>rsi_vrf_cfg:ModeBig</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </mode-big>
+      <description config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/gl/rsi/vrf/&lt;rsi_vrf_cfg_VRF_vrf&gt;/ord_a/rsi/ord_k/rsi/descr</xr-path>
+        <xr-xml-map>rsi_vrf_cfg:Description</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-sch-type>BoundedString</xr-sch-type>
+        <type length="1..244">
+          <type-name>string</type-name>
+        </type>
+      </description>
+      <vrf-name config="true" is-key="true" is-yang-key="true" node="leaf">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/gl/rsi/vrf/&lt;rsi_vrf_cfg_VRF_vrf&gt;/</xr-path>
+        <xr-xml-map>rsi_vrf_cfg:VRFName</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-sch-type>BoundedString</xr-sch-type>
+        <xr-sch-arg-name>&lt;rsi_vrf_cfg_VRF_vrf&gt;</xr-sch-arg-name>
+        <type length="1..32">
+          <type-name>xr:Cisco-ios-xr-string</type-name>
+        </type>
+      </vrf-name>
+      <afs config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/rsi/vrf/&lt;rsi_vrf_cfg_VRF_vrf&gt;/ord_z/afi_safi/</xr-path>
+        <xr-xml-map>rsi_vrf_cfg:AFTable</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <af config="true" key="af-name saf-name topology-name" node="list">
+          <xr-path>/cfg/gl/rsi/vrf/&lt;rsi_vrf_cfg_VRF_vrf&gt;/ord_z/afi_safi/&lt;rsi_vrf_cfg_AF_afi&gt;/&lt;rsi_vrf_cfg_AF_safi&gt;/&lt;rsi_vrf_cfg_AF_topology&gt;/</xr-path>
+          <xr-xml-map>rsi_vrf_cfg:AF</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-scope>exported</xr-scope>
+          <create config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/rsi/vrf/&lt;rsi_vrf_cfg_VRF_vrf&gt;/ord_z/afi_safi/&lt;rsi_vrf_cfg_AF_afi&gt;/&lt;rsi_vrf_cfg_AF_safi&gt;/&lt;rsi_vrf_cfg_AF_topology&gt;/ord_a/rsi/ord_a</xr-path>
+            <xr-xml-map>rsi_vrf_cfg:Create</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </create>
+          <af-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/rsi/vrf/&lt;rsi_vrf_cfg_VRF_vrf&gt;/ord_z/afi_safi/&lt;rsi_vrf_cfg_AF_afi&gt;/&lt;rsi_vrf_cfg_AF_safi&gt;/&lt;rsi_vrf_cfg_AF_topology&gt;/</xr-path>
+            <xr-xml-map>rsi_vrf_cfg:AFName</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <xr-sch-arg-name>&lt;rsi_vrf_cfg_AF_afi&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>Vrf-address-family</type-name>
+            </type>
+          </af-name>
+          <saf-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/rsi/vrf/&lt;rsi_vrf_cfg_VRF_vrf&gt;/ord_z/afi_safi/&lt;rsi_vrf_cfg_AF_afi&gt;/&lt;rsi_vrf_cfg_AF_safi&gt;/&lt;rsi_vrf_cfg_AF_topology&gt;/</xr-path>
+            <xr-xml-map>rsi_vrf_cfg:SAFName</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <xr-sch-arg-name>&lt;rsi_vrf_cfg_AF_safi&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>Vrf-sub-address-family</type-name>
+            </type>
+          </saf-name>
+          <topology-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/rsi/vrf/&lt;rsi_vrf_cfg_VRF_vrf&gt;/ord_z/afi_safi/&lt;rsi_vrf_cfg_AF_afi&gt;/&lt;rsi_vrf_cfg_AF_safi&gt;/&lt;rsi_vrf_cfg_AF_topology&gt;/</xr-path>
+            <xr-xml-map>rsi_vrf_cfg:TopologyName</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-sch-type>BoundedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;rsi_vrf_cfg_AF_topology&gt;</xr-sch-arg-name>
+            <type length="1..244">
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </topology-name>
+        </af>
+      </afs>
+    </vrf>
+  </vrfs>
+  <global-af config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/rsi/afi_safi/</xr-path>
+    <xr-xml-map>rsi_vrf_cfg:GlobalAF</xr-xml-map>
+    <xr-task>ip-services</xr-task>
+    <afs config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/rsi/afi_safi/ord_z/afi_safi/</xr-path>
+      <xr-xml-map>rsi_vrf_cfg:AFTable</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <af config="true" key="af-name saf-name topology-name" node="list">
+        <xr-path>/cfg/gl/rsi/afi_safi/ord_z/afi_safi/&lt;rsi_vrf_cfg_AF_afi&gt;/&lt;rsi_vrf_cfg_AF_safi&gt;/&lt;rsi_vrf_cfg_AF_topology&gt;/</xr-path>
+        <xr-xml-map>rsi_vrf_cfg:AF</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-scope>exported</xr-scope>
+        <create config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/rsi/afi_safi/ord_z/afi_safi/&lt;rsi_vrf_cfg_AF_afi&gt;/&lt;rsi_vrf_cfg_AF_safi&gt;/&lt;rsi_vrf_cfg_AF_topology&gt;/ord_a/rsi/ord_a</xr-path>
+          <xr-xml-map>rsi_vrf_cfg:Create</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </create>
+        <af-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/rsi/afi_safi/ord_z/afi_safi/&lt;rsi_vrf_cfg_AF_afi&gt;/&lt;rsi_vrf_cfg_AF_safi&gt;/&lt;rsi_vrf_cfg_AF_topology&gt;/</xr-path>
+          <xr-xml-map>rsi_vrf_cfg:AFName</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <xr-sch-arg-name>&lt;rsi_vrf_cfg_AF_afi&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>Vrf-address-family</type-name>
+          </type>
+        </af-name>
+        <saf-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/rsi/afi_safi/ord_z/afi_safi/&lt;rsi_vrf_cfg_AF_afi&gt;/&lt;rsi_vrf_cfg_AF_safi&gt;/&lt;rsi_vrf_cfg_AF_topology&gt;/</xr-path>
+          <xr-xml-map>rsi_vrf_cfg:SAFName</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <xr-sch-arg-name>&lt;rsi_vrf_cfg_AF_safi&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>Vrf-sub-address-family</type-name>
+          </type>
+        </saf-name>
+        <topology-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/rsi/afi_safi/ord_z/afi_safi/&lt;rsi_vrf_cfg_AF_afi&gt;/&lt;rsi_vrf_cfg_AF_safi&gt;/&lt;rsi_vrf_cfg_AF_topology&gt;/</xr-path>
+          <xr-xml-map>rsi_vrf_cfg:TopologyName</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;rsi_vrf_cfg_AF_topology&gt;</xr-sch-arg-name>
+          <type length="1..244">
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </topology-name>
+      </af>
+    </afs>
+  </global-af>
+  <srlg config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/srlg/</xr-path>
+    <xr-xml-map>rsi_srlg_cfg:SRLG</xr-xml-map>
+    <xr-task>ip-services</xr-task>
+    <interfaces config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/srlg/if/</xr-path>
+      <xr-xml-map>rsi_srlg_cfg:InterfaceTable</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <interface config="true" key="interface-name" node="list">
+        <xr-path>/cfg/gl/srlg/if/&lt;rsi_srlg_cfg_Interface_interface&gt;/</xr-path>
+        <xr-xml-map>rsi_srlg_cfg:Interface</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <include-optical config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/srlg/if/&lt;rsi_srlg_cfg_Interface_interface&gt;/optical/</xr-path>
+          <xr-xml-map>rsi_srlg_cfg:IncludeOptical</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/srlg/if/&lt;rsi_srlg_cfg_Interface_interface&gt;/optical/ord_a</xr-path>
+            <xr-xml-map>rsi_srlg_cfg:Enable</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </enable>
+          <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/srlg/if/&lt;rsi_srlg_cfg_Interface_interface&gt;/optical/ord_b/priority</xr-path>
+            <xr-xml-map>rsi_srlg_cfg:Priority</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <xr-default-set/>
+            <type>
+              <type-name>Srlg-priority</type-name>
+            </type>
+            <default>default</default>
+          </priority>
+        </include-optical>
+        <interface-group config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/srlg/if/&lt;rsi_srlg_cfg_Interface_interface&gt;/ord_f/group/</xr-path>
+          <xr-xml-map>rsi_srlg_cfg:InterfaceGroup</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <group-names config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/srlg/if/&lt;rsi_srlg_cfg_Interface_interface&gt;/ord_f/group/index/</xr-path>
+            <xr-xml-map>rsi_srlg_cfg:GroupNameTable</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <group-name config="true" key="group-name-index" node="list">
+              <xr-path>/cfg/gl/srlg/if/&lt;rsi_srlg_cfg_Interface_interface&gt;/ord_f/group/index/&lt;rsi_srlg_cfg_GroupName_gindex&gt;</xr-path>
+              <xr-xml-map>rsi_srlg_cfg:GroupName</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <group-name-index config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%s%d</xr-pack-format>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/srlg/if/&lt;rsi_srlg_cfg_Interface_interface&gt;/ord_f/group/index/&lt;rsi_srlg_cfg_GroupName_gindex&gt;</xr-path>
+                <xr-xml-map>rsi_srlg_cfg:GroupNameIndex</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-sch-arg-name>&lt;rsi_srlg_cfg_GroupName_gindex&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </group-name-index>
+              <group-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/srlg/if/&lt;rsi_srlg_cfg_Interface_interface&gt;/ord_f/group/index/&lt;rsi_srlg_cfg_GroupName_gindex&gt;`0</xr-path>
+                <xr-xml-map>rsi_srlg_cfg:GroupName</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </group-name>
+              <srlg-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/srlg/if/&lt;rsi_srlg_cfg_Interface_interface&gt;/ord_f/group/index/&lt;rsi_srlg_cfg_GroupName_gindex&gt;`1</xr-path>
+                <xr-xml-map>rsi_srlg_cfg:SRLGPriority</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>Srlg-priority</type-name>
+                </type>
+                <default>default</default>
+              </srlg-priority>
+            </group-name>
+          </group-names>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/srlg/if/&lt;rsi_srlg_cfg_Interface_interface&gt;/ord_f/group/ord_a</xr-path>
+            <xr-xml-map>rsi_srlg_cfg:Enable</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </enable>
+        </interface-group>
+        <values config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/srlg/if/&lt;rsi_srlg_cfg_Interface_interface&gt;/ord_e/values/index/</xr-path>
+          <xr-xml-map>rsi_srlg_cfg:ValueTable</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <value config="true" key="srlg-index" node="list">
+            <xr-path>/cfg/gl/srlg/if/&lt;rsi_srlg_cfg_Interface_interface&gt;/ord_e/values/index/&lt;rsi_srlg_cfg_Value_index&gt;</xr-path>
+            <xr-xml-map>rsi_srlg_cfg:Value</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <srlg-index config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/srlg/if/&lt;rsi_srlg_cfg_Interface_interface&gt;/ord_e/values/index/&lt;rsi_srlg_cfg_Value_index&gt;</xr-path>
+              <xr-xml-map>rsi_srlg_cfg:SRLGIndex</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-sch-arg-name>&lt;rsi_srlg_cfg_Value_index&gt;</xr-sch-arg-name>
+              <type range="1..65535">
+                <type-name>uint32</type-name>
+              </type>
+            </srlg-index>
+            <srlg-value config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/srlg/if/&lt;rsi_srlg_cfg_Interface_interface&gt;/ord_e/values/index/&lt;rsi_srlg_cfg_Value_index&gt;`0</xr-path>
+              <xr-xml-map>rsi_srlg_cfg:SRLGValue</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="0..4294967295">
+                <type-name>uint32</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </srlg-value>
+            <srlg-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/srlg/if/&lt;rsi_srlg_cfg_Interface_interface&gt;/ord_e/values/index/&lt;rsi_srlg_cfg_Value_index&gt;`1</xr-path>
+              <xr-xml-map>rsi_srlg_cfg:SRLGPriority</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <xr-default-set/>
+              <type>
+                <type-name>Srlg-priority</type-name>
+              </type>
+              <default>default</default>
+            </srlg-priority>
+          </value>
+        </values>
+        <interface-srlg-names config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/srlg/if/&lt;rsi_srlg_cfg_Interface_interface&gt;/ord_g/name/</xr-path>
+          <xr-xml-map>rsi_srlg_cfg:InterfaceSRLGNameTable</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <interface-srlg-name config="true" key="srlg-name" node="list">
+            <xr-path>/cfg/gl/srlg/if/&lt;rsi_srlg_cfg_Interface_interface&gt;/ord_g/name/&lt;rsi_srlg_cfg_InterfaceSRLGName_ifsrlgname&gt;</xr-path>
+            <xr-xml-map>rsi_srlg_cfg:InterfaceSRLGName</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <srlg-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-create-item-relative-path/>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/srlg/if/&lt;rsi_srlg_cfg_Interface_interface&gt;/ord_g/name/&lt;rsi_srlg_cfg_InterfaceSRLGName_ifsrlgname&gt;</xr-path>
+              <xr-xml-map>rsi_srlg_cfg:SRLGName</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <xr-sch-arg-name>&lt;rsi_srlg_cfg_InterfaceSRLGName_ifsrlgname&gt;</xr-sch-arg-name>
+              <type length="1..64">
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </srlg-name>
+          </interface-srlg-name>
+        </interface-srlg-names>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/srlg/if/&lt;rsi_srlg_cfg_Interface_interface&gt;/ord_d/enabled</xr-path>
+          <xr-xml-map>rsi_srlg_cfg:Enable</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </enable>
+        <interface-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/srlg/if/&lt;rsi_srlg_cfg_Interface_interface&gt;/</xr-path>
+          <xr-xml-map>rsi_srlg_cfg:InterfaceName</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>InterfaceForward</xr-sch-type>
+          <xr-sch-arg-name>&lt;rsi_srlg_cfg_Interface_interface&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </interface-name>
+      </interface>
+    </interfaces>
+    <srlg-names config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/srlg/name/</xr-path>
+      <xr-xml-map>rsi_srlg_cfg:SRLGNameTable</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <srlg-name config="true" key="srlg-name" node="list">
+        <xr-path>/cfg/gl/srlg/name/&lt;rsi_srlg_cfg_SRLGName_srlgname&gt;</xr-path>
+        <xr-xml-map>rsi_srlg_cfg:SRLGName</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <srlg-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/srlg/name/&lt;rsi_srlg_cfg_SRLGName_srlgname&gt;</xr-path>
+          <xr-xml-map>rsi_srlg_cfg:SRLGName</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;rsi_srlg_cfg_SRLGName_srlgname&gt;</xr-sch-arg-name>
+          <type length="1..64">
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </srlg-name>
+        <srlg-value config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/srlg/name/&lt;rsi_srlg_cfg_SRLGName_srlgname&gt;</xr-path>
+          <xr-xml-map>rsi_srlg_cfg:SRLGValue</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="0..4294967295">
+            <type-name>uint32</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </srlg-value>
+      </srlg-name>
+    </srlg-names>
+    <groups config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/srlg/group/</xr-path>
+      <xr-xml-map>rsi_srlg_cfg:GroupTable</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <group config="true" key="group-name" node="list">
+        <xr-path>/cfg/gl/srlg/group/&lt;rsi_srlg_cfg_Group_group&gt;/</xr-path>
+        <xr-xml-map>rsi_srlg_cfg:Group</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <group-values config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/srlg/group/&lt;rsi_srlg_cfg_Group_group&gt;/values/index/</xr-path>
+          <xr-xml-map>rsi_srlg_cfg:GroupValueTable</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <group-value config="true" key="srlg-index" node="list">
+            <xr-path>/cfg/gl/srlg/group/&lt;rsi_srlg_cfg_Group_group&gt;/values/index/&lt;rsi_srlg_cfg_GroupValue_index&gt;</xr-path>
+            <xr-xml-map>rsi_srlg_cfg:GroupValue</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <srlg-index config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/srlg/group/&lt;rsi_srlg_cfg_Group_group&gt;/values/index/&lt;rsi_srlg_cfg_GroupValue_index&gt;</xr-path>
+              <xr-xml-map>rsi_srlg_cfg:SRLGIndex</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-sch-arg-name>&lt;rsi_srlg_cfg_GroupValue_index&gt;</xr-sch-arg-name>
+              <type range="1..65535">
+                <type-name>uint32</type-name>
+              </type>
+            </srlg-index>
+            <srlg-value config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/srlg/group/&lt;rsi_srlg_cfg_Group_group&gt;/values/index/&lt;rsi_srlg_cfg_GroupValue_index&gt;`0</xr-path>
+              <xr-xml-map>rsi_srlg_cfg:SRLGValue</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="0..4294967295">
+                <type-name>uint32</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </srlg-value>
+            <srlg-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/srlg/group/&lt;rsi_srlg_cfg_Group_group&gt;/values/index/&lt;rsi_srlg_cfg_GroupValue_index&gt;`1</xr-path>
+              <xr-xml-map>rsi_srlg_cfg:SRLGPriority</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <xr-default-set/>
+              <type>
+                <type-name>Srlg-priority</type-name>
+              </type>
+              <default>default</default>
+            </srlg-priority>
+          </group-value>
+        </group-values>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/srlg/group/&lt;rsi_srlg_cfg_Group_group&gt;/ord_g</xr-path>
+          <xr-xml-map>rsi_srlg_cfg:Enable</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </enable>
+        <group-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/srlg/group/&lt;rsi_srlg_cfg_Group_group&gt;/</xr-path>
+          <xr-xml-map>rsi_srlg_cfg:GroupName</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;rsi_srlg_cfg_Group_group&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </group-name>
+      </group>
+    </groups>
+    <inherit-nodes config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/srlg/loc/</xr-path>
+      <xr-xml-map>rsi_srlg_cfg:InheritNodeTable</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <inherit-node config="true" key="inherit-node-name" node="list">
+        <xr-path>/cfg/gl/srlg/loc/&lt;rsi_srlg_cfg_InheritNode_node-id&gt;/</xr-path>
+        <xr-xml-map>rsi_srlg_cfg:InheritNode</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <inherit-node-values config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/srlg/loc/&lt;rsi_srlg_cfg_InheritNode_node-id&gt;/values/index/</xr-path>
+          <xr-xml-map>rsi_srlg_cfg:InheritNodeValueTable</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <inherit-node-value config="true" key="srlg-index" node="list">
+            <xr-path>/cfg/gl/srlg/loc/&lt;rsi_srlg_cfg_InheritNode_node-id&gt;/values/index/&lt;rsi_srlg_cfg_InheritNodeValue_index&gt;</xr-path>
+            <xr-xml-map>rsi_srlg_cfg:InheritNodeValue</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <srlg-index config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/srlg/loc/&lt;rsi_srlg_cfg_InheritNode_node-id&gt;/values/index/&lt;rsi_srlg_cfg_InheritNodeValue_index&gt;</xr-path>
+              <xr-xml-map>rsi_srlg_cfg:SRLGIndex</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-sch-arg-name>&lt;rsi_srlg_cfg_InheritNodeValue_index&gt;</xr-sch-arg-name>
+              <type range="1..65535">
+                <type-name>uint32</type-name>
+              </type>
+            </srlg-index>
+            <srlg-value config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/srlg/loc/&lt;rsi_srlg_cfg_InheritNode_node-id&gt;/values/index/&lt;rsi_srlg_cfg_InheritNodeValue_index&gt;`0</xr-path>
+              <xr-xml-map>rsi_srlg_cfg:SRLGValue</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="0..4294967295">
+                <type-name>uint32</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </srlg-value>
+            <srlg-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/srlg/loc/&lt;rsi_srlg_cfg_InheritNode_node-id&gt;/values/index/&lt;rsi_srlg_cfg_InheritNodeValue_index&gt;`1</xr-path>
+              <xr-xml-map>rsi_srlg_cfg:SRLGPriority</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <xr-default-set/>
+              <type>
+                <type-name>Srlg-priority</type-name>
+              </type>
+              <default>default</default>
+            </srlg-priority>
+          </inherit-node-value>
+        </inherit-node-values>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/srlg/loc/&lt;rsi_srlg_cfg_InheritNode_node-id&gt;/ord_l</xr-path>
+          <xr-xml-map>rsi_srlg_cfg:Enable</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </enable>
+        <inherit-node-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/srlg/loc/&lt;rsi_srlg_cfg_InheritNode_node-id&gt;/</xr-path>
+          <xr-xml-map>rsi_srlg_cfg:InheritNodeName</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>PQNodeIDString</xr-sch-type>
+          <xr-sch-arg-name>&lt;rsi_srlg_cfg_InheritNode_node-id&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Pq-node-id</type-name>
+          </type>
+        </inherit-node-name>
+      </inherit-node>
+    </inherit-nodes>
+    <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/srlg/ord_d/config</xr-path>
+      <xr-xml-map>rsi_srlg_cfg:Enable</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <xr-sch-type>Configured</xr-sch-type>
+      <type>
+        <type-name>empty</type-name>
+      </type>
+    </enable>
+  </srlg>
+  <vrf-groups config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/rsi/vrfgroup/</xr-path>
+    <xr-xml-map>rsi_vrfgroup_cfg:VRFGroupTable</xr-xml-map>
+    <xr-task>ip-services</xr-task>
+    <vrf-group config="true" key="vrf-group-name" node="list">
+      <xr-path>/cfg/gl/rsi/vrfgroup/&lt;rsi_vrfgroup_cfg_VRFGroup_group&gt;/</xr-path>
+      <xr-xml-map>rsi_vrfgroup_cfg:VRFGroup</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <vrfs config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/rsi/vrfgroup/&lt;rsi_vrfgroup_cfg_VRFGroup_group&gt;/vrf/</xr-path>
+        <xr-xml-map>rsi_vrfgroup_cfg:VRFTable</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <vrf config="true" key="vrf-name" node="list">
+          <xr-path>/cfg/gl/rsi/vrfgroup/&lt;rsi_vrfgroup_cfg_VRFGroup_group&gt;/vrf/&lt;rsi_vrfgroup_cfg_VRF_vrf&gt;</xr-path>
+          <xr-xml-map>rsi_vrfgroup_cfg:VRF</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <vrf-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-create-item-relative-path/>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/rsi/vrfgroup/&lt;rsi_vrfgroup_cfg_VRFGroup_group&gt;/vrf/&lt;rsi_vrfgroup_cfg_VRF_vrf&gt;</xr-path>
+            <xr-xml-map>rsi_vrfgroup_cfg:VRFName</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-sch-type>BoundedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;rsi_vrfgroup_cfg_VRF_vrf&gt;</xr-sch-arg-name>
+            <type length="1..32">
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </vrf-name>
+        </vrf>
+      </vrfs>
+      <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/rsi/vrfgroup/&lt;rsi_vrfgroup_cfg_VRFGroup_group&gt;/a</xr-path>
+        <xr-xml-map>rsi_vrfgroup_cfg:Enable</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </enable>
+      <vrf-group-name config="true" is-key="true" is-yang-key="true" node="leaf">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/gl/rsi/vrfgroup/&lt;rsi_vrfgroup_cfg_VRFGroup_group&gt;/</xr-path>
+        <xr-xml-map>rsi_vrfgroup_cfg:VRFGroupName</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-sch-type>BoundedString</xr-sch-type>
+        <xr-sch-arg-name>&lt;rsi_vrfgroup_cfg_VRFGroup_group&gt;</xr-sch-arg-name>
+        <type length="1..32">
+          <type-name>xr:Cisco-ios-xr-string</type-name>
+        </type>
+      </vrf-group-name>
+    </vrf-group>
+  </vrf-groups>
+  <selective-vrf-download config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/rsi/svd/</xr-path>
+    <xr-xml-map>rsi_svd_cfg:SelectiveVRFDownload</xr-xml-map>
+    <xr-task>ip-services</xr-task>
+    <disable config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/rsi/svd/ord_d/disabled</xr-path>
+      <xr-xml-map>rsi_svd_cfg:Disable</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <xr-sch-type>Configured</xr-sch-type>
+      <type>
+        <type-name>empty</type-name>
+      </type>
+    </disable>
+  </selective-vrf-download>
+</Cisco-IOS-XR-infra-rsi-cfg>

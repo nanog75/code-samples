@@ -1,0 +1,1128 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ip-daps-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ip-daps-oper" revision="2015-11-09">
+  <files>
+    <file revision="2015-11-09" submodule="false">Cisco-IOS-XR-ip-daps-oper.yang</file>
+    <file revision="2015-11-09" submodule="true">Cisco-IOS-XR-ip-daps-oper-sub1.yang</file>
+  </files>
+  <prefix>ip-daps-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="Daps-serg-role">
+    <type node="enumeration">
+      <enum>none</enum>
+      <enum>master</enum>
+      <enum>slave</enum>
+    </type>
+  </typedef>
+  <typedef name="Daps-client">
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">ppp</enum>
+      <enum value="2">dhcp</enum>
+      <enum value="4">dhcpv6</enum>
+      <enum value="5">ipv6nd</enum>
+    </type>
+  </typedef>
+  <typedef name="Ipv6-addr">
+    <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+    <type>
+      <type-name>inet:ipv6-address</type-name>
+    </type>
+  </typedef>
+  <typedef name="Ip-addr">
+    <type node="enumeration">
+      <enum value="2">ipv4</enum>
+      <enum value="10">ipv6</enum>
+    </type>
+  </typedef>
+  <address-pool-service config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/daps/</xr-path>
+    <xr-xml-map>daps_oper:AddressPoolService</xr-xml-map>
+    <xr-task>ip-services</xr-task>
+    <xr-scope>exported</xr-scope>
+    <nodes config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/daps/node/</xr-path>
+      <xr-xml-map>daps_oper:NodeTable</xr-xml-map>
+      <xr-task>ip-services</xr-task>
+      <node config="false" key="node-name" node="list">
+        <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/</xr-path>
+        <xr-xml-map>daps_oper:Node</xr-xml-map>
+        <xr-task>ip-services</xr-task>
+        <xr-scope>exported</xr-scope>
+        <pools config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/</xr-path>
+          <xr-xml-map>daps_pool_oper:PoolTable</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <pool config="false" key="pool-name" node="list">
+            <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/</xr-path>
+            <xr-xml-map>daps_pool_oper:Pool</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <address-ranges config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/</xr-path>
+              <xr-xml-map>daps_pool_oper:AddressRangeTable</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <address-range config="false" key="start-address" node="list">
+                <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;</xr-path>
+                <xr-xml-map>daps_pool_oper:AddressRange</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-grp-name>ip_daps_show_pool_brief</xr-bag-grp-name>
+                <xr-bag>daps_show.bag</xr-bag>
+                <start-address config="false" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;</xr-path>
+                  <xr-xml-map>daps_pool_oper:StartAddress</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-sch-type>IPAddress</xr-sch-type>
+                  <xr-sch-arg-name>&lt;daps_pool_oper_AddressRange_RangeStart&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>inet:ip-address-no-zone</type-name>
+                  </type>
+                </start-address>
+                <start-address-xr config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;~ip_daps_show_pool_brief.StartAddress</xr-path>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <address config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;~ip_daps_show_pool_brief.StartAddress.Address</xr-path>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <address-family config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;~ip_daps_show_pool_brief.StartAddress.Address.AddressFamily</xr-path>
+                      <xr-xml-map>daps_show:AddressFamily</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <type>
+                        <type-name>Ip-addr</type-name>
+                      </type>
+                    </address-family>
+                    <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;~ip_daps_show_pool_brief.StartAddress.Address.IPv4Address</xr-path>
+                      <xr-xml-map>daps_show:IPv4Address</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <when>../address-family = 'ipv4'</when>
+                      <type>
+                        <type-name>inet:ipv4-address</type-name>
+                      </type>
+                    </ipv4-address>
+                    <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;~ip_daps_show_pool_brief.StartAddress.Address.IPv6Address</xr-path>
+                      <xr-xml-map>daps_show:IPv6Address</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <when>../address-family = 'ipv6'</when>
+                      <type>
+                        <type-name>Ipv6-addr</type-name>
+                      </type>
+                    </ipv6-address>
+                  </address>
+                </start-address-xr>
+                <end-address config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;~ip_daps_show_pool_brief.EndAddress</xr-path>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <address config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;~ip_daps_show_pool_brief.EndAddress.Address</xr-path>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <address-family config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;~ip_daps_show_pool_brief.EndAddress.Address.AddressFamily</xr-path>
+                      <xr-xml-map>daps_show:AddressFamily</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <type>
+                        <type-name>Ip-addr</type-name>
+                      </type>
+                    </address-family>
+                    <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;~ip_daps_show_pool_brief.EndAddress.Address.IPv4Address</xr-path>
+                      <xr-xml-map>daps_show:IPv4Address</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <when>../address-family = 'ipv4'</when>
+                      <type>
+                        <type-name>inet:ipv4-address</type-name>
+                      </type>
+                    </ipv4-address>
+                    <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;~ip_daps_show_pool_brief.EndAddress.Address.IPv6Address</xr-path>
+                      <xr-xml-map>daps_show:IPv6Address</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <when>../address-family = 'ipv6'</when>
+                      <type>
+                        <type-name>Ipv6-addr</type-name>
+                      </type>
+                    </ipv6-address>
+                  </address>
+                </end-address>
+                <default-router config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;~ip_daps_show_pool_brief.DefaultRouter</xr-path>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <address config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;~ip_daps_show_pool_brief.DefaultRouter.Address</xr-path>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <address-family config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;~ip_daps_show_pool_brief.DefaultRouter.Address.AddressFamily</xr-path>
+                      <xr-xml-map>daps_show:AddressFamily</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <type>
+                        <type-name>Ip-addr</type-name>
+                      </type>
+                    </address-family>
+                    <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;~ip_daps_show_pool_brief.DefaultRouter.Address.IPv4Address</xr-path>
+                      <xr-xml-map>daps_show:IPv4Address</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <when>../address-family = 'ipv4'</when>
+                      <type>
+                        <type-name>inet:ipv4-address</type-name>
+                      </type>
+                    </ipv4-address>
+                    <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;~ip_daps_show_pool_brief.DefaultRouter.Address.IPv6Address</xr-path>
+                      <xr-xml-map>daps_show:IPv6Address</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <when>../address-family = 'ipv6'</when>
+                      <type>
+                        <type-name>Ipv6-addr</type-name>
+                      </type>
+                    </ipv6-address>
+                  </address>
+                </default-router>
+                <pool-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;~ip_daps_show_pool_brief.PoolName</xr-path>
+                  <xr-xml-map>daps_show:PoolName</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type length="0..64">
+                    <type-name>string</type-name>
+                  </type>
+                </pool-name>
+                <vrf-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;~ip_daps_show_pool_brief.VRFName</xr-path>
+                  <xr-xml-map>daps_show:VRFName</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type length="0..64">
+                    <type-name>string</type-name>
+                  </type>
+                </vrf-name>
+                <allocated-addresses config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;~ip_daps_show_pool_brief.AllocatedAddresses</xr-path>
+                  <xr-xml-map>daps_show:AllocatedAddresses</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </allocated-addresses>
+                <free-addresses config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;~ip_daps_show_pool_brief.FreeAddresses</xr-path>
+                  <xr-xml-map>daps_show:FreeAddresses</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </free-addresses>
+                <excluded-addresses config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;~ip_daps_show_pool_brief.ExcludedAddresses</xr-path>
+                  <xr-xml-map>daps_show:ExcludedAddresses</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </excluded-addresses>
+                <network-blocked-status config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;~ip_daps_show_pool_brief.NetworkBlockedStatus</xr-path>
+                  <xr-xml-map>daps_show:NetworkBlockedStatus</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </network-blocked-status>
+                <network-blocked-status-trp config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/brief/&lt;daps_pool_oper_AddressRange_RangeStart&gt;~ip_daps_show_pool_brief.NetworkBlockedStatusTrp</xr-path>
+                  <xr-xml-map>daps_show:NetworkBlockedStatusTrp</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </network-blocked-status-trp>
+              </address-range>
+            </address-ranges>
+            <allocated-addresses config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose</xr-path>
+              <xr-xml-map>daps_pool_oper:AllocatedAddresses</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-bag-grp-name>daps_pool_detail</xr-bag-grp-name>
+              <xr-bag>daps_show.bag</xr-bag>
+              <pool-allocations config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.PoolAllocations</xr-path>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <high-threshold config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.PoolAllocations.HighThreshold</xr-path>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <threshold config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.PoolAllocations.HighThreshold.Threshold</xr-path>
+                    <xr-xml-map>daps_show:Threshold</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </threshold>
+                  <triggers config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.PoolAllocations.HighThreshold.Triggers</xr-path>
+                    <xr-xml-map>daps_show:Triggers</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </triggers>
+                  <time-last-crossed config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.PoolAllocations.HighThreshold.TimeLastCrossed</xr-path>
+                    <xr-xml-map>daps_show:TimeLastCrossed</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </time-last-crossed>
+                </high-threshold>
+                <low-threshold config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.PoolAllocations.LowThreshold</xr-path>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <threshold config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.PoolAllocations.LowThreshold.Threshold</xr-path>
+                    <xr-xml-map>daps_show:Threshold</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </threshold>
+                  <triggers config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.PoolAllocations.LowThreshold.Triggers</xr-path>
+                    <xr-xml-map>daps_show:Triggers</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                  </triggers>
+                  <time-last-crossed config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.PoolAllocations.LowThreshold.TimeLastCrossed</xr-path>
+                    <xr-xml-map>daps_show:TimeLastCrossed</xr-xml-map>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </time-last-crossed>
+                </low-threshold>
+                <vrf-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.PoolAllocations.VRFName</xr-path>
+                  <xr-xml-map>daps_show:VRFName</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type length="0..64">
+                    <type-name>string</type-name>
+                  </type>
+                </vrf-name>
+                <used config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.PoolAllocations.Used</xr-path>
+                  <xr-xml-map>daps_show:Used</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </used>
+                <excluded config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.PoolAllocations.Excluded</xr-path>
+                  <xr-xml-map>daps_show:Excluded</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </excluded>
+                <free config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.PoolAllocations.Free</xr-path>
+                  <xr-xml-map>daps_show:Free</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </free>
+                <total config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.PoolAllocations.Total</xr-path>
+                  <xr-xml-map>daps_show:Total</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </total>
+                <utilization config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.PoolAllocations.Utilization</xr-path>
+                  <xr-xml-map>daps_show:Utilization</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </utilization>
+              </pool-allocations>
+              <address-range config="false" node="list">
+                <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.AddressRanges[&lt;bag_arg2&gt;]</xr-path>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+                <start-address config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.AddressRanges[&lt;bag_arg2&gt;].StartAddress</xr-path>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <address config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.AddressRanges[&lt;bag_arg2&gt;].StartAddress.Address</xr-path>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <address-family config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.AddressRanges[&lt;bag_arg2&gt;].StartAddress.Address.AddressFamily</xr-path>
+                      <xr-xml-map>daps_show:AddressFamily</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <type>
+                        <type-name>Ip-addr</type-name>
+                      </type>
+                    </address-family>
+                    <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.AddressRanges[&lt;bag_arg2&gt;].StartAddress.Address.IPv4Address</xr-path>
+                      <xr-xml-map>daps_show:IPv4Address</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <when>../address-family = 'ipv4'</when>
+                      <type>
+                        <type-name>inet:ipv4-address</type-name>
+                      </type>
+                    </ipv4-address>
+                    <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.AddressRanges[&lt;bag_arg2&gt;].StartAddress.Address.IPv6Address</xr-path>
+                      <xr-xml-map>daps_show:IPv6Address</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <when>../address-family = 'ipv6'</when>
+                      <type>
+                        <type-name>Ipv6-addr</type-name>
+                      </type>
+                    </ipv6-address>
+                  </address>
+                </start-address>
+                <end-address config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.AddressRanges[&lt;bag_arg2&gt;].EndAddress</xr-path>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <address config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.AddressRanges[&lt;bag_arg2&gt;].EndAddress.Address</xr-path>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <address-family config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.AddressRanges[&lt;bag_arg2&gt;].EndAddress.Address.AddressFamily</xr-path>
+                      <xr-xml-map>daps_show:AddressFamily</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <type>
+                        <type-name>Ip-addr</type-name>
+                      </type>
+                    </address-family>
+                    <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.AddressRanges[&lt;bag_arg2&gt;].EndAddress.Address.IPv4Address</xr-path>
+                      <xr-xml-map>daps_show:IPv4Address</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <when>../address-family = 'ipv4'</when>
+                      <type>
+                        <type-name>inet:ipv4-address</type-name>
+                      </type>
+                    </ipv4-address>
+                    <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.AddressRanges[&lt;bag_arg2&gt;].EndAddress.Address.IPv6Address</xr-path>
+                      <xr-xml-map>daps_show:IPv6Address</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <when>../address-family = 'ipv6'</when>
+                      <type>
+                        <type-name>Ipv6-addr</type-name>
+                      </type>
+                    </ipv6-address>
+                  </address>
+                </end-address>
+                <used config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.AddressRanges[&lt;bag_arg2&gt;].Used</xr-path>
+                  <xr-xml-map>daps_show:Used</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </used>
+                <excluded config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.AddressRanges[&lt;bag_arg2&gt;].Excluded</xr-path>
+                  <xr-xml-map>daps_show:Excluded</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </excluded>
+                <free config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.AddressRanges[&lt;bag_arg2&gt;].Free</xr-path>
+                  <xr-xml-map>daps_show:Free</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </free>
+              </address-range>
+              <in-use-address config="false" node="list">
+                <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.InUseAddresses[&lt;bag_arg3&gt;]</xr-path>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+                <address config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.InUseAddresses[&lt;bag_arg3&gt;].Address</xr-path>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <address config="false" is-key="false" node="container" presence="false">
+                    <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.InUseAddresses[&lt;bag_arg3&gt;].Address.Address</xr-path>
+                    <xr-task>ip-services</xr-task>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <address-family config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.InUseAddresses[&lt;bag_arg3&gt;].Address.Address.AddressFamily</xr-path>
+                      <xr-xml-map>daps_show:AddressFamily</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <type>
+                        <type-name>Ip-addr</type-name>
+                      </type>
+                    </address-family>
+                    <ipv4-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.InUseAddresses[&lt;bag_arg3&gt;].Address.Address.IPv4Address</xr-path>
+                      <xr-xml-map>daps_show:IPv4Address</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <when>../address-family = 'ipv4'</when>
+                      <type>
+                        <type-name>inet:ipv4-address</type-name>
+                      </type>
+                    </ipv4-address>
+                    <ipv6-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.InUseAddresses[&lt;bag_arg3&gt;].Address.Address.IPv6Address</xr-path>
+                      <xr-xml-map>daps_show:IPv6Address</xr-xml-map>
+                      <xr-task>ip-services</xr-task>
+                      <xr-bag-primitive-type>in6_addr_t</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <when>../address-family = 'ipv6'</when>
+                      <type>
+                        <type-name>Ipv6-addr</type-name>
+                      </type>
+                    </ipv6-address>
+                  </address>
+                </address>
+                <client-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/verbose~daps_pool_detail.InUseAddresses[&lt;bag_arg3&gt;].ClientType</xr-path>
+                  <xr-xml-map>daps_show:ClientType</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Daps-client</type-name>
+                  </type>
+                </client-type>
+              </in-use-address>
+            </allocated-addresses>
+            <configuration config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/cfg</xr-path>
+              <xr-xml-map>daps_pool_oper:Configuration</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-bag-grp-name>ip_daps_show_pool_cfg</xr-bag-grp-name>
+              <xr-bag>daps_show.bag</xr-bag>
+              <serg-info config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/cfg~ip_daps_show_pool_cfg.SergInfo</xr-path>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <preferred-role config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/cfg~ip_daps_show_pool_cfg.SergInfo.PreferredRole</xr-path>
+                  <xr-xml-map>daps_show:PreferredRole</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Daps-serg-role</type-name>
+                  </type>
+                </preferred-role>
+                <peer-down config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/cfg~ip_daps_show_pool_cfg.SergInfo.PeerDown</xr-path>
+                  <xr-xml-map>daps_show:PeerDown</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </peer-down>
+                <verify-pend config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/cfg~ip_daps_show_pool_cfg.SergInfo.VerifyPend</xr-path>
+                  <xr-xml-map>daps_show:VerifyPend</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </verify-pend>
+              </serg-info>
+              <pool-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/cfg~ip_daps_show_pool_cfg.PoolName</xr-path>
+                <xr-xml-map>daps_show:PoolName</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type length="0..64">
+                  <type-name>string</type-name>
+                </type>
+              </pool-name>
+              <pool-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/cfg~ip_daps_show_pool_cfg.PoolID</xr-path>
+                <xr-xml-map>daps_show:PoolID</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </pool-id>
+              <vrf-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/cfg~ip_daps_show_pool_cfg.VRFName</xr-path>
+                <xr-xml-map>daps_show:VRFName</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type length="0..64">
+                  <type-name>string</type-name>
+                </type>
+              </vrf-name>
+              <pool-scope config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/cfg~ip_daps_show_pool_cfg.PoolScope</xr-path>
+                <xr-xml-map>daps_show:PoolScope</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type length="0..64">
+                  <type-name>string</type-name>
+                </type>
+              </pool-scope>
+              <pool-prefix-length config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/cfg~ip_daps_show_pool_cfg.PoolPrefixLength</xr-path>
+                <xr-xml-map>daps_show:PoolPrefixLength</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </pool-prefix-length>
+              <high-utilization-mark config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/cfg~ip_daps_show_pool_cfg.HighUtilizationMark</xr-path>
+                <xr-xml-map>daps_show:HighUtilizationMark</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </high-utilization-mark>
+              <low-utilization-mark config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/cfg~ip_daps_show_pool_cfg.LowUtilizationMark</xr-path>
+                <xr-xml-map>daps_show:LowUtilizationMark</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </low-utilization-mark>
+              <current-utilization config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/cfg~ip_daps_show_pool_cfg.CurrentUtilization</xr-path>
+                <xr-xml-map>daps_show:CurrentUtilization</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </current-utilization>
+              <utilization-high-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/cfg~ip_daps_show_pool_cfg.UtilizationHighCount</xr-path>
+                <xr-xml-map>daps_show:UtilizationHighCount</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </utilization-high-count>
+              <utilization-low-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/cfg~ip_daps_show_pool_cfg.UtilizationLowCount</xr-path>
+                <xr-xml-map>daps_show:UtilizationLowCount</xr-xml-map>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </utilization-low-count>
+            </configuration>
+            <pool-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/pool/&lt;daps_pool_oper_Pool_pool-name&gt;/</xr-path>
+              <xr-xml-map>daps_pool_oper:PoolName</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;daps_pool_oper_Pool_pool-name&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </pool-name>
+          </pool>
+        </pools>
+        <total-utilization config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/total-util</xr-path>
+          <xr-xml-map>daps_pool_oper:TotalUtilization</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-bag-grp-name>ip_daps_show_pool_total_util</xr-bag-grp-name>
+          <xr-bag>daps_show.bag</xr-bag>
+          <total-utilization-high-mark config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/total-util~ip_daps_show_pool_total_util.TotalUtilizationHighMark</xr-path>
+            <xr-xml-map>daps_show:TotalUtilizationHighMark</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </total-utilization-high-mark>
+          <total-utilization-low-mark config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/total-util~ip_daps_show_pool_total_util.TotalUtilizationLowMark</xr-path>
+            <xr-xml-map>daps_show:TotalUtilizationLowMark</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </total-utilization-low-mark>
+          <current-total-utilization config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/total-util~ip_daps_show_pool_total_util.CurrentTotalUtilization</xr-path>
+            <xr-xml-map>daps_show:CurrentTotalUtilization</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+            <xr-bag-version>2 0</xr-bag-version>
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </current-total-utilization>
+        </total-utilization>
+        <vrfs config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/</xr-path>
+          <xr-xml-map>daps_vrf_oper:VRFTable</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <vrf config="false" key="vrf-name" node="list">
+            <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/</xr-path>
+            <xr-xml-map>daps_vrf_oper:VRF</xr-xml-map>
+            <xr-task>ip-services</xr-task>
+            <ipv4 config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv4</xr-path>
+              <xr-xml-map>daps_vrf_oper:IPv4</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-bag-grp-name>daps_vrf_info</xr-bag-grp-name>
+              <xr-bag>daps_show.bag</xr-bag>
+              <allocation-summary config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv4~daps_vrf_info.AllocationSummary</xr-path>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <used config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv4~daps_vrf_info.AllocationSummary.Used</xr-path>
+                  <xr-xml-map>daps_show:Used</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </used>
+                <excluded config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv4~daps_vrf_info.AllocationSummary.Excluded</xr-path>
+                  <xr-xml-map>daps_show:Excluded</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </excluded>
+                <free config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv4~daps_vrf_info.AllocationSummary.Free</xr-path>
+                  <xr-xml-map>daps_show:Free</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </free>
+                <total config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv4~daps_vrf_info.AllocationSummary.Total</xr-path>
+                  <xr-xml-map>daps_show:Total</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </total>
+                <high-utilization-threshold config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv4~daps_vrf_info.AllocationSummary.HighUtilizationThreshold</xr-path>
+                  <xr-xml-map>daps_show:HighUtilizationThreshold</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </high-utilization-threshold>
+                <low-utilization-threshold config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv4~daps_vrf_info.AllocationSummary.LowUtilizationThreshold</xr-path>
+                  <xr-xml-map>daps_show:LowUtilizationThreshold</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </low-utilization-threshold>
+                <utilization config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv4~daps_vrf_info.AllocationSummary.Utilization</xr-path>
+                  <xr-xml-map>daps_show:Utilization</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </utilization>
+              </allocation-summary>
+              <pools config="false" node="list">
+                <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv4~daps_vrf_info.Pools[&lt;bag_arg1&gt;]</xr-path>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+                <pool-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv4~daps_vrf_info.Pools[&lt;bag_arg1&gt;].PoolName</xr-path>
+                  <xr-xml-map>daps_show:PoolName</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type length="0..64">
+                    <type-name>string</type-name>
+                  </type>
+                </pool-name>
+                <vrf-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv4~daps_vrf_info.Pools[&lt;bag_arg1&gt;].VRFName</xr-path>
+                  <xr-xml-map>daps_show:VRFName</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type length="0..64">
+                    <type-name>string</type-name>
+                  </type>
+                </vrf-name>
+                <used config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv4~daps_vrf_info.Pools[&lt;bag_arg1&gt;].Used</xr-path>
+                  <xr-xml-map>daps_show:Used</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </used>
+                <excluded config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv4~daps_vrf_info.Pools[&lt;bag_arg1&gt;].Excluded</xr-path>
+                  <xr-xml-map>daps_show:Excluded</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </excluded>
+                <free config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv4~daps_vrf_info.Pools[&lt;bag_arg1&gt;].Free</xr-path>
+                  <xr-xml-map>daps_show:Free</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </free>
+                <total config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv4~daps_vrf_info.Pools[&lt;bag_arg1&gt;].Total</xr-path>
+                  <xr-xml-map>daps_show:Total</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </total>
+              </pools>
+            </ipv4>
+            <ipv6 config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv6</xr-path>
+              <xr-xml-map>daps_vrf_oper:IPv6</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-bag-grp-name>daps_vrf_info</xr-bag-grp-name>
+              <xr-bag>daps_show.bag</xr-bag>
+              <allocation-summary config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv6~daps_vrf_info.AllocationSummary</xr-path>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <used config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv6~daps_vrf_info.AllocationSummary.Used</xr-path>
+                  <xr-xml-map>daps_show:Used</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </used>
+                <excluded config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv6~daps_vrf_info.AllocationSummary.Excluded</xr-path>
+                  <xr-xml-map>daps_show:Excluded</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </excluded>
+                <free config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv6~daps_vrf_info.AllocationSummary.Free</xr-path>
+                  <xr-xml-map>daps_show:Free</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </free>
+                <total config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv6~daps_vrf_info.AllocationSummary.Total</xr-path>
+                  <xr-xml-map>daps_show:Total</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </total>
+                <high-utilization-threshold config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv6~daps_vrf_info.AllocationSummary.HighUtilizationThreshold</xr-path>
+                  <xr-xml-map>daps_show:HighUtilizationThreshold</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </high-utilization-threshold>
+                <low-utilization-threshold config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv6~daps_vrf_info.AllocationSummary.LowUtilizationThreshold</xr-path>
+                  <xr-xml-map>daps_show:LowUtilizationThreshold</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </low-utilization-threshold>
+                <utilization config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv6~daps_vrf_info.AllocationSummary.Utilization</xr-path>
+                  <xr-xml-map>daps_show:Utilization</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </utilization>
+              </allocation-summary>
+              <pools config="false" node="list">
+                <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv6~daps_vrf_info.Pools[&lt;bag_arg1&gt;]</xr-path>
+                <xr-task>ip-services</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+                <pool-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv6~daps_vrf_info.Pools[&lt;bag_arg1&gt;].PoolName</xr-path>
+                  <xr-xml-map>daps_show:PoolName</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type length="0..64">
+                    <type-name>string</type-name>
+                  </type>
+                </pool-name>
+                <vrf-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv6~daps_vrf_info.Pools[&lt;bag_arg1&gt;].VRFName</xr-path>
+                  <xr-xml-map>daps_show:VRFName</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type length="0..64">
+                    <type-name>string</type-name>
+                  </type>
+                </vrf-name>
+                <used config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv6~daps_vrf_info.Pools[&lt;bag_arg1&gt;].Used</xr-path>
+                  <xr-xml-map>daps_show:Used</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </used>
+                <excluded config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv6~daps_vrf_info.Pools[&lt;bag_arg1&gt;].Excluded</xr-path>
+                  <xr-xml-map>daps_show:Excluded</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </excluded>
+                <free config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv6~daps_vrf_info.Pools[&lt;bag_arg1&gt;].Free</xr-path>
+                  <xr-xml-map>daps_show:Free</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </free>
+                <total config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/ipv6~daps_vrf_info.Pools[&lt;bag_arg1&gt;].Total</xr-path>
+                  <xr-xml-map>daps_show:Total</xr-xml-map>
+                  <xr-task>ip-services</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </total>
+              </pools>
+            </ipv6>
+            <vrf-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/vrf-xml/&lt;daps_vrf_oper_VRF_vrf-name&gt;/</xr-path>
+              <xr-xml-map>daps_vrf_oper:VRFName</xr-xml-map>
+              <xr-task>ip-services</xr-task>
+              <xr-sch-type>VRF_Name</xr-sch-type>
+              <xr-sch-arg-name>&lt;daps_vrf_oper_VRF_vrf-name&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </vrf-name>
+          </vrf>
+        </vrfs>
+        <node-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-pathformat>hex_nozerox</xr-pathformat>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/daps/node/&lt;daps_oper_Node_node&gt;/</xr-path>
+          <xr-xml-map>daps_oper:NodeName</xr-xml-map>
+          <xr-task>ip-services</xr-task>
+          <xr-sch-type>NodeID</xr-sch-type>
+          <xr-sch-arg-name>&lt;daps_oper_Node_node&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Node-id</type-name>
+          </type>
+        </node-name>
+      </node>
+    </nodes>
+  </address-pool-service>
+</Cisco-IOS-XR-ip-daps-oper>

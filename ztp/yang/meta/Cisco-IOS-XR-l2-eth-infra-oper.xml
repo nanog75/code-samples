@@ -1,0 +1,1696 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-l2-eth-infra-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-l2-eth-infra-oper" revision="2015-11-09">
+  <files>
+    <file revision="2015-11-09" submodule="false">Cisco-IOS-XR-l2-eth-infra-oper.yang</file>
+    <file revision="2015-11-09" submodule="true">Cisco-IOS-XR-l2-eth-infra-oper-sub3.yang</file>
+    <file revision="2015-11-09" submodule="true">Cisco-IOS-XR-l2-eth-infra-oper-sub2.yang</file>
+    <file revision="2015-11-09" submodule="true">Cisco-IOS-XR-l2-eth-infra-oper-sub1.yang</file>
+  </files>
+  <prefix>l2-eth-infra-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="dt1">Cisco-IOS-XR-l2-eth-infra-datatypes</import>
+  <import prefix="yang">ietf-yang-types</import>
+  <typedef name="Vlan-service">
+    <type node="enumeration">
+      <enum value="1">vlan-service-l2</enum>
+      <enum value="2">vlan-service-l3</enum>
+    </type>
+  </typedef>
+  <typedef name="Vlan-encaps">
+    <type node="enumeration">
+      <enum value="0">no-encapsulation</enum>
+      <enum value="1">dot1q</enum>
+      <enum value="2">qinq</enum>
+      <enum value="3">qin-any</enum>
+      <enum value="4">dot1q-native</enum>
+      <enum value="5">dot1ad</enum>
+      <enum value="6">dot1ad-native</enum>
+      <enum value="7">service-instance</enum>
+      <enum value="8">dot1ad-dot1q</enum>
+      <enum value="9">dot1ad-any</enum>
+    </type>
+  </typedef>
+  <typedef name="Mac-address">
+    <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+    <type>
+      <type-name>yang:mac-address</type-name>
+    </type>
+  </typedef>
+  <typedef name="Efp-payload-etype">
+    <type node="enumeration">
+      <enum value="0">payload-ethertype-any</enum>
+      <enum value="1">payload-ethertype-ip</enum>
+      <enum value="2">payload-ethertype-pppoe</enum>
+    </type>
+  </typedef>
+  <typedef name="Efp-tag-priority">
+    <type node="enumeration">
+      <enum value="0">priority0</enum>
+      <enum value="1">priority1</enum>
+      <enum value="2">priority2</enum>
+      <enum value="3">priority3</enum>
+      <enum value="4">priority4</enum>
+      <enum value="5">priority5</enum>
+      <enum value="6">priority6</enum>
+      <enum value="7">priority7</enum>
+      <enum value="8">priority-any</enum>
+    </type>
+  </typedef>
+  <typedef name="Efp-tag-etype">
+    <type node="enumeration">
+      <enum value="0">untagged</enum>
+      <enum value="33024">dot1q</enum>
+      <enum value="34984">dot1ad</enum>
+    </type>
+  </typedef>
+  <typedef name="Vlan-switched-mode">
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">trunk-port</enum>
+      <enum value="2">access-port</enum>
+    </type>
+  </typedef>
+  <typedef name="Eth-filtering">
+    <type node="enumeration">
+      <enum value="0">no-filtering</enum>
+      <enum value="1">dot1q-filtering</enum>
+      <enum value="2">dot1ad-filtering</enum>
+      <enum value="3">two-port-mac-relay-filtering</enum>
+    </type>
+  </typedef>
+  <typedef name="Vlan-qinq-outer-etype">
+    <type node="enumeration">
+      <enum value="33024">ether-type8100</enum>
+      <enum value="37120">ether-type9100</enum>
+      <enum value="37376">ether-type9200</enum>
+    </type>
+  </typedef>
+  <typedef name="Vlan-tag-value">
+    <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+    <type>
+      <type-name>uint16</type-name>
+    </type>
+  </typedef>
+  <typedef name="Im-state-enum">
+    <type node="enumeration">
+      <enum>im-state-not-ready</enum>
+      <enum>im-state-admin-down</enum>
+      <enum>im-state-down</enum>
+      <enum>im-state-up</enum>
+      <enum>im-state-shutdown</enum>
+      <enum>im-state-err-disable</enum>
+      <enum>im-state-down-immediate</enum>
+      <enum>im-state-down-immediate-admin</enum>
+      <enum>im-state-down-graceful</enum>
+      <enum>im-state-begin-shutdown</enum>
+      <enum>im-state-end-shutdown</enum>
+      <enum>im-state-begin-error-disable</enum>
+      <enum>im-state-end-error-disable</enum>
+      <enum>im-state-begin-down-graceful</enum>
+      <enum>im-state-reset</enum>
+      <enum>im-state-operational</enum>
+      <enum>im-state-not-operational</enum>
+      <enum>im-state-unknown</enum>
+      <enum>im-state-last</enum>
+    </type>
+  </typedef>
+  <typedef name="Eth-caps-ucast-mac-mode">
+    <type node="enumeration">
+      <enum value="0">reserved</enum>
+      <enum value="1">permit</enum>
+    </type>
+  </typedef>
+  <mac-accounting config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/mac-acc/</xr-path>
+    <xr-xml-map>ether_mac_acc_oper:MACAccounting</xr-xml-map>
+    <xr-task>interface</xr-task>
+    <interfaces config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/mac-acc/ifg/</xr-path>
+      <xr-xml-map>ether_mac_acc_oper:InterfaceTable</xr-xml-map>
+      <xr-task>interface</xr-task>
+      <interface config="false" key="interface-name" node="list">
+        <xr-path>/oper/mac-acc/ifg/&lt;ether_mac_acc_oper_Interface_intf-name&gt;</xr-path>
+        <xr-xml-map>ether_mac_acc_oper:Interface</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <xr-bag-grp-name>mac_acc_intf</xr-bag-grp-name>
+        <xr-bag>ether_mac_acc.bag</xr-bag>
+        <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/mac-acc/ifg/&lt;ether_mac_acc_oper_Interface_intf-name&gt;</xr-path>
+          <xr-xml-map>ether_mac_acc_oper:InterfaceName</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-sch-type>InterfaceName</xr-sch-type>
+          <xr-sch-arg-name>&lt;ether_mac_acc_oper_Interface_intf-name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </interface-name>
+        <state config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/mac-acc/ifg/&lt;ether_mac_acc_oper_Interface_intf-name&gt;~mac_acc_intf.State</xr-path>
+          <xr-task>interface</xr-task>
+          <xr-bag-version>0 1</xr-bag-version>
+          <is-ingress-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mac-acc/ifg/&lt;ether_mac_acc_oper_Interface_intf-name&gt;~mac_acc_intf.State.IsIngressEnabled</xr-path>
+            <xr-xml-map>ether_mac_acc:IsIngressEnabled</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </is-ingress-enabled>
+          <is-egress-enabled config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mac-acc/ifg/&lt;ether_mac_acc_oper_Interface_intf-name&gt;~mac_acc_intf.State.IsEgressEnabled</xr-path>
+            <xr-xml-map>ether_mac_acc:IsEgressEnabled</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </is-egress-enabled>
+          <number-available-ingress config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mac-acc/ifg/&lt;ether_mac_acc_oper_Interface_intf-name&gt;~mac_acc_intf.State.NumberAvailableIngress</xr-path>
+            <xr-xml-map>ether_mac_acc:NumberAvailableIngress</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </number-available-ingress>
+          <number-available-egress config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mac-acc/ifg/&lt;ether_mac_acc_oper_Interface_intf-name&gt;~mac_acc_intf.State.NumberAvailableEgress</xr-path>
+            <xr-xml-map>ether_mac_acc:NumberAvailableEgress</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </number-available-egress>
+          <number-available-on-node config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mac-acc/ifg/&lt;ether_mac_acc_oper_Interface_intf-name&gt;~mac_acc_intf.State.NumberAvailableOnNode</xr-path>
+            <xr-xml-map>ether_mac_acc:NumberAvailableOnNode</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </number-available-on-node>
+        </state>
+        <ingress-statistic config="false" node="list">
+          <xr-path>/oper/mac-acc/ifg/&lt;ether_mac_acc_oper_Interface_intf-name&gt;~mac_acc_intf.IngressStatistics[&lt;bag_arg6&gt;]</xr-path>
+          <xr-task>interface</xr-task>
+          <xr-bag-version>0 1</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg6&gt;</xr-internal-key>
+          <mac-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mac-acc/ifg/&lt;ether_mac_acc_oper_Interface_intf-name&gt;~mac_acc_intf.IngressStatistics[&lt;bag_arg6&gt;].MACAddress</xr-path>
+            <xr-xml-map>ether_mac_acc:MACAddress</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>yang:mac-address</type-name>
+            </type>
+          </mac-address>
+          <packets config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mac-acc/ifg/&lt;ether_mac_acc_oper_Interface_intf-name&gt;~mac_acc_intf.IngressStatistics[&lt;bag_arg6&gt;].Packets</xr-path>
+            <xr-xml-map>ether_mac_acc:Packets</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </packets>
+          <bytes config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mac-acc/ifg/&lt;ether_mac_acc_oper_Interface_intf-name&gt;~mac_acc_intf.IngressStatistics[&lt;bag_arg6&gt;].Bytes</xr-path>
+            <xr-xml-map>ether_mac_acc:Bytes</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </bytes>
+        </ingress-statistic>
+        <egress-statistic config="false" node="list">
+          <xr-path>/oper/mac-acc/ifg/&lt;ether_mac_acc_oper_Interface_intf-name&gt;~mac_acc_intf.EgressStatistics[&lt;bag_arg7&gt;]</xr-path>
+          <xr-task>interface</xr-task>
+          <xr-bag-version>0 1</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg7&gt;</xr-internal-key>
+          <mac-address config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mac-acc/ifg/&lt;ether_mac_acc_oper_Interface_intf-name&gt;~mac_acc_intf.EgressStatistics[&lt;bag_arg7&gt;].MACAddress</xr-path>
+            <xr-xml-map>ether_mac_acc:MACAddress</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>yang:mac-address</type-name>
+            </type>
+          </mac-address>
+          <packets config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mac-acc/ifg/&lt;ether_mac_acc_oper_Interface_intf-name&gt;~mac_acc_intf.EgressStatistics[&lt;bag_arg7&gt;].Packets</xr-path>
+            <xr-xml-map>ether_mac_acc:Packets</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </packets>
+          <bytes config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/mac-acc/ifg/&lt;ether_mac_acc_oper_Interface_intf-name&gt;~mac_acc_intf.EgressStatistics[&lt;bag_arg7&gt;].Bytes</xr-path>
+            <xr-xml-map>ether_mac_acc:Bytes</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </bytes>
+        </egress-statistic>
+      </interface>
+    </interfaces>
+  </mac-accounting>
+  <vlan config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/vlan/</xr-path>
+    <xr-xml-map>vlan_oper:VLAN</xr-xml-map>
+    <xr-task>vlan</xr-task>
+    <nodes config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/vlan/node/</xr-path>
+      <xr-xml-map>vlan_oper:NodeTable</xr-xml-map>
+      <xr-task>vlan</xr-task>
+      <node config="false" key="node-id" node="list">
+        <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/</xr-path>
+        <xr-xml-map>vlan_oper:Node</xr-xml-map>
+        <xr-task>vlan</xr-task>
+        <trunks config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/</xr-path>
+          <xr-xml-map>vlan_oper:TrunkTable</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <trunk config="false" key="interface" node="list">
+            <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;</xr-path>
+            <xr-xml-map>vlan_oper:Trunk</xr-xml-map>
+            <xr-task>vlan</xr-task>
+            <xr-bag-grp-name>vlan_trunk</xr-bag-grp-name>
+            <xr-bag>vlan_mgmt.bag</xr-bag>
+            <interface config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;</xr-path>
+              <xr-xml-map>vlan_oper:Interface</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-sch-type>InterfaceHandle</xr-sch-type>
+              <xr-sch-arg-name>&lt;vlan_oper_Trunk_ifhandle&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface>
+            <layer2-sub-interfaces config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.Layer2SubInterfaces</xr-path>
+              <xr-task>vlan</xr-task>
+              <xr-bag-version>2 0</xr-bag-version>
+              <state-counters config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.Layer2SubInterfaces.StateCounters</xr-path>
+                <xr-task>vlan</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <up config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.Layer2SubInterfaces.StateCounters.Up</xr-path>
+                  <xr-xml-map>vlan_mgmt:Up</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </up>
+                <down config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.Layer2SubInterfaces.StateCounters.Down</xr-path>
+                  <xr-xml-map>vlan_mgmt:Down</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </down>
+                <admin-down config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.Layer2SubInterfaces.StateCounters.AdminDown</xr-path>
+                  <xr-xml-map>vlan_mgmt:AdminDown</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </admin-down>
+              </state-counters>
+              <total-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.Layer2SubInterfaces.TotalCount</xr-path>
+                <xr-xml-map>vlan_mgmt:TotalCount</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </total-count>
+              <dot1q-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.Layer2SubInterfaces.Dot1QCount</xr-path>
+                <xr-xml-map>vlan_mgmt:Dot1QCount</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </dot1q-count>
+              <qin-q-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.Layer2SubInterfaces.QInQCount</xr-path>
+                <xr-xml-map>vlan_mgmt:QInQCount</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </qin-q-count>
+              <qin-any-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.Layer2SubInterfaces.QInAnyCount</xr-path>
+                <xr-xml-map>vlan_mgmt:QInAnyCount</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </qin-any-count>
+              <untagged-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.Layer2SubInterfaces.UntaggedCount</xr-path>
+                <xr-xml-map>vlan_mgmt:UntaggedCount</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </untagged-count>
+            </layer2-sub-interfaces>
+            <layer3-sub-interfaces config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.Layer3SubInterfaces</xr-path>
+              <xr-task>vlan</xr-task>
+              <xr-bag-version>2 0</xr-bag-version>
+              <state-counters config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.Layer3SubInterfaces.StateCounters</xr-path>
+                <xr-task>vlan</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <up config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.Layer3SubInterfaces.StateCounters.Up</xr-path>
+                  <xr-xml-map>vlan_mgmt:Up</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </up>
+                <down config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.Layer3SubInterfaces.StateCounters.Down</xr-path>
+                  <xr-xml-map>vlan_mgmt:Down</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </down>
+                <admin-down config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.Layer3SubInterfaces.StateCounters.AdminDown</xr-path>
+                  <xr-xml-map>vlan_mgmt:AdminDown</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </admin-down>
+              </state-counters>
+              <total-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.Layer3SubInterfaces.TotalCount</xr-path>
+                <xr-xml-map>vlan_mgmt:TotalCount</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </total-count>
+              <dot1q-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.Layer3SubInterfaces.Dot1QCount</xr-path>
+                <xr-xml-map>vlan_mgmt:Dot1QCount</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </dot1q-count>
+              <qin-q-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.Layer3SubInterfaces.QInQCount</xr-path>
+                <xr-xml-map>vlan_mgmt:QInQCount</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </qin-q-count>
+              <untagged-count config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.Layer3SubInterfaces.UntaggedCount</xr-path>
+                <xr-xml-map>vlan_mgmt:UntaggedCount</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </untagged-count>
+              <native-vlan config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.Layer3SubInterfaces.NativeVLAN</xr-path>
+                <xr-xml-map>vlan_mgmt:NativeVLAN</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>Vlan-tag-value</type-name>
+                </type>
+              </native-vlan>
+            </layer3-sub-interfaces>
+            <vlan-switched config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched</xr-path>
+              <xr-task>vlan</xr-task>
+              <xr-bag-version>2 0</xr-bag-version>
+              <trunk-vlan-ranges config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched.TrunkVLANRanges</xr-path>
+                <xr-task>vlan</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <local-traffic-stack config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched.TrunkVLANRanges.LocalTrafficStack</xr-path>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <local-traffic-tag config="false" node="list">
+                    <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched.TrunkVLANRanges.LocalTrafficStack.LocalTrafficTags[&lt;bag_arg2&gt;]</xr-path>
+                    <xr-task>vlan</xr-task>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+                    <ethertype config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched.TrunkVLANRanges.LocalTrafficStack.LocalTrafficTags[&lt;bag_arg2&gt;].Ethertype</xr-path>
+                      <xr-xml-map>vlan_mgmt:Ethertype</xr-xml-map>
+                      <xr-task>vlan</xr-task>
+                      <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <type>
+                        <type-name>Efp-tag-etype</type-name>
+                      </type>
+                    </ethertype>
+                    <vlan-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched.TrunkVLANRanges.LocalTrafficStack.LocalTrafficTags[&lt;bag_arg2&gt;].VLAN_ID</xr-path>
+                      <xr-xml-map>vlan_mgmt:VLAN_ID</xr-xml-map>
+                      <xr-task>vlan</xr-task>
+                      <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <type>
+                        <type-name>Vlan-tag-value</type-name>
+                      </type>
+                    </vlan-id>
+                  </local-traffic-tag>
+                </local-traffic-stack>
+                <payload-ethertype config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched.TrunkVLANRanges.PayloadEthertype</xr-path>
+                  <xr-xml-map>vlan_mgmt:PayloadEthertype</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Efp-payload-etype</type-name>
+                  </type>
+                </payload-ethertype>
+                <tags-popped config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched.TrunkVLANRanges.TagsPopped</xr-path>
+                  <xr-xml-map>vlan_mgmt:TagsPopped</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint16</type-name>
+                  </type>
+                </tags-popped>
+                <is-exact-match config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched.TrunkVLANRanges.IsExactMatch</xr-path>
+                  <xr-xml-map>vlan_mgmt:IsExactMatch</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </is-exact-match>
+                <is-native-vlan config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched.TrunkVLANRanges.IsNativeVLAN</xr-path>
+                  <xr-xml-map>vlan_mgmt:IsNativeVLAN</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </is-native-vlan>
+                <is-native-preserving config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched.TrunkVLANRanges.IsNativePreserving</xr-path>
+                  <xr-xml-map>vlan_mgmt:IsNativePreserving</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </is-native-preserving>
+                <source-mac-match config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched.TrunkVLANRanges.SourceMACMatch</xr-path>
+                  <xr-xml-map>vlan_mgmt:SourceMACMatch</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Mac-address</type-name>
+                  </type>
+                </source-mac-match>
+                <destination-mac-match config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched.TrunkVLANRanges.DestinationMACMatch</xr-path>
+                  <xr-xml-map>vlan_mgmt:DestinationMACMatch</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Mac-address</type-name>
+                  </type>
+                </destination-mac-match>
+                <tags-to-match config="false" node="list">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched.TrunkVLANRanges.TagsToMatch[&lt;bag_arg3&gt;]</xr-path>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+                  <ethertype config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched.TrunkVLANRanges.TagsToMatch[&lt;bag_arg3&gt;].Ethertype</xr-path>
+                    <xr-xml-map>vlan_mgmt:Ethertype</xr-xml-map>
+                    <xr-task>vlan</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <type>
+                      <type-name>Efp-tag-etype</type-name>
+                    </type>
+                  </ethertype>
+                  <priority config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched.TrunkVLANRanges.TagsToMatch[&lt;bag_arg3&gt;].Priority</xr-path>
+                    <xr-xml-map>vlan_mgmt:Priority</xr-xml-map>
+                    <xr-task>vlan</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <type>
+                      <type-name>Efp-tag-priority</type-name>
+                    </type>
+                  </priority>
+                  <vlan-range config="false" node="list">
+                    <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched.TrunkVLANRanges.TagsToMatch[&lt;bag_arg3&gt;].VLANRanges[&lt;bag_arg1&gt;]</xr-path>
+                    <xr-task>vlan</xr-task>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+                    <vlan-id-low config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched.TrunkVLANRanges.TagsToMatch[&lt;bag_arg3&gt;].VLANRanges[&lt;bag_arg1&gt;].VLAN_ID_Low</xr-path>
+                      <xr-xml-map>vlan_mgmt:VLAN_ID_Low</xr-xml-map>
+                      <xr-task>vlan</xr-task>
+                      <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <type>
+                        <type-name>Vlan-tag-value</type-name>
+                      </type>
+                    </vlan-id-low>
+                    <vlan-id-high config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched.TrunkVLANRanges.TagsToMatch[&lt;bag_arg3&gt;].VLANRanges[&lt;bag_arg1&gt;].VLAN_ID_High</xr-path>
+                      <xr-xml-map>vlan_mgmt:VLAN_ID_High</xr-xml-map>
+                      <xr-task>vlan</xr-task>
+                      <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <type>
+                        <type-name>Vlan-tag-value</type-name>
+                      </type>
+                    </vlan-id-high>
+                  </vlan-range>
+                </tags-to-match>
+                <pushe config="false" node="list">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched.TrunkVLANRanges.Pushes[&lt;bag_arg4&gt;]</xr-path>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <xr-internal-key>&lt;bag_arg4&gt;</xr-internal-key>
+                  <ethertype config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched.TrunkVLANRanges.Pushes[&lt;bag_arg4&gt;].Ethertype</xr-path>
+                    <xr-xml-map>vlan_mgmt:Ethertype</xr-xml-map>
+                    <xr-task>vlan</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <type>
+                      <type-name>Efp-tag-etype</type-name>
+                    </type>
+                  </ethertype>
+                  <vlan-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched.TrunkVLANRanges.Pushes[&lt;bag_arg4&gt;].VLAN_ID</xr-path>
+                    <xr-xml-map>vlan_mgmt:VLAN_ID</xr-xml-map>
+                    <xr-task>vlan</xr-task>
+                    <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <type>
+                      <type-name>Vlan-tag-value</type-name>
+                    </type>
+                  </vlan-id>
+                </pushe>
+              </trunk-vlan-ranges>
+              <mode config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched.Mode</xr-path>
+                <xr-xml-map>vlan_mgmt:Mode</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>Vlan-switched-mode</type-name>
+                </type>
+              </mode>
+              <access-vlan config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.VLANSwitched.AccessVLAN</xr-path>
+                <xr-xml-map>vlan_mgmt:AccessVLAN</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>Vlan-tag-value</type-name>
+                </type>
+              </access-vlan>
+            </vlan-switched>
+            <interface-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.Interface</xr-path>
+              <xr-xml-map>vlan_mgmt:interface-xr</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-xr>
+            <state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.State</xr-path>
+              <xr-xml-map>vlan_mgmt:State</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Im-state-enum</type-name>
+              </type>
+            </state>
+            <mtu config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.MTU</xr-path>
+              <xr-xml-map>vlan_mgmt:MTU</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </mtu>
+            <qinq-outer-ether-type config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.QinQOuterEtherType</xr-path>
+              <xr-xml-map>vlan_mgmt:QinQOuterEtherType</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Vlan-qinq-outer-etype</type-name>
+              </type>
+            </qinq-outer-ether-type>
+            <dot1ad-count config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.Dot1adCount</xr-path>
+              <xr-xml-map>vlan_mgmt:Dot1adCount</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+            </dot1ad-count>
+            <untagged-interface config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.UntaggedInterface</xr-path>
+              <xr-xml-map>vlan_mgmt:UntaggedInterface</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </untagged-interface>
+            <mac-filtering config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/trunk-table/&lt;vlan_oper_Trunk_ifhandle&gt;~vlan_trunk.MACFiltering</xr-path>
+              <xr-xml-map>vlan_mgmt:MACFiltering</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Eth-filtering</type-name>
+              </type>
+            </mac-filtering>
+          </trunk>
+        </trunks>
+        <interfaces config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/</xr-path>
+          <xr-xml-map>vlan_oper:InterfaceTable</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-filterlist>TrunkFilter</xr-filterlist>
+          <interface config="false" key="interface" node="list">
+            <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;</xr-path>
+            <xr-xml-map>vlan_oper:Interface</xr-xml-map>
+            <xr-task>vlan</xr-task>
+            <xr-bag-grp-name>vlan_intf</xr-bag-grp-name>
+            <xr-bag>vlan_mgmt.bag</xr-bag>
+            <interface config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;</xr-path>
+              <xr-xml-map>vlan_oper:Interface</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-sch-type>InterfaceHandle</xr-sch-type>
+              <xr-sch-arg-name>&lt;vlan_oper_Interface_ifhandle&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface>
+            <encapsulation-details config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails</xr-path>
+              <xr-task>vlan</xr-task>
+              <xr-bag-version>2 0</xr-bag-version>
+              <stack config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.Stack</xr-path>
+                <xr-task>vlan</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../vlan-encapsulation = 'qinq'</when>
+                <outer-tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.Stack.OuterTag</xr-path>
+                  <xr-xml-map>vlan_mgmt:OuterTag</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Vlan-tag-value</type-name>
+                  </type>
+                </outer-tag>
+                <second-tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.Stack.SecondTag</xr-path>
+                  <xr-xml-map>vlan_mgmt:SecondTag</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Vlan-tag-value</type-name>
+                  </type>
+                </second-tag>
+              </stack>
+              <service-instance-details config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0]</xr-path>
+                <xr-task>vlan</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../vlan-encapsulation = 'service-instance'</when>
+                <local-traffic-stack config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].LocalTrafficStack</xr-path>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <local-traffic-tag config="false" node="list">
+                    <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].LocalTrafficStack.LocalTrafficTags[&lt;bag_arg2&gt;]</xr-path>
+                    <xr-task>vlan</xr-task>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+                    <ethertype config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].LocalTrafficStack.LocalTrafficTags[&lt;bag_arg2&gt;].Ethertype</xr-path>
+                      <xr-xml-map>vlan_mgmt:Ethertype</xr-xml-map>
+                      <xr-task>vlan</xr-task>
+                      <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <type>
+                        <type-name>Efp-tag-etype</type-name>
+                      </type>
+                    </ethertype>
+                    <vlan-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].LocalTrafficStack.LocalTrafficTags[&lt;bag_arg2&gt;].VLAN_ID</xr-path>
+                      <xr-xml-map>vlan_mgmt:VLAN_ID</xr-xml-map>
+                      <xr-task>vlan</xr-task>
+                      <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <type>
+                        <type-name>Vlan-tag-value</type-name>
+                      </type>
+                    </vlan-id>
+                  </local-traffic-tag>
+                </local-traffic-stack>
+                <payload-ethertype config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].PayloadEthertype</xr-path>
+                  <xr-xml-map>vlan_mgmt:PayloadEthertype</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Efp-payload-etype</type-name>
+                  </type>
+                </payload-ethertype>
+                <tags-popped config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].TagsPopped</xr-path>
+                  <xr-xml-map>vlan_mgmt:TagsPopped</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint16</type-name>
+                  </type>
+                </tags-popped>
+                <is-exact-match config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].IsExactMatch</xr-path>
+                  <xr-xml-map>vlan_mgmt:IsExactMatch</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </is-exact-match>
+                <is-native-vlan config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].IsNativeVLAN</xr-path>
+                  <xr-xml-map>vlan_mgmt:IsNativeVLAN</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </is-native-vlan>
+                <is-native-preserving config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].IsNativePreserving</xr-path>
+                  <xr-xml-map>vlan_mgmt:IsNativePreserving</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </is-native-preserving>
+                <source-mac-match config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].SourceMACMatch</xr-path>
+                  <xr-xml-map>vlan_mgmt:SourceMACMatch</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Mac-address</type-name>
+                  </type>
+                </source-mac-match>
+                <destination-mac-match config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].DestinationMACMatch</xr-path>
+                  <xr-xml-map>vlan_mgmt:DestinationMACMatch</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Mac-address</type-name>
+                  </type>
+                </destination-mac-match>
+                <tags-to-match config="false" node="list">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].TagsToMatch[&lt;bag_arg3&gt;]</xr-path>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+                  <ethertype config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].TagsToMatch[&lt;bag_arg3&gt;].Ethertype</xr-path>
+                    <xr-xml-map>vlan_mgmt:Ethertype</xr-xml-map>
+                    <xr-task>vlan</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <type>
+                      <type-name>Efp-tag-etype</type-name>
+                    </type>
+                  </ethertype>
+                  <priority config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].TagsToMatch[&lt;bag_arg3&gt;].Priority</xr-path>
+                    <xr-xml-map>vlan_mgmt:Priority</xr-xml-map>
+                    <xr-task>vlan</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <type>
+                      <type-name>Efp-tag-priority</type-name>
+                    </type>
+                  </priority>
+                  <vlan-range config="false" node="list">
+                    <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].TagsToMatch[&lt;bag_arg3&gt;].VLANRanges[&lt;bag_arg1&gt;]</xr-path>
+                    <xr-task>vlan</xr-task>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+                    <vlan-id-low config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].TagsToMatch[&lt;bag_arg3&gt;].VLANRanges[&lt;bag_arg1&gt;].VLAN_ID_Low</xr-path>
+                      <xr-xml-map>vlan_mgmt:VLAN_ID_Low</xr-xml-map>
+                      <xr-task>vlan</xr-task>
+                      <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <type>
+                        <type-name>Vlan-tag-value</type-name>
+                      </type>
+                    </vlan-id-low>
+                    <vlan-id-high config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].TagsToMatch[&lt;bag_arg3&gt;].VLANRanges[&lt;bag_arg1&gt;].VLAN_ID_High</xr-path>
+                      <xr-xml-map>vlan_mgmt:VLAN_ID_High</xr-xml-map>
+                      <xr-task>vlan</xr-task>
+                      <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <type>
+                        <type-name>Vlan-tag-value</type-name>
+                      </type>
+                    </vlan-id-high>
+                  </vlan-range>
+                </tags-to-match>
+                <pushe config="false" node="list">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].Pushes[&lt;bag_arg4&gt;]</xr-path>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <xr-internal-key>&lt;bag_arg4&gt;</xr-internal-key>
+                  <ethertype config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].Pushes[&lt;bag_arg4&gt;].Ethertype</xr-path>
+                    <xr-xml-map>vlan_mgmt:Ethertype</xr-xml-map>
+                    <xr-task>vlan</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <type>
+                      <type-name>Efp-tag-etype</type-name>
+                    </type>
+                  </ethertype>
+                  <vlan-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].Pushes[&lt;bag_arg4&gt;].VLAN_ID</xr-path>
+                    <xr-xml-map>vlan_mgmt:VLAN_ID</xr-xml-map>
+                    <xr-task>vlan</xr-task>
+                    <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <type>
+                      <type-name>Vlan-tag-value</type-name>
+                    </type>
+                  </vlan-id>
+                </pushe>
+              </service-instance-details>
+              <dot1ad-dot1q-stack config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.Dot1adDot1qStack</xr-path>
+                <xr-task>vlan</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../vlan-encapsulation = 'dot1ad-dot1q'</when>
+                <outer-tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.Dot1adDot1qStack.OuterTag</xr-path>
+                  <xr-xml-map>vlan_mgmt:OuterTag</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Vlan-tag-value</type-name>
+                  </type>
+                </outer-tag>
+                <second-tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.Dot1adDot1qStack.SecondTag</xr-path>
+                  <xr-xml-map>vlan_mgmt:SecondTag</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Vlan-tag-value</type-name>
+                  </type>
+                </second-tag>
+              </dot1ad-dot1q-stack>
+              <vlan-encapsulation config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.VLANEncapsulation</xr-path>
+                <xr-xml-map>vlan_mgmt:VLANEncapsulation</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>Vlan-encaps</type-name>
+                </type>
+              </vlan-encapsulation>
+              <tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.Tag</xr-path>
+                <xr-xml-map>vlan_mgmt:Tag</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../vlan-encapsulation = 'dot1q'</when>
+                <type>
+                  <type-name>Vlan-tag-value</type-name>
+                </type>
+              </tag>
+              <outer-tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.OuterTag</xr-path>
+                <xr-xml-map>vlan_mgmt:OuterTag</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../vlan-encapsulation = 'qin-any'</when>
+                <type>
+                  <type-name>Vlan-tag-value</type-name>
+                </type>
+              </outer-tag>
+              <native-tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.NativeTag</xr-path>
+                <xr-xml-map>vlan_mgmt:NativeTag</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../vlan-encapsulation = 'dot1q-native'</when>
+                <type>
+                  <type-name>Vlan-tag-value</type-name>
+                </type>
+              </native-tag>
+              <dot1ad-tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.Dot1adTag</xr-path>
+                <xr-xml-map>vlan_mgmt:Dot1adTag</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../vlan-encapsulation = 'dot1ad'</when>
+                <type>
+                  <type-name>Vlan-tag-value</type-name>
+                </type>
+              </dot1ad-tag>
+              <dot1ad-native-tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.Dot1adNativeTag</xr-path>
+                <xr-xml-map>vlan_mgmt:Dot1adNativeTag</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../vlan-encapsulation = 'dot1ad-native'</when>
+                <type>
+                  <type-name>Vlan-tag-value</type-name>
+                </type>
+              </dot1ad-native-tag>
+              <dot1ad-outer-tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.EncapsulationDetails.Dot1adOuterTag</xr-path>
+                <xr-xml-map>vlan_mgmt:Dot1adOuterTag</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../vlan-encapsulation = 'dot1ad-any'</when>
+                <type>
+                  <type-name>Vlan-tag-value</type-name>
+                </type>
+              </dot1ad-outer-tag>
+            </encapsulation-details>
+            <interface-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.Interface</xr-path>
+              <xr-xml-map>vlan_mgmt:interface-xr</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-xr>
+            <parent-interface config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.ParentInterface</xr-path>
+              <xr-xml-map>vlan_mgmt:ParentInterface</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </parent-interface>
+            <service config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.Service</xr-path>
+              <xr-xml-map>vlan_mgmt:Service</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Vlan-service</type-name>
+              </type>
+            </service>
+            <state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.State</xr-path>
+              <xr-xml-map>vlan_mgmt:State</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Im-state-enum</type-name>
+              </type>
+            </state>
+            <mtu config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.MTU</xr-path>
+              <xr-xml-map>vlan_mgmt:MTU</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </mtu>
+            <switched-mtu config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/intf-table/&lt;vlan_oper_Interface_ifhandle&gt;~vlan_intf.SwitchedMTU</xr-path>
+              <xr-xml-map>vlan_mgmt:SwitchedMTU</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </switched-mtu>
+          </interface>
+        </interfaces>
+        <tag-allocations config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/</xr-path>
+          <xr-xml-map>vlan_oper:TagAllocationTable</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-filterlist>TrunkFilter</xr-filterlist>
+          <tag-allocation config="false" node="list">
+            <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;</xr-path>
+            <xr-xml-map>vlan_oper:TagAllocation</xr-xml-map>
+            <xr-task>vlan</xr-task>
+            <xr-bag-grp-name>vlan_intf</xr-bag-grp-name>
+            <xr-bag>vlan_mgmt.bag</xr-bag>
+            <interface config="false" is-key="true" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;</xr-path>
+              <xr-xml-map>vlan_oper:Interface</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-sch-type>InterfaceHandle</xr-sch-type>
+              <xr-sch-arg-name>&lt;vlan_oper_TagAllocation_ifhandle&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface>
+            <first-tag config="false" is-key="true" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;</xr-path>
+              <xr-xml-map>vlan_oper:FirstTag</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-sch-arg-name>&lt;vlan_oper_TagAllocation_first_tag&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>dt1:Vlan-tag</type-name>
+              </type>
+            </first-tag>
+            <second-tag config="false" is-key="true" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;</xr-path>
+              <xr-xml-map>vlan_oper:SecondTag</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-sch-type>RangeEnum</xr-sch-type>
+              <xr-sch-arg-name>&lt;vlan_oper_TagAllocation_second_tag&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>dt1:Vlan-tag-or-any</type-name>
+              </type>
+            </second-tag>
+            <encapsulation-details config="false" is-key="false" node="container" presence="false">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails</xr-path>
+              <xr-task>vlan</xr-task>
+              <xr-bag-version>2 0</xr-bag-version>
+              <stack config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.Stack</xr-path>
+                <xr-task>vlan</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../vlan-encapsulation = 'qinq'</when>
+                <outer-tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.Stack.OuterTag</xr-path>
+                  <xr-xml-map>vlan_mgmt:OuterTag</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Vlan-tag-value</type-name>
+                  </type>
+                </outer-tag>
+                <second-tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.Stack.SecondTag</xr-path>
+                  <xr-xml-map>vlan_mgmt:SecondTag</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Vlan-tag-value</type-name>
+                  </type>
+                </second-tag>
+              </stack>
+              <service-instance-details config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0]</xr-path>
+                <xr-task>vlan</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../vlan-encapsulation = 'service-instance'</when>
+                <local-traffic-stack config="false" is-key="false" node="container" presence="false">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].LocalTrafficStack</xr-path>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <local-traffic-tag config="false" node="list">
+                    <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].LocalTrafficStack.LocalTrafficTags[&lt;bag_arg2&gt;]</xr-path>
+                    <xr-task>vlan</xr-task>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+                    <ethertype config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].LocalTrafficStack.LocalTrafficTags[&lt;bag_arg2&gt;].Ethertype</xr-path>
+                      <xr-xml-map>vlan_mgmt:Ethertype</xr-xml-map>
+                      <xr-task>vlan</xr-task>
+                      <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <type>
+                        <type-name>Efp-tag-etype</type-name>
+                      </type>
+                    </ethertype>
+                    <vlan-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].LocalTrafficStack.LocalTrafficTags[&lt;bag_arg2&gt;].VLAN_ID</xr-path>
+                      <xr-xml-map>vlan_mgmt:VLAN_ID</xr-xml-map>
+                      <xr-task>vlan</xr-task>
+                      <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <type>
+                        <type-name>Vlan-tag-value</type-name>
+                      </type>
+                    </vlan-id>
+                  </local-traffic-tag>
+                </local-traffic-stack>
+                <payload-ethertype config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].PayloadEthertype</xr-path>
+                  <xr-xml-map>vlan_mgmt:PayloadEthertype</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Efp-payload-etype</type-name>
+                  </type>
+                </payload-ethertype>
+                <tags-popped config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].TagsPopped</xr-path>
+                  <xr-xml-map>vlan_mgmt:TagsPopped</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>uint16</type-name>
+                  </type>
+                </tags-popped>
+                <is-exact-match config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].IsExactMatch</xr-path>
+                  <xr-xml-map>vlan_mgmt:IsExactMatch</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </is-exact-match>
+                <is-native-vlan config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].IsNativeVLAN</xr-path>
+                  <xr-xml-map>vlan_mgmt:IsNativeVLAN</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </is-native-vlan>
+                <is-native-preserving config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].IsNativePreserving</xr-path>
+                  <xr-xml-map>vlan_mgmt:IsNativePreserving</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </is-native-preserving>
+                <source-mac-match config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].SourceMACMatch</xr-path>
+                  <xr-xml-map>vlan_mgmt:SourceMACMatch</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Mac-address</type-name>
+                  </type>
+                </source-mac-match>
+                <destination-mac-match config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].DestinationMACMatch</xr-path>
+                  <xr-xml-map>vlan_mgmt:DestinationMACMatch</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Mac-address</type-name>
+                  </type>
+                </destination-mac-match>
+                <tags-to-match config="false" node="list">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].TagsToMatch[&lt;bag_arg3&gt;]</xr-path>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+                  <ethertype config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].TagsToMatch[&lt;bag_arg3&gt;].Ethertype</xr-path>
+                    <xr-xml-map>vlan_mgmt:Ethertype</xr-xml-map>
+                    <xr-task>vlan</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <type>
+                      <type-name>Efp-tag-etype</type-name>
+                    </type>
+                  </ethertype>
+                  <priority config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].TagsToMatch[&lt;bag_arg3&gt;].Priority</xr-path>
+                    <xr-xml-map>vlan_mgmt:Priority</xr-xml-map>
+                    <xr-task>vlan</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <type>
+                      <type-name>Efp-tag-priority</type-name>
+                    </type>
+                  </priority>
+                  <vlan-range config="false" node="list">
+                    <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].TagsToMatch[&lt;bag_arg3&gt;].VLANRanges[&lt;bag_arg1&gt;]</xr-path>
+                    <xr-task>vlan</xr-task>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+                    <vlan-id-low config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].TagsToMatch[&lt;bag_arg3&gt;].VLANRanges[&lt;bag_arg1&gt;].VLAN_ID_Low</xr-path>
+                      <xr-xml-map>vlan_mgmt:VLAN_ID_Low</xr-xml-map>
+                      <xr-task>vlan</xr-task>
+                      <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <type>
+                        <type-name>Vlan-tag-value</type-name>
+                      </type>
+                    </vlan-id-low>
+                    <vlan-id-high config="false" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].TagsToMatch[&lt;bag_arg3&gt;].VLANRanges[&lt;bag_arg1&gt;].VLAN_ID_High</xr-path>
+                      <xr-xml-map>vlan_mgmt:VLAN_ID_High</xr-xml-map>
+                      <xr-task>vlan</xr-task>
+                      <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                      <xr-bag-version>2 0</xr-bag-version>
+                      <type>
+                        <type-name>Vlan-tag-value</type-name>
+                      </type>
+                    </vlan-id-high>
+                  </vlan-range>
+                </tags-to-match>
+                <pushe config="false" node="list">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].Pushes[&lt;bag_arg4&gt;]</xr-path>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <xr-internal-key>&lt;bag_arg4&gt;</xr-internal-key>
+                  <ethertype config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].Pushes[&lt;bag_arg4&gt;].Ethertype</xr-path>
+                    <xr-xml-map>vlan_mgmt:Ethertype</xr-xml-map>
+                    <xr-task>vlan</xr-task>
+                    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <type>
+                      <type-name>Efp-tag-etype</type-name>
+                    </type>
+                  </ethertype>
+                  <vlan-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.ServiceInstanceDetails[0].Pushes[&lt;bag_arg4&gt;].VLAN_ID</xr-path>
+                    <xr-xml-map>vlan_mgmt:VLAN_ID</xr-xml-map>
+                    <xr-task>vlan</xr-task>
+                    <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                    <xr-bag-version>2 0</xr-bag-version>
+                    <type>
+                      <type-name>Vlan-tag-value</type-name>
+                    </type>
+                  </vlan-id>
+                </pushe>
+              </service-instance-details>
+              <dot1ad-dot1q-stack config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.Dot1adDot1qStack</xr-path>
+                <xr-task>vlan</xr-task>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../vlan-encapsulation = 'dot1ad-dot1q'</when>
+                <outer-tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.Dot1adDot1qStack.OuterTag</xr-path>
+                  <xr-xml-map>vlan_mgmt:OuterTag</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Vlan-tag-value</type-name>
+                  </type>
+                </outer-tag>
+                <second-tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.Dot1adDot1qStack.SecondTag</xr-path>
+                  <xr-xml-map>vlan_mgmt:SecondTag</xr-xml-map>
+                  <xr-task>vlan</xr-task>
+                  <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                  <xr-bag-version>2 0</xr-bag-version>
+                  <type>
+                    <type-name>Vlan-tag-value</type-name>
+                  </type>
+                </second-tag>
+              </dot1ad-dot1q-stack>
+              <vlan-encapsulation config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.VLANEncapsulation</xr-path>
+                <xr-xml-map>vlan_mgmt:VLANEncapsulation</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <type>
+                  <type-name>Vlan-encaps</type-name>
+                </type>
+              </vlan-encapsulation>
+              <tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.Tag</xr-path>
+                <xr-xml-map>vlan_mgmt:Tag</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../vlan-encapsulation = 'dot1q'</when>
+                <type>
+                  <type-name>Vlan-tag-value</type-name>
+                </type>
+              </tag>
+              <outer-tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.OuterTag</xr-path>
+                <xr-xml-map>vlan_mgmt:OuterTag</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../vlan-encapsulation = 'qin-any'</when>
+                <type>
+                  <type-name>Vlan-tag-value</type-name>
+                </type>
+              </outer-tag>
+              <native-tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.NativeTag</xr-path>
+                <xr-xml-map>vlan_mgmt:NativeTag</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../vlan-encapsulation = 'dot1q-native'</when>
+                <type>
+                  <type-name>Vlan-tag-value</type-name>
+                </type>
+              </native-tag>
+              <dot1ad-tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.Dot1adTag</xr-path>
+                <xr-xml-map>vlan_mgmt:Dot1adTag</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../vlan-encapsulation = 'dot1ad'</when>
+                <type>
+                  <type-name>Vlan-tag-value</type-name>
+                </type>
+              </dot1ad-tag>
+              <dot1ad-native-tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.Dot1adNativeTag</xr-path>
+                <xr-xml-map>vlan_mgmt:Dot1adNativeTag</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../vlan-encapsulation = 'dot1ad-native'</when>
+                <type>
+                  <type-name>Vlan-tag-value</type-name>
+                </type>
+              </dot1ad-native-tag>
+              <dot1ad-outer-tag config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.EncapsulationDetails.Dot1adOuterTag</xr-path>
+                <xr-xml-map>vlan_mgmt:Dot1adOuterTag</xr-xml-map>
+                <xr-task>vlan</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>2 0</xr-bag-version>
+                <when>../vlan-encapsulation = 'dot1ad-any'</when>
+                <type>
+                  <type-name>Vlan-tag-value</type-name>
+                </type>
+              </dot1ad-outer-tag>
+            </encapsulation-details>
+            <interface-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.Interface</xr-path>
+              <xr-xml-map>vlan_mgmt:interface-xr</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-xr>
+            <parent-interface config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.ParentInterface</xr-path>
+              <xr-xml-map>vlan_mgmt:ParentInterface</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-bag-primitive-type>ifhtype</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </parent-interface>
+            <service config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.Service</xr-path>
+              <xr-xml-map>vlan_mgmt:Service</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Vlan-service</type-name>
+              </type>
+            </service>
+            <state config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.State</xr-path>
+              <xr-xml-map>vlan_mgmt:State</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>Im-state-enum</type-name>
+              </type>
+            </state>
+            <mtu config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.MTU</xr-path>
+              <xr-xml-map>vlan_mgmt:MTU</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </mtu>
+            <switched-mtu config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/tag-table/&lt;vlan_oper_TagAllocation_ifhandle&gt;,&lt;vlan_oper_TagAllocation_first_tag&gt;,&lt;vlan_oper_TagAllocation_second_tag&gt;~vlan_intf.SwitchedMTU</xr-path>
+              <xr-xml-map>vlan_mgmt:SwitchedMTU</xr-xml-map>
+              <xr-task>vlan</xr-task>
+              <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+              <xr-bag-version>2 0</xr-bag-version>
+              <type>
+                <type-name>uint16</type-name>
+              </type>
+            </switched-mtu>
+          </tag-allocation>
+        </tag-allocations>
+        <node-id config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-pathformat>hex_nozerox</xr-pathformat>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/vlan/node/&lt;vlan_oper_Node_node-id&gt;/</xr-path>
+          <xr-xml-map>vlan_oper:NodeID</xr-xml-map>
+          <xr-task>vlan</xr-task>
+          <xr-sch-type>NodeID</xr-sch-type>
+          <xr-sch-arg-name>&lt;vlan_oper_Node_node-id&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Node-id</type-name>
+          </type>
+        </node-id>
+      </node>
+    </nodes>
+  </vlan>
+  <ethernet-encapsulation config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/ecp/</xr-path>
+    <xr-xml-map>ether_caps_oper:EthernetEncapsulation</xr-xml-map>
+    <xr-task>interface</xr-task>
+    <nodes config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ecp/node/</xr-path>
+      <xr-xml-map>ether_caps_oper:NodeTable</xr-xml-map>
+      <xr-task>interface</xr-task>
+      <node config="false" key="node-name" node="list">
+        <xr-path>/oper/ecp/node/&lt;ether_caps_oper_Node_node-id&gt;/</xr-path>
+        <xr-xml-map>ether_caps_oper:Node</xr-xml-map>
+        <xr-task>interface</xr-task>
+        <unicast-mac-filters config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ecp/node/&lt;ether_caps_oper_Node_node-id&gt;/umac/if/</xr-path>
+          <xr-xml-map>ether_caps_oper:UnicastMACFilterTable</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <unicast-mac-filter config="false" key="interface-name" node="list">
+            <xr-path>/oper/ecp/node/&lt;ether_caps_oper_Node_node-id&gt;/umac/if/&lt;ether_caps_oper_UnicastMACFilter_ifhandle&gt;</xr-path>
+            <xr-xml-map>ether_caps_oper:UnicastMACFilter</xr-xml-map>
+            <xr-task>interface</xr-task>
+            <xr-bag-grp-name>ether_caps_ucast_filter</xr-bag-grp-name>
+            <xr-bag>ether_caps.bag</xr-bag>
+            <interface-name config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/oper/ecp/node/&lt;ether_caps_oper_Node_node-id&gt;/umac/if/&lt;ether_caps_oper_UnicastMACFilter_ifhandle&gt;</xr-path>
+              <xr-xml-map>ether_caps_oper:InterfaceName</xr-xml-map>
+              <xr-task>interface</xr-task>
+              <xr-sch-type>InterfaceHandle</xr-sch-type>
+              <xr-sch-arg-name>&lt;ether_caps_oper_UnicastMACFilter_ifhandle&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-name>
+            <unicast-filter config="false" node="list">
+              <xr-path>/oper/ecp/node/&lt;ether_caps_oper_Node_node-id&gt;/umac/if/&lt;ether_caps_oper_UnicastMACFilter_ifhandle&gt;~ether_caps_ucast_filter.UnicastFilter[&lt;bag_arg5&gt;]</xr-path>
+              <xr-task>interface</xr-task>
+              <xr-bag-version>0 1</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg5&gt;</xr-internal-key>
+              <mac-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ecp/node/&lt;ether_caps_oper_Node_node-id&gt;/umac/if/&lt;ether_caps_oper_UnicastMACFilter_ifhandle&gt;~ether_caps_ucast_filter.UnicastFilter[&lt;bag_arg5&gt;].MACAddress</xr-path>
+                <xr-xml-map>ether_caps:MACAddress</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>mac_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>yang:mac-address</type-name>
+                </type>
+              </mac-address>
+              <mode config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ecp/node/&lt;ether_caps_oper_Node_node-id&gt;/umac/if/&lt;ether_caps_oper_UnicastMACFilter_ifhandle&gt;~ether_caps_ucast_filter.UnicastFilter[&lt;bag_arg5&gt;].Mode</xr-path>
+                <xr-xml-map>ether_caps:Mode</xr-xml-map>
+                <xr-task>interface</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>Eth-caps-ucast-mac-mode</type-name>
+                </type>
+              </mode>
+            </unicast-filter>
+          </unicast-mac-filter>
+        </unicast-mac-filters>
+        <node-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-pathformat>hex_nozerox</xr-pathformat>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/ecp/node/&lt;ether_caps_oper_Node_node-id&gt;/</xr-path>
+          <xr-xml-map>ether_caps_oper:NodeName</xr-xml-map>
+          <xr-task>interface</xr-task>
+          <xr-sch-type>NodeID</xr-sch-type>
+          <xr-sch-arg-name>&lt;ether_caps_oper_Node_node-id&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Node-id</type-name>
+          </type>
+        </node-name>
+      </node>
+    </nodes>
+  </ethernet-encapsulation>
+</Cisco-IOS-XR-l2-eth-infra-oper>

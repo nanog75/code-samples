@@ -1,0 +1,228 @@
+<?xml version="1.0"?>
+<openconfig-platform-transceiver ns="http://openconfig.net/yang/platform/transceiver" oc-ver="0.1.0" revision="2016-05-24">
+  <files>
+    <file revision="2016-05-24" submodule="false">openconfig-platform-transceiver.yang</file>
+  </files>
+  <prefix>oc-transceiver</prefix>
+  <organization>OpenConfig working group</organization>
+  <import prefix="oc-platform">openconfig-platform</import>
+  <import prefix="oc-opt-types">openconfig-transport-types</import>
+  <import prefix="oc-types">openconfig-types</import>
+  <import prefix="oc-ext">openconfig-extensions</import>
+  <import prefix="yang">ietf-yang-types</import>
+  <augment path="/oc-platform:components/oc-platform:component">
+    <when>/oc-platform:components/oc-platform:component/oc-platform:state/oc-platform:type = 'TRANSCEIVER'</when>
+    <transceiver config="true" is-key="false" node="container" presence="false">
+      <config config="true" is-key="false" node="container" presence="false">
+        <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </enabled>
+        <form-factor config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="identityref">
+            <base>oc-opt-types:TRANSCEIVER_FORM_FACTOR_TYPE</base>
+          </type>
+        </form-factor>
+      </config>
+      <state config="true" is-key="false" node="container" presence="false">
+        <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </enabled>
+        <form-factor config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="identityref">
+            <base>oc-opt-types:TRANSCEIVER_FORM_FACTOR_TYPE</base>
+          </type>
+        </form-factor>
+        <present config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="enumeration">
+            <enum>PRESENT</enum>
+            <enum>NOT_PRESENT</enum>
+          </type>
+        </present>
+        <connector-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="identityref">
+            <base>oc-opt-types:FIBER_CONNECTOR_TYPE</base>
+          </type>
+        </connector-type>
+        <internal-temp config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type range="-40..125">
+            <type-name>int16</type-name>
+          </type>
+        </internal-temp>
+        <vendor config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type length="1..16">
+            <type-name>string</type-name>
+          </type>
+        </vendor>
+        <vendor-part config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type length="1..16">
+            <type-name>string</type-name>
+          </type>
+        </vendor-part>
+        <vendor-rev config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type length="1..2">
+            <type-name>string</type-name>
+          </type>
+        </vendor-rev>
+        <ethernet-compliance-code config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="identityref">
+            <base>oc-opt-types:ETHERNET_PMD_TYPE</base>
+          </type>
+        </ethernet-compliance-code>
+        <sonet-sdh-compliance-code config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="identityref">
+            <base>oc-opt-types:SONET_APPLICATION_CODE</base>
+          </type>
+        </sonet-sdh-compliance-code>
+        <otn-compliance-code config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="identityref">
+            <base>oc-opt-types:OTN_APPLICATION_CODE</base>
+          </type>
+        </otn-compliance-code>
+        <serial-no config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type length="1..16">
+            <type-name>string</type-name>
+          </type>
+        </serial-no>
+        <date-code config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:date-and-time</type-name>
+          </type>
+        </date-code>
+        <fault-condition config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </fault-condition>
+      </state>
+      <physical-channels config="true" is-key="false" node="container" presence="false">
+        <channel config="true" key="index" node="list">
+          <index config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </index>
+          <config config="true" is-key="false" node="container" presence="false">
+            <index config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type range="0..max">
+                <type-name>uint16</type-name>
+              </type>
+            </index>
+            <description config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </description>
+            <tx-laser config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </tx-laser>
+            <target-output-power config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>decimal64</type-name>
+              </type>
+            </target-output-power>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <index config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type range="0..max">
+                <type-name>uint16</type-name>
+              </type>
+            </index>
+            <description config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </description>
+            <tx-laser config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+            </tx-laser>
+            <target-output-power config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>decimal64</type-name>
+              </type>
+            </target-output-power>
+            <output-frequency config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>oc-opt-types:frequency-type</type-name>
+              </type>
+            </output-frequency>
+            <output-power config="true" is-key="false" node="container" presence="false">
+              <instant config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>decimal64</type-name>
+                </type>
+              </instant>
+              <avg config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>decimal64</type-name>
+                </type>
+              </avg>
+              <min config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>decimal64</type-name>
+                </type>
+              </min>
+              <max config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>decimal64</type-name>
+                </type>
+              </max>
+            </output-power>
+            <input-power config="true" is-key="false" node="container" presence="false">
+              <instant config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>decimal64</type-name>
+                </type>
+              </instant>
+              <avg config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>decimal64</type-name>
+                </type>
+              </avg>
+              <min config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>decimal64</type-name>
+                </type>
+              </min>
+              <max config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>decimal64</type-name>
+                </type>
+              </max>
+            </input-power>
+            <laser-bias-current config="true" is-key="false" node="container" presence="false">
+              <instant config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>decimal64</type-name>
+                </type>
+              </instant>
+              <avg config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>decimal64</type-name>
+                </type>
+              </avg>
+              <min config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>decimal64</type-name>
+                </type>
+              </min>
+              <max config="true" is-key="false" is-yang-key="false" node="leaf">
+                <type>
+                  <type-name>decimal64</type-name>
+                </type>
+              </max>
+            </laser-bias-current>
+          </state>
+        </channel>
+      </physical-channels>
+    </transceiver>
+  </augment>
+</openconfig-platform-transceiver>

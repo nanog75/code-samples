@@ -1,0 +1,719 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ipv4-autorp-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-autorp-oper" revision="2015-11-09">
+  <files>
+    <file revision="2015-11-09" submodule="false">Cisco-IOS-XR-ipv4-autorp-oper.yang</file>
+    <file revision="2015-11-09" submodule="true">Cisco-IOS-XR-ipv4-autorp-oper-sub1.yang</file>
+    <file revision="2015-11-09" submodule="true">Cisco-IOS-XR-ipv4-autorp-oper-sub2.yang</file>
+  </files>
+  <prefix>ipv4-autorp-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="dt1">Cisco-IOS-XR-ipv4-autorp-datatypes</import>
+  <typedef name="Autorp-protocol-mode">
+    <type node="enumeration">
+      <enum value="0">sparse</enum>
+      <enum value="1">bidirectional</enum>
+    </type>
+  </typedef>
+  <auto-rp config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/ipv4-autorp/gl/</xr-path>
+    <xr-xml-map>ipv4_multicast_autorp_oper:AutoRP</xr-xml-map>
+    <xr-task>multicast</xr-task>
+    <xr-scope>exported</xr-scope>
+    <standby config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ipv4-autorp/gl/sby/</xr-path>
+      <xr-xml-map>ipv4_autorp_role_lvl_oper:Standby</xr-xml-map>
+      <xr-task>multicast</xr-task>
+      <xr-compatibility>6.0</xr-compatibility>
+      <candidate-rp config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ipv4-autorp/gl/sby/candidate_rp/</xr-path>
+        <xr-xml-map>ipv4_autorp_role_lvl_oper:CandidateRP</xr-xml-map>
+        <xr-task>multicast</xr-task>
+        <xr-scope>exported</xr-scope>
+        <xr-compatibility>6.1</xr-compatibility>
+        <traffic config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv4-autorp/gl/sby/candidate_rp/traffic</xr-path>
+          <xr-xml-map>ipv4_autorp_common_oper:Traffic</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <xr-bag-grp-name>autorp_crp_traffic_bag</xr-bag-grp-name>
+          <xr-bag>autorp_candidate_rp.bag</xr-bag>
+          <active-sent-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-autorp/gl/sby/candidate_rp/traffic~autorp_crp_traffic_bag.ActiveSentPackets</xr-path>
+            <xr-xml-map>autorp_candidate_rp:ActiveSentPackets</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </active-sent-packets>
+          <standby-sent-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-autorp/gl/sby/candidate_rp/traffic~autorp_crp_traffic_bag.StandbySentPackets</xr-path>
+            <xr-xml-map>autorp_candidate_rp:StandbySentPackets</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </standby-sent-packets>
+        </traffic>
+        <rps config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv4-autorp/gl/sby/candidate_rp/crp-table/</xr-path>
+          <xr-xml-map>ipv4_autorp_common_oper:RPTable</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <rp config="false" node="list">
+            <xr-path>/oper/ipv4-autorp/gl/sby/candidate_rp/crp-table/&lt;ipv4_autorp_common_oper_RP_intf_name&gt;,&lt;ipv4_autorp_common_oper_RP_protocol_mode&gt;</xr-path>
+            <xr-xml-map>ipv4_autorp_common_oper:RP</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-bag-grp-name>autorp_crp_bag</xr-bag-grp-name>
+            <xr-bag>autorp_candidate_rp.bag</xr-bag>
+            <interface-name config="false" is-key="true" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/ipv4-autorp/gl/sby/candidate_rp/crp-table/&lt;ipv4_autorp_common_oper_RP_intf_name&gt;,&lt;ipv4_autorp_common_oper_RP_protocol_mode&gt;</xr-path>
+              <xr-xml-map>ipv4_autorp_common_oper:InterfaceName</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-sch-type>InterfaceName</xr-sch-type>
+              <xr-sch-arg-name>&lt;ipv4_autorp_common_oper_RP_intf_name&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-name>
+            <protocol-mode config="false" is-key="true" is-yang-key="false" node="leaf">
+              <xr-pathformat>decimal</xr-pathformat>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/oper/ipv4-autorp/gl/sby/candidate_rp/crp-table/&lt;ipv4_autorp_common_oper_RP_intf_name&gt;,&lt;ipv4_autorp_common_oper_RP_protocol_mode&gt;</xr-path>
+              <xr-xml-map>ipv4_autorp_common_oper:ProtocolMode</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <xr-sch-arg-name>&lt;ipv4_autorp_common_oper_RP_protocol_mode&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>dt1:Auto-rp-protocol-mode</type-name>
+              </type>
+            </protocol-mode>
+            <access-list-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-autorp/gl/sby/candidate_rp/crp-table/&lt;ipv4_autorp_common_oper_RP_intf_name&gt;,&lt;ipv4_autorp_common_oper_RP_protocol_mode&gt;~autorp_crp_bag.AccessListName</xr-path>
+              <xr-xml-map>autorp_candidate_rp:AccessListName</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </access-list-name>
+            <candidate-rp-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-autorp/gl/sby/candidate_rp/crp-table/&lt;ipv4_autorp_common_oper_RP_intf_name&gt;,&lt;ipv4_autorp_common_oper_RP_protocol_mode&gt;~autorp_crp_bag.CandidateRPAddress</xr-path>
+              <xr-xml-map>autorp_candidate_rp:CandidateRPAddress</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </candidate-rp-address>
+            <ttl config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-autorp/gl/sby/candidate_rp/crp-table/&lt;ipv4_autorp_common_oper_RP_intf_name&gt;,&lt;ipv4_autorp_common_oper_RP_protocol_mode&gt;~autorp_crp_bag.TTL</xr-path>
+              <xr-xml-map>autorp_candidate_rp:TTL</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>int32</type-name>
+              </type>
+            </ttl>
+            <announce-period config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-autorp/gl/sby/candidate_rp/crp-table/&lt;ipv4_autorp_common_oper_RP_intf_name&gt;,&lt;ipv4_autorp_common_oper_RP_protocol_mode&gt;~autorp_crp_bag.AnnouncePeriod</xr-path>
+              <xr-xml-map>autorp_candidate_rp:AnnouncePeriod</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>int32</type-name>
+              </type>
+            </announce-period>
+            <protocol-mode-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-autorp/gl/sby/candidate_rp/crp-table/&lt;ipv4_autorp_common_oper_RP_intf_name&gt;,&lt;ipv4_autorp_common_oper_RP_protocol_mode&gt;~autorp_crp_bag.ProtocolMode</xr-path>
+              <xr-xml-map>autorp_candidate_rp:protocol-mode-xr</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>Autorp-protocol-mode</type-name>
+              </type>
+            </protocol-mode-xr>
+          </rp>
+        </rps>
+      </candidate-rp>
+      <mapping-agent config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/</xr-path>
+        <xr-xml-map>ipv4_autorp_role_lvl_oper:MappingAgent</xr-xml-map>
+        <xr-task>multicast</xr-task>
+        <xr-scope>exported</xr-scope>
+        <xr-compatibility>6.0</xr-compatibility>
+        <traffic config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/traffic</xr-path>
+          <xr-xml-map>ipv4_autorp_common_oper:Traffic</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <xr-bag-grp-name>autorp_map_traffic_bag</xr-bag-grp-name>
+          <xr-bag>autorp_candidate_rp.bag</xr-bag>
+          <active-sent-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/traffic~autorp_map_traffic_bag.ActiveSentPackets</xr-path>
+            <xr-xml-map>autorp_map_agent:ActiveSentPackets</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </active-sent-packets>
+          <standby-sent-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/traffic~autorp_map_traffic_bag.StandbySentPackets</xr-path>
+            <xr-xml-map>autorp_map_agent:StandbySentPackets</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </standby-sent-packets>
+          <active-received-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/traffic~autorp_map_traffic_bag.ActiveReceivedPackets</xr-path>
+            <xr-xml-map>autorp_map_agent:ActiveReceivedPackets</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </active-received-packets>
+          <standby-received-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/traffic~autorp_map_traffic_bag.StandbyReceivedPackets</xr-path>
+            <xr-xml-map>autorp_map_agent:StandbyReceivedPackets</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </standby-received-packets>
+        </traffic>
+        <rp-addresses config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/entry/</xr-path>
+          <xr-xml-map>ipv4_autorp_common_oper:RPAddressTable</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <rp-address config="false" key="rp-address" node="list">
+            <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;</xr-path>
+            <xr-xml-map>ipv4_autorp_common_oper:RPAddress</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-bag-grp-name>autorp_map_rp_bag</xr-bag-grp-name>
+            <xr-bag>autorp_map_agent.bag</xr-bag>
+            <rp-address config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-pathformat>hex_nozerox</xr-pathformat>
+              <xr-primitive-type>inaddr</xr-primitive-type>
+              <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;</xr-path>
+              <xr-xml-map>ipv4_autorp_common_oper:RPAddress</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-sch-type>IPV4Address</xr-sch-type>
+              <xr-sch-arg-name>&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </rp-address>
+            <rp-address-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;~autorp_map_rp_bag.RPAddress</xr-path>
+              <xr-xml-map>autorp_map_agent:rp-address-xr</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </rp-address-xr>
+            <expiry-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;~autorp_map_rp_bag.ExpiryTime</xr-path>
+              <xr-xml-map>autorp_map_agent:ExpiryTime</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </expiry-time>
+            <pim-version config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;~autorp_map_rp_bag.PIMVersion</xr-path>
+              <xr-xml-map>autorp_map_agent:PIMVersion</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+            </pim-version>
+            <range config="false" node="list">
+              <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;~autorp_map_rp_bag.Ranges[&lt;bag_arg1&gt;]</xr-path>
+              <xr-task>multicast</xr-task>
+              <xr-bag-version>0 1</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+              <prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;~autorp_map_rp_bag.Ranges[&lt;bag_arg1&gt;].Prefix</xr-path>
+                <xr-xml-map>autorp_map_agent:Prefix</xr-xml-map>
+                <xr-task>multicast</xr-task>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>inet:ipv4-address</type-name>
+                </type>
+              </prefix>
+              <prefix-length config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;~autorp_map_rp_bag.Ranges[&lt;bag_arg1&gt;].PrefixLength</xr-path>
+                <xr-xml-map>autorp_map_agent:PrefixLength</xr-xml-map>
+                <xr-task>multicast</xr-task>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </prefix-length>
+              <protocol-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;~autorp_map_rp_bag.Ranges[&lt;bag_arg1&gt;].ProtocolMode</xr-path>
+                <xr-xml-map>autorp_map_agent:ProtocolMode</xr-xml-map>
+                <xr-task>multicast</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>Autorp-protocol-mode</type-name>
+                </type>
+              </protocol-mode>
+              <is-advertised config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;~autorp_map_rp_bag.Ranges[&lt;bag_arg1&gt;].IsAdvertised</xr-path>
+                <xr-xml-map>autorp_map_agent:IsAdvertised</xr-xml-map>
+                <xr-task>multicast</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-advertised>
+              <create-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;~autorp_map_rp_bag.Ranges[&lt;bag_arg1&gt;].CreateType</xr-path>
+                <xr-xml-map>autorp_map_agent:CreateType</xr-xml-map>
+                <xr-task>multicast</xr-task>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </create-type>
+              <check-point-object-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;~autorp_map_rp_bag.Ranges[&lt;bag_arg1&gt;].CheckPointObjectID</xr-path>
+                <xr-xml-map>autorp_map_agent:CheckPointObjectID</xr-xml-map>
+                <xr-task>multicast</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </check-point-object-id>
+              <uptime config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;~autorp_map_rp_bag.Ranges[&lt;bag_arg1&gt;].Uptime</xr-path>
+                <xr-xml-map>autorp_map_agent:Uptime</xr-xml-map>
+                <xr-task>multicast</xr-task>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </uptime>
+            </range>
+          </rp-address>
+        </rp-addresses>
+        <summary config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/summary</xr-path>
+          <xr-xml-map>ipv4_autorp_common_oper:Summary</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <xr-bag-grp-name>autorp_map_summary_bag</xr-bag-grp-name>
+          <xr-bag>autorp_map_agent.bag</xr-bag>
+          <is-maximum-disabled config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/summary~autorp_map_summary_bag.IsMaximumDisabled</xr-path>
+            <xr-xml-map>autorp_map_agent:IsMaximumDisabled</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </is-maximum-disabled>
+          <cache-limit config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/summary~autorp_map_summary_bag.CacheLimit</xr-path>
+            <xr-xml-map>autorp_map_agent:CacheLimit</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </cache-limit>
+          <cache-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-autorp/gl/sby/map_agent/summary~autorp_map_summary_bag.CacheCount</xr-path>
+            <xr-xml-map>autorp_map_agent:CacheCount</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </cache-count>
+        </summary>
+      </mapping-agent>
+    </standby>
+    <active config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ipv4-autorp/gl/act/</xr-path>
+      <xr-xml-map>ipv4_autorp_role_lvl_oper:Active</xr-xml-map>
+      <xr-task>multicast</xr-task>
+      <xr-compatibility>6.0</xr-compatibility>
+      <candidate-rp config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ipv4-autorp/gl/act/candidate_rp/</xr-path>
+        <xr-xml-map>ipv4_autorp_role_lvl_oper:CandidateRP</xr-xml-map>
+        <xr-task>multicast</xr-task>
+        <xr-scope>exported</xr-scope>
+        <xr-compatibility>6.1</xr-compatibility>
+        <traffic config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv4-autorp/gl/act/candidate_rp/traffic</xr-path>
+          <xr-xml-map>ipv4_autorp_common_oper:Traffic</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <xr-bag-grp-name>autorp_crp_traffic_bag</xr-bag-grp-name>
+          <xr-bag>autorp_candidate_rp.bag</xr-bag>
+          <active-sent-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-autorp/gl/act/candidate_rp/traffic~autorp_crp_traffic_bag.ActiveSentPackets</xr-path>
+            <xr-xml-map>autorp_candidate_rp:ActiveSentPackets</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </active-sent-packets>
+          <standby-sent-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-autorp/gl/act/candidate_rp/traffic~autorp_crp_traffic_bag.StandbySentPackets</xr-path>
+            <xr-xml-map>autorp_candidate_rp:StandbySentPackets</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </standby-sent-packets>
+        </traffic>
+        <rps config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv4-autorp/gl/act/candidate_rp/crp-table/</xr-path>
+          <xr-xml-map>ipv4_autorp_common_oper:RPTable</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <rp config="false" node="list">
+            <xr-path>/oper/ipv4-autorp/gl/act/candidate_rp/crp-table/&lt;ipv4_autorp_common_oper_RP_intf_name&gt;,&lt;ipv4_autorp_common_oper_RP_protocol_mode&gt;</xr-path>
+            <xr-xml-map>ipv4_autorp_common_oper:RP</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-bag-grp-name>autorp_crp_bag</xr-bag-grp-name>
+            <xr-bag>autorp_candidate_rp.bag</xr-bag>
+            <interface-name config="false" is-key="true" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/oper/ipv4-autorp/gl/act/candidate_rp/crp-table/&lt;ipv4_autorp_common_oper_RP_intf_name&gt;,&lt;ipv4_autorp_common_oper_RP_protocol_mode&gt;</xr-path>
+              <xr-xml-map>ipv4_autorp_common_oper:InterfaceName</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-sch-type>InterfaceName</xr-sch-type>
+              <xr-sch-arg-name>&lt;ipv4_autorp_common_oper_RP_intf_name&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </interface-name>
+            <protocol-mode config="false" is-key="true" is-yang-key="false" node="leaf">
+              <xr-pathformat>decimal</xr-pathformat>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/oper/ipv4-autorp/gl/act/candidate_rp/crp-table/&lt;ipv4_autorp_common_oper_RP_intf_name&gt;,&lt;ipv4_autorp_common_oper_RP_protocol_mode&gt;</xr-path>
+              <xr-xml-map>ipv4_autorp_common_oper:ProtocolMode</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <xr-sch-arg-name>&lt;ipv4_autorp_common_oper_RP_protocol_mode&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>dt1:Auto-rp-protocol-mode</type-name>
+              </type>
+            </protocol-mode>
+            <access-list-name config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-autorp/gl/act/candidate_rp/crp-table/&lt;ipv4_autorp_common_oper_RP_intf_name&gt;,&lt;ipv4_autorp_common_oper_RP_protocol_mode&gt;~autorp_crp_bag.AccessListName</xr-path>
+              <xr-xml-map>autorp_candidate_rp:AccessListName</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-bag-primitive-type>string</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </access-list-name>
+            <candidate-rp-address config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-autorp/gl/act/candidate_rp/crp-table/&lt;ipv4_autorp_common_oper_RP_intf_name&gt;,&lt;ipv4_autorp_common_oper_RP_protocol_mode&gt;~autorp_crp_bag.CandidateRPAddress</xr-path>
+              <xr-xml-map>autorp_candidate_rp:CandidateRPAddress</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </candidate-rp-address>
+            <ttl config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-autorp/gl/act/candidate_rp/crp-table/&lt;ipv4_autorp_common_oper_RP_intf_name&gt;,&lt;ipv4_autorp_common_oper_RP_protocol_mode&gt;~autorp_crp_bag.TTL</xr-path>
+              <xr-xml-map>autorp_candidate_rp:TTL</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>int32</type-name>
+              </type>
+            </ttl>
+            <announce-period config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-autorp/gl/act/candidate_rp/crp-table/&lt;ipv4_autorp_common_oper_RP_intf_name&gt;,&lt;ipv4_autorp_common_oper_RP_protocol_mode&gt;~autorp_crp_bag.AnnouncePeriod</xr-path>
+              <xr-xml-map>autorp_candidate_rp:AnnouncePeriod</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>int32</type-name>
+              </type>
+            </announce-period>
+            <protocol-mode-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-autorp/gl/act/candidate_rp/crp-table/&lt;ipv4_autorp_common_oper_RP_intf_name&gt;,&lt;ipv4_autorp_common_oper_RP_protocol_mode&gt;~autorp_crp_bag.ProtocolMode</xr-path>
+              <xr-xml-map>autorp_candidate_rp:protocol-mode-xr</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-bag-primitive-type>int</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>Autorp-protocol-mode</type-name>
+              </type>
+            </protocol-mode-xr>
+          </rp>
+        </rps>
+      </candidate-rp>
+      <mapping-agent config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ipv4-autorp/gl/act/map_agent/</xr-path>
+        <xr-xml-map>ipv4_autorp_role_lvl_oper:MappingAgent</xr-xml-map>
+        <xr-task>multicast</xr-task>
+        <xr-scope>exported</xr-scope>
+        <xr-compatibility>6.0</xr-compatibility>
+        <traffic config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv4-autorp/gl/act/map_agent/traffic</xr-path>
+          <xr-xml-map>ipv4_autorp_common_oper:Traffic</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <xr-bag-grp-name>autorp_map_traffic_bag</xr-bag-grp-name>
+          <xr-bag>autorp_candidate_rp.bag</xr-bag>
+          <active-sent-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-autorp/gl/act/map_agent/traffic~autorp_map_traffic_bag.ActiveSentPackets</xr-path>
+            <xr-xml-map>autorp_map_agent:ActiveSentPackets</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </active-sent-packets>
+          <standby-sent-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-autorp/gl/act/map_agent/traffic~autorp_map_traffic_bag.StandbySentPackets</xr-path>
+            <xr-xml-map>autorp_map_agent:StandbySentPackets</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </standby-sent-packets>
+          <active-received-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-autorp/gl/act/map_agent/traffic~autorp_map_traffic_bag.ActiveReceivedPackets</xr-path>
+            <xr-xml-map>autorp_map_agent:ActiveReceivedPackets</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </active-received-packets>
+          <standby-received-packets config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-autorp/gl/act/map_agent/traffic~autorp_map_traffic_bag.StandbyReceivedPackets</xr-path>
+            <xr-xml-map>autorp_map_agent:StandbyReceivedPackets</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </standby-received-packets>
+        </traffic>
+        <rp-addresses config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv4-autorp/gl/act/map_agent/entry/</xr-path>
+          <xr-xml-map>ipv4_autorp_common_oper:RPAddressTable</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <rp-address config="false" key="rp-address" node="list">
+            <xr-path>/oper/ipv4-autorp/gl/act/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;</xr-path>
+            <xr-xml-map>ipv4_autorp_common_oper:RPAddress</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-bag-grp-name>autorp_map_rp_bag</xr-bag-grp-name>
+            <xr-bag>autorp_map_agent.bag</xr-bag>
+            <rp-address config="false" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-pathformat>hex_nozerox</xr-pathformat>
+              <xr-primitive-type>inaddr</xr-primitive-type>
+              <xr-path>/oper/ipv4-autorp/gl/act/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;</xr-path>
+              <xr-xml-map>ipv4_autorp_common_oper:RPAddress</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-sch-type>IPV4Address</xr-sch-type>
+              <xr-sch-arg-name>&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </rp-address>
+            <rp-address-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-autorp/gl/act/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;~autorp_map_rp_bag.RPAddress</xr-path>
+              <xr-xml-map>autorp_map_agent:rp-address-xr</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>inet:ipv4-address</type-name>
+              </type>
+            </rp-address-xr>
+            <expiry-time config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-autorp/gl/act/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;~autorp_map_rp_bag.ExpiryTime</xr-path>
+              <xr-xml-map>autorp_map_agent:ExpiryTime</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>uint64</type-name>
+              </type>
+            </expiry-time>
+            <pim-version config="false" is-key="false" is-yang-key="false" node="leaf">
+              <xr-path>/oper/ipv4-autorp/gl/act/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;~autorp_map_rp_bag.PIMVersion</xr-path>
+              <xr-xml-map>autorp_map_agent:PIMVersion</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+              <xr-bag-version>0 1</xr-bag-version>
+              <type>
+                <type-name>uint8</type-name>
+              </type>
+            </pim-version>
+            <range config="false" node="list">
+              <xr-path>/oper/ipv4-autorp/gl/act/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;~autorp_map_rp_bag.Ranges[&lt;bag_arg1&gt;]</xr-path>
+              <xr-task>multicast</xr-task>
+              <xr-bag-version>0 1</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+              <prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-autorp/gl/act/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;~autorp_map_rp_bag.Ranges[&lt;bag_arg1&gt;].Prefix</xr-path>
+                <xr-xml-map>autorp_map_agent:Prefix</xr-xml-map>
+                <xr-task>multicast</xr-task>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>inet:ipv4-address</type-name>
+                </type>
+              </prefix>
+              <prefix-length config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-autorp/gl/act/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;~autorp_map_rp_bag.Ranges[&lt;bag_arg1&gt;].PrefixLength</xr-path>
+                <xr-xml-map>autorp_map_agent:PrefixLength</xr-xml-map>
+                <xr-task>multicast</xr-task>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </prefix-length>
+              <protocol-mode config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-autorp/gl/act/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;~autorp_map_rp_bag.Ranges[&lt;bag_arg1&gt;].ProtocolMode</xr-path>
+                <xr-xml-map>autorp_map_agent:ProtocolMode</xr-xml-map>
+                <xr-task>multicast</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>Autorp-protocol-mode</type-name>
+                </type>
+              </protocol-mode>
+              <is-advertised config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-autorp/gl/act/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;~autorp_map_rp_bag.Ranges[&lt;bag_arg1&gt;].IsAdvertised</xr-path>
+                <xr-xml-map>autorp_map_agent:IsAdvertised</xr-xml-map>
+                <xr-task>multicast</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-advertised>
+              <create-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-autorp/gl/act/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;~autorp_map_rp_bag.Ranges[&lt;bag_arg1&gt;].CreateType</xr-path>
+                <xr-xml-map>autorp_map_agent:CreateType</xr-xml-map>
+                <xr-task>multicast</xr-task>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </create-type>
+              <check-point-object-id config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-autorp/gl/act/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;~autorp_map_rp_bag.Ranges[&lt;bag_arg1&gt;].CheckPointObjectID</xr-path>
+                <xr-xml-map>autorp_map_agent:CheckPointObjectID</xr-xml-map>
+                <xr-task>multicast</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </check-point-object-id>
+              <uptime config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-autorp/gl/act/map_agent/entry/&lt;ipv4_autorp_common_oper_RPAddress_rp_addr&gt;~autorp_map_rp_bag.Ranges[&lt;bag_arg1&gt;].Uptime</xr-path>
+                <xr-xml-map>autorp_map_agent:Uptime</xr-xml-map>
+                <xr-task>multicast</xr-task>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>0 1</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </uptime>
+            </range>
+          </rp-address>
+        </rp-addresses>
+        <summary config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv4-autorp/gl/act/map_agent/summary</xr-path>
+          <xr-xml-map>ipv4_autorp_common_oper:Summary</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <xr-bag-grp-name>autorp_map_summary_bag</xr-bag-grp-name>
+          <xr-bag>autorp_map_agent.bag</xr-bag>
+          <is-maximum-disabled config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-autorp/gl/act/map_agent/summary~autorp_map_summary_bag.IsMaximumDisabled</xr-path>
+            <xr-xml-map>autorp_map_agent:IsMaximumDisabled</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </is-maximum-disabled>
+          <cache-limit config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-autorp/gl/act/map_agent/summary~autorp_map_summary_bag.CacheLimit</xr-path>
+            <xr-xml-map>autorp_map_agent:CacheLimit</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </cache-limit>
+          <cache-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-autorp/gl/act/map_agent/summary~autorp_map_summary_bag.CacheCount</xr-path>
+            <xr-xml-map>autorp_map_agent:CacheCount</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 1</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </cache-count>
+        </summary>
+      </mapping-agent>
+    </active>
+  </auto-rp>
+</Cisco-IOS-XR-ipv4-autorp-oper>

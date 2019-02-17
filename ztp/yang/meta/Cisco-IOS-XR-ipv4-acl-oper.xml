@@ -1,0 +1,1580 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ipv4-acl-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-acl-oper" revision="2017-05-01">
+  <files>
+    <file revision="2017-05-01" submodule="false">Cisco-IOS-XR-ipv4-acl-oper.yang</file>
+    <file revision="2017-05-01" submodule="true">Cisco-IOS-XR-ipv4-acl-oper-sub1.yang</file>
+  </files>
+  <prefix>ipv4-acl-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="dt1">Cisco-IOS-XR-common-acl-datatypes</import>
+  <import prefix="inet">ietf-inet-types</import>
+  <typedef name="Acl-frag-offset-operator">
+    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+    <type>
+      <type-name>Acl-port-operator</type-name>
+    </type>
+  </typedef>
+  <typedef name="Bag-acl-nh-at-status">
+    <type node="enumeration">
+      <enum>unknown</enum>
+      <enum>up</enum>
+      <enum>down</enum>
+      <enum>not-present</enum>
+      <enum>max</enum>
+    </type>
+  </typedef>
+  <typedef name="Bag-acl-nh-status">
+    <type node="enumeration">
+      <enum>not-present</enum>
+      <enum>unknown</enum>
+      <enum>down</enum>
+      <enum>up</enum>
+      <enum>max</enum>
+    </type>
+  </typedef>
+  <typedef name="Bag-acl-nh">
+    <type node="enumeration">
+      <enum>nexthop-none</enum>
+      <enum>nexthop-default</enum>
+      <enum>nexthop</enum>
+    </type>
+  </typedef>
+  <typedef name="Acl-ttl-operator">
+    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+    <type>
+      <type-name>Acl-port-operator</type-name>
+    </type>
+  </typedef>
+  <typedef name="Acl-plen-operator">
+    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+    <type>
+      <type-name>Acl-port-operator</type-name>
+    </type>
+  </typedef>
+  <typedef name="Acl-tcpflags-operator">
+    <type node="enumeration">
+      <enum>match-none</enum>
+      <enum>match-all</enum>
+      <enum>match-any-old</enum>
+      <enum>match-any</enum>
+    </type>
+  </typedef>
+  <typedef name="Acl-log">
+    <type node="enumeration">
+      <enum value="0">log-none</enum>
+      <enum value="1">log</enum>
+      <enum value="2">log-input</enum>
+    </type>
+  </typedef>
+  <typedef name="Acl-port-operator">
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">eq</enum>
+      <enum value="2">gt</enum>
+      <enum value="3">lt</enum>
+      <enum value="4">neq</enum>
+      <enum value="5">range</enum>
+      <enum value="8">onebyte</enum>
+      <enum value="9">twobytes</enum>
+    </type>
+  </typedef>
+  <typedef name="Acl-action">
+    <type node="enumeration">
+      <enum value="0">deny</enum>
+      <enum value="1">permit</enum>
+      <enum value="2">encrypt</enum>
+      <enum value="3">bypass</enum>
+      <enum value="4">fallthrough</enum>
+      <enum value="5">invalid</enum>
+    </type>
+  </typedef>
+  <typedef name="Acl-ace1">
+    <type node="enumeration">
+      <enum>normal</enum>
+      <enum>remark</enum>
+      <enum>abf</enum>
+    </type>
+  </typedef>
+  <typedef name="Acl-ace">
+    <xr-bag-primitive-type>int</xr-bag-primitive-type>
+    <type>
+      <type-name>Acl-ace1</type-name>
+    </type>
+  </typedef>
+  <ipv4-acl-and-prefix-list config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/ipv4-acl/gl/</xr-path>
+    <xr-xml-map>ipv4_acl_oper:IPV4_ACLAndPrefixList</xr-xml-map>
+    <xr-task>acl</xr-task>
+    <access-list-manager config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ipv4-acl/gl/show/</xr-path>
+      <xr-xml-map>ipv4_acl_oper:AccessListManager</xr-xml-map>
+      <xr-task>acl</xr-task>
+      <prefixes config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ipv4-acl/gl/show/prefix-list/</xr-path>
+        <xr-xml-map>ipv4_acl_oper:PrefixListTable</xr-xml-map>
+        <xr-task>acl</xr-task>
+        <prefix config="false" key="prefix-list-name" node="list">
+          <xr-path>/oper/ipv4-acl/gl/show/prefix-list/&lt;ipv4_acl_oper_PrefixList_name&gt;/</xr-path>
+          <xr-xml-map>ipv4_acl_oper:PrefixList</xr-xml-map>
+          <xr-task>acl</xr-task>
+          <prefix-list-sequences config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ipv4-acl/gl/show/prefix-list/&lt;ipv4_acl_oper_PrefixList_name&gt;/sequencetable/</xr-path>
+            <xr-xml-map>ipv4_acl_oper:PrefixListSequenceTable</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <prefix-list-sequence config="false" key="sequence-number" node="list">
+              <xr-path>/oper/ipv4-acl/gl/show/prefix-list/&lt;ipv4_acl_oper_PrefixList_name&gt;/sequencetable/&lt;ipv4_acl_oper_PrefixListSequence_seq&gt;</xr-path>
+              <xr-xml-map>ipv4_acl_oper:PrefixListSequence</xr-xml-map>
+              <xr-task>acl</xr-task>
+              <xr-bag-grp-name>ipv4_pfx_edm_ace</xr-bag-grp-name>
+              <xr-bag>ipv4_acl_edm.bag</xr-bag>
+              <sequence-number config="false" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-pathformat>hex_nozerox</xr-pathformat>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/oper/ipv4-acl/gl/show/prefix-list/&lt;ipv4_acl_oper_PrefixList_name&gt;/sequencetable/&lt;ipv4_acl_oper_PrefixListSequence_seq&gt;</xr-path>
+                <xr-xml-map>ipv4_acl_oper:SequenceNumber</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-sch-arg-name>&lt;ipv4_acl_oper_PrefixListSequence_seq&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>dt1:Acl-sequence-number-range</type-name>
+                </type>
+              </sequence-number>
+              <item-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/prefix-list/&lt;ipv4_acl_oper_PrefixList_name&gt;/sequencetable/&lt;ipv4_acl_oper_PrefixListSequence_seq&gt;~ipv4_pfx_edm_ace.ItemType</xr-path>
+                <xr-xml-map>ipv4_acl_edm:ItemType</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>Acl-ace</type-name>
+                </type>
+              </item-type>
+              <sequence config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/prefix-list/&lt;ipv4_acl_oper_PrefixList_name&gt;/sequencetable/&lt;ipv4_acl_oper_PrefixListSequence_seq&gt;~ipv4_pfx_edm_ace.Sequence</xr-path>
+                <xr-xml-map>ipv4_acl_edm:Sequence</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </sequence>
+              <grant config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/prefix-list/&lt;ipv4_acl_oper_PrefixList_name&gt;/sequencetable/&lt;ipv4_acl_oper_PrefixListSequence_seq&gt;~ipv4_pfx_edm_ace.Grant</xr-path>
+                <xr-xml-map>ipv4_acl_edm:Grant</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>Acl-action</type-name>
+                </type>
+              </grant>
+              <prefix config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/prefix-list/&lt;ipv4_acl_oper_PrefixList_name&gt;/sequencetable/&lt;ipv4_acl_oper_PrefixListSequence_seq&gt;~ipv4_pfx_edm_ace.Prefix</xr-path>
+                <xr-xml-map>ipv4_acl_edm:Prefix</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>inet:ipv4-address</type-name>
+                </type>
+              </prefix>
+              <prefix-length config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/prefix-list/&lt;ipv4_acl_oper_PrefixList_name&gt;/sequencetable/&lt;ipv4_acl_oper_PrefixListSequence_seq&gt;~ipv4_pfx_edm_ace.PrefixLength</xr-path>
+                <xr-xml-map>ipv4_acl_edm:PrefixLength</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </prefix-length>
+              <operator config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/prefix-list/&lt;ipv4_acl_oper_PrefixList_name&gt;/sequencetable/&lt;ipv4_acl_oper_PrefixListSequence_seq&gt;~ipv4_pfx_edm_ace.Operator</xr-path>
+                <xr-xml-map>ipv4_acl_edm:Operator</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>Acl-port-operator</type-name>
+                </type>
+              </operator>
+              <minimum-length config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/prefix-list/&lt;ipv4_acl_oper_PrefixList_name&gt;/sequencetable/&lt;ipv4_acl_oper_PrefixListSequence_seq&gt;~ipv4_pfx_edm_ace.MinimumLength</xr-path>
+                <xr-xml-map>ipv4_acl_edm:MinimumLength</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </minimum-length>
+              <maximum-length config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/prefix-list/&lt;ipv4_acl_oper_PrefixList_name&gt;/sequencetable/&lt;ipv4_acl_oper_PrefixListSequence_seq&gt;~ipv4_pfx_edm_ace.MaximumLength</xr-path>
+                <xr-xml-map>ipv4_acl_edm:MaximumLength</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </maximum-length>
+              <hits config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/prefix-list/&lt;ipv4_acl_oper_PrefixList_name&gt;/sequencetable/&lt;ipv4_acl_oper_PrefixListSequence_seq&gt;~ipv4_pfx_edm_ace.Hits</xr-path>
+                <xr-xml-map>ipv4_acl_edm:Hits</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </hits>
+              <remark config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/prefix-list/&lt;ipv4_acl_oper_PrefixList_name&gt;/sequencetable/&lt;ipv4_acl_oper_PrefixListSequence_seq&gt;~ipv4_pfx_edm_ace.Remark</xr-path>
+                <xr-xml-map>ipv4_acl_edm:Remark</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </remark>
+              <acl-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/prefix-list/&lt;ipv4_acl_oper_PrefixList_name&gt;/sequencetable/&lt;ipv4_acl_oper_PrefixListSequence_seq&gt;~ipv4_pfx_edm_ace.ACLName</xr-path>
+                <xr-xml-map>ipv4_acl_edm:ACLName</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </acl-name>
+            </prefix-list-sequence>
+          </prefix-list-sequences>
+          <prefix-list-name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/ipv4-acl/gl/show/prefix-list/&lt;ipv4_acl_oper_PrefixList_name&gt;/</xr-path>
+            <xr-xml-map>ipv4_acl_oper:PrefixListName</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-sch-type>EncodedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;ipv4_acl_oper_PrefixList_name&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </prefix-list-name>
+        </prefix>
+      </prefixes>
+      <accesses config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ipv4-acl/gl/show/access-list/</xr-path>
+        <xr-xml-map>ipv4_acl_oper:AccessListTable</xr-xml-map>
+        <xr-task>acl</xr-task>
+        <access config="false" key="access-list-name" node="list">
+          <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/</xr-path>
+          <xr-xml-map>ipv4_acl_oper:AccessList</xr-xml-map>
+          <xr-task>acl</xr-task>
+          <access-list-sequences config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/</xr-path>
+            <xr-xml-map>ipv4_acl_oper:AccessListSequenceTable</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <access-list-sequence config="false" key="sequence-number" node="list">
+              <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;</xr-path>
+              <xr-xml-map>ipv4_acl_oper:AccessListSequence</xr-xml-map>
+              <xr-task>acl</xr-task>
+              <xr-bag-grp-name>ipv4_acl_edm_ace</xr-bag-grp-name>
+              <xr-bag>ipv4_acl_edm.bag</xr-bag>
+              <sequence-number config="false" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-pathformat>hex_nozerox</xr-pathformat>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;</xr-path>
+                <xr-xml-map>ipv4_acl_oper:SequenceNumber</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-sch-arg-name>&lt;ipv4_acl_oper_AccessListSequence_seq&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>dt1:Acl-sequence-number-range</type-name>
+                </type>
+              </sequence-number>
+              <hw-next-hop-info config="false" is-key="false" node="container" presence="false">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.HWNextHopInfo</xr-path>
+                <xr-task>acl</xr-task>
+                <xr-bag-version>0 4</xr-bag-version>
+                <next-hop config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.HWNextHopInfo.NextHop</xr-path>
+                  <xr-xml-map>ipv4_acl_edm:NextHop</xr-xml-map>
+                  <xr-task>acl</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>0 4</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </next-hop>
+                <type config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.HWNextHopInfo.Type</xr-path>
+                  <xr-xml-map>ipv4_acl_edm:Type</xr-xml-map>
+                  <xr-task>acl</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>0 4</xr-bag-version>
+                  <type>
+                    <type-name>Bag-acl-nh</type-name>
+                  </type>
+                </type>
+                <vrf-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.HWNextHopInfo.VRFName</xr-path>
+                  <xr-xml-map>ipv4_acl_edm:VRFName</xr-xml-map>
+                  <xr-task>acl</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>0 4</xr-bag-version>
+                  <type length="0..32">
+                    <type-name>string</type-name>
+                  </type>
+                </vrf-name>
+              </hw-next-hop-info>
+              <item-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.ItemType</xr-path>
+                <xr-xml-map>ipv4_acl_edm:ItemType</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>Acl-ace</type-name>
+                </type>
+              </item-type>
+              <sequence config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.Sequence</xr-path>
+                <xr-xml-map>ipv4_acl_edm:Sequence</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </sequence>
+              <grant config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.Grant</xr-path>
+                <xr-xml-map>ipv4_acl_edm:Grant</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>Acl-action</type-name>
+                </type>
+              </grant>
+              <protocol-operator config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.ProtocolOperator</xr-path>
+                <xr-xml-map>ipv4_acl_edm:ProtocolOperator</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </protocol-operator>
+              <protocol config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.Protocol</xr-path>
+                <xr-xml-map>ipv4_acl_edm:Protocol</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </protocol>
+              <protocol2 config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.Protocol2</xr-path>
+                <xr-xml-map>ipv4_acl_edm:Protocol2</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </protocol2>
+              <source-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.SourceAddress</xr-path>
+                <xr-xml-map>ipv4_acl_edm:SourceAddress</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>inet:ipv4-address</type-name>
+                </type>
+              </source-address>
+              <source-address-mask config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.SourceAddressMask</xr-path>
+                <xr-xml-map>ipv4_acl_edm:SourceAddressMask</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>inet:ipv4-address</type-name>
+                </type>
+              </source-address-mask>
+              <destination-address config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.DestinationAddress</xr-path>
+                <xr-xml-map>ipv4_acl_edm:DestinationAddress</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>inet:ipv4-address</type-name>
+                </type>
+              </destination-address>
+              <destination-address-mask config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.DestinationAddressMask</xr-path>
+                <xr-xml-map>ipv4_acl_edm:DestinationAddressMask</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>inet:ipv4-address</type-name>
+                </type>
+              </destination-address-mask>
+              <source-operator config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.SourceOperator</xr-path>
+                <xr-xml-map>ipv4_acl_edm:SourceOperator</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>Acl-port-operator</type-name>
+                </type>
+              </source-operator>
+              <source-port1 config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.SourcePort1</xr-path>
+                <xr-xml-map>ipv4_acl_edm:SourcePort1</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </source-port1>
+              <source-port2 config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.SourcePort2</xr-path>
+                <xr-xml-map>ipv4_acl_edm:SourcePort2</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </source-port2>
+              <sorce-operator config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.SorceOperator</xr-path>
+                <xr-xml-map>ipv4_acl_edm:SorceOperator</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>Acl-port-operator</type-name>
+                </type>
+              </sorce-operator>
+              <sorce-port1 config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.SorcePort1</xr-path>
+                <xr-xml-map>ipv4_acl_edm:SorcePort1</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </sorce-port1>
+              <sorce-port2 config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.SorcePort2</xr-path>
+                <xr-xml-map>ipv4_acl_edm:SorcePort2</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </sorce-port2>
+              <destination-operator config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.DestinationOperator</xr-path>
+                <xr-xml-map>ipv4_acl_edm:DestinationOperator</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>Acl-port-operator</type-name>
+                </type>
+              </destination-operator>
+              <destination-port1 config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.DestinationPort1</xr-path>
+                <xr-xml-map>ipv4_acl_edm:DestinationPort1</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </destination-port1>
+              <destination-port2 config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.DestinationPort2</xr-path>
+                <xr-xml-map>ipv4_acl_edm:DestinationPort2</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </destination-port2>
+              <log-option config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.LogOption</xr-path>
+                <xr-xml-map>ipv4_acl_edm:LogOption</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>Acl-log</type-name>
+                </type>
+              </log-option>
+              <counter-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.CounterName</xr-path>
+                <xr-xml-map>ipv4_acl_edm:CounterName</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </counter-name>
+              <capture config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.Capture</xr-path>
+                <xr-xml-map>ipv4_acl_edm:Capture</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </capture>
+              <dscp-present config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.DSCPPresent</xr-path>
+                <xr-xml-map>ipv4_acl_edm:DSCPPresent</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </dscp-present>
+              <dscp config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.DSCP</xr-path>
+                <xr-xml-map>ipv4_acl_edm:DSCP</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </dscp>
+              <dscp2 config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.DSCP2</xr-path>
+                <xr-xml-map>ipv4_acl_edm:DSCP2</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </dscp2>
+              <dscp-operator config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.DSCPOperator</xr-path>
+                <xr-xml-map>ipv4_acl_edm:DSCPOperator</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </dscp-operator>
+              <precedence-present config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.PrecedencePresent</xr-path>
+                <xr-xml-map>ipv4_acl_edm:PrecedencePresent</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </precedence-present>
+              <precedence config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.Precedence</xr-path>
+                <xr-xml-map>ipv4_acl_edm:Precedence</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </precedence>
+              <tcp-flags-operator config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.TCPFlagsOperator</xr-path>
+                <xr-xml-map>ipv4_acl_edm:TCPFlagsOperator</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>Acl-tcpflags-operator</type-name>
+                </type>
+              </tcp-flags-operator>
+              <tcp-flags config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.TCPFlags</xr-path>
+                <xr-xml-map>ipv4_acl_edm:TCPFlags</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </tcp-flags>
+              <tcp-flags-mask config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.TCPFlagsMask</xr-path>
+                <xr-xml-map>ipv4_acl_edm:TCPFlagsMask</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </tcp-flags-mask>
+              <fragments config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.Fragments</xr-path>
+                <xr-xml-map>ipv4_acl_edm:Fragments</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </fragments>
+              <packet-length-operator config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.PacketLengthOperator</xr-path>
+                <xr-xml-map>ipv4_acl_edm:PacketLengthOperator</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>Acl-plen-operator</type-name>
+                </type>
+              </packet-length-operator>
+              <packet-length1 config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.PacketLength1</xr-path>
+                <xr-xml-map>ipv4_acl_edm:PacketLength1</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </packet-length1>
+              <packet-length2 config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.PacketLength2</xr-path>
+                <xr-xml-map>ipv4_acl_edm:PacketLength2</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </packet-length2>
+              <ttl-operator config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.TTLOperator</xr-path>
+                <xr-xml-map>ipv4_acl_edm:TTLOperator</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>Acl-ttl-operator</type-name>
+                </type>
+              </ttl-operator>
+              <ttl1 config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.TTL1</xr-path>
+                <xr-xml-map>ipv4_acl_edm:TTL1</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </ttl1>
+              <ttl2 config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.TTL2</xr-path>
+                <xr-xml-map>ipv4_acl_edm:TTL2</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </ttl2>
+              <no-stats config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.NoStats</xr-path>
+                <xr-xml-map>ipv4_acl_edm:NoStats</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </no-stats>
+              <hits config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.Hits</xr-path>
+                <xr-xml-map>ipv4_acl_edm:Hits</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint64</type-name>
+                </type>
+              </hits>
+              <is-icmp-off config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.IsICMPOff</xr-path>
+                <xr-xml-map>ipv4_acl_edm:IsICMPOff</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </is-icmp-off>
+              <qos-group config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.QosGroup</xr-path>
+                <xr-xml-map>ipv4_acl_edm:QosGroup</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </qos-group>
+              <next-hop-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.NextHopType</xr-path>
+                <xr-xml-map>ipv4_acl_edm:NextHopType</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>Bag-acl-nh</type-name>
+                </type>
+              </next-hop-type>
+              <remark config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.Remark</xr-path>
+                <xr-xml-map>ipv4_acl_edm:Remark</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </remark>
+              <dynamic config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.dynamic</xr-path>
+                <xr-xml-map>ipv4_acl_edm:dynamic</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>boolean</type-name>
+                </type>
+              </dynamic>
+              <source-prefix-group config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.SourcePrefixGroup</xr-path>
+                <xr-xml-map>ipv4_acl_edm:SourcePrefixGroup</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </source-prefix-group>
+              <destination-prefix-group config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.DestinationPrefixGroup</xr-path>
+                <xr-xml-map>ipv4_acl_edm:DestinationPrefixGroup</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </destination-prefix-group>
+              <source-port-group config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.SourcePortGroup</xr-path>
+                <xr-xml-map>ipv4_acl_edm:SourcePortGroup</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </source-port-group>
+              <destination-port-group config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.DestinationPortGroup</xr-path>
+                <xr-xml-map>ipv4_acl_edm:DestinationPortGroup</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </destination-port-group>
+              <acl-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.ACLName</xr-path>
+                <xr-xml-map>ipv4_acl_edm:ACLName</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </acl-name>
+              <sequence-str config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.SequenceStr</xr-path>
+                <xr-xml-map>ipv4_acl_edm:SequenceStr</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </sequence-str>
+              <fragment-offset-operator config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.FragmentOffsetOperator</xr-path>
+                <xr-xml-map>ipv4_acl_edm:FragmentOffsetOperator</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>Acl-frag-offset-operator</type-name>
+                </type>
+              </fragment-offset-operator>
+              <fragment-offset1 config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.FragmentOffset1</xr-path>
+                <xr-xml-map>ipv4_acl_edm:FragmentOffset1</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </fragment-offset1>
+              <fragment-offset2 config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.FragmentOffset2</xr-path>
+                <xr-xml-map>ipv4_acl_edm:FragmentOffset2</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </fragment-offset2>
+              <set-ttl config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.SetTTL</xr-path>
+                <xr-xml-map>ipv4_acl_edm:SetTTL</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint16_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint16</type-name>
+                </type>
+              </set-ttl>
+              <fragment-flags config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.FragmentFlags</xr-path>
+                <xr-xml-map>ipv4_acl_edm:FragmentFlags</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint8_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint8</type-name>
+                </type>
+              </fragment-flags>
+              <next-hop-info config="false" node="list">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.NextHopInfo[&lt;bag_arg4&gt;]</xr-path>
+                <xr-task>acl</xr-task>
+                <xr-bag-version>0 4</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg4&gt;</xr-internal-key>
+                <max-elements>3</max-elements>
+                <next-hop config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.NextHopInfo[&lt;bag_arg4&gt;].NextHop</xr-path>
+                  <xr-xml-map>ipv4_acl_edm:NextHop</xr-xml-map>
+                  <xr-task>acl</xr-task>
+                  <xr-bag-primitive-type>in_addr_t</xr-bag-primitive-type>
+                  <xr-bag-version>0 4</xr-bag-version>
+                  <type>
+                    <type-name>inet:ipv4-address</type-name>
+                  </type>
+                </next-hop>
+                <track-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.NextHopInfo[&lt;bag_arg4&gt;].TrackName</xr-path>
+                  <xr-xml-map>ipv4_acl_edm:TrackName</xr-xml-map>
+                  <xr-task>acl</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>0 4</xr-bag-version>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                </track-name>
+                <status config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.NextHopInfo[&lt;bag_arg4&gt;].Status</xr-path>
+                  <xr-xml-map>ipv4_acl_edm:Status</xr-xml-map>
+                  <xr-task>acl</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>0 4</xr-bag-version>
+                  <type>
+                    <type-name>Bag-acl-nh-status</type-name>
+                  </type>
+                </status>
+                <at-status config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.NextHopInfo[&lt;bag_arg4&gt;].AtStatus</xr-path>
+                  <xr-xml-map>ipv4_acl_edm:AtStatus</xr-xml-map>
+                  <xr-task>acl</xr-task>
+                  <xr-bag-primitive-type>int</xr-bag-primitive-type>
+                  <xr-bag-version>0 4</xr-bag-version>
+                  <type>
+                    <type-name>Bag-acl-nh-at-status</type-name>
+                  </type>
+                </at-status>
+                <is-acl-next-hop-exist config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.NextHopInfo[&lt;bag_arg4&gt;].IsACLNextHopExist</xr-path>
+                  <xr-xml-map>ipv4_acl_edm:IsACLNextHopExist</xr-xml-map>
+                  <xr-task>acl</xr-task>
+                  <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+                  <xr-bag-version>0 4</xr-bag-version>
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                </is-acl-next-hop-exist>
+              </next-hop-info>
+              <udf config="false" node="list">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.UDF[&lt;bag_arg5&gt;]</xr-path>
+                <xr-task>acl</xr-task>
+                <xr-bag-version>0 4</xr-bag-version>
+                <xr-internal-key>&lt;bag_arg5&gt;</xr-internal-key>
+                <udf-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.UDF[&lt;bag_arg5&gt;].UDFName</xr-path>
+                  <xr-xml-map>ipv4_acl_edm:UDFName</xr-xml-map>
+                  <xr-task>acl</xr-task>
+                  <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                  <xr-bag-version>0 4</xr-bag-version>
+                  <type length="0..17">
+                    <type-name>string</type-name>
+                  </type>
+                </udf-name>
+                <udf-value config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.UDF[&lt;bag_arg5&gt;].UDFValue</xr-path>
+                  <xr-xml-map>ipv4_acl_edm:UDFValue</xr-xml-map>
+                  <xr-task>acl</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>0 4</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </udf-value>
+                <udf-mask config="false" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/sequencetable/&lt;ipv4_acl_oper_AccessListSequence_seq&gt;~ipv4_acl_edm_ace.UDF[&lt;bag_arg5&gt;].UDFMask</xr-path>
+                  <xr-xml-map>ipv4_acl_edm:UDFMask</xr-xml-map>
+                  <xr-task>acl</xr-task>
+                  <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                  <xr-bag-version>0 4</xr-bag-version>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                </udf-mask>
+              </udf>
+            </access-list-sequence>
+          </access-list-sequences>
+          <object-group config="false" is-key="false" node="container" presence="false">
+            <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/objectgroup</xr-path>
+            <xr-xml-map>ipv4_acl_oper:ObjectGroup</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-grp-name>ipv4_acl_edm_objgrp</xr-bag-grp-name>
+            <xr-bag>ipv4_acl_edm.bag</xr-bag>
+            <obj-grp-info config="false" node="list">
+              <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/objectgroup~ipv4_acl_edm_objgrp.ObjGrpInfo[&lt;bag_arg3&gt;]</xr-path>
+              <xr-task>acl</xr-task>
+              <xr-bag-version>0 4</xr-bag-version>
+              <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+              <obj-grp-name config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/objectgroup~ipv4_acl_edm_objgrp.ObjGrpInfo[&lt;bag_arg3&gt;].ObjGrpName</xr-path>
+                <xr-xml-map>ipv4_acl_edm:ObjGrpName</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>string</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type length="0..64">
+                  <type-name>string</type-name>
+                </type>
+              </obj-grp-name>
+              <obj-grp-type config="false" is-key="false" is-yang-key="false" node="leaf">
+                <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/objectgroup~ipv4_acl_edm_objgrp.ObjGrpInfo[&lt;bag_arg3&gt;].ObjGrpType</xr-path>
+                <xr-xml-map>ipv4_acl_edm:ObjGrpType</xr-xml-map>
+                <xr-task>acl</xr-task>
+                <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+                <xr-bag-version>0 4</xr-bag-version>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+              </obj-grp-type>
+            </obj-grp-info>
+          </object-group>
+          <access-list-name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/ipv4-acl/gl/show/access-list/&lt;ipv4_acl_oper_AccessList_name&gt;/</xr-path>
+            <xr-xml-map>ipv4_acl_oper:AccessListName</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-sch-type>EncodedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;ipv4_acl_oper_AccessList_name&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </access-list-name>
+        </access>
+      </accesses>
+      <usages config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ipv4-acl/gl/show/usage/</xr-path>
+        <xr-xml-map>ipv4_acl_oper:UsageTable</xr-xml-map>
+        <xr-task>acl</xr-task>
+        <usage config="false" node="list">
+          <xr-path>/oper/ipv4-acl/gl/show/usage/&lt;ipv4_acl_oper_Usage_location&gt;,&lt;ipv4_acl_oper_Usage_appid&gt;,&lt;ipv4_acl_oper_Usage_name&gt;,0</xr-path>
+          <xr-xml-map>ipv4_acl_oper:Usage</xr-xml-map>
+          <xr-task>acl</xr-task>
+          <node-name config="false" is-key="true" is-yang-key="false" node="leaf">
+            <xr-pathformat>hex_nozerox</xr-pathformat>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/oper/ipv4-acl/gl/show/usage/&lt;ipv4_acl_oper_Usage_location&gt;,&lt;ipv4_acl_oper_Usage_appid&gt;,&lt;ipv4_acl_oper_Usage_name&gt;,0</xr-path>
+            <xr-xml-map>ipv4_acl_oper:NodeName</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-sch-type>NodeID</xr-sch-type>
+            <xr-sch-arg-name>&lt;ipv4_acl_oper_Usage_location&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Node-id</type-name>
+            </type>
+          </node-name>
+          <application-id config="false" is-key="true" is-yang-key="false" node="leaf">
+            <xr-pathformat>hex_nozerox</xr-pathformat>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/oper/ipv4-acl/gl/show/usage/&lt;ipv4_acl_oper_Usage_location&gt;,&lt;ipv4_acl_oper_Usage_appid&gt;,&lt;ipv4_acl_oper_Usage_name&gt;,0</xr-path>
+            <xr-xml-map>ipv4_acl_oper:ApplicationID</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <xr-sch-arg-name>&lt;ipv4_acl_oper_Usage_appid&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>dt1:Acl-usage-app-id-enum</type-name>
+            </type>
+          </application-id>
+          <access-list-name config="false" is-key="true" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/ipv4-acl/gl/show/usage/&lt;ipv4_acl_oper_Usage_location&gt;,&lt;ipv4_acl_oper_Usage_appid&gt;,&lt;ipv4_acl_oper_Usage_name&gt;,0</xr-path>
+            <xr-xml-map>ipv4_acl_oper:AccessListName</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-sch-type>EncodedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;ipv4_acl_oper_Usage_name&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </access-list-name>
+          <usage-details config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/ipv4-acl/gl/show/usage/&lt;ipv4_acl_oper_Usage_location&gt;,&lt;ipv4_acl_oper_Usage_appid&gt;,&lt;ipv4_acl_oper_Usage_name&gt;,0</xr-path>
+            <xr-xml-map>ipv4_acl_oper:UsageDetails</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </usage-details>
+        </usage>
+      </usages>
+    </access-list-manager>
+    <oor config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/ipv4-acl/gl/oor/</xr-path>
+      <xr-xml-map>ipv4_acl_oper:OOR</xr-xml-map>
+      <xr-task>acl</xr-task>
+      <details config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ipv4-acl/gl/oor/detail</xr-path>
+        <xr-xml-map>ipv4_acl_oper:Details</xr-xml-map>
+        <xr-task>acl</xr-task>
+        <xr-bag-grp-name>ipv4_acl_edm_oor_detail</xr-bag-grp-name>
+        <xr-bag>ipv4_acl_edm.bag</xr-bag>
+        <default-max-ac-ls config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ipv4-acl/gl/oor/detail~ipv4_acl_edm_oor_detail.DefaultMaxACLs</xr-path>
+          <xr-xml-map>ipv4_acl_edm:DefaultMaxACLs</xr-xml-map>
+          <xr-task>acl</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </default-max-ac-ls>
+        <default-max-ac-es config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ipv4-acl/gl/oor/detail~ipv4_acl_edm_oor_detail.DefaultMaxACEs</xr-path>
+          <xr-xml-map>ipv4_acl_edm:DefaultMaxACEs</xr-xml-map>
+          <xr-task>acl</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </default-max-ac-es>
+        <current-configured-ac-ls config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ipv4-acl/gl/oor/detail~ipv4_acl_edm_oor_detail.CurrentConfiguredACLs</xr-path>
+          <xr-xml-map>ipv4_acl_edm:CurrentConfiguredACLs</xr-xml-map>
+          <xr-task>acl</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </current-configured-ac-ls>
+        <current-configured-ac-es config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ipv4-acl/gl/oor/detail~ipv4_acl_edm_oor_detail.CurrentConfiguredACEs</xr-path>
+          <xr-xml-map>ipv4_acl_edm:CurrentConfiguredACEs</xr-xml-map>
+          <xr-task>acl</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </current-configured-ac-es>
+        <current-max-configurable-ac-ls config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ipv4-acl/gl/oor/detail~ipv4_acl_edm_oor_detail.CurrentMaxConfigurableACLs</xr-path>
+          <xr-xml-map>ipv4_acl_edm:CurrentMaxConfigurableACLs</xr-xml-map>
+          <xr-task>acl</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </current-max-configurable-ac-ls>
+        <current-max-configurable-ac-es config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ipv4-acl/gl/oor/detail~ipv4_acl_edm_oor_detail.CurrentMaxConfigurableACEs</xr-path>
+          <xr-xml-map>ipv4_acl_edm:CurrentMaxConfigurableACEs</xr-xml-map>
+          <xr-task>acl</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </current-max-configurable-ac-es>
+        <max-configurable-ac-ls config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ipv4-acl/gl/oor/detail~ipv4_acl_edm_oor_detail.MaxConfigurableACLs</xr-path>
+          <xr-xml-map>ipv4_acl_edm:MaxConfigurableACLs</xr-xml-map>
+          <xr-task>acl</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </max-configurable-ac-ls>
+        <max-configurable-ac-es config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/ipv4-acl/gl/oor/detail~ipv4_acl_edm_oor_detail.MaxConfigurableACEs</xr-path>
+          <xr-xml-map>ipv4_acl_edm:MaxConfigurableACEs</xr-xml-map>
+          <xr-task>acl</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 4</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </max-configurable-ac-es>
+      </details>
+      <oor-prefixes config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ipv4-acl/gl/oor/prefix/</xr-path>
+        <xr-xml-map>ipv4_acl_oper:OORPrefixListTable</xr-xml-map>
+        <xr-task>acl</xr-task>
+        <oor-prefix config="false" key="prefix-list-name" node="list">
+          <xr-path>/oper/ipv4-acl/gl/oor/prefix/&lt;ipv4_acl_oper_OORPrefixList_name&gt;</xr-path>
+          <xr-xml-map>ipv4_acl_oper:OORPrefixList</xr-xml-map>
+          <xr-task>acl</xr-task>
+          <xr-bag-grp-name>ipv4_acl_edm_oor_detail</xr-bag-grp-name>
+          <xr-bag>ipv4_acl_edm.bag</xr-bag>
+          <prefix-list-name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/ipv4-acl/gl/oor/prefix/&lt;ipv4_acl_oper_OORPrefixList_name&gt;</xr-path>
+            <xr-xml-map>ipv4_acl_oper:PrefixListName</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-sch-type>EncodedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;ipv4_acl_oper_OORPrefixList_name&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </prefix-list-name>
+          <default-max-ac-ls config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/prefix/&lt;ipv4_acl_oper_OORPrefixList_name&gt;~ipv4_acl_edm_oor_detail.DefaultMaxACLs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:DefaultMaxACLs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </default-max-ac-ls>
+          <default-max-ac-es config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/prefix/&lt;ipv4_acl_oper_OORPrefixList_name&gt;~ipv4_acl_edm_oor_detail.DefaultMaxACEs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:DefaultMaxACEs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </default-max-ac-es>
+          <current-configured-ac-ls config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/prefix/&lt;ipv4_acl_oper_OORPrefixList_name&gt;~ipv4_acl_edm_oor_detail.CurrentConfiguredACLs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:CurrentConfiguredACLs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </current-configured-ac-ls>
+          <current-configured-ac-es config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/prefix/&lt;ipv4_acl_oper_OORPrefixList_name&gt;~ipv4_acl_edm_oor_detail.CurrentConfiguredACEs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:CurrentConfiguredACEs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </current-configured-ac-es>
+          <current-max-configurable-ac-ls config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/prefix/&lt;ipv4_acl_oper_OORPrefixList_name&gt;~ipv4_acl_edm_oor_detail.CurrentMaxConfigurableACLs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:CurrentMaxConfigurableACLs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </current-max-configurable-ac-ls>
+          <current-max-configurable-ac-es config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/prefix/&lt;ipv4_acl_oper_OORPrefixList_name&gt;~ipv4_acl_edm_oor_detail.CurrentMaxConfigurableACEs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:CurrentMaxConfigurableACEs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </current-max-configurable-ac-es>
+          <max-configurable-ac-ls config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/prefix/&lt;ipv4_acl_oper_OORPrefixList_name&gt;~ipv4_acl_edm_oor_detail.MaxConfigurableACLs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:MaxConfigurableACLs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </max-configurable-ac-ls>
+          <max-configurable-ac-es config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/prefix/&lt;ipv4_acl_oper_OORPrefixList_name&gt;~ipv4_acl_edm_oor_detail.MaxConfigurableACEs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:MaxConfigurableACEs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </max-configurable-ac-es>
+        </oor-prefix>
+      </oor-prefixes>
+      <oor-accesses config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ipv4-acl/gl/oor/acl/</xr-path>
+        <xr-xml-map>ipv4_acl_oper:OORAccessListTable</xr-xml-map>
+        <xr-task>acl</xr-task>
+        <oor-access config="false" key="access-list-name" node="list">
+          <xr-path>/oper/ipv4-acl/gl/oor/acl/&lt;ipv4_acl_oper_OORAccessList_aclname&gt;</xr-path>
+          <xr-xml-map>ipv4_acl_oper:OORAccessList</xr-xml-map>
+          <xr-task>acl</xr-task>
+          <xr-bag-grp-name>ipv4_acl_edm_oor_detail</xr-bag-grp-name>
+          <xr-bag>ipv4_acl_edm.bag</xr-bag>
+          <access-list-name config="false" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/oper/ipv4-acl/gl/oor/acl/&lt;ipv4_acl_oper_OORAccessList_aclname&gt;</xr-path>
+            <xr-xml-map>ipv4_acl_oper:AccessListName</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-sch-type>EncodedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;ipv4_acl_oper_OORAccessList_aclname&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </access-list-name>
+          <default-max-ac-ls config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/acl/&lt;ipv4_acl_oper_OORAccessList_aclname&gt;~ipv4_acl_edm_oor_detail.DefaultMaxACLs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:DefaultMaxACLs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </default-max-ac-ls>
+          <default-max-ac-es config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/acl/&lt;ipv4_acl_oper_OORAccessList_aclname&gt;~ipv4_acl_edm_oor_detail.DefaultMaxACEs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:DefaultMaxACEs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </default-max-ac-es>
+          <current-configured-ac-ls config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/acl/&lt;ipv4_acl_oper_OORAccessList_aclname&gt;~ipv4_acl_edm_oor_detail.CurrentConfiguredACLs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:CurrentConfiguredACLs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </current-configured-ac-ls>
+          <current-configured-ac-es config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/acl/&lt;ipv4_acl_oper_OORAccessList_aclname&gt;~ipv4_acl_edm_oor_detail.CurrentConfiguredACEs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:CurrentConfiguredACEs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </current-configured-ac-es>
+          <current-max-configurable-ac-ls config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/acl/&lt;ipv4_acl_oper_OORAccessList_aclname&gt;~ipv4_acl_edm_oor_detail.CurrentMaxConfigurableACLs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:CurrentMaxConfigurableACLs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </current-max-configurable-ac-ls>
+          <current-max-configurable-ac-es config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/acl/&lt;ipv4_acl_oper_OORAccessList_aclname&gt;~ipv4_acl_edm_oor_detail.CurrentMaxConfigurableACEs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:CurrentMaxConfigurableACEs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </current-max-configurable-ac-es>
+          <max-configurable-ac-ls config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/acl/&lt;ipv4_acl_oper_OORAccessList_aclname&gt;~ipv4_acl_edm_oor_detail.MaxConfigurableACLs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:MaxConfigurableACLs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </max-configurable-ac-ls>
+          <max-configurable-ac-es config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/acl/&lt;ipv4_acl_oper_OORAccessList_aclname&gt;~ipv4_acl_edm_oor_detail.MaxConfigurableACEs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:MaxConfigurableACEs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </max-configurable-ac-es>
+        </oor-access>
+      </oor-accesses>
+      <access-list-summary config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ipv4-acl/gl/oor/acl-summary/</xr-path>
+        <xr-xml-map>ipv4_acl_oper:AccessListSummary</xr-xml-map>
+        <xr-task>acl</xr-task>
+        <details config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv4-acl/gl/oor/acl-summary/details</xr-path>
+          <xr-xml-map>ipv4_acl_oper:Details</xr-xml-map>
+          <xr-task>acl</xr-task>
+          <xr-bag-grp-name>ipv4_acl_edm_oor_detail</xr-bag-grp-name>
+          <xr-bag>ipv4_acl_edm.bag</xr-bag>
+          <default-max-ac-ls config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/acl-summary/details~ipv4_acl_edm_oor_detail.DefaultMaxACLs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:DefaultMaxACLs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </default-max-ac-ls>
+          <default-max-ac-es config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/acl-summary/details~ipv4_acl_edm_oor_detail.DefaultMaxACEs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:DefaultMaxACEs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </default-max-ac-es>
+          <current-configured-ac-ls config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/acl-summary/details~ipv4_acl_edm_oor_detail.CurrentConfiguredACLs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:CurrentConfiguredACLs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </current-configured-ac-ls>
+          <current-configured-ac-es config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/acl-summary/details~ipv4_acl_edm_oor_detail.CurrentConfiguredACEs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:CurrentConfiguredACEs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </current-configured-ac-es>
+          <current-max-configurable-ac-ls config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/acl-summary/details~ipv4_acl_edm_oor_detail.CurrentMaxConfigurableACLs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:CurrentMaxConfigurableACLs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </current-max-configurable-ac-ls>
+          <current-max-configurable-ac-es config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/acl-summary/details~ipv4_acl_edm_oor_detail.CurrentMaxConfigurableACEs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:CurrentMaxConfigurableACEs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </current-max-configurable-ac-es>
+          <max-configurable-ac-ls config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/acl-summary/details~ipv4_acl_edm_oor_detail.MaxConfigurableACLs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:MaxConfigurableACLs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </max-configurable-ac-ls>
+          <max-configurable-ac-es config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/acl-summary/details~ipv4_acl_edm_oor_detail.MaxConfigurableACEs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:MaxConfigurableACEs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </max-configurable-ac-es>
+        </details>
+      </access-list-summary>
+      <prefix-list-summary config="false" is-key="false" node="container" presence="false">
+        <xr-path>/oper/ipv4-acl/gl/oor/prefix-summary/</xr-path>
+        <xr-xml-map>ipv4_acl_oper:PrefixListSummary</xr-xml-map>
+        <xr-task>acl</xr-task>
+        <details config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/ipv4-acl/gl/oor/prefix-summary/details</xr-path>
+          <xr-xml-map>ipv4_acl_oper:Details</xr-xml-map>
+          <xr-task>acl</xr-task>
+          <xr-bag-grp-name>ipv4_acl_edm_oor_detail</xr-bag-grp-name>
+          <xr-bag>ipv4_acl_edm.bag</xr-bag>
+          <default-max-ac-ls config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/prefix-summary/details~ipv4_acl_edm_oor_detail.DefaultMaxACLs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:DefaultMaxACLs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </default-max-ac-ls>
+          <default-max-ac-es config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/prefix-summary/details~ipv4_acl_edm_oor_detail.DefaultMaxACEs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:DefaultMaxACEs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </default-max-ac-es>
+          <current-configured-ac-ls config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/prefix-summary/details~ipv4_acl_edm_oor_detail.CurrentConfiguredACLs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:CurrentConfiguredACLs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </current-configured-ac-ls>
+          <current-configured-ac-es config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/prefix-summary/details~ipv4_acl_edm_oor_detail.CurrentConfiguredACEs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:CurrentConfiguredACEs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </current-configured-ac-es>
+          <current-max-configurable-ac-ls config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/prefix-summary/details~ipv4_acl_edm_oor_detail.CurrentMaxConfigurableACLs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:CurrentMaxConfigurableACLs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </current-max-configurable-ac-ls>
+          <current-max-configurable-ac-es config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/prefix-summary/details~ipv4_acl_edm_oor_detail.CurrentMaxConfigurableACEs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:CurrentMaxConfigurableACEs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </current-max-configurable-ac-es>
+          <max-configurable-ac-ls config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/prefix-summary/details~ipv4_acl_edm_oor_detail.MaxConfigurableACLs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:MaxConfigurableACLs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </max-configurable-ac-ls>
+          <max-configurable-ac-es config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/ipv4-acl/gl/oor/prefix-summary/details~ipv4_acl_edm_oor_detail.MaxConfigurableACEs</xr-path>
+            <xr-xml-map>ipv4_acl_edm:MaxConfigurableACEs</xr-xml-map>
+            <xr-task>acl</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 4</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </max-configurable-ac-es>
+        </details>
+      </prefix-list-summary>
+    </oor>
+  </ipv4-acl-and-prefix-list>
+</Cisco-IOS-XR-ipv4-acl-oper>

@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-fib-common-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-fib-common-cfg" revision="2017-05-01">
+  <files>
+    <file revision="2017-05-01" submodule="false">Cisco-IOS-XR-fib-common-cfg.yang</file>
+  </files>
+  <prefix>fib-common-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="Fib-pbts-forward-class">
+    <xr-sch-type>RangeEnum</xr-sch-type>
+    <type node="union">
+      <type node="enumeration">
+        <enum value="8">any</enum>
+      </type>
+      <type range="0..8">
+        <type-name>uint32</type-name>
+      </type>
+    </type>
+  </typedef>
+  <typedef name="Fib-pbts-fallback">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">list</enum>
+      <enum value="2">any</enum>
+      <enum value="3">drop</enum>
+    </type>
+  </typedef>
+  <fib config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/cef/</xr-path>
+    <xr-xml-map>fib_common_cfg:FIB</xr-xml-map>
+    <xr-task>cef</xr-task>
+    <pbts-forward-class-fallbacks config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/cef/fallback_class/</xr-path>
+      <xr-xml-map>fib_common_cfg:PBTSForwardClassTable</xr-xml-map>
+      <xr-task>cef</xr-task>
+      <pbts-forward-class-fallback config="true" key="forward-class-number" node="list">
+        <xr-path>/cfg/gl/cef/fallback_class/&lt;fib_common_cfg_PBTSForwardClassFallback_class_num&gt;</xr-path>
+        <xr-xml-map>fib_common_cfg:PBTSForwardClassFallback</xr-xml-map>
+        <xr-task>cef</xr-task>
+        <xr-pack-format>%d%d%d%d%d%d%d%d</xr-pack-format>
+        <forward-class-number config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/cef/fallback_class/&lt;fib_common_cfg_PBTSForwardClassFallback_class_num&gt;</xr-path>
+          <xr-xml-map>fib_common_cfg:ForwardClassNumber</xr-xml-map>
+          <xr-task>cef</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <xr-sch-arg-name>&lt;fib_common_cfg_PBTSForwardClassFallback_class_num&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>Fib-pbts-forward-class</type-name>
+          </type>
+        </forward-class-number>
+        <fallback-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/cef/fallback_class/&lt;fib_common_cfg_PBTSForwardClassFallback_class_num&gt;`0</xr-path>
+          <xr-xml-map>fib_common_cfg:FallbackType</xr-xml-map>
+          <xr-task>cef</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Fib-pbts-fallback</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </fallback-type>
+        <fallback-class-number-array config="true" is-key="false" is-yang-key="false" node="leaf-list">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d%d%d%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-pack-list-start>1</xr-pack-list-start>
+          <xr-pack-list-end>8</xr-pack-list-end>
+          <xr-internal-key>&lt;pack_arg1&gt;</xr-internal-key>
+          <xr-path>/cfg/gl/cef/fallback_class/&lt;fib_common_cfg_PBTSForwardClassFallback_class_num&gt;`&lt;pack_arg1&gt;</xr-path>
+          <xr-xml-map>fib_common_cfg:FallbackClassNumberArray</xr-xml-map>
+          <xr-task>cef</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="0..7">
+            <type-name>uint32</type-name>
+          </type>
+          <max-elements>7</max-elements>
+        </fallback-class-number-array>
+      </pbts-forward-class-fallback>
+    </pbts-forward-class-fallbacks>
+    <platform config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/cef/platform/</xr-path>
+      <xr-xml-map>fib_common_cfg:Platform</xr-xml-map>
+      <xr-task>cef</xr-task>
+      <label-switched-multicast config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/cef/platform/lsm/</xr-path>
+        <xr-xml-map>fib_common_cfg:LabelSwitchedMulticast</xr-xml-map>
+        <xr-task>cef</xr-task>
+        <frr-holdtime config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/cef/platform/lsm/frr_holdtime</xr-path>
+          <xr-xml-map>fib_common_cfg:FRRHoldtime</xr-xml-map>
+          <xr-task>cef</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="3..180">
+            <type-name>uint32</type-name>
+          </type>
+        </frr-holdtime>
+      </label-switched-multicast>
+    </platform>
+    <auto-hash-recover config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/cef/lba-hash-recover</xr-path>
+      <xr-xml-map>fib_common_cfg:AutoHashRecover</xr-xml-map>
+      <xr-task>cef</xr-task>
+      <xr-sch-type>Boolean</xr-sch-type>
+      <type>
+        <type-name>boolean</type-name>
+      </type>
+    </auto-hash-recover>
+    <prefer-aib-routes config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/cef/prefer-aib-routes</xr-path>
+      <xr-xml-map>fib_common_cfg:PreferAibRoutes</xr-xml-map>
+      <xr-task>cef</xr-task>
+      <xr-sch-type>Boolean</xr-sch-type>
+      <type>
+        <type-name>boolean</type-name>
+      </type>
+    </prefer-aib-routes>
+    <encap-sharing-disable config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/cef/encap-sharing-disable</xr-path>
+      <xr-xml-map>fib_common_cfg:EncapSharingDisable</xr-xml-map>
+      <xr-task>cef</xr-task>
+      <xr-sch-type>Boolean</xr-sch-type>
+      <type>
+        <type-name>boolean</type-name>
+      </type>
+    </encap-sharing-disable>
+    <frr-follow-bgp-pic config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/cef/frr-follow-bgp</xr-path>
+      <xr-xml-map>fib_common_cfg:FRRFollowBGP_PIC</xr-xml-map>
+      <xr-task>cef</xr-task>
+      <xr-sch-type>Boolean</xr-sch-type>
+      <type>
+        <type-name>boolean</type-name>
+      </type>
+    </frr-follow-bgp-pic>
+  </fib>
+</Cisco-IOS-XR-fib-common-cfg>

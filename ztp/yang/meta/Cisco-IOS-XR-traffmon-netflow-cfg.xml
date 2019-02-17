@@ -1,0 +1,1056 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-traffmon-netflow-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-traffmon-netflow-cfg" revision="2017-05-01">
+  <files>
+    <file revision="2017-05-01" submodule="false">Cisco-IOS-XR-traffmon-netflow-cfg.yang</file>
+  </files>
+  <prefix>traffmon-netflow-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-ifmgr-cfg</import>
+  <typedef name="Nf-export-timeout">
+    <xr-sch-type>ZeroRange</xr-sch-type>
+    <type range="0..604800">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Nf-active-cache-aging-timeout">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="1..604800">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Nf-inactive-cache-aging-timeout">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="0..604800">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Nf-sample-interval">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="1..65535">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Nf-sample-number">
+    <xr-sch-type>Range</xr-sch-type>
+    <type>
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Nf-template-timeout">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="1..604800">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Nf-map-name">
+    <xr-sch-type>BoundedString</xr-sch-type>
+    <type length="1..32">
+      <type-name>xr:Cisco-ios-xr-string</type-name>
+    </type>
+  </typedef>
+  <typedef name="Nf-cache-aging-mode">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">normal</enum>
+      <enum value="1">permanent</enum>
+      <enum value="2">immediate</enum>
+    </type>
+  </typedef>
+  <typedef name="Nf-cache-entry">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="4096..1000000">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Nf-update-cache-aging-timeout">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="1..604800">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Nf-sampling-mode">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="2">random</enum>
+    </type>
+  </typedef>
+  <typedef name="Nf-export-version">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="9..10">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <typedef name="Nf-cache-timeout-rate-limit">
+    <xr-sch-type>Range</xr-sch-type>
+    <type range="1..1000000">
+      <type-name>uint32</type-name>
+    </type>
+  </typedef>
+  <augment path="/a1:interface-configurations/a1:interface-configuration">
+    <net-flow config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/</xr-path>
+      <xr-xml-map>netflow_interface_cfg:NetFlow</xr-xml-map>
+      <xr-task>netflow</xr-task>
+      <data-link-frame-section config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0xd/</xr-path>
+        <xr-xml-map>netflow_interface_cfg:DataLinkFrameSection</xr-xml-map>
+        <xr-task>netflow</xr-task>
+        <flow-monitor-map config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0xd/flowmon/</xr-path>
+          <xr-xml-map>netflow_interface_cfg:FlowMonitorMap</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <ingress config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0xd/flowmon/0x0/</xr-path>
+            <xr-xml-map>netflow_interface_cfg:Ingress</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <flow-monitor-name config="true" key="monitor-map-name" node="list">
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0xd/flowmon/0x0/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+              <xr-xml-map>netflow_interface_cfg:FlowMonitorName</xr-xml-map>
+              <xr-task>netflow</xr-task>
+              <monitor-map-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0xd/flowmon/0x0/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+                <xr-xml-map>netflow_interface_cfg:MonitorMapName</xr-xml-map>
+                <xr-task>netflow</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <xr-sch-arg-name>&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>xr:Cisco-ios-xr-string</type-name>
+                </type>
+              </monitor-map-name>
+              <sampler-map-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0xd/flowmon/0x0/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+                <xr-xml-map>netflow_interface_cfg:SamplerMapName</xr-xml-map>
+                <xr-task>netflow</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </sampler-map-name>
+            </flow-monitor-name>
+          </ingress>
+          <egress config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0xd/flowmon/0x1/</xr-path>
+            <xr-xml-map>netflow_interface_cfg:Egress</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <flow-monitor-name config="true" key="monitor-map-name" node="list">
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0xd/flowmon/0x1/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+              <xr-xml-map>netflow_interface_cfg:FlowMonitorName</xr-xml-map>
+              <xr-task>netflow</xr-task>
+              <monitor-map-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0xd/flowmon/0x1/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+                <xr-xml-map>netflow_interface_cfg:MonitorMapName</xr-xml-map>
+                <xr-task>netflow</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <xr-sch-arg-name>&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>xr:Cisco-ios-xr-string</type-name>
+                </type>
+              </monitor-map-name>
+              <sampler-map-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0xd/flowmon/0x1/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+                <xr-xml-map>netflow_interface_cfg:SamplerMapName</xr-xml-map>
+                <xr-task>netflow</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </sampler-map-name>
+            </flow-monitor-name>
+          </egress>
+        </flow-monitor-map>
+      </data-link-frame-section>
+      <mpls config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x2/</xr-path>
+        <xr-xml-map>netflow_interface_cfg:MPLS</xr-xml-map>
+        <xr-task>netflow</xr-task>
+        <flow-monitor-map config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x2/flowmon/</xr-path>
+          <xr-xml-map>netflow_interface_cfg:FlowMonitorMap</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <ingress config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x2/flowmon/0x0/</xr-path>
+            <xr-xml-map>netflow_interface_cfg:Ingress</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <flow-monitor-name config="true" key="monitor-map-name" node="list">
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x2/flowmon/0x0/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+              <xr-xml-map>netflow_interface_cfg:FlowMonitorName</xr-xml-map>
+              <xr-task>netflow</xr-task>
+              <monitor-map-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x2/flowmon/0x0/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+                <xr-xml-map>netflow_interface_cfg:MonitorMapName</xr-xml-map>
+                <xr-task>netflow</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <xr-sch-arg-name>&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>xr:Cisco-ios-xr-string</type-name>
+                </type>
+              </monitor-map-name>
+              <sampler-map-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x2/flowmon/0x0/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+                <xr-xml-map>netflow_interface_cfg:SamplerMapName</xr-xml-map>
+                <xr-task>netflow</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </sampler-map-name>
+            </flow-monitor-name>
+          </ingress>
+          <egress config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x2/flowmon/0x1/</xr-path>
+            <xr-xml-map>netflow_interface_cfg:Egress</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <flow-monitor-name config="true" key="monitor-map-name" node="list">
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x2/flowmon/0x1/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+              <xr-xml-map>netflow_interface_cfg:FlowMonitorName</xr-xml-map>
+              <xr-task>netflow</xr-task>
+              <monitor-map-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x2/flowmon/0x1/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+                <xr-xml-map>netflow_interface_cfg:MonitorMapName</xr-xml-map>
+                <xr-task>netflow</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <xr-sch-arg-name>&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>xr:Cisco-ios-xr-string</type-name>
+                </type>
+              </monitor-map-name>
+              <sampler-map-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x2/flowmon/0x1/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+                <xr-xml-map>netflow_interface_cfg:SamplerMapName</xr-xml-map>
+                <xr-task>netflow</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </sampler-map-name>
+            </flow-monitor-name>
+          </egress>
+        </flow-monitor-map>
+      </mpls>
+      <ipv6 config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x1/</xr-path>
+        <xr-xml-map>netflow_interface_cfg:IPv6</xr-xml-map>
+        <xr-task>netflow</xr-task>
+        <flow-monitor-map config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x1/flowmon/</xr-path>
+          <xr-xml-map>netflow_interface_cfg:FlowMonitorMap</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <ingress config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x1/flowmon/0x0/</xr-path>
+            <xr-xml-map>netflow_interface_cfg:Ingress</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <flow-monitor-name config="true" key="monitor-map-name" node="list">
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x1/flowmon/0x0/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+              <xr-xml-map>netflow_interface_cfg:FlowMonitorName</xr-xml-map>
+              <xr-task>netflow</xr-task>
+              <monitor-map-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x1/flowmon/0x0/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+                <xr-xml-map>netflow_interface_cfg:MonitorMapName</xr-xml-map>
+                <xr-task>netflow</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <xr-sch-arg-name>&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>xr:Cisco-ios-xr-string</type-name>
+                </type>
+              </monitor-map-name>
+              <sampler-map-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x1/flowmon/0x0/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+                <xr-xml-map>netflow_interface_cfg:SamplerMapName</xr-xml-map>
+                <xr-task>netflow</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </sampler-map-name>
+            </flow-monitor-name>
+          </ingress>
+          <egress config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x1/flowmon/0x1/</xr-path>
+            <xr-xml-map>netflow_interface_cfg:Egress</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <flow-monitor-name config="true" key="monitor-map-name" node="list">
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x1/flowmon/0x1/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+              <xr-xml-map>netflow_interface_cfg:FlowMonitorName</xr-xml-map>
+              <xr-task>netflow</xr-task>
+              <monitor-map-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x1/flowmon/0x1/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+                <xr-xml-map>netflow_interface_cfg:MonitorMapName</xr-xml-map>
+                <xr-task>netflow</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <xr-sch-arg-name>&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>xr:Cisco-ios-xr-string</type-name>
+                </type>
+              </monitor-map-name>
+              <sampler-map-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x1/flowmon/0x1/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+                <xr-xml-map>netflow_interface_cfg:SamplerMapName</xr-xml-map>
+                <xr-task>netflow</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </sampler-map-name>
+            </flow-monitor-name>
+          </egress>
+        </flow-monitor-map>
+      </ipv6>
+      <ipv4 config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x0/</xr-path>
+        <xr-xml-map>netflow_interface_cfg:IPv4</xr-xml-map>
+        <xr-task>netflow</xr-task>
+        <flow-monitor-map config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x0/flowmon/</xr-path>
+          <xr-xml-map>netflow_interface_cfg:FlowMonitorMap</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <ingress config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x0/flowmon/0x0/</xr-path>
+            <xr-xml-map>netflow_interface_cfg:Ingress</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <flow-monitor-name config="true" key="monitor-map-name" node="list">
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x0/flowmon/0x0/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+              <xr-xml-map>netflow_interface_cfg:FlowMonitorName</xr-xml-map>
+              <xr-task>netflow</xr-task>
+              <monitor-map-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x0/flowmon/0x0/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+                <xr-xml-map>netflow_interface_cfg:MonitorMapName</xr-xml-map>
+                <xr-task>netflow</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <xr-sch-arg-name>&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>xr:Cisco-ios-xr-string</type-name>
+                </type>
+              </monitor-map-name>
+              <sampler-map-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x0/flowmon/0x0/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+                <xr-xml-map>netflow_interface_cfg:SamplerMapName</xr-xml-map>
+                <xr-task>netflow</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </sampler-map-name>
+            </flow-monitor-name>
+          </ingress>
+          <egress config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x0/flowmon/0x1/</xr-path>
+            <xr-xml-map>netflow_interface_cfg:Egress</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <flow-monitor-name config="true" key="monitor-map-name" node="list">
+              <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x0/flowmon/0x1/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+              <xr-xml-map>netflow_interface_cfg:FlowMonitorName</xr-xml-map>
+              <xr-task>netflow</xr-task>
+              <monitor-map-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x0/flowmon/0x1/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+                <xr-xml-map>netflow_interface_cfg:MonitorMapName</xr-xml-map>
+                <xr-task>netflow</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <xr-sch-arg-name>&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>xr:Cisco-ios-xr-string</type-name>
+                </type>
+              </monitor-map-name>
+              <sampler-map-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/if/&lt;ifmgr_cfg_InterfaceConfiguration_active&gt;/&lt;ifmgr_cfg_InterfaceConfiguration_name&gt;/netflow/0x0/flowmon/0x1/&lt;netflow_interface_cfg_FlowMonitorName_monname&gt;</xr-path>
+                <xr-xml-map>netflow_interface_cfg:SamplerMapName</xr-xml-map>
+                <xr-task>netflow</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </sampler-map-name>
+            </flow-monitor-name>
+          </egress>
+        </flow-monitor-map>
+      </ipv4>
+    </net-flow>
+  </augment>
+  <net-flow config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/netflow/</xr-path>
+    <xr-xml-map>netflow_cfg:NetFlow</xr-xml-map>
+    <xr-task>netflow</xr-task>
+    <flow-exporter-maps config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/netflow/fem/</xr-path>
+      <xr-xml-map>netflow_cfg:FlowExporterMapTable</xr-xml-map>
+      <xr-task>netflow</xr-task>
+      <flow-exporter-map config="true" key="exporter-map-name" node="list">
+        <xr-path>/cfg/gl/netflow/fem/&lt;netflow_cfg_FlowExporterMap_arg1&gt;/</xr-path>
+        <xr-xml-map>netflow_cfg:FlowExporterMap</xr-xml-map>
+        <xr-task>netflow</xr-task>
+        <udp config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/netflow/fem/&lt;netflow_cfg_FlowExporterMap_arg1&gt;/collector/udp/</xr-path>
+          <xr-xml-map>netflow_cfg:UDP</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <destination-port config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/netflow/fem/&lt;netflow_cfg_FlowExporterMap_arg1&gt;/collector/udp/dport</xr-path>
+            <xr-xml-map>netflow_cfg:DestinationPort</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1024..65535">
+              <type-name>uint32</type-name>
+            </type>
+          </destination-port>
+        </udp>
+        <destination config="true" is-key="false" node="container" presence="false">
+          <xr-is-packed/>
+          <xr-path>/cfg/gl/netflow/fem/&lt;netflow_cfg_FlowExporterMap_arg1&gt;/collector/destination`</xr-path>
+          <xr-xml-map>netflow_cfg:Destination</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <xr-pack-format>%N%s%s</xr-pack-format>
+          <ip-address config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%N%s%s</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/netflow/fem/&lt;netflow_cfg_FlowExporterMap_arg1&gt;/collector/destination`0</xr-path>
+            <xr-xml-map>netflow_cfg:IPAddress</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <xr-sch-type>IPV4Address</xr-sch-type>
+            <type>
+              <type-name>inet:ipv4-address-no-zone</type-name>
+            </type>
+          </ip-address>
+          <ipv6-address config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%N%s%s</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/netflow/fem/&lt;netflow_cfg_FlowExporterMap_arg1&gt;/collector/destination`1</xr-path>
+            <xr-xml-map>netflow_cfg:IPv6Address</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </ipv6-address>
+          <vrf-name config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%N%s%s</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/netflow/fem/&lt;netflow_cfg_FlowExporterMap_arg1&gt;/collector/destination`2</xr-path>
+            <xr-xml-map>netflow_cfg:VRFName</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <xr-sch-type>VRF_Name</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </vrf-name>
+        </destination>
+        <version config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/netflow/fem/&lt;netflow_cfg_FlowExporterMap_arg1&gt;/version/</xr-path>
+          <xr-xml-map>netflow_cfg:Version</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <options config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/netflow/fem/&lt;netflow_cfg_FlowExporterMap_arg1&gt;/version/opts/</xr-path>
+            <xr-xml-map>netflow_cfg:Options</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <interface-table-export-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/netflow/fem/&lt;netflow_cfg_FlowExporterMap_arg1&gt;/version/opts/iftbl</xr-path>
+              <xr-xml-map>netflow_cfg:InterfaceTableExportTimeout</xr-xml-map>
+              <xr-task>netflow</xr-task>
+              <xr-sch-type>ZeroRange</xr-sch-type>
+              <type>
+                <type-name>Nf-export-timeout</type-name>
+              </type>
+            </interface-table-export-timeout>
+            <sampler-table-export-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/netflow/fem/&lt;netflow_cfg_FlowExporterMap_arg1&gt;/version/opts/samplertbl</xr-path>
+              <xr-xml-map>netflow_cfg:SamplerTableExportTimeout</xr-xml-map>
+              <xr-task>netflow</xr-task>
+              <xr-sch-type>ZeroRange</xr-sch-type>
+              <type>
+                <type-name>Nf-export-timeout</type-name>
+              </type>
+            </sampler-table-export-timeout>
+            <vrf-table-export-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/netflow/fem/&lt;netflow_cfg_FlowExporterMap_arg1&gt;/version/opts/vrftbl</xr-path>
+              <xr-xml-map>netflow_cfg:VrfTableExportTimeout</xr-xml-map>
+              <xr-task>netflow</xr-task>
+              <xr-sch-type>ZeroRange</xr-sch-type>
+              <type>
+                <type-name>Nf-export-timeout</type-name>
+              </type>
+            </vrf-table-export-timeout>
+          </options>
+          <version-type config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/netflow/fem/&lt;netflow_cfg_FlowExporterMap_arg1&gt;/version/a/enter</xr-path>
+            <xr-xml-map>netflow_cfg:VersionType</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type>
+              <type-name>Nf-export-version</type-name>
+            </type>
+          </version-type>
+          <options-template-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/netflow/fem/&lt;netflow_cfg_FlowExporterMap_arg1&gt;/version/options-tmpl-tout</xr-path>
+            <xr-xml-map>netflow_cfg:OptionsTemplateTimeout</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type>
+              <type-name>Nf-template-timeout</type-name>
+            </type>
+            <default>1800</default>
+          </options-template-timeout>
+          <common-template-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/netflow/fem/&lt;netflow_cfg_FlowExporterMap_arg1&gt;/version/tmpl-tout</xr-path>
+            <xr-xml-map>netflow_cfg:CommonTemplateTimeout</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type>
+              <type-name>Nf-template-timeout</type-name>
+            </type>
+            <default>1800</default>
+          </common-template-timeout>
+          <data-template-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/netflow/fem/&lt;netflow_cfg_FlowExporterMap_arg1&gt;/version/data-tmpl-tout</xr-path>
+            <xr-xml-map>netflow_cfg:DataTemplateTimeout</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type>
+              <type-name>Nf-template-timeout</type-name>
+            </type>
+            <default>1800</default>
+          </data-template-timeout>
+        </version>
+        <source-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/netflow/fem/&lt;netflow_cfg_FlowExporterMap_arg1&gt;/collector/src-intf</xr-path>
+          <xr-xml-map>netflow_cfg:SourceInterface</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <xr-sch-type>InterfaceName</xr-sch-type>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </source-interface>
+        <dscp config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/netflow/fem/&lt;netflow_cfg_FlowExporterMap_arg1&gt;/collector/dscp</xr-path>
+          <xr-xml-map>netflow_cfg:DSCP</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="0..63">
+            <type-name>uint32</type-name>
+          </type>
+        </dscp>
+        <packet-length config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/netflow/fem/&lt;netflow_cfg_FlowExporterMap_arg1&gt;/pak-len</xr-path>
+          <xr-xml-map>netflow_cfg:PacketLength</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="512..1468">
+            <type-name>uint32</type-name>
+          </type>
+        </packet-length>
+        <exporter-map-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-create-item-relative-path>a/enter</xr-create-item-relative-path>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/netflow/fem/&lt;netflow_cfg_FlowExporterMap_arg1&gt;/</xr-path>
+          <xr-xml-map>netflow_cfg:ExporterMapName</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;netflow_cfg_FlowExporterMap_arg1&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>Nf-map-name</type-name>
+          </type>
+        </exporter-map-name>
+      </flow-exporter-map>
+    </flow-exporter-maps>
+    <flow-sampler-maps config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/netflow/fsm/</xr-path>
+      <xr-xml-map>netflow_cfg:FlowSamplerMapTable</xr-xml-map>
+      <xr-task>netflow</xr-task>
+      <flow-sampler-map config="true" key="sampler-map-name" node="list">
+        <xr-path>/cfg/gl/netflow/fsm/&lt;netflow_cfg_FlowSamplerMap_arg1&gt;/</xr-path>
+        <xr-xml-map>netflow_cfg:FlowSamplerMap</xr-xml-map>
+        <xr-task>netflow</xr-task>
+        <sampling-modes config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/netflow/fsm/&lt;netflow_cfg_FlowSamplerMap_arg1&gt;/mode/</xr-path>
+          <xr-xml-map>netflow_cfg:SamplingModeTable</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <sampling-mode config="true" key="mode" node="list">
+            <xr-path>/cfg/gl/netflow/fsm/&lt;netflow_cfg_FlowSamplerMap_arg1&gt;/mode/&lt;netflow_cfg_SamplingMode_arg2&gt;</xr-path>
+            <xr-xml-map>netflow_cfg:SamplingMode</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <mode config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/netflow/fsm/&lt;netflow_cfg_FlowSamplerMap_arg1&gt;/mode/&lt;netflow_cfg_SamplingMode_arg2&gt;</xr-path>
+              <xr-xml-map>netflow_cfg:Mode</xr-xml-map>
+              <xr-task>netflow</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <xr-sch-arg-name>&lt;netflow_cfg_SamplingMode_arg2&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>Nf-sampling-mode</type-name>
+              </type>
+            </mode>
+            <sample-number config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/netflow/fsm/&lt;netflow_cfg_FlowSamplerMap_arg1&gt;/mode/&lt;netflow_cfg_SamplingMode_arg2&gt;`0</xr-path>
+              <xr-xml-map>netflow_cfg:SampleNumber</xr-xml-map>
+              <xr-task>netflow</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type>
+                <type-name>Nf-sample-number</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </sample-number>
+            <interval config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/netflow/fsm/&lt;netflow_cfg_FlowSamplerMap_arg1&gt;/mode/&lt;netflow_cfg_SamplingMode_arg2&gt;`1</xr-path>
+              <xr-xml-map>netflow_cfg:Interval</xr-xml-map>
+              <xr-task>netflow</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type>
+                <type-name>Nf-sample-interval</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </interval>
+          </sampling-mode>
+        </sampling-modes>
+        <sampler-map-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-create-item-relative-path>a/enter</xr-create-item-relative-path>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/netflow/fsm/&lt;netflow_cfg_FlowSamplerMap_arg1&gt;/</xr-path>
+          <xr-xml-map>netflow_cfg:SamplerMapName</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;netflow_cfg_FlowSamplerMap_arg1&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>Nf-map-name</type-name>
+          </type>
+        </sampler-map-name>
+      </flow-sampler-map>
+    </flow-sampler-maps>
+    <flow-monitor-map-table config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/netflow/fmm/netflow/</xr-path>
+      <xr-xml-map>netflow_cfg:FlowMonitorMapTable</xr-xml-map>
+      <xr-task>netflow</xr-task>
+      <flow-monitor-map config="true" key="monitor-map-name" node="list">
+        <xr-path>/cfg/gl/netflow/fmm/netflow/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/</xr-path>
+        <xr-xml-map>netflow_cfg:FlowMonitorMap</xr-xml-map>
+        <xr-task>netflow</xr-task>
+        <option config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/netflow/fmm/netflow/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/option/</xr-path>
+          <xr-xml-map>netflow_cfg:Option</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <filtered config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/netflow/fmm/netflow/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/option/filtered</xr-path>
+            <xr-xml-map>netflow_cfg:Filtered</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </filtered>
+          <out-bundle-member config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/netflow/fmm/netflow/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/option/outbundlemember</xr-path>
+            <xr-xml-map>netflow_cfg:OutBundleMember</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </out-bundle-member>
+          <out-phys-int config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/netflow/fmm/netflow/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/option/outphysint</xr-path>
+            <xr-xml-map>netflow_cfg:OutPhysInt</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </out-phys-int>
+          <bgp-attr config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/netflow/fmm/netflow/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/option/bgpattr</xr-path>
+            <xr-xml-map>netflow_cfg:BGPAttr</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </bgp-attr>
+        </option>
+        <exporters config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/netflow/fmm/netflow/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/exporter/</xr-path>
+          <xr-xml-map>netflow_cfg:ExporterTable</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <exporter config="true" key="exporter-name" node="list">
+            <xr-path>/cfg/gl/netflow/fmm/netflow/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/exporter/&lt;netflow_cfg_Exporter_arg2&gt;</xr-path>
+            <xr-xml-map>netflow_cfg:Exporter</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <exporter-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-create-item-relative-path/>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/netflow/fmm/netflow/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/exporter/&lt;netflow_cfg_Exporter_arg2&gt;</xr-path>
+              <xr-xml-map>netflow_cfg:ExporterName</xr-xml-map>
+              <xr-task>netflow</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <xr-sch-arg-name>&lt;netflow_cfg_Exporter_arg2&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>Nf-map-name</type-name>
+              </type>
+            </exporter-name>
+          </exporter>
+        </exporters>
+        <record config="true" is-key="false" node="container" presence="true">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-is-packed/>
+          <xr-path>/cfg/gl/netflow/fmm/netflow/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/record`</xr-path>
+          <xr-xml-map>netflow_cfg:Record</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <xr-pack-format>%s%d</xr-pack-format>
+          <record-name config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/netflow/fmm/netflow/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/record`0</xr-path>
+            <xr-xml-map>netflow_cfg:RecordName</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <xr-sch-type>BoundedString</xr-sch-type>
+            <type>
+              <type-name>Nf-map-name</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </record-name>
+          <label config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/netflow/fmm/netflow/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/record`1</xr-path>
+            <xr-xml-map>netflow_cfg:Label</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1..6">
+              <type-name>uint32</type-name>
+            </type>
+          </label>
+        </record>
+        <cache-update-aging-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/netflow/fmm/netflow/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/cache-update-timeout</xr-path>
+          <xr-xml-map>netflow_cfg:CacheUpdateAgingTimeout</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>Nf-update-cache-aging-timeout</type-name>
+          </type>
+          <default>1800</default>
+        </cache-update-aging-timeout>
+        <cache-entries config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/netflow/fmm/netflow/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/cache-entries</xr-path>
+          <xr-xml-map>netflow_cfg:CacheEntries</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>Nf-cache-entry</type-name>
+          </type>
+          <default>65535</default>
+        </cache-entries>
+        <cache-inactive-aging-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/netflow/fmm/netflow/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/cache-inactv-timeout</xr-path>
+          <xr-xml-map>netflow_cfg:CacheInactiveAgingTimeout</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>Nf-inactive-cache-aging-timeout</type-name>
+          </type>
+          <default>15</default>
+        </cache-inactive-aging-timeout>
+        <cache-active-aging-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/netflow/fmm/netflow/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/cache-actv-timeout</xr-path>
+          <xr-xml-map>netflow_cfg:CacheActiveAgingTimeout</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>Nf-active-cache-aging-timeout</type-name>
+          </type>
+          <default>1800</default>
+        </cache-active-aging-timeout>
+        <cache-timeout-rate-limit config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/netflow/fmm/netflow/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/cache-timeout-rate-limit</xr-path>
+          <xr-xml-map>netflow_cfg:CacheTimeoutRateLimit</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>Nf-cache-timeout-rate-limit</type-name>
+          </type>
+          <default>2000</default>
+        </cache-timeout-rate-limit>
+        <cache-aging-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/netflow/fmm/netflow/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/cache-mode</xr-path>
+          <xr-xml-map>netflow_cfg:CacheAgingMode</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Nf-cache-aging-mode</type-name>
+          </type>
+          <default>normal</default>
+        </cache-aging-mode>
+        <monitor-map-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-create-item-relative-path>a/enter</xr-create-item-relative-path>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/netflow/fmm/netflow/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/</xr-path>
+          <xr-xml-map>netflow_cfg:MonitorMapName</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;netflow_cfg_FlowMonitorMap_arg1&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>Nf-map-name</type-name>
+          </type>
+        </monitor-map-name>
+      </flow-monitor-map>
+    </flow-monitor-map-table>
+    <flow-monitor-map-performance-table config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/netflow/fmm/traffic/</xr-path>
+      <xr-xml-map>netflow_cfg:FlowMonitorMapPerformanceTable</xr-xml-map>
+      <xr-task>netflow</xr-task>
+      <flow-monitor-map config="true" key="monitor-map-name" node="list">
+        <xr-path>/cfg/gl/netflow/fmm/traffic/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/</xr-path>
+        <xr-xml-map>netflow_cfg:FlowMonitorMap</xr-xml-map>
+        <xr-task>netflow</xr-task>
+        <option config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/netflow/fmm/traffic/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/option/</xr-path>
+          <xr-xml-map>netflow_cfg:Option</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <filtered config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/netflow/fmm/traffic/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/option/filtered</xr-path>
+            <xr-xml-map>netflow_cfg:Filtered</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </filtered>
+          <out-bundle-member config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/netflow/fmm/traffic/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/option/outbundlemember</xr-path>
+            <xr-xml-map>netflow_cfg:OutBundleMember</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </out-bundle-member>
+          <out-phys-int config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/netflow/fmm/traffic/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/option/outphysint</xr-path>
+            <xr-xml-map>netflow_cfg:OutPhysInt</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </out-phys-int>
+          <bgp-attr config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/netflow/fmm/traffic/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/option/bgpattr</xr-path>
+            <xr-xml-map>netflow_cfg:BGPAttr</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </bgp-attr>
+        </option>
+        <exporters config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/netflow/fmm/traffic/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/exporter/</xr-path>
+          <xr-xml-map>netflow_cfg:ExporterTable</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <exporter config="true" key="exporter-name" node="list">
+            <xr-path>/cfg/gl/netflow/fmm/traffic/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/exporter/&lt;netflow_cfg_Exporter_arg2&gt;</xr-path>
+            <xr-xml-map>netflow_cfg:Exporter</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <exporter-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-create-item-relative-path/>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/netflow/fmm/traffic/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/exporter/&lt;netflow_cfg_Exporter_arg2&gt;</xr-path>
+              <xr-xml-map>netflow_cfg:ExporterName</xr-xml-map>
+              <xr-task>netflow</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <xr-sch-arg-name>&lt;netflow_cfg_Exporter_arg2&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>Nf-map-name</type-name>
+              </type>
+            </exporter-name>
+          </exporter>
+        </exporters>
+        <record config="true" is-key="false" node="container" presence="true">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-is-packed/>
+          <xr-path>/cfg/gl/netflow/fmm/traffic/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/record`</xr-path>
+          <xr-xml-map>netflow_cfg:Record</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <xr-pack-format>%s%d</xr-pack-format>
+          <record-name config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/netflow/fmm/traffic/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/record`0</xr-path>
+            <xr-xml-map>netflow_cfg:RecordName</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <xr-sch-type>BoundedString</xr-sch-type>
+            <type>
+              <type-name>Nf-map-name</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </record-name>
+          <label config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/netflow/fmm/traffic/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/record`1</xr-path>
+            <xr-xml-map>netflow_cfg:Label</xr-xml-map>
+            <xr-task>netflow</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1..6">
+              <type-name>uint32</type-name>
+            </type>
+          </label>
+        </record>
+        <cache-update-aging-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/netflow/fmm/traffic/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/cache-update-timeout</xr-path>
+          <xr-xml-map>netflow_cfg:CacheUpdateAgingTimeout</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>Nf-update-cache-aging-timeout</type-name>
+          </type>
+          <default>1800</default>
+        </cache-update-aging-timeout>
+        <cache-entries config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/netflow/fmm/traffic/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/cache-entries</xr-path>
+          <xr-xml-map>netflow_cfg:CacheEntries</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>Nf-cache-entry</type-name>
+          </type>
+          <default>65535</default>
+        </cache-entries>
+        <cache-inactive-aging-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/netflow/fmm/traffic/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/cache-inactv-timeout</xr-path>
+          <xr-xml-map>netflow_cfg:CacheInactiveAgingTimeout</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>Nf-inactive-cache-aging-timeout</type-name>
+          </type>
+          <default>15</default>
+        </cache-inactive-aging-timeout>
+        <cache-active-aging-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/netflow/fmm/traffic/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/cache-actv-timeout</xr-path>
+          <xr-xml-map>netflow_cfg:CacheActiveAgingTimeout</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>Nf-active-cache-aging-timeout</type-name>
+          </type>
+          <default>1800</default>
+        </cache-active-aging-timeout>
+        <cache-timeout-rate-limit config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/netflow/fmm/traffic/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/cache-timeout-rate-limit</xr-path>
+          <xr-xml-map>netflow_cfg:CacheTimeoutRateLimit</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>Nf-cache-timeout-rate-limit</type-name>
+          </type>
+          <default>2000</default>
+        </cache-timeout-rate-limit>
+        <cache-aging-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/netflow/fmm/traffic/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/cache-mode</xr-path>
+          <xr-xml-map>netflow_cfg:CacheAgingMode</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Nf-cache-aging-mode</type-name>
+          </type>
+          <default>normal</default>
+        </cache-aging-mode>
+        <monitor-map-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-create-item-relative-path>a/enter</xr-create-item-relative-path>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/netflow/fmm/traffic/&lt;netflow_cfg_FlowMonitorMap_arg1&gt;/</xr-path>
+          <xr-xml-map>netflow_cfg:MonitorMapName</xr-xml-map>
+          <xr-task>netflow</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;netflow_cfg_FlowMonitorMap_arg1&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>Nf-map-name</type-name>
+          </type>
+        </monitor-map-name>
+      </flow-monitor-map>
+    </flow-monitor-map-performance-table>
+  </net-flow>
+</Cisco-IOS-XR-traffmon-netflow-cfg>

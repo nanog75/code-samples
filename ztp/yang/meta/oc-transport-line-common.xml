@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<openconfig-transport-line-common ns="http://openconfig.net/yang/transport-line-common" oc-ver="0.3.0" revision="2017-07-08">
+  <files>
+    <file revision="2017-07-08" submodule="false">openconfig-transport-line-common.yang</file>
+  </files>
+  <prefix>oc-line-com</prefix>
+  <organization>OpenConfig working group</organization>
+  <import prefix="ift">iana-if-type</import>
+  <import prefix="oc-ext">openconfig-extensions</import>
+  <import prefix="oc-if">openconfig-interfaces</import>
+  <import prefix="oc-platform">openconfig-platform</import>
+  <import prefix="oc-types">openconfig-types</import>
+  <import prefix="oc-opt-types">openconfig-transport-types</import>
+  <identity name="OPTICAL_LINE_PORT_TYPE"/>
+  <identity name="INGRESS">
+    <base>OPTICAL_LINE_PORT_TYPE</base>
+  </identity>
+  <identity name="EGRESS">
+    <base>OPTICAL_LINE_PORT_TYPE</base>
+  </identity>
+  <identity name="ADD">
+    <base>OPTICAL_LINE_PORT_TYPE</base>
+  </identity>
+  <identity name="DROP">
+    <base>OPTICAL_LINE_PORT_TYPE</base>
+  </identity>
+  <identity name="MONITOR">
+    <base>OPTICAL_LINE_PORT_TYPE</base>
+  </identity>
+  <augment path="/oc-platform:components/oc-platform:component">
+    <when>/oc-platform:components/oc-platform:component/oc-platform:state/oc-platform:type = 'PORT'</when>
+    <optical-port config="true" is-key="false" node="container" presence="false">
+      <config config="true" is-key="false" node="container" presence="false">
+        <admin-state config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>oc-opt-types:admin-state-type</type-name>
+          </type>
+        </admin-state>
+      </config>
+      <state config="true" is-key="false" node="container" presence="false">
+        <admin-state config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>oc-opt-types:admin-state-type</type-name>
+          </type>
+        </admin-state>
+        <optical-port-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="identityref">
+            <base>OPTICAL_LINE_PORT_TYPE</base>
+          </type>
+        </optical-port-type>
+        <input-power config="true" is-key="false" node="container" presence="false">
+          <instant config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>decimal64</type-name>
+            </type>
+          </instant>
+          <avg config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>decimal64</type-name>
+            </type>
+          </avg>
+          <min config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>decimal64</type-name>
+            </type>
+          </min>
+          <max config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>decimal64</type-name>
+            </type>
+          </max>
+        </input-power>
+        <output-power config="true" is-key="false" node="container" presence="false">
+          <instant config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>decimal64</type-name>
+            </type>
+          </instant>
+          <avg config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>decimal64</type-name>
+            </type>
+          </avg>
+          <min config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>decimal64</type-name>
+            </type>
+          </min>
+          <max config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>decimal64</type-name>
+            </type>
+          </max>
+        </output-power>
+      </state>
+    </optical-port>
+  </augment>
+  <augment path="/oc-if:interfaces/oc-if:interface">
+    <when>oc-if:config/oc-if:type = 'ift:sonet'</when>
+    <sonet config="true" is-key="false" node="container" presence="false"/>
+  </augment>
+</openconfig-transport-line-common>

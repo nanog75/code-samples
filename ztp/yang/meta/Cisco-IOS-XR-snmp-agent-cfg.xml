@@ -1,0 +1,3456 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-snmp-agent-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-snmp-agent-cfg" revision="2018-06-27">
+  <files>
+    <file revision="2018-06-27" submodule="false">Cisco-IOS-XR-snmp-agent-cfg.yang</file>
+  </files>
+  <prefix>snmp-agent-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="Snmp-tos">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">precedence</enum>
+      <enum value="1">dscp</enum>
+    </type>
+  </typedef>
+  <typedef name="Snmp-hash-algorithm">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">md5</enum>
+      <enum value="2">sha</enum>
+    </type>
+  </typedef>
+  <typedef name="Snmp-priv-algorithm">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">none</enum>
+      <enum value="1">des</enum>
+      <enum value="2">3des</enum>
+      <enum value="3">aes128</enum>
+      <enum value="4">aes192</enum>
+      <enum value="5">aes256</enum>
+    </type>
+  </typedef>
+  <typedef name="Snmp-owner-access">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">sdr-owner</enum>
+      <enum value="1">system-owner</enum>
+    </type>
+  </typedef>
+  <typedef name="Snmp-bulkstat-schema">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">exact-interface</enum>
+      <enum value="2">exact-oid</enum>
+      <enum value="3">wild-interface</enum>
+      <enum value="4">wild-oid</enum>
+      <enum value="5">range-oid</enum>
+      <enum value="6">repeat-oid</enum>
+    </type>
+  </typedef>
+  <typedef name="Snmpacl">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">ipv4</enum>
+      <enum value="2">ipv6</enum>
+    </type>
+  </typedef>
+  <typedef name="Snmp-dscp-value">
+    <xr-sch-type>RangeEnum</xr-sch-type>
+    <type node="union">
+      <type node="enumeration">
+        <enum value="0">default</enum>
+        <enum value="10">af11</enum>
+        <enum value="12">af12</enum>
+        <enum value="14">af13</enum>
+        <enum value="18">af21</enum>
+        <enum value="20">af22</enum>
+        <enum value="22">af23</enum>
+        <enum value="26">af31</enum>
+        <enum value="28">af32</enum>
+        <enum value="30">af33</enum>
+        <enum value="34">af41</enum>
+        <enum value="36">af42</enum>
+        <enum value="38">af43</enum>
+        <enum value="46">ef</enum>
+        <enum value="8">cs1</enum>
+        <enum value="16">cs2</enum>
+        <enum value="24">cs3</enum>
+        <enum value="32">cs4</enum>
+        <enum value="40">cs5</enum>
+        <enum value="48">cs6</enum>
+        <enum value="56">cs7</enum>
+      </type>
+      <type range="0..63">
+        <type-name>uint32</type-name>
+      </type>
+    </type>
+  </typedef>
+  <typedef name="Snmp-precedence-value1">
+    <xr-sch-type>RangeEnum</xr-sch-type>
+    <type node="union">
+      <type node="enumeration">
+        <enum value="0">routine</enum>
+        <enum value="1">priority</enum>
+        <enum value="2">immediate</enum>
+        <enum value="3">flash</enum>
+        <enum value="4">flash-override</enum>
+        <enum value="5">critical</enum>
+        <enum value="6">internet</enum>
+        <enum value="7">network</enum>
+      </type>
+      <type range="0..7">
+        <type-name>uint32</type-name>
+      </type>
+    </type>
+  </typedef>
+  <typedef name="Snmp-security-model">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">no-authentication</enum>
+      <enum value="1">authentication</enum>
+      <enum value="2">privacy</enum>
+    </type>
+  </typedef>
+  <typedef name="Snmp-mib-view-inclusion">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">included</enum>
+      <enum value="2">excluded</enum>
+    </type>
+  </typedef>
+  <typedef name="Snmp-bulkstat-file-format">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">schema-ascii</enum>
+      <enum value="2">bulk-ascii</enum>
+      <enum value="3">bulk-binary</enum>
+    </type>
+  </typedef>
+  <typedef name="Snmp-access-level">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">read-only</enum>
+      <enum value="1">read-write</enum>
+    </type>
+  </typedef>
+  <typedef name="Snmp-context">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">vrf</enum>
+      <enum value="4">bridge</enum>
+      <enum value="5">ospf</enum>
+      <enum value="6">ospfv3</enum>
+    </type>
+  </typedef>
+  <typedef name="Group-snmp-version">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">v1</enum>
+      <enum value="1">v2c</enum>
+      <enum value="2">v3</enum>
+    </type>
+  </typedef>
+  <typedef name="User-snmp-version">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">v1</enum>
+      <enum value="2">v2c</enum>
+      <enum value="3">v3</enum>
+    </type>
+  </typedef>
+  <snmp config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/snmp/</xr-path>
+    <xr-xml-map>snmp_cfg:SNMP</xr-xml-map>
+    <xr-task>snmp</xr-task>
+    <xr-scope>exported</xr-scope>
+    <encrypted-community-maps config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/community-map/0x2/</xr-path>
+      <xr-xml-map>snmp_cfg:EncryptedCommunityMapTable</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <encrypted-community-map config="true" key="community-name" node="list">
+        <xr-path>/cfg/gl/snmp/community-map/0x2/&lt;snmp_cfg_EncryptedCommunityMap_community&gt;</xr-path>
+        <xr-xml-map>snmp_cfg:EncryptedCommunityMap</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-pack-format>%s%s%s</xr-pack-format>
+        <community-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%s%s%s</xr-pack-format>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/snmp/community-map/0x2/&lt;snmp_cfg_EncryptedCommunityMap_community&gt;</xr-path>
+          <xr-xml-map>snmp_cfg:CommunityName</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>EncryptedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;snmp_cfg_EncryptedCommunityMap_community&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </community-name>
+        <context config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/community-map/0x2/&lt;snmp_cfg_EncryptedCommunityMap_community&gt;`0</xr-path>
+          <xr-xml-map>snmp_cfg:Context</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </context>
+        <security config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/community-map/0x2/&lt;snmp_cfg_EncryptedCommunityMap_community&gt;`1</xr-path>
+          <xr-xml-map>snmp_cfg:Security</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </security>
+        <target-list config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/community-map/0x2/&lt;snmp_cfg_EncryptedCommunityMap_community&gt;`2</xr-path>
+          <xr-xml-map>snmp_cfg:TargetList</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </target-list>
+      </encrypted-community-map>
+    </encrypted-community-maps>
+    <views config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/view/</xr-path>
+      <xr-xml-map>snmp_cfg:ViewTable</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <view config="true" key="view-name family" node="list">
+        <xr-path>/cfg/gl/snmp/view/&lt;snmp_cfg_View_view&gt;/&lt;snmp_cfg_View_family&gt;</xr-path>
+        <xr-xml-map>snmp_cfg:View</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <view-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/snmp/view/&lt;snmp_cfg_View_view&gt;/&lt;snmp_cfg_View_family&gt;</xr-path>
+          <xr-xml-map>snmp_cfg:ViewName</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;snmp_cfg_View_view&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </view-name>
+        <family config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/snmp/view/&lt;snmp_cfg_View_view&gt;/&lt;snmp_cfg_View_family&gt;</xr-path>
+          <xr-xml-map>snmp_cfg:Family</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>EncodedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;snmp_cfg_View_family&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </family>
+        <view-inclusion config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/snmp/view/&lt;snmp_cfg_View_view&gt;/&lt;snmp_cfg_View_family&gt;</xr-path>
+          <xr-xml-map>snmp_cfg:ViewInclusion</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Snmp-mib-view-inclusion</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </view-inclusion>
+      </view>
+    </views>
+    <logging config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/logging/</xr-path>
+      <xr-xml-map>snmp_cfg:Logging</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <threshold config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/snmp/logging/threshold/</xr-path>
+        <xr-xml-map>snmp_cfg:Threshold</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <oid-processing config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/snmp/logging/threshold/oid-processing</xr-path>
+          <xr-xml-map>snmp_cfg:OIDProcessing</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="0..20000">
+            <type-name>uint32</type-name>
+          </type>
+          <default>500</default>
+        </oid-processing>
+        <pdu-processing config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/snmp/logging/threshold/pdu-processing</xr-path>
+          <xr-xml-map>snmp_cfg:PDUProcessing</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="0..20000">
+            <type-name>uint32</type-name>
+          </type>
+          <default>20000</default>
+        </pdu-processing>
+      </threshold>
+    </logging>
+    <administration config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/admin/</xr-path>
+      <xr-xml-map>snmp_cfg:Administration</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <default-communities config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/snmp/admin/community/0x1/</xr-path>
+        <xr-xml-map>snmp_cfg:DefaultCommunityTable</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <default-community config="true" key="community-name" node="list">
+          <xr-path>/cfg/gl/snmp/admin/community/0x1/&lt;snmp_cfg_DefaultCommunity_community&gt;</xr-path>
+          <xr-xml-map>snmp_cfg:DefaultCommunity</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-pack-format>%d%s%d%s%d%s%d</xr-pack-format>
+          <community-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%s%d%s%d%s%d</xr-pack-format>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/snmp/admin/community/0x1/&lt;snmp_cfg_DefaultCommunity_community&gt;</xr-path>
+            <xr-xml-map>snmp_cfg:CommunityName</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>EncodedBoundedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_cfg_DefaultCommunity_community&gt;</xr-sch-arg-name>
+            <type length="1..128">
+              <type-name>string</type-name>
+            </type>
+          </community-name>
+          <priviledge config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%s%d%s%d%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/snmp/admin/community/0x1/&lt;snmp_cfg_DefaultCommunity_community&gt;`0</xr-path>
+            <xr-xml-map>snmp_cfg:Priviledge</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Snmp-access-level</type-name>
+            </type>
+          </priviledge>
+          <view-name config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%s%d%s%d%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/snmp/admin/community/0x1/&lt;snmp_cfg_DefaultCommunity_community&gt;`1</xr-path>
+            <xr-xml-map>snmp_cfg:ViewName</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </view-name>
+          <v4acl-type config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%s%d%s%d%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/snmp/admin/community/0x1/&lt;snmp_cfg_DefaultCommunity_community&gt;`2</xr-path>
+            <xr-xml-map>snmp_cfg:V4ACLType</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Snmpacl</type-name>
+            </type>
+          </v4acl-type>
+          <v4-access-list config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%s%d%s%d%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/snmp/admin/community/0x1/&lt;snmp_cfg_DefaultCommunity_community&gt;`3</xr-path>
+            <xr-xml-map>snmp_cfg:V4AccessList</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </v4-access-list>
+          <v6acl-type config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%s%d%s%d%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/snmp/admin/community/0x1/&lt;snmp_cfg_DefaultCommunity_community&gt;`4</xr-path>
+            <xr-xml-map>snmp_cfg:V6ACLType</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Snmpacl</type-name>
+            </type>
+          </v6acl-type>
+          <v6-access-list config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%s%d%s%d%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/snmp/admin/community/0x1/&lt;snmp_cfg_DefaultCommunity_community&gt;`5</xr-path>
+            <xr-xml-map>snmp_cfg:V6AccessList</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </v6-access-list>
+          <owner config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%s%d%s%d%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/snmp/admin/community/0x1/&lt;snmp_cfg_DefaultCommunity_community&gt;`6</xr-path>
+            <xr-xml-map>snmp_cfg:Owner</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Snmp-owner-access</type-name>
+            </type>
+          </owner>
+        </default-community>
+      </default-communities>
+      <encrypted-communities config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/snmp/admin/community/0x2/</xr-path>
+        <xr-xml-map>snmp_cfg:EncryptedCommunityTable</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <encrypted-community config="true" key="community-name" node="list">
+          <xr-path>/cfg/gl/snmp/admin/community/0x2/&lt;snmp_cfg_EncryptedCommunity_community&gt;</xr-path>
+          <xr-xml-map>snmp_cfg:EncryptedCommunity</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-pack-format>%d%s%d%s%d%s%d</xr-pack-format>
+          <community-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%s%d%s%d%s%d</xr-pack-format>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/snmp/admin/community/0x2/&lt;snmp_cfg_EncryptedCommunity_community&gt;</xr-path>
+            <xr-xml-map>snmp_cfg:CommunityName</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>EncryptedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_cfg_EncryptedCommunity_community&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </community-name>
+          <priviledge config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%s%d%s%d%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/snmp/admin/community/0x2/&lt;snmp_cfg_EncryptedCommunity_community&gt;`0</xr-path>
+            <xr-xml-map>snmp_cfg:Priviledge</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Snmp-access-level</type-name>
+            </type>
+          </priviledge>
+          <view-name config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%s%d%s%d%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/snmp/admin/community/0x2/&lt;snmp_cfg_EncryptedCommunity_community&gt;`1</xr-path>
+            <xr-xml-map>snmp_cfg:ViewName</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </view-name>
+          <v4acl-type config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%s%d%s%d%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/snmp/admin/community/0x2/&lt;snmp_cfg_EncryptedCommunity_community&gt;`2</xr-path>
+            <xr-xml-map>snmp_cfg:V4ACLType</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Snmpacl</type-name>
+            </type>
+          </v4acl-type>
+          <v4-access-list config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%s%d%s%d%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/snmp/admin/community/0x2/&lt;snmp_cfg_EncryptedCommunity_community&gt;`3</xr-path>
+            <xr-xml-map>snmp_cfg:V4AccessList</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </v4-access-list>
+          <v6acl-type config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%s%d%s%d%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/snmp/admin/community/0x2/&lt;snmp_cfg_EncryptedCommunity_community&gt;`4</xr-path>
+            <xr-xml-map>snmp_cfg:V6ACLType</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Snmpacl</type-name>
+            </type>
+          </v6acl-type>
+          <v6-access-list config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%s%d%s%d%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/snmp/admin/community/0x2/&lt;snmp_cfg_EncryptedCommunity_community&gt;`5</xr-path>
+            <xr-xml-map>snmp_cfg:V6AccessList</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </v6-access-list>
+          <owner config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-data-handler>preserve-pack</xr-data-handler>
+            <xr-is-packed/>
+            <xr-pack-format>%d%s%d%s%d%s%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/snmp/admin/community/0x2/&lt;snmp_cfg_EncryptedCommunity_community&gt;`6</xr-path>
+            <xr-xml-map>snmp_cfg:Owner</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Snmp-owner-access</type-name>
+            </type>
+          </owner>
+        </encrypted-community>
+      </encrypted-communities>
+    </administration>
+    <agent config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/a/</xr-path>
+      <xr-xml-map>snmp_cfg:Agent</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <engine-id config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/snmp/a/engineID/</xr-path>
+        <xr-xml-map>snmp_cfg:EngineID</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <remotes config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/snmp/a/engineID/remote/</xr-path>
+          <xr-xml-map>snmp_cfg:RemoteTable</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <remote config="true" key="remote-address" node="list">
+            <xr-path>/cfg/gl/snmp/a/engineID/remote/&lt;snmp_cfg_Remote_address&gt;</xr-path>
+            <xr-xml-map>snmp_cfg:Remote</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-pack-format>%s%d</xr-pack-format>
+            <remote-address config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <xr-pathformat>hex_padded_nozerox</xr-pathformat>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/snmp/a/engineID/remote/&lt;snmp_cfg_Remote_address&gt;</xr-path>
+              <xr-xml-map>snmp_cfg:RemoteAddress</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>IPAddress</xr-sch-type>
+              <xr-sch-arg-name>&lt;snmp_cfg_Remote_address&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ip-address-no-zone</type-name>
+              </type>
+            </remote-address>
+            <remote-engine-id config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/a/engineID/remote/&lt;snmp_cfg_Remote_address&gt;`0</xr-path>
+              <xr-xml-map>snmp_cfg:RemoteEngineID</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </remote-engine-id>
+            <port config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%s%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/a/engineID/remote/&lt;snmp_cfg_Remote_address&gt;`1</xr-path>
+              <xr-xml-map>snmp_cfg:Port</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type>
+                <type-name>xr:Cisco-ios-xr-port-number</type-name>
+              </type>
+            </port>
+          </remote>
+        </remotes>
+        <local config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/snmp/a/engineID/local</xr-path>
+          <xr-xml-map>snmp_cfg:Local</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </local>
+      </engine-id>
+    </agent>
+    <trap config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/hostq/</xr-path>
+      <xr-xml-map>snmp_cfg:Trap</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/hostq/traptimeout</xr-path>
+        <xr-xml-map>snmp_cfg:Timeout</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..1000">
+          <type-name>uint32</type-name>
+        </type>
+      </timeout>
+      <throttle-time config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/hostq/throttletime</xr-path>
+        <xr-xml-map>snmp_cfg:ThrottleTime</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="10..500">
+          <type-name>uint32</type-name>
+        </type>
+      </throttle-time>
+      <queue-length config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/hostq/trapqlen</xr-path>
+        <xr-xml-map>snmp_cfg:QueueLength</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..5000">
+          <type-name>uint32</type-name>
+        </type>
+      </queue-length>
+    </trap>
+    <drop-packet config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/drop/</xr-path>
+      <xr-xml-map>snmp_cfg:DropPacket</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <unknown-user config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/drop/unknown-user</xr-path>
+        <xr-xml-map>snmp_cfg:UnknownUser</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </unknown-user>
+    </drop-packet>
+    <ipv6 config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/ipv6/</xr-path>
+      <xr-xml-map>snmp_cfg:IPv6</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <tos config="true" is-key="false" node="container" presence="false">
+        <xr-is-packed/>
+        <xr-path>/cfg/gl/snmp/ipv6/tclass`</xr-path>
+        <xr-xml-map>snmp_cfg:TOS</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-pack-format>%d%d%d</xr-pack-format>
+        <xr-compatibility>9.0</xr-compatibility>
+        <type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/ipv6/tclass`0</xr-path>
+          <xr-xml-map>snmp_cfg:Type</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Snmp-tos</type-name>
+          </type>
+        </type>
+        <precedence config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/ipv6/tclass`1</xr-path>
+          <xr-xml-map>snmp_cfg:Precedence</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <when>../type = 'precedence'</when>
+          <type>
+            <type-name>Snmp-precedence-value1</type-name>
+          </type>
+        </precedence>
+        <dscp config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/ipv6/tclass`2</xr-path>
+          <xr-xml-map>snmp_cfg:DSCP</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <when>../type = 'dscp'</when>
+          <type>
+            <type-name>Snmp-dscp-value</type-name>
+          </type>
+        </dscp>
+      </tos>
+    </ipv6>
+    <ipv4 config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/ipv4/</xr-path>
+      <xr-xml-map>snmp_cfg:IPv4</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <tos config="true" is-key="false" node="container" presence="false">
+        <xr-is-packed/>
+        <xr-path>/cfg/gl/snmp/ipv4/tos`</xr-path>
+        <xr-xml-map>snmp_cfg:TOS</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-pack-format>%d%d%d</xr-pack-format>
+        <xr-compatibility>9.0</xr-compatibility>
+        <type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/ipv4/tos`0</xr-path>
+          <xr-xml-map>snmp_cfg:Type</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Snmp-tos</type-name>
+          </type>
+        </type>
+        <precedence config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/ipv4/tos`1</xr-path>
+          <xr-xml-map>snmp_cfg:Precedence</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <when>../type = 'precedence'</when>
+          <type>
+            <type-name>Snmp-precedence-value1</type-name>
+          </type>
+        </precedence>
+        <dscp config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/ipv4/tos`2</xr-path>
+          <xr-xml-map>snmp_cfg:DSCP</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>RangeEnum</xr-sch-type>
+          <when>../type = 'dscp'</when>
+          <type>
+            <type-name>Snmp-dscp-value</type-name>
+          </type>
+        </dscp>
+      </tos>
+    </ipv4>
+    <system config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/system/</xr-path>
+      <xr-xml-map>snmp_cfg:System</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <chassis-id config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/system/chassis</xr-path>
+        <xr-xml-map>snmp_cfg:ChassisID</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-sch-type>BoundedString</xr-sch-type>
+        <type length="1..255">
+          <type-name>string</type-name>
+        </type>
+      </chassis-id>
+      <location config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/system/location</xr-path>
+        <xr-xml-map>snmp_cfg:Location</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-sch-type>BoundedString</xr-sch-type>
+        <type length="1..255">
+          <type-name>string</type-name>
+        </type>
+      </location>
+      <contact config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/system/contact</xr-path>
+        <xr-xml-map>snmp_cfg:Contact</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-sch-type>BoundedString</xr-sch-type>
+        <type length="1..255">
+          <type-name>string</type-name>
+        </type>
+      </contact>
+    </system>
+    <target config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/target/</xr-path>
+      <xr-xml-map>snmp_cfg:Target</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <targets config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/snmp/target/list/</xr-path>
+        <xr-xml-map>snmp_cfg:TargetListTable</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <target config="true" key="target-list-name" node="list">
+          <xr-path>/cfg/gl/snmp/target/list/&lt;snmp_cfg_TargetList_list-name&gt;/</xr-path>
+          <xr-xml-map>snmp_cfg:TargetList</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <vrf-names config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/snmp/target/list/&lt;snmp_cfg_TargetList_list-name&gt;/vrf/</xr-path>
+            <xr-xml-map>snmp_cfg:VRFNameTable</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <vrf-name config="true" key="name" node="list">
+              <xr-path>/cfg/gl/snmp/target/list/&lt;snmp_cfg_TargetList_list-name&gt;/vrf/&lt;snmp_cfg_VRFName_vrf&gt;</xr-path>
+              <xr-xml-map>snmp_cfg:VRFName</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <name config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-create-item-relative-path/>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/snmp/target/list/&lt;snmp_cfg_TargetList_list-name&gt;/vrf/&lt;snmp_cfg_VRFName_vrf&gt;</xr-path>
+                <xr-xml-map>snmp_cfg:Name</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <xr-sch-arg-name>&lt;snmp_cfg_VRFName_vrf&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>xr:Cisco-ios-xr-string</type-name>
+                </type>
+              </name>
+            </vrf-name>
+          </vrf-names>
+          <target-addresses config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/snmp/target/list/&lt;snmp_cfg_TargetList_list-name&gt;/address/</xr-path>
+            <xr-xml-map>snmp_cfg:TargetAddressTable</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <target-address config="true" key="ip-address" node="list">
+              <xr-path>/cfg/gl/snmp/target/list/&lt;snmp_cfg_TargetList_list-name&gt;/address/&lt;snmp_cfg_TargetAddress_address&gt;</xr-path>
+              <xr-xml-map>snmp_cfg:TargetAddress</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <ip-address config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-pathformat>hex_padded_nozerox</xr-pathformat>
+                <xr-create-item-relative-path/>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/snmp/target/list/&lt;snmp_cfg_TargetList_list-name&gt;/address/&lt;snmp_cfg_TargetAddress_address&gt;</xr-path>
+                <xr-xml-map>snmp_cfg:IPAddress</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>IPAddress</xr-sch-type>
+                <xr-sch-arg-name>&lt;snmp_cfg_TargetAddress_address&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>inet:ip-address-no-zone</type-name>
+                </type>
+              </ip-address>
+            </target-address>
+          </target-addresses>
+          <target-list-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/snmp/target/list/&lt;snmp_cfg_TargetList_list-name&gt;/</xr-path>
+            <xr-xml-map>snmp_cfg:TargetListName</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_cfg_TargetList_list-name&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </target-list-name>
+        </target>
+      </targets>
+    </target>
+    <notification config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/enable/traps/</xr-path>
+      <xr-xml-map>snmp_cfg:Notification</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <xr-scope>exported</xr-scope>
+      <snmp config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/snmp/enable/traps/snmp/</xr-path>
+        <xr-xml-map>snmpmib_cfg:SNMP</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-scope>exported</xr-scope>
+        <authentication config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/snmp/enable/traps/snmp/authentication</xr-path>
+          <xr-xml-map>snmpmib_cfg:Authentication</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </authentication>
+        <cold-start config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/snmp/enable/traps/snmp/coldstart</xr-path>
+          <xr-xml-map>snmpmib_cfg:ColdStart</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </cold-start>
+        <warm-start config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/snmp/enable/traps/snmp/warmstart</xr-path>
+          <xr-xml-map>snmpmib_cfg:WarmStart</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </warm-start>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/snmp/enable/traps/snmp/all</xr-path>
+          <xr-xml-map>snmpmib_cfg:Enable</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </enable>
+      </snmp>
+    </notification>
+    <correlator config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/correlator/</xr-path>
+      <xr-xml-map>snmp_corr_cfg:Correlator</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <rules config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/snmp/correlator/rules/</xr-path>
+        <xr-xml-map>snmp_corr_cfg:RuleTable</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <rule config="true" key="name" node="list">
+          <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/</xr-path>
+          <xr-xml-map>snmp_corr_cfg:Rule</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <root-causes config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/rootcause/</xr-path>
+            <xr-xml-map>snmp_corr_cfg:RootCauseTable</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <root-cause config="true" key="oid" node="list">
+              <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/rootcause/&lt;snmp_corr_cfg_RootCause_oid&gt;/</xr-path>
+              <xr-xml-map>snmp_corr_cfg:RootCause</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <created config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/rootcause/&lt;snmp_corr_cfg_RootCause_oid&gt;/created</xr-path>
+                <xr-xml-map>snmp_corr_cfg:Created</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>Configured</xr-sch-type>
+                <type>
+                  <type-name>empty</type-name>
+                </type>
+              </created>
+              <oid config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/rootcause/&lt;snmp_corr_cfg_RootCause_oid&gt;/</xr-path>
+                <xr-xml-map>snmp_corr_cfg:OID</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>EncodedString</xr-sch-type>
+                <xr-sch-arg-name>&lt;snmp_corr_cfg_RootCause_oid&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </oid>
+              <var-binds config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/rootcause/&lt;snmp_corr_cfg_RootCause_oid&gt;/vbind/</xr-path>
+                <xr-xml-map>snmp_corr_cfg:VarBindTable</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <var-bind config="true" key="oid" node="list">
+                  <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/rootcause/&lt;snmp_corr_cfg_RootCause_oid&gt;/vbind/&lt;snmp_corr_cfg_VarBind_oid&gt;/</xr-path>
+                  <xr-xml-map>snmp_corr_cfg:VarBind</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <match config="true" is-key="false" node="container" presence="false">
+                    <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/rootcause/&lt;snmp_corr_cfg_RootCause_oid&gt;/vbind/&lt;snmp_corr_cfg_VarBind_oid&gt;/match/</xr-path>
+                    <xr-xml-map>snmp_corr_cfg:Match</xr-xml-map>
+                    <xr-task>snmp</xr-task>
+                    <value config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-primitive-type>string</xr-primitive-type>
+                      <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/rootcause/&lt;snmp_corr_cfg_RootCause_oid&gt;/vbind/&lt;snmp_corr_cfg_VarBind_oid&gt;/match/value</xr-path>
+                      <xr-xml-map>snmp_corr_cfg:Value</xr-xml-map>
+                      <xr-task>snmp</xr-task>
+                      <xr-sch-type>EncodedString</xr-sch-type>
+                      <type>
+                        <type-name>string</type-name>
+                      </type>
+                    </value>
+                    <index config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-primitive-type>string</xr-primitive-type>
+                      <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/rootcause/&lt;snmp_corr_cfg_RootCause_oid&gt;/vbind/&lt;snmp_corr_cfg_VarBind_oid&gt;/match/index</xr-path>
+                      <xr-xml-map>snmp_corr_cfg:Index</xr-xml-map>
+                      <xr-task>snmp</xr-task>
+                      <xr-sch-type>EncodedString</xr-sch-type>
+                      <type>
+                        <type-name>string</type-name>
+                      </type>
+                    </index>
+                  </match>
+                  <oid config="true" is-key="true" is-yang-key="true" node="leaf">
+                    <xr-data-handler>ignore</xr-data-handler>
+                    <xr-primitive-type>string</xr-primitive-type>
+                    <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/rootcause/&lt;snmp_corr_cfg_RootCause_oid&gt;/vbind/&lt;snmp_corr_cfg_VarBind_oid&gt;/</xr-path>
+                    <xr-xml-map>snmp_corr_cfg:OID</xr-xml-map>
+                    <xr-task>snmp</xr-task>
+                    <xr-sch-type>EncodedString</xr-sch-type>
+                    <xr-sch-arg-name>&lt;snmp_corr_cfg_VarBind_oid&gt;</xr-sch-arg-name>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </oid>
+                </var-bind>
+              </var-binds>
+            </root-cause>
+          </root-causes>
+          <non-root-causes config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/nonrootcause/</xr-path>
+            <xr-xml-map>snmp_corr_cfg:NonRootCauseTable</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <non-root-cause config="true" key="oid" node="list">
+              <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/nonrootcause/&lt;snmp_corr_cfg_NonRootCause_oid&gt;/</xr-path>
+              <xr-xml-map>snmp_corr_cfg:NonRootCause</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <created config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/nonrootcause/&lt;snmp_corr_cfg_NonRootCause_oid&gt;/created</xr-path>
+                <xr-xml-map>snmp_corr_cfg:Created</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>Configured</xr-sch-type>
+                <type>
+                  <type-name>empty</type-name>
+                </type>
+              </created>
+              <oid config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/nonrootcause/&lt;snmp_corr_cfg_NonRootCause_oid&gt;/</xr-path>
+                <xr-xml-map>snmp_corr_cfg:OID</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>EncodedString</xr-sch-type>
+                <xr-sch-arg-name>&lt;snmp_corr_cfg_NonRootCause_oid&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </oid>
+              <var-binds config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/nonrootcause/&lt;snmp_corr_cfg_NonRootCause_oid&gt;/vbind/</xr-path>
+                <xr-xml-map>snmp_corr_cfg:VarBindTable</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <var-bind config="true" key="oid" node="list">
+                  <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/nonrootcause/&lt;snmp_corr_cfg_NonRootCause_oid&gt;/vbind/&lt;snmp_corr_cfg_VarBind_oid&gt;/</xr-path>
+                  <xr-xml-map>snmp_corr_cfg:VarBind</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <match config="true" is-key="false" node="container" presence="false">
+                    <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/nonrootcause/&lt;snmp_corr_cfg_NonRootCause_oid&gt;/vbind/&lt;snmp_corr_cfg_VarBind_oid&gt;/match/</xr-path>
+                    <xr-xml-map>snmp_corr_cfg:Match</xr-xml-map>
+                    <xr-task>snmp</xr-task>
+                    <value config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-primitive-type>string</xr-primitive-type>
+                      <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/nonrootcause/&lt;snmp_corr_cfg_NonRootCause_oid&gt;/vbind/&lt;snmp_corr_cfg_VarBind_oid&gt;/match/value</xr-path>
+                      <xr-xml-map>snmp_corr_cfg:Value</xr-xml-map>
+                      <xr-task>snmp</xr-task>
+                      <xr-sch-type>EncodedString</xr-sch-type>
+                      <type>
+                        <type-name>string</type-name>
+                      </type>
+                    </value>
+                    <index config="true" is-key="false" is-yang-key="false" node="leaf">
+                      <xr-primitive-type>string</xr-primitive-type>
+                      <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/nonrootcause/&lt;snmp_corr_cfg_NonRootCause_oid&gt;/vbind/&lt;snmp_corr_cfg_VarBind_oid&gt;/match/index</xr-path>
+                      <xr-xml-map>snmp_corr_cfg:Index</xr-xml-map>
+                      <xr-task>snmp</xr-task>
+                      <xr-sch-type>EncodedString</xr-sch-type>
+                      <type>
+                        <type-name>string</type-name>
+                      </type>
+                    </index>
+                  </match>
+                  <oid config="true" is-key="true" is-yang-key="true" node="leaf">
+                    <xr-data-handler>ignore</xr-data-handler>
+                    <xr-primitive-type>string</xr-primitive-type>
+                    <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/nonrootcause/&lt;snmp_corr_cfg_NonRootCause_oid&gt;/vbind/&lt;snmp_corr_cfg_VarBind_oid&gt;/</xr-path>
+                    <xr-xml-map>snmp_corr_cfg:OID</xr-xml-map>
+                    <xr-task>snmp</xr-task>
+                    <xr-sch-type>EncodedString</xr-sch-type>
+                    <xr-sch-arg-name>&lt;snmp_corr_cfg_VarBind_oid&gt;</xr-sch-arg-name>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                  </oid>
+                </var-bind>
+              </var-binds>
+            </non-root-cause>
+          </non-root-causes>
+          <timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/timeout</xr-path>
+            <xr-xml-map>snmp_corr_cfg:Timeout</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1..600000">
+              <type-name>uint32</type-name>
+            </type>
+          </timeout>
+          <name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-create-item-relative-path>aza</xr-create-item-relative-path>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/</xr-path>
+            <xr-xml-map>snmp_corr_cfg:Name</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>EncodedBoundedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_corr_cfg_Rule_rule&gt;</xr-sch-arg-name>
+            <type length="1..32">
+              <type-name>string</type-name>
+            </type>
+          </name>
+          <applied-to config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/ord_k/applyto/</xr-path>
+            <xr-xml-map>snmp_corr_cfg:AppliedTo</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <hosts config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/ord_k/applyto/hosts/</xr-path>
+              <xr-xml-map>snmp_corr_cfg:HostTable</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <host config="true" key="ip-address port" node="list">
+                <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/ord_k/applyto/hosts/&lt;snmp_corr_cfg_Host_ipaddr&gt;,&lt;snmp_corr_cfg_Host_port&gt;</xr-path>
+                <xr-xml-map>snmp_corr_cfg:Host</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <ip-address config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-create-item-relative-path/>
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/ord_k/applyto/hosts/&lt;snmp_corr_cfg_Host_ipaddr&gt;,&lt;snmp_corr_cfg_Host_port&gt;</xr-path>
+                  <xr-xml-map>snmp_corr_cfg:IPAddress</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-sch-type>IPAddress</xr-sch-type>
+                  <xr-sch-arg-name>&lt;snmp_corr_cfg_Host_ipaddr&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>inet:ip-address-no-zone</type-name>
+                  </type>
+                </ip-address>
+                <port config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-create-item-relative-path/>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/ord_k/applyto/hosts/&lt;snmp_corr_cfg_Host_ipaddr&gt;,&lt;snmp_corr_cfg_Host_port&gt;</xr-path>
+                  <xr-xml-map>snmp_corr_cfg:Port</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <xr-sch-arg-name>&lt;snmp_corr_cfg_Host_port&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>xr:Cisco-ios-xr-port-number</type-name>
+                  </type>
+                </port>
+              </host>
+            </hosts>
+            <all config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/snmp/correlator/rules/&lt;snmp_corr_cfg_Rule_rule&gt;/ord_e/nonstateful/ord_k/applyto/all</xr-path>
+              <xr-xml-map>snmp_corr_cfg:All</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </all>
+          </applied-to>
+        </rule>
+      </rules>
+      <rule-sets config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/snmp/correlator/rulesets/</xr-path>
+        <xr-xml-map>snmp_corr_cfg:RulesetTable</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <rule-set config="true" key="name" node="list">
+          <xr-path>/cfg/gl/snmp/correlator/rulesets/&lt;snmp_corr_cfg_Ruleset_ruleset&gt;/</xr-path>
+          <xr-xml-map>snmp_corr_cfg:Ruleset</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <rulenames config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/snmp/correlator/rulesets/&lt;snmp_corr_cfg_Ruleset_ruleset&gt;/ord_e/rulenames/</xr-path>
+            <xr-xml-map>snmp_corr_cfg:RulenameTable</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <rulename config="true" key="rulename" node="list">
+              <xr-path>/cfg/gl/snmp/correlator/rulesets/&lt;snmp_corr_cfg_Ruleset_ruleset&gt;/ord_e/rulenames/&lt;snmp_corr_cfg_Rulename_rulename&gt;</xr-path>
+              <xr-xml-map>snmp_corr_cfg:Rulename</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <rulename config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-create-item-relative-path/>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/snmp/correlator/rulesets/&lt;snmp_corr_cfg_Ruleset_ruleset&gt;/ord_e/rulenames/&lt;snmp_corr_cfg_Rulename_rulename&gt;</xr-path>
+                <xr-xml-map>snmp_corr_cfg:Rulename</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>EncodedBoundedString</xr-sch-type>
+                <xr-sch-arg-name>&lt;snmp_corr_cfg_Rulename_rulename&gt;</xr-sch-arg-name>
+                <type length="1..32">
+                  <type-name>string</type-name>
+                </type>
+              </rulename>
+            </rulename>
+          </rulenames>
+          <name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-create-item-relative-path>ord_e/aza</xr-create-item-relative-path>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/snmp/correlator/rulesets/&lt;snmp_corr_cfg_Ruleset_ruleset&gt;/</xr-path>
+            <xr-xml-map>snmp_corr_cfg:Name</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>EncodedBoundedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_corr_cfg_Ruleset_ruleset&gt;</xr-sch-arg-name>
+            <type length="1..32">
+              <type-name>string</type-name>
+            </type>
+          </name>
+          <applied-to config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/snmp/correlator/rulesets/&lt;snmp_corr_cfg_Ruleset_ruleset&gt;/ord_k/applyto/</xr-path>
+            <xr-xml-map>snmp_corr_cfg:AppliedTo</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <hosts config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/snmp/correlator/rulesets/&lt;snmp_corr_cfg_Ruleset_ruleset&gt;/ord_k/applyto/hosts/</xr-path>
+              <xr-xml-map>snmp_corr_cfg:HostTable</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <host config="true" key="ip-address port" node="list">
+                <xr-path>/cfg/gl/snmp/correlator/rulesets/&lt;snmp_corr_cfg_Ruleset_ruleset&gt;/ord_k/applyto/hosts/&lt;snmp_corr_cfg_Host_ipaddr&gt;,&lt;snmp_corr_cfg_Host_port&gt;</xr-path>
+                <xr-xml-map>snmp_corr_cfg:Host</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <ip-address config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-create-item-relative-path/>
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/cfg/gl/snmp/correlator/rulesets/&lt;snmp_corr_cfg_Ruleset_ruleset&gt;/ord_k/applyto/hosts/&lt;snmp_corr_cfg_Host_ipaddr&gt;,&lt;snmp_corr_cfg_Host_port&gt;</xr-path>
+                  <xr-xml-map>snmp_corr_cfg:IPAddress</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-sch-type>IPAddress</xr-sch-type>
+                  <xr-sch-arg-name>&lt;snmp_corr_cfg_Host_ipaddr&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>inet:ip-address-no-zone</type-name>
+                  </type>
+                </ip-address>
+                <port config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-create-item-relative-path/>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/snmp/correlator/rulesets/&lt;snmp_corr_cfg_Ruleset_ruleset&gt;/ord_k/applyto/hosts/&lt;snmp_corr_cfg_Host_ipaddr&gt;,&lt;snmp_corr_cfg_Host_port&gt;</xr-path>
+                  <xr-xml-map>snmp_corr_cfg:Port</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <xr-sch-arg-name>&lt;snmp_corr_cfg_Host_port&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>xr:Cisco-ios-xr-port-number</type-name>
+                  </type>
+                </port>
+              </host>
+            </hosts>
+            <all config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/snmp/correlator/rulesets/&lt;snmp_corr_cfg_Ruleset_ruleset&gt;/ord_k/applyto/all</xr-path>
+              <xr-xml-map>snmp_corr_cfg:All</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </all>
+          </applied-to>
+        </rule-set>
+      </rule-sets>
+      <buffer-size config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/correlator/buffer-size</xr-path>
+        <xr-xml-map>snmp_corr_cfg:BufferSize</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1024..52428800">
+          <type-name>uint32</type-name>
+        </type>
+      </buffer-size>
+    </correlator>
+    <bulk-stats config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/bulkstat/</xr-path>
+      <xr-xml-map>snmp_bulkstat_cfg:BulkStats</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <schemas config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/snmp/bulkstat/schema/</xr-path>
+        <xr-xml-map>snmp_bulkstat_cfg:SchemaTable</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <schema config="true" key="schema-name" node="list">
+          <xr-path>/cfg/gl/snmp/bulkstat/schema/&lt;snmp_bulkstat_cfg_Schema_schema-name&gt;/</xr-path>
+          <xr-xml-map>snmp_bulkstat_cfg:Schema</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <instance config="true" is-key="false" node="container" presence="true">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/snmp/bulkstat/schema/&lt;snmp_bulkstat_cfg_Schema_schema-name&gt;/instance`</xr-path>
+            <xr-xml-map>snmp_bulkstat_cfg:Instance</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-pack-format>%d%s%s%s%d%d</xr-pack-format>
+            <type config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%s%s%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/bulkstat/schema/&lt;snmp_bulkstat_cfg_Schema_schema-name&gt;/instance`0</xr-path>
+              <xr-xml-map>snmp_bulkstat_cfg:Type</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Snmp-bulkstat-schema</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </type>
+            <instance config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%s%s%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/bulkstat/schema/&lt;snmp_bulkstat_cfg_Schema_schema-name&gt;/instance`1</xr-path>
+              <xr-xml-map>snmp_bulkstat_cfg:Instance</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>InterfaceName</xr-sch-type>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </instance>
+            <start config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%s%s%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/bulkstat/schema/&lt;snmp_bulkstat_cfg_Schema_schema-name&gt;/instance`2</xr-path>
+              <xr-xml-map>snmp_bulkstat_cfg:Start</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>EncodedString</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </start>
+            <end config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%s%s%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/bulkstat/schema/&lt;snmp_bulkstat_cfg_Schema_schema-name&gt;/instance`3</xr-path>
+              <xr-xml-map>snmp_bulkstat_cfg:End</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>EncodedString</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </end>
+            <max config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%s%s%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/bulkstat/schema/&lt;snmp_bulkstat_cfg_Schema_schema-name&gt;/instance`4</xr-path>
+              <xr-xml-map>snmp_bulkstat_cfg:Max</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>Integer</xr-sch-type>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </max>
+            <sub-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%s%s%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/bulkstat/schema/&lt;snmp_bulkstat_cfg_Schema_schema-name&gt;/instance`5</xr-path>
+              <xr-xml-map>snmp_bulkstat_cfg:SubInterface</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>Boolean</xr-sch-type>
+              <type>
+                <type-name>boolean</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </sub-interface>
+          </instance>
+          <type config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/snmp/bulkstat/schema/&lt;snmp_bulkstat_cfg_Schema_schema-name&gt;/type/dcm</xr-path>
+            <xr-xml-map>snmp_bulkstat_cfg:Type</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </type>
+          <schema-object-list config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/snmp/bulkstat/schema/&lt;snmp_bulkstat_cfg_Schema_schema-name&gt;/object</xr-path>
+            <xr-xml-map>snmp_bulkstat_cfg:SchemaObjectList</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>BoundedString</xr-sch-type>
+            <type length="1..32">
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </schema-object-list>
+          <poll-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/snmp/bulkstat/schema/&lt;snmp_bulkstat_cfg_Schema_schema-name&gt;/interval</xr-path>
+            <xr-xml-map>snmp_bulkstat_cfg:PollInterval</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1..20000">
+              <type-name>uint32</type-name>
+            </type>
+          </poll-interval>
+          <schema-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/snmp/bulkstat/schema/&lt;snmp_bulkstat_cfg_Schema_schema-name&gt;/</xr-path>
+            <xr-xml-map>snmp_bulkstat_cfg:SchemaName</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>BoundedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_bulkstat_cfg_Schema_schema-name&gt;</xr-sch-arg-name>
+            <type length="1..32">
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </schema-name>
+        </schema>
+      </schemas>
+      <objects config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/snmp/bulkstat/object/</xr-path>
+        <xr-xml-map>snmp_bulkstat_cfg:ObjectListTable</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <object config="true" key="object-list-name" node="list">
+          <xr-path>/cfg/gl/snmp/bulkstat/object/&lt;snmp_bulkstat_cfg_ObjectList_list-name&gt;/</xr-path>
+          <xr-xml-map>snmp_bulkstat_cfg:ObjectList</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <objects config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/snmp/bulkstat/object/&lt;snmp_bulkstat_cfg_ObjectList_list-name&gt;/oidname/</xr-path>
+            <xr-xml-map>snmp_bulkstat_cfg:ObjectTable</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <object config="true" key="oid" node="list">
+              <xr-path>/cfg/gl/snmp/bulkstat/object/&lt;snmp_bulkstat_cfg_ObjectList_list-name&gt;/oidname/&lt;snmp_bulkstat_cfg_Object_oid&gt;</xr-path>
+              <xr-xml-map>snmp_bulkstat_cfg:Object</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <oid config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-create-item-relative-path/>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/snmp/bulkstat/object/&lt;snmp_bulkstat_cfg_ObjectList_list-name&gt;/oidname/&lt;snmp_bulkstat_cfg_Object_oid&gt;</xr-path>
+                <xr-xml-map>snmp_bulkstat_cfg:OID</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>EncodedString</xr-sch-type>
+                <xr-sch-arg-name>&lt;snmp_bulkstat_cfg_Object_oid&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+              </oid>
+            </object>
+          </objects>
+          <type config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/snmp/bulkstat/object/&lt;snmp_bulkstat_cfg_ObjectList_list-name&gt;/type/dcm</xr-path>
+            <xr-xml-map>snmp_bulkstat_cfg:Type</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </type>
+          <object-list-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/snmp/bulkstat/object/&lt;snmp_bulkstat_cfg_ObjectList_list-name&gt;/</xr-path>
+            <xr-xml-map>snmp_bulkstat_cfg:ObjectListName</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>BoundedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_bulkstat_cfg_ObjectList_list-name&gt;</xr-sch-arg-name>
+            <type length="1..32">
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </object-list-name>
+        </object>
+      </objects>
+      <transfers config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/snmp/bulkstat/transfer/</xr-path>
+        <xr-xml-map>snmp_bulkstat_cfg:TransferTable</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <transfer config="true" key="transfer-name" node="list">
+          <xr-path>/cfg/gl/snmp/bulkstat/transfer/&lt;snmp_bulkstat_cfg_Transfer_transfer-id&gt;/</xr-path>
+          <xr-xml-map>snmp_bulkstat_cfg:Transfer</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <transfer-schemas config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/snmp/bulkstat/transfer/&lt;snmp_bulkstat_cfg_Transfer_transfer-id&gt;/schema/</xr-path>
+            <xr-xml-map>snmp_bulkstat_cfg:TransferSchemaTable</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <transfer-schema config="true" key="schema-name" node="list">
+              <xr-path>/cfg/gl/snmp/bulkstat/transfer/&lt;snmp_bulkstat_cfg_Transfer_transfer-id&gt;/schema/&lt;snmp_bulkstat_cfg_TransferSchema_transfer-schema&gt;</xr-path>
+              <xr-xml-map>snmp_bulkstat_cfg:TransferSchema</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <schema-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-create-item-relative-path/>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/snmp/bulkstat/transfer/&lt;snmp_bulkstat_cfg_Transfer_transfer-id&gt;/schema/&lt;snmp_bulkstat_cfg_TransferSchema_transfer-schema&gt;</xr-path>
+                <xr-xml-map>snmp_bulkstat_cfg:SchemaName</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>BoundedString</xr-sch-type>
+                <xr-sch-arg-name>&lt;snmp_bulkstat_cfg_TransferSchema_transfer-schema&gt;</xr-sch-arg-name>
+                <type length="1..32">
+                  <type-name>xr:Cisco-ios-xr-string</type-name>
+                </type>
+              </schema-name>
+            </transfer-schema>
+          </transfer-schemas>
+          <secondary config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/snmp/bulkstat/transfer/&lt;snmp_bulkstat_cfg_Transfer_transfer-id&gt;/secondary</xr-path>
+            <xr-xml-map>snmp_bulkstat_cfg:Secondary</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>EncodedString</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </secondary>
+          <type config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/snmp/bulkstat/transfer/&lt;snmp_bulkstat_cfg_Transfer_transfer-id&gt;/type/dcm</xr-path>
+            <xr-xml-map>snmp_bulkstat_cfg:Type</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </type>
+          <buffer-size config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/snmp/bulkstat/transfer/&lt;snmp_bulkstat_cfg_Transfer_transfer-id&gt;/buffer</xr-path>
+            <xr-xml-map>snmp_bulkstat_cfg:BufferSize</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1024..2147483647">
+              <type-name>uint32</type-name>
+            </type>
+          </buffer-size>
+          <retain config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/snmp/bulkstat/transfer/&lt;snmp_bulkstat_cfg_Transfer_transfer-id&gt;/retain</xr-path>
+            <xr-xml-map>snmp_bulkstat_cfg:Retain</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>ZeroRange</xr-sch-type>
+            <type range="0..20000">
+              <type-name>uint32</type-name>
+            </type>
+          </retain>
+          <format config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/snmp/bulkstat/transfer/&lt;snmp_bulkstat_cfg_Transfer_transfer-id&gt;/format</xr-path>
+            <xr-xml-map>snmp_bulkstat_cfg:Format</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <type>
+              <type-name>Snmp-bulkstat-file-format</type-name>
+            </type>
+          </format>
+          <retry config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/snmp/bulkstat/transfer/&lt;snmp_bulkstat_cfg_Transfer_transfer-id&gt;/retry</xr-path>
+            <xr-xml-map>snmp_bulkstat_cfg:Retry</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>ZeroRange</xr-sch-type>
+            <type range="0..100">
+              <type-name>uint32</type-name>
+            </type>
+          </retry>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/snmp/bulkstat/transfer/&lt;snmp_bulkstat_cfg_Transfer_transfer-id&gt;/enable</xr-path>
+            <xr-xml-map>snmp_bulkstat_cfg:Enable</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </enable>
+          <primary config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/snmp/bulkstat/transfer/&lt;snmp_bulkstat_cfg_Transfer_transfer-id&gt;/primary</xr-path>
+            <xr-xml-map>snmp_bulkstat_cfg:Primary</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>EncodedString</xr-sch-type>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </primary>
+          <interval config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/snmp/bulkstat/transfer/&lt;snmp_bulkstat_cfg_Transfer_transfer-id&gt;/interval</xr-path>
+            <xr-xml-map>snmp_bulkstat_cfg:Interval</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>Integer</xr-sch-type>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </interval>
+          <transfer-name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/snmp/bulkstat/transfer/&lt;snmp_bulkstat_cfg_Transfer_transfer-id&gt;/</xr-path>
+            <xr-xml-map>snmp_bulkstat_cfg:TransferName</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-sch-type>BoundedString</xr-sch-type>
+            <xr-sch-arg-name>&lt;snmp_bulkstat_cfg_Transfer_transfer-id&gt;</xr-sch-arg-name>
+            <type length="1..32">
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </transfer-name>
+        </transfer>
+      </transfers>
+      <memory config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/bulkstat/memory</xr-path>
+        <xr-xml-map>snmp_bulkstat_cfg:Memory</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="100..200000">
+          <type-name>uint32</type-name>
+        </type>
+      </memory>
+    </bulk-stats>
+    <default-community-maps config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/community-map/0x1/</xr-path>
+      <xr-xml-map>snmp_cfg:DefaultCommunityMapTable</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <default-community-map config="true" key="community-name" node="list">
+        <xr-path>/cfg/gl/snmp/community-map/0x1/&lt;snmp_cfg_DefaultCommunityMap_community&gt;</xr-path>
+        <xr-xml-map>snmp_cfg:DefaultCommunityMap</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-pack-format>%s%s%s</xr-pack-format>
+        <community-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%s%s%s</xr-pack-format>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/snmp/community-map/0x1/&lt;snmp_cfg_DefaultCommunityMap_community&gt;</xr-path>
+          <xr-xml-map>snmp_cfg:CommunityName</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;snmp_cfg_DefaultCommunityMap_community&gt;</xr-sch-arg-name>
+          <type length="1..128">
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </community-name>
+        <context config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/community-map/0x1/&lt;snmp_cfg_DefaultCommunityMap_community&gt;`0</xr-path>
+          <xr-xml-map>snmp_cfg:Context</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </context>
+        <security config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/community-map/0x1/&lt;snmp_cfg_DefaultCommunityMap_community&gt;`1</xr-path>
+          <xr-xml-map>snmp_cfg:Security</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </security>
+        <target-list config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/community-map/0x1/&lt;snmp_cfg_DefaultCommunityMap_community&gt;`2</xr-path>
+          <xr-xml-map>snmp_cfg:TargetList</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </target-list>
+      </default-community-map>
+    </default-community-maps>
+    <overload-control config="true" is-key="false" node="container" presence="true">
+      <xr-data-handler>ignore</xr-data-handler>
+      <xr-is-packed/>
+      <xr-path>/cfg/gl/snmp/overloadcontrol`</xr-path>
+      <xr-xml-map>snmp_cfg:OverloadControl</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <xr-pack-format>%d%d</xr-pack-format>
+      <drop-time config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/gl/snmp/overloadcontrol`0</xr-path>
+        <xr-xml-map>snmp_cfg:DropTime</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..300">
+          <type-name>uint32</type-name>
+        </type>
+        <mandatory>true</mandatory>
+      </drop-time>
+      <throttle-rate config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-is-packed/>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <xr-pack-elem-size>1</xr-pack-elem-size>
+        <xr-path>/cfg/gl/snmp/overloadcontrol`1</xr-path>
+        <xr-xml-map>snmp_cfg:ThrottleRate</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..1000">
+          <type-name>uint32</type-name>
+        </type>
+        <mandatory>true</mandatory>
+      </throttle-rate>
+    </overload-control>
+    <timeouts config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/timeouts/</xr-path>
+      <xr-xml-map>snmp_cfg:Timeouts</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <duplicates config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/timeouts/dupdrop</xr-path>
+        <xr-xml-map>snmp_cfg:Duplicates</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..20">
+          <type-name>uint32</type-name>
+        </type>
+        <default>1</default>
+      </duplicates>
+      <in-qdrop config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/timeouts/inQdrop</xr-path>
+        <xr-xml-map>snmp_cfg:InQdrop</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..20">
+          <type-name>uint32</type-name>
+        </type>
+        <default>10</default>
+      </in-qdrop>
+      <threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/timeouts/threshold</xr-path>
+        <xr-xml-map>snmp_cfg:Threshold</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="0..100000">
+          <type-name>uint32</type-name>
+        </type>
+        <default>50000</default>
+      </threshold>
+      <subagent config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/timeouts/subagent</xr-path>
+        <xr-xml-map>snmp_cfg:Subagent</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..20">
+          <type-name>uint32</type-name>
+        </type>
+        <default>10</default>
+      </subagent>
+      <pdu-stats config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/timeouts/pdu_stats</xr-path>
+        <xr-xml-map>snmp_cfg:PDUStats</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..10">
+          <type-name>uint32</type-name>
+        </type>
+        <default>2</default>
+      </pdu-stats>
+    </timeouts>
+    <users config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/user/</xr-path>
+      <xr-xml-map>snmp_cfg:UserTable</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <user config="true" key="user-name" node="list">
+        <xr-path>/cfg/gl/snmp/user/&lt;snmp_cfg_User_user&gt;</xr-path>
+        <xr-xml-map>snmp_cfg:User</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-pack-format>%s%d%d%d%s%d%d%s%d%s%d%s%d%s%d</xr-pack-format>
+        <user-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%s%d%d%d%s%d%d%s%d%s%d%s%d%s%d</xr-pack-format>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/snmp/user/&lt;snmp_cfg_User_user&gt;</xr-path>
+          <xr-xml-map>snmp_cfg:UserName</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>EncodedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;snmp_cfg_User_user&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </user-name>
+        <group-name config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%d%d%d%s%d%d%s%d%s%d%s%d%s%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/user/&lt;snmp_cfg_User_user&gt;`0</xr-path>
+          <xr-xml-map>snmp_cfg:GroupName</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </group-name>
+        <version config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%d%d%d%s%d%d%s%d%s%d%s%d%s%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/user/&lt;snmp_cfg_User_user&gt;`1</xr-path>
+          <xr-xml-map>snmp_cfg:Version</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>User-snmp-version</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </version>
+        <authentication-password-configured config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%d%d%d%s%d%d%s%d%s%d%s%d%s%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/user/&lt;snmp_cfg_User_user&gt;`2</xr-path>
+          <xr-xml-map>snmp_cfg:AuthenticationPasswordConfigured</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </authentication-password-configured>
+        <algorithm config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%d%d%d%s%d%d%s%d%s%d%s%d%s%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/user/&lt;snmp_cfg_User_user&gt;`3</xr-path>
+          <xr-xml-map>snmp_cfg:Algorithm</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Snmp-hash-algorithm</type-name>
+          </type>
+        </algorithm>
+        <authentication-password config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%d%d%d%s%d%d%s%d%s%d%s%d%s%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/user/&lt;snmp_cfg_User_user&gt;`4</xr-path>
+          <xr-xml-map>snmp_cfg:AuthenticationPassword</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>ProprietaryPassword</xr-sch-type>
+          <type>
+            <type-name>xr:Proprietary-password</type-name>
+          </type>
+        </authentication-password>
+        <privacy-password-configured config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%d%d%d%s%d%d%s%d%s%d%s%d%s%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/user/&lt;snmp_cfg_User_user&gt;`5</xr-path>
+          <xr-xml-map>snmp_cfg:PrivacyPasswordConfigured</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </privacy-password-configured>
+        <priv-algorithm config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%d%d%d%s%d%d%s%d%s%d%s%d%s%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/user/&lt;snmp_cfg_User_user&gt;`6</xr-path>
+          <xr-xml-map>snmp_cfg:Priv_Algorithm</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Snmp-priv-algorithm</type-name>
+          </type>
+        </priv-algorithm>
+        <privacy-password config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%d%d%d%s%d%d%s%d%s%d%s%d%s%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/user/&lt;snmp_cfg_User_user&gt;`7</xr-path>
+          <xr-xml-map>snmp_cfg:PrivacyPassword</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>ProprietaryPassword</xr-sch-type>
+          <type>
+            <type-name>xr:Proprietary-password</type-name>
+          </type>
+        </privacy-password>
+        <v4acl-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%d%d%d%s%d%d%s%d%s%d%s%d%s%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/user/&lt;snmp_cfg_User_user&gt;`8</xr-path>
+          <xr-xml-map>snmp_cfg:V4ACLType</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Snmpacl</type-name>
+          </type>
+        </v4acl-type>
+        <v4-access-list config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%d%d%d%s%d%d%s%d%s%d%s%d%s%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/user/&lt;snmp_cfg_User_user&gt;`9</xr-path>
+          <xr-xml-map>snmp_cfg:V4AccessList</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </v4-access-list>
+        <v6acl-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%d%d%d%s%d%d%s%d%s%d%s%d%s%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/user/&lt;snmp_cfg_User_user&gt;`10</xr-path>
+          <xr-xml-map>snmp_cfg:V6ACLType</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Snmpacl</type-name>
+          </type>
+        </v6acl-type>
+        <v6-access-list config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%d%d%d%s%d%d%s%d%s%d%s%d%s%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/user/&lt;snmp_cfg_User_user&gt;`11</xr-path>
+          <xr-xml-map>snmp_cfg:V6AccessList</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </v6-access-list>
+        <owner config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%d%d%d%s%d%d%s%d%s%d%s%d%s%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/user/&lt;snmp_cfg_User_user&gt;`12</xr-path>
+          <xr-xml-map>snmp_cfg:Owner</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Snmp-owner-access</type-name>
+          </type>
+        </owner>
+        <remote-address config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%d%d%d%s%d%d%s%d%s%d%s%d%s%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/user/&lt;snmp_cfg_User_user&gt;`13</xr-path>
+          <xr-xml-map>snmp_cfg:RemoteAddress</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>IPAddress</xr-sch-type>
+          <type>
+            <type-name>inet:ip-address-no-zone</type-name>
+          </type>
+        </remote-address>
+        <port config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%s%d%d%d%s%d%d%s%d%s%d%s%d%s%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/user/&lt;snmp_cfg_User_user&gt;`14</xr-path>
+          <xr-xml-map>snmp_cfg:Port</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type>
+            <type-name>xr:Cisco-ios-xr-port-number</type-name>
+          </type>
+        </port>
+      </user>
+    </users>
+    <vrfs config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/vrf/</xr-path>
+      <xr-xml-map>snmp_cfg:VRFTable</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <vrf config="true" key="name" node="list">
+        <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/</xr-path>
+        <xr-xml-map>snmp_cfg:VRF</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-create-item-relative-path>aza</xr-create-item-relative-path>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/</xr-path>
+          <xr-xml-map>snmp_cfg:Name</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;snmp_cfg_VRF_vrf_name&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </name>
+        <trap-hosts config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/</xr-path>
+          <xr-xml-map>snmp_cfg:TrapHostTable</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <trap-host config="true" key="ip-address" node="list">
+            <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/</xr-path>
+            <xr-xml-map>snmp_cfg:TrapHost</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <encrypted-user-communities config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x2/</xr-path>
+              <xr-xml-map>snmp_cfg:EncryptedUserCommunityTable</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <encrypted-user-community config="true" key="community-name" node="list">
+                <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x2/&lt;snmp_cfg_EncryptedUserCommunity_user_community&gt;</xr-path>
+                <xr-xml-map>snmp_cfg:EncryptedUserCommunity</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                <community-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x2/&lt;snmp_cfg_EncryptedUserCommunity_user_community&gt;</xr-path>
+                  <xr-xml-map>snmp_cfg:CommunityName</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-sch-type>EncryptedString</xr-sch-type>
+                  <xr-sch-arg-name>&lt;snmp_cfg_EncryptedUserCommunity_user_community&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>xr:Cisco-ios-xr-string</type-name>
+                  </type>
+                </community-name>
+                <port config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x2/&lt;snmp_cfg_EncryptedUserCommunity_user_community&gt;`0</xr-path>
+                  <xr-xml-map>snmp_cfg:Port</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>xr:Cisco-ios-xr-port-number</type-name>
+                  </type>
+                  <default>162</default>
+                </port>
+                <version config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x2/&lt;snmp_cfg_EncryptedUserCommunity_user_community&gt;`1</xr-path>
+                  <xr-xml-map>snmp_cfg:Version</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-sch-type>String</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                  <default>1</default>
+                </version>
+                <security-level config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x2/&lt;snmp_cfg_EncryptedUserCommunity_user_community&gt;`2</xr-path>
+                  <xr-xml-map>snmp_cfg:SecurityLevel</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>Snmp-security-model</type-name>
+                  </type>
+                </security-level>
+                <basic-trap-types config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x2/&lt;snmp_cfg_EncryptedUserCommunity_user_community&gt;`3</xr-path>
+                  <xr-xml-map>snmp_cfg:BasicTrapTypes</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-sch-type>Integer</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>0</default>
+                </basic-trap-types>
+                <advanced-trap-types1 config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x2/&lt;snmp_cfg_EncryptedUserCommunity_user_community&gt;`4</xr-path>
+                  <xr-xml-map>snmp_cfg:AdvancedTrapTypes1</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-sch-type>Integer</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>0</default>
+                </advanced-trap-types1>
+                <advanced-trap-types2 config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x2/&lt;snmp_cfg_EncryptedUserCommunity_user_community&gt;`5</xr-path>
+                  <xr-xml-map>snmp_cfg:AdvancedTrapTypes2</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-sch-type>Integer</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>0</default>
+                </advanced-trap-types2>
+              </encrypted-user-community>
+            </encrypted-user-communities>
+            <inform-host config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/</xr-path>
+              <xr-xml-map>snmp_cfg:InformHost</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <inform-user-communities config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x1/</xr-path>
+                <xr-xml-map>snmp_cfg:InformUserCommunityTable</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <inform-user-community config="true" key="community-name" node="list">
+                  <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x1/&lt;snmp_cfg_InformUserCommunity_user_community&gt;</xr-path>
+                  <xr-xml-map>snmp_cfg:InformUserCommunity</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                  <community-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                    <xr-primitive-type>string</xr-primitive-type>
+                    <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x1/&lt;snmp_cfg_InformUserCommunity_user_community&gt;</xr-path>
+                    <xr-xml-map>snmp_cfg:CommunityName</xr-xml-map>
+                    <xr-task>snmp</xr-task>
+                    <xr-sch-type>BoundedString</xr-sch-type>
+                    <xr-sch-arg-name>&lt;snmp_cfg_InformUserCommunity_user_community&gt;</xr-sch-arg-name>
+                    <type length="1..128">
+                      <type-name>xr:Cisco-ios-xr-string</type-name>
+                    </type>
+                  </community-name>
+                  <port config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-data-handler>preserve-pack</xr-data-handler>
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x1/&lt;snmp_cfg_InformUserCommunity_user_community&gt;`0</xr-path>
+                    <xr-xml-map>snmp_cfg:Port</xr-xml-map>
+                    <xr-task>snmp</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <xr-default-set/>
+                    <type>
+                      <type-name>xr:Cisco-ios-xr-port-number</type-name>
+                    </type>
+                    <default>162</default>
+                  </port>
+                  <version config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-data-handler>preserve-pack</xr-data-handler>
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x1/&lt;snmp_cfg_InformUserCommunity_user_community&gt;`1</xr-path>
+                    <xr-xml-map>snmp_cfg:Version</xr-xml-map>
+                    <xr-task>snmp</xr-task>
+                    <xr-sch-type>String</xr-sch-type>
+                    <xr-default-set/>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                    <default>2c</default>
+                  </version>
+                  <security-level config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-data-handler>preserve-pack</xr-data-handler>
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x1/&lt;snmp_cfg_InformUserCommunity_user_community&gt;`2</xr-path>
+                    <xr-xml-map>snmp_cfg:SecurityLevel</xr-xml-map>
+                    <xr-task>snmp</xr-task>
+                    <xr-sch-type>Enum</xr-sch-type>
+                    <xr-default-set/>
+                    <type>
+                      <type-name>Snmp-security-model</type-name>
+                    </type>
+                  </security-level>
+                  <basic-trap-types config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-data-handler>preserve-pack</xr-data-handler>
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x1/&lt;snmp_cfg_InformUserCommunity_user_community&gt;`3</xr-path>
+                    <xr-xml-map>snmp_cfg:BasicTrapTypes</xr-xml-map>
+                    <xr-task>snmp</xr-task>
+                    <xr-sch-type>Integer</xr-sch-type>
+                    <xr-default-set/>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                    <default>0</default>
+                  </basic-trap-types>
+                  <advanced-trap-types1 config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-data-handler>preserve-pack</xr-data-handler>
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x1/&lt;snmp_cfg_InformUserCommunity_user_community&gt;`4</xr-path>
+                    <xr-xml-map>snmp_cfg:AdvancedTrapTypes1</xr-xml-map>
+                    <xr-task>snmp</xr-task>
+                    <xr-sch-type>Integer</xr-sch-type>
+                    <xr-default-set/>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                    <default>0</default>
+                  </advanced-trap-types1>
+                  <advanced-trap-types2 config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-data-handler>preserve-pack</xr-data-handler>
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x1/&lt;snmp_cfg_InformUserCommunity_user_community&gt;`5</xr-path>
+                    <xr-xml-map>snmp_cfg:AdvancedTrapTypes2</xr-xml-map>
+                    <xr-task>snmp</xr-task>
+                    <xr-sch-type>Integer</xr-sch-type>
+                    <xr-default-set/>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                    <default>0</default>
+                  </advanced-trap-types2>
+                </inform-user-community>
+              </inform-user-communities>
+              <inform-encrypted-user-communities config="true" is-key="false" node="container" presence="false">
+                <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x2/</xr-path>
+                <xr-xml-map>snmp_cfg:InformEncryptedUserCommunityTable</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <inform-encrypted-user-community config="true" key="community-name" node="list">
+                  <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x2/&lt;snmp_cfg_InformEncryptedUserCommunity_user_community&gt;</xr-path>
+                  <xr-xml-map>snmp_cfg:InformEncryptedUserCommunity</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                  <community-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                    <xr-primitive-type>string</xr-primitive-type>
+                    <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x2/&lt;snmp_cfg_InformEncryptedUserCommunity_user_community&gt;</xr-path>
+                    <xr-xml-map>snmp_cfg:CommunityName</xr-xml-map>
+                    <xr-task>snmp</xr-task>
+                    <xr-sch-type>EncryptedString</xr-sch-type>
+                    <xr-sch-arg-name>&lt;snmp_cfg_InformEncryptedUserCommunity_user_community&gt;</xr-sch-arg-name>
+                    <type>
+                      <type-name>xr:Cisco-ios-xr-string</type-name>
+                    </type>
+                  </community-name>
+                  <port config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-data-handler>preserve-pack</xr-data-handler>
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x2/&lt;snmp_cfg_InformEncryptedUserCommunity_user_community&gt;`0</xr-path>
+                    <xr-xml-map>snmp_cfg:Port</xr-xml-map>
+                    <xr-task>snmp</xr-task>
+                    <xr-sch-type>Range</xr-sch-type>
+                    <xr-default-set/>
+                    <type>
+                      <type-name>xr:Cisco-ios-xr-port-number</type-name>
+                    </type>
+                    <default>162</default>
+                  </port>
+                  <version config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-data-handler>preserve-pack</xr-data-handler>
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x2/&lt;snmp_cfg_InformEncryptedUserCommunity_user_community&gt;`1</xr-path>
+                    <xr-xml-map>snmp_cfg:Version</xr-xml-map>
+                    <xr-task>snmp</xr-task>
+                    <xr-sch-type>String</xr-sch-type>
+                    <xr-default-set/>
+                    <type>
+                      <type-name>string</type-name>
+                    </type>
+                    <default>2c</default>
+                  </version>
+                  <security-level config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-data-handler>preserve-pack</xr-data-handler>
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x2/&lt;snmp_cfg_InformEncryptedUserCommunity_user_community&gt;`2</xr-path>
+                    <xr-xml-map>snmp_cfg:SecurityLevel</xr-xml-map>
+                    <xr-task>snmp</xr-task>
+                    <xr-sch-type>Enum</xr-sch-type>
+                    <xr-default-set/>
+                    <type>
+                      <type-name>Snmp-security-model</type-name>
+                    </type>
+                  </security-level>
+                  <basic-trap-types config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-data-handler>preserve-pack</xr-data-handler>
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x2/&lt;snmp_cfg_InformEncryptedUserCommunity_user_community&gt;`3</xr-path>
+                    <xr-xml-map>snmp_cfg:BasicTrapTypes</xr-xml-map>
+                    <xr-task>snmp</xr-task>
+                    <xr-sch-type>Integer</xr-sch-type>
+                    <xr-default-set/>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                    <default>0</default>
+                  </basic-trap-types>
+                  <advanced-trap-types1 config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-data-handler>preserve-pack</xr-data-handler>
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x2/&lt;snmp_cfg_InformEncryptedUserCommunity_user_community&gt;`4</xr-path>
+                    <xr-xml-map>snmp_cfg:AdvancedTrapTypes1</xr-xml-map>
+                    <xr-task>snmp</xr-task>
+                    <xr-sch-type>Integer</xr-sch-type>
+                    <xr-default-set/>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                    <default>0</default>
+                  </advanced-trap-types1>
+                  <advanced-trap-types2 config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <xr-data-handler>preserve-pack</xr-data-handler>
+                    <xr-is-packed/>
+                    <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                    <xr-pack-elem-size>1</xr-pack-elem-size>
+                    <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x2/&lt;snmp_cfg_InformEncryptedUserCommunity_user_community&gt;`5</xr-path>
+                    <xr-xml-map>snmp_cfg:AdvancedTrapTypes2</xr-xml-map>
+                    <xr-task>snmp</xr-task>
+                    <xr-sch-type>Integer</xr-sch-type>
+                    <xr-default-set/>
+                    <type>
+                      <type-name>uint32</type-name>
+                    </type>
+                    <default>0</default>
+                  </advanced-trap-types2>
+                </inform-encrypted-user-community>
+              </inform-encrypted-user-communities>
+            </inform-host>
+            <default-user-communities config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x1/</xr-path>
+              <xr-xml-map>snmp_cfg:DefaultUserCommunityTable</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <default-user-community config="true" key="community-name" node="list">
+                <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x1/&lt;snmp_cfg_DefaultUserCommunity_user_community&gt;</xr-path>
+                <xr-xml-map>snmp_cfg:DefaultUserCommunity</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                <community-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x1/&lt;snmp_cfg_DefaultUserCommunity_user_community&gt;</xr-path>
+                  <xr-xml-map>snmp_cfg:CommunityName</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-sch-type>BoundedString</xr-sch-type>
+                  <xr-sch-arg-name>&lt;snmp_cfg_DefaultUserCommunity_user_community&gt;</xr-sch-arg-name>
+                  <type length="1..128">
+                    <type-name>xr:Cisco-ios-xr-string</type-name>
+                  </type>
+                </community-name>
+                <port config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x1/&lt;snmp_cfg_DefaultUserCommunity_user_community&gt;`0</xr-path>
+                  <xr-xml-map>snmp_cfg:Port</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-sch-type>Range</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>xr:Cisco-ios-xr-port-number</type-name>
+                  </type>
+                  <default>162</default>
+                </port>
+                <version config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x1/&lt;snmp_cfg_DefaultUserCommunity_user_community&gt;`1</xr-path>
+                  <xr-xml-map>snmp_cfg:Version</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-sch-type>String</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>string</type-name>
+                  </type>
+                  <default>1</default>
+                </version>
+                <security-level config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x1/&lt;snmp_cfg_DefaultUserCommunity_user_community&gt;`2</xr-path>
+                  <xr-xml-map>snmp_cfg:SecurityLevel</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>Snmp-security-model</type-name>
+                  </type>
+                </security-level>
+                <basic-trap-types config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x1/&lt;snmp_cfg_DefaultUserCommunity_user_community&gt;`3</xr-path>
+                  <xr-xml-map>snmp_cfg:BasicTrapTypes</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-sch-type>Integer</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>0</default>
+                </basic-trap-types>
+                <advanced-trap-types1 config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x1/&lt;snmp_cfg_DefaultUserCommunity_user_community&gt;`4</xr-path>
+                  <xr-xml-map>snmp_cfg:AdvancedTrapTypes1</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-sch-type>Integer</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>0</default>
+                </advanced-trap-types1>
+                <advanced-trap-types2 config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-data-handler>preserve-pack</xr-data-handler>
+                  <xr-is-packed/>
+                  <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                  <xr-pack-elem-size>1</xr-pack-elem-size>
+                  <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x1/&lt;snmp_cfg_DefaultUserCommunity_user_community&gt;`5</xr-path>
+                  <xr-xml-map>snmp_cfg:AdvancedTrapTypes2</xr-xml-map>
+                  <xr-task>snmp</xr-task>
+                  <xr-sch-type>Integer</xr-sch-type>
+                  <xr-default-set/>
+                  <type>
+                    <type-name>uint32</type-name>
+                  </type>
+                  <default>0</default>
+                </advanced-trap-types2>
+              </default-user-community>
+            </default-user-communities>
+            <ip-address config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-pathformat>hex_padded_nozerox</xr-pathformat>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/host/&lt;snmp_cfg_TrapHost_address&gt;/</xr-path>
+              <xr-xml-map>snmp_cfg:IPAddress</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>IPAddress</xr-sch-type>
+              <xr-sch-arg-name>&lt;snmp_cfg_TrapHost_address&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ip-address-no-zone</type-name>
+              </type>
+            </ip-address>
+          </trap-host>
+        </trap-hosts>
+        <contexts config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/context/</xr-path>
+          <xr-xml-map>snmp_cfg:ContextTable</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <context config="true" key="context-name" node="list">
+            <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/context/&lt;snmp_cfg_Context_context&gt;</xr-path>
+            <xr-xml-map>snmp_cfg:Context</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <context-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-create-item-relative-path/>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/context/&lt;snmp_cfg_Context_context&gt;</xr-path>
+              <xr-xml-map>snmp_cfg:ContextName</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;snmp_cfg_Context_context&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </context-name>
+          </context>
+        </contexts>
+        <context-mappings config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/ctxmapping/</xr-path>
+          <xr-xml-map>snmp_cfg:ContextMappingTable</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <context-mapping config="true" key="context-mapping-name" node="list">
+            <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/ctxmapping/&lt;snmp_cfg_ContextMapping_context&gt;</xr-path>
+            <xr-xml-map>snmp_cfg:ContextMapping</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-pack-format>%d%s%s%s</xr-pack-format>
+            <context-mapping-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%s%s</xr-pack-format>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/ctxmapping/&lt;snmp_cfg_ContextMapping_context&gt;</xr-path>
+              <xr-xml-map>snmp_cfg:ContextMappingName</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-sch-arg-name>&lt;snmp_cfg_ContextMapping_context&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </context-mapping-name>
+            <context config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%s%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/ctxmapping/&lt;snmp_cfg_ContextMapping_context&gt;`0</xr-path>
+              <xr-xml-map>snmp_cfg:Context</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Snmp-context</type-name>
+              </type>
+            </context>
+            <instance-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%s%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/ctxmapping/&lt;snmp_cfg_ContextMapping_context&gt;`1</xr-path>
+              <xr-xml-map>snmp_cfg:InstanceName</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </instance-name>
+            <vrf-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%s%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/ctxmapping/&lt;snmp_cfg_ContextMapping_context&gt;`2</xr-path>
+              <xr-xml-map>snmp_cfg:VRFName</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>VRF_Name</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </vrf-name>
+            <topology-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%s%s</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/vrf/&lt;snmp_cfg_VRF_vrf_name&gt;/ctxmapping/&lt;snmp_cfg_ContextMapping_context&gt;`3</xr-path>
+              <xr-xml-map>snmp_cfg:TopologyName</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <type>
+                <type-name>string</type-name>
+              </type>
+            </topology-name>
+          </context-mapping>
+        </context-mappings>
+      </vrf>
+    </vrfs>
+    <groups config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/group/</xr-path>
+      <xr-xml-map>snmp_cfg:GroupTable</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <group config="true" key="name" node="list">
+        <xr-path>/cfg/gl/snmp/group/&lt;snmp_cfg_Group_name&gt;</xr-path>
+        <xr-xml-map>snmp_cfg:Group</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-pack-format>%d%d%s%s%s%d%s%d%s%s</xr-pack-format>
+        <name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%s%s%s%d%s%d%s%s</xr-pack-format>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/snmp/group/&lt;snmp_cfg_Group_name&gt;</xr-path>
+          <xr-xml-map>snmp_cfg:Name</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;snmp_cfg_Group_name&gt;</xr-sch-arg-name>
+          <type length="1..128">
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </name>
+        <snmp-version config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%s%s%s%d%s%d%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/group/&lt;snmp_cfg_Group_name&gt;`0</xr-path>
+          <xr-xml-map>snmp_cfg:SNMPVersion</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Group-snmp-version</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </snmp-version>
+        <security-model config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%s%s%s%d%s%d%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/group/&lt;snmp_cfg_Group_name&gt;`1</xr-path>
+          <xr-xml-map>snmp_cfg:SecurityModel</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Snmp-security-model</type-name>
+          </type>
+        </security-model>
+        <notify-view config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%s%s%s%d%s%d%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/group/&lt;snmp_cfg_Group_name&gt;`2</xr-path>
+          <xr-xml-map>snmp_cfg:NotifyView</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </notify-view>
+        <read-view config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%s%s%s%d%s%d%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/group/&lt;snmp_cfg_Group_name&gt;`3</xr-path>
+          <xr-xml-map>snmp_cfg:ReadView</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </read-view>
+        <write-view config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%s%s%s%d%s%d%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/group/&lt;snmp_cfg_Group_name&gt;`4</xr-path>
+          <xr-xml-map>snmp_cfg:WriteView</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </write-view>
+        <v4acl-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%s%s%s%d%s%d%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/group/&lt;snmp_cfg_Group_name&gt;`5</xr-path>
+          <xr-xml-map>snmp_cfg:V4ACLType</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Snmpacl</type-name>
+          </type>
+        </v4acl-type>
+        <v4-access-list config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%s%s%s%d%s%d%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/group/&lt;snmp_cfg_Group_name&gt;`6</xr-path>
+          <xr-xml-map>snmp_cfg:V4AccessList</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </v4-access-list>
+        <v6acl-type config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%s%s%s%d%s%d%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/group/&lt;snmp_cfg_Group_name&gt;`7</xr-path>
+          <xr-xml-map>snmp_cfg:V6ACLType</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Snmpacl</type-name>
+          </type>
+        </v6acl-type>
+        <v6-access-list config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%s%s%s%d%s%d%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/group/&lt;snmp_cfg_Group_name&gt;`8</xr-path>
+          <xr-xml-map>snmp_cfg:V6AccessList</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </v6-access-list>
+        <context-name config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%d%s%s%s%d%s%d%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/group/&lt;snmp_cfg_Group_name&gt;`9</xr-path>
+          <xr-xml-map>snmp_cfg:ContextName</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </context-name>
+      </group>
+    </groups>
+    <inform-retries config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/snmp/inform_retries</xr-path>
+      <xr-xml-map>snmp_cfg:InformRetries</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <xr-sch-type>Range</xr-sch-type>
+      <type range="0..100">
+        <type-name>uint32</type-name>
+      </type>
+    </inform-retries>
+    <trap-port config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/snmp/trapsource_port</xr-path>
+      <xr-xml-map>snmp_cfg:TrapPort</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <xr-sch-type>Range</xr-sch-type>
+      <type range="1024..65535">
+        <type-name>uint32</type-name>
+      </type>
+    </trap-port>
+    <oid-poll-stats config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/snmp/oid-poll-stats</xr-path>
+      <xr-xml-map>snmp_cfg:OIDPollStats</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <xr-sch-type>Configured</xr-sch-type>
+      <type>
+        <type-name>empty</type-name>
+      </type>
+    </oid-poll-stats>
+    <trap-source config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>string</xr-primitive-type>
+      <xr-path>/cfg/gl/snmp/trapsource/0x3</xr-path>
+      <xr-xml-map>snmp_cfg:TrapSource</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <xr-sch-type>InterfaceName</xr-sch-type>
+      <type>
+        <type-name>xr:Interface-name</type-name>
+      </type>
+    </trap-source>
+    <vrf-authentication-trap-disable config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/snmp/auth_vrf_disable</xr-path>
+      <xr-xml-map>snmp_cfg:VRFAuthenticationTrapDisable</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <xr-sch-type>Configured</xr-sch-type>
+      <type>
+        <type-name>empty</type-name>
+      </type>
+    </vrf-authentication-trap-disable>
+    <inform-timeout config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/snmp/inform_timeout</xr-path>
+      <xr-xml-map>snmp_cfg:InformTimeout</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <xr-sch-type>Range</xr-sch-type>
+      <type range="1..42949671">
+        <type-name>uint32</type-name>
+      </type>
+    </inform-timeout>
+    <trap-source-ipv6 config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>string</xr-primitive-type>
+      <xr-path>/cfg/gl/snmp/trapsource/0x2</xr-path>
+      <xr-xml-map>snmp_cfg:TrapSource_IPV6</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <xr-sch-type>InterfaceName</xr-sch-type>
+      <type>
+        <type-name>xr:Interface-name</type-name>
+      </type>
+    </trap-source-ipv6>
+    <packet-size config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/snmp/packetsize</xr-path>
+      <xr-xml-map>snmp_cfg:PacketSize</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <xr-sch-type>Range</xr-sch-type>
+      <type range="484..65500">
+        <type-name>uint32</type-name>
+      </type>
+    </packet-size>
+    <throttle-time config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/snmp/throttletime</xr-path>
+      <xr-xml-map>snmp_cfg:ThrottleTime</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <xr-sch-type>Range</xr-sch-type>
+      <type range="50..1000">
+        <type-name>uint32</type-name>
+      </type>
+    </throttle-time>
+    <trap-source-ipv4 config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>string</xr-primitive-type>
+      <xr-path>/cfg/gl/snmp/trapsource/0x1</xr-path>
+      <xr-xml-map>snmp_cfg:TrapSource_IPV4</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <xr-sch-type>InterfaceName</xr-sch-type>
+      <type>
+        <type-name>xr:Interface-name</type-name>
+      </type>
+    </trap-source-ipv4>
+    <inform-pending config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/snmp/inform_pending</xr-path>
+      <xr-xml-map>snmp_cfg:InformPending</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <xr-sch-type>Range</xr-sch-type>
+      <type range="0..4294967295">
+        <type-name>uint32</type-name>
+      </type>
+    </inform-pending>
+    <trap-hosts config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/host/</xr-path>
+      <xr-xml-map>snmp_cfg:TrapHostTable</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <trap-host config="true" key="ip-address" node="list">
+        <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/</xr-path>
+        <xr-xml-map>snmp_cfg:TrapHost</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <encrypted-user-communities config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x2/</xr-path>
+          <xr-xml-map>snmp_cfg:EncryptedUserCommunityTable</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <encrypted-user-community config="true" key="community-name" node="list">
+            <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x2/&lt;snmp_cfg_EncryptedUserCommunity_user_community&gt;</xr-path>
+            <xr-xml-map>snmp_cfg:EncryptedUserCommunity</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+            <community-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x2/&lt;snmp_cfg_EncryptedUserCommunity_user_community&gt;</xr-path>
+              <xr-xml-map>snmp_cfg:CommunityName</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>EncryptedString</xr-sch-type>
+              <xr-sch-arg-name>&lt;snmp_cfg_EncryptedUserCommunity_user_community&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </community-name>
+            <port config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x2/&lt;snmp_cfg_EncryptedUserCommunity_user_community&gt;`0</xr-path>
+              <xr-xml-map>snmp_cfg:Port</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-default-set/>
+              <type>
+                <type-name>xr:Cisco-ios-xr-port-number</type-name>
+              </type>
+              <default>162</default>
+            </port>
+            <version config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x2/&lt;snmp_cfg_EncryptedUserCommunity_user_community&gt;`1</xr-path>
+              <xr-xml-map>snmp_cfg:Version</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-default-set/>
+              <type>
+                <type-name>string</type-name>
+              </type>
+              <default>1</default>
+            </version>
+            <security-level config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x2/&lt;snmp_cfg_EncryptedUserCommunity_user_community&gt;`2</xr-path>
+              <xr-xml-map>snmp_cfg:SecurityLevel</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <xr-default-set/>
+              <type>
+                <type-name>Snmp-security-model</type-name>
+              </type>
+            </security-level>
+            <basic-trap-types config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x2/&lt;snmp_cfg_EncryptedUserCommunity_user_community&gt;`3</xr-path>
+              <xr-xml-map>snmp_cfg:BasicTrapTypes</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>Integer</xr-sch-type>
+              <xr-default-set/>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+              <default>0</default>
+            </basic-trap-types>
+            <advanced-trap-types1 config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x2/&lt;snmp_cfg_EncryptedUserCommunity_user_community&gt;`4</xr-path>
+              <xr-xml-map>snmp_cfg:AdvancedTrapTypes1</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>Integer</xr-sch-type>
+              <xr-default-set/>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+              <default>0</default>
+            </advanced-trap-types1>
+            <advanced-trap-types2 config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x2/&lt;snmp_cfg_EncryptedUserCommunity_user_community&gt;`5</xr-path>
+              <xr-xml-map>snmp_cfg:AdvancedTrapTypes2</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>Integer</xr-sch-type>
+              <xr-default-set/>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+              <default>0</default>
+            </advanced-trap-types2>
+          </encrypted-user-community>
+        </encrypted-user-communities>
+        <inform-host config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/</xr-path>
+          <xr-xml-map>snmp_cfg:InformHost</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <inform-user-communities config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x1/</xr-path>
+            <xr-xml-map>snmp_cfg:InformUserCommunityTable</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <inform-user-community config="true" key="community-name" node="list">
+              <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x1/&lt;snmp_cfg_InformUserCommunity_user_community&gt;</xr-path>
+              <xr-xml-map>snmp_cfg:InformUserCommunity</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+              <community-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x1/&lt;snmp_cfg_InformUserCommunity_user_community&gt;</xr-path>
+                <xr-xml-map>snmp_cfg:CommunityName</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>BoundedString</xr-sch-type>
+                <xr-sch-arg-name>&lt;snmp_cfg_InformUserCommunity_user_community&gt;</xr-sch-arg-name>
+                <type length="1..128">
+                  <type-name>xr:Cisco-ios-xr-string</type-name>
+                </type>
+              </community-name>
+              <port config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x1/&lt;snmp_cfg_InformUserCommunity_user_community&gt;`0</xr-path>
+                <xr-xml-map>snmp_cfg:Port</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>xr:Cisco-ios-xr-port-number</type-name>
+                </type>
+                <default>162</default>
+              </port>
+              <version config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x1/&lt;snmp_cfg_InformUserCommunity_user_community&gt;`1</xr-path>
+                <xr-xml-map>snmp_cfg:Version</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+                <default>2c</default>
+              </version>
+              <security-level config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x1/&lt;snmp_cfg_InformUserCommunity_user_community&gt;`2</xr-path>
+                <xr-xml-map>snmp_cfg:SecurityLevel</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>Snmp-security-model</type-name>
+                </type>
+              </security-level>
+              <basic-trap-types config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x1/&lt;snmp_cfg_InformUserCommunity_user_community&gt;`3</xr-path>
+                <xr-xml-map>snmp_cfg:BasicTrapTypes</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>Integer</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+                <default>0</default>
+              </basic-trap-types>
+              <advanced-trap-types1 config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x1/&lt;snmp_cfg_InformUserCommunity_user_community&gt;`4</xr-path>
+                <xr-xml-map>snmp_cfg:AdvancedTrapTypes1</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>Integer</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+                <default>0</default>
+              </advanced-trap-types1>
+              <advanced-trap-types2 config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x1/&lt;snmp_cfg_InformUserCommunity_user_community&gt;`5</xr-path>
+                <xr-xml-map>snmp_cfg:AdvancedTrapTypes2</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>Integer</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+                <default>0</default>
+              </advanced-trap-types2>
+            </inform-user-community>
+          </inform-user-communities>
+          <inform-encrypted-user-communities config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x2/</xr-path>
+            <xr-xml-map>snmp_cfg:InformEncryptedUserCommunityTable</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <inform-encrypted-user-community config="true" key="community-name" node="list">
+              <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x2/&lt;snmp_cfg_InformEncryptedUserCommunity_user_community&gt;</xr-path>
+              <xr-xml-map>snmp_cfg:InformEncryptedUserCommunity</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+              <community-name config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x2/&lt;snmp_cfg_InformEncryptedUserCommunity_user_community&gt;</xr-path>
+                <xr-xml-map>snmp_cfg:CommunityName</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>EncryptedString</xr-sch-type>
+                <xr-sch-arg-name>&lt;snmp_cfg_InformEncryptedUserCommunity_user_community&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>xr:Cisco-ios-xr-string</type-name>
+                </type>
+              </community-name>
+              <port config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x2/&lt;snmp_cfg_InformEncryptedUserCommunity_user_community&gt;`0</xr-path>
+                <xr-xml-map>snmp_cfg:Port</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>xr:Cisco-ios-xr-port-number</type-name>
+                </type>
+                <default>162</default>
+              </port>
+              <version config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x2/&lt;snmp_cfg_InformEncryptedUserCommunity_user_community&gt;`1</xr-path>
+                <xr-xml-map>snmp_cfg:Version</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>String</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>string</type-name>
+                </type>
+                <default>2c</default>
+              </version>
+              <security-level config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x2/&lt;snmp_cfg_InformEncryptedUserCommunity_user_community&gt;`2</xr-path>
+                <xr-xml-map>snmp_cfg:SecurityLevel</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>Snmp-security-model</type-name>
+                </type>
+              </security-level>
+              <basic-trap-types config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x2/&lt;snmp_cfg_InformEncryptedUserCommunity_user_community&gt;`3</xr-path>
+                <xr-xml-map>snmp_cfg:BasicTrapTypes</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>Integer</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+                <default>0</default>
+              </basic-trap-types>
+              <advanced-trap-types1 config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x2/&lt;snmp_cfg_InformEncryptedUserCommunity_user_community&gt;`4</xr-path>
+                <xr-xml-map>snmp_cfg:AdvancedTrapTypes1</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>Integer</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+                <default>0</default>
+              </advanced-trap-types1>
+              <advanced-trap-types2 config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x2/0x2/&lt;snmp_cfg_InformEncryptedUserCommunity_user_community&gt;`5</xr-path>
+                <xr-xml-map>snmp_cfg:AdvancedTrapTypes2</xr-xml-map>
+                <xr-task>snmp</xr-task>
+                <xr-sch-type>Integer</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+                <default>0</default>
+              </advanced-trap-types2>
+            </inform-encrypted-user-community>
+          </inform-encrypted-user-communities>
+        </inform-host>
+        <default-user-communities config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x1/</xr-path>
+          <xr-xml-map>snmp_cfg:DefaultUserCommunityTable</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <default-user-community config="true" key="community-name" node="list">
+            <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x1/&lt;snmp_cfg_DefaultUserCommunity_user_community&gt;</xr-path>
+            <xr-xml-map>snmp_cfg:DefaultUserCommunity</xr-xml-map>
+            <xr-task>snmp</xr-task>
+            <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+            <community-name config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x1/&lt;snmp_cfg_DefaultUserCommunity_user_community&gt;</xr-path>
+              <xr-xml-map>snmp_cfg:CommunityName</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <xr-sch-arg-name>&lt;snmp_cfg_DefaultUserCommunity_user_community&gt;</xr-sch-arg-name>
+              <type length="1..128">
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </community-name>
+            <port config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x1/&lt;snmp_cfg_DefaultUserCommunity_user_community&gt;`0</xr-path>
+              <xr-xml-map>snmp_cfg:Port</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-default-set/>
+              <type>
+                <type-name>xr:Cisco-ios-xr-port-number</type-name>
+              </type>
+              <default>162</default>
+            </port>
+            <version config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x1/&lt;snmp_cfg_DefaultUserCommunity_user_community&gt;`1</xr-path>
+              <xr-xml-map>snmp_cfg:Version</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>String</xr-sch-type>
+              <xr-default-set/>
+              <type>
+                <type-name>string</type-name>
+              </type>
+              <default>1</default>
+            </version>
+            <security-level config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x1/&lt;snmp_cfg_DefaultUserCommunity_user_community&gt;`2</xr-path>
+              <xr-xml-map>snmp_cfg:SecurityLevel</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <xr-default-set/>
+              <type>
+                <type-name>Snmp-security-model</type-name>
+              </type>
+            </security-level>
+            <basic-trap-types config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x1/&lt;snmp_cfg_DefaultUserCommunity_user_community&gt;`3</xr-path>
+              <xr-xml-map>snmp_cfg:BasicTrapTypes</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>Integer</xr-sch-type>
+              <xr-default-set/>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+              <default>0</default>
+            </basic-trap-types>
+            <advanced-trap-types1 config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x1/&lt;snmp_cfg_DefaultUserCommunity_user_community&gt;`4</xr-path>
+              <xr-xml-map>snmp_cfg:AdvancedTrapTypes1</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>Integer</xr-sch-type>
+              <xr-default-set/>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+              <default>0</default>
+            </advanced-trap-types1>
+            <advanced-trap-types2 config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-data-handler>preserve-pack</xr-data-handler>
+              <xr-is-packed/>
+              <xr-pack-format>%d%s%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/0x1/0x1/&lt;snmp_cfg_DefaultUserCommunity_user_community&gt;`5</xr-path>
+              <xr-xml-map>snmp_cfg:AdvancedTrapTypes2</xr-xml-map>
+              <xr-task>snmp</xr-task>
+              <xr-sch-type>Integer</xr-sch-type>
+              <xr-default-set/>
+              <type>
+                <type-name>uint32</type-name>
+              </type>
+              <default>0</default>
+            </advanced-trap-types2>
+          </default-user-community>
+        </default-user-communities>
+        <ip-address config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-pathformat>hex_padded_nozerox</xr-pathformat>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/snmp/host/&lt;snmp_cfg_TrapHost_address&gt;/</xr-path>
+          <xr-xml-map>snmp_cfg:IPAddress</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>IPAddress</xr-sch-type>
+          <xr-sch-arg-name>&lt;snmp_cfg_TrapHost_address&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>inet:ip-address-no-zone</type-name>
+          </type>
+        </ip-address>
+      </trap-host>
+    </trap-hosts>
+    <contexts config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/context/</xr-path>
+      <xr-xml-map>snmp_cfg:ContextTable</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <context config="true" key="context-name" node="list">
+        <xr-path>/cfg/gl/snmp/context/&lt;snmp_cfg_Context_context&gt;</xr-path>
+        <xr-xml-map>snmp_cfg:Context</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <context-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-create-item-relative-path/>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/snmp/context/&lt;snmp_cfg_Context_context&gt;</xr-path>
+          <xr-xml-map>snmp_cfg:ContextName</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;snmp_cfg_Context_context&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </context-name>
+      </context>
+    </contexts>
+    <context-mappings config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/ctxmapping/</xr-path>
+      <xr-xml-map>snmp_cfg:ContextMappingTable</xr-xml-map>
+      <xr-task>snmp</xr-task>
+      <context-mapping config="true" key="context-mapping-name" node="list">
+        <xr-path>/cfg/gl/snmp/ctxmapping/&lt;snmp_cfg_ContextMapping_context&gt;</xr-path>
+        <xr-xml-map>snmp_cfg:ContextMapping</xr-xml-map>
+        <xr-task>snmp</xr-task>
+        <xr-pack-format>%d%s%s%s</xr-pack-format>
+        <context-mapping-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%s%s%s</xr-pack-format>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/snmp/ctxmapping/&lt;snmp_cfg_ContextMapping_context&gt;</xr-path>
+          <xr-xml-map>snmp_cfg:ContextMappingName</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <xr-sch-arg-name>&lt;snmp_cfg_ContextMapping_context&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </context-mapping-name>
+        <context config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%s%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/ctxmapping/&lt;snmp_cfg_ContextMapping_context&gt;`0</xr-path>
+          <xr-xml-map>snmp_cfg:Context</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <type>
+            <type-name>Snmp-context</type-name>
+          </type>
+        </context>
+        <instance-name config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%s%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/ctxmapping/&lt;snmp_cfg_ContextMapping_context&gt;`1</xr-path>
+          <xr-xml-map>snmp_cfg:InstanceName</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </instance-name>
+        <vrf-name config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%s%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/ctxmapping/&lt;snmp_cfg_ContextMapping_context&gt;`2</xr-path>
+          <xr-xml-map>snmp_cfg:VRFName</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>VRF_Name</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </vrf-name>
+        <topology-name config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-data-handler>preserve-pack</xr-data-handler>
+          <xr-is-packed/>
+          <xr-pack-format>%d%s%s%s</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/snmp/ctxmapping/&lt;snmp_cfg_ContextMapping_context&gt;`3</xr-path>
+          <xr-xml-map>snmp_cfg:TopologyName</xr-xml-map>
+          <xr-task>snmp</xr-task>
+          <xr-sch-type>String</xr-sch-type>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </topology-name>
+      </context-mapping>
+    </context-mappings>
+  </snmp>
+  <mib config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/mibs/</xr-path>
+    <xr-xml-map>snmp_cfg:MIB</xr-xml-map>
+    <xr-task>snmp</xr-task>
+    <xr-scope>exported</xr-scope>
+  </mib>
+</Cisco-IOS-XR-snmp-agent-cfg>

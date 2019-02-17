@@ -1,0 +1,1817 @@
+<?xml version="1.0"?>
+<openconfig-if-ip ns="http://openconfig.net/yang/interfaces/ip" oc-ver="1.0.2" revision="2016-05-26">
+  <files>
+    <file revision="2016-05-26" submodule="false">openconfig-if-ip.yang</file>
+  </files>
+  <prefix>oc-ip</prefix>
+  <organization>OpenConfig working group</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="oc-if">openconfig-interfaces</import>
+  <import prefix="oc-vlan">openconfig-vlan</import>
+  <import prefix="yang">ietf-yang-types</import>
+  <import prefix="oc-ext">openconfig-extensions</import>
+  <typedef name="ip-address-origin">
+    <type node="enumeration">
+      <enum>OTHER</enum>
+      <enum>STATIC</enum>
+      <enum>DHCP</enum>
+      <enum>LINK_LAYER</enum>
+      <enum>RANDOM</enum>
+    </type>
+  </typedef>
+  <typedef name="neighbor-origin">
+    <type node="enumeration">
+      <enum>OTHER</enum>
+      <enum>STATIC</enum>
+      <enum>DYNAMIC</enum>
+    </type>
+  </typedef>
+  <augment path="/oc-if:interfaces/oc-if:interface/oc-if:subinterfaces/oc-if:subinterface">
+    <ipv4 config="true" is-key="false" node="container" presence="false">
+      <addresses config="true" is-key="false" node="container" presence="false">
+        <address config="true" key="ip" node="list">
+          <ip config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </ip>
+          <config config="true" is-key="false" node="container" presence="false">
+            <ip config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </ip>
+            <prefix-length config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type range="0..32">
+                <type-name>uint8</type-name>
+              </type>
+            </prefix-length>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <ip config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </ip>
+            <prefix-length config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type range="0..32">
+                <type-name>uint8</type-name>
+              </type>
+            </prefix-length>
+            <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>ip-address-origin</type-name>
+              </type>
+            </origin>
+          </state>
+          <vrrp config="true" is-key="false" node="container" presence="false">
+            <vrrp-group config="true" key="virtual-router-id" node="list">
+              <virtual-router-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <type>
+                  <type-name>leafref</type-name>
+                </type>
+              </virtual-router-id>
+              <config config="true" is-key="false" node="container" presence="false">
+                <virtual-router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..255">
+                    <type-name>uint8</type-name>
+                  </type>
+                </virtual-router-id>
+                <virtual-address config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                  <type>
+                    <type-name>inet:ip-address</type-name>
+                  </type>
+                </virtual-address>
+                <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..254">
+                    <type-name>uint8</type-name>
+                  </type>
+                  <default>100</default>
+                </priority>
+                <preempt config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>true</default>
+                </preempt>
+                <preempt-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="0..3600">
+                    <type-name>uint16</type-name>
+                  </type>
+                  <default>0</default>
+                </preempt-delay>
+                <accept-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </accept-mode>
+                <advertisement-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..4095">
+                    <type-name>uint16</type-name>
+                  </type>
+                  <default>100</default>
+                </advertisement-interval>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <virtual-router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..255">
+                    <type-name>uint8</type-name>
+                  </type>
+                </virtual-router-id>
+                <virtual-address config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                  <type>
+                    <type-name>inet:ip-address</type-name>
+                  </type>
+                </virtual-address>
+                <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..254">
+                    <type-name>uint8</type-name>
+                  </type>
+                  <default>100</default>
+                </priority>
+                <preempt config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>true</default>
+                </preempt>
+                <preempt-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="0..3600">
+                    <type-name>uint16</type-name>
+                  </type>
+                  <default>0</default>
+                </preempt-delay>
+                <accept-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </accept-mode>
+                <advertisement-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..4095">
+                    <type-name>uint16</type-name>
+                  </type>
+                  <default>100</default>
+                </advertisement-interval>
+                <current-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </current-priority>
+              </state>
+              <interface-tracking config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <track-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>leafref</type-name>
+                    </type>
+                  </track-interface>
+                  <priority-decrement config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type range="0..254">
+                      <type-name>uint8</type-name>
+                    </type>
+                    <default>0</default>
+                  </priority-decrement>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <track-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>leafref</type-name>
+                    </type>
+                  </track-interface>
+                  <priority-decrement config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type range="0..254">
+                      <type-name>uint8</type-name>
+                    </type>
+                    <default>0</default>
+                  </priority-decrement>
+                </state>
+              </interface-tracking>
+            </vrrp-group>
+          </vrrp>
+        </address>
+      </addresses>
+      <neighbors config="true" is-key="false" node="container" presence="false">
+        <neighbor config="true" key="ip" node="list">
+          <ip config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </ip>
+          <config config="true" is-key="false" node="container" presence="false">
+            <ip config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </ip>
+            <link-layer-address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>yang:phys-address</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </link-layer-address>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <ip config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </ip>
+            <link-layer-address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>yang:phys-address</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </link-layer-address>
+            <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>neighbor-origin</type-name>
+              </type>
+            </origin>
+          </state>
+        </neighbor>
+      </neighbors>
+      <config config="true" is-key="false" node="container" presence="false">
+        <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+          <default>true</default>
+        </enabled>
+        <mtu config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type range="68..max">
+            <type-name>uint16</type-name>
+          </type>
+        </mtu>
+      </config>
+      <state config="true" is-key="false" node="container" presence="false">
+        <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+          <default>true</default>
+        </enabled>
+        <mtu config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type range="68..max">
+            <type-name>uint16</type-name>
+          </type>
+        </mtu>
+      </state>
+      <unnumbered config="true" is-key="false" node="container" presence="false">
+        <config config="true" is-key="false" node="container" presence="false">
+          <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </enabled>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </enabled>
+        </state>
+        <interface-ref config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </interface>
+            <subinterface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </subinterface>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </interface>
+            <subinterface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </subinterface>
+          </state>
+        </interface-ref>
+      </unnumbered>
+    </ipv4>
+  </augment>
+  <augment path="/oc-if:interfaces/oc-if:interface/oc-if:subinterfaces/oc-if:subinterface">
+    <ipv6 config="true" is-key="false" node="container" presence="false">
+      <addresses config="true" is-key="false" node="container" presence="false">
+        <address config="true" key="ip" node="list">
+          <ip config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </ip>
+          <config config="true" is-key="false" node="container" presence="false">
+            <ip config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv6-address-no-zone</type-name>
+              </type>
+            </ip>
+            <prefix-length config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type range="0..128">
+                <type-name>uint8</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </prefix-length>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <ip config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv6-address-no-zone</type-name>
+              </type>
+            </ip>
+            <prefix-length config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type range="0..128">
+                <type-name>uint8</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </prefix-length>
+            <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>ip-address-origin</type-name>
+              </type>
+            </origin>
+            <status config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type node="enumeration">
+                <enum>PREFERRED</enum>
+                <enum>DEPRECATED</enum>
+                <enum>INVALID</enum>
+                <enum>INACCESSIBLE</enum>
+                <enum>UNKNOWN</enum>
+                <enum>TENTATIVE</enum>
+                <enum>DUPLICATE</enum>
+                <enum>OPTIMISTIC</enum>
+              </type>
+            </status>
+          </state>
+          <vrrp config="true" is-key="false" node="container" presence="false">
+            <vrrp-group config="true" key="virtual-router-id" node="list">
+              <virtual-router-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <type>
+                  <type-name>leafref</type-name>
+                </type>
+              </virtual-router-id>
+              <config config="true" is-key="false" node="container" presence="false">
+                <virtual-router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..255">
+                    <type-name>uint8</type-name>
+                  </type>
+                </virtual-router-id>
+                <virtual-address config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                  <type>
+                    <type-name>inet:ip-address</type-name>
+                  </type>
+                </virtual-address>
+                <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..254">
+                    <type-name>uint8</type-name>
+                  </type>
+                  <default>100</default>
+                </priority>
+                <preempt config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>true</default>
+                </preempt>
+                <preempt-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="0..3600">
+                    <type-name>uint16</type-name>
+                  </type>
+                  <default>0</default>
+                </preempt-delay>
+                <accept-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </accept-mode>
+                <advertisement-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..4095">
+                    <type-name>uint16</type-name>
+                  </type>
+                  <default>100</default>
+                </advertisement-interval>
+                <virtual-link-local config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>inet:ip-address</type-name>
+                  </type>
+                </virtual-link-local>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <virtual-router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..255">
+                    <type-name>uint8</type-name>
+                  </type>
+                </virtual-router-id>
+                <virtual-address config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                  <type>
+                    <type-name>inet:ip-address</type-name>
+                  </type>
+                </virtual-address>
+                <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..254">
+                    <type-name>uint8</type-name>
+                  </type>
+                  <default>100</default>
+                </priority>
+                <preempt config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>true</default>
+                </preempt>
+                <preempt-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="0..3600">
+                    <type-name>uint16</type-name>
+                  </type>
+                  <default>0</default>
+                </preempt-delay>
+                <accept-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </accept-mode>
+                <advertisement-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..4095">
+                    <type-name>uint16</type-name>
+                  </type>
+                  <default>100</default>
+                </advertisement-interval>
+                <current-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </current-priority>
+                <virtual-link-local config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>inet:ip-address</type-name>
+                  </type>
+                </virtual-link-local>
+              </state>
+              <interface-tracking config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <track-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>leafref</type-name>
+                    </type>
+                  </track-interface>
+                  <priority-decrement config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type range="0..254">
+                      <type-name>uint8</type-name>
+                    </type>
+                    <default>0</default>
+                  </priority-decrement>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <track-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>leafref</type-name>
+                    </type>
+                  </track-interface>
+                  <priority-decrement config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type range="0..254">
+                      <type-name>uint8</type-name>
+                    </type>
+                    <default>0</default>
+                  </priority-decrement>
+                </state>
+              </interface-tracking>
+            </vrrp-group>
+          </vrrp>
+        </address>
+      </addresses>
+      <neighbors config="true" is-key="false" node="container" presence="false">
+        <neighbor config="true" key="ip" node="list">
+          <ip config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </ip>
+          <config config="true" is-key="false" node="container" presence="false">
+            <ip config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv6-address-no-zone</type-name>
+              </type>
+            </ip>
+            <link-layer-address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>yang:phys-address</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </link-layer-address>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <ip config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv6-address-no-zone</type-name>
+              </type>
+            </ip>
+            <link-layer-address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>yang:phys-address</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </link-layer-address>
+            <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>neighbor-origin</type-name>
+              </type>
+            </origin>
+            <is-router config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </is-router>
+            <neighbor-state config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type node="enumeration">
+                <enum>INCOMPLETE</enum>
+                <enum>REACHABLE</enum>
+                <enum>STALE</enum>
+                <enum>DELAY</enum>
+                <enum>PROBE</enum>
+              </type>
+            </neighbor-state>
+          </state>
+        </neighbor>
+      </neighbors>
+      <config config="true" is-key="false" node="container" presence="false">
+        <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+          <default>true</default>
+        </enabled>
+        <mtu config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type range="1280..max">
+            <type-name>uint32</type-name>
+          </type>
+        </mtu>
+        <dup-addr-detect-transmits config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+          <default>1</default>
+        </dup-addr-detect-transmits>
+      </config>
+      <state config="true" is-key="false" node="container" presence="false">
+        <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+          <default>true</default>
+        </enabled>
+        <mtu config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type range="1280..max">
+            <type-name>uint32</type-name>
+          </type>
+        </mtu>
+        <dup-addr-detect-transmits config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+          <default>1</default>
+        </dup-addr-detect-transmits>
+      </state>
+      <unnumbered config="true" is-key="false" node="container" presence="false">
+        <config config="true" is-key="false" node="container" presence="false">
+          <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </enabled>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </enabled>
+        </state>
+        <interface-ref config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </interface>
+            <subinterface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </subinterface>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </interface>
+            <subinterface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </subinterface>
+          </state>
+        </interface-ref>
+      </unnumbered>
+    </ipv6>
+  </augment>
+  <augment path="/oc-if:interfaces/oc-if:interface/oc-if:subinterfaces/oc-if:subinterface/oc-ip:ipv4/oc-ip:addresses/oc-ip:address">
+    <vrrp config="true" is-key="false" node="container" presence="false">
+      <vrrp-group config="true" key="virtual-router-id" node="list">
+        <virtual-router-id config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <type>
+            <type-name>leafref</type-name>
+          </type>
+        </virtual-router-id>
+        <config config="true" is-key="false" node="container" presence="false">
+          <virtual-router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..255">
+              <type-name>uint8</type-name>
+            </type>
+          </virtual-router-id>
+          <virtual-address config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </virtual-address>
+          <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..254">
+              <type-name>uint8</type-name>
+            </type>
+            <default>100</default>
+          </priority>
+          <preempt config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>true</default>
+          </preempt>
+          <preempt-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="0..3600">
+              <type-name>uint16</type-name>
+            </type>
+            <default>0</default>
+          </preempt-delay>
+          <accept-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </accept-mode>
+          <advertisement-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..4095">
+              <type-name>uint16</type-name>
+            </type>
+            <default>100</default>
+          </advertisement-interval>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <virtual-router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..255">
+              <type-name>uint8</type-name>
+            </type>
+          </virtual-router-id>
+          <virtual-address config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </virtual-address>
+          <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..254">
+              <type-name>uint8</type-name>
+            </type>
+            <default>100</default>
+          </priority>
+          <preempt config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>true</default>
+          </preempt>
+          <preempt-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="0..3600">
+              <type-name>uint16</type-name>
+            </type>
+            <default>0</default>
+          </preempt-delay>
+          <accept-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </accept-mode>
+          <advertisement-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..4095">
+              <type-name>uint16</type-name>
+            </type>
+            <default>100</default>
+          </advertisement-interval>
+          <current-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </current-priority>
+        </state>
+        <interface-tracking config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <track-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </track-interface>
+            <priority-decrement config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type range="0..254">
+                <type-name>uint8</type-name>
+              </type>
+              <default>0</default>
+            </priority-decrement>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <track-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </track-interface>
+            <priority-decrement config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type range="0..254">
+                <type-name>uint8</type-name>
+              </type>
+              <default>0</default>
+            </priority-decrement>
+          </state>
+        </interface-tracking>
+      </vrrp-group>
+    </vrrp>
+  </augment>
+  <augment path="/oc-if:interfaces/oc-if:interface/oc-if:subinterfaces/oc-if:subinterface/oc-ip:ipv6/oc-ip:addresses/oc-ip:address">
+    <vrrp config="true" is-key="false" node="container" presence="false">
+      <vrrp-group config="true" key="virtual-router-id" node="list">
+        <virtual-router-id config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <type>
+            <type-name>leafref</type-name>
+          </type>
+        </virtual-router-id>
+        <config config="true" is-key="false" node="container" presence="false">
+          <virtual-router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..255">
+              <type-name>uint8</type-name>
+            </type>
+          </virtual-router-id>
+          <virtual-address config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </virtual-address>
+          <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..254">
+              <type-name>uint8</type-name>
+            </type>
+            <default>100</default>
+          </priority>
+          <preempt config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>true</default>
+          </preempt>
+          <preempt-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="0..3600">
+              <type-name>uint16</type-name>
+            </type>
+            <default>0</default>
+          </preempt-delay>
+          <accept-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </accept-mode>
+          <advertisement-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..4095">
+              <type-name>uint16</type-name>
+            </type>
+            <default>100</default>
+          </advertisement-interval>
+          <virtual-link-local config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </virtual-link-local>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <virtual-router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..255">
+              <type-name>uint8</type-name>
+            </type>
+          </virtual-router-id>
+          <virtual-address config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </virtual-address>
+          <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..254">
+              <type-name>uint8</type-name>
+            </type>
+            <default>100</default>
+          </priority>
+          <preempt config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>true</default>
+          </preempt>
+          <preempt-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="0..3600">
+              <type-name>uint16</type-name>
+            </type>
+            <default>0</default>
+          </preempt-delay>
+          <accept-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </accept-mode>
+          <advertisement-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..4095">
+              <type-name>uint16</type-name>
+            </type>
+            <default>100</default>
+          </advertisement-interval>
+          <current-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </current-priority>
+          <virtual-link-local config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </virtual-link-local>
+        </state>
+        <interface-tracking config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <track-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </track-interface>
+            <priority-decrement config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type range="0..254">
+                <type-name>uint8</type-name>
+              </type>
+              <default>0</default>
+            </priority-decrement>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <track-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </track-interface>
+            <priority-decrement config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type range="0..254">
+                <type-name>uint8</type-name>
+              </type>
+              <default>0</default>
+            </priority-decrement>
+          </state>
+        </interface-tracking>
+      </vrrp-group>
+    </vrrp>
+  </augment>
+  <augment path="/oc-if:interfaces/oc-if:interface/oc-if:subinterfaces/oc-if:subinterface/oc-ip:ipv6/oc-ip:addresses/oc-ip:address/vrrp/vrrp-group/config">
+    <virtual-link-local config="true" is-key="false" is-yang-key="false" node="leaf">
+      <type>
+        <type-name>inet:ip-address</type-name>
+      </type>
+    </virtual-link-local>
+  </augment>
+  <augment path="/oc-if:interfaces/oc-if:interface/oc-if:subinterfaces/oc-if:subinterface/oc-ip:ipv6/oc-ip:addresses/oc-ip:address/vrrp/vrrp-group/state">
+    <virtual-link-local config="true" is-key="false" is-yang-key="false" node="leaf">
+      <type>
+        <type-name>inet:ip-address</type-name>
+      </type>
+    </virtual-link-local>
+  </augment>
+  <augment path="/oc-if:interfaces/oc-if:interface/oc-vlan:routed-vlan">
+    <ipv4 config="true" is-key="false" node="container" presence="false">
+      <addresses config="true" is-key="false" node="container" presence="false">
+        <address config="true" key="ip" node="list">
+          <ip config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </ip>
+          <config config="true" is-key="false" node="container" presence="false">
+            <ip config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </ip>
+            <prefix-length config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type range="0..32">
+                <type-name>uint8</type-name>
+              </type>
+            </prefix-length>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <ip config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </ip>
+            <prefix-length config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type range="0..32">
+                <type-name>uint8</type-name>
+              </type>
+            </prefix-length>
+            <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>ip-address-origin</type-name>
+              </type>
+            </origin>
+          </state>
+          <vrrp config="true" is-key="false" node="container" presence="false">
+            <vrrp-group config="true" key="virtual-router-id" node="list">
+              <virtual-router-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <type>
+                  <type-name>leafref</type-name>
+                </type>
+              </virtual-router-id>
+              <config config="true" is-key="false" node="container" presence="false">
+                <virtual-router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..255">
+                    <type-name>uint8</type-name>
+                  </type>
+                </virtual-router-id>
+                <virtual-address config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                  <type>
+                    <type-name>inet:ip-address</type-name>
+                  </type>
+                </virtual-address>
+                <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..254">
+                    <type-name>uint8</type-name>
+                  </type>
+                  <default>100</default>
+                </priority>
+                <preempt config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>true</default>
+                </preempt>
+                <preempt-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="0..3600">
+                    <type-name>uint16</type-name>
+                  </type>
+                  <default>0</default>
+                </preempt-delay>
+                <accept-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </accept-mode>
+                <advertisement-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..4095">
+                    <type-name>uint16</type-name>
+                  </type>
+                  <default>100</default>
+                </advertisement-interval>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <virtual-router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..255">
+                    <type-name>uint8</type-name>
+                  </type>
+                </virtual-router-id>
+                <virtual-address config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                  <type>
+                    <type-name>inet:ip-address</type-name>
+                  </type>
+                </virtual-address>
+                <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..254">
+                    <type-name>uint8</type-name>
+                  </type>
+                  <default>100</default>
+                </priority>
+                <preempt config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>true</default>
+                </preempt>
+                <preempt-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="0..3600">
+                    <type-name>uint16</type-name>
+                  </type>
+                  <default>0</default>
+                </preempt-delay>
+                <accept-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </accept-mode>
+                <advertisement-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..4095">
+                    <type-name>uint16</type-name>
+                  </type>
+                  <default>100</default>
+                </advertisement-interval>
+                <current-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </current-priority>
+              </state>
+              <interface-tracking config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <track-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>leafref</type-name>
+                    </type>
+                  </track-interface>
+                  <priority-decrement config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type range="0..254">
+                      <type-name>uint8</type-name>
+                    </type>
+                    <default>0</default>
+                  </priority-decrement>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <track-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>leafref</type-name>
+                    </type>
+                  </track-interface>
+                  <priority-decrement config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type range="0..254">
+                      <type-name>uint8</type-name>
+                    </type>
+                    <default>0</default>
+                  </priority-decrement>
+                </state>
+              </interface-tracking>
+            </vrrp-group>
+          </vrrp>
+        </address>
+      </addresses>
+      <neighbors config="true" is-key="false" node="container" presence="false">
+        <neighbor config="true" key="ip" node="list">
+          <ip config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </ip>
+          <config config="true" is-key="false" node="container" presence="false">
+            <ip config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </ip>
+            <link-layer-address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>yang:phys-address</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </link-layer-address>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <ip config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </ip>
+            <link-layer-address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>yang:phys-address</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </link-layer-address>
+            <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>neighbor-origin</type-name>
+              </type>
+            </origin>
+          </state>
+        </neighbor>
+      </neighbors>
+      <config config="true" is-key="false" node="container" presence="false">
+        <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+          <default>true</default>
+        </enabled>
+        <mtu config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type range="68..max">
+            <type-name>uint16</type-name>
+          </type>
+        </mtu>
+      </config>
+      <state config="true" is-key="false" node="container" presence="false">
+        <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+          <default>true</default>
+        </enabled>
+        <mtu config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type range="68..max">
+            <type-name>uint16</type-name>
+          </type>
+        </mtu>
+      </state>
+      <unnumbered config="true" is-key="false" node="container" presence="false">
+        <config config="true" is-key="false" node="container" presence="false">
+          <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </enabled>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </enabled>
+        </state>
+        <interface-ref config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </interface>
+            <subinterface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </subinterface>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </interface>
+            <subinterface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </subinterface>
+          </state>
+        </interface-ref>
+      </unnumbered>
+    </ipv4>
+  </augment>
+  <augment path="/oc-if:interfaces/oc-if:interface/oc-vlan:routed-vlan">
+    <ipv6 config="true" is-key="false" node="container" presence="false">
+      <addresses config="true" is-key="false" node="container" presence="false">
+        <address config="true" key="ip" node="list">
+          <ip config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </ip>
+          <config config="true" is-key="false" node="container" presence="false">
+            <ip config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv6-address-no-zone</type-name>
+              </type>
+            </ip>
+            <prefix-length config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type range="0..128">
+                <type-name>uint8</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </prefix-length>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <ip config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv6-address-no-zone</type-name>
+              </type>
+            </ip>
+            <prefix-length config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type range="0..128">
+                <type-name>uint8</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </prefix-length>
+            <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>ip-address-origin</type-name>
+              </type>
+            </origin>
+            <status config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type node="enumeration">
+                <enum>PREFERRED</enum>
+                <enum>DEPRECATED</enum>
+                <enum>INVALID</enum>
+                <enum>INACCESSIBLE</enum>
+                <enum>UNKNOWN</enum>
+                <enum>TENTATIVE</enum>
+                <enum>DUPLICATE</enum>
+                <enum>OPTIMISTIC</enum>
+              </type>
+            </status>
+          </state>
+          <vrrp config="true" is-key="false" node="container" presence="false">
+            <vrrp-group config="true" key="virtual-router-id" node="list">
+              <virtual-router-id config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <type>
+                  <type-name>leafref</type-name>
+                </type>
+              </virtual-router-id>
+              <config config="true" is-key="false" node="container" presence="false">
+                <virtual-router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..255">
+                    <type-name>uint8</type-name>
+                  </type>
+                </virtual-router-id>
+                <virtual-address config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                  <type>
+                    <type-name>inet:ip-address</type-name>
+                  </type>
+                </virtual-address>
+                <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..254">
+                    <type-name>uint8</type-name>
+                  </type>
+                  <default>100</default>
+                </priority>
+                <preempt config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>true</default>
+                </preempt>
+                <preempt-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="0..3600">
+                    <type-name>uint16</type-name>
+                  </type>
+                  <default>0</default>
+                </preempt-delay>
+                <accept-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </accept-mode>
+                <advertisement-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..4095">
+                    <type-name>uint16</type-name>
+                  </type>
+                  <default>100</default>
+                </advertisement-interval>
+                <virtual-link-local config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>inet:ip-address</type-name>
+                  </type>
+                </virtual-link-local>
+              </config>
+              <state config="true" is-key="false" node="container" presence="false">
+                <virtual-router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..255">
+                    <type-name>uint8</type-name>
+                  </type>
+                </virtual-router-id>
+                <virtual-address config="true" is-key="false" is-yang-key="false" node="leaf-list">
+                  <type>
+                    <type-name>inet:ip-address</type-name>
+                  </type>
+                </virtual-address>
+                <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..254">
+                    <type-name>uint8</type-name>
+                  </type>
+                  <default>100</default>
+                </priority>
+                <preempt config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>true</default>
+                </preempt>
+                <preempt-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="0..3600">
+                    <type-name>uint16</type-name>
+                  </type>
+                  <default>0</default>
+                </preempt-delay>
+                <accept-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>boolean</type-name>
+                  </type>
+                  <default>false</default>
+                </accept-mode>
+                <advertisement-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type range="1..4095">
+                    <type-name>uint16</type-name>
+                  </type>
+                  <default>100</default>
+                </advertisement-interval>
+                <current-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>uint8</type-name>
+                  </type>
+                </current-priority>
+                <virtual-link-local config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <type>
+                    <type-name>inet:ip-address</type-name>
+                  </type>
+                </virtual-link-local>
+              </state>
+              <interface-tracking config="true" is-key="false" node="container" presence="false">
+                <config config="true" is-key="false" node="container" presence="false">
+                  <track-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>leafref</type-name>
+                    </type>
+                  </track-interface>
+                  <priority-decrement config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type range="0..254">
+                      <type-name>uint8</type-name>
+                    </type>
+                    <default>0</default>
+                  </priority-decrement>
+                </config>
+                <state config="true" is-key="false" node="container" presence="false">
+                  <track-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type>
+                      <type-name>leafref</type-name>
+                    </type>
+                  </track-interface>
+                  <priority-decrement config="true" is-key="false" is-yang-key="false" node="leaf">
+                    <type range="0..254">
+                      <type-name>uint8</type-name>
+                    </type>
+                    <default>0</default>
+                  </priority-decrement>
+                </state>
+              </interface-tracking>
+            </vrrp-group>
+          </vrrp>
+        </address>
+      </addresses>
+      <neighbors config="true" is-key="false" node="container" presence="false">
+        <neighbor config="true" key="ip" node="list">
+          <ip config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <type>
+              <type-name>leafref</type-name>
+            </type>
+          </ip>
+          <config config="true" is-key="false" node="container" presence="false">
+            <ip config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv6-address-no-zone</type-name>
+              </type>
+            </ip>
+            <link-layer-address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>yang:phys-address</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </link-layer-address>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <ip config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>inet:ipv6-address-no-zone</type-name>
+              </type>
+            </ip>
+            <link-layer-address config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>yang:phys-address</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </link-layer-address>
+            <origin config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>neighbor-origin</type-name>
+              </type>
+            </origin>
+            <is-router config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </is-router>
+            <neighbor-state config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type node="enumeration">
+                <enum>INCOMPLETE</enum>
+                <enum>REACHABLE</enum>
+                <enum>STALE</enum>
+                <enum>DELAY</enum>
+                <enum>PROBE</enum>
+              </type>
+            </neighbor-state>
+          </state>
+        </neighbor>
+      </neighbors>
+      <config config="true" is-key="false" node="container" presence="false">
+        <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+          <default>true</default>
+        </enabled>
+        <mtu config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type range="1280..max">
+            <type-name>uint32</type-name>
+          </type>
+        </mtu>
+        <dup-addr-detect-transmits config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+          <default>1</default>
+        </dup-addr-detect-transmits>
+      </config>
+      <state config="true" is-key="false" node="container" presence="false">
+        <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+          <default>true</default>
+        </enabled>
+        <mtu config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type range="1280..max">
+            <type-name>uint32</type-name>
+          </type>
+        </mtu>
+        <dup-addr-detect-transmits config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+          <default>1</default>
+        </dup-addr-detect-transmits>
+      </state>
+      <unnumbered config="true" is-key="false" node="container" presence="false">
+        <config config="true" is-key="false" node="container" presence="false">
+          <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </enabled>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <enabled config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </enabled>
+        </state>
+        <interface-ref config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </interface>
+            <subinterface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </subinterface>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <interface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </interface>
+            <subinterface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </subinterface>
+          </state>
+        </interface-ref>
+      </unnumbered>
+    </ipv6>
+  </augment>
+  <augment path="/oc-if:interfaces/oc-if:interface/oc-vlan:routed-vlan/oc-ip:ipv4/oc-ip:addresses/oc-ip:address">
+    <vrrp config="true" is-key="false" node="container" presence="false">
+      <vrrp-group config="true" key="virtual-router-id" node="list">
+        <virtual-router-id config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <type>
+            <type-name>leafref</type-name>
+          </type>
+        </virtual-router-id>
+        <config config="true" is-key="false" node="container" presence="false">
+          <virtual-router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..255">
+              <type-name>uint8</type-name>
+            </type>
+          </virtual-router-id>
+          <virtual-address config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </virtual-address>
+          <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..254">
+              <type-name>uint8</type-name>
+            </type>
+            <default>100</default>
+          </priority>
+          <preempt config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>true</default>
+          </preempt>
+          <preempt-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="0..3600">
+              <type-name>uint16</type-name>
+            </type>
+            <default>0</default>
+          </preempt-delay>
+          <accept-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </accept-mode>
+          <advertisement-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..4095">
+              <type-name>uint16</type-name>
+            </type>
+            <default>100</default>
+          </advertisement-interval>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <virtual-router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..255">
+              <type-name>uint8</type-name>
+            </type>
+          </virtual-router-id>
+          <virtual-address config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </virtual-address>
+          <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..254">
+              <type-name>uint8</type-name>
+            </type>
+            <default>100</default>
+          </priority>
+          <preempt config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>true</default>
+          </preempt>
+          <preempt-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="0..3600">
+              <type-name>uint16</type-name>
+            </type>
+            <default>0</default>
+          </preempt-delay>
+          <accept-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </accept-mode>
+          <advertisement-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..4095">
+              <type-name>uint16</type-name>
+            </type>
+            <default>100</default>
+          </advertisement-interval>
+          <current-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </current-priority>
+        </state>
+        <interface-tracking config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <track-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </track-interface>
+            <priority-decrement config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type range="0..254">
+                <type-name>uint8</type-name>
+              </type>
+              <default>0</default>
+            </priority-decrement>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <track-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </track-interface>
+            <priority-decrement config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type range="0..254">
+                <type-name>uint8</type-name>
+              </type>
+              <default>0</default>
+            </priority-decrement>
+          </state>
+        </interface-tracking>
+      </vrrp-group>
+    </vrrp>
+  </augment>
+  <augment path="/oc-if:interfaces/oc-if:interface/oc-vlan:routed-vlan/oc-ip:ipv6/oc-ip:addresses/oc-ip:address">
+    <vrrp config="true" is-key="false" node="container" presence="false">
+      <vrrp-group config="true" key="virtual-router-id" node="list">
+        <virtual-router-id config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <type>
+            <type-name>leafref</type-name>
+          </type>
+        </virtual-router-id>
+        <config config="true" is-key="false" node="container" presence="false">
+          <virtual-router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..255">
+              <type-name>uint8</type-name>
+            </type>
+          </virtual-router-id>
+          <virtual-address config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </virtual-address>
+          <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..254">
+              <type-name>uint8</type-name>
+            </type>
+            <default>100</default>
+          </priority>
+          <preempt config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>true</default>
+          </preempt>
+          <preempt-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="0..3600">
+              <type-name>uint16</type-name>
+            </type>
+            <default>0</default>
+          </preempt-delay>
+          <accept-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </accept-mode>
+          <advertisement-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..4095">
+              <type-name>uint16</type-name>
+            </type>
+            <default>100</default>
+          </advertisement-interval>
+          <virtual-link-local config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </virtual-link-local>
+        </config>
+        <state config="true" is-key="false" node="container" presence="false">
+          <virtual-router-id config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..255">
+              <type-name>uint8</type-name>
+            </type>
+          </virtual-router-id>
+          <virtual-address config="true" is-key="false" is-yang-key="false" node="leaf-list">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </virtual-address>
+          <priority config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..254">
+              <type-name>uint8</type-name>
+            </type>
+            <default>100</default>
+          </priority>
+          <preempt config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>true</default>
+          </preempt>
+          <preempt-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="0..3600">
+              <type-name>uint16</type-name>
+            </type>
+            <default>0</default>
+          </preempt-delay>
+          <accept-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+            <default>false</default>
+          </accept-mode>
+          <advertisement-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type range="1..4095">
+              <type-name>uint16</type-name>
+            </type>
+            <default>100</default>
+          </advertisement-interval>
+          <current-priority config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>uint8</type-name>
+            </type>
+          </current-priority>
+          <virtual-link-local config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>inet:ip-address</type-name>
+            </type>
+          </virtual-link-local>
+        </state>
+        <interface-tracking config="true" is-key="false" node="container" presence="false">
+          <config config="true" is-key="false" node="container" presence="false">
+            <track-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </track-interface>
+            <priority-decrement config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type range="0..254">
+                <type-name>uint8</type-name>
+              </type>
+              <default>0</default>
+            </priority-decrement>
+          </config>
+          <state config="true" is-key="false" node="container" presence="false">
+            <track-interface config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type>
+                <type-name>leafref</type-name>
+              </type>
+            </track-interface>
+            <priority-decrement config="true" is-key="false" is-yang-key="false" node="leaf">
+              <type range="0..254">
+                <type-name>uint8</type-name>
+              </type>
+              <default>0</default>
+            </priority-decrement>
+          </state>
+        </interface-tracking>
+      </vrrp-group>
+    </vrrp>
+  </augment>
+  <augment path="/oc-if:interfaces/oc-if:interface/oc-vlan:routed-vlan/oc-ip:ipv6/oc-ip:addresses/oc-ip:address/vrrp/vrrp-group/config">
+    <virtual-link-local config="true" is-key="false" is-yang-key="false" node="leaf">
+      <type>
+        <type-name>inet:ip-address</type-name>
+      </type>
+    </virtual-link-local>
+  </augment>
+  <augment path="/oc-if:interfaces/oc-if:interface/oc-vlan:routed-vlan/oc-ip:ipv6/oc-ip:addresses/oc-ip:address/vrrp/vrrp-group/state">
+    <virtual-link-local config="true" is-key="false" is-yang-key="false" node="leaf">
+      <type>
+        <type-name>inet:ip-address</type-name>
+      </type>
+    </virtual-link-local>
+  </augment>
+</openconfig-if-ip>

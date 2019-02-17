@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<openconfig-if-ethernet ns="http://openconfig.net/yang/interfaces/ethernet" oc-ver="1.0.2" revision="2016-05-26">
+  <files>
+    <file revision="2016-05-26" submodule="false">openconfig-if-ethernet.yang</file>
+  </files>
+  <prefix>oc-eth</prefix>
+  <organization>OpenConfig working group</organization>
+  <import prefix="oc-if">openconfig-interfaces</import>
+  <import prefix="ift">iana-if-type</import>
+  <import prefix="yang">ietf-yang-types</import>
+  <import prefix="oc-ext">openconfig-extensions</import>
+  <identity name="ETHERNET_SPEED"/>
+  <identity name="SPEED_10MB">
+    <base>ETHERNET_SPEED</base>
+  </identity>
+  <identity name="SPEED_100MB">
+    <base>ETHERNET_SPEED</base>
+  </identity>
+  <identity name="SPEED_1GB">
+    <base>ETHERNET_SPEED</base>
+  </identity>
+  <identity name="SPEED_10GB">
+    <base>ETHERNET_SPEED</base>
+  </identity>
+  <identity name="SPEED_25GB">
+    <base>ETHERNET_SPEED</base>
+  </identity>
+  <identity name="SPEED_40GB">
+    <base>ETHERNET_SPEED</base>
+  </identity>
+  <identity name="SPEED_50GB">
+    <base>ETHERNET_SPEED</base>
+  </identity>
+  <identity name="SPEED_100GB">
+    <base>ETHERNET_SPEED</base>
+  </identity>
+  <identity name="SPEED_UNKNOWN">
+    <base>ETHERNET_SPEED</base>
+  </identity>
+  <augment path="/oc-if:interfaces/oc-if:interface">
+    <when>oc-if:state/oc-if:type = 'ift:ethernetCsmacd'</when>
+    <ethernet config="true" is-key="false" node="container" presence="false">
+      <config config="true" is-key="false" node="container" presence="false">
+        <mac-address config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:mac-address</type-name>
+          </type>
+        </mac-address>
+        <auto-negotiate config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+          <default>true</default>
+        </auto-negotiate>
+        <duplex-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="enumeration">
+            <enum>FULL</enum>
+            <enum>HALF</enum>
+          </type>
+        </duplex-mode>
+        <port-speed config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="identityref">
+            <base>ETHERNET_SPEED</base>
+          </type>
+        </port-speed>
+        <enable-flow-control config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+          <default>false</default>
+        </enable-flow-control>
+      </config>
+      <state config="true" is-key="false" node="container" presence="false">
+        <mac-address config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:mac-address</type-name>
+          </type>
+        </mac-address>
+        <auto-negotiate config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+          <default>true</default>
+        </auto-negotiate>
+        <duplex-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="enumeration">
+            <enum>FULL</enum>
+            <enum>HALF</enum>
+          </type>
+        </duplex-mode>
+        <port-speed config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type node="identityref">
+            <base>ETHERNET_SPEED</base>
+          </type>
+        </port-speed>
+        <enable-flow-control config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+          <default>false</default>
+        </enable-flow-control>
+        <hw-mac-address config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>yang:mac-address</type-name>
+          </type>
+        </hw-mac-address>
+        <effective-speed config="true" is-key="false" is-yang-key="false" node="leaf">
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </effective-speed>
+        <counters config="true" is-key="false" node="container" presence="false">
+          <in-mac-control-frames config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>yang:counter64</type-name>
+            </type>
+          </in-mac-control-frames>
+          <in-mac-pause-frames config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>yang:counter64</type-name>
+            </type>
+          </in-mac-pause-frames>
+          <in-oversize-frames config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>yang:counter64</type-name>
+            </type>
+          </in-oversize-frames>
+          <in-jabber-frames config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>yang:counter64</type-name>
+            </type>
+          </in-jabber-frames>
+          <in-fragment-frames config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>yang:counter64</type-name>
+            </type>
+          </in-fragment-frames>
+          <in-8021q-frames config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>yang:counter64</type-name>
+            </type>
+          </in-8021q-frames>
+          <in-crc-errors config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>yang:counter64</type-name>
+            </type>
+          </in-crc-errors>
+          <out-mac-control-frames config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>yang:counter64</type-name>
+            </type>
+          </out-mac-control-frames>
+          <out-mac-pause-frames config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>yang:counter64</type-name>
+            </type>
+          </out-mac-pause-frames>
+          <out-8021q-frames config="true" is-key="false" is-yang-key="false" node="leaf">
+            <type>
+              <type-name>yang:counter64</type-name>
+            </type>
+          </out-8021q-frames>
+        </counters>
+      </state>
+    </ethernet>
+  </augment>
+</openconfig-if-ethernet>

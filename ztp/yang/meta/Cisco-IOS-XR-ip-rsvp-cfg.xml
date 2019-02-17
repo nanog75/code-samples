@@ -1,0 +1,966 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ip-rsvp-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ip-rsvp-cfg" revision="2017-05-01">
+  <files>
+    <file revision="2017-05-01" submodule="false">Cisco-IOS-XR-ip-rsvp-cfg.yang</file>
+  </files>
+  <prefix>ip-rsvp-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <import prefix="a1">Cisco-IOS-XR-snmp-agent-cfg</import>
+  <typedef name="Rsvp-rdm">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">rdm</enum>
+      <enum value="2">not-specified</enum>
+      <enum value="3">use-default-bandwidth</enum>
+    </type>
+  </typedef>
+  <typedef name="Rsvp-bc0">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">bc0</enum>
+      <enum value="2">global-pool</enum>
+      <enum value="3">not-specified</enum>
+    </type>
+  </typedef>
+  <typedef name="Rsvp-bw-cfg">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="0">absolute</enum>
+      <enum value="1">percentage</enum>
+    </type>
+  </typedef>
+  <typedef name="Rsvp-bc1">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">bc1</enum>
+      <enum value="2">sub-pool</enum>
+    </type>
+  </typedef>
+  <augment path="/a1:snmp/a1:notification">
+    <rsvp config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/snmp/enable/traps/rsvpmib/</xr-path>
+      <xr-xml-map>rsvpmib_cfg:RSVP</xr-xml-map>
+      <xr-task>ouni &amp; mpls-te</xr-task>
+      <lost-flow config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/enable/traps/rsvpmib/lost-flow</xr-path>
+        <xr-xml-map>rsvpmib_cfg:LostFlow</xr-xml-map>
+        <xr-task>ouni &amp; mpls-te</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </lost-flow>
+      <new-flow config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/enable/traps/rsvpmib/new-flow</xr-path>
+        <xr-xml-map>rsvpmib_cfg:NewFlow</xr-xml-map>
+        <xr-task>ouni &amp; mpls-te</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </new-flow>
+      <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/snmp/enable/traps/rsvpmib/all</xr-path>
+        <xr-xml-map>rsvpmib_cfg:Enable</xr-xml-map>
+        <xr-task>ouni &amp; mpls-te</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </enable>
+    </rsvp>
+  </augment>
+  <rsvp config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/ip_rsvp/core/</xr-path>
+    <xr-xml-map>ip_rsvp_cfg:RSVP</xr-xml-map>
+    <xr-task>ouni &amp; mpls-te</xr-task>
+    <neighbors config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip_rsvp/core/neighbor/address/</xr-path>
+      <xr-xml-map>ip_rsvp_cfg:NeighborTable</xr-xml-map>
+      <xr-task>ouni &amp; mpls-te</xr-task>
+      <neighbor config="true" key="neighbor" node="list">
+        <xr-path>/cfg/gl/ip_rsvp/core/neighbor/address/&lt;ip_rsvp_cfg_Neighbor_neighbor&gt;/</xr-path>
+        <xr-xml-map>ip_rsvp_cfg:Neighbor</xr-xml-map>
+        <xr-task>ouni &amp; mpls-te</xr-task>
+        <neighbor config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-create-item-relative-path>aza</xr-create-item-relative-path>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/ip_rsvp/core/neighbor/address/&lt;ip_rsvp_cfg_Neighbor_neighbor&gt;/</xr-path>
+          <xr-xml-map>ip_rsvp_cfg:Neighbor</xr-xml-map>
+          <xr-task>ouni &amp; mpls-te</xr-task>
+          <xr-sch-type>IPV4AddressString</xr-sch-type>
+          <xr-sch-arg-name>&lt;ip_rsvp_cfg_Neighbor_neighbor&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>inet:ipv4-address-no-zone</type-name>
+          </type>
+        </neighbor>
+        <authentication config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/ip_rsvp/core/neighbor/address/&lt;ip_rsvp_cfg_Neighbor_neighbor&gt;/a/authentication/</xr-path>
+          <xr-xml-map>ip_rsvp_cfg:Authentication</xr-xml-map>
+          <xr-task>ouni &amp; mpls-te</xr-task>
+          <life-time config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ip_rsvp/core/neighbor/address/&lt;ip_rsvp_cfg_Neighbor_neighbor&gt;/a/authentication/life-time</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:LifeTime</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="30..86400">
+              <type-name>uint32</type-name>
+            </type>
+          </life-time>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ip_rsvp/core/neighbor/address/&lt;ip_rsvp_cfg_Neighbor_neighbor&gt;/a/authentication/enable</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:Enable</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <xr-sch-type>Boolean</xr-sch-type>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </enable>
+          <window-size config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ip_rsvp/core/neighbor/address/&lt;ip_rsvp_cfg_Neighbor_neighbor&gt;/a/authentication/window-size</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:WindowSize</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1..64">
+              <type-name>uint32</type-name>
+            </type>
+          </window-size>
+          <key-chain config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/ip_rsvp/core/neighbor/address/&lt;ip_rsvp_cfg_Neighbor_neighbor&gt;/a/authentication/key-chain</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:KeyChain</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <xr-sch-type>BoundedString</xr-sch-type>
+            <type length="1..32">
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </key-chain>
+        </authentication>
+      </neighbor>
+    </neighbors>
+    <controllers config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip_rsvp/core/cntl/</xr-path>
+      <xr-xml-map>ip_rsvp_cfg:ControllerTable</xr-xml-map>
+      <xr-task>ouni &amp; mpls-te</xr-task>
+      <controller config="true" key="controller-name" node="list">
+        <xr-path>/cfg/gl/ip_rsvp/core/cntl/&lt;ip_rsvp_cfg_Controller_arg102&gt;/</xr-path>
+        <xr-xml-map>ip_rsvp_cfg:Controller</xr-xml-map>
+        <xr-task>ouni &amp; mpls-te</xr-task>
+        <cntl-signalling config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/ip_rsvp/core/cntl/&lt;ip_rsvp_cfg_Controller_arg102&gt;/sig/</xr-path>
+          <xr-xml-map>ip_rsvp_cfg:CNTLSignalling</xr-xml-map>
+          <xr-task>ouni &amp; mpls-te</xr-task>
+          <out-of-band config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/ip_rsvp/core/cntl/&lt;ip_rsvp_cfg_Controller_arg102&gt;/sig/out_of_band/</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:OutOfBand</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <missed-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/ip_rsvp/core/cntl/&lt;ip_rsvp_cfg_Controller_arg102&gt;/sig/out_of_band/refresh_missed_msgs</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:MissedMessages</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="1..110000">
+                <type-name>uint32</type-name>
+              </type>
+              <default>38000</default>
+            </missed-messages>
+            <refresh-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/ip_rsvp/core/cntl/&lt;ip_rsvp_cfg_Controller_arg102&gt;/sig/out_of_band/refresh_interval</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:RefreshInterval</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="180..86400">
+                <type-name>uint32</type-name>
+              </type>
+            </refresh-interval>
+          </out-of-band>
+        </cntl-signalling>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ip_rsvp/core/cntl/&lt;ip_rsvp_cfg_Controller_arg102&gt;/a</xr-path>
+          <xr-xml-map>ip_rsvp_cfg:Enable</xr-xml-map>
+          <xr-task>ouni &amp; mpls-te</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </enable>
+        <controller-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/ip_rsvp/core/cntl/&lt;ip_rsvp_cfg_Controller_arg102&gt;/</xr-path>
+          <xr-xml-map>ip_rsvp_cfg:ControllerName</xr-xml-map>
+          <xr-task>ouni &amp; mpls-te</xr-task>
+          <xr-sch-type>InterfaceForward</xr-sch-type>
+          <xr-sch-arg-name>&lt;ip_rsvp_cfg_Controller_arg102&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </controller-name>
+      </controller>
+    </controllers>
+    <global-logging config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip_rsvp/core/logging/</xr-path>
+      <xr-xml-map>ip_rsvp_cfg:GlobalLogging</xr-xml-map>
+      <xr-task>ouni &amp; mpls-te</xr-task>
+      <log-nsr-status config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/ip_rsvp/core/logging/nsr</xr-path>
+        <xr-xml-map>ip_rsvp_cfg:LogNSRStatus</xr-xml-map>
+        <xr-task>ouni &amp; mpls-te</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </log-nsr-status>
+      <log-issu-status config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/ip_rsvp/core/logging/issu</xr-path>
+        <xr-xml-map>ip_rsvp_cfg:LogISSUStatus</xr-xml-map>
+        <xr-task>ouni &amp; mpls-te</xr-task>
+        <xr-sch-type>Configured</xr-sch-type>
+        <type>
+          <type-name>empty</type-name>
+        </type>
+      </log-issu-status>
+    </global-logging>
+    <global-bandwidth config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip_rsvp/core/bw/</xr-path>
+      <xr-xml-map>ip_rsvp_cfg:GlobalBandwidth</xr-xml-map>
+      <xr-task>ouni &amp; mpls-te</xr-task>
+      <default-interface-percent config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/ip_rsvp/core/bw/def-gl-if-percent-bw/</xr-path>
+        <xr-xml-map>ip_rsvp_cfg:DefaultInterfacePercent</xr-xml-map>
+        <xr-task>ouni &amp; mpls-te</xr-task>
+        <xr-scope>exported</xr-scope>
+        <mam config="true" is-key="false" node="container" presence="false">
+          <xr-is-packed/>
+          <xr-path>/cfg/gl/ip_rsvp/core/bw/def-gl-if-percent-bw/mam`</xr-path>
+          <xr-xml-map>ip_rsvp_cfg:MAM</xr-xml-map>
+          <xr-task>ouni &amp; mpls-te</xr-task>
+          <xr-pack-format>%d%d%d</xr-pack-format>
+          <max-res-percent config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/ip_rsvp/core/bw/def-gl-if-percent-bw/mam`0</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:MaxResPercent</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..10000">
+              <type-name>uint32</type-name>
+            </type>
+          </max-res-percent>
+          <bc0-percent config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/ip_rsvp/core/bw/def-gl-if-percent-bw/mam`1</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:BC0Percent</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..10000">
+              <type-name>uint32</type-name>
+            </type>
+          </bc0-percent>
+          <bc1-percent config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/ip_rsvp/core/bw/def-gl-if-percent-bw/mam`2</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:BC1Percent</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..10000">
+              <type-name>uint32</type-name>
+            </type>
+          </bc1-percent>
+        </mam>
+        <rdm config="true" is-key="false" node="container" presence="false">
+          <xr-is-packed/>
+          <xr-path>/cfg/gl/ip_rsvp/core/bw/def-gl-if-percent-bw/rdm`</xr-path>
+          <xr-xml-map>ip_rsvp_cfg:RDM</xr-xml-map>
+          <xr-task>ouni &amp; mpls-te</xr-task>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <bc0-percent config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/ip_rsvp/core/bw/def-gl-if-percent-bw/rdm`0</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:BC0Percent</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..10000">
+              <type-name>uint32</type-name>
+            </type>
+          </bc0-percent>
+          <bc1-percent config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/ip_rsvp/core/bw/def-gl-if-percent-bw/rdm`1</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:BC1Percent</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..10000">
+              <type-name>uint32</type-name>
+            </type>
+          </bc1-percent>
+        </rdm>
+      </default-interface-percent>
+    </global-bandwidth>
+    <interfaces config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip_rsvp/core/if/</xr-path>
+      <xr-xml-map>ip_rsvp_cfg:InterfaceTable</xr-xml-map>
+      <xr-task>ouni &amp; mpls-te</xr-task>
+      <interface config="true" key="name" node="list">
+        <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/</xr-path>
+        <xr-xml-map>ip_rsvp_cfg:Interface</xr-xml-map>
+        <xr-task>ouni &amp; mpls-te</xr-task>
+        <if-signalling config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/sig/</xr-path>
+          <xr-xml-map>ip_rsvp_cfg:IfSignalling</xr-xml-map>
+          <xr-task>ouni &amp; mpls-te</xr-task>
+          <refresh-reduction config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/sig/refresh_reduction/</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:RefreshReduction</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <disable config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/sig/refresh_reduction/disable</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:Disable</xr-xml-map>
+              <xr-task>ouni &amp; mpls-te</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </disable>
+            <reliable-ack-max-size config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/sig/refresh_reduction/rel_ack_max_size</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:ReliableAckMaxSize</xr-xml-map>
+              <xr-task>ouni &amp; mpls-te</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="20..65000">
+                <type-name>uint32</type-name>
+              </type>
+              <default>4096</default>
+            </reliable-ack-max-size>
+            <reliable-ack-hold-time config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/sig/refresh_reduction/rel_ack_hold_time</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:ReliableAckHoldTime</xr-xml-map>
+              <xr-task>ouni &amp; mpls-te</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="100..5000">
+                <type-name>uint32</type-name>
+              </type>
+              <default>400</default>
+            </reliable-ack-hold-time>
+            <reliable-retransmit-time config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/sig/refresh_reduction/rel_retransmit_time</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:ReliableRetransmitTime</xr-xml-map>
+              <xr-task>ouni &amp; mpls-te</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="100..10000">
+                <type-name>uint32</type-name>
+              </type>
+              <default>2100</default>
+            </reliable-retransmit-time>
+            <reliable-s-refresh config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/sig/refresh_reduction/rel_srefresh</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:ReliableSRefresh</xr-xml-map>
+              <xr-task>ouni &amp; mpls-te</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </reliable-s-refresh>
+            <summary-max-size config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/sig/refresh_reduction/summary_max_size</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:SummaryMaxSize</xr-xml-map>
+              <xr-task>ouni &amp; mpls-te</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="20..65000">
+                <type-name>uint32</type-name>
+              </type>
+              <default>4096</default>
+            </summary-max-size>
+            <bundle-message-max-size config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/sig/refresh_reduction/bundle_max_size</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:BundleMessageMaxSize</xr-xml-map>
+              <xr-task>ouni &amp; mpls-te</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="512..65000">
+                <type-name>uint32</type-name>
+              </type>
+              <default>4096</default>
+            </bundle-message-max-size>
+          </refresh-reduction>
+          <interval-rate config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/sig/pacing_rate_i`</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:IntervalRate</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <messages-per-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/sig/pacing_rate_i`0</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:MessagesPerInterval</xr-xml-map>
+              <xr-task>ouni &amp; mpls-te</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="1..500">
+                <type-name>uint32</type-name>
+              </type>
+              <default>100</default>
+            </messages-per-interval>
+            <interval-size config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/sig/pacing_rate_i`1</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:IntervalSize</xr-xml-map>
+              <xr-task>ouni &amp; mpls-te</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="250..2000">
+                <type-name>uint32</type-name>
+              </type>
+              <default>1000</default>
+            </interval-size>
+          </interval-rate>
+          <dscp config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/sig/dscp</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:DSCP</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="0..63">
+              <type-name>uint32</type-name>
+            </type>
+          </dscp>
+          <missed-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/sig/refresh_missed_msgs</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:MissedMessages</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1..8">
+              <type-name>uint32</type-name>
+            </type>
+            <default>4</default>
+          </missed-messages>
+          <hello-graceful-restart-if-based config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/sig/hello_if_based</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:HelloGracefulRestartIfBased</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </hello-graceful-restart-if-based>
+          <pacing config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/sig/pacing_enable</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:Pacing</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </pacing>
+          <refresh-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/sig/refresh_interval</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:RefreshInterval</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="10..180">
+              <type-name>uint32</type-name>
+            </type>
+            <default>45</default>
+          </refresh-interval>
+          <out-of-band config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/sig/out_of_band/</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:OutOfBand</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <missed-messages config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/sig/out_of_band/refresh_missed_msgs</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:MissedMessages</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="1..110000">
+                <type-name>uint32</type-name>
+              </type>
+              <default>38000</default>
+            </missed-messages>
+            <refresh-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/sig/out_of_band/refresh_interval</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:RefreshInterval</xr-xml-map>
+              <xr-task>ouni</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="180..86400">
+                <type-name>uint32</type-name>
+              </type>
+            </refresh-interval>
+          </out-of-band>
+        </if-signalling>
+        <bandwidth config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/bw/</xr-path>
+          <xr-xml-map>ip_rsvp_cfg:Bandwidth</xr-xml-map>
+          <xr-task>ouni &amp; mpls-te</xr-task>
+          <mam config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/bw/mam`</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:MAM</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+            <max-resv-bandwidth config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/bw/mam`0</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:MaxResvBandwidth</xr-xml-map>
+              <xr-task>ouni &amp; mpls-te</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="0..4294967295">
+                <type-name>uint32</type-name>
+              </type>
+            </max-resv-bandwidth>
+            <max-resv-flow config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/bw/mam`1</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:MaxResvFlow</xr-xml-map>
+              <xr-task>ouni &amp; mpls-te</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="0..4294967295">
+                <type-name>uint32</type-name>
+              </type>
+            </max-resv-flow>
+            <bc0-bandwidth config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/bw/mam`2</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:BC0Bandwidth</xr-xml-map>
+              <xr-task>ouni &amp; mpls-te</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="0..4294967295">
+                <type-name>uint32</type-name>
+              </type>
+            </bc0-bandwidth>
+            <bc1-bandwidth config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/bw/mam`3</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:BC1Bandwidth</xr-xml-map>
+              <xr-task>ouni &amp; mpls-te</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="0..4294967295">
+                <type-name>uint32</type-name>
+              </type>
+            </bc1-bandwidth>
+            <bandwidth-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/bw/mam`4</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:BandwidthMode</xr-xml-map>
+              <xr-task>ouni &amp; mpls-te</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Rsvp-bw-cfg</type-name>
+              </type>
+            </bandwidth-mode>
+          </mam>
+          <rdm config="true" is-key="false" node="container" presence="false">
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/bw/rdm`</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:RDM</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <xr-pack-format>%d%d%d%d%d%d%d</xr-pack-format>
+            <max-resv-flow config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/bw/rdm`0</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:MaxResvFlow</xr-xml-map>
+              <xr-task>ouni &amp; mpls-te</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <when>../rdm-keyword = 'rdm' or ../rdm-keyword = 'not-specified'</when>
+              <type range="0..4294967295">
+                <type-name>uint32</type-name>
+              </type>
+            </max-resv-flow>
+            <bc0-bandwidth config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/bw/rdm`1</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:BC0Bandwidth</xr-xml-map>
+              <xr-task>ouni &amp; mpls-te</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <when>../rdm-keyword = 'rdm' or ../rdm-keyword = 'not-specified'</when>
+              <type range="0..4294967295">
+                <type-name>uint32</type-name>
+              </type>
+            </bc0-bandwidth>
+            <bc1-bandwidth config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/bw/rdm`2</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:BC1Bandwidth</xr-xml-map>
+              <xr-task>ouni &amp; mpls-te</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <when>../rdm-keyword = 'rdm' or ../rdm-keyword = 'not-specified'</when>
+              <type range="0..4294967295">
+                <type-name>uint32</type-name>
+              </type>
+            </bc1-bandwidth>
+            <rdm-keyword config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/bw/rdm`3</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:RDMKeyword</xr-xml-map>
+              <xr-task>ouni &amp; mpls-te</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <type>
+                <type-name>Rsvp-rdm</type-name>
+              </type>
+            </rdm-keyword>
+            <bc0-keyword config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/bw/rdm`4</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:BC0Keyword</xr-xml-map>
+              <xr-task>ouni &amp; mpls-te</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <when>../rdm-keyword = 'rdm' or ../rdm-keyword = 'not-specified'</when>
+              <type>
+                <type-name>Rsvp-bc0</type-name>
+              </type>
+            </bc0-keyword>
+            <bc1-keyword config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/bw/rdm`5</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:BC1Keyword</xr-xml-map>
+              <xr-task>ouni &amp; mpls-te</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <when>../rdm-keyword = 'rdm' or ../rdm-keyword = 'not-specified'</when>
+              <type>
+                <type-name>Rsvp-bc1</type-name>
+              </type>
+            </bc1-keyword>
+            <bandwidth-mode config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d%d%d%d%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/bw/rdm`6</xr-path>
+              <xr-xml-map>ip_rsvp_cfg:BandwidthMode</xr-xml-map>
+              <xr-task>ouni &amp; mpls-te</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <when>../rdm-keyword = 'rdm' or ../rdm-keyword = 'not-specified'</when>
+              <type>
+                <type-name>Rsvp-bw-cfg</type-name>
+              </type>
+            </bandwidth-mode>
+          </rdm>
+        </bandwidth>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/a</xr-path>
+          <xr-xml-map>ip_rsvp_cfg:Enable</xr-xml-map>
+          <xr-task>ouni &amp; mpls-te</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </enable>
+        <name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/</xr-path>
+          <xr-xml-map>ip_rsvp_cfg:Name</xr-xml-map>
+          <xr-task>ouni &amp; mpls-te</xr-task>
+          <xr-sch-type>InterfaceForward</xr-sch-type>
+          <xr-sch-arg-name>&lt;ip_rsvp_cfg_Interface_arg102&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </name>
+        <authentication config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/a/authentication/</xr-path>
+          <xr-xml-map>ip_rsvp_cfg:Authentication</xr-xml-map>
+          <xr-task>ouni &amp; mpls-te</xr-task>
+          <life-time config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/a/authentication/life-time</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:LifeTime</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="30..86400">
+              <type-name>uint32</type-name>
+            </type>
+          </life-time>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/a/authentication/enable</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:Enable</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <xr-sch-type>Boolean</xr-sch-type>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </enable>
+          <window-size config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/a/authentication/window-size</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:WindowSize</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1..64">
+              <type-name>uint32</type-name>
+            </type>
+          </window-size>
+          <key-chain config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/ip_rsvp/core/if/&lt;ip_rsvp_cfg_Interface_arg102&gt;/a/authentication/key-chain</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:KeyChain</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <xr-sch-type>BoundedString</xr-sch-type>
+            <type length="1..32">
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </key-chain>
+        </authentication>
+      </interface>
+    </interfaces>
+    <signalling config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip_rsvp/core/sig/</xr-path>
+      <xr-xml-map>ip_rsvp_cfg:Signalling</xr-xml-map>
+      <xr-task>ouni &amp; mpls-te</xr-task>
+      <xr-scope>exported</xr-scope>
+      <global-out-of-band config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/ip_rsvp/core/sig/oob/</xr-path>
+        <xr-xml-map>ip_rsvp_cfg:GlobalOutOfBand</xr-xml-map>
+        <xr-task>ouni &amp; mpls-te</xr-task>
+        <vrf config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/ip_rsvp/core/sig/oob/vrf</xr-path>
+          <xr-xml-map>ip_rsvp_cfg:VRF</xr-xml-map>
+          <xr-task>ouni &amp; mpls-te</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <type length="1..32">
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </vrf>
+      </global-out-of-band>
+      <graceful-restart config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/ip_rsvp/core/sig/gr/</xr-path>
+        <xr-xml-map>ip_rsvp_cfg:GracefulRestart</xr-xml-map>
+        <xr-task>ouni &amp; mpls-te</xr-task>
+        <lsp-class-type config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/ip_rsvp/core/sig/gr/lsp_ctype/</xr-path>
+          <xr-xml-map>ip_rsvp_cfg:LSPClassType</xr-xml-map>
+          <xr-task>ouni &amp; mpls-te</xr-task>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ip_rsvp/core/sig/gr/lsp_ctype/enable</xr-path>
+            <xr-xml-map>ip_rsvp_cfg:Enable</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <xr-sch-type>Boolean</xr-sch-type>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </enable>
+        </lsp-class-type>
+        <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ip_rsvp/core/sig/gr/enable</xr-path>
+          <xr-xml-map>ip_rsvp_cfg:Enable</xr-xml-map>
+          <xr-task>ouni &amp; mpls-te</xr-task>
+          <xr-sch-type>Boolean</xr-sch-type>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </enable>
+        <restart-time config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ip_rsvp/core/sig/gr/restart_time</xr-path>
+          <xr-xml-map>ip_rsvp_cfg:RestartTime</xr-xml-map>
+          <xr-task>ouni &amp; mpls-te</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="60..3600">
+            <type-name>uint32</type-name>
+          </type>
+          <default>120</default>
+        </restart-time>
+        <recovery-time config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ip_rsvp/core/sig/gr/recovery_time</xr-path>
+          <xr-xml-map>ip_rsvp_cfg:RecoveryTime</xr-xml-map>
+          <xr-task>ouni &amp; mpls-te</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="0..3600">
+            <type-name>uint32</type-name>
+          </type>
+          <default>120</default>
+        </recovery-time>
+      </graceful-restart>
+      <prefix-filtering config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/ip_rsvp/core/sig/prefix_filtering/</xr-path>
+        <xr-xml-map>ip_rsvp_prefix_filtering_cfg:PrefixFiltering</xr-xml-map>
+        <xr-task>ouni &amp; mpls-te</xr-task>
+        <default-deny-action config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/ip_rsvp/core/sig/prefix_filtering/default_deny_action/</xr-path>
+          <xr-xml-map>ip_rsvp_prefix_filtering_cfg:DefaultDenyAction</xr-xml-map>
+          <xr-task>ouni &amp; mpls-te</xr-task>
+          <drop config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ip_rsvp/core/sig/prefix_filtering/default_deny_action/drop</xr-path>
+            <xr-xml-map>ip_rsvp_prefix_filtering_cfg:Drop</xr-xml-map>
+            <xr-task>ouni &amp; mpls-te</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </drop>
+        </default-deny-action>
+        <acl config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/ip_rsvp/core/sig/prefix_filtering/acl</xr-path>
+          <xr-xml-map>ip_rsvp_prefix_filtering_cfg:ACL</xr-xml-map>
+          <xr-task>ouni &amp; mpls-te</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <type length="1..65">
+            <type-name>string</type-name>
+          </type>
+        </acl>
+      </prefix-filtering>
+      <pesr config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/ip_rsvp/core/sig/pesr/</xr-path>
+        <xr-xml-map>ip_rsvp_cfg:PESR</xr-xml-map>
+        <xr-task>ouni &amp; mpls-te</xr-task>
+        <disable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ip_rsvp/core/sig/pesr/disable</xr-path>
+          <xr-xml-map>ip_rsvp_cfg:Disable</xr-xml-map>
+          <xr-task>ouni &amp; mpls-te</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </disable>
+      </pesr>
+      <checksum config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/ip_rsvp/core/sig/checksum/</xr-path>
+        <xr-xml-map>ip_rsvp_cfg:Checksum</xr-xml-map>
+        <xr-task>ouni &amp; mpls-te</xr-task>
+        <disable config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ip_rsvp/core/sig/checksum/disable</xr-path>
+          <xr-xml-map>ip_rsvp_cfg:Disable</xr-xml-map>
+          <xr-task>ouni &amp; mpls-te</xr-task>
+          <xr-sch-type>Configured</xr-sch-type>
+          <type>
+            <type-name>empty</type-name>
+          </type>
+        </disable>
+      </checksum>
+      <hello-graceful-restart-misses config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/ip_rsvp/core/sig/hello_missed</xr-path>
+        <xr-xml-map>ip_rsvp_cfg:HelloGracefulRestartMisses</xr-xml-map>
+        <xr-task>ouni &amp; mpls-te</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..10">
+          <type-name>uint32</type-name>
+        </type>
+        <default>3</default>
+      </hello-graceful-restart-misses>
+      <hello-graceful-restart-interval config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/ip_rsvp/core/sig/hello_interval</xr-path>
+        <xr-xml-map>ip_rsvp_cfg:HelloGracefulRestartInterval</xr-xml-map>
+        <xr-task>ouni &amp; mpls-te</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="3000..30000">
+          <type-name>uint32</type-name>
+        </type>
+        <default>5000</default>
+      </hello-graceful-restart-interval>
+    </signalling>
+    <authentication config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ip_rsvp/core/a/authentication/</xr-path>
+      <xr-xml-map>ip_rsvp_cfg:Authentication</xr-xml-map>
+      <xr-task>ouni &amp; mpls-te</xr-task>
+      <life-time config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/ip_rsvp/core/a/authentication/life-time</xr-path>
+        <xr-xml-map>ip_rsvp_cfg:LifeTime</xr-xml-map>
+        <xr-task>ouni &amp; mpls-te</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="30..86400">
+          <type-name>uint32</type-name>
+        </type>
+      </life-time>
+      <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/ip_rsvp/core/a/authentication/enable</xr-path>
+        <xr-xml-map>ip_rsvp_cfg:Enable</xr-xml-map>
+        <xr-task>ouni &amp; mpls-te</xr-task>
+        <xr-sch-type>Boolean</xr-sch-type>
+        <type>
+          <type-name>boolean</type-name>
+        </type>
+      </enable>
+      <window-size config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/ip_rsvp/core/a/authentication/window-size</xr-path>
+        <xr-xml-map>ip_rsvp_cfg:WindowSize</xr-xml-map>
+        <xr-task>ouni &amp; mpls-te</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..64">
+          <type-name>uint32</type-name>
+        </type>
+      </window-size>
+      <key-chain config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/gl/ip_rsvp/core/a/authentication/key-chain</xr-path>
+        <xr-xml-map>ip_rsvp_cfg:KeyChain</xr-xml-map>
+        <xr-task>ouni &amp; mpls-te</xr-task>
+        <xr-sch-type>BoundedString</xr-sch-type>
+        <type length="1..32">
+          <type-name>xr:Cisco-ios-xr-string</type-name>
+        </type>
+      </key-chain>
+    </authentication>
+  </rsvp>
+</Cisco-IOS-XR-ip-rsvp-cfg>

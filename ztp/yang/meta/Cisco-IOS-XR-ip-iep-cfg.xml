@@ -1,0 +1,322 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ip-iep-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ip-iep-cfg" revision="2017-09-07">
+  <files>
+    <file revision="2017-09-07" submodule="false">Cisco-IOS-XR-ip-iep-cfg.yang</file>
+  </files>
+  <prefix>ip-iep-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="Ip-iep-num">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">unnumbered</enum>
+      <enum value="2">numbered</enum>
+    </type>
+  </typedef>
+  <typedef name="Ip-iep-hop">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="2">next-strict</enum>
+      <enum value="3">next-loose</enum>
+      <enum value="4">exclude</enum>
+      <enum value="5">exclude-srlg</enum>
+      <enum value="6">next-label</enum>
+    </type>
+  </typedef>
+  <typedef name="Ip-iep-path">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">identifier</enum>
+      <enum value="2">name</enum>
+    </type>
+  </typedef>
+  <ip-explicit-paths config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/iep/</xr-path>
+    <xr-xml-map>ip_iep_cfg:IPExplicitPaths</xr-xml-map>
+    <xr-task>mpls-te | ouni</xr-task>
+    <paths config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/iep/paths/</xr-path>
+      <xr-xml-map>ip_iep_cfg:PathTable</xr-xml-map>
+      <xr-task>mpls-te | ouni</xr-task>
+      <path config="true" key="type" node="list">
+        <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/</xr-path>
+        <xr-xml-map>ip_iep_cfg:Path</xr-xml-map>
+        <xr-task>mpls-te | ouni</xr-task>
+        <must>name or identifier</must>
+        <type config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/</xr-path>
+          <xr-xml-map>ip_iep_cfg:Type</xr-xml-map>
+          <xr-task>mpls-te | ouni</xr-task>
+          <xr-sch-type>Enum</xr-sch-type>
+          <xr-sch-arg-name>&lt;ip_iep_cfg_Path_path_type&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>Ip-iep-path</type-name>
+          </type>
+        </type>
+        <name config="true" key="name" node="list">
+          <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/&lt;ip_iep_cfg_Path_name&gt;,________/</xr-path>
+          <xr-xml-map>ip_iep_cfg:Disable</xr-xml-map>
+          <xr-task>mpls-te | ouni</xr-task>
+          <when>../type = 'name'</when>
+          <name config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-create-item-relative-path>mode</xr-create-item-relative-path>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/&lt;ip_iep_cfg_Path_name&gt;,________/</xr-path>
+            <xr-xml-map>ip_iep_cfg:Name</xr-xml-map>
+            <xr-task>mpls-te | ouni</xr-task>
+            <xr-sch-type>String</xr-sch-type>
+            <xr-sch-arg-name>&lt;ip_iep_cfg_Path_name&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </name>
+          <hops config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/&lt;ip_iep_cfg_Path_name&gt;,________/index/</xr-path>
+            <xr-xml-map>ip_iep_cfg:HopTable</xr-xml-map>
+            <xr-task>mpls-te | ouni</xr-task>
+            <hop config="true" key="index-number" node="list">
+              <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/&lt;ip_iep_cfg_Path_name&gt;,________/index/&lt;ip_iep_cfg_Hop_index&gt;</xr-path>
+              <xr-xml-map>ip_iep_cfg:Hop</xr-xml-map>
+              <xr-task>mpls-te | ouni</xr-task>
+              <xr-pack-format>%s%d%d%d%d</xr-pack-format>
+              <index-number config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%s%d%d%d%d</xr-pack-format>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/&lt;ip_iep_cfg_Path_name&gt;,________/index/&lt;ip_iep_cfg_Hop_index&gt;</xr-path>
+                <xr-xml-map>ip_iep_cfg:IndexNumber</xr-xml-map>
+                <xr-task>mpls-te | ouni</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-sch-arg-name>&lt;ip_iep_cfg_Hop_index&gt;</xr-sch-arg-name>
+                <type range="1..65535">
+                  <type-name>uint32</type-name>
+                </type>
+              </index-number>
+              <ip-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/&lt;ip_iep_cfg_Path_name&gt;,________/index/&lt;ip_iep_cfg_Hop_index&gt;`0</xr-path>
+                <xr-xml-map>ip_iep_cfg:IPAddress</xr-xml-map>
+                <xr-task>mpls-te | ouni</xr-task>
+                <xr-sch-type>IPV4AddressString</xr-sch-type>
+                <xr-default-set/>
+                <when>../hop-type != 'next-label'</when>
+                <type>
+                  <type-name>inet:ipv4-address-no-zone</type-name>
+                </type>
+                <default>0.0.0.0</default>
+              </ip-address>
+              <hop-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/&lt;ip_iep_cfg_Path_name&gt;,________/index/&lt;ip_iep_cfg_Hop_index&gt;`1</xr-path>
+                <xr-xml-map>ip_iep_cfg:HopType</xr-xml-map>
+                <xr-task>mpls-te | ouni</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>Ip-iep-hop</type-name>
+                </type>
+                <default>next-strict</default>
+              </hop-type>
+              <if-index config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/&lt;ip_iep_cfg_Path_name&gt;,________/index/&lt;ip_iep_cfg_Hop_index&gt;`2</xr-path>
+                <xr-xml-map>ip_iep_cfg:IfIndex</xr-xml-map>
+                <xr-task>mpls-te | ouni</xr-task>
+                <xr-sch-type>Integer</xr-sch-type>
+                <xr-default-set/>
+                <when>../hop-type != 'next-label'</when>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+                <default>0</default>
+              </if-index>
+              <num-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/&lt;ip_iep_cfg_Path_name&gt;,________/index/&lt;ip_iep_cfg_Hop_index&gt;`3</xr-path>
+                <xr-xml-map>ip_iep_cfg:NumType</xr-xml-map>
+                <xr-task>mpls-te | ouni</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-default-set/>
+                <when>../hop-type != 'next-label'</when>
+                <type>
+                  <type-name>Ip-iep-num</type-name>
+                </type>
+                <default>numbered</default>
+              </num-type>
+              <mpls-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/&lt;ip_iep_cfg_Path_name&gt;,________/index/&lt;ip_iep_cfg_Hop_index&gt;`4</xr-path>
+                <xr-xml-map>ip_iep_cfg:MPLSLabel</xr-xml-map>
+                <xr-task>mpls-te | ouni</xr-task>
+                <xr-sch-type>ZeroRange</xr-sch-type>
+                <xr-default-set/>
+                <when>../hop-type = 'next-label'</when>
+                <type range="0..1048575">
+                  <type-name>uint32</type-name>
+                </type>
+              </mpls-label>
+            </hop>
+          </hops>
+          <disable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/&lt;ip_iep_cfg_Path_name&gt;,________/disable</xr-path>
+            <xr-task>mpls-te | ouni</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </disable>
+        </name>
+        <identifier config="true" key="id" node="list">
+          <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/________,&lt;ip_iep_cfg_Path_id&gt;/</xr-path>
+          <xr-xml-map>ip_iep_cfg:Disable</xr-xml-map>
+          <xr-task>mpls-te | ouni</xr-task>
+          <when>../type = 'identifier'</when>
+          <id config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-create-item-relative-path>mode</xr-create-item-relative-path>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/________,&lt;ip_iep_cfg_Path_id&gt;/</xr-path>
+            <xr-xml-map>ip_iep_cfg:ID</xr-xml-map>
+            <xr-task>mpls-te | ouni</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <xr-sch-arg-name>&lt;ip_iep_cfg_Path_id&gt;</xr-sch-arg-name>
+            <type range="1..65535">
+              <type-name>uint32</type-name>
+            </type>
+          </id>
+          <hops config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/________,&lt;ip_iep_cfg_Path_id&gt;/index/</xr-path>
+            <xr-xml-map>ip_iep_cfg:HopTable</xr-xml-map>
+            <xr-task>mpls-te | ouni</xr-task>
+            <hop config="true" key="index-number" node="list">
+              <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/________,&lt;ip_iep_cfg_Path_id&gt;/index/&lt;ip_iep_cfg_Hop_index&gt;</xr-path>
+              <xr-xml-map>ip_iep_cfg:Hop</xr-xml-map>
+              <xr-task>mpls-te | ouni</xr-task>
+              <xr-pack-format>%s%d%d%d%d</xr-pack-format>
+              <index-number config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%s%d%d%d%d</xr-pack-format>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/________,&lt;ip_iep_cfg_Path_id&gt;/index/&lt;ip_iep_cfg_Hop_index&gt;</xr-path>
+                <xr-xml-map>ip_iep_cfg:IndexNumber</xr-xml-map>
+                <xr-task>mpls-te | ouni</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-sch-arg-name>&lt;ip_iep_cfg_Hop_index&gt;</xr-sch-arg-name>
+                <type range="1..65535">
+                  <type-name>uint32</type-name>
+                </type>
+              </index-number>
+              <ip-address config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/________,&lt;ip_iep_cfg_Path_id&gt;/index/&lt;ip_iep_cfg_Hop_index&gt;`0</xr-path>
+                <xr-xml-map>ip_iep_cfg:IPAddress</xr-xml-map>
+                <xr-task>mpls-te | ouni</xr-task>
+                <xr-sch-type>IPV4AddressString</xr-sch-type>
+                <xr-default-set/>
+                <when>../hop-type != 'next-label'</when>
+                <type>
+                  <type-name>inet:ipv4-address-no-zone</type-name>
+                </type>
+                <default>0.0.0.0</default>
+              </ip-address>
+              <hop-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/________,&lt;ip_iep_cfg_Path_id&gt;/index/&lt;ip_iep_cfg_Hop_index&gt;`1</xr-path>
+                <xr-xml-map>ip_iep_cfg:HopType</xr-xml-map>
+                <xr-task>mpls-te | ouni</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-default-set/>
+                <type>
+                  <type-name>Ip-iep-hop</type-name>
+                </type>
+                <default>next-strict</default>
+              </hop-type>
+              <if-index config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/________,&lt;ip_iep_cfg_Path_id&gt;/index/&lt;ip_iep_cfg_Hop_index&gt;`2</xr-path>
+                <xr-xml-map>ip_iep_cfg:IfIndex</xr-xml-map>
+                <xr-task>mpls-te | ouni</xr-task>
+                <xr-sch-type>Integer</xr-sch-type>
+                <xr-default-set/>
+                <when>../hop-type != 'next-label'</when>
+                <type>
+                  <type-name>uint32</type-name>
+                </type>
+                <default>0</default>
+              </if-index>
+              <num-type config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/________,&lt;ip_iep_cfg_Path_id&gt;/index/&lt;ip_iep_cfg_Hop_index&gt;`3</xr-path>
+                <xr-xml-map>ip_iep_cfg:NumType</xr-xml-map>
+                <xr-task>mpls-te | ouni</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-default-set/>
+                <when>../hop-type != 'next-label'</when>
+                <type>
+                  <type-name>Ip-iep-num</type-name>
+                </type>
+                <default>numbered</default>
+              </num-type>
+              <mpls-label config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-data-handler>preserve-pack</xr-data-handler>
+                <xr-is-packed/>
+                <xr-pack-format>%s%d%d%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/________,&lt;ip_iep_cfg_Path_id&gt;/index/&lt;ip_iep_cfg_Hop_index&gt;`4</xr-path>
+                <xr-xml-map>ip_iep_cfg:MPLSLabel</xr-xml-map>
+                <xr-task>mpls-te | ouni</xr-task>
+                <xr-sch-type>ZeroRange</xr-sch-type>
+                <xr-default-set/>
+                <when>../hop-type = 'next-label'</when>
+                <type range="0..1048575">
+                  <type-name>uint32</type-name>
+                </type>
+              </mpls-label>
+            </hop>
+          </hops>
+          <disable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/iep/paths/&lt;ip_iep_cfg_Path_path_type&gt;/________,&lt;ip_iep_cfg_Path_id&gt;/disable</xr-path>
+            <xr-task>mpls-te | ouni</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </disable>
+        </identifier>
+      </path>
+    </paths>
+  </ip-explicit-paths>
+</Cisco-IOS-XR-ip-iep-cfg>

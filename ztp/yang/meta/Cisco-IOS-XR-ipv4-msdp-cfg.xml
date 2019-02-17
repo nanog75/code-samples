@@ -1,0 +1,888 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-ipv4-msdp-cfg ns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-msdp-cfg" revision="2017-10-15">
+  <files>
+    <file revision="2017-10-15" submodule="false">Cisco-IOS-XR-ipv4-msdp-cfg.yang</file>
+  </files>
+  <prefix>ipv4-msdp-cfg</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="inet">ietf-inet-types</import>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="Msdp-filter-type-vrf">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="1">incoming</enum>
+      <enum value="2">outgoing</enum>
+    </type>
+  </typedef>
+  <typedef name="Msdp-list-type-vrf">
+    <xr-sch-type>Enum</xr-sch-type>
+    <type node="enumeration">
+      <enum value="3">list</enum>
+      <enum value="4">rp-list</enum>
+    </type>
+  </typedef>
+  <msdp config="true" is-key="false" node="container" presence="false">
+    <xr-path>/cfg/gl/ipv4-msdp/</xr-path>
+    <xr-xml-map>ipv4_msdp_cfg:MSDP</xr-xml-map>
+    <xr-task>multicast</xr-task>
+    <vrfs config="true" is-key="false" node="container" presence="false">
+      <xr-path>/cfg/gl/ipv4-msdp/ord_v/</xr-path>
+      <xr-xml-map>ipv4_msdp_cfg:VRFTable</xr-xml-map>
+      <xr-task>multicast</xr-task>
+      <xr-compatibility>12.0</xr-compatibility>
+      <vrf config="true" key="vrf-name" node="list">
+        <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/</xr-path>
+        <xr-xml-map>ipv4_msdp_cfg:VRF</xr-xml-map>
+        <xr-task>multicast</xr-task>
+        <xr-scope>exported</xr-scope>
+        <vrf-name config="true" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-create-item-relative-path>aza</xr-create-item-relative-path>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/</xr-path>
+          <xr-xml-map>ipv4_msdp_cfg:VRFName</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;ipv4_msdp_cfg_VRF_vrfname&gt;</xr-sch-arg-name>
+          <type length="1..32">
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </vrf-name>
+        <ttl-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/aca/ttl-threshold</xr-path>
+          <xr-xml-map>ipv4_msdp_vrf_cfg:TTLThreshold</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..255">
+            <type-name>uint32</type-name>
+          </type>
+        </ttl-threshold>
+        <max-peer-sa config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/acb/max-peer-sa</xr-path>
+          <xr-xml-map>ipv4_msdp_vrf_cfg:MaxPeerSA</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..75000">
+            <type-name>uint32</type-name>
+          </type>
+        </max-peer-sa>
+        <default-peer config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>inaddr</xr-primitive-type>
+          <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/afa/peer-default</xr-path>
+          <xr-xml-map>ipv4_msdp_vrf_cfg:DefaultPeer</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <xr-sch-type>IPV4Address</xr-sch-type>
+          <type>
+            <type-name>inet:ipv4-address-no-zone</type-name>
+          </type>
+        </default-peer>
+        <originator-id config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/aba/originator</xr-path>
+          <xr-xml-map>ipv4_msdp_vrf_cfg:OriginatorID</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <xr-sch-type>InterfaceName</xr-sch-type>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </originator-id>
+        <max-sa config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/acb/max-sa</xr-path>
+          <xr-xml-map>ipv4_msdp_vrf_cfg:MaxSA</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..75000">
+            <type-name>uint32</type-name>
+          </type>
+        </max-sa>
+        <cache-state config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/ada/cache-state/</xr-path>
+          <xr-xml-map>ipv4_msdp_vrf_cfg:CacheState</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <sa-holdtime config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/ada/cache-state/sa-holdtime</xr-path>
+            <xr-xml-map>ipv4_msdp_vrf_cfg:SAHoldtime</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="150..3600">
+              <type-name>uint32</type-name>
+            </type>
+            <default>150</default>
+          </sa-holdtime>
+          <list config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/ada/cache-state/cache-acl</xr-path>
+            <xr-xml-map>ipv4_msdp_vrf_cfg:List</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-sch-type>BoundedString</xr-sch-type>
+            <type length="1..64">
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </list>
+          <rp-list config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/ada/cache-state/rp-list</xr-path>
+            <xr-xml-map>ipv4_msdp_vrf_cfg:RPList</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-sch-type>BoundedString</xr-sch-type>
+            <type length="1..64">
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </rp-list>
+        </cache-state>
+        <keep-alive config="true" is-key="false" node="container" presence="true">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-is-packed/>
+          <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/acc/keepalive`</xr-path>
+          <xr-xml-map>ipv4_msdp_vrf_cfg:KeepAlive</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <keep-alive-period config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/acc/keepalive`0</xr-path>
+            <xr-xml-map>ipv4_msdp_vrf_cfg:KeepAlivePeriod</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1..60">
+              <type-name>uint32</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </keep-alive-period>
+          <peer-timeout-period config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-is-packed/>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <xr-pack-elem-size>1</xr-pack-elem-size>
+            <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/acc/keepalive`1</xr-path>
+            <xr-xml-map>ipv4_msdp_vrf_cfg:PeerTimeoutPeriod</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1..75">
+              <type-name>uint32</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </peer-timeout-period>
+        </keep-alive>
+        <peers config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/peers/</xr-path>
+          <xr-xml-map>ipv4_msdp_vrf_cfg:PeerTable</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <peer config="true" key="peer-address" node="list">
+            <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/</xr-path>
+            <xr-xml-map>ipv4_msdp_vrf_cfg:Peer</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <remote-as config="true" is-key="false" node="container" presence="true">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-is-packed/>
+              <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aab/remoteas`</xr-path>
+              <xr-xml-map>ipv4_msdp_vrf_cfg:RemoteAS</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <as-xx config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aab/remoteas`0</xr-path>
+                <xr-xml-map>ipv4_msdp_vrf_cfg:AS_XX</xr-xml-map>
+                <xr-task>multicast</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <xr-default-set/>
+                <type range="0..65535">
+                  <type-name>uint32</type-name>
+                </type>
+                <default>0</default>
+              </as-xx>
+              <as-yy config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aab/remoteas`1</xr-path>
+                <xr-xml-map>ipv4_msdp_vrf_cfg:AS_YY</xr-xml-map>
+                <xr-task>multicast</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="0..4294967295">
+                  <type-name>uint32</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </as-yy>
+            </remote-as>
+            <shutdown config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/ada/shutdown</xr-path>
+              <xr-xml-map>ipv4_msdp_vrf_cfg:Shutdown</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </shutdown>
+            <description config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aba/description</xr-path>
+              <xr-xml-map>ipv4_msdp_vrf_cfg:Description</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <type length="1..80">
+                <type-name>string</type-name>
+              </type>
+            </description>
+            <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aaa/config</xr-path>
+              <xr-xml-map>ipv4_msdp_vrf_cfg:Enable</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </enable>
+            <max-sa config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/acb/max-sa</xr-path>
+              <xr-xml-map>ipv4_msdp_vrf_cfg:MaxSA</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-compatibility>13.1</xr-compatibility>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="1..75000">
+                <type-name>uint32</type-name>
+              </type>
+            </max-sa>
+            <nsr-down config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/ada/nsr-down</xr-path>
+              <xr-xml-map>ipv4_msdp_vrf_cfg:NSRDown</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-sch-type>Configured</xr-sch-type>
+              <type>
+                <type-name>empty</type-name>
+              </type>
+            </nsr-down>
+            <peer-password config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aaa/md5-password</xr-path>
+              <xr-xml-map>ipv4_msdp_vrf_cfg:PeerPassword</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-sch-type>ProprietaryPassword</xr-sch-type>
+              <type>
+                <type-name>xr:Proprietary-password</type-name>
+              </type>
+            </peer-password>
+            <mesh-group config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aca/mesh-group</xr-path>
+              <xr-xml-map>ipv4_msdp_vrf_cfg:MeshGroup</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <type length="1..32">
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+            </mesh-group>
+            <peer-address config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/</xr-path>
+              <xr-xml-map>ipv4_msdp_vrf_cfg:PeerAddress</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-sch-type>IPV4AddressString</xr-sch-type>
+              <xr-sch-arg-name>&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>inet:ipv4-address-no-zone</type-name>
+              </type>
+            </peer-address>
+            <ttl-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aca/ttl-threshold</xr-path>
+              <xr-xml-map>ipv4_msdp_vrf_cfg:TTLThreshold</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="1..255">
+                <type-name>uint32</type-name>
+              </type>
+            </ttl-threshold>
+            <keep-alive config="true" is-key="false" node="container" presence="true">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-is-packed/>
+              <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/acc/keepalive`</xr-path>
+              <xr-xml-map>ipv4_msdp_vrf_cfg:KeepAlive</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <keep-alive-period config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/acc/keepalive`0</xr-path>
+                <xr-xml-map>ipv4_msdp_vrf_cfg:KeepAlivePeriod</xr-xml-map>
+                <xr-task>multicast</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="1..60">
+                  <type-name>uint32</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </keep-alive-period>
+              <peer-timeout-period config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-is-packed/>
+                <xr-pack-format>%d%d</xr-pack-format>
+                <xr-pack-elem-size>1</xr-pack-elem-size>
+                <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/acc/keepalive`1</xr-path>
+                <xr-xml-map>ipv4_msdp_vrf_cfg:PeerTimeoutPeriod</xr-xml-map>
+                <xr-task>multicast</xr-task>
+                <xr-sch-type>Range</xr-sch-type>
+                <type range="1..75">
+                  <type-name>uint32</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </peer-timeout-period>
+            </keep-alive>
+            <connect-source config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aaa/connectsource</xr-path>
+              <xr-xml-map>ipv4_msdp_vrf_cfg:ConnectSource</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-sch-type>InterfaceName</xr-sch-type>
+              <type>
+                <type-name>xr:Interface-name</type-name>
+              </type>
+            </connect-source>
+            <sa-filters config="true" is-key="false" node="container" presence="false">
+              <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aca/sa-filter/</xr-path>
+              <xr-xml-map>ipv4_msdp_vrf_cfg:SAFilterTable</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <sa-filter config="true" key="list filter-type" node="list">
+                <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aca/sa-filter/&lt;ipv4_msdp_vrf_cfg_SAFilter_listtype&gt;/&lt;ipv4_msdp_vrf_cfg_SAFilter_filtertype&gt;</xr-path>
+                <xr-xml-map>ipv4_msdp_vrf_cfg:SAFilter</xr-xml-map>
+                <xr-task>multicast</xr-task>
+                <list config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aca/sa-filter/&lt;ipv4_msdp_vrf_cfg_SAFilter_listtype&gt;/&lt;ipv4_msdp_vrf_cfg_SAFilter_filtertype&gt;</xr-path>
+                  <xr-xml-map>ipv4_msdp_vrf_cfg:List</xr-xml-map>
+                  <xr-task>multicast</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <xr-sch-arg-name>&lt;ipv4_msdp_vrf_cfg_SAFilter_listtype&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>Msdp-list-type-vrf</type-name>
+                  </type>
+                </list>
+                <filter-type config="true" is-key="true" is-yang-key="true" node="leaf">
+                  <xr-data-handler>ignore</xr-data-handler>
+                  <xr-primitive-type>uint32</xr-primitive-type>
+                  <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aca/sa-filter/&lt;ipv4_msdp_vrf_cfg_SAFilter_listtype&gt;/&lt;ipv4_msdp_vrf_cfg_SAFilter_filtertype&gt;</xr-path>
+                  <xr-xml-map>ipv4_msdp_vrf_cfg:FilterType</xr-xml-map>
+                  <xr-task>multicast</xr-task>
+                  <xr-sch-type>Enum</xr-sch-type>
+                  <xr-sch-arg-name>&lt;ipv4_msdp_vrf_cfg_SAFilter_filtertype&gt;</xr-sch-arg-name>
+                  <type>
+                    <type-name>Msdp-filter-type-vrf</type-name>
+                  </type>
+                </filter-type>
+                <access-list-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                  <xr-primitive-type>string</xr-primitive-type>
+                  <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aca/sa-filter/&lt;ipv4_msdp_vrf_cfg_SAFilter_listtype&gt;/&lt;ipv4_msdp_vrf_cfg_SAFilter_filtertype&gt;</xr-path>
+                  <xr-xml-map>ipv4_msdp_vrf_cfg:AccessListName</xr-xml-map>
+                  <xr-task>multicast</xr-task>
+                  <xr-sch-type>BoundedString</xr-sch-type>
+                  <type length="1..64">
+                    <type-name>xr:Cisco-ios-xr-string</type-name>
+                  </type>
+                  <mandatory>true</mandatory>
+                </access-list-name>
+              </sa-filter>
+            </sa-filters>
+          </peer>
+        </peers>
+        <connect-source config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/aaa/connectsource</xr-path>
+          <xr-xml-map>ipv4_msdp_vrf_cfg:ConnectSource</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <xr-sch-type>InterfaceName</xr-sch-type>
+          <type>
+            <type-name>xr:Interface-name</type-name>
+          </type>
+        </connect-source>
+        <sa-filters config="true" is-key="false" node="container" presence="false">
+          <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/aca/sa-filter/</xr-path>
+          <xr-xml-map>ipv4_msdp_vrf_cfg:SAFilterTable</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <sa-filter config="true" key="list filter-type" node="list">
+            <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/aca/sa-filter/&lt;ipv4_msdp_vrf_cfg_SAFilter_listtype&gt;/&lt;ipv4_msdp_vrf_cfg_SAFilter_filtertype&gt;</xr-path>
+            <xr-xml-map>ipv4_msdp_vrf_cfg:SAFilter</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <list config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/aca/sa-filter/&lt;ipv4_msdp_vrf_cfg_SAFilter_listtype&gt;/&lt;ipv4_msdp_vrf_cfg_SAFilter_filtertype&gt;</xr-path>
+              <xr-xml-map>ipv4_msdp_vrf_cfg:List</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <xr-sch-arg-name>&lt;ipv4_msdp_vrf_cfg_SAFilter_listtype&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>Msdp-list-type-vrf</type-name>
+              </type>
+            </list>
+            <filter-type config="true" is-key="true" is-yang-key="true" node="leaf">
+              <xr-data-handler>ignore</xr-data-handler>
+              <xr-primitive-type>uint32</xr-primitive-type>
+              <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/aca/sa-filter/&lt;ipv4_msdp_vrf_cfg_SAFilter_listtype&gt;/&lt;ipv4_msdp_vrf_cfg_SAFilter_filtertype&gt;</xr-path>
+              <xr-xml-map>ipv4_msdp_vrf_cfg:FilterType</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-sch-type>Enum</xr-sch-type>
+              <xr-sch-arg-name>&lt;ipv4_msdp_vrf_cfg_SAFilter_filtertype&gt;</xr-sch-arg-name>
+              <type>
+                <type-name>Msdp-filter-type-vrf</type-name>
+              </type>
+            </filter-type>
+            <access-list-name config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-primitive-type>string</xr-primitive-type>
+              <xr-path>/cfg/gl/ipv4-msdp/ord_v/&lt;ipv4_msdp_cfg_VRF_vrfname&gt;/aca/sa-filter/&lt;ipv4_msdp_vrf_cfg_SAFilter_listtype&gt;/&lt;ipv4_msdp_vrf_cfg_SAFilter_filtertype&gt;</xr-path>
+              <xr-xml-map>ipv4_msdp_vrf_cfg:AccessListName</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-sch-type>BoundedString</xr-sch-type>
+              <type length="1..64">
+                <type-name>xr:Cisco-ios-xr-string</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </access-list-name>
+          </sa-filter>
+        </sa-filters>
+      </vrf>
+    </vrfs>
+    <default-context config="true" is-key="false" node="container" presence="false">
+      <xr-presence-submode/>
+      <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/aza</xr-path>
+      <xr-xml-map>ipv4_msdp_cfg:DefaultContext</xr-xml-map>
+      <xr-task>multicast</xr-task>
+      <xr-scope>exported</xr-scope>
+      <xr-compatibility>13.0</xr-compatibility>
+      <ttl-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/aca/ttl-threshold</xr-path>
+        <xr-xml-map>ipv4_msdp_vrf_cfg:TTLThreshold</xr-xml-map>
+        <xr-task>multicast</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..255">
+          <type-name>uint32</type-name>
+        </type>
+      </ttl-threshold>
+      <max-peer-sa config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/acb/max-peer-sa</xr-path>
+        <xr-xml-map>ipv4_msdp_vrf_cfg:MaxPeerSA</xr-xml-map>
+        <xr-task>multicast</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..75000">
+          <type-name>uint32</type-name>
+        </type>
+      </max-peer-sa>
+      <default-peer config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>inaddr</xr-primitive-type>
+        <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/afa/peer-default</xr-path>
+        <xr-xml-map>ipv4_msdp_vrf_cfg:DefaultPeer</xr-xml-map>
+        <xr-task>multicast</xr-task>
+        <xr-sch-type>IPV4Address</xr-sch-type>
+        <type>
+          <type-name>inet:ipv4-address-no-zone</type-name>
+        </type>
+      </default-peer>
+      <originator-id config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/aba/originator</xr-path>
+        <xr-xml-map>ipv4_msdp_vrf_cfg:OriginatorID</xr-xml-map>
+        <xr-task>multicast</xr-task>
+        <xr-sch-type>InterfaceName</xr-sch-type>
+        <type>
+          <type-name>xr:Interface-name</type-name>
+        </type>
+      </originator-id>
+      <max-sa config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>uint32</xr-primitive-type>
+        <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/acb/max-sa</xr-path>
+        <xr-xml-map>ipv4_msdp_vrf_cfg:MaxSA</xr-xml-map>
+        <xr-task>multicast</xr-task>
+        <xr-sch-type>Range</xr-sch-type>
+        <type range="1..75000">
+          <type-name>uint32</type-name>
+        </type>
+      </max-sa>
+      <cache-state config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/ada/cache-state/</xr-path>
+        <xr-xml-map>ipv4_msdp_vrf_cfg:CacheState</xr-xml-map>
+        <xr-task>multicast</xr-task>
+        <sa-holdtime config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/ada/cache-state/sa-holdtime</xr-path>
+          <xr-xml-map>ipv4_msdp_vrf_cfg:SAHoldtime</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="150..3600">
+            <type-name>uint32</type-name>
+          </type>
+          <default>150</default>
+        </sa-holdtime>
+        <list config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/ada/cache-state/cache-acl</xr-path>
+          <xr-xml-map>ipv4_msdp_vrf_cfg:List</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <type length="1..64">
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </list>
+        <rp-list config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/ada/cache-state/rp-list</xr-path>
+          <xr-xml-map>ipv4_msdp_vrf_cfg:RPList</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <xr-sch-type>BoundedString</xr-sch-type>
+          <type length="1..64">
+            <type-name>xr:Cisco-ios-xr-string</type-name>
+          </type>
+        </rp-list>
+      </cache-state>
+      <keep-alive config="true" is-key="false" node="container" presence="true">
+        <xr-data-handler>ignore</xr-data-handler>
+        <xr-is-packed/>
+        <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/acc/keepalive`</xr-path>
+        <xr-xml-map>ipv4_msdp_vrf_cfg:KeepAlive</xr-xml-map>
+        <xr-task>multicast</xr-task>
+        <xr-pack-format>%d%d</xr-pack-format>
+        <keep-alive-period config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/acc/keepalive`0</xr-path>
+          <xr-xml-map>ipv4_msdp_vrf_cfg:KeepAlivePeriod</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..60">
+            <type-name>uint32</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </keep-alive-period>
+        <peer-timeout-period config="true" is-key="false" is-yang-key="false" node="leaf">
+          <xr-is-packed/>
+          <xr-pack-format>%d%d</xr-pack-format>
+          <xr-pack-elem-size>1</xr-pack-elem-size>
+          <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/acc/keepalive`1</xr-path>
+          <xr-xml-map>ipv4_msdp_vrf_cfg:PeerTimeoutPeriod</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <xr-sch-type>Range</xr-sch-type>
+          <type range="1..75">
+            <type-name>uint32</type-name>
+          </type>
+          <mandatory>true</mandatory>
+        </peer-timeout-period>
+      </keep-alive>
+      <peers config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/peers/</xr-path>
+        <xr-xml-map>ipv4_msdp_vrf_cfg:PeerTable</xr-xml-map>
+        <xr-task>multicast</xr-task>
+        <peer config="true" key="peer-address" node="list">
+          <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/</xr-path>
+          <xr-xml-map>ipv4_msdp_vrf_cfg:Peer</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <remote-as config="true" is-key="false" node="container" presence="true">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aab/remoteas`</xr-path>
+            <xr-xml-map>ipv4_msdp_vrf_cfg:RemoteAS</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <as-xx config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aab/remoteas`0</xr-path>
+              <xr-xml-map>ipv4_msdp_vrf_cfg:AS_XX</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <xr-default-set/>
+              <type range="0..65535">
+                <type-name>uint32</type-name>
+              </type>
+              <default>0</default>
+            </as-xx>
+            <as-yy config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aab/remoteas`1</xr-path>
+              <xr-xml-map>ipv4_msdp_vrf_cfg:AS_YY</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="0..4294967295">
+                <type-name>uint32</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </as-yy>
+          </remote-as>
+          <shutdown config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/ada/shutdown</xr-path>
+            <xr-xml-map>ipv4_msdp_vrf_cfg:Shutdown</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </shutdown>
+          <description config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aba/description</xr-path>
+            <xr-xml-map>ipv4_msdp_vrf_cfg:Description</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-sch-type>BoundedString</xr-sch-type>
+            <type length="1..80">
+              <type-name>string</type-name>
+            </type>
+          </description>
+          <enable config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aaa/config</xr-path>
+            <xr-xml-map>ipv4_msdp_vrf_cfg:Enable</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </enable>
+          <max-sa config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/acb/max-sa</xr-path>
+            <xr-xml-map>ipv4_msdp_vrf_cfg:MaxSA</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-compatibility>13.1</xr-compatibility>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1..75000">
+              <type-name>uint32</type-name>
+            </type>
+          </max-sa>
+          <nsr-down config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/ada/nsr-down</xr-path>
+            <xr-xml-map>ipv4_msdp_vrf_cfg:NSRDown</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-sch-type>Configured</xr-sch-type>
+            <type>
+              <type-name>empty</type-name>
+            </type>
+          </nsr-down>
+          <peer-password config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aaa/md5-password</xr-path>
+            <xr-xml-map>ipv4_msdp_vrf_cfg:PeerPassword</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-sch-type>ProprietaryPassword</xr-sch-type>
+            <type>
+              <type-name>xr:Proprietary-password</type-name>
+            </type>
+          </peer-password>
+          <mesh-group config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aca/mesh-group</xr-path>
+            <xr-xml-map>ipv4_msdp_vrf_cfg:MeshGroup</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-sch-type>BoundedString</xr-sch-type>
+            <type length="1..32">
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+          </mesh-group>
+          <peer-address config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/</xr-path>
+            <xr-xml-map>ipv4_msdp_vrf_cfg:PeerAddress</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-sch-type>IPV4AddressString</xr-sch-type>
+            <xr-sch-arg-name>&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>inet:ipv4-address-no-zone</type-name>
+            </type>
+          </peer-address>
+          <ttl-threshold config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aca/ttl-threshold</xr-path>
+            <xr-xml-map>ipv4_msdp_vrf_cfg:TTLThreshold</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-sch-type>Range</xr-sch-type>
+            <type range="1..255">
+              <type-name>uint32</type-name>
+            </type>
+          </ttl-threshold>
+          <keep-alive config="true" is-key="false" node="container" presence="true">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-is-packed/>
+            <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/acc/keepalive`</xr-path>
+            <xr-xml-map>ipv4_msdp_vrf_cfg:KeepAlive</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-pack-format>%d%d</xr-pack-format>
+            <keep-alive-period config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/acc/keepalive`0</xr-path>
+              <xr-xml-map>ipv4_msdp_vrf_cfg:KeepAlivePeriod</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="1..60">
+                <type-name>uint32</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </keep-alive-period>
+            <peer-timeout-period config="true" is-key="false" is-yang-key="false" node="leaf">
+              <xr-is-packed/>
+              <xr-pack-format>%d%d</xr-pack-format>
+              <xr-pack-elem-size>1</xr-pack-elem-size>
+              <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/acc/keepalive`1</xr-path>
+              <xr-xml-map>ipv4_msdp_vrf_cfg:PeerTimeoutPeriod</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <xr-sch-type>Range</xr-sch-type>
+              <type range="1..75">
+                <type-name>uint32</type-name>
+              </type>
+              <mandatory>true</mandatory>
+            </peer-timeout-period>
+          </keep-alive>
+          <connect-source config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aaa/connectsource</xr-path>
+            <xr-xml-map>ipv4_msdp_vrf_cfg:ConnectSource</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-sch-type>InterfaceName</xr-sch-type>
+            <type>
+              <type-name>xr:Interface-name</type-name>
+            </type>
+          </connect-source>
+          <sa-filters config="true" is-key="false" node="container" presence="false">
+            <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aca/sa-filter/</xr-path>
+            <xr-xml-map>ipv4_msdp_vrf_cfg:SAFilterTable</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <sa-filter config="true" key="list filter-type" node="list">
+              <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aca/sa-filter/&lt;ipv4_msdp_vrf_cfg_SAFilter_listtype&gt;/&lt;ipv4_msdp_vrf_cfg_SAFilter_filtertype&gt;</xr-path>
+              <xr-xml-map>ipv4_msdp_vrf_cfg:SAFilter</xr-xml-map>
+              <xr-task>multicast</xr-task>
+              <list config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aca/sa-filter/&lt;ipv4_msdp_vrf_cfg_SAFilter_listtype&gt;/&lt;ipv4_msdp_vrf_cfg_SAFilter_filtertype&gt;</xr-path>
+                <xr-xml-map>ipv4_msdp_vrf_cfg:List</xr-xml-map>
+                <xr-task>multicast</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-sch-arg-name>&lt;ipv4_msdp_vrf_cfg_SAFilter_listtype&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>Msdp-list-type-vrf</type-name>
+                </type>
+              </list>
+              <filter-type config="true" is-key="true" is-yang-key="true" node="leaf">
+                <xr-data-handler>ignore</xr-data-handler>
+                <xr-primitive-type>uint32</xr-primitive-type>
+                <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aca/sa-filter/&lt;ipv4_msdp_vrf_cfg_SAFilter_listtype&gt;/&lt;ipv4_msdp_vrf_cfg_SAFilter_filtertype&gt;</xr-path>
+                <xr-xml-map>ipv4_msdp_vrf_cfg:FilterType</xr-xml-map>
+                <xr-task>multicast</xr-task>
+                <xr-sch-type>Enum</xr-sch-type>
+                <xr-sch-arg-name>&lt;ipv4_msdp_vrf_cfg_SAFilter_filtertype&gt;</xr-sch-arg-name>
+                <type>
+                  <type-name>Msdp-filter-type-vrf</type-name>
+                </type>
+              </filter-type>
+              <access-list-name config="true" is-key="false" is-yang-key="false" node="leaf">
+                <xr-primitive-type>string</xr-primitive-type>
+                <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/peers/&lt;ipv4_msdp_vrf_cfg_Peer_peer_addr&gt;/aca/sa-filter/&lt;ipv4_msdp_vrf_cfg_SAFilter_listtype&gt;/&lt;ipv4_msdp_vrf_cfg_SAFilter_filtertype&gt;</xr-path>
+                <xr-xml-map>ipv4_msdp_vrf_cfg:AccessListName</xr-xml-map>
+                <xr-task>multicast</xr-task>
+                <xr-sch-type>BoundedString</xr-sch-type>
+                <type length="1..64">
+                  <type-name>xr:Cisco-ios-xr-string</type-name>
+                </type>
+                <mandatory>true</mandatory>
+              </access-list-name>
+            </sa-filter>
+          </sa-filters>
+        </peer>
+      </peers>
+      <connect-source config="true" is-key="false" is-yang-key="false" node="leaf">
+        <xr-primitive-type>string</xr-primitive-type>
+        <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/aaa/connectsource</xr-path>
+        <xr-xml-map>ipv4_msdp_vrf_cfg:ConnectSource</xr-xml-map>
+        <xr-task>multicast</xr-task>
+        <xr-sch-type>InterfaceName</xr-sch-type>
+        <type>
+          <type-name>xr:Interface-name</type-name>
+        </type>
+      </connect-source>
+      <sa-filters config="true" is-key="false" node="container" presence="false">
+        <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/aca/sa-filter/</xr-path>
+        <xr-xml-map>ipv4_msdp_vrf_cfg:SAFilterTable</xr-xml-map>
+        <xr-task>multicast</xr-task>
+        <sa-filter config="true" key="list filter-type" node="list">
+          <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/aca/sa-filter/&lt;ipv4_msdp_vrf_cfg_SAFilter_listtype&gt;/&lt;ipv4_msdp_vrf_cfg_SAFilter_filtertype&gt;</xr-path>
+          <xr-xml-map>ipv4_msdp_vrf_cfg:SAFilter</xr-xml-map>
+          <xr-task>multicast</xr-task>
+          <list config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/aca/sa-filter/&lt;ipv4_msdp_vrf_cfg_SAFilter_listtype&gt;/&lt;ipv4_msdp_vrf_cfg_SAFilter_filtertype&gt;</xr-path>
+            <xr-xml-map>ipv4_msdp_vrf_cfg:List</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <xr-sch-arg-name>&lt;ipv4_msdp_vrf_cfg_SAFilter_listtype&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>Msdp-list-type-vrf</type-name>
+            </type>
+          </list>
+          <filter-type config="true" is-key="true" is-yang-key="true" node="leaf">
+            <xr-data-handler>ignore</xr-data-handler>
+            <xr-primitive-type>uint32</xr-primitive-type>
+            <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/aca/sa-filter/&lt;ipv4_msdp_vrf_cfg_SAFilter_listtype&gt;/&lt;ipv4_msdp_vrf_cfg_SAFilter_filtertype&gt;</xr-path>
+            <xr-xml-map>ipv4_msdp_vrf_cfg:FilterType</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-sch-type>Enum</xr-sch-type>
+            <xr-sch-arg-name>&lt;ipv4_msdp_vrf_cfg_SAFilter_filtertype&gt;</xr-sch-arg-name>
+            <type>
+              <type-name>Msdp-filter-type-vrf</type-name>
+            </type>
+          </filter-type>
+          <access-list-name config="true" is-key="false" is-yang-key="false" node="leaf">
+            <xr-primitive-type>string</xr-primitive-type>
+            <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/aca/sa-filter/&lt;ipv4_msdp_vrf_cfg_SAFilter_listtype&gt;/&lt;ipv4_msdp_vrf_cfg_SAFilter_filtertype&gt;</xr-path>
+            <xr-xml-map>ipv4_msdp_vrf_cfg:AccessListName</xr-xml-map>
+            <xr-task>multicast</xr-task>
+            <xr-sch-type>BoundedString</xr-sch-type>
+            <type length="1..64">
+              <type-name>xr:Cisco-ios-xr-string</type-name>
+            </type>
+            <mandatory>true</mandatory>
+          </access-list-name>
+        </sa-filter>
+      </sa-filters>
+    </default-context>
+    <global-max-sa config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/acb/global-max-sa</xr-path>
+      <xr-xml-map>ipv4_msdp_cfg:GlobalMaxSA</xr-xml-map>
+      <xr-task>multicast</xr-task>
+      <xr-compatibility>12.0</xr-compatibility>
+      <xr-sch-type>Range</xr-sch-type>
+      <type range="1..75000">
+        <type-name>uint32</type-name>
+      </type>
+    </global-max-sa>
+    <nsr-delay config="true" is-key="false" is-yang-key="false" node="leaf">
+      <xr-primitive-type>uint32</xr-primitive-type>
+      <xr-path>/cfg/gl/ipv4-msdp/ord_d/default/acz/nsr-delay</xr-path>
+      <xr-xml-map>ipv4_msdp_cfg:NSRDelay</xr-xml-map>
+      <xr-task>multicast</xr-task>
+      <xr-compatibility>13.0</xr-compatibility>
+      <xr-sch-type>Range</xr-sch-type>
+      <type range="5..90">
+        <type-name>uint32</type-name>
+      </type>
+    </nsr-delay>
+  </msdp>
+</Cisco-IOS-XR-ipv4-msdp-cfg>

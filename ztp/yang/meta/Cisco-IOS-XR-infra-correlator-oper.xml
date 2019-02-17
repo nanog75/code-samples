@@ -1,0 +1,905 @@
+<?xml version="1.0"?>
+<Cisco-IOS-XR-infra-correlator-oper ns="http://cisco.com/ns/yang/Cisco-IOS-XR-infra-correlator-oper" revision="2017-09-07">
+  <files>
+    <file revision="2017-09-07" submodule="false">Cisco-IOS-XR-infra-correlator-oper.yang</file>
+    <file revision="2017-09-07" submodule="true">Cisco-IOS-XR-infra-correlator-oper-sub1.yang</file>
+  </files>
+  <prefix>infra-correlator-oper</prefix>
+  <organization>Cisco Systems, Inc.</organization>
+  <import prefix="xr">Cisco-IOS-XR-types</import>
+  <typedef name="Al-alarm-bistate">
+    <type node="enumeration">
+      <enum value="0">not-available</enum>
+      <enum value="1">active</enum>
+      <enum value="2">clear</enum>
+    </type>
+  </typedef>
+  <typedef name="Context">
+    <xr-bag-primitive-type>string</xr-bag-primitive-type>
+    <type length="0..33">
+      <type-name>string</type-name>
+    </type>
+  </typedef>
+  <typedef name="Al-alarm-severity">
+    <type node="enumeration">
+      <enum value="-1">unknown</enum>
+      <enum value="0">emergency</enum>
+      <enum value="1">alert</enum>
+      <enum value="2">critical</enum>
+      <enum value="3">error</enum>
+      <enum value="4">warning</enum>
+      <enum value="5">notice</enum>
+      <enum value="6">informational</enum>
+      <enum value="7">debugging</enum>
+    </type>
+  </typedef>
+  <typedef name="Ac-rule-state">
+    <type node="enumeration">
+      <enum value="0">rule-unapplied</enum>
+      <enum value="1">rule-applied</enum>
+      <enum value="2">rule-applied-all</enum>
+    </type>
+  </typedef>
+  <suppression config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/suppress/gl/</xr-path>
+    <xr-xml-map>infra_correlator_suppress_oper:Suppression</xr-xml-map>
+    <xr-task>logging</xr-task>
+    <rule-summaries config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/suppress/gl/rulesums/</xr-path>
+      <xr-xml-map>infra_correlator_suppress_oper:RuleSummaryTable</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <xr-filterlist>SuppressionRuleNameListFilter</xr-filterlist>
+      <xr-filterlist>SuppressionRulePropertyFilter</xr-filterlist>
+      <rule-summary config="false" key="rule-name" node="list">
+        <xr-path>/oper/suppress/gl/rulesums/&lt;infra_correlator_suppress_oper_RuleSummary_rulename&gt;</xr-path>
+        <xr-xml-map>infra_correlator_suppress_oper:RuleSummary</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-bag-grp-name>ac_suppr_rule_summary_bag</xr-bag-grp-name>
+        <xr-bag>infra_correlator.bag</xr-bag>
+        <rule-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/suppress/gl/rulesums/&lt;infra_correlator_suppress_oper_RuleSummary_rulename&gt;</xr-path>
+          <xr-xml-map>infra_correlator_suppress_oper:RuleName</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>EncodedBoundedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;infra_correlator_suppress_oper_RuleSummary_rulename&gt;</xr-sch-arg-name>
+          <type length="1..32">
+            <type-name>string</type-name>
+          </type>
+        </rule-name>
+        <rule-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/suppress/gl/rulesums/&lt;infra_correlator_suppress_oper_RuleSummary_rulename&gt;~ac_suppr_rule_summary_bag.RuleName</xr-path>
+          <xr-xml-map>infra_correlator:rule-name-xr</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </rule-name-xr>
+        <rule-state config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/suppress/gl/rulesums/&lt;infra_correlator_suppress_oper_RuleSummary_rulename&gt;~ac_suppr_rule_summary_bag.RuleState</xr-path>
+          <xr-xml-map>infra_correlator:RuleState</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>Ac-rule-state</type-name>
+          </type>
+        </rule-state>
+        <suppressed-alarms-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/suppress/gl/rulesums/&lt;infra_correlator_suppress_oper_RuleSummary_rulename&gt;~ac_suppr_rule_summary_bag.SuppressedAlarmsCount</xr-path>
+          <xr-xml-map>infra_correlator:SuppressedAlarmsCount</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </suppressed-alarms-count>
+      </rule-summary>
+    </rule-summaries>
+    <rule-details config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/suppress/gl/ruledetails/</xr-path>
+      <xr-xml-map>infra_correlator_suppress_oper:RuleDetailTable</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <xr-filterlist>SuppressionRuleNameListFilter</xr-filterlist>
+      <xr-filterlist>SuppressionRulePropertyFilter</xr-filterlist>
+      <rule-detail config="false" key="rule-name" node="list">
+        <xr-path>/oper/suppress/gl/ruledetails/&lt;infra_correlator_suppress_oper_RuleDetail_rulename&gt;</xr-path>
+        <xr-xml-map>infra_correlator_suppress_oper:RuleDetail</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-bag-grp-name>ac_suppr_rule_detail_bag</xr-bag-grp-name>
+        <xr-bag>infra_correlator.bag</xr-bag>
+        <rule-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/suppress/gl/ruledetails/&lt;infra_correlator_suppress_oper_RuleDetail_rulename&gt;</xr-path>
+          <xr-xml-map>infra_correlator_suppress_oper:RuleName</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>EncodedBoundedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;infra_correlator_suppress_oper_RuleDetail_rulename&gt;</xr-sch-arg-name>
+          <type length="1..32">
+            <type-name>string</type-name>
+          </type>
+        </rule-name>
+        <rule-summary config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/suppress/gl/ruledetails/&lt;infra_correlator_suppress_oper_RuleDetail_rulename&gt;~ac_suppr_rule_detail_bag.RuleSummary</xr-path>
+          <xr-task>logging</xr-task>
+          <xr-bag-version>0 2</xr-bag-version>
+          <rule-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/suppress/gl/ruledetails/&lt;infra_correlator_suppress_oper_RuleDetail_rulename&gt;~ac_suppr_rule_detail_bag.RuleSummary.RuleName</xr-path>
+            <xr-xml-map>infra_correlator:rule-name-xr</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </rule-name-xr>
+          <rule-state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/suppress/gl/ruledetails/&lt;infra_correlator_suppress_oper_RuleDetail_rulename&gt;~ac_suppr_rule_detail_bag.RuleSummary.RuleState</xr-path>
+            <xr-xml-map>infra_correlator:RuleState</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>Ac-rule-state</type-name>
+            </type>
+          </rule-state>
+          <suppressed-alarms-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/suppress/gl/ruledetails/&lt;infra_correlator_suppress_oper_RuleDetail_rulename&gt;~ac_suppr_rule_detail_bag.RuleSummary.SuppressedAlarmsCount</xr-path>
+            <xr-xml-map>infra_correlator:SuppressedAlarmsCount</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </suppressed-alarms-count>
+        </rule-summary>
+        <all-alarms config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/suppress/gl/ruledetails/&lt;infra_correlator_suppress_oper_RuleDetail_rulename&gt;~ac_suppr_rule_detail_bag.AllAlarms</xr-path>
+          <xr-xml-map>infra_correlator:AllAlarms</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </all-alarms>
+        <alarm-severity config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/suppress/gl/ruledetails/&lt;infra_correlator_suppress_oper_RuleDetail_rulename&gt;~ac_suppr_rule_detail_bag.AlarmSeverity</xr-path>
+          <xr-xml-map>infra_correlator:AlarmSeverity</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>Al-alarm-severity</type-name>
+          </type>
+        </alarm-severity>
+        <apply-source config="false" is-key="false" is-yang-key="false" node="leaf-list">
+          <xr-path>/oper/suppress/gl/ruledetails/&lt;infra_correlator_suppress_oper_RuleDetail_rulename&gt;~ac_suppr_rule_detail_bag.ApplySource[&lt;bag_arg8&gt;]</xr-path>
+          <xr-xml-map>infra_correlator:ApplySource</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>nodeid_td</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg8&gt;</xr-internal-key>
+          <type>
+            <type-name>xr:Node-id</type-name>
+          </type>
+        </apply-source>
+        <codes config="false" node="list">
+          <xr-path>/oper/suppress/gl/ruledetails/&lt;infra_correlator_suppress_oper_RuleDetail_rulename&gt;~ac_suppr_rule_detail_bag.Codes[&lt;bag_arg7&gt;]</xr-path>
+          <xr-task>logging</xr-task>
+          <xr-bag-version>0 2</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg7&gt;</xr-internal-key>
+          <category config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/suppress/gl/ruledetails/&lt;infra_correlator_suppress_oper_RuleDetail_rulename&gt;~ac_suppr_rule_detail_bag.Codes[&lt;bag_arg7&gt;].Category</xr-path>
+            <xr-xml-map>infra_correlator:Category</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </category>
+          <group config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/suppress/gl/ruledetails/&lt;infra_correlator_suppress_oper_RuleDetail_rulename&gt;~ac_suppr_rule_detail_bag.Codes[&lt;bag_arg7&gt;].Group</xr-path>
+            <xr-xml-map>infra_correlator:Group</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </group>
+          <code config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/suppress/gl/ruledetails/&lt;infra_correlator_suppress_oper_RuleDetail_rulename&gt;~ac_suppr_rule_detail_bag.Codes[&lt;bag_arg7&gt;].Code</xr-path>
+            <xr-xml-map>infra_correlator:Code</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </code>
+        </codes>
+      </rule-detail>
+    </rule-details>
+  </suppression>
+  <correlator config="false" is-key="false" node="container" presence="false">
+    <xr-path>/oper/correlator/gl/</xr-path>
+    <xr-xml-map>infra_correlator_oper:Correlator</xr-xml-map>
+    <xr-task>logging</xr-task>
+    <rules config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/correlator/gl/rules/</xr-path>
+      <xr-xml-map>infra_correlator_oper:RuleTable</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <rule config="false" key="rule-name" node="list">
+        <xr-path>/oper/correlator/gl/rules/&lt;infra_correlator_oper_Rule_rulename&gt;</xr-path>
+        <xr-xml-map>infra_correlator_oper:Rule</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-bag-grp-name>ac_rule_info_bag</xr-bag-grp-name>
+        <xr-bag>infra_correlator.bag</xr-bag>
+        <rule-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/correlator/gl/rules/&lt;infra_correlator_oper_Rule_rulename&gt;</xr-path>
+          <xr-xml-map>infra_correlator_oper:RuleName</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>EncodedBoundedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;infra_correlator_oper_Rule_rulename&gt;</xr-sch-arg-name>
+          <type length="1..32">
+            <type-name>string</type-name>
+          </type>
+        </rule-name>
+        <rule-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/correlator/gl/rules/&lt;infra_correlator_oper_Rule_rulename&gt;~ac_rule_info_bag.RuleName</xr-path>
+          <xr-xml-map>infra_correlator:rule-name-xr</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </rule-name-xr>
+        <timeout config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/correlator/gl/rules/&lt;infra_correlator_oper_Rule_rulename&gt;~ac_rule_info_bag.Timeout</xr-path>
+          <xr-xml-map>infra_correlator:Timeout</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </timeout>
+        <rule-state config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/correlator/gl/rules/&lt;infra_correlator_oper_Rule_rulename&gt;~ac_rule_info_bag.RuleState</xr-path>
+          <xr-xml-map>infra_correlator:RuleState</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>Ac-rule-state</type-name>
+          </type>
+        </rule-state>
+        <apply-location config="false" is-key="false" is-yang-key="false" node="leaf-list">
+          <xr-path>/oper/correlator/gl/rules/&lt;infra_correlator_oper_Rule_rulename&gt;~ac_rule_info_bag.ApplyLocation[&lt;bag_arg5&gt;]</xr-path>
+          <xr-xml-map>infra_correlator:ApplyLocation</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>nodeid_td</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg5&gt;</xr-internal-key>
+          <type>
+            <type-name>xr:Node-id</type-name>
+          </type>
+          <max-elements>32</max-elements>
+        </apply-location>
+        <apply-context config="false" is-key="false" is-yang-key="false" node="leaf-list">
+          <xr-path>/oper/correlator/gl/rules/&lt;infra_correlator_oper_Rule_rulename&gt;~ac_rule_info_bag.ApplyContext[&lt;bag_arg6&gt;]</xr-path>
+          <xr-xml-map>infra_correlator:ApplyContext</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg6&gt;</xr-internal-key>
+          <type>
+            <type-name>Context</type-name>
+          </type>
+          <max-elements>32</max-elements>
+        </apply-context>
+        <codes config="false" node="list">
+          <xr-path>/oper/correlator/gl/rules/&lt;infra_correlator_oper_Rule_rulename&gt;~ac_rule_info_bag.Codes[&lt;bag_arg4&gt;]</xr-path>
+          <xr-task>logging</xr-task>
+          <xr-bag-version>0 2</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg4&gt;</xr-internal-key>
+          <max-elements>10</max-elements>
+          <category config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/rules/&lt;infra_correlator_oper_Rule_rulename&gt;~ac_rule_info_bag.Codes[&lt;bag_arg4&gt;].Category</xr-path>
+            <xr-xml-map>infra_correlator:Category</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </category>
+          <group config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/rules/&lt;infra_correlator_oper_Rule_rulename&gt;~ac_rule_info_bag.Codes[&lt;bag_arg4&gt;].Group</xr-path>
+            <xr-xml-map>infra_correlator:Group</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </group>
+          <code config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/rules/&lt;infra_correlator_oper_Rule_rulename&gt;~ac_rule_info_bag.Codes[&lt;bag_arg4&gt;].Code</xr-path>
+            <xr-xml-map>infra_correlator:Code</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </code>
+        </codes>
+      </rule>
+    </rules>
+    <buffer-status config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/correlator/gl/correlator-info</xr-path>
+      <xr-xml-map>infra_correlator_oper:BufferStatus</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <xr-bag-grp-name>ac_buffer_info_bag</xr-bag-grp-name>
+      <xr-bag>infra_correlator.bag</xr-bag>
+      <current-size config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/correlator/gl/correlator-info~ac_buffer_info_bag.CurrentSize</xr-path>
+        <xr-xml-map>infra_correlator:CurrentSize</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>0 2</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </current-size>
+      <configured-size config="false" is-key="false" is-yang-key="false" node="leaf">
+        <xr-path>/oper/correlator/gl/correlator-info~ac_buffer_info_bag.ConfiguredSize</xr-path>
+        <xr-xml-map>infra_correlator:ConfiguredSize</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+        <xr-bag-version>0 2</xr-bag-version>
+        <type>
+          <type-name>uint32</type-name>
+        </type>
+      </configured-size>
+    </buffer-status>
+    <alarms config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/correlator/gl/buffer/</xr-path>
+      <xr-xml-map>infra_correlator_oper:AlarmTable</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <xr-filterlist>CorrelationRuleFilter</xr-filterlist>
+      <xr-filterlist>CorrelationIDFilter</xr-filterlist>
+      <xr-filterlist>CorrelationBufferRuleTypeSourceFilter</xr-filterlist>
+      <xr-filterlist>CorrelationBufferCorrelationIDListFilter</xr-filterlist>
+      <xr-filterlist>CorrelationBufferCorrelationRuleNameListFilter</xr-filterlist>
+      <alarm config="false" key="alarm-id" node="list">
+        <xr-path>/oper/correlator/gl/buffer/&lt;infra_correlator_oper_Alarm_alarmid&gt;</xr-path>
+        <xr-xml-map>infra_correlator_oper:Alarm</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-bag-grp-name>ac_aldems_alarm_bag</xr-bag-grp-name>
+        <xr-bag>infra_correlator.bag</xr-bag>
+        <alarm-id config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-pathformat>decimal</xr-pathformat>
+          <xr-primitive-type>uint32</xr-primitive-type>
+          <xr-path>/oper/correlator/gl/buffer/&lt;infra_correlator_oper_Alarm_alarmid&gt;</xr-path>
+          <xr-xml-map>infra_correlator_oper:AlarmID</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>Integer</xr-sch-type>
+          <xr-sch-arg-name>&lt;infra_correlator_oper_Alarm_alarmid&gt;</xr-sch-arg-name>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </alarm-id>
+        <alarm-info config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/correlator/gl/buffer/&lt;infra_correlator_oper_Alarm_alarmid&gt;~ac_aldems_alarm_bag.AlarmInfo</xr-path>
+          <xr-task>logging</xr-task>
+          <xr-bag-version>0 2</xr-bag-version>
+          <source-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/buffer/&lt;infra_correlator_oper_Alarm_alarmid&gt;~ac_aldems_alarm_bag.AlarmInfo.SourceID</xr-path>
+            <xr-xml-map>infra_correlator:SourceID</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </source-id>
+          <timestamp config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/buffer/&lt;infra_correlator_oper_Alarm_alarmid&gt;~ac_aldems_alarm_bag.AlarmInfo.Timestamp</xr-path>
+            <xr-xml-map>infra_correlator:Timestamp</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>uint64_t</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>uint64</type-name>
+            </type>
+          </timestamp>
+          <category config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/buffer/&lt;infra_correlator_oper_Alarm_alarmid&gt;~ac_aldems_alarm_bag.AlarmInfo.Category</xr-path>
+            <xr-xml-map>infra_correlator:Category</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </category>
+          <group config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/buffer/&lt;infra_correlator_oper_Alarm_alarmid&gt;~ac_aldems_alarm_bag.AlarmInfo.Group</xr-path>
+            <xr-xml-map>infra_correlator:Group</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </group>
+          <code config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/buffer/&lt;infra_correlator_oper_Alarm_alarmid&gt;~ac_aldems_alarm_bag.AlarmInfo.Code</xr-path>
+            <xr-xml-map>infra_correlator:Code</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </code>
+          <severity config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/buffer/&lt;infra_correlator_oper_Alarm_alarmid&gt;~ac_aldems_alarm_bag.AlarmInfo.Severity</xr-path>
+            <xr-xml-map>infra_correlator:Severity</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>Al-alarm-severity</type-name>
+            </type>
+          </severity>
+          <state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/buffer/&lt;infra_correlator_oper_Alarm_alarmid&gt;~ac_aldems_alarm_bag.AlarmInfo.State</xr-path>
+            <xr-xml-map>infra_correlator:State</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>Al-alarm-bistate</type-name>
+            </type>
+          </state>
+          <correlation-id config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/buffer/&lt;infra_correlator_oper_Alarm_alarmid&gt;~ac_aldems_alarm_bag.AlarmInfo.CorrelationID</xr-path>
+            <xr-xml-map>infra_correlator:CorrelationID</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </correlation-id>
+          <is-admin config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/buffer/&lt;infra_correlator_oper_Alarm_alarmid&gt;~ac_aldems_alarm_bag.AlarmInfo.IsAdmin</xr-path>
+            <xr-xml-map>infra_correlator:IsAdmin</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </is-admin>
+          <additional-text config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/buffer/&lt;infra_correlator_oper_Alarm_alarmid&gt;~ac_aldems_alarm_bag.AlarmInfo.AdditionalText</xr-path>
+            <xr-xml-map>infra_correlator:AdditionalText</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </additional-text>
+        </alarm-info>
+        <rule-name config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/correlator/gl/buffer/&lt;infra_correlator_oper_Alarm_alarmid&gt;~ac_aldems_alarm_bag.RuleName</xr-path>
+          <xr-xml-map>infra_correlator:RuleName</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </rule-name>
+        <context config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/correlator/gl/buffer/&lt;infra_correlator_oper_Alarm_alarmid&gt;~ac_aldems_alarm_bag.Context</xr-path>
+          <xr-xml-map>infra_correlator:Context</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </context>
+      </alarm>
+    </alarms>
+    <rule-set-summaries config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/correlator/gl/rulesetsums/</xr-path>
+      <xr-xml-map>infra_correlator_oper:RulesetSummaryTable</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <xr-filterlist>CorrelationRulesetNameListFilter</xr-filterlist>
+      <rule-set-summary config="false" key="rule-set-name" node="list">
+        <xr-path>/oper/correlator/gl/rulesetsums/&lt;infra_correlator_oper_RulesetSummary_rulesetname&gt;</xr-path>
+        <xr-xml-map>infra_correlator_oper:RulesetSummary</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-bag-grp-name>ac_ruleset_summary_bag</xr-bag-grp-name>
+        <xr-bag>infra_correlator.bag</xr-bag>
+        <rule-set-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/correlator/gl/rulesetsums/&lt;infra_correlator_oper_RulesetSummary_rulesetname&gt;</xr-path>
+          <xr-xml-map>infra_correlator_oper:RulesetName</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>EncodedBoundedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;infra_correlator_oper_RulesetSummary_rulesetname&gt;</xr-sch-arg-name>
+          <type length="1..32">
+            <type-name>string</type-name>
+          </type>
+        </rule-set-name>
+        <rule-set-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/correlator/gl/rulesetsums/&lt;infra_correlator_oper_RulesetSummary_rulesetname&gt;~ac_ruleset_summary_bag.RuleSetName</xr-path>
+          <xr-xml-map>infra_correlator:rule-set-name-xr</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </rule-set-name-xr>
+      </rule-set-summary>
+    </rule-set-summaries>
+    <rule-set-details config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/correlator/gl/rulesets/</xr-path>
+      <xr-xml-map>infra_correlator_oper:RulesetDetailTable</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <xr-filterlist>CorrelationRulesetNameListFilter</xr-filterlist>
+      <rule-set-detail config="false" key="rule-set-name" node="list">
+        <xr-path>/oper/correlator/gl/rulesets/&lt;infra_correlator_oper_RulesetDetail_rulesetname&gt;</xr-path>
+        <xr-xml-map>infra_correlator_oper:RulesetDetail</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-bag-grp-name>ac_ruleset_detail_bag</xr-bag-grp-name>
+        <xr-bag>infra_correlator.bag</xr-bag>
+        <rule-set-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/correlator/gl/rulesets/&lt;infra_correlator_oper_RulesetDetail_rulesetname&gt;</xr-path>
+          <xr-xml-map>infra_correlator_oper:RulesetName</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>EncodedBoundedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;infra_correlator_oper_RulesetDetail_rulesetname&gt;</xr-sch-arg-name>
+          <type length="1..32">
+            <type-name>string</type-name>
+          </type>
+        </rule-set-name>
+        <rule-set-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/correlator/gl/rulesets/&lt;infra_correlator_oper_RulesetDetail_rulesetname&gt;~ac_ruleset_detail_bag.RuleSetName</xr-path>
+          <xr-xml-map>infra_correlator:rule-set-name-xr</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </rule-set-name-xr>
+        <rules config="false" node="list">
+          <xr-path>/oper/correlator/gl/rulesets/&lt;infra_correlator_oper_RulesetDetail_rulesetname&gt;~ac_ruleset_detail_bag.Rules[&lt;bag_arg9&gt;]</xr-path>
+          <xr-task>logging</xr-task>
+          <xr-bag-version>0 2</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg9&gt;</xr-internal-key>
+          <rule-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/rulesets/&lt;infra_correlator_oper_RulesetDetail_rulesetname&gt;~ac_ruleset_detail_bag.Rules[&lt;bag_arg9&gt;].RuleName</xr-path>
+            <xr-xml-map>infra_correlator:rule-name-xr</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </rule-name-xr>
+          <stateful config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/rulesets/&lt;infra_correlator_oper_RulesetDetail_rulesetname&gt;~ac_ruleset_detail_bag.Rules[&lt;bag_arg9&gt;].Stateful</xr-path>
+            <xr-xml-map>infra_correlator:Stateful</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </stateful>
+          <rule-state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/rulesets/&lt;infra_correlator_oper_RulesetDetail_rulesetname&gt;~ac_ruleset_detail_bag.Rules[&lt;bag_arg9&gt;].RuleState</xr-path>
+            <xr-xml-map>infra_correlator:RuleState</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>Ac-rule-state</type-name>
+            </type>
+          </rule-state>
+          <buffered-alarms-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/rulesets/&lt;infra_correlator_oper_RulesetDetail_rulesetname&gt;~ac_ruleset_detail_bag.Rules[&lt;bag_arg9&gt;].BufferedAlarmsCount</xr-path>
+            <xr-xml-map>infra_correlator:BufferedAlarmsCount</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </buffered-alarms-count>
+        </rules>
+      </rule-set-detail>
+    </rule-set-details>
+    <rule-details config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/correlator/gl/ruledetails/</xr-path>
+      <xr-xml-map>infra_correlator_oper:RuleDetailTable</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <xr-filterlist>CorrelationRuleNameListFilter</xr-filterlist>
+      <xr-filterlist>CorrelationRulePropertyFilter</xr-filterlist>
+      <rule-detail config="false" key="rule-name" node="list">
+        <xr-path>/oper/correlator/gl/ruledetails/&lt;infra_correlator_oper_RuleDetail_rulename&gt;</xr-path>
+        <xr-xml-map>infra_correlator_oper:RuleDetail</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-bag-grp-name>ac_rule_detail_bag</xr-bag-grp-name>
+        <xr-bag>infra_correlator.bag</xr-bag>
+        <rule-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/correlator/gl/ruledetails/&lt;infra_correlator_oper_RuleDetail_rulename&gt;</xr-path>
+          <xr-xml-map>infra_correlator_oper:RuleName</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>EncodedBoundedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;infra_correlator_oper_RuleDetail_rulename&gt;</xr-sch-arg-name>
+          <type length="1..32">
+            <type-name>string</type-name>
+          </type>
+        </rule-name>
+        <rule-summary config="false" is-key="false" node="container" presence="false">
+          <xr-path>/oper/correlator/gl/ruledetails/&lt;infra_correlator_oper_RuleDetail_rulename&gt;~ac_rule_detail_bag.RuleSummary</xr-path>
+          <xr-task>logging</xr-task>
+          <xr-bag-version>0 2</xr-bag-version>
+          <rule-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/ruledetails/&lt;infra_correlator_oper_RuleDetail_rulename&gt;~ac_rule_detail_bag.RuleSummary.RuleName</xr-path>
+            <xr-xml-map>infra_correlator:rule-name-xr</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </rule-name-xr>
+          <stateful config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/ruledetails/&lt;infra_correlator_oper_RuleDetail_rulename&gt;~ac_rule_detail_bag.RuleSummary.Stateful</xr-path>
+            <xr-xml-map>infra_correlator:Stateful</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>boolean</type-name>
+            </type>
+          </stateful>
+          <rule-state config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/ruledetails/&lt;infra_correlator_oper_RuleDetail_rulename&gt;~ac_rule_detail_bag.RuleSummary.RuleState</xr-path>
+            <xr-xml-map>infra_correlator:RuleState</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>int</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>Ac-rule-state</type-name>
+            </type>
+          </rule-state>
+          <buffered-alarms-count config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/ruledetails/&lt;infra_correlator_oper_RuleDetail_rulename&gt;~ac_rule_detail_bag.RuleSummary.BufferedAlarmsCount</xr-path>
+            <xr-xml-map>infra_correlator:BufferedAlarmsCount</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>uint32</type-name>
+            </type>
+          </buffered-alarms-count>
+        </rule-summary>
+        <timeout config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/correlator/gl/ruledetails/&lt;infra_correlator_oper_RuleDetail_rulename&gt;~ac_rule_detail_bag.Timeout</xr-path>
+          <xr-xml-map>infra_correlator:Timeout</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </timeout>
+        <root-cause-timeout config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/correlator/gl/ruledetails/&lt;infra_correlator_oper_RuleDetail_rulename&gt;~ac_rule_detail_bag.RootCauseTimeout</xr-path>
+          <xr-xml-map>infra_correlator:RootCauseTimeout</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </root-cause-timeout>
+        <internal config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/correlator/gl/ruledetails/&lt;infra_correlator_oper_RuleDetail_rulename&gt;~ac_rule_detail_bag.Internal</xr-path>
+          <xr-xml-map>infra_correlator:Internal</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </internal>
+        <reissue-non-bistate config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/correlator/gl/ruledetails/&lt;infra_correlator_oper_RuleDetail_rulename&gt;~ac_rule_detail_bag.ReissueNonBistate</xr-path>
+          <xr-xml-map>infra_correlator:ReissueNonBistate</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </reissue-non-bistate>
+        <reparent config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/correlator/gl/ruledetails/&lt;infra_correlator_oper_RuleDetail_rulename&gt;~ac_rule_detail_bag.Reparent</xr-path>
+          <xr-xml-map>infra_correlator:Reparent</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </reparent>
+        <context-correlation config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/correlator/gl/ruledetails/&lt;infra_correlator_oper_RuleDetail_rulename&gt;~ac_rule_detail_bag.ContextCorrelation</xr-path>
+          <xr-xml-map>infra_correlator:ContextCorrelation</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </context-correlation>
+        <apply-location config="false" is-key="false" is-yang-key="false" node="leaf-list">
+          <xr-path>/oper/correlator/gl/ruledetails/&lt;infra_correlator_oper_RuleDetail_rulename&gt;~ac_rule_detail_bag.ApplyLocation[&lt;bag_arg2&gt;]</xr-path>
+          <xr-xml-map>infra_correlator:ApplyLocation</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>nodeid_td</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg2&gt;</xr-internal-key>
+          <type>
+            <type-name>xr:Node-id</type-name>
+          </type>
+        </apply-location>
+        <apply-context config="false" is-key="false" is-yang-key="false" node="leaf-list">
+          <xr-path>/oper/correlator/gl/ruledetails/&lt;infra_correlator_oper_RuleDetail_rulename&gt;~ac_rule_detail_bag.ApplyContext[&lt;bag_arg3&gt;]</xr-path>
+          <xr-xml-map>infra_correlator:ApplyContext</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg3&gt;</xr-internal-key>
+          <type>
+            <type-name>Context</type-name>
+          </type>
+        </apply-context>
+        <codes config="false" node="list">
+          <xr-path>/oper/correlator/gl/ruledetails/&lt;infra_correlator_oper_RuleDetail_rulename&gt;~ac_rule_detail_bag.Codes[&lt;bag_arg1&gt;]</xr-path>
+          <xr-task>logging</xr-task>
+          <xr-bag-version>0 2</xr-bag-version>
+          <xr-internal-key>&lt;bag_arg1&gt;</xr-internal-key>
+          <category config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/ruledetails/&lt;infra_correlator_oper_RuleDetail_rulename&gt;~ac_rule_detail_bag.Codes[&lt;bag_arg1&gt;].Category</xr-path>
+            <xr-xml-map>infra_correlator:Category</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </category>
+          <group config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/ruledetails/&lt;infra_correlator_oper_RuleDetail_rulename&gt;~ac_rule_detail_bag.Codes[&lt;bag_arg1&gt;].Group</xr-path>
+            <xr-xml-map>infra_correlator:Group</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </group>
+          <code config="false" is-key="false" is-yang-key="false" node="leaf">
+            <xr-path>/oper/correlator/gl/ruledetails/&lt;infra_correlator_oper_RuleDetail_rulename&gt;~ac_rule_detail_bag.Codes[&lt;bag_arg1&gt;].Code</xr-path>
+            <xr-xml-map>infra_correlator:Code</xr-xml-map>
+            <xr-task>logging</xr-task>
+            <xr-bag-primitive-type>string</xr-bag-primitive-type>
+            <xr-bag-version>0 2</xr-bag-version>
+            <type>
+              <type-name>string</type-name>
+            </type>
+          </code>
+        </codes>
+      </rule-detail>
+    </rule-details>
+    <rule-summaries config="false" is-key="false" node="container" presence="false">
+      <xr-path>/oper/correlator/gl/rulesums/</xr-path>
+      <xr-xml-map>infra_correlator_oper:RuleSummaryTable</xr-xml-map>
+      <xr-task>logging</xr-task>
+      <xr-filterlist>CorrelationRuleNameListFilter</xr-filterlist>
+      <xr-filterlist>CorrelationRulePropertyFilter</xr-filterlist>
+      <rule-summary config="false" key="rule-name" node="list">
+        <xr-path>/oper/correlator/gl/rulesums/&lt;infra_correlator_oper_RuleSummary_rulename&gt;</xr-path>
+        <xr-xml-map>infra_correlator_oper:RuleSummary</xr-xml-map>
+        <xr-task>logging</xr-task>
+        <xr-bag-grp-name>ac_rule_summary_bag</xr-bag-grp-name>
+        <xr-bag>infra_correlator.bag</xr-bag>
+        <rule-name config="false" is-key="true" is-yang-key="true" node="leaf">
+          <xr-data-handler>ignore</xr-data-handler>
+          <xr-primitive-type>string</xr-primitive-type>
+          <xr-path>/oper/correlator/gl/rulesums/&lt;infra_correlator_oper_RuleSummary_rulename&gt;</xr-path>
+          <xr-xml-map>infra_correlator_oper:RuleName</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-sch-type>EncodedBoundedString</xr-sch-type>
+          <xr-sch-arg-name>&lt;infra_correlator_oper_RuleSummary_rulename&gt;</xr-sch-arg-name>
+          <type length="1..32">
+            <type-name>string</type-name>
+          </type>
+        </rule-name>
+        <rule-name-xr config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/correlator/gl/rulesums/&lt;infra_correlator_oper_RuleSummary_rulename&gt;~ac_rule_summary_bag.RuleName</xr-path>
+          <xr-xml-map>infra_correlator:rule-name-xr</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>string</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>string</type-name>
+          </type>
+        </rule-name-xr>
+        <stateful config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/correlator/gl/rulesums/&lt;infra_correlator_oper_RuleSummary_rulename&gt;~ac_rule_summary_bag.Stateful</xr-path>
+          <xr-xml-map>infra_correlator:Stateful</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>bool</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>boolean</type-name>
+          </type>
+        </stateful>
+        <rule-state config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/correlator/gl/rulesums/&lt;infra_correlator_oper_RuleSummary_rulename&gt;~ac_rule_summary_bag.RuleState</xr-path>
+          <xr-xml-map>infra_correlator:RuleState</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>int</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>Ac-rule-state</type-name>
+          </type>
+        </rule-state>
+        <buffered-alarms-count config="false" is-key="false" is-yang-key="false" node="leaf">
+          <xr-path>/oper/correlator/gl/rulesums/&lt;infra_correlator_oper_RuleSummary_rulename&gt;~ac_rule_summary_bag.BufferedAlarmsCount</xr-path>
+          <xr-xml-map>infra_correlator:BufferedAlarmsCount</xr-xml-map>
+          <xr-task>logging</xr-task>
+          <xr-bag-primitive-type>uint32_t</xr-bag-primitive-type>
+          <xr-bag-version>0 2</xr-bag-version>
+          <type>
+            <type-name>uint32</type-name>
+          </type>
+        </buffered-alarms-count>
+      </rule-summary>
+    </rule-summaries>
+  </correlator>
+</Cisco-IOS-XR-infra-correlator-oper>
