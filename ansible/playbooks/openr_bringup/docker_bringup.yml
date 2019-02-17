@@ -13,7 +13,6 @@
 
   tasks:
 
-  - debug: msg="hostname={{hostname}}"
   - name: restart docker daemon and pull openr image
     script: ./automate_docker_setup.py
     register: output
@@ -43,15 +42,6 @@
       group: root 
       mode: a+x 
 
-#  - name: Copy increment_ipv4 script to rtr
-#    copy:
-#      src: "{{ increment_ipv4_prefix }}"
-#      dest: "/misc/app_host/"
-#      owner: root 
-#      group: root 
-#      mode: a+x 
-
-
   - name: Check docker container is running
     shell: sudo -i docker inspect --format={{ '{{.State.Running}}' }}  openr
     args:
@@ -66,7 +56,7 @@
     args:
       executable: /bin/bash
     register: output
-    #when: status.stdout == "true"
+    when: status.stdout == "true"
     ignore_errors: yes
   - debug: var=output.stdout_lines
 
